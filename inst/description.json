@@ -1,0 +1,27 @@
+{
+	"moduleDescription" :
+	{
+        "title" :       "Teaching Statistics",
+        "icon":         "main_icon.svg",
+        "description": 	"Teaching Statistics with JASP",
+        "version":		"0.1",
+        "author":		"JASP Team",
+        "maintainer":	"JASP Team <info@jasp-stats.org>",
+        "website":		"www.jasp-stats.org",
+        "license":		"GPL (>= 2)"
+	},
+
+
+	"menu":
+	[
+		{
+            "title": 	"Examples",
+            "icon": 	"menu1.svg"
+		},
+		{
+            "title":	"Binomial example",
+            "qml":		"binomial.qml",
+            "function":	"binomial"
+		}
+	]
+}
