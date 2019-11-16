@@ -1,0 +1,745 @@
+#
+# Copyright (C) 2019 University of Amsterdam
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
+
+  # lazy test
+  options[["priors"]] <- list(
+    list(
+      name = "H1",
+      type = "point",
+      parPoint = 0.5),
+    list(
+      name = "H2",
+      type = "beta",
+      parAlpha = 1,
+      parBeta = 1),
+    list(
+      name = "H3",
+      type = "beta",
+      parAlpha = 5,
+      parBeta = 1)
+  )
+  
+  ready <- .readyBinomial(options)
+
+  # load, check, transform and process data
+  if(ready)data <- .readDataBinomial(dataset, options)
+  
+  # summary table if requested (but not if the data counts were added directly)
+  if(options$dataSummary & !options$dataType == "dataCounts").summaryBinomial(jaspResults, data, ready)
+  
+  # estimated parameter values
+  .estimatesBinomial(jaspResults, data, ready, options)
+  
+  # sequentially estimated parameter values
+  if(options$doIterative & !options$dataType == "dataCounts").estimatesSequentialBinomial(jaspResults, data, ready, options)
+
+  # prior plots
+  if(options$plotsPrior).plotsSimpleBinomial(jaspResults, data, ready, options, type = "Prior")
+    
+  # prior plots
+  if(options$plotsPosterior).plotsSimpleBinomial(jaspResults, data, ready, options, type = "Posterior")
+  
+  # prior and posterior plots
+  if(options$plotsBoth).plotsBothBinomial(jaspResults, data, ready, options)
+
+  # Iterative plots
+  if(options$plotsIterative).plotsIterativeBinomial(jaspResults, data, ready, options)
+
+  return()
+}
+
+.readyBinomial       <- function(options){
+  # are data ready
+  if(options$dataType == "dataCounts"){
+    ready <- options$nSuccesses > 0 | options$nFailures > 0
+  }else if(options$dataType == "dataSequence"){
+    ready <- nchar(options$data_sequence) > 0
+  }else if(options$dataType == "dataVariable"){
+    ready <- options$selectedVariable != ""
+  }
+  # are priors ready
+  ready <- ready & length(options[["priors"]]) > 0
+  return(ready)
+}
+.readDataBinomial    <- function(dataset, options){
+  data <- list()
+  
+  if(options$dataType == "dataCounts"){
+    data$y <- NULL
+    data$nSuccesses <- options$nSuccesses
+    data$nFailures  <- options$nFailures
+  }else if(options$dataType == "dataSequence"){
+    y <- unlist(strsplit(options$data_sequence, split = ""))
+    data$y <- .cleanDataBinomial(y, options)
+    data$nSuccesses <- sum(data$y == 1)
+    data$nFailures  <- sum(data$y == 0)
+  }else if(options$dataType == "dataVariable"){
+    # this is stupidly written #rework
+    if (!is.null(dataset)){
+      y <- dataset
+    }else{
+      y <- .readDataSetToEnd(columns = options$selectedVariable)[,1]
+    }
+    data$y <- .cleanDataBinomial(y, options)
+    #stop(data$y)
+    #stop(paste0(y))
+    data$nSuccesses <- sum(data$y == 1)
+    data$nFailures  <- sum(data$y == 0)
+  }
+  return(data)
+}
+.cleanDataBinomial   <- function(x, options){
+  
+  key <- list(
+    c("T", "F"),
+    c("S", "F"),
+    c("TRUE", "FALSE"),
+    c("correct", "incorrect"),
+    c("hit", "miss"),
+    c(2, 1)
+  )
+
+  x <- na.omit(x)
+  
+  # use user provided keys if possible
+  if(options$key_success != "" & options$key_failure != "" & options$dataType == "dataVariable"){
+    x <- ifelse(toupper(x) %in% toupper(options$key_success), 1,
+                ifelse(toupper(x) %in% toupper(options$key_failure), 0, NA))
+  }else if(!all(x == 1 | x == 0)){
+    # if not, and all of the variables aren't already 1s or 0s, try the recoding provided in key object
+    
+    for(i in 1:length(key)){
+      if(all( toupper(x) %in% toupper(key[[i]][1]) | toupper(x) %in% toupper(key[[i]][2]))){
+        x <- ifelse(toupper(x) %in% toupper(key[[i]][1]), 1,
+                    ifelse(toupper(x) %in% toupper(key[[i]][2]), 0, NA))
+      }
+    }
+    
+    if(!all(x == 1 | x == 0))stop(paste("The data input was not recognized. Input successes as '1' and failures as '0'."))
+
+  }
+  
+  return(as.numeric(x))
+}
+.summaryBinomial     <- function(jaspResults, data, ready){
+  summaryTable <- createJaspTable(title = "Data Summary")
+  
+  summaryTable$position <- 1
+  summaryTable$dependOn(c("dataSummary", "dataType",
+                          "nSuccesses", "nFailures", "data_sequence", "variables"))
+  
+  summaryTable$addColumnInfo(name = "variable",   title = "",            type = "string")
+  summaryTable$addColumnInfo(name = "counts",     title = "Counts",      type = "integer")
+  summaryTable$addColumnInfo(name = "proportion", title = "Proportion",  type = "number")
+  
+  summaryTable$setExpectedSize(3)
+  
+  jaspResults[["summaryTable"]] <- summaryTable
+  
+  if(ready){
+    summaryTable$addRows(list(variable = "Successes", counts = data$nSuccesses, 
+                              proportion = data$nSuccesses / (data$nSuccesses + data$nFailures)))
+    summaryTable$addRows(list(variable = "Failures", counts = data$nFailures, 
+                              proportion = data$nFailures / (data$nSuccesses + data$nFailures)))
+    summaryTable$addRows(list(variable = "Total", counts = data$nSuccesses + data$nFailures, 
+                              proportion = (data$nSuccesses + data$nFailures) / (data$nSuccesses + data$nFailures)))
+  }
+  
+  return()
+}
+.estimatesBinomial   <- function(jaspResults, data, ready, options){
+  estimatesTable <- createJaspTable(title = "Estimation Summary")
+  
+  estimatesTable$position <- 2
+  estimatesTable$dependOn(c("dataSummary", "dataType",
+                          "nSuccesses", "nFailures", "data_sequence", "variables"))
+  
+  estimatesTable$addColumnInfo(name = "hypothesis", title = "Hypothesis",      type = "string")
+  estimatesTable$addColumnInfo(name = "prior",      title = "Prior",           type = "string")
+  estimatesTable$addColumnInfo(name = "priorM",     title = "Prior Mean",      type = "number")
+  estimatesTable$addColumnInfo(name = "posterior",  title = "Posterior",       type = "string")
+  estimatesTable$addColumnInfo(name = "posteriorM", title = "Posterior Mean",  type = "number")
+  estimatesTable$addColumnInfo(name = "likelihood", title = "Likelihood",      type = "number")
+  
+  estimatesTable$setExpectedSize(length(options$priors))
+  
+  jaspResults[["estimatesTable"]] <- estimatesTable
+  
+  if(ready){
+    
+    for(i in 1:length(options$priors)){
+      temp_results <- .computeBinomial(data, options$priors[[i]])
+      estimatesTable$addRows(list(
+        prior      = temp_results$prior,
+        priorM     = temp_results$priorM,
+        hypothesis = options$priors[[i]]$name, 
+        posterior  = temp_results$posterior, 
+        posteriorM = temp_results$posteriorM,
+        likelihood = temp_results$likelihood))
+    }
+
+
+  }
+  
+  return()
+}
+.estimatesSequentialBinomial <- function(jaspResults, data, ready, options){
+  estimatesSequentialTable <- createJaspTable(title = "Iterative Posterior Updating")
+  
+  estimatesSequentialTable$position <- 3
+  estimatesSequentialTable$dependOn(c("doIterative", "dataType",
+                            "nSuccesses", "nFailures", "data_sequence", "variables"))
+  
+  estimatesSequentialTable$addColumnInfo(name = "iteration", title = "Iteration", type = "integer")
+  for(i in 1:length(options$priors)){
+    estimatesSequentialTable$addColumnInfo(
+      name  = options$priors[[i]]$name,  
+      title = options$priors[[i]]$name,
+      type = "string")
+  }
+  
+  estimatesSequentialTable$setExpectedSize(ifelse(ready, length(data$y) + 1, 1))
+  
+  jaspResults[["estimatesSequentialTable"]] <- estimatesSequentialTable
+  
+  if(ready){
+    
+    # add priors to the first row
+    temp_row <- NULL
+    temp_row[["iteration"]] <- 0
+    for(h in 1:length(options$priors)){
+      temp_results <- .computeBinomial(data, options$priors[[h]])
+      temp_row[[options$priors[[h]]$name]] <- temp_results$prior
+    }
+    estimatesSequentialTable$addRows(temp_row)
+    
+    # then update the posteriors as the data go in
+    for(i in 1:length(data$y)){
+      temp_row <- NULL
+      temp_row[["iteration"]] <- i
+      for(h in 1:length(options$priors)){
+        temp_data    <- list(
+          nSuccesses = sum(data$y[1:i] == 1),
+          nFailures  = sum(data$y[1:i] == 0)
+        )
+        temp_results <- .computeBinomial(temp_data, options$priors[[h]])
+        temp_row[[options$priors[[h]]$name]] <- temp_results$posterior
+      }
+      estimatesSequentialTable$addRows(temp_row)
+    }
+    
+  }
+  
+  return()
+}
+.computeBinomial     <- function(data, prior){
+  if(prior$type == "point"){
+    return(list(
+      prior        = paste0("point at ", prior$parPoint),
+      priorM       = prior$parPoint,
+      posterior    = paste0("point at ", prior$parPoint),
+      posteriorM   = prior$parPoint,
+      posteriorlCI = prior$parPoint,
+      posterioruCI = prior$parPoint,
+      likelihood   = stats::dbinom(data$nSuccesses, data$nSuccesses + data$nFailures, prior$parPoint)
+    ))
+  }else if(prior$type == "beta"){
+    return(list(
+      prior        = paste0("beta (", prior$parAlpha, ", ",  prior$parBeta, ")"),
+      priorM       = prior$parAlpha / (prior$parAlpha + prior$parBeta),
+      posterior    = paste0("beta (", prior$parAlpha + data$nSuccesses, ", ",  prior$parBeta + data$nFailures, ")"),
+      posteriorM   = (prior$parAlpha + data$nSuccesses) / (prior$parAlpha + data$nSuccesses + prior$parBeta + data$nFailures),
+      posteriorlCI = qbeta(.025, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
+      posterioruCI = qbeta(.975, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
+      likelihood   = (factorial(data$nSuccesses+data$nFailures)/(factorial(data$nSuccesses)*factorial(data$nFailures)))*
+        beta(prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)/beta(prior$parAlpha, prior$parBeta)
+    ))
+  }
+}
+.plotsSimpleBinomial <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
+  
+  plotsSimple <- createJaspPlot(title = paste0(type, " Plots"), width = 530, height = 400, aspectRatio = 0.7)
+  
+  plotsSimple$position <- ifelse(type == "Prior", 4, 5)
+  plotsSimple$dependOn(c("dataType", 
+                        ifelse(type == "Prior", "plotsPrior", "plotsPosterior"),
+                        ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType"),
+                       "nSuccesses", "nFailures", "data_sequence", "variables"))
+  
+  jaspResults[[type]] <- plotsSimple
+  
+  if (!ready)return()
+  
+  all_lines  <- c()
+  all_arrows <- c()
+  legend     <- NULL
+  for(i in 1:length(options$priors)){
+    
+    if(options$priors[[i]]$type == "point"){
+      
+      dfArrowPP   <- .dataArrowPP(options$priors[[i]])
+      dfArrowPP$g <- options$priors[[i]]$name
+      
+      all_arrows  <- c(all_arrows, list(dfArrowPP))
+      legend      <- rbind(legend, c(options$priors[[i]]$type, options$priors[[i]]$name))
+      
+    }else if(options$priors[[i]]$type == "beta"){
+      
+      dfLinesPP   <- .dataLinesPP(data, options$priors[[i]])
+      dfLinesPP   <- dfLinesPP[dfLinesPP$g == type,]
+      dfLinesPP$g <- options$priors[[i]]$name
+      
+      all_lines   <- c(all_lines, list(dfLinesPP))
+      legend      <- rbind(legend, c(options$priors[[i]]$type, options$priors[[i]]$name))
+      
+    }
+  }
+
+  xName  <- expression(paste("Population proportion ", theta))
+  
+  if(options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "overlying"){
+    p <- .plotOverlying(all_lines, all_arrows, xName = xName)
+  }else{
+    p <- .plotStacked(all_lines, all_arrows, legend, xName = xName)
+  }
+
+  jaspResults[[type]]$plotObject <- p
+  
+  return()
+}
+.plotsBothBinomial   <- function(jaspResults, data, ready, options){
+
+  plotsBoth <- createJaspContainer(title = "Prior and Posterior Plots")
+  
+  plotsBoth$position <- 6
+  plotsBoth$dependOn(c("dataType", "plotsBoth",
+                      "nSuccesses", "nFailures", "data_sequence", "variables"))
+  
+  jaspResults[["plotsBoth"]] <- plotsBoth
+
+  if (!ready)return()
+  
+  for(i in 1:length(options$priors)){
+    
+    temp_plot <- createJaspPlot(title = options$priors[[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
+    
+    plotsBoth[[options$priors[[i]]$name]] <- temp_plot
+    
+    xName  <- expression(paste("Population proportion ", theta))
+    
+    if(options$priors[[i]]$type == "point"){
+      
+      dfArrowPP <- .dataArrowPP(options$priors[[i]])
+      dfPointsPP<- .dataPointsPP(data, options$priors[[i]])
+      p <- .plotArrow(dfArrow = dfArrowPP, dfPoints = dfPointsPP, xName = xName)
+      
+    }else if(options$priors[[i]]$type == "beta"){
+      
+      dfLinesPP <- .dataLinesPP(data, options$priors[[i]])
+      dfPointsPP<- .dataPointsPP(data, options$priors[[i]])
+      p <- JASPgraphs::PlotPriorAndPosterior(dfLines = dfLinesPP, dfPoints = dfPointsPP, xName = xName)
+      
+    }
+    
+    temp_plot$plotObject <- p
+  }
+  
+  return()
+}
+.plotsIterativeBinomial <- function(jaspResults, data, ready, options){
+  
+  plotsIterative <- createJaspPlot(title = "Iterative Posterior Updating", width = 530, height = 400, aspectRatio = 0.7)
+  
+  plotsIterative$position <- 7
+  plotsIterative$dependOn(c("dataType", "plotsIterative",
+                         "nSuccesses", "nFailures", "data_sequence", "variables"))
+  
+  jaspResults[["plotsIterative"]] <- plotsIterative
+  
+  if (!ready)return()
+
+  plot_data <- NULL
+  for(h in 1:length(options$priors)){
+    temp_data    <- list(
+      nSuccesses = 0,
+      nFailures  = 0
+    )
+    temp_results <- .computeBinomial(temp_data, options$priors[[h]])
+    plot_data <- rbind(plot_data, cbind(data.frame(temp_results), "name" = options$priors[[h]]$name, "i" = 0))
+  }
+  
+  # then update the posteriors as the data go in
+  for(i in 1:length(data$y)){
+    for(h in 1:length(options$priors)){
+      temp_data    <- list(
+        nSuccesses = sum(data$y[1:i] == 1),
+        nFailures  = sum(data$y[1:i] == 0)
+      )
+      temp_results <- .computeBinomial(temp_data, options$priors[[h]])
+      plot_data <- rbind(plot_data, cbind(data.frame(temp_results), "name" = options$priors[[h]]$name, "i" = i))
+    }
+  }
+  
+  yName  <- expression(paste("Population proportion ", theta))
+  xName  <- "Iteration"
+
+  p <- .plotIterative(plot_data, xName = xName, yName = yName)
+  
+  jaspResults[["plotsIterative"]]$plotObject <- p
+  
+  return()
+}
+.dataLinesPP         <- function(data, prior){
+
+  if (prior$parAlpha == 1 && prior$parBeta == 1) {
+    
+    theta <- seq(0, 1, length.out = 1000)
+    
+  } else {
+    
+    theta <- seq(0.001, 0.999, length.out = 1000)
+  }
+  
+  size <- length(theta)
+  linesGroup <- c(dbeta(theta, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
+                  dbeta(theta, prior$parAlpha, prior$parBeta))
+  
+
+  thetaGroup <- c(theta, theta)
+  nameGroup  <- c(rep("Posterior", length(theta)), rep("Prior", length(theta)))
+  dat        <- data.frame(x = thetaGroup, y = linesGroup, g = nameGroup)
+  return(dat)
+}
+.dataPointsPP        <- function(data, prior){
+
+  theta <- data$nSuccesses / (data$nSuccesses + data$nFailures)
+  
+  pointXVal <- c(theta, theta)
+  
+  if(prior$type == "point"){
+    if(prior$parPoint == theta){
+      pointYVal <- c(1, 1)
+    }else{
+      pointYVal <- c(0, 0)
+    }
+  }else if(prior$type == "beta"){
+    pointYVal <- c(dbeta(theta, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
+                   dbeta(theta, prior$parAlpha, prior$parBeta))
+  }
+
+  nameGroup <- c("Posterior", "Prior")
+  dat       <- data.frame(x = pointXVal, y = pointYVal, g = nameGroup)
+  return(dat)
+}
+.dataArrowPP         <- function(prior){
+  dat       <- data.frame(x = prior$parPoint, y_start = 0, y_end = 1, g = "Prior = Posterior")
+  return(dat)
+}
+.plotArrow           <- function(dfArrow, dfPoints = NULL, xName = NULL, yName = "Density",
+                                 bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), lineColors = NULL){
+  
+  mapping <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, linetype = g)
+  
+  g <- ggplot2::ggplot(data = dfArrow, mapping) + 
+    ggplot2::geom_segment(
+      color = "black", size = 1,
+      arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
+      show.legend = TRUE) +
+    ggplot2::scale_x_continuous(xName, limits = c(0, 1)) + 
+    ggplot2::scale_y_continuous(yName,
+                       breaks = c(0, dfArrow$y_end),
+                       limits = c(0, dfArrow$y_end),
+                       labels = c(0, "\U221E" )) 
+    
+  if(!is.null(dfPoints)){
+    g <- g + ggplot2::geom_point(data = dfPoints, ggplot2::aes(x = x,y = y),
+                                 inherit.aes = FALSE, size = 4, shape = 21, 
+                                 stroke = 1.25, fill = "grey")
+  }
+  
+  
+  if (dfArrow$x > .5) {
+    legend.position = c(0.15, 0.875)
+  }else {
+    legend.position = c(0.8, 0.875)
+  }
+  
+  
+  g <- JASPgraphs::themeJasp(graph = g, legend.position = legend.position, bty = bty) + 
+    ggplot2::theme(
+      legend.title = ggplot2::element_blank(), 
+      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
+      legend.key.height = ggplot2::unit(1, "cm"),
+      legend.key.width  = ggplot2::unit(1.5,"cm"))
+  
+  plot <- g
+  class(plot) <- c("JASPgraphs", class(plot))
+  
+  return(plot)
+}
+.plotOverlying       <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL, yName = "Density",
+                                 bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), lineColors = NULL){
+
+  mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
+  mappingArrows <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
+  
+  all_lines  <- do.call("rbind", all_lines)
+  all_arrows <- do.call("rbind", all_arrows)
+
+  yBreaks    <- JASPgraphs::getPrettyAxisBreaks(c(0, all_lines$y))
+  breaksYmax <- yBreaks[length(yBreaks)]
+  obsYmax <- max(all_lines$y)
+  newymax <- max(1.1 * obsYmax, breaksYmax)
+  
+  all_arrows$y_end <- newymax
+  
+  g <- ggplot2::ggplot()
+  
+  if(!is.null(all_arrows)){
+    g <- g + ggplot2::geom_segment(
+      data = all_arrows, mapping = mappingArrows, size = 1,
+      arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")))
+  }
+  if(!is.null(all_lines)){
+    g <- g + ggplot2::geom_line(data = all_lines, mapping = mappingLines, size = 1,)
+  }
+  
+  g <- g + ggplot2::scale_colour_manual(values = RColorBrewer::brewer.pal(n = length(all_lines) + length(all_arrows), name = "Dark2")) +
+    ggplot2::scale_x_continuous(xName, limits = c(0, 1)) + 
+    ggplot2::scale_y_continuous(yName,
+                                breaks = yBreaks,
+                                limits = c(0, newymax)) 
+  
+    
+  xr <- range(all_lines$x)
+  idx <- which.max(all_lines$y)
+  xmax <- all_lines$x[idx]
+  if (xmax > mean(xr)) {
+    legend.position = c(0.15, 0.875)
+  }else{
+    legend.position = c(0.8, 0.875)
+  }
+  
+  g <- JASPgraphs::themeJasp(graph = g, legend.position = legend.position, bty = bty) + 
+    ggplot2::theme(
+      legend.title = ggplot2::element_blank(), 
+      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
+      legend.key.height = ggplot2::unit(1, "cm"),
+      legend.key.width  = ggplot2::unit(1.5,"cm"))
+  
+  plot <- g
+  class(plot) <- c("JASPgraphs", class(plot))
+  
+  return(plot)
+}
+.plotStacked         <- function(all_lines, all_arrows, legend, xName = NULL, yName = "Density",
+                                 bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), lineColors = NULL){
+  
+  mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
+  mappingArrows <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
+  mappingLegend <- ggplot2::aes(x = x, y = y, label = name)
+  
+  all_linesD <- all_lines
+  for(i in 1:length(all_linesD)){
+    all_linesD[[i]] <- rbind.data.frame(
+      data.frame(x = 0, y = 0, g = all_linesD[[i]]$g[1]),
+      all_linesD[[i]],
+      data.frame(x = 1, y = 0, g = all_linesD[[i]]$g[1])     
+    )
+  }
+  
+  all_arrowsL <- list()
+  for(i in 1:length(all_arrows)){
+    all_arrowsL[[i]] <- data.frame(y = rep(all_arrows[[i]]$y_start, 2), x = c(0, 1),
+                                  g = rep(all_arrows[[i]]$g, 2))
+  }
+  
+  all_lines  <- do.call("rbind", all_lines)
+  all_linesD <- do.call("rbind", all_linesD)
+  all_arrows <- do.call("rbind", all_arrows)
+  all_arrowsL<- do.call("rbind", all_arrowsL)
+  legend     <- data.frame(legend)
+  colnames(legend) <- c("type", "name")
+  legend$type <- as.character(legend$type)
+  legend$name <- as.character(legend$name)
+  
+  obsYmax <- max(all_lines$y)
+  yBreak  <- obsYmax/3 
+  newymax <- obsYmax + yBreak*nrow(legend)
+  
+  all_arrows$y_end <- obsYmax
+  
+  # changing y-coordinates to "stack" the plots
+  for(i in 1:nrow(legend)){
+    if(legend$type[i] == "point"){
+      all_arrows[all_arrows$g == legend[i,2], "y_start"] <- all_arrows[all_arrows$g == legend[i,2], "y_start"] + yBreak*(i-1)
+      all_arrows[all_arrows$g == legend[i,2], "y_end"]   <- all_arrows[all_arrows$g == legend[i,2], "y_end"]   + yBreak*(i-1)
+      all_arrowsL[all_arrowsL$g == legend[i,2], "y"]     <- all_arrowsL[all_arrowsL$g == legend[i,2], "y"]     + yBreak*(i-1)
+    }else if(legend$type[i] == "beta"){
+      all_lines[all_lines$g == legend[i,2], "y"]   <- all_lines[all_lines$g == legend[i,2], "y"]   + yBreak*(i-1)
+      all_linesD[all_linesD$g == legend[i,2], "y"] <- all_linesD[all_linesD$g == legend[i,2], "y"] + yBreak*(i-1)
+    }
+  }
+  legend$y <- yBreak*(0:(nrow(legend)-1))
+  legend$x <- -(.5/6)*max(sapply(legend$name,nchar))
+  
+  
+  g <- ggplot2::ggplot()
+  
+  for(i in nrow(legend):1){
+    if(legend$type[i] == "point"){
+      g <- g + ggplot2::geom_segment(
+          data = all_arrows[all_arrows$g == legend$name[i],],
+          mapping = mappingArrows, size = 1,
+          arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm"))) +
+        ggplot2::geom_line(
+          data = all_arrowsL[all_arrowsL$g == legend$name[i],],
+          mapping = mappingLines)
+    }
+    if(legend$type[i] == "beta"){
+      g <- g + ggplot2::geom_line(
+          data = all_lines[all_lines$g == legend$name[i],],
+          mapping = mappingLines, size = 1) + 
+        ggplot2::geom_polygon(
+          data = all_linesD[all_linesD$g == legend$name[i],],
+          mapping = mappingLines, fill = "grey60", alpha = .8)
+    }
+  }
+  
+  g <- g + ggplot2::geom_text(data = legend, mapping = mappingLegend,
+                              size = 8, hjust = 0, vjust = 0, fontface = 1)
+  
+  g <- g + ggplot2::scale_colour_manual(values = rep("black", nrow(legend))) +
+    ggplot2::scale_x_continuous(xName) +
+    ggplot2::scale_y_continuous(yName) +
+    ggplot2::coord_cartesian(clip = "off")
+  
+  
+  g <- JASPgraphs::themeJasp(graph = g, bty = bty) + 
+    ggplot2::theme(
+      legend.title = ggplot2::element_blank(), 
+      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 2, 2, 0)),
+      legend.key.height = ggplot2::unit(1, "cm"),
+      legend.key.width  = ggplot2::unit(1.5,"cm"),
+      
+      axis.line.y  = ggplot2::element_blank(),
+      axis.text.y  = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.title.y = ggplot2::element_blank(),
+      legend.position = "none"
+    )
+  
+  plot <- g
+  class(plot) <- c("JASPgraphs", class(plot))
+  
+  return(plot)
+}
+.plotIterative       <- function(plot_data, xName = "Iteration", yName = NULL,
+                                 bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), lineColors = NULL){
+  
+  xBreaks    <- JASPgraphs::getPrettyAxisBreaks(c(0, max(plot_data$i)))
+  breaksXmax <- xBreaks[length(xBreaks)]
+  obsXmax    <- max(plot_data$i)
+  newymax    <- max(obsXmax, breaksXmax)
+  xBreaks[length(xBreaks)] <- newymax
+  
+  mappingLines   <- ggplot2::aes(x = i, y = posteriorM, 
+                                 group = name, color = name)
+  mappinglCI     <- ggplot2::aes(x = i, y = posteriorlCI, 
+                                 group = name, color = name)
+  mappinguCI     <- ggplot2::aes(x = i, y = posterioruCI, 
+                                 group = name, color = name)
+  mappingPolygon <- ggplot2::aes(x = x, y = y, group = name)
+  
+  clr <- RColorBrewer::brewer.pal(n = length(unique(plot_data$name)), name = "Dark2")
+  
+  g <- ggplot2::ggplot()
+  
+  for(i in length(unique(plot_data$name)):1){
+    temp_data <- plot_data[plot_data$name == unique(plot_data$name)[i], ]
+    temp_poly <- data.frame(
+      x = c(temp_data$i, rev(temp_data$i)),
+      y = c(temp_data$posteriorlCI, rev(temp_data$posterioruCI)),
+      name = rep(temp_data$name,2)
+    )
+    
+    g <- g + 
+      ggplot2::geom_polygon(
+        data = temp_poly,
+        mapping = mappingPolygon, fill = clr[i], alpha = .3) +
+      ggplot2::geom_line(
+        data = temp_data,
+        mapping = mappinguCI, size = 1, linetype = 2) +
+      ggplot2::geom_line(
+        data = temp_data,
+        mapping = mappinglCI, size = 1, linetype = 2)
+  }
+  
+  for(i in length(unique(plot_data$name)):1){
+    temp_data <- plot_data[plot_data$name == unique(plot_data$name)[i], ]
+    g <- g +
+      ggplot2::geom_line(
+        data = temp_data,
+        mapping = mappingLines, size = 1)
+  }
+
+  g <- g +
+    ggplot2::scale_x_continuous(xName, limits = c(0, newymax), breaks = xBreaks) +
+    ggplot2::scale_y_continuous(yName, limits = c(0, 1)) +
+    ggplot2::scale_colour_manual(values = clr)
+  
+  if (mean(plot_data$posteriorM[plot_data$i == max(plot_data$i)]) > .5) {
+    legend.position = c(0.8, .5)
+  }else{
+    legend.position = c(0.8, 1)
+  }
+
+  g <- JASPgraphs::themeJasp(graph = g, legend.position = legend.position, bty = bty) + 
+    ggplot2::theme(
+      legend.title = ggplot2::element_blank(), 
+      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 2, 2, 0)),
+      legend.key.height = ggplot2::unit(1, "cm"),
+      legend.key.width  = ggplot2::unit(1.5,"cm"),
+    )
+  
+  plot <- g
+  class(plot) <- c("JASPgraphs", class(plot))
+  
+  return(plot)
+}
+
+
+# removing arrowheads from legend
+.fix_arrow_head <- function(){
+  # https://stackoverflow.com/questions/48591582/exclude-arrowheads-in-legend-entry-on-ggplot2
+  draw_key_line <- function(data, params, size) {
+    data$linetype[is.na(data$linetype)] <- 0
+    
+    grid::segmentsGrob(0.1, 0.5, 0.9, 0.5,
+                       gp = grid::gpar(
+                         col = alpha(data$colour, data$alpha),
+                         lwd = data$size * .pt,
+                         lty = data$linetype,
+                         lineend = "butt"
+                       )
+    )
+  }
+  
+  GeomPath$draw_key <- draw_key_line
+}

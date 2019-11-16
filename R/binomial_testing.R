@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-binomial <- function(jaspResults, dataset, options, state=NULL){
+binomial_testing <- function(jaspResults, dataset, options, state=NULL){
   
   return()
 }

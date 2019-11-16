@@ -26,15 +26,7 @@ Form {
   
   	Group
 	{
-		Layout.columnSpan: 2
-
-		RadioButtonGroup
-		{
-		name: "procedureType"
-		title: qsTr("Select a computational procedure")
-			RadioButton { value: "procedureAll"; 		label: qsTr("All in one"); 	id: procedureA;	checked: true 	}
-			RadioButton { value: "procedureIterative"; 	label: qsTr("Iterative"); 	id: procedureB					}
-		}		
+				
 		
 		RadioButtonGroup
 		{
@@ -79,10 +71,21 @@ Form {
 		
 		Group
 		{
-		title: qsTr("Show data summary")
 		visible: dataTypeB.checked || dataTypeC.checked
+			Group
+			{
 			CheckBox { name: "dataSummary"; label: qsTr("Show data summary"); checked: false }
+			}
+		
+			RadioButtonGroup
+			{
+			name: "procedureType"
+			title: qsTr("Select a computational procedure")
+				RadioButton { value: "procedureAll"; 		label: qsTr("All in one"); 	id: procedureA;	checked: true 	}
+				RadioButton { value: "procedureIterative"; 	label: qsTr("Iterative"); 	id: procedureB					}
+			}
 		}
+	
 		
 	}
   
@@ -113,27 +116,24 @@ Form {
 				RadioButton { value: "plotsOverTime"; 	label: qsTr("Over time (does not allow stacked densities)"); 	id: plotsTypeB					}
 			}
 			
-			CheckBox { name: "plotsSeparate"; label: qsTr("Separate"); checked: false }	
 			
-			CheckBox 
-			{ 
-								name: "plotsCombined"; 			label: qsTr("Combined"); checked: false;
-				Group
-				{
-					CheckBox { 	name: "plotsCombinedPrior"; 	label: qsTr("Prior");		checked: true	}
-					CheckBox { 	name: "plotsCombinedPosterior"; label: qsTr("Posterior");	checked: true	}
-					RadioButtonGroup{
-					name: "plotsCombinedType"
-					title: qsTr("Type")
-						RadioButton { value: "plotsCombinedOverlying"; 	label: qsTr("Overlying densities")	}
-						Group
-						{
-						visible: plotsTypeA.checked
-						RadioButton { value: "plotsCombinedStacked"; 	label: qsTr("Stacked densities")	}
-						}
-					}		
-				}
+			Group
+			{
+				CheckBox { 	name: "plotsPrior"; 	label: qsTr("Prior");		checked: false	}
+				CheckBox { 	name: "plotsPosterior"; label: qsTr("Posterior");	checked: false	}
+				CheckBox { 	name: "plotsBoth"; 		label: qsTr("Both");		checked: false	}
+						
+			RadioButtonGroup{
+				name: "plotsCombinedType"
+				title: qsTr("Type")
+					RadioButton { value: "plotsCombinedOverlying"; 	label: qsTr("Overlying densities")	}
+					Group
+					{
+					RadioButton { value: "plotsCombinedStacked"; 	label: qsTr("Stacked densities")	}
+					}
+				}		
 			}
+			
 		}
 		
 	}
@@ -145,9 +145,12 @@ Form {
 		
 		Group
 		{
-			title: qsTr("Probability of observing")
-			IntegerField { name: "predictionSuccess";	label: qsTr("Number of successes");	defaultValue: 1  }
-			IntegerField { name: "predictionFailure";	label: qsTr("Number of failures");	defaultValue: 1  }
+			title: qsTr("Show prediction for")
+				CheckBox { 	name: "predictionParameter"; 	label: qsTr("Paramater");		checked: false	}
+				CheckBox { 	name: "predictionStatistic"; 	label: qsTr("Statistic");		checked: false	}
+				CheckBox { 	name: "predictionData"; 		label: qsTr("Data");			checked: false	}
+				CheckBox { 	name: "predictionComparison";	label: qsTr("Comparison");		checked: false	}
+				CheckBox { 	name: "predictionAll";	 		label: qsTr("All");				checked: false	}
 		}
 	}
     

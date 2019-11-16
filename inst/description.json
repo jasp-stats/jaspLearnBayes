@@ -1,27 +1,33 @@
 {
 	"moduleDescription" :
 	{
-        "title" :       "Teaching Statistics",
-        "icon":         "main_icon.svg",
-        "description": 	"Teaching Statistics with JASP",
-        "version":		"0.1",
-        "author":		"JASP Team",
-        "maintainer":	"JASP Team <info@jasp-stats.org>",
-        "website":		"www.jasp-stats.org",
-        "license":		"GPL (>= 2)"
+		"title" :		"Teaching Statistics",
+		"icon":			"main_icon.bmp",
+		"description":	"Teaching Statistics with JASP",
+		"version":		"0.1",
+		"requiresData": false,
+		"author":		"JASP Team",
+		"maintainer":	"JASP Team <info@jasp-stats.org>",
+		"website":		"www.jasp-stats.org",
+		"license":		"GPL (>= 2)"
 	},
 
 
 	"menu":
 	[
 		{
-            "title": 	"Examples",
-            "icon": 	"menu1.svg"
+			"title": 	"Binomial",
+			"icon": 	"menu1.svg"
 		},
 		{
-            "title":	"Binomial example",
-            "qml":		"binomial.qml",
-            "function":	"binomial"
+			"title":	"Estimation",
+			"qml":		"BinomialEstimation.qml",
+			"function":	"binomialEstimation"
+		},
+		{
+			"title":	"Testing",
+			"qml":		"binomial_testing.qml",
+			"function":	"binomial_testing"
 		}
 	]
 }

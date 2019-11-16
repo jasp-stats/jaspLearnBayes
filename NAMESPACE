@@ -1,1 +1,2 @@
-export(binomial)
+export(binomialEstimation)
+export(binomial_testing)
