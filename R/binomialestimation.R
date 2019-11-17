@@ -736,7 +736,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   mappingPolygon <- ggplot2::aes(x = x, y = y, group = name, fill = name)
   
   clr  <- JASPgraphs::colorBrewerJasp(n = length(unique(plot_data$name)))
-  clr1 <- clr[order(unique(as.character(plot_data$name)))]
+  clr1 <- clr[order(order(levels(plot_data$name)))]
   
   g <- ggplot2::ggplot()
   
