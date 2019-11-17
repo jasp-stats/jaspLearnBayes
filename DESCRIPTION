@@ -2,7 +2,7 @@ Package: DevelopmentModule
 Type: Package
 Title: Teaching Statistics Module for JASP
 Version: 0.1
-Date: 2019-11-16
+Date: 2019-11-17
 Author: JASP Team
 Website: www.jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>

@@ -18,22 +18,38 @@
 binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
 
   # lazy test
-  options[["priors"]] <- list(
-    list(
-      name = "H1",
-      type = "point",
-      parPoint = 0.5),
-    list(
-      name = "H2",
-      type = "beta",
-      parAlpha = 1,
-      parBeta = 1),
-    list(
-      name = "H3",
-      type = "beta",
-      parAlpha = 5,
-      parBeta = 1)
-  )
+  if(F){
+    options[["priors"]] <- list(
+      list(
+        name = "H1",
+        type = "point",
+        parPoint = 0.5),
+      list(
+        name = "REpetia",
+        type = "point",
+        parPoint = 0.3),
+      list(
+        name = "H2",
+        type = "beta",
+        parAlpha = 1,
+        parBeta = 1),
+      list(
+        name = "H3",
+        type = "beta",
+        parAlpha = 5,
+        parBeta = 1),
+      list(
+        name = "H4",
+        type = "beta",
+        parAlpha = 5,
+        parBeta = 1),
+      list(
+        name = "H5",
+        type = "beta",
+        parAlpha = 5,
+        parBeta = 1)
+    )
+  }
   
   ready <- .readyBinomial(options)
 
@@ -443,7 +459,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
                    dbeta(theta, prior$parAlpha, prior$parBeta))
   }
 
-  nameGroup <- c("Posterior", "Prior")
+  nameGroup <- c("Observed", "Observed")
   dat       <- data.frame(x = pointXVal, y = pointYVal, g = nameGroup)
   return(dat)
 }
@@ -454,13 +470,17 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
 .plotArrow           <- function(dfArrow, dfPoints = NULL, xName = NULL, yName = "Density",
                                  bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), lineColors = NULL){
   
-  mapping <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, linetype = g)
+  mappingArrow <- ggplot2::aes(x = x ,xend = x, y = y_start, yend = y_end, color = g)
+  mappingPoint <- ggplot2::aes(x = x, y = y, color = g)
+
   
-  g <- ggplot2::ggplot(data = dfArrow, mapping) + 
+  g <- ggplot2::ggplot() + 
     ggplot2::geom_segment(
-      color = "black", size = 1,
+      data = dfArrow, mappingArrow,
+      size = 1,
       arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
-      show.legend = TRUE) +
+      show.legend = F) +
+    ggplot2::geom_segment(data = dfArrow, mappingArrow, size = 1) +
     ggplot2::scale_x_continuous(xName, limits = c(0, 1)) + 
     ggplot2::scale_y_continuous(yName,
                        breaks = c(0, dfArrow$y_end),
@@ -468,7 +488,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
                        labels = c(0, "\U221E" )) 
     
   if(!is.null(dfPoints)){
-    g <- g + ggplot2::geom_point(data = dfPoints, ggplot2::aes(x = x,y = y),
+    g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = TRUE,
                                  inherit.aes = FALSE, size = 4, shape = 21, 
                                  stroke = 1.25, fill = "grey")
   }
@@ -480,6 +500,14 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     legend.position = c(0.8, 0.875)
   }
   
+  g <- g + ggplot2::scale_color_manual("",
+                                  values  = c("black", "black"),
+                                  breaks  = c(as.character(dfArrow$g), as.character(unique(dfPoints$g))),
+                                  guide   = ggplot2::guide_legend(override.aes = list(
+                                    linetype = c(1, NA),
+                                    shape    = c(NA, 21)
+                                    #arrow    = rep(NA, 2)
+                                  ))) 
   
   g <- JASPgraphs::themeJasp(graph = g, legend.position = legend.position, bty = bty) + 
     ggplot2::theme(
@@ -490,7 +518,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   
   plot <- g
   class(plot) <- c("JASPgraphs", class(plot))
-  
+
   return(plot)
 }
 .plotOverlying       <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL, yName = "Density",
@@ -499,37 +527,59 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
   mappingArrows <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
   
-  all_lines  <- do.call("rbind", all_lines)
-  all_arrows <- do.call("rbind", all_arrows)
-
-  yBreaks    <- JASPgraphs::getPrettyAxisBreaks(c(0, all_lines$y))
-  breaksYmax <- yBreaks[length(yBreaks)]
-  obsYmax <- max(all_lines$y)
-  newymax <- max(1.1 * obsYmax, breaksYmax)
+  if(!is.null(all_lines))all_lines  <- do.call("rbind", all_lines)
+  if(!is.null(all_arrows))all_arrows <- do.call("rbind", all_arrows)
   
-  all_arrows$y_end <- newymax
+  if(!is.null(all_lines)){
+    yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, all_lines$y))  
+    obsYmax  <- max(all_lines$y)
+  }else{
+    yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, all_arrows$y_end))  
+    obsYmax  <- max(all_arrows$y_end)
+    
+  }
+
+  breaksYmax <- yBreaks[length(yBreaks)]
+  newymax <- max(1.1 * obsYmax, breaksYmax)
+  if(!is.null(all_arrows))all_arrows$y_end <- newymax
   
   g <- ggplot2::ggplot()
   
   if(!is.null(all_arrows)){
     g <- g + ggplot2::geom_segment(
       data = all_arrows, mapping = mappingArrows, size = 1,
-      arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")))
+      arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")), show.legend = F) +
+      ggplot2::geom_segment(data = all_arrows, mappingArrows, size = 1)
   }
   if(!is.null(all_lines)){
     g <- g + ggplot2::geom_line(data = all_lines, mapping = mappingLines, size = 1,)
   }
   
-  g <- g + ggplot2::scale_colour_manual(values = RColorBrewer::brewer.pal(n = length(all_lines) + length(all_arrows), name = "Dark2")) +
-    ggplot2::scale_x_continuous(xName, limits = c(0, 1)) + 
-    ggplot2::scale_y_continuous(yName,
-                                breaks = yBreaks,
-                                limits = c(0, newymax)) 
+  g <- g + ggplot2::scale_colour_manual(values = JASPgraphs::colorBrewerJasp(n = length(unique(all_lines$g)) + length(unique(all_arrows$g)))) +
+    ggplot2::scale_x_continuous(xName, limits = c(0, 1))
   
-    
-  xr <- range(all_lines$x)
-  idx <- which.max(all_lines$y)
-  xmax <- all_lines$x[idx]
+  
+  if(!is.null(all_lines)){
+    g <- g + ggplot2::scale_y_continuous(yName,
+                                         breaks = yBreaks,
+                                         limits = c(0, newymax)) 
+  }else{
+    g <- g + ggplot2::scale_y_continuous(yName,
+                                         breaks = c(0, newymax),
+                                         limits = c(0, newymax),
+                                         labels = c(0, "\U221E" )) 
+  }
+  
+  if(!is.null(all_lines)){
+    xr <- range(all_lines$x)
+    idx <- which.max(all_lines$y)
+    xmax <- all_lines$x[idx]
+  }else{
+    xr <- range(all_arrows$x)
+    idx <- which.max(all_arrows$y_end)
+    xmax <- all_arrows$x[idx]
+  }
+
   if (xmax > mean(xr)) {
     legend.position = c(0.15, 0.875)
   }else{
@@ -555,35 +605,51 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   mappingArrows <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
   mappingLegend <- ggplot2::aes(x = x, y = y, label = name)
   
-  all_linesD <- all_lines
-  for(i in 1:length(all_linesD)){
-    all_linesD[[i]] <- rbind.data.frame(
-      data.frame(x = 0, y = 0, g = all_linesD[[i]]$g[1]),
-      all_linesD[[i]],
-      data.frame(x = 1, y = 0, g = all_linesD[[i]]$g[1])     
-    )
+  if(!is.null(all_lines)){
+    
+    all_linesD <- all_lines
+    for(i in 1:length(all_linesD)){
+      all_linesD[[i]] <- rbind.data.frame(
+        data.frame(x = 0, y = 0, g = all_linesD[[i]]$g[1]),
+        all_linesD[[i]],
+        data.frame(x = 1, y = 0, g = all_linesD[[i]]$g[1])     
+      )
+    }
+    
+    all_lines  <- do.call("rbind", all_lines)
+    all_linesD <- do.call("rbind", all_linesD)
   }
   
-  all_arrowsL <- list()
-  for(i in 1:length(all_arrows)){
-    all_arrowsL[[i]] <- data.frame(y = rep(all_arrows[[i]]$y_start, 2), x = c(0, 1),
-                                  g = rep(all_arrows[[i]]$g, 2))
+  if(!is.null(all_arrows)){
+    
+    all_arrowsL <- list()
+    for(i in 1:length(all_arrows)){
+      all_arrowsL[[i]] <- data.frame(y = rep(all_arrows[[i]]$y_start, 2), x = c(0, 1),
+                                     g = rep(all_arrows[[i]]$g, 2))
+    }
+    
+    all_arrows <- do.call("rbind", all_arrows)
+    all_arrowsL<- do.call("rbind", all_arrowsL)
   }
-  
-  all_lines  <- do.call("rbind", all_lines)
-  all_linesD <- do.call("rbind", all_linesD)
-  all_arrows <- do.call("rbind", all_arrows)
-  all_arrowsL<- do.call("rbind", all_arrowsL)
-  legend     <- data.frame(legend)
+
+  legend      <- data.frame(legend)
   colnames(legend) <- c("type", "name")
   legend$type <- as.character(legend$type)
   legend$name <- as.character(legend$name)
   
-  obsYmax <- max(all_lines$y)
+  if(!is.null(all_lines)){
+    obsYmax <- max(all_lines$y)
+    if(!is.null(all_arrows)){
+      all_arrows$y_end <- obsYmax
+    }
+  }else{
+    obsYmax <- max(all_arrows$y_end)    
+  }
   yBreak  <- obsYmax/3 
   newymax <- obsYmax + yBreak*nrow(legend)
   
-  all_arrows$y_end <- obsYmax
+  legend$y <- yBreak*(0:(nrow(legend)-1))
+  legend$x <- 0
   
   # changing y-coordinates to "stack" the plots
   for(i in 1:nrow(legend)){
@@ -596,8 +662,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
       all_linesD[all_linesD$g == legend[i,2], "y"] <- all_linesD[all_linesD$g == legend[i,2], "y"] + yBreak*(i-1)
     }
   }
-  legend$y <- yBreak*(0:(nrow(legend)-1))
-  legend$x <- -(.5/6)*max(sapply(legend$name,nchar))
+
   
   
   g <- ggplot2::ggplot()
@@ -622,19 +687,21 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     }
   }
   
+  legend$name <- sapply(legend$name, function(x)paste(c(x, "   "), collapse = ""))
   g <- g + ggplot2::geom_text(data = legend, mapping = mappingLegend,
-                              size = 8, hjust = 0, vjust = 0, fontface = 1)
+                              size = 8, hjust = 1, vjust = 0, fontface = 1)
   
   g <- g + ggplot2::scale_colour_manual(values = rep("black", nrow(legend))) +
-    ggplot2::scale_x_continuous(xName) +
-    ggplot2::scale_y_continuous(yName) +
-    ggplot2::coord_cartesian(clip = "off")
-  
+    ggplot2::scale_x_continuous(xName, limits = c(0, 1)) +
+    ggplot2::scale_y_continuous(yName) + 
+    ggplot2::coord_cartesian(clip = 'off')
+
+
   
   g <- JASPgraphs::themeJasp(graph = g, bty = bty) + 
-    ggplot2::theme(
+      ggplot2::theme(
       legend.title = ggplot2::element_blank(), 
-      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 2, 2, 0)),
+      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
       legend.key.width  = ggplot2::unit(1.5,"cm"),
       
@@ -642,9 +709,10 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
       axis.text.y  = ggplot2::element_blank(),
       axis.ticks.y = ggplot2::element_blank(),
       axis.title.y = ggplot2::element_blank(),
-      legend.position = "none"
+      legend.position = "none", 
+      plot.margin  = ggplot2::unit(c(0,0,0,max(sapply(legend$name,nchar))/60), "npc")
     )
-  
+
   plot <- g
   class(plot) <- c("JASPgraphs", class(plot))
   
@@ -665,9 +733,10 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
                                  group = name, color = name)
   mappinguCI     <- ggplot2::aes(x = i, y = posterioruCI, 
                                  group = name, color = name)
-  mappingPolygon <- ggplot2::aes(x = x, y = y, group = name)
+  mappingPolygon <- ggplot2::aes(x = x, y = y, group = name, fill = name)
   
-  clr <- RColorBrewer::brewer.pal(n = length(unique(plot_data$name)), name = "Dark2")
+  clr  <- JASPgraphs::colorBrewerJasp(n = length(unique(plot_data$name)))
+  clr1 <- clr[order(unique(as.character(plot_data$name)))]
   
   g <- ggplot2::ggplot()
   
@@ -682,7 +751,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     g <- g + 
       ggplot2::geom_polygon(
         data = temp_poly,
-        mapping = mappingPolygon, fill = clr[i], alpha = .3) +
+        mapping = mappingPolygon, fill = clr1[i], alpha = .3) +
       ggplot2::geom_line(
         data = temp_data,
         mapping = mappinguCI, size = 1, linetype = 2) +
@@ -722,24 +791,4 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   class(plot) <- c("JASPgraphs", class(plot))
   
   return(plot)
-}
-
-
-# removing arrowheads from legend
-.fix_arrow_head <- function(){
-  # https://stackoverflow.com/questions/48591582/exclude-arrowheads-in-legend-entry-on-ggplot2
-  draw_key_line <- function(data, params, size) {
-    data$linetype[is.na(data$linetype)] <- 0
-    
-    grid::segmentsGrob(0.1, 0.5, 0.9, 0.5,
-                       gp = grid::gpar(
-                         col = alpha(data$colour, data$alpha),
-                         lwd = data$size * .pt,
-                         lty = data$linetype,
-                         lineend = "butt"
-                       )
-    )
-  }
-  
-  GeomPath$draw_key <- draw_key_line
 }

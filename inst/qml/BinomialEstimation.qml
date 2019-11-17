@@ -149,7 +149,7 @@ Form {
 				{
 					DoubleField
 					{
-						label: "point at"
+						label: "theta"
 						name: "parPoint"
 						visible: fromRowComponents["type"].currentText === "point"
 						Layout.rightMargin: width
@@ -191,8 +191,8 @@ Form {
 				}
 			}
 
-			CheckBox { 	name: "plotsBoth"; 		label: qsTr("Both");		checked: false	}
-			CheckBox { 	name: "plotsIterative";	label: qsTr("Iterative");	checked: false;
+			CheckBox { 	name: "plotsBoth"; 		label: qsTr("Prior and Posterior");	checked: false}
+			CheckBox { 	name: "plotsIterative";	label: qsTr("Iterative");			checked: false;
 						visible: dataTypeB.checked || dataTypeC.checked}
 		}
 	}
