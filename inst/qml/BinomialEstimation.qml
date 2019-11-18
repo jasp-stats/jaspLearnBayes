@@ -40,19 +40,34 @@ Form {
 		{
 		title: qsTr("Enter count data")
 		visible: dataTypeA.checked
-		IntegerField { name: "nSuccesses";	label: qsTr("Number of successes");	defaultValue: 0 }
-		IntegerField { name: "nFailures";	label: qsTr("Number of failures");	defaultValue: 0 }
+		IntegerField { name: "nSuccesses";	label: qsTr("Successes");		defaultValue: 0 }
+		IntegerField { name: "nFailures";	label: qsTr("Failures     ");	defaultValue: 0 } 
+		// this is definitelly the wrong way how to allign the boxes
 		}
 
 		Group
 		{
-		title: qsTr("Enter the sequence of observation")
+		title: qsTr("Enter comma separated sequence of observation")
 		visible: dataTypeB.checked
 		TextField { 
 			name: "data_sequence"; 
 			label: "";
-			placeholderText: qsTr("Enter the sequence of successes or failures (ie. '101101')")
+			placeholderText: qsTr("Enter the sequence of successes or failures (ie. '1,0,1,1,0,1')")
 			fieldWidth: 400 
+			}
+		
+		Group{
+			title: qsTr("Encoding of")
+			TextField {
+				name: "key_success_Seq"; 
+				label: qsTr("Level 1");
+				fieldWidth: 75
+			}
+			TextField {
+				name: "key_failure_Seq"; 
+				label: qsTr("Level 2");
+				fieldWidth: 75 
+			}
 			}
 		}
 
@@ -68,21 +83,21 @@ Form {
 									suggestedColumns: ["nominal"];
 									singleVariable: true }
 			}
+		
 		Group{
 			title: qsTr("Encoding of")
 			TextField {
-				name: "key_success"; 
-				label: qsTr("Successes");
+				name: "key_success_Var"; 
+				label: qsTr("Level 1");
 				fieldWidth: 75
 			}
 			TextField {
-				name: "key_failure"; 
-				label: qsTr("Failures");
+				name: "key_failure_Var"; 
+				label: qsTr("Level 2");
 				fieldWidth: 75 
 			}
 			}
 		}
-		
 
 		Group
 		{
@@ -103,7 +118,7 @@ Form {
 		InputListView
 		{
 			height: 200
-			title				: qsTr("Distributions")
+			title				: qsTr("Name")
 			name				: "priors"
 			optionKey			: "name"
 			placeHolder			: qsTr("New Hypothesis")
@@ -125,7 +140,7 @@ Form {
 				{
 					DoubleField
 					{
-						label: "alpha"
+						label: "α"
 						name: "parAlpha"
 						visible: fromRowComponents["type"].currentText === "beta"
 						defaultValue: 1
@@ -137,7 +152,7 @@ Form {
 				{
 					DoubleField
 					{
-						label: "beta"
+						label: "β"
 						name: "parBeta"
 						visible: fromRowComponents["type"].currentText === "beta"
 						defaultValue: 1
@@ -149,7 +164,7 @@ Form {
 				{
 					DoubleField
 					{
-						label: "theta"
+						label: "θ"
 						name: "parPoint"
 						visible: fromRowComponents["type"].currentText === "point"
 						Layout.rightMargin: width
@@ -192,25 +207,17 @@ Form {
 			}
 
 			CheckBox { 	name: "plotsBoth"; 		label: qsTr("Prior and Posterior");	checked: false}
-			CheckBox { 	name: "plotsIterative";	label: qsTr("Iterative");			checked: false;
-						visible: dataTypeB.checked || dataTypeC.checked}
+			CheckBox
+			{
+				name: "plotsIterative";	label: qsTr("Iterative"); checked: false;
+				visible: dataTypeB.checked || dataTypeC.checked
+				RadioButtonGroup
+				{
+					name: "plotsIterativeType"
+					RadioButton { value: "overlying"; 	label: qsTr("Overlying densities")	}
+					RadioButton { value: "stacked"; 	label: qsTr("Stacked densities")	}
+				}
+			}
 		}
 	}
-
-
-
-	Section
-	{
-		expanded: true
-		title: "Prediction"
-		
-		Group
-		{
-			title: qsTr("Show prediction after")
-			IntegerField { name: "predictionSuccess";	label: qsTr("Number of successes");	defaultValue: 1  }
-			IntegerField { name: "predictionFailure";	label: qsTr("Number of failures");	defaultValue: 1  }
-		}
-	}
-    
-
 }
