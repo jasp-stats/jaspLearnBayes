@@ -24,16 +24,21 @@ import JASP.Theme 1.0
 Form {
 	id: form
 
-	Group
+	Section
 	{
+		expanded: true
+		title: "Data"
 
+		Group{
+		
 		RadioButtonGroup
 		{
 		name: "dataType"
-		title: qsTr("Enter data")
-			RadioButton { value: "dataCounts"; 		label: qsTr("Counts"); 			id: dataTypeA;	checked: true 	}
-			RadioButton { value: "dataSequence"; 	label: qsTr("Sequence"); 		id: dataTypeB					}
-			RadioButton { value: "dataVariable"; 	label: qsTr("Select variable");	id: dataTypeC					}
+		title: qsTr("Input type")
+			RadioButton { value: "dataVariable"; 	label: qsTr("Select variable");		id: dataTypeC; 	checked: true}
+			RadioButton { value: "dataCounts"; 		label: qsTr("Specify counts"); 		id: dataTypeA 	}
+			RadioButton { value: "dataSequence"; 	label: qsTr("Enter sequence"); 		id: dataTypeB	}
+
 		}
 
 		Group
@@ -60,12 +65,12 @@ Form {
 			title: qsTr("Encoding of")
 			TextField {
 				name: "key_success_Seq"; 
-				label: qsTr("Level 1");
+				label: qsTr("Successes");
 				fieldWidth: 75
 			}
 			TextField {
 				name: "key_failure_Seq"; 
-				label: qsTr("Level 2");
+				label: qsTr("Failures     ");
 				fieldWidth: 75 
 			}
 			}
@@ -88,12 +93,12 @@ Form {
 			title: qsTr("Encoding of")
 			TextField {
 				name: "key_success_Var"; 
-				label: qsTr("Level 1");
+				label: qsTr("Successes");
 				fieldWidth: 75
 			}
 			TextField {
 				name: "key_failure_Var"; 
-				label: qsTr("Level 2");
+				label: qsTr("Failures     ");
 				fieldWidth: 75 
 			}
 			}
@@ -104,16 +109,17 @@ Form {
 		visible: dataTypeB.checked || dataTypeC.checked
 			Group
 			{
-			CheckBox { name: "dataSummary"; label: qsTr("Show data summary");			checked: true }
-			CheckBox { name: "doIterative"; label: qsTr("Show iterative computation");	checked: false }
+			CheckBox { name: "dataSummary"; label: qsTr("Data summary"); checked: true }
 			}
+		}
+		
 		}
 	}
 
 	Section
 	{
 		expanded: true
-		title: "Hypotheses"
+		title: "Model"
 
 		InputListView
 		{
@@ -121,8 +127,8 @@ Form {
 			title				: qsTr("Name")
 			name				: "priors"
 			optionKey			: "name"
-			placeHolder			: qsTr("New Hypothesis")
-			rowComponentsTitles: [qsTr("Parameters")]
+			placeHolder			: qsTr("New model")
+			rowComponentsTitles: [qsTr("Parameter (θ)")]
 
 			rowComponents:
 			[
@@ -180,44 +186,77 @@ Form {
 	Section
 	{
 		expanded: true
-		title: "Plots"
-		Layout.columnSpan: 2
+		title: "Output"
+		Layout.columnSpan: 1
+
 		Group
 		{
 			CheckBox
 			{
-				name: "plotsPrior"; label: qsTr("Prior"); checked: false	;
-				RadioButtonGroup
-				{
-					name: "plotsPriorType"
-					RadioButton { value: "overlying"; 	label: qsTr("Overlying densities")	}
-					RadioButton { value: "stacked"; 	label: qsTr("Stacked densities")	}
-				}
-			}
-
-			CheckBox
-			{
-				name: "plotsPosterior"; label: qsTr("Posterior"); checked: false
-				RadioButtonGroup
-				{
-					name: "plotsPosteriorType"
-					RadioButton { value: "overlying"; 	label: qsTr("Overlying densities")	}
-					RadioButton { value: "stacked"; 	label: qsTr("Stacked densities")	}
-				}
-			}
-
-			CheckBox { 	name: "plotsBoth"; 		label: qsTr("Prior and Posterior");	checked: false}
-			CheckBox
-			{
-				name: "plotsIterative";	label: qsTr("Iterative"); checked: false;
 				visible: dataTypeB.checked || dataTypeC.checked
-				RadioButtonGroup
+				name: "doIterative"
+				label: qsTr("Sequential analysis")
+				checked: false
+			}
+
+			Group
+			{
+				title: "Plots"
+				CheckBox
 				{
-					name: "plotsIterativeType"
-					RadioButton { value: "overlying"; 	label: qsTr("Overlying densities")	}
-					RadioButton { value: "stacked"; 	label: qsTr("Stacked densities")	}
+					name: "plotsPrior"; label: qsTr("Prior distribution"); checked: false	;
+					RadioButtonGroup
+					{
+						name: "plotsPriorType"
+						RadioButton { value: "overlying"; 	label: qsTr("Overlying"); checked: true}
+						RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
+//						RadioButton {
+//							value: "individual"
+//							label: qsTr("Individual")
+//							RadioButtonGroup
+//							{
+//								name: "plotsPriorIndividualType"
+//								RadioButton { value: "central"; label: qsTr("Central");
+//									DoubleField{ name: "priorCentralCoverage"; label: qsTr("Coverage");fieldWidth: 45}}
+//								RadioButton { value: "HDP"; 	label: qsTr("HDP")}
+//								RadioButton { value: "user"; 	label: qsTr("Custom")}
+//							}
+//						}
+					}
+				}
+
+				CheckBox
+				{
+					name: "plotsPosterior"; label: qsTr("Posterior distribution"); checked: false
+					RadioButtonGroup
+					{
+						name: "plotsPosteriorType"
+						RadioButton { value: "overlying"; 	label: qsTr("Overlying"); checked: true}
+						RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
+					}
+				}
+
+				CheckBox { 	name: "plotsBoth"; 		label: qsTr("Prior and Posterior distribution");	checked: false}
+				CheckBox
+				{
+					name: "plotsIterative";	label: qsTr("Sequential analysis"); checked: false;
+					visible: dataTypeB.checked || dataTypeC.checked
+					RadioButtonGroup
+					{
+						name: "plotsIterativeType"
+						RadioButton { value: "overlying"; 	label: qsTr("Overlying")	}
+						RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
+					}
 				}
 			}
 		}
 	}
+
+	Section
+	{
+		expanded: true
+		title: "Prediction"
+		Layout.columnSpan: 1
+	}
+	
 }

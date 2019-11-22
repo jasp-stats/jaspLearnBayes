@@ -87,11 +87,11 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
 .readyBinomial       <- function(options){
   # are data ready
   if(options$dataType == "dataCounts"){
-    ready <- options$nSuccesses > 0 | options$nFailures > 0
+    ready <- TRUE # options$nSuccesses > 0 | options$nFailures > 0
   }else if(options$dataType == "dataSequence"){
-    ready <- nchar(options$data_sequence) > 0
+    ready <- TRUE # nchar(options$data_sequence) > 0
   }else if(options$dataType == "dataVariable"){
-    ready <- options$selectedVariable != ""
+    ready <- TRUE # options$selectedVariable != ""
   }
   
   # are priors ready
@@ -109,27 +109,36 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     data$nFailures  <- options$nFailures
     
   }else{
-    
-    if(options$dataType == "dataSequence"){
-      
-      y <- options$data_sequence
 
-    }else if(options$dataType == "dataVariable"){
-      # this is stupidly written #rework
-      if (!is.null(dataset)){
-        y <- dataset
-      }else{
-        y <- .readDataSetToEnd(columns = options$selectedVariable)[,1]
+    if((options$dataType == "dataVariable" & options$selectedVariable == "") |
+       (options$dataType == "dataSequence" & options$data_sequence == "")){
+      
+      data$y <- NULL
+      
+    }else{
+      
+      if(options$dataType == "dataSequence"){
+        
+        temp_y <- options$data_sequence
+        
+      }else if(options$dataType == "dataVariable"){
+        
+        # this is stupidly written #rework
+        if (!is.null(dataset)){
+          temp_y <- dataset
+        }else{
+          temp_y <- .readDataSetToEnd(columns = options$selectedVariable)[,1]
+        }
+        
       }
       
+      data$y          <- .cleanDataBinomial(temp_y, options)
+    
     }
     
-    cleaned_out     <- .cleanDataBinomial(y, options)
-    data$y          <- cleaned_out$y
     data$nSuccesses <- sum(data$y == 1)
     data$nFailures  <- sum(data$y == 0)
-    data$lSuccesses <- cleaned_out$lSuccesses
-    data$lFailures  <- cleaned_out$lFailures
+    
   } 
   
   return(data)
@@ -137,7 +146,6 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
 }
 .cleanDataBinomial   <- function(x, options){
   
-  lSuccesses <- NULL -> lFailures
   key <- list(
     c("T", "F"),
     c("S", "F"),
@@ -175,8 +183,6 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     }
     
     x <- ifelse(toupper(x) %in% toupper(key_success), 1, 0)
-    lSuccesses <- key_success
-    lFailures <- key_failure
     
   }else if(!all(x == 1 | x == 0)){
     # if not, and all of the variables aren't already 1s or 0s, try the recoding provided in key object
@@ -210,12 +216,7 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     
   }
   
-  return(list(
-    y          = as.numeric(x),
-    lSuccesses = lSuccesses,
-    lFailures  = lFailures
-    )
-  )
+  return(as.numeric(x))
 }
 .summaryBinomial     <- function(jaspResults, data, ready){
   summaryTable <- createJaspTable(title = "Data Summary")
@@ -232,15 +233,18 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   jaspResults[["summaryTable"]] <- summaryTable
   
   if(ready[1]){
-    summaryTable$addRows(list(variable   = ifelse(!is.null(data$lSuccesses), data$lSuccesses, "Successes"), 
+    summaryTable$addRows(list(variable   = "Successes", 
                               counts     = data$nSuccesses, 
-                              proportion = data$nSuccesses / (data$nSuccesses + data$nFailures)))
-    summaryTable$addRows(list(variable   = ifelse(!is.null(data$lFailures), data$lFailures, "Failures"),
+                              proportion = ifelse(is.nan(data$nSuccesses / (data$nSuccesses + data$nFailures)), "",
+                                                  data$nSuccesses / (data$nSuccesses + data$nFailures))))
+    summaryTable$addRows(list(variable   = "Failures",
                               counts     = data$nFailures, 
-                              proportion = data$nFailures / (data$nSuccesses + data$nFailures)))
+                              proportion = ifelse(is.nan(data$nFailures / (data$nSuccesses + data$nFailures)), "",
+                                                  data$nFailures / (data$nSuccesses + data$nFailures))))
     summaryTable$addRows(list(variable   = "Total",
                               counts     = data$nSuccesses + data$nFailures, 
-                              proportion = (data$nSuccesses + data$nFailures) / (data$nSuccesses + data$nFailures)))
+                              proportion = ifelse(is.nan((data$nSuccesses + data$nFailures) / (data$nSuccesses + data$nFailures)), "",
+                                                  (data$nSuccesses + data$nFailures) / (data$nSuccesses + data$nFailures))))
   }
   
   return()
@@ -251,10 +255,10 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   estimatesTable$position <- 2
   estimatesTable$dependOn(.binomial_data_dependencies)
   
-  estimatesTable$addColumnInfo(name = "hypothesis",   title = "Hypothesis",      type = "string")
-  estimatesTable$addColumnInfo(name = "prior",        title = "Prior",           type = "string")
+  estimatesTable$addColumnInfo(name = "hypothesis",   title = "Model"    ,       type = "string")
+  estimatesTable$addColumnInfo(name = "prior",        title = "Prior (θ)",       type = "string")
   estimatesTable$addColumnInfo(name = "priorMed",     title = "Prior Median",    type = "number")
-  estimatesTable$addColumnInfo(name = "posterior",    title = "Posterior",       type = "string")
+  estimatesTable$addColumnInfo(name = "posterior",    title = "Posterior (θ)",   type = "string")
   estimatesTable$addColumnInfo(name = "posteriorMed", title = "Posterior Median",type = "number")
   estimatesTable$addColumnInfo(name = "likelihood",   title = "Likelihood",      type = "number")
   
@@ -297,11 +301,9 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
       estimatesTable$addRows(temp_row)
     }
     
-    # add footnote clarifying what the theta paramater symbolizes
-    if(!is.null(data$lSuccesses)){
-      estimatesTable$addFootnote(paste0("The proportion of '", data$lSuccesses, "' is used through the analysis."))
-    }
-    
+    # add footnote clarifying what dataset was used
+    estimatesTable$addFootnote(paste0("The output is based on ", data$nSuccesses," ", ifelse(data$nSuccesses == 1, "success", "successes"),
+                                      "  and ", data$nFailures, " ",ifelse(data$nFailures == 1, "failure", "failures"), "."))
     
   }
   
@@ -334,24 +336,30 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
     temp_row <- NULL
     temp_row[["iteration"]] <- 0
     for(h in 1:length(options$priors)){
-      temp_results <- .computeBinomial(data, options$priors[[h]])
+      temp_data    <- list(
+        nSuccesses = 0,
+        nFailures  = 0
+      )
+      temp_results <- .computeBinomial(temp_data, options$priors[[h]])
       temp_row[[options$priors[[h]]$name]] <- temp_results$distribution
     }
     estimatesSequentialTable$addRows(temp_row)
     
     # then update the posteriors as the data go in
-    for(i in 1:length(data$y)){
-      temp_row <- NULL
-      temp_row[["iteration"]] <- i
-      for(h in 1:length(options$priors)){
-        temp_data    <- list(
-          nSuccesses = sum(data$y[1:i] == 1),
-          nFailures  = sum(data$y[1:i] == 0)
-        )
-        temp_results <- .computeBinomial(temp_data, options$priors[[h]])
-        temp_row[[options$priors[[h]]$name]] <- temp_results$distribution
+    if(length(data$y) > 0){
+      for(i in 1:length(data$y)){
+        temp_row <- NULL
+        temp_row[["iteration"]] <- i
+        for(h in 1:length(options$priors)){
+          temp_data    <- list(
+            nSuccesses = sum(data$y[1:i] == 1),
+            nFailures  = sum(data$y[1:i] == 0)
+          )
+          temp_results <- .computeBinomial(temp_data, options$priors[[h]])
+          temp_row[[options$priors[[h]]$name]] <- temp_results$distribution
+        }
+        estimatesSequentialTable$addRows(temp_row)
       }
-      estimatesSequentialTable$addRows(temp_row)
     }
     
   }
@@ -481,14 +489,16 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
       
       if(options$priors[[i]]$type == "point"){
         
-        dfArrowPP <- .dataArrowPP(options$priors[[i]])
-        dfPointsPP<- .dataPointsPP(data, options$priors[[i]])
+        dfArrowPP  <- .dataArrowPP(options$priors[[i]])
+        dfPointsPP <- .dataProportionPP(data, options$priors[[i]])
+        #dfPointsPP <- NULL 
         p <- .plotArrow(dfArrow = dfArrowPP, dfPoints = dfPointsPP, xName = xName)
         
       }else if(options$priors[[i]]$type == "beta"){
         
-        dfLinesPP <- .dataLinesPP(data, options$priors[[i]])
-        dfPointsPP<- .dataPointsPP(data, options$priors[[i]])
+        dfLinesPP  <- .dataLinesPP(data, options$priors[[i]])
+        dfPointsPP <- .dataProportionPP(data, options$priors[[i]])
+        #dfPointsPP <- NULL 
         p <- JASPgraphs::PlotPriorAndPosterior(dfLines = dfLinesPP, dfPoints = dfPointsPP, xName = xName)
         
       }
@@ -509,35 +519,39 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   plotsIterative$dependOn(c(.binomial_data_dependencies, "plotsIterative"))
   
   
-  
   if (!all(ready)){
     jaspResults[["plotsIterative"]] <- plotsIterative
     return()
   }
   
   plot_data <- NULL
-  for(h in 1:length(options$priors)){
-    temp_data    <- list(
-      nSuccesses = 0,
-      nFailures  = 0
-    )
-    temp_results <- .computeBinomial(temp_data, options$priors[[h]])
-    plot_data <- rbind(plot_data, cbind(data.frame(temp_results), "name" = options$priors[[h]]$name, "i" = 0))
-  }
-  
   # then update the posteriors as the data go in
-  for(i in 1:length(data$y)){
+  for(i in 0:length(data$y)){
+    
     for(h in 1:length(options$priors)){
+      
       temp_data    <- list(
-        nSuccesses = sum(data$y[1:i] == 1),
+        nSuccesses = sum(data$y[0:i] == 1),
         nFailures  = sum(data$y[1:i] == 0)
       )
       temp_results <- .computeBinomial(temp_data, options$priors[[h]])
-      plot_data <- rbind(plot_data, cbind(data.frame(temp_results), "name" = options$priors[[h]]$name, "i" = i))
+      plot_data    <- rbind(plot_data, cbind(data.frame(temp_results), "name" = options$priors[[h]]$name, "i" = i))
+      
+      # cheat for getting 2x 0 for the sequantial plot in case of no data
+      if(length(data$y) == 0){
+        temp_data    <- list(
+          nSuccesses = sum(data$y[0:i] == 1),
+          nFailures  = sum(data$y[1:i] == 0)
+        )
+        temp_results <- .computeBinomial(temp_data, options$priors[[h]])
+        plot_data    <- rbind(plot_data, cbind(data.frame(temp_results), "name" = options$priors[[h]]$name, "i" = .1))
+      }
+      
     }
+    
   }
   
-  yName  <- expression(paste("Population proportion ", theta))
+  yName  <- expression(paste("Population proportion  ", theta))
   xName  <- "Iteration"
   
   p <- .plotIterative(plot_data, xName = xName, yName = yName)
@@ -670,6 +684,13 @@ binomialEstimation <- function(jaspResults, dataset, options, state = NULL){
   
   nameGroup <- c("Observed", "Observed")
   dat       <- data.frame(x = pointXVal, y = pointYVal, g = nameGroup)
+  return(dat)
+}
+.dataProportionPP    <- function(data, prior){
+  
+  theta <- data$nSuccesses / (data$nSuccesses + data$nFailures)
+  dat   <- data.frame(x = theta, y = 0, g = "Sample proportion")
+  
   return(dat)
 }
 .dataArrowPP         <- function(prior){
