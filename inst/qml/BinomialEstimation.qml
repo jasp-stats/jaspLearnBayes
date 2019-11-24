@@ -361,6 +361,7 @@ Form {
 					name: "plotsBoth"
 					label: qsTr("Prior and Posterior distribution")
 					checked: false
+					
 					CheckBox{name: "plotsBothSampleProportion"; label: qsTr("Sample proportion"); checked: false}
 				}
 
@@ -455,65 +456,82 @@ Form {
 				name: "predictionTable"
 				label: qsTr("Summary")
 			}
-			
-			CheckBox
+	
+		
+			Group
 			{
-				name: "predictionPlot"
-				label: qsTr("Plot")
+				title: qsTr("Plots")
 				
-				Group
+				CheckBox
 				{
-					columns: 5
+					label: qsTr("Predictive distribution")
+					name: "plotsPredictions"
 					
-					CheckBox
+				RadioButtonGroup
+				{
+					name: "predictionPlotType"
+					RadioButton { value: "overlying"; 	label: qsTr("Overlying"); checked: true}
+					RadioButton { value: "stacked"; 	label: qsTr("Stacked")}
+					RadioButton
 					{
-						name: "plotsPredictionCI"
-						label: qsTr("CI")
-						id: plotsPredictionCI
-					}
-					
-					DropDown
-					{
-						visible: plotsPredictionCI.checked
-						name: "plotsPredictionType"
-						label: ""
-						values: ["Central", "HPD", "Custom"]
-						id: plotsPredictionType
-					}
+						value: "individual"
+						label: qsTr("Individual")
 				
-					DoubleField{
-						visible: (plotsPredictionType.currentText == "Central" |
-								  plotsPredictionType.currentText == "HPD") &
-								 plotsPredictionCI.checked
-						name: "plotsPredictionCoverage"
-						label: qsTr("coverage")
-						fieldWidth: 40
-						defaultValue: 95; min: 0; max: 100; inclusive: "no"
-					}
-					
-					IntegerField{
-						visible: plotsPredictionType.currentText == "Custom" &
-								 plotsPredictionCI.checked
-						name: "plotsPredictionLower"
-						label: qsTr("lower")
-						id: plotsPredictionLower
-						fieldWidth: 40
-						defaultValue: 0; min: 0; max: plotsPredictionUpper.value; inclusive: "yes"
-					}
-					
-					IntegerField{
-						visible: plotsPredictionType.currentText == "Custom" &
-								 plotsPredictionCI.checked
-						name: "plotsPredictionUpper"
-						label: qsTr("upper")
-						id: plotsPredictionUpper
-						fieldWidth: 40
-						defaultValue: 1
-						min: plotsPredictionLower.value; max: predictionN.value; inclusive: "yes"
-					}
+						Group
+						{
+							columns: 5
+						
+							CheckBox
+							{
+								name: "plotsPredictionCI"
+								label: qsTr("CI")
+								id: plotsPredictionCI
+							}
+						
+							DropDown
+							{
+								visible: plotsPredictionCI.checked
+								name: "plotsPredictionType"
+								label: ""
+								values: ["Central", "HPD", "Custom"]
+								id: plotsPredictionType
+							}
 				
+							DoubleField{
+								visible: (plotsPredictionType.currentText == "Central" |
+										plotsPredictionType.currentText == "HPD") &
+										plotsPredictionCI.checked
+								name: "plotsPredictionCoverage"
+								label: qsTr("coverage")
+								fieldWidth: 40
+								defaultValue: 95; min: 0; max: 100; inclusive: "no"
+							}
+						
+							IntegerField{
+								visible: plotsPredictionType.currentText == "Custom" &
+										plotsPredictionCI.checked
+								name: "plotsPredictionLower"
+								label: qsTr("lower")
+								id: plotsPredictionLower
+								fieldWidth: 40
+								defaultValue: 0; min: 0; max: plotsPredictionUpper.value; inclusive: "yes"
+							}
+						
+							IntegerField{
+								visible: plotsPredictionType.currentText == "Custom" &
+										plotsPredictionCI.checked
+								name: "plotsPredictionUpper"
+								label: qsTr("upper")
+								id: plotsPredictionUpper
+								fieldWidth: 40
+								defaultValue: 1
+								min: plotsPredictionLower.value; max: predictionN.value; inclusive: "yes"
+							}
+				
+						}
+					}
 				}
-			
+				}
 			}
 		}
 	}

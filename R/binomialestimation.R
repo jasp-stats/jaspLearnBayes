@@ -59,7 +59,10 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   if(options$predictionTable).predictionsBinomial(jaspResults, data, ready, options)
   
   # plot
-  if(options$predictionPlot).plotsPredictionsBinomial(jaspResults, data, ready, options)
+  if(options$plotsPredictions){
+    if(options$predictionPlotType != "individual").plotsPredictionsBinomial(jaspResults, data, ready, options)
+    if(options$predictionPlotType == "individual").plotsPredictionsIndividualBinomial(jaspResults, data, ready, options)
+  }
   
   return()
 }
@@ -446,6 +449,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       
       if(options$plotsBothSampleProportion){
         dfPointsPP <- .dataProportionPP(data, options$priors[[i]])
+        if(is.nan(dfPointsPP$x))dfPointsPP <- NULL
       }else{
         dfPointsPP <- NULL 
       }
@@ -846,27 +850,28 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   }
   
 }
-.plotsPredictionsBinomial    <- function(jaspResults, data, ready, options){
+.plotsPredictionsIndividualBinomial  <- function(jaspResults, data, ready, options){
   
-  plotsPredictions <- createJaspContainer(title = "Prediction Plots")
+  plotsPredictionsIndividual <- createJaspContainer(title = "Prediction Plots")
   
-  plotsPredictions$position <- 9
-  plotsPredictions$dependOn(c(.binomial_data_dependencies, "predictionPlot", "predictionN",
+  plotsPredictionsIndividual$position <- 9
+  plotsPredictionsIndividual$dependOn(c(.binomial_data_dependencies, "predictionN",
+                                        "plotsPredictions", "predictionPlotType",
                               "plotsPredictionCI","plotsPredictionType", "plotsPredictionCoverage",
                               "plotsPredictionLower", "plotsPredictionUpper"))
   
-  jaspResults[["plotsPredictions"]] <- plotsPredictions
+  jaspResults[["plotsPredictionsIndividual"]] <- plotsPredictionsIndividual
   
   
   if(all(!ready) | (ready[1] & !ready[2])){
     
-    plotsPredictions[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
+    plotsPredictionsIndividual[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
     return()
     
   }else if(!ready[1] & ready[2]){
     
     for(i in 1:length(options$priors)){
-      plotsPredictions[[options$priors[[i]]$name]] <- createJaspPlot(title = options$priors[[i]]$name,
+      plotsPredictionsIndividual[[options$priors[[i]]$name]] <- createJaspPlot(title = options$priors[[i]]$name,
                                                                     width = 530, height = 400, aspectRatio = 0.7)
     }
     return()
@@ -877,7 +882,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       
       temp_plot <- createJaspPlot(title = options$priors[[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
       
-      plotsPredictions[[options$priors[[i]]$name]] <- temp_plot
+      plotsPredictionsIndividual[[options$priors[[i]]$name]] <- temp_plot
       
       xName  <- "Number of successes"
       yName  <- "Probability"
@@ -916,6 +921,50 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     return()
   }
   
+  
+}
+.plotsPredictionsBinomial   <- function(jaspResults, data, ready, options){
+  
+  plotsPredictions <- createJaspPlot(title = "Prediction Plots", width = 530, height = 400, aspectRatio = 0.7)
+  
+  plotsPredictions$position <- 9
+  plotsPredictions$dependOn(c(.binomial_data_dependencies, "predictionN",
+                              "plotsPredictions", "predictionPlotType"))
+  
+  jaspResults[["plotsPredictions"]] <- plotsPredictions
+  
+  
+  if(!all(ready)){
+      return()
+  }else{
+    
+    xName  <- "Number of successes"
+    yName  <- "Probability"
+    xRange <- c(0, options$predictionN)
+    
+    all_lines  <- c()
+    legend     <- NULL
+    
+    for(i in 1:length(options$priors)){
+      
+      dfHist   <- .dataHistPP(data, options$priors[[i]], options$predictionN)
+      dfHist$g <- options$priors[[i]]$name
+      
+      # it's not beta, but I'm lazzy to rewrite a function I wanna use
+      legend   <- rbind(legend, c("beta", options$priors[[i]]$name))
+      all_lines<- c(all_lines, list(dfHist))
+    }
+    
+    if(options$predictionPlotType == "overlying"){
+      p <- .plotOverlying(all_lines, NULL, xName = xName, yName = yName, xRange = xRange,
+                          palette = options$colorPalette)
+    }else{
+      p <- .plotStacked(all_lines, NULL, legend, xName = xName, xRange = xRange)
+    }
+    
+    jaspResults[["plotsPredictions"]]$plotObject <- p
+    return()
+  }
   
 }
 
@@ -1297,12 +1346,12 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   return(plot)
 }
 .plotOverlying       <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL, yName = "Density",
-                                 palette = "colorblind"){
+                                 xRange = c(0,1), palette = "colorblind"){
   
   mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
   mappingArrows <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
   
-  if(!is.null(all_lines))all_lines  <- do.call("rbind", all_lines)
+  if(!is.null(all_lines))all_lines   <- do.call("rbind", all_lines)
   if(!is.null(all_arrows))all_arrows <- do.call("rbind", all_arrows)
   
   if(!is.null(all_lines)){
@@ -1312,6 +1361,10 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, all_arrows$y_end))  
     obsYmax  <- max(all_arrows$y_end)
   }
+  
+  xBreaks <- JASPgraphs::getPrettyAxisBreaks(xRange) 
+  if(xRange[2] > 1)xBreaks <- round(xBreaks)
+  
   
   breaksYmax <- yBreaks[length(yBreaks)]
   newymax <- max(1.1 * obsYmax, breaksYmax)
@@ -1332,7 +1385,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   g <- g + 
     JASPgraphs::scale_JASPcolor_discrete(palette) +
     #ggplot2::scale_colour_manual(values = JASPgraphs::colorBrewerJasp(n = length(unique(all_lines$g)) + length(unique(all_arrows$g)))) +
-    ggplot2::scale_x_continuous(xName, limits = c(0, 1))
+    ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks)
   
   
   if(!is.null(all_lines)){
@@ -1347,12 +1400,12 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   }
   
   if(!is.null(all_lines)){
-    xr <- range(all_lines$x)
-    idx <- which.max(all_lines$y)
+    xr   <- range(all_lines$x)
+    idx  <- which.max(all_lines$y)
     xmax <- all_lines$x[idx]
   }else{
-    xr <- range(all_arrows$x)
-    idx <- which.max(all_arrows$y_end)
+    xr   <- range(all_arrows$x)
+    idx  <- which.max(all_arrows$y_end)
     xmax <- all_arrows$x[idx]
   }
   
@@ -1375,20 +1428,24 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   
   return(plot)
 }
-.plotStacked         <- function(all_lines, all_arrows, legend, xName = NULL, yName = "Density"){
+.plotStacked         <- function(all_lines, all_arrows, legend, xName = NULL, yName = "Density",
+                                 xRange = c(0,1)){
   
   mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
   mappingArrows <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
   mappingLegend <- ggplot2::aes(x = x, y = y, label = name)
+  
+  xBreaks <- JASPgraphs::getPrettyAxisBreaks(xRange) 
+  if(xRange[2] > 1)xBreaks <- round(xBreaks)
   
   if(!is.null(all_lines)){
     
     all_linesD <- all_lines
     for(i in 1:length(all_linesD)){
       all_linesD[[i]] <- rbind.data.frame(
-        data.frame(x = 0, y = 0, g = all_linesD[[i]]$g[1]),
+        data.frame(x = xRange[1], y = 0, g = all_linesD[[i]]$g[1]),
         all_linesD[[i]],
-        data.frame(x = 1, y = 0, g = all_linesD[[i]]$g[1])     
+        data.frame(x = xRange[2], y = 0, g = all_linesD[[i]]$g[1])     
       )
     }
     
@@ -1400,7 +1457,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     
     all_arrowsL <- list()
     for(i in 1:length(all_arrows)){
-      all_arrowsL[[i]] <- data.frame(y = rep(all_arrows[[i]]$y_start, 2), x = c(0, 1),
+      all_arrowsL[[i]] <- data.frame(y = rep(all_arrows[[i]]$y_start, 2), x = xRange,
                                      g = rep(all_arrows[[i]]$g, 2))
     }
     
@@ -1466,7 +1523,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
                               size = 8, hjust = 1, vjust = 0, fontface = 1)
   
   g <- g + ggplot2::scale_colour_manual(values = rep("black", nrow(legend))) +
-    ggplot2::scale_x_continuous(xName, limits = c(0, 1)) +
+    ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks) +
     ggplot2::scale_y_continuous(yName) + 
     ggplot2::coord_cartesian(clip = 'off')
   
