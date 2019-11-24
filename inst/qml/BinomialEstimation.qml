@@ -202,6 +202,23 @@ Form {
 			Group
 			{
 				title: "Plots"
+				
+				DropDown
+				{
+					name: "colorPalette"
+					label: qsTr("Color palette")
+					indexDefaultValue: 0
+					values:
+						[
+						{ label: qsTr("Colorblind"),		value: "colorblind"		},
+						{ label: qsTr("Colorblind Alt."),	value: "colorblind3"	},
+						{ label: qsTr("Viridis"),			value: "viridis"		},
+						{ label: qsTr("ggplot2"),			value: "ggplot2"		},
+						{ label: qsTr("Gray"),				value: "gray"			}
+						]
+				}
+				
+				
 				CheckBox
 				{
 					name: "plotsPrior"; label: qsTr("Prior distribution"); checked: false	;
@@ -210,18 +227,64 @@ Form {
 						name: "plotsPriorType"
 						RadioButton { value: "overlying"; 	label: qsTr("Overlying"); checked: true}
 						RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
-//						RadioButton {
-//							value: "individual"
-//							label: qsTr("Individual")
-//							RadioButtonGroup
-//							{
-//								name: "plotsPriorIndividualType"
-//								RadioButton { value: "central"; label: qsTr("Central");
-//									DoubleField{ name: "priorCentralCoverage"; label: qsTr("Coverage");fieldWidth: 45}}
-//								RadioButton { value: "HDP"; 	label: qsTr("HDP")}
-//								RadioButton { value: "user"; 	label: qsTr("Custom")}
-//							}
-//						}
+						RadioButton {
+							value: "individual"
+							label: qsTr("Individual")
+							
+							Group
+							{
+								columns: 5
+								
+								CheckBox
+								{
+									name: "plotsPriorIndividualCI"
+									label: qsTr("CI")
+									id: plotsPriorIndividualCI
+								}
+								
+								DropDown
+								{
+									visible: plotsPriorIndividualCI.checked
+									name: "plotsPriorIndividualType"
+									label: ""
+									values: ["Central", "HPD", "Custom"]
+									id: plotsPriorIndividualType
+								}
+								
+								DoubleField{
+									visible: (plotsPriorIndividualType.currentText == "Central" |
+											  plotsPriorIndividualType.currentText == "HPD") &
+											 plotsPriorIndividualCI.checked
+									name: "plotsPriorCoverage"
+									label: qsTr("coverage")
+									fieldWidth: 40
+									defaultValue: 95; min: 0; max: 100; inclusive: "no"
+								}
+								
+								DoubleField{
+									visible: plotsPriorIndividualType.currentText == "Custom" &
+											 plotsPriorIndividualCI.checked
+									name: "plotsPriorLower"
+									label: qsTr("lower")
+									id: plotsPriorLower
+									fieldWidth: 40
+									defaultValue: 0.25; min: 0; max: plotsPriorUpper.value; inclusive: "no"
+								}
+								
+								DoubleField{
+									visible: plotsPriorIndividualType.currentText == "Custom" &
+											 plotsPriorIndividualCI.checked
+									name: "plotsPriorUpper"
+									label: qsTr("upper")
+									id: plotsPriorUpper
+									fieldWidth: 40
+									defaultValue: 0.75; min: plotsPriorLower.value; max: 1; inclusive: "no"
+								}
+							
+							}
+							
+						}
+
 					}
 				}
 
@@ -233,10 +296,74 @@ Form {
 						name: "plotsPosteriorType"
 						RadioButton { value: "overlying"; 	label: qsTr("Overlying"); checked: true}
 						RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
+						RadioButton {
+							value: "individual"
+							label: qsTr("Individual")
+							
+							Group
+							{
+								columns: 5
+								
+								CheckBox
+								{
+									name: "plotsPosteriorIndividualCI"
+									label: qsTr("CI")
+									id: plotsPosteriorIndividualCI
+								}
+								
+								DropDown
+								{
+									visible: plotsPosteriorIndividualCI.checked
+									name: "plotsPosteriorIndividualType"
+									label: ""
+									values: ["Central", "HPD", "Custom"]
+									id: plotsPosteriorIndividualType
+								}
+								
+								DoubleField{
+									visible: (plotsPosteriorIndividualType.currentText == "Central" |
+											  plotsPosteriorIndividualType.currentText == "HPD") &
+											 plotsPosteriorIndividualCI.checked
+									name: "plotsPosteriorCoverage"
+									label: qsTr("coverage")
+									fieldWidth: 40
+									defaultValue: 95; min: 0; max: 100; inclusive: "no"
+								}
+								
+								DoubleField{
+									visible: plotsPosteriorIndividualType.currentText == "Custom" &
+											 plotsPosteriorIndividualCI.checked
+									name: "plotsPosteriorLower"
+									label: qsTr("lower")
+									id: plotsPosteriorLower
+									fieldWidth: 40
+									defaultValue: 0.25; min: 0; max: plotsPosteriorUpper.value; inclusive: "no"
+								}
+								
+								DoubleField{
+									visible: plotsPosteriorIndividualType.currentText == "Custom" &
+											 plotsPosteriorIndividualCI.checked
+									name: "plotsPosteriorUpper"
+									label: qsTr("upper")
+									id: plotsPosteriorUpper
+									fieldWidth: 40
+									defaultValue: 0.75; min: plotsPosteriorLower.value; max: 1; inclusive: "no"
+								}
+							
+							}
+							
+						}
 					}
 				}
 
-				CheckBox { 	name: "plotsBoth"; 		label: qsTr("Prior and Posterior distribution");	checked: false}
+				CheckBox
+				{
+					name: "plotsBoth"
+					label: qsTr("Prior and Posterior distribution")
+					checked: false
+					CheckBox{name: "plotsBothSampleProportion"; label: qsTr("Sample proportion"); checked: false}
+				}
+
 				CheckBox
 				{
 					name: "plotsIterative";	label: qsTr("Sequential analysis"); checked: false;
@@ -244,19 +371,150 @@ Form {
 					RadioButtonGroup
 					{
 						name: "plotsIterativeType"
-						RadioButton { value: "overlying"; 	label: qsTr("Overlying")	}
-						RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
+						RadioButton
+						{
+							value: "overlying"
+							label: qsTr("Overlying")
+							
+							RadioButtonGroup
+							{
+								name: "plotsIterativeCenter"
+								RadioButton{value: "mean"; label: qsTr("Mean")}
+								RadioButton{value: "median"; label: qsTr("Median")}
+							}
+							
+							Group
+							{
+								columns: 3
+								
+								CheckBox
+								{
+									name: "plotsIterativeIndividualCI"
+									label: qsTr("CI")
+									id: plotsIterativeIndividualCI
+								}
+								
+								DropDown
+								{
+									visible: plotsIterativeIndividualCI.checked
+									name: "plotsIterativeIndividualType"
+									label: ""
+									values: ["Central", "HPD"]
+									id: plotsIterativeIndividualType
+								}
+								
+								DoubleField{
+									visible: (plotsIterativeIndividualType.currentText == "Central" |
+											  plotsIterativeIndividualType.currentText == "HPD") &
+											 plotsIterativeIndividualCI.checked
+									name: "plotsIterativeCoverage"
+									label: qsTr("coverage")
+									fieldWidth: 40
+									defaultValue: 95; min: 0; max: 100; inclusive: "no"
+								}
+							
+							}
+						
+						}
+						RadioButton { value: "stacked"; 	label: qsTr("Stacked")		}
 					}
 				}
 			}
 		}
 	}
 
+
+// EXPLAIN THIS TO ME
+	Section
+	{
+		expanded: false
+		title: "WTF"
+		Layout.columnSpan: 1
+	}
+
+	
 	Section
 	{
 		expanded: true
 		title: "Prediction"
 		Layout.columnSpan: 1
+		
+		Group
+		{
+			IntegerField
+			{
+				name: "predictionN"
+				label: qsTr("Future observations")
+				id: predictionN
+				min: 1
+				defaultValue: 1
+			}
+			
+			CheckBox
+			{
+				name: "predictionTable"
+				label: qsTr("Summary")
+			}
+			
+			CheckBox
+			{
+				name: "predictionPlot"
+				label: qsTr("Plot")
+				
+				Group
+				{
+					columns: 5
+					
+					CheckBox
+					{
+						name: "plotsPredictionCI"
+						label: qsTr("CI")
+						id: plotsPredictionCI
+					}
+					
+					DropDown
+					{
+						visible: plotsPredictionCI.checked
+						name: "plotsPredictionType"
+						label: ""
+						values: ["Central", "HPD", "Custom"]
+						id: plotsPredictionType
+					}
+				
+					DoubleField{
+						visible: (plotsPredictionType.currentText == "Central" |
+								  plotsPredictionType.currentText == "HPD") &
+								 plotsPredictionCI.checked
+						name: "plotsPredictionCoverage"
+						label: qsTr("coverage")
+						fieldWidth: 40
+						defaultValue: 95; min: 0; max: 100; inclusive: "no"
+					}
+					
+					IntegerField{
+						visible: plotsPredictionType.currentText == "Custom" &
+								 plotsPredictionCI.checked
+						name: "plotsPredictionLower"
+						label: qsTr("lower")
+						id: plotsPredictionLower
+						fieldWidth: 40
+						defaultValue: 0; min: 0; max: plotsPredictionUpper.value; inclusive: "yes"
+					}
+					
+					IntegerField{
+						visible: plotsPredictionType.currentText == "Custom" &
+								 plotsPredictionCI.checked
+						name: "plotsPredictionUpper"
+						label: qsTr("upper")
+						id: plotsPredictionUpper
+						fieldWidth: 40
+						defaultValue: 1
+						min: plotsPredictionLower.value; max: predictionN.value; inclusive: "yes"
+					}
+				
+				}
+			
+			}
+		}
 	}
-	
 }
