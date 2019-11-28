@@ -247,37 +247,37 @@ Form {
 									visible: plotsPriorIndividualCI.checked
 									name: "plotsPriorIndividualType"
 									label: ""
-									values: ["Central", "HPD", "Custom"]
+									values: ["central", "HPD", "custom"]
 									id: plotsPriorIndividualType
 								}
 								
-								DoubleField{
-									visible: (plotsPriorIndividualType.currentText == "Central" |
+								CIField{
+									visible: (plotsPriorIndividualType.currentText == "central" |
 											  plotsPriorIndividualType.currentText == "HPD") &
 											 plotsPriorIndividualCI.checked
 									name: "plotsPriorCoverage"
-									label: qsTr("coverage")
+									label: qsTr("probability")
 									fieldWidth: 40
 									defaultValue: 95; min: 0; max: 100; inclusive: "no"
 								}
 								
 								DoubleField{
-									visible: plotsPriorIndividualType.currentText == "Custom" &
+									visible: plotsPriorIndividualType.currentText == "custom" &
 											 plotsPriorIndividualCI.checked
 									name: "plotsPriorLower"
 									label: qsTr("lower")
 									id: plotsPriorLower
-									fieldWidth: 40
+									fieldWidth: 50
 									defaultValue: 0.25; min: 0; max: plotsPriorUpper.value; inclusive: "no"
 								}
 								
 								DoubleField{
-									visible: plotsPriorIndividualType.currentText == "Custom" &
+									visible: plotsPriorIndividualType.currentText == "custom" &
 											 plotsPriorIndividualCI.checked
 									name: "plotsPriorUpper"
 									label: qsTr("upper")
 									id: plotsPriorUpper
-									fieldWidth: 40
+									fieldWidth: 50
 									defaultValue: 0.75; min: plotsPriorLower.value; max: 1; inclusive: "no"
 								}
 							
@@ -316,37 +316,37 @@ Form {
 									visible: plotsPosteriorIndividualCI.checked
 									name: "plotsPosteriorIndividualType"
 									label: ""
-									values: ["Central", "HPD", "Custom"]
+									values: ["central", "HPD", "custom"]
 									id: plotsPosteriorIndividualType
 								}
 								
-								DoubleField{
-									visible: (plotsPosteriorIndividualType.currentText == "Central" |
+								CIField{
+									visible: (plotsPosteriorIndividualType.currentText == "central" |
 											  plotsPosteriorIndividualType.currentText == "HPD") &
 											 plotsPosteriorIndividualCI.checked
 									name: "plotsPosteriorCoverage"
-									label: qsTr("coverage")
+									label: qsTr("probability")
 									fieldWidth: 40
 									defaultValue: 95; min: 0; max: 100; inclusive: "no"
 								}
 								
 								DoubleField{
-									visible: plotsPosteriorIndividualType.currentText == "Custom" &
+									visible: plotsPosteriorIndividualType.currentText == "custom" &
 											 plotsPosteriorIndividualCI.checked
 									name: "plotsPosteriorLower"
 									label: qsTr("lower")
 									id: plotsPosteriorLower
-									fieldWidth: 40
+									fieldWidth: 50
 									defaultValue: 0.25; min: 0; max: plotsPosteriorUpper.value; inclusive: "no"
 								}
 								
 								DoubleField{
-									visible: plotsPosteriorIndividualType.currentText == "Custom" &
+									visible: plotsPosteriorIndividualType.currentText == "custom" &
 											 plotsPosteriorIndividualCI.checked
 									name: "plotsPosteriorUpper"
 									label: qsTr("upper")
 									id: plotsPosteriorUpper
-									fieldWidth: 40
+									fieldWidth: 50
 									defaultValue: 0.75; min: plotsPosteriorLower.value; max: 1; inclusive: "no"
 								}
 							
@@ -400,16 +400,16 @@ Form {
 									visible: plotsIterativeIndividualCI.checked
 									name: "plotsIterativeIndividualType"
 									label: ""
-									values: ["Central", "HPD"]
+									values: ["central", "HPD"]
 									id: plotsIterativeIndividualType
 								}
 								
-								DoubleField{
-									visible: (plotsIterativeIndividualType.currentText == "Central" |
+								CIField{
+									visible: (plotsIterativeIndividualType.currentText == "central" |
 											  plotsIterativeIndividualType.currentText == "HPD") &
 											 plotsIterativeIndividualCI.checked
 									name: "plotsIterativeCoverage"
-									label: qsTr("coverage")
+									label: qsTr("probability")
 									fieldWidth: 40
 									defaultValue: 95; min: 0; max: 100; inclusive: "no"
 								}
@@ -433,7 +433,7 @@ Form {
 		Layout.columnSpan: 1
 	}
 
-	
+
 	Section
 	{
 		expanded: true
@@ -461,6 +461,21 @@ Form {
 			Group
 			{
 				title: qsTr("Plots")
+				
+				DropDown
+				{
+					name: "colorPalettePrediction"
+					label: qsTr("Color palette")
+					indexDefaultValue: 0
+					values:
+						[
+						{ label: qsTr("Colorblind"),		value: "colorblind"		},
+						{ label: qsTr("Colorblind Alt."),	value: "colorblind3"	},
+						{ label: qsTr("Viridis"),			value: "viridis"		},
+						{ label: qsTr("ggplot2"),			value: "ggplot2"		},
+						{ label: qsTr("Gray"),				value: "gray"			}
+						]
+				}
 				
 				CheckBox
 				{
@@ -493,37 +508,37 @@ Form {
 								visible: plotsPredictionCI.checked
 								name: "plotsPredictionType"
 								label: ""
-								values: ["Central", "HPD", "Custom"]
+								values: ["central", "HPD", "custom"]
 								id: plotsPredictionType
 							}
 				
-							DoubleField{
-								visible: (plotsPredictionType.currentText == "Central" |
+							CIField{
+								visible: (plotsPredictionType.currentText == "central" |
 										plotsPredictionType.currentText == "HPD") &
 										plotsPredictionCI.checked
 								name: "plotsPredictionCoverage"
-								label: qsTr("coverage")
+								label: qsTr("probability")
 								fieldWidth: 40
 								defaultValue: 95; min: 0; max: 100; inclusive: "no"
 							}
 						
 							IntegerField{
-								visible: plotsPredictionType.currentText == "Custom" &
+								visible: plotsPredictionType.currentText == "custom" &
 										plotsPredictionCI.checked
 								name: "plotsPredictionLower"
 								label: qsTr("lower")
 								id: plotsPredictionLower
-								fieldWidth: 40
+								fieldWidth: 50
 								defaultValue: 0; min: 0; max: plotsPredictionUpper.value; inclusive: "yes"
 							}
 						
 							IntegerField{
-								visible: plotsPredictionType.currentText == "Custom" &
+								visible: plotsPredictionType.currentText == "custom" &
 										plotsPredictionCI.checked
 								name: "plotsPredictionUpper"
 								label: qsTr("upper")
 								id: plotsPredictionUpper
-								fieldWidth: 40
+								fieldWidth: 50
 								defaultValue: 1
 								min: plotsPredictionLower.value; max: predictionN.value; inclusive: "yes"
 							}

@@ -2,7 +2,7 @@
 	"moduleDescription" :
 	{
 		"title" :		"Teaching Statistics",
-		"icon":			"main_icon.bmp",
+		"icon":			"bayes.png",
 		"description":	"Teaching Statistics with JASP",
 		"version":		"0.1",
 		"requiresData": false,
@@ -17,7 +17,7 @@
 	[
 		{
 			"title": 	"Binomial",
-			"icon": 	"binomialIcon.png"
+			"icon": 	"pancakes.png"
 		},
 		{
 			"title":	"Estimation",

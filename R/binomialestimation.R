@@ -518,7 +518,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
 
       if(options[[ifelse(type == "Prior", "plotsPriorIndividualCI", "plotsPosteriorIndividualCI")]]){
         
-        if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "Central"){
+        if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "central"){
           
           dfCI <- .dataCentralPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]]/100, type = "parameter")
           
@@ -526,7 +526,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
           
           dfCI <- .dataHPDPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]]/100, type = "parameter")
           
-        }else if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "Custom"){
+        }else if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "custom"){
           
           dfCI <- .dataCustomPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorLower", "plotsPosteriorLower")]],
                                 options[[ifelse(type == "Prior", "plotsPriorUpper", "plotsPosteriorUpper")]], type = "parameter")  
@@ -843,8 +843,8 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     }
 
     # add footnote clarifying what dataset was used
-    predictionsTable$addFootnote(paste0("Prediction of ", options$predictionN, " ", ifelse(options$predictionN == 1, "observation", "observations"), 
-                                        " based on ", data$nSuccesses," ", ifelse(data$nSuccesses == 1, "success", "successes"),
+    predictionsTable$addFootnote(paste0("The prediction of ", options$predictionN, " ", ifelse(options$predictionN == 1, "observation", "observations"), 
+                                        " is based on ", data$nSuccesses," ", ifelse(data$nSuccesses == 1, "success", "successes"),
                                         "  and ", data$nFailures, " ",ifelse(data$nFailures == 1, "failure", "failures"), "."))
     
   }
@@ -857,8 +857,8 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   plotsPredictionsIndividual$position <- 9
   plotsPredictionsIndividual$dependOn(c(.binomial_data_dependencies, "predictionN",
                                         "plotsPredictions", "predictionPlotType",
-                              "plotsPredictionCI","plotsPredictionType", "plotsPredictionCoverage",
-                              "plotsPredictionLower", "plotsPredictionUpper"))
+                                        "plotsPredictionCI","plotsPredictionType", "plotsPredictionCoverage",
+                                        "plotsPredictionLower", "plotsPredictionUpper"))
   
   jaspResults[["plotsPredictionsIndividual"]] <- plotsPredictionsIndividual
   
@@ -893,7 +893,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       
       if(options$plotsPredictionCI){
         
-        if(options$plotsPredictionType == "Central"){
+        if(options$plotsPredictionType == "central"){
           
           dfCI <- .dataCentralPP(data, options$priors[[i]], options$plotsPredictionCoverage/100,
                                  n = options$predictionN,type = "prediction")
@@ -903,7 +903,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
           dfCI <- .dataHPDPP(data, options$priors[[i]], options$plotsPredictionCoverage/100,
                              n = options$predictionN, type = "prediction")
           
-        }else if(options$plotsPredictionType == "Custom"){
+        }else if(options$plotsPredictionType == "custom"){
           
           dfCI <- .dataCustomPP(data, options$priors[[i]],
                                 options$plotsPredictionLower, options$plotsPredictionUpper,
@@ -923,13 +923,13 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   
   
 }
-.plotsPredictionsBinomial   <- function(jaspResults, data, ready, options){
+.plotsPredictionsBinomial    <- function(jaspResults, data, ready, options){
   
   plotsPredictions <- createJaspPlot(title = "Prediction Plots", width = 530, height = 400, aspectRatio = 0.7)
   
   plotsPredictions$position <- 9
   plotsPredictions$dependOn(c(.binomial_data_dependencies, "predictionN",
-                              "plotsPredictions", "predictionPlotType"))
+                              "plotsPredictions", "predictionPlotType", "colorPalettePrediction"))
   
   jaspResults[["plotsPredictions"]] <- plotsPredictions
   
@@ -940,14 +940,14 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     
     xName  <- "Number of successes"
     yName  <- "Probability"
-    xRange <- c(0, options$predictionN)
+    xRange <- c(-.5, options$predictionN+.5)
     
     all_lines  <- c()
     legend     <- NULL
     
     for(i in 1:length(options$priors)){
       
-      dfHist   <- .dataHistPP(data, options$priors[[i]], options$predictionN)
+      dfHist   <- .dataHistPP2(data, options$priors[[i]], options$predictionN)
       dfHist$g <- options$priors[[i]]$name
       
       # it's not beta, but I'm lazzy to rewrite a function I wanna use
@@ -957,7 +957,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     
     if(options$predictionPlotType == "overlying"){
       p <- .plotOverlying(all_lines, NULL, xName = xName, yName = yName, xRange = xRange,
-                          palette = options$colorPalette)
+                          palette = options$colorPalettePrediction)
     }else{
       p <- .plotStacked(all_lines, NULL, legend, xName = xName, xRange = xRange)
     }
@@ -1038,7 +1038,12 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .betaHDI             <- function(alpha, beta, coverage){
   
-  if(alpha >= 1 & beta >= 1){
+  if(alpha == 1 & beta == 1){
+    
+    # do central in case that alpha & beta == 1, the interval is weird otherwise
+    HDI <- c(.5 - coverage/2, .5 + coverage/2)
+    
+  }else if(alpha >= 1 & beta >= 1){
     
     HDI <- HDInterval::hdi(qbeta, coverage, shape1 = alpha, shape2 = beta)
     
@@ -1063,21 +1068,44 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .binomialHDI         <- function(n, theta, coverage){
   
-  HDI <- HDInterval::hdi(qbinom, coverage, size = n, prob = theta)
+  # this doesn't work in some cases for some reason
+  # HDI <- HDInterval::hdi(qbinom, coverage, size = n, prob = theta)
+  
+  x_density <- 0:n
+  y_density <- dbinom(x_density, n, theta)
+  y_density <- round(y_density, 10)
+  den_binom <- list(
+    x = x_density,
+    y = y_density
+  )
+  class(den_binom) <- "density"
+  HDI <- HDInterval::hdi(den_binom, coverage, allowSplit = T)
   
   HDI <- matrix(as.vector(HDI), ncol = 2)
   return(HDI)
 }
 .betabinomialHDI     <- function(n, alpha, beta, coverage){
   
-  x_density <- 0:n
-  y_density <- sapply(x_density,function(s).dbetabinom(s, n, alpha, beta))
-  den_beta <- list(
-    x = x_density,
-    y = y_density
-  )
-  class(den_beta) <- "density"
-  HDI <- HDInterval::hdi(den_beta, coverage, allowSplit = T)
+  if(alpha == 1 & beta == 1){
+    
+    HDI <-     x <- c(
+      .qbetabinom((1 - coverage)/2 + 1e-5,  n, alpha, beta),
+      .qbetabinom(1 - (1 - coverage)/2,     n, alpha, beta)
+    )
+    
+  }else{
+    
+    x_density <- 0:n
+    y_density <- sapply(x_density,function(s).dbetabinom(s, n, alpha, beta))
+    y_density <- round(y_density, 10)
+    den_beta <- list(
+      x = x_density,
+      y = y_density
+    )
+    class(den_beta) <- "density"
+    HDI <- HDInterval::hdi(den_beta, coverage, allowSplit = T)
+    
+  }
   
   HDI <- matrix(as.vector(HDI), ncol = 2)
   return(HDI)
@@ -1090,8 +1118,10 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   return(sum(sapply(0:s, function(i).dbetabinom(i, n, alpha, beta))))
 }
 .qbetabinom          <- function(p, n, alpha, beta){
-  return(c(0:n)[match(TRUE, sapply(0:n, function(s).pbetabinom(s, n, alpha, beta)) >= p)])
+  # the rounding is due to numerical imprecission in .pbetabinom
+  return(c(0:n)[match(TRUE, round(sapply(0:n, function(s).pbetabinom(s, n, alpha, beta)),10) >= p)])
 }
+
 # plotting functions
 .dataLinesPP         <- function(data, prior){
   
@@ -1169,13 +1199,16 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     }
     
   }else if(type == "prediction"){
-    
+    # adding  (+ 1e-5) to the first lower bound because the quantile function is not inverse of cumulatiove
+    # distribution function and the lower boundary is not part of the interval. Wanted to write custom 
+    # quantile function for the lower bound, however, the aproximation in R reusults in inability to fix
+    # the borderline cases: CI for binomial distribution with 3 trials, probabily .5 and coverage 75% 
     if(prior$type == "point"){
-      x <- qbinom(c((1 - coverage)/2, 1 - (1 - coverage)/2), n, prior$parPoint)
+      x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior$parPoint)
     }else if(prior$type == "beta"){
       x <- c(
-        .qbetabinom((1 - coverage)/2,     n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-        .qbetabinom(1 - (1 - coverage)/2, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+        .qbetabinom((1 - coverage)/2 + 1e-5, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
+        .qbetabinom(1 - (1 - coverage)/2,     n , prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
       )
     }
     
@@ -1230,6 +1263,22 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   }
   
   dat <- data.frame(x = x, y = y)
+  return(dat)
+}
+.dataHistPP2         <- function(data, prior, n){
+  
+  x <- 0:n
+  
+  if(prior$type == "point"){
+    y <- dbinom(x, n, prior$parPoint)
+  }else if(prior$type == "beta"){
+    y <- sapply(x, function(s).dbetabinom(s, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures))
+  }
+  
+  x_new <- x[sort(rep(1:length(x),2))] + c(-.5, +.5)
+  y_new <- y[sort(rep(1:length(x),2))]
+
+  dat <- data.frame(x = x_new, y = y_new)
   return(dat)
 }
 .dataArrowPP         <- function(prior){
@@ -1718,7 +1767,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     temp_label <- sapply(1:nrow(CI), function(i)paste(c(
       "[",format(round(CI$x_start[i], nRound), nsmall = nRound),", ",format(round(CI$x_end[i], nRound), nsmall = nRound),"]"
     ), collapse = ""))
-    temp_label <- paste(temp_label, collapse = " ∪ " )
+    temp_label <- paste(temp_label, collapse = " u " )
     temp_label <- paste(c(round(CI$coverage[1]*100), "% CI: ", temp_label), collapse = "")
     
     temp_text <- data.frame(
@@ -1778,8 +1827,10 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   
   yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, dfHist$y))
   xBreaks  <- round(JASPgraphs::getPrettyAxisBreaks(xRange))
-  obsYmax  <- max(dfHist$y)
   
+  if(xBreaks[length(xBreaks)] > xRange[2])xBreaks[length(xBreaks)] <- xRange[2]
+  
+  obsYmax  <- max(dfHist$y)
   breaksYmax <- yBreaks[length(yBreaks)]
   newymax    <- max(ifelse(!is.null(CI), 1.25, 1.10) * obsYmax, breaksYmax)
   
@@ -1821,9 +1872,8 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
     temp_label <- sapply(1:nrow(CI), function(i)paste(c(
       "[",format(round(CI$x_start[i], nRound), nsmall = nRound),", ",format(round(CI$x_end[i], nRound), nsmall = nRound),"]"
     ), collapse = ""))
-    temp_label <- paste(temp_label, collapse = " ∪ " )
+    temp_label <- paste(temp_label, collapse = " u " )
     temp_label <- paste(c(round(CI$coverage[1]*100), "% CI: ", temp_label), collapse = "")
-    
     temp_text <- data.frame(
       x     = ifelse(nrow(CI) > 1,
                      (xRange[1] + xRange[2])/2,
