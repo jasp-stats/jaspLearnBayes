@@ -519,12 +519,12 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       if(options[[ifelse(type == "Prior", "plotsPriorIndividualCI", "plotsPosteriorIndividualCI")]]){
         
         if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "central"){
-          
-          dfCI <- .dataCentralPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]]/100, type = "parameter")
+
+          dfCI <- .dataCentralPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]], type = "parameter")
           
         }else if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "HPD"){
           
-          dfCI <- .dataHPDPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]]/100, type = "parameter")
+          dfCI <- .dataHPDPP(temp_data, options$priors[[i]], options[[ifelse(type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]], type = "parameter")
           
         }else if(options[[ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "custom"){
           
@@ -618,13 +618,13 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       
       if(options$plotsIterativeIndividualCI){
         
-        if(options$plotsIterativeIndividualType == "Central"){
+        if(options$plotsIterativeIndividualType == "central"){
           temp_CIPP <- .dataCentralPP(temp_data, options$priors[[h]],
-                                      options$plotsIterativeCoverage/100, type = "parameter")
+                                      options$plotsIterativeCoverage, type = "parameter")
         }else if(options$plotsIterativeIndividualType == "HPD"){
           
           temp_CIPP <- .dataHPDPP(temp_data, options$priors[[h]],
-                                  options$plotsIterativeCoverage/100, type = "parameter")
+                                  options$plotsIterativeCoverage, type = "parameter")
           if(nrow(temp_CIPP) == 2)CI_unimodal <- FALSE
           
         }
@@ -895,12 +895,12 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
         
         if(options$plotsPredictionType == "central"){
           
-          dfCI <- .dataCentralPP(data, options$priors[[i]], options$plotsPredictionCoverage/100,
+          dfCI <- .dataCentralPP(data, options$priors[[i]], options$plotsPredictionCoverage,
                                  n = options$predictionN,type = "prediction")
           
         }else if(options$plotsPredictionType == "HPD"){
           
-          dfCI <- .dataHPDPP(data, options$priors[[i]], options$plotsPredictionCoverage/100,
+          dfCI <- .dataHPDPP(data, options$priors[[i]], options$plotsPredictionCoverage,
                              n = options$predictionN, type = "prediction")
           
         }else if(options$plotsPredictionType == "custom"){
@@ -1017,8 +1017,8 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       distribution = paste0("binomial (", options$predictionN, ", ", prior$parPoint,")"),
       mean         = prior$parPoint * options$predictionN,
       median       = qbinom(.5, options$predictionN, prior$parPoint),
-      lCI          = qbinom(    (1 - options$predictionTableCI/100)/2, options$predictionN, prior$parPoint),
-      uCI          = qbinom(1 - (1 - options$predictionTableCI/100)/2, options$predictionN, prior$parPoint)
+      lCI          = qbinom(    (1 - options$predictionTableCI)/2, options$predictionN, prior$parPoint),
+      uCI          = qbinom(1 - (1 - options$predictionTableCI)/2, options$predictionN, prior$parPoint)
     )
     
     return(output)
@@ -1029,8 +1029,8 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
       distribution = paste0("beta-binomial (",options$predictionN, ", ", prior$parAlpha + data$nSuccesses, ", ",  prior$parBeta + data$nFailures, ")"),
       mean         = (prior$parAlpha + data$nSuccesses) * options$predictionN / (prior$parAlpha + data$nSuccesses + prior$parBeta + data$nFailures),
       median       = .qbetabinom(.5, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-      lCI          = .qbetabinom(    (1 - options$predictionTableCI/100)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-      uCI          = .qbetabinom(1 - (1 - options$predictionTableCI/100)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+      lCI          = .qbetabinom(    (1 - options$predictionTableCI)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
+      uCI          = .qbetabinom(1 - (1 - options$predictionTableCI)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
     )
     
     return(output)
