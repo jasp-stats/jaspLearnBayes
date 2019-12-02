@@ -1531,7 +1531,7 @@ binomialEstimation   <- function(jaspResults, dataset, options, state = NULL){
   newymax <- obsYmax + yBreak*nrow(legend)
   
   legend$y <- yBreak*(0:(nrow(legend)-1))
-  legend$x <- 0
+  legend$x <- xRange[1]
   
   # changing y-coordinates to "stack" the plots
   for(i in 1:nrow(legend)){
