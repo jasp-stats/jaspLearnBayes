@@ -24,9 +24,9 @@ import JASP.Theme 1.0
 
 Section
 {
-	expanded: true
-	title: "Data"
-	columns:1
+	expanded:	true
+	title:		"Data"
+	columns:	1
 
 	RadioButtonGroup
 	{
@@ -92,28 +92,32 @@ Section
 		separators:	[",",";","\n"]
 	}
 
-	VariablesForm
+	Group
 	{
-		visible:			dataTypeB.checked
-		preferredHeight:	150
+		visible:	dataTypeB.checked
 
-		AvailableVariablesList
+		VariablesForm
 		{
-			name:	"levels_Seq"
-			title:	qsTr("Levels")
-			source:	"data_sequence"
-		}
+			preferredHeight:	200
 
-		AssignedVariablesList
-		{
-			name:	"key_success_Seq"
-			title:	qsTr("Successes")
-		}
+			AvailableVariablesList
+			{
+				name:	"levels_Seq"
+				title:	qsTr("Levels")
+				source:	"data_sequence"
+			}
 
-		AssignedVariablesList
-		{
-			name:	"key_failure_Seq"
-			title:	qsTr("Failures")
+			AssignedVariablesList
+			{
+				name:	"key_success_Seq"
+				title:	qsTr("Successes")
+			}
+
+			AssignedVariablesList
+			{
+				name:	"key_failure_Seq"
+				title:	qsTr("Failures")
+			}
 		}
 	}
 
@@ -123,7 +127,7 @@ Section
 
 		VariablesForm
 		{
-			height:	150
+			preferredHeight:	150
 
 			AvailableVariablesList
 			{
@@ -142,7 +146,7 @@ Section
 
 		VariablesForm
 		{
-			height: 150
+			preferredHeight: 200
 
 			AvailableVariablesList
 			{
@@ -165,19 +169,12 @@ Section
 		}
 	}
 
-	Group
+	CheckBox
 	{
-		visible: dataTypeB.checked || dataTypeC.checked
-
-		Group
-		{
-			CheckBox
-			{
-				name:		"dataSummary"
-				label:		qsTr("Data summary")
-				checked:	true
-			}
-		}
+		visible:	dataTypeB.checked || dataTypeC.checked
+		name:		"dataSummary"
+		label:		qsTr("Data summary")
+		checked:	true
 	}
 
 }
