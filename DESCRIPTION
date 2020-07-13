@@ -1,10 +1,10 @@
 Package: DevelopmentModule
 Type: Package
-Title: Teaching Statistics Module for JASP
+Title: Learn Bayes Module for JASP
 Version: 0.1
-Date: 2019-11-29
+Date: 2020-04-09
 Author: JASP Team
 Website: www.jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
-Description: Teaching Statistics with JASP
+Description: Learning Bayesian Statistics with JASP
 License: GPL (>= 2)

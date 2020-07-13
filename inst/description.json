@@ -1,11 +1,11 @@
 {
 	"moduleDescription" :
 	{
-		"title" :		"Teaching Statistics",
-		"icon":			"bayes.png",
-		"description":	"Teaching Statistics with JASP",
+		"title" :		"Learn Bayes",
+		"icon":			"learning-stats.png",
+		"description":	"Learning Bayesian Statistics with JASP",
 		"version":		"0.1",
-		"requiresData": false,
+		"requiresData":	false,
 		"author":		"JASP Team",
 		"maintainer":	"JASP Team <info@jasp-stats.org>",
 		"website":		"www.jasp-stats.org",
@@ -17,17 +17,23 @@
 	[
 		{
 			"title": 	"Binomial",
-			"icon": 	"pancakes.png"
+			"icon":		"analysis-bayesian-crosstabs.svg"
 		},
 		{
-			"title":	"Estimation",
-			"qml":		"BinomialEstimation.qml",
-			"function":	"binomialEstimation"
+			"menu":		"Estimation",
+			"title":	"Estimation for Binomial Parameter",
+			"qml":		"LSbinomialestimation.qml",
+			"function":	"LSbinomialestimation"
 		},
-		{
-			"title":	"Testing",
-			"qml":		"binomial_testing.qml",
-			"function":	"binomial_testing"
+			{
+			"menu":		"Testing",
+			"title":	"Testing for Binomial Parameter",
+			"qml":		"LSbinomialtesting.qml",
+			"function":	"LSbinomialtesting"
+		},
+			{
+			"title": 	"Continuous",
+			"icon":		"analysis-bayesian-ttest.svg"
 		}
 	]
 }
