@@ -25,7 +25,7 @@ import JASP.Theme 1.0
 Section
 {
 	expanded:	true
-	title:		"Data"
+	title:		qsTr("Data")
 	columns:	1
 
 	RadioButtonGroup

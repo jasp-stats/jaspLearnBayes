@@ -30,7 +30,7 @@ Form {
 	Section
 	{
 		expanded: true
-		title: "Model"
+		title: qsTr("Model")
 
 		InputListView
 		{
@@ -123,7 +123,7 @@ Form {
 	Section
 	{
 		expanded: true
-		title: "Inference"
+		title: qsTr("Inference")
 		columns: 2
 
 
@@ -132,6 +132,7 @@ Form {
 			name: "colorPalette"
 			label: qsTr("Color palette")
 			indexDefaultValue: 0
+			Layout.columnSpan:	2
 			values:
 				[
 				{ label: qsTr("Colorblind"),		value: "colorblind"		},
@@ -141,13 +142,6 @@ Form {
 				{ label: qsTr("Gray"),				value: "gray"			}
 				]
 		}
-
-		CheckBox
-		{
-			name: "scaleSpikes"
-			label: qsTr("Scale spikes")
-		}
-
 
 		CheckBox
 		{
@@ -476,7 +470,7 @@ Form {
 				name: "predictiveAccuracyType"
 				RadioButton { value: "conditional"; label: qsTr("Conditional"); checked: true}
 				RadioButton { value: "joint";		label: qsTr("Joint")}
-				RadioButton { value: "marginal"; 	label: qsTr("Marginal")}
+				RadioButton { value: "marginal"; 	label: qsTr("Normalized")}
 
 			}
 		}
@@ -689,13 +683,19 @@ Form {
 
 			CheckBox{name: "plotsBothSampleProportion"; label: qsTr("Sample proportion"); checked: false}
 		}
-		
+
+	}
+
+	Section
+	{
+		expanded: false
+		title: qsTr("Sequential analysis")
+		enabled: dataTypeB.checked || dataTypeC.checked
 
 		CheckBox
 		{
-			visible: dataTypeB.checked || dataTypeC.checked
 			name: "plotsIterative"
-			label: qsTr("Sequential analysis")
+			label: qsTr("Test results")
 			checked: false
 
 			RadioButtonGroup
@@ -703,11 +703,11 @@ Form {
 				name: "plotsIterativeType"
 				RadioButton { value: "conditional";		label: qsTr("Conditional"); checked: true}
 				RadioButton { value: "joint";			label: qsTr("Joint")}
-				RadioButton { value: "marginal";		label: qsTr("Marginal")}
+				RadioButton { value: "marginal";		label: qsTr("Normalized")}
 				RadioButton 
 				{
 					value: "BF"
-					label: qsTr("Bayes Factor")
+					label: qsTr("Bayes factor")
 					
 					DropDown
 						{
@@ -739,8 +739,8 @@ Form {
 
 	Section
 	{
-		expanded: true
-		title: "Posterior prediction"
+		expanded: false
+		title: qsTr("Posterior prediction")
 
 		Group
 		{
