@@ -1,2 +1,6 @@
 export(LSbinomialestimation)
 export(LSbinomialtesting)
+export(LSgaussianestimation)
+export(LSgaussiantesting)
+export(LSgameofchance)
+export(LSgameofskills)

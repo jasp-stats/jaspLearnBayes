@@ -16,24 +16,52 @@
 	"menu":
 	[
 		{
-			"title": 	"Binomial",
+			"title": 	"Counts",
 			"icon":		"analysis-bayesian-crosstabs.svg"
 		},
 		{
-			"menu":		"Estimation",
-			"title":	"Estimation for Binomial Parameter",
+			"menu":		"Binomial Estimation",
+			"title":	"Binomial Estimation",
 			"qml":		"LSbinomialestimation.qml",
 			"function":	"LSbinomialestimation"
 		},
-			{
-			"menu":		"Testing",
-			"title":	"Testing for Binomial Parameter",
+		{
+			"menu":		"Binomial Testing",
+			"title":	"Binomial Testing",
 			"qml":		"LSbinomialtesting.qml",
 			"function":	"LSbinomialtesting"
 		},
-			{
+		{
 			"title": 	"Continuous",
 			"icon":		"analysis-bayesian-ttest.svg"
+		},
+		{
+			"menu":		"Gaussian Estimation",
+			"title":	"Gaussian Estimation",
+			"qml":		"LSgaussianestimation.qml",
+			"function":	"LSgaussianestimation"
+		},
+		{
+			"menu":		"Gaussian Testing",
+			"title":	"Gaussian Testing",
+			"qml":		"LSgaussiantesting.qml",
+			"function":	"LSgaussiantesting"
+		},
+		{
+			"title": 	"Problem of Points",
+			"icon":		""
+		},
+		{
+			"menu":		"Game of Chance",
+			"title":	"Game of Chance",
+			"qml":		"LSgameofchance.qml",
+			"function":	"LSgameofchance"
+		},
+		{
+			"menu":		"Game of Skills",
+			"title":	"Game of Skills",
+			"qml":		"LSgameofskills.qml",
+			"function":	"LSgameofskills"
 		}
 	]
 }
