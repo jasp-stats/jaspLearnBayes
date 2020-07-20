@@ -16,7 +16,7 @@
 #
 
 LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
-  saveOptions(options)
+
   # a vector of two, first for data, second for hypotheses
   ready <- .readyBinomialLS(options)
   
@@ -76,15 +76,6 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
   
   return()
 }
-
-RDEBUG <- function(message){
-  sink(file = "D:/Projects/jasp/jasp-R-debug/RDEBUG.txt", append = TRUE)
-  cat(message)
-  cat("\n")
-  sink(file = NULL)
-}
-saveOptions <- function(options)saveRDS(options, file = "D:/Projects/jasp/jasp-R-debug/options.RDS")
-
 
 .testsBinomialLS   <- function(jaspResults, data, ready, options){
   testsTable <- createJaspTable(title = "Testing Summary")
@@ -1225,200 +1216,7 @@ saveOptions <- function(options)saveRDS(options, file = "D:/Projects/jasp/jasp-R
 }
 
 
-.marginalCentralLS <- function(density, spikes, coverage, l.bound = 0, u.bound = 1, density_discrete = FALSE){
-  
-  if(!is.null(density)){
-    if(!density_discrete)density$y <- density$y/nrow(density)    
-  }else{
-    density <- data.frame("y" = NULL, "x" = NULL)
-  }
-  
-  if(length(spikes) != 0){
-    for(i in 1:length(spikes)){
-      density <- rbind(density[density$x <= spikes[[i]]$x,], spikes[[i]], density[spikes[[i]]$x < density$x,])
-    }
-  }
-  
-  cs  <- cumsum(density$y)
-  css <- rev(cumsum(rev(density$y)))
-  
-  lower <- density$x[cs  > (1-coverage)/2]
-  lower <- lower[1]
-  if(is.na(lower))lower <- l.bound
-  
-  upper <- density$x[(1-coverage)/2  <  css]
-  upper <- upper[length(upper)]
-  if(length(upper) == 0)upper <- u.bound
-  
-  return(cbind.data.frame(x_start = lower, x_end = upper, g = "central", coverage = coverage))
-}
-.marginalHPDLS     <- function(density, spikes, coverage, l.bound = 0, u.bound = 1, density_discrete = FALSE){
-  
-  HDI      <- NULL
-  temp.cov <- 0
-  
-  # spikes have always the highest density - use them first
-  if(length(spikes) != 0){
-    spikes.df   <- do.call(rbind, spikes)
-    spikes.df   <- spikes.df[order(spikes.df$y),]
-    
-    i        <- 1
-    while(temp.cov < coverage & i <= nrow(spikes.df)){
-      HDI      <- rbind(HDI, rep(spikes.df$x[i],2))
-      temp.cov <- temp.cov + spikes.df$y[i]
-      i        <- i + 1
-    }
-    
-    # remove duplicious spikes
-    HDI <- HDI[!duplicated(HDI[,1]),]
-    HDI <- matrix(as.vector(HDI), ncol = 2)
-  }
-  
-  # add continous density
-  if(!is.null(density) & temp.cov < coverage){
-    
-    # if we have only spikes and density, the probability mass of density is 1 - spikes
-    sum_dens_prob <- 1 - temp.cov
-    # proportion of density needed to finish the coverage
-    prop_density  <- (coverage-temp.cov)/sum_dens_prob
-    
-    # deal with flat density
-    if(all(round(density$y,10) == round(density$y[1],10))){
-      
-      if(density_discrete){
-        n.bars  <- u.bound-l.bound+1
-        HDI2    <- c((u.bound-l.bound)/2 - prop_density*n.bars/2 + .5, (u.bound-l.bound)/2 + prop_density*n.bars/2 - .5)
-        HDI2[1] <- floor(HDI2[1])
-        HDI2[2] <- ceiling(HDI2[2])
-      }else{
-        HDI2 <- c((u.bound-l.bound)/2-(u.bound-l.bound)*prop_density/2, (u.bound-l.bound)/2+(u.bound-l.bound)*prop_density/2)
-      }
-      
-    }else{
-      
-      den_marginal <- list(
-        x = density$x,
-        y = density$y
-      )
-      class(den_marginal) <- "density"
-      HDI2 <- HDInterval::hdi(den_marginal, prop_density, allowSplit = T)
-      
-    }
-    
-    HDI2 <- matrix(as.vector(HDI2), ncol = 2)
-    HDI2[HDI2 >= u.bound - .001] <- u.bound
-    HDI2[HDI2 <= l.bound + .001] <- l.bound
-    
-    # remove spikes covered by density
-    if(length(spikes) != 0){
-      for(i in nrow(HDI):1){
-        if(any(HDI[i,1] >= HDI2[,1] & HDI2[,2] >= HDI[i,1]))HDI <- HDI[-i,]
-      }
-    }
-    
-    HDI  <- rbind(HDI, HDI2)
-    
-  }
-  
-  HDI <- HDI[order(HDI[,1]),]
-  HDI <- matrix(as.vector(HDI), ncol = 2)
-  
-  return(cbind.data.frame(x_start = HDI[,1], x_end = HDI[,2], g = "HPD", coverage = coverage))
-}
-.marginalCustomLS  <- function(density, spikes, lCI, uCI, density_discrete = FALSE){
-  
-  if(!is.null(density)){
-    if(!density_discrete)density$y <- density$y/nrow(density)    
-  }else{
-    density <- data.frame("y" = NULL, "x" = NULL)
-  }
-  
-  if(length(spikes) != 0){
-    for(i in 1:length(spikes)){
-      density <- rbind(density[density$x <= spikes[[i]]$x,], spikes[[i]], density[spikes[[i]]$x < density$x,])
-    }
-  }
-  
-  coverage <- sum(density$y[density$x >= lCI & density$x <= uCI])
-  
-  return(cbind.data.frame(x_start = lCI, x_end = uCI, g = "custom", coverage = coverage))
-}
-.marginalSupportLS <- function(data, priors, post_density, post_spikes, BF){
-  
-  # posterior spikes and density are already computed, we just need to get priors
-  prior_spikes   <- list()
-  density_i      <- 0
-  prior_density  <- NULL
-  temp_results   <- .testBinomialLS(data, priors)
-  for(i in 1:length(priors)){
-    if(priors[[i]]$type == "spike"){
-      prior_spikes <- c(
-        prior_spikes, 
-        list(data.frame(y = priors[[i]]$PH, x = priors[[i]]$parPoint, g = "__marginal"))
-      )
-    }else if(priors[[i]]$type == "beta"){
-      dfLinesPP   <- .dataLinesPPLS(data, priors[[i]])
-      dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Prior",]
-      dfLinesPP$y <- exp(log(dfLinesPP$y)+log(temp_results[i, "prior"]))
-      dfLinesPP$g <- priors[[i]]$name
-      
-      if(density_i == 0){
-        prior_density   <- dfLinesPP
-      }else{
-        prior_density$y <- prior_density$y + dfLinesPP$y
-      }
-      density_i <- density_i + 1
-    }
-  }
-  
-  
-  # compute BFs
-  bf_spikes <- list()
-  if(!is.null(prior_density)){
-    bf_density <- data.frame(
-      y = exp(log(post_density$y) - log(prior_density$y)),
-      x = post_density$x
-      )
-    bf_density$y[post_density$y == 0] <- 0 # dealing with NaN's due to density aproximation
-  }else{
-    bf_density <- data.frame(y = NULL, x = NULL)
-  }
-  if(length(prior_spikes) != 0){
-    for(i in 1:length(prior_spikes)){
-      bf_spikes[[i]] <- data.frame(
-        x = post_spikes[[i]]$x,
-        y = post_spikes[[i]]$y / prior_spikes[[i]]$y 
-      )
-    }
-  }
-  
-  
-  if(length(bf_spikes) != 0){
-    for(i in 1:length(bf_spikes)){
-      bf_density <- rbind(bf_density[bf_density$x <= bf_spikes[[i]]$x,], bf_spikes[[i]], bf_density[bf_spikes[[i]]$x < bf_density$x,])
-    }
-  }
-  
-  
-  support <- .aproximateSupportLS(bf_density$x, bf_density$y > BF)
-  
-  support$lCI[support$lCI == .0005] <- 0
-  support$uCI[support$uCI == .9995] <- 1
-  
-  if(nrow(support) > 0){
-    lCI      <- support$lCI
-    uCI      <- support$uCI
-    coverage <- 666 # not implemented
-  }else{
-    lCI      <- NA
-    uCI      <- NA
-    coverage <- 0
-  }
-  
-  dat       <- data.frame(x_start = lCI, x_end = uCI, g = "support", coverage = coverage, BF = BF)
-  
-  return(dat)
-}
+
 .plotAccuracyLS    <- function(dfHist, xName = xName, yName = yName){
   
   mappingHistogram  <- ggplot2::aes(x = x, y = y, fill = col)
