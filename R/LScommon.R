@@ -15,6 +15,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# developmental stuff
+RDEBUG <- function(message){
+  if(file.exists("D:/Projects/jasp/jasp-R-debug/RDEBUG.txt")){
+    sink(file = "D:/Projects/jasp/jasp-R-debug/RDEBUG.txt", append = TRUE)
+    cat(message)
+    cat("\n")
+    sink(file = NULL) 
+  }
+}
+saveOptions <- function(options){
+  if(file.exists("D:/Projects/jasp/jasp-R-debug/options.RDS"))
+    saveRDS(options, file = "D:/Projects/jasp/jasp-R-debug/options.RDS")
+}
+
+
 # general functions
 .evaluate_priors       <- function(priors){
   for(p in 1:length(priors)){
@@ -35,6 +50,31 @@
     priors[[i]]$PH <- scaled[i]
   }
   return(priors)
+}
+.aproximateSupportLS   <- function(x_seq, TF_seq){
+  x_start <- NULL
+  x_end   <- NULL
+  
+  r <- rle(TF_seq)
+  
+  if(length(r$values) > 0){
+    for(i in 1:length(r$values)){
+      if(r$values[i]){
+        if(i == 1){
+          x_start <- c(x_start, 1)
+          x_end   <- c(x_end,   r$lengths[1])
+        }else{
+          x_start <- c(x_start, sum(r$lengths[1:(i-1)])+1)
+          x_end   <- c(x_end,   sum(r$lengths[1:i]))
+        }
+      } 
+    }
+  }else{
+    x_start <- NA
+    x_end   <- NA
+  }
+  
+  return(cbind.data.frame("lCI" = x_seq[x_start], "uCI" = x_seq[x_end]))
 }
 
 # plotting functions
@@ -231,7 +271,7 @@
   }
   
   # axes
-  g <- g + ggplot2::scale_x_continuous(xName, limits = xRange)
+  g <- g + .plotXAxis(xName, xRange, discrete)
   g <- g + .plotYAxis(all_lines, all_arrows, CI)
   
   # legend
@@ -805,6 +845,50 @@
   class(plot) <- c("JASPgraphs", class(plot))
   return(plot)
 }
+.plotAccuracyLS        <- function(dfHist, xName = xName, yName = yName){
+  
+  mappingHistogram  <- ggplot2::aes(x = x, y = y, fill = col)
+  
+  yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, dfHist$y))
+  xBreaks  <- 1:nrow(dfHist)
+  xRange   <- c(.5, nrow(dfHist) + .5)
+  
+  obsYmax  <- max(dfHist$y)
+  breaksYmax <- yBreaks[length(yBreaks)]
+  newymax    <- max(1.10 * obsYmax, breaksYmax)
+  
+  dfHist$col <- "a"
+  
+  g <- ggplot2::ggplot()
+  g <- g + ggplot2::geom_bar(
+    data     = dfHist,
+    mapping  = mappingHistogram,
+    #fill     = "grey",
+    col      = "black",
+    stat     = "identity"
+  )
+  
+  
+  g <- g + ggplot2::scale_x_continuous(xName, breaks = xBreaks, labels = dfHist$g, limits = xRange)
+  g <- g + ggplot2::scale_y_continuous(yName, breaks = yBreaks, limits = c(0, newymax)) 
+  g <- g + ggplot2::scale_colour_manual(values = "grey90", aesthetics = "fill")
+  
+  
+  g <- g + JASPgraphs::themeJaspRaw() + 
+    JASPgraphs::geom_rangeframe(sides = 'lb') +  
+    ggplot2::theme(
+      legend.title = ggplot2::element_blank(), 
+      legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
+      legend.key.height = ggplot2::unit(1, "cm"),
+      legend.key.width  = ggplot2::unit(1.5,"cm"),
+      axis.text.x       = ggplot2::element_text(angle = 45))
+  
+  plot <- g
+  class(plot) <- c("JASPgraphs", class(plot))
+  return(plot)
+  
+}
+
 # support functions
 .CI_labelLS            <- function(CI, nRound){
   temp_int <- sapply(1:nrow(CI), function(i){
@@ -869,6 +953,16 @@
   }else{
     return(1)
   }
+}
+.plotXAxis             <- function(x_name, x_range, discrete){
+  
+  x_breaks <- JASPgraphs::getPrettyAxisBreaks(x_range)
+  
+  if(discrete){
+    x_breaks <- round(x_breaks)
+    x_breaks <- unique(x_breaks[x_breaks >= x_range[1] &  x_breaks <= x_range[2]])
+  }
+  return(ggplot2::scale_x_continuous(x_name, limits = x_range, breaks = x_breaks))
 }
 .plotYAxis             <- function(all_lines, all_arrows, CI){
   

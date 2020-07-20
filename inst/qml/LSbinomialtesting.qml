@@ -410,10 +410,10 @@ Form {
 
 						DropDown
 						{
-							name: "plotsPredictionMarginalType"
+							name: "plotsPredictionMarginalTypeCI"
 							label: ""
 							values: ["central", "HPD", "custom"]
-							id: plotsPredictionMarginalType
+							id: plotsPredictionMarginalTypeCI
 						}
 					}
 
@@ -422,8 +422,8 @@ Form {
 						columns: 2
 						CIField
 						{
-							visible: plotsPredictionMarginalType.currentText == "central" |
-									 plotsPredictionMarginalType.currentText == "HPD"
+							visible: plotsPredictionMarginalTypeCI.currentText == "central" |
+									 plotsPredictionMarginalTypeCI.currentText == "HPD"
 							enabled: plotsPredictionMarginalCI.checked
 							name: "plotsPredictionMarginalCoverage"
 							label: qsTr("probability")
@@ -433,7 +433,7 @@ Form {
 
 						DoubleField
 						{
-							visible: plotsPredictionMarginalType.currentText == "custom"
+							visible: plotsPredictionMarginalTypeCI.currentText == "custom"
 							enabled: plotsPredictionMarginalCI.checked
 							name: "plotsPredictionMarginalLower"
 							label: qsTr("lower")
@@ -444,7 +444,7 @@ Form {
 
 						DoubleField
 						{
-							visible: plotsPredictionMarginalType.currentText == "custom"
+							visible: plotsPredictionMarginalTypeCI.currentText == "custom"
 							enabled: plotsPredictionMarginalCI.checked
 							name: "plotsPredictionMarginalUpper"
 							label: qsTr("upper")
