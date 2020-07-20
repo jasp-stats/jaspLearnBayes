@@ -18,7 +18,7 @@
 
 
 LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
-  
+
   # a vector of two, first for data, second for hypotheses
   ready <- .readyBinomialLS(options)
   
@@ -273,7 +273,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   estimatesTable$position <- 2
   estimatesTable$dependOn(.BinomialLS_data_dependencies)
   
-  estimatesTable$addColumnInfo(name = "hypothesis",   title = "Model"    ,       type = "string")
+  estimatesTable$addColumnInfo(name = "hypothesis",   title = "Model",           type = "string")
   estimatesTable$addColumnInfo(name = "prior",        title = "Prior (θ)",       type = "string")
   estimatesTable$addColumnInfo(name = "priorMed",     title = "Prior Median",    type = "number")
   estimatesTable$addColumnInfo(name = "posterior",    title = "Posterior (θ)",   type = "string")
@@ -396,7 +396,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
                          ifelse(options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "overlying",
                                 "colorPalette", "")))
   
-  jaspResults[[type]] <- plotsSimple
+  jaspResults[[paste0("plots",type,"simple")]] <- plotsSimple
   
   if (!all(ready))return()
   
@@ -433,7 +433,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     p <- .plotStackedLS(all_lines, all_arrows, legend, xName = xName)
   }
   
-  jaspResults[[type]]$plotObject <- p
+  jaspResults[[paste0("plots",type,"simple")]]$plotObject <- p
   
   return()
 }
@@ -486,13 +486,13 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
       }
       
       if(options$plotsBothSampleProportion){
-        dfPointsPP <- .dataProportionPPLS(data, options$priors[[i]])
+        dfPointsPP <- .dataProportionPPLS(data)
         if(is.nan(dfPointsPP$x))dfPointsPP <- NULL
       }else{
         dfPointsPP <- NULL 
       }
       
-      p <- .plotPriorPosteriorLS(dfLine = dfLinesPP, dfArrow = dfArrowPP, dfPoints = dfPointsPP, xName = xName)
+      p <- .plotPriorPosteriorLS(list(dfLinesPP), list(dfArrowPP), dfPoints = dfPointsPP, xName = xName)
       temp_plot$plotObject <- p
     }
     
@@ -514,7 +514,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
                              ifelse(type == "Prior", "plotsPriorLower",        "plotsPosteriorLower"),
                              ifelse(type == "Prior", "plotsPriorUpper",        "plotsPosteriorUpper")))
   
-  jaspResults[["plotsIndividual"]] <- plotsIndividual
+  jaspResults[[paste0("plots",type,"individual")]] <- plotsIndividual
   
   
   if(all(!ready) | (ready[1] & !ready[2])){
@@ -601,7 +601,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         
       }
       
-      p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfCI, dfCILinesPP, c(0,1), xName, "Density", nRound = 3)
+      p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfCI, dfCILinesPP, c(0,1), xName, nRound = 3)
       temp_plot$plotObject <- p
     }
     
@@ -1751,7 +1751,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   dat       <- data.frame(x_start = lCI, x_end = uCI, g = "support", coverage = coverage, BF = BF)
   return(dat)
 }
-.dataProportionPPLS    <- function(data, prior){
+.dataProportionPPLS    <- function(data){
   
   theta <- data$nSuccesses / (data$nSuccesses + data$nFailures)
   dat   <- data.frame(x = theta, y = 0, g = "Sample proportion")
@@ -1834,50 +1834,140 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   
   return(temp_label)
 }
+.getYMax               <- function(all_lines, all_arrows){
+  if(!is.null(all_lines) & !is.null(all_arrows)){
+    y_breaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_lines$y)))
+    y_max     <- max(c(all_lines$y, y_breaks))
+  }else if(!is.null(all_lines)){
+    y_breaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_lines$y)))
+    y_max     <- max(c(all_lines$y, y_breaks))
+  }else{
+    y_breaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_arrows$y_end)))
+    y_max     <- max(c(all_arrows$y_end, y_breaks))
+  }
+  return(y_max)
+}
+.scalingSpikes         <- function(all_lines, all_arrows){
+  if(!is.null(all_lines) & !is.null(all_arrows)){
+    y_max     <- .getYMax(all_lines, all_arrows)
+    y_breaks2 <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_arrows$y_end)))
+    return(y_max/max(y_breaks2))
+  }else{
+    return(1)
+  }
+}
+.plotYAxis             <- function(all_lines, all_arrows, CI){
+  
+  y_max <- .getYMax(all_lines, all_arrows)
+  
+  if(!is.null(all_lines) & !is.null(all_arrows)){
+    y_breaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_lines$y)))
+    y_breaks2 <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_arrows$y_end)))
+    y_pos2    <- y_breaks2/(max(y_breaks2)/y_max)
+  }else if(!is.null(all_lines)){
+    y_breaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_lines$y)))
+  }else{
+    y_breaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, max(all_arrows$y_end)))
+  }
+  
+  # set the y-scale plotting range
+  if(!is.null(CI)){
+    y_range    <- c(0, y_max * 1.20) 
+  }else{
+    y_range    <- c(0, y_max) 
+  }
+  
+  if(!is.null(all_lines) & !is.null(all_arrows)){
+    return(ggplot2::scale_y_continuous(
+      "Density",
+      breaks = y_breaks,
+      limits = y_range,
+      sec.axis = ggplot2::sec_axis(
+        ~ .,
+        name   = "Probability",
+        breaks = y_pos2,
+        labels = y_breaks2)
+    ))
+  }else{
+    return(ggplot2::scale_y_continuous(
+      ifelse(is.null(all_lines), "Probability", "Density"),
+      breaks = y_breaks,
+      limits = y_range
+    ))
+  }
+}
+.plotThemePlus         <- function(all_lines, all_arrows){
+  if(!is.null(all_lines) & !is.null(all_arrows)){
+    return(
+      ggplot2::theme(
+        axis.title.y.right = ggplot2::element_text(vjust = 3),
+        plot.margin = ggplot2::margin(t = 3, r = 10, b = 0, l = 1))
+    )    
+  }else{
+    return(
+      ggplot2::theme(
+        axis.title.y.right = ggplot2::element_text(vjust = 3.5),
+        plot.margin = ggplot2::margin(t = 3, r = 0, b = 0, l = 1))
+    )
+  }
+}
 
-
-.plotPriorPosteriorLS  <- function(dfLine, dfArrow, dfPoints = NULL, xName = NULL, yName = "Density"){
+.plotPriorPosteriorLS  <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL, yName = "Density"){
   
   mappingArrow <- ggplot2::aes(x = x, xend = x, y = y_start, yend = y_end, color = g)
   mappingLines <- ggplot2::aes(x = x, y = y, color = g)
   mappingPoint <- ggplot2::aes(x = x, y = y, color = g)
-  
+
+  if(!is.null(all_lines))all_lines   <- do.call("rbind", all_lines)
+  if(!is.null(all_arrows))all_arrows <- do.call("rbind", all_arrows)
+
+  # get the y_axis max
+  y_max <- .getYMax(all_lines, all_arrows)
   
   g <- ggplot2::ggplot() 
   
-  if(!is.null(dfArrow)){
-    g <- g +  ggplot2::geom_segment(
-      data = dfArrow, mappingArrow,
-      size = 1,
-      arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
-      show.legend = F) +
-      ggplot2::geom_segment(data = dfArrow, mappingArrow, size = 1)
+  if(!is.null(all_arrows)){
     
-    y_max    <- dfArrow$y_end
-    y_breaks <- c(0, dfArrow$y_end)
-    y_labels <- c(0, "\U221E" )
-    x_high   <- dfArrow$x
-  }else{
-    
-    for(i in 1:length(unique(dfLine$g))){
-      temp_line <- dfLine[dfLine$g == unique(dfLine$g)[i], ]
-      temp_type <- i
-      g <- g + ggplot2::geom_line(
-        data = temp_line, mappingLines,
-        size = 1, linetype = temp_type)
+    for(i in nrow(all_arrows):1){
+
+      temp_arrow       <- all_arrows[i,]
+      temp_arrow$y_end <- temp_arrow$y_end * .scalingSpikes(all_lines, all_arrows)
+      
+      g <- g + ggplot2::geom_segment(
+        data        = temp_arrow,
+        mapping     = mappingArrow,
+        size        = 1,
+        linetype    = 1,
+        arrow       = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
+        show.legend = F) +
+        ggplot2::geom_segment(
+          data    = temp_arrow,
+          mapping = mappingArrow,
+          size    = 1)
     }
     
-    y_max <- max(dfLine$y)
-    y_breaks <- JASPgraphs::getPrettyAxisBreaks(c(0, y_max))
-    y_labels <- y_breaks
-    x_high   <- dfLine$x[which.max(dfLine$y)]
+    x_high <- max(all_arrows$x)
   }
   
-  g <- g + ggplot2::scale_x_continuous(xName, limits = c(0, 1)) + 
-    ggplot2::scale_y_continuous(yName,
-                                breaks = y_breaks,
-                                limits = c(0, y_max),
-                                labels = y_labels) 
+  if(!is.null(all_lines)){
+    
+    for(i in 1:length(unique(all_lines$g))){
+      
+      temp_line <- all_lines[all_lines$g == unique(all_lines$g)[i], ]
+      temp_type <- i
+      
+      g <- g + ggplot2::geom_line(
+        data     = temp_line,
+        mapping  = mappingLines,
+        size     = 1,
+        linetype = temp_type)
+    }
+    
+    x_high <- all_lines$x[which.max(all_lines$y)]
+  }
+
+  g <- g + ggplot2::scale_x_continuous(xName, limits = c(0, 1))
+  g <- g + .plotYAxis(all_lines, all_arrows, NULL)
   
   if(!is.null(dfPoints)){
     
@@ -1885,70 +1975,71 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
                                  inherit.aes = FALSE, size = 4, shape = 4, 
                                  stroke = 1.25, fill = "grey")
     
-    if(!is.null(dfArrow)){
+    if(!is.null(all_arrows)){
       g <- g + ggplot2::scale_color_manual("",
-                                           values  = c("black", "black"),
-                                           breaks  = c(as.character(dfArrow$g), as.character(unique(dfPoints$g))),
+                                           values  = c(c("black", "gray")[1:length(unique(all_arrows$g))], "black"),
+                                           breaks  = c(as.character(all_arrows$g), as.character(unique(dfPoints$g))),
                                            guide   = ggplot2::guide_legend(override.aes = list(
-                                             linetype = c(1, NA),
-                                             shape    = c(NA, 4)
+                                             linetype = if(length(unique(all_arrows$g)) == 1) c(1, NA) else c(1, 2, NA),
+                                             shape    = if(length(unique(all_arrows$g)) == 1) c(NA, 4) else c(NA, NA, 4)
                                            )))  
     }else{
       g <- g + ggplot2::scale_color_manual("",
-                                           values  = c("black", "black", "black")[c(1:length(unique(dfLine$g)), 3)],
-                                           breaks  = c(unique(as.character(dfLine$g)), as.character(unique(dfPoints$g))),
+                                           values  = c("black", "gray", "black")[c(1:length(unique(all_lines$g)), 3)],
+                                           breaks  = c(unique(as.character(all_lines$g)), as.character(unique(dfPoints$g))),
                                            guide   = ggplot2::guide_legend(override.aes = list(
-                                             linetype = c( 1,  2, NA)[c(1:length(unique(dfLine$g)), 3)],
-                                             shape    = c(NA, NA,  4)[c(1:length(unique(dfLine$g)), 3)]
+                                             linetype = c( 1,  2, NA)[c(1:length(unique(all_lines$g)), 3)],
+                                             shape    = c(NA, NA,  4)[c(1:length(unique(all_lines$g)), 3)]
                                            ))) 
     }
     
   }else{
     
-    if(!is.null(dfArrow)){
+    if(!is.null(all_arrows)){
       g <- g + ggplot2::scale_color_manual("",
-                                           values  = "black",
-                                           breaks  = as.character(dfArrow$g),
+                                           values  = c("black", "gray")[1:length(unique(all_arrows$g))],
+                                           breaks  = as.character(all_arrows$g),
                                            guide   = ggplot2::guide_legend(override.aes = list(
-                                             linetype = c(1),
-                                             shape    = c(NA)
+                                             linetype = if(length(unique(all_arrows$g)) == 1) c(1) else c(1, 2),
+                                             shape    = if(length(unique(all_arrows$g)) == 1) c(NA) else c(NA, NA)
                                            ))) 
     }else{
       g <- g + ggplot2::scale_color_manual("",
-                                           values  = c( "black", "black")[1:length(unique(dfLine$g))],
-                                           breaks  = c(unique(as.character(dfLine$g))),
+                                           values  = c( "black", "gray")[1:length(unique(all_lines$g))],
+                                           breaks  = c(unique(as.character(all_lines$g))),
                                            guide   = ggplot2::guide_legend(override.aes = list(
-                                             linetype = c( 1,  2)[1:length(unique(dfLine$g))],
-                                             shape    = c(NA, NA)[1:length(unique(dfLine$g))]
+                                             linetype = c( 1,  2)[1:length(unique(all_lines$g))],
+                                             shape    = c(NA, NA)[1:length(unique(all_lines$g))]
                                            ))) 
     }
     
   }
   
-  
+
   if (x_high > .5) {
-    legend.position = c(0.2,  0.875)
+    legend.position = c(0.25, 1)
   }else {
-    legend.position = c(0.75, 0.875)
+    legend.position = c(0.75, 1)
   }
-  
-  g <- g + JASPgraphs::themeJaspRaw(legend.position = legend.position) + 
-    JASPgraphs::geom_rangeframe(sides = 'lb') + 
+
+  g <- g + JASPgraphs::themeJaspRaw(legend.position = legend.position)
+  g <- g + JASPgraphs::geom_rangeframe(sides = if(!is.null(all_lines) & !is.null(all_arrows)) "lbr" else "lb") +
     ggplot2::theme(
       legend.title = ggplot2::element_blank(), 
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
-      legend.key.width  = ggplot2::unit(1.5,"cm"))
+      legend.key.width  = ggplot2::unit(1.5,"cm")) + 
+    .plotThemePlus(all_lines, all_arrows)
   
   plot <- g
   class(plot) <- c("JASPgraphs", class(plot))
   
   return(plot)
 }
-.plotOverlyingLS       <- function(all_lines, all_arrows, dfPoints = NULL, CI = NULL, xName = NULL, yName = "Density",
+.plotOverlyingLS       <- function(all_lines, all_arrows, dfPoints = NULL, CI = NULL, xName = NULL, yName = NULL,
                                    xRange = c(0,1), palette = "colorblind", no_legend = FALSE, nRound = 3, discrete = FALSE,
                                    proportions = FALSE){
-  
+
   mappingLines   <- ggplot2::aes(x = x, y = y, group = g, color = g)
   mappingArrows  <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g, color = g)
   mappingArrows1 <- ggplot2::aes(x = x_start , xend = x_end, y = y, yend = y, group = g)
@@ -1958,20 +2049,15 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   
   if(!is.null(all_lines))all_lines   <- do.call("rbind", all_lines)
   if(!is.null(all_arrows))all_arrows <- do.call("rbind", all_arrows)
+
+  # get the y_axis max
+  y_max <- .getYMax(all_lines, all_arrows)
   
+  # set the CI text
   if(!is.null(CI)){
     # text for the interval
     temp_label <- .CI_labelLS(CI, nRound)
-    
-    y_max_multiplier <- ifelse(length(temp_label) == 1, 1.25, 1.35)
-  }
-  
-  if(!is.null(all_lines)){
-    yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, all_lines$y))  
-    obsYmax  <- max(all_lines$y)
-  }else{
-    yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, all_arrows$y_end))  
-    obsYmax  <- max(all_arrows$y_end)
+    CI         <- cbind.data.frame(CI, "y" = y_max * 1.05)
   }
   
   if(discrete){
@@ -1984,28 +2070,23 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     xBreaks <- JASPgraphs::getPrettyAxisBreaks(xRange)
   }
   
-  breaksYmax <- yBreaks[length(yBreaks)]
-  newymax <- max(ifelse(!is.null(CI), y_max_multiplier + .05, 1.10) * obsYmax, breaksYmax)
-  
-  if(!is.null(all_arrows)){
-    if(is.null(CI)){
-      all_arrows$y_end <- newymax
-    }else{
-      all_arrows$y_end <- 1.10*newymax/y_max_multiplier
-    }
-  }
-  
-  if(!is.null(CI)){
-    CI <- cbind.data.frame(CI, "y" = obsYmax * 1.20)
-  }
-  
   g <- ggplot2::ggplot()
   
   if(!is.null(all_arrows)){
+    
+    all_arrows_scaled        <- all_arrows
+    all_arrows_scaled$y_end  <- all_arrows_scaled$y_end * .scalingSpikes(all_lines, all_arrows)
+    
     g <- g + ggplot2::geom_segment(
-      data = all_arrows, mapping = mappingArrows, size = 1,
-      arrow = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")), show.legend = F) +
-      ggplot2::geom_segment(data = all_arrows, mappingArrows, size = 1)
+      data        = all_arrows_scaled,
+      mapping     = mappingArrows,
+      size        = 1,
+      arrow       = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
+      show.legend = F)
+    g <- g + ggplot2::geom_segment(
+        data    = all_arrows_scaled,
+        mapping = mappingArrows,
+        size    = 1)
   }
   if(!is.null(all_lines)){
     g <- g + ggplot2::geom_line(data = all_lines, mapping = mappingLines, size = 1,)
@@ -2018,30 +2099,16 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   }
   
   if(no_legend == TRUE){
-    g <- g +
-      ggplot2::scale_colour_manual(values = "black")
-    #ggplot2::scale_colour_manual(values = JASPgraphs::colorBrewerJasp(n = length(unique(all_lines$g)) + length(unique(all_arrows$g)))) +
-    
+    g <- g + ggplot2::scale_colour_manual(values = "black")
   }else{
-    g <- g + 
-      JASPgraphs::scale_JASPcolor_discrete(palette)
+    g <- g + JASPgraphs::scale_JASPcolor_discrete(palette)
   }
   
-  g <- g +
-    ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks)
+  # axes
+  g <- g + ggplot2::scale_x_continuous(xName, limits = xRange)
+  g <- g + .plotYAxis(all_lines, all_arrows, CI)
   
-  
-  if(!is.null(all_lines)){
-    g <- g + ggplot2::scale_y_continuous(yName,
-                                         breaks = yBreaks,
-                                         limits = c(0, newymax)) 
-  }else{
-    g <- g + ggplot2::scale_y_continuous(yName,
-                                         breaks = c(0, newymax),
-                                         limits = c(0, newymax),
-                                         labels = c(0, "\U221E" )) 
-  }
-  
+  # legend
   if(!is.null(all_lines)){
     xr   <- range(all_lines$x)
     idx  <- which.max(all_lines$y)
@@ -2065,13 +2132,13 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
           color   = "black")
     }
     
-    r <- 0
+    label_y    <- if(length(temp_label) == 1) 1.10 else 1.25 - .07 * c(1:length(temp_label)) 
     for(i in 1:length(temp_label)){
       
       temp_text <- data.frame(
         label = temp_label[i],
         x = (xRange[1] + xRange[2])/2,
-        y = obsYmax * (y_max_multiplier-r)
+        y = y_max * label_y[i]
       )
       
       g <- g + ggplot2::geom_text(
@@ -2080,16 +2147,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         parse   = TRUE,
         hjust   = .5, vjust = 0, size = 6
       )
-      
-      r <- r + .10
-      
     }
   }
+  
   
   if (xmax > mean(xr)) {
     legend.position = c(0.15, 0.875)
   }else{
-    legend.position = c(0.8, 0.875)
+    legend.position = c(0.8,  0.875)
   }
   
   if(no_legend == FALSE){
@@ -2097,13 +2162,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   }else{
     g <- g + JASPgraphs::themeJaspRaw()
   }
-  g <- g + JASPgraphs::geom_rangeframe(sides = 'lb') +  
+  g <- g + JASPgraphs::geom_rangeframe(sides = if(!is.null(all_lines) & !is.null(all_arrows)) "lbr" else "lb") +  
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
-      legend.key.width  = ggplot2::unit(1.5,"cm"))
-  
+      legend.key.width  = ggplot2::unit(1.5,"cm")) + 
+    .plotThemePlus(all_lines, all_arrows)
+
   plot <- g
   class(plot) <- c("JASPgraphs", class(plot))
   
@@ -2267,7 +2333,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotIterativeLS       <- function(all_lines, all_CI, xName = "Observations", yName = NULL, x_start = 0,
                                    palette = "colorblind", BF_log = NULL){
-  print(all_lines)
+
   all_lines      <- do.call("rbind", all_lines)
   all_lines$name <- factor(all_lines$name, levels = sort(levels(all_lines$name)))
   
@@ -2378,7 +2444,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   
   return(plot)
 }
-.plotIndividualLS      <- function(LinesPP, ArrowPP, CI, CILinesPP, xRange, xName, yName, nRound = 3){
+.plotIndividualLS      <- function(all_lines, all_arrows, CI, CIall_lines, xRange, xName, yName = NULL, nRound = 3){ 
   
   mappingLines   <- ggplot2::aes(x = x, y = y, group = g,)
   mappingArrows  <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g)
@@ -2386,55 +2452,38 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   mappingArrows2 <- ggplot2::aes(x = x_end , xend = x_start, y = y, yend = y, group = g)
   mappingText    <- ggplot2::aes(x = x, y = y, label = label)
   
+  # get the y_axis max
+  y_max <- .getYMax(all_lines, all_arrows)
+  
+  # set the CI text
   if(!is.null(CI)){
     # text for the interval
     temp_label <- .CI_labelLS(CI, nRound)
-    
-    y_max_multiplier <- ifelse(length(temp_label) == 1, 1.25, 1.35)
+    CI         <- cbind.data.frame(CI, "y" = y_max * 1.05)
   }
-  
-  if(!is.null(LinesPP)){
-    yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, LinesPP$y))  
-    obsYmax  <- max(LinesPP$y)
-  }else{
-    yBreaks  <- JASPgraphs::getPrettyAxisBreaks(c(0, ArrowPP$y_end))  
-    obsYmax  <- max(ArrowPP$y_end)
-  }
-  
-  breaksYmax <- yBreaks[length(yBreaks)]
-  newymax <- max(ifelse(!is.null(CI), y_max_multiplier + .05, 1.10) * obsYmax, breaksYmax)
-  
-  if(!is.null(ArrowPP)){
-    if(is.null(CI)){
-      ArrowPP$y_end <- newymax
-    }else{
-      ArrowPP$y_end <- 1.10*newymax/y_max_multiplier
-    }
-  }
-  
-  if(!is.null(CI)){
-    CI <- cbind.data.frame(CI, "y" = obsYmax * 1.20)
-  }
-  
   
   g <- ggplot2::ggplot()
   
-  if(!is.null(ArrowPP)){
+  if(!is.null(all_arrows)){
+    
+    temp_arrows        <- all_arrows
+    temp_arrows$y_end  <- temp_arrows$y_end * .scalingSpikes(all_lines, all_arrows)
+      
     g <- g + ggplot2::geom_segment(
-      data    = ArrowPP,
+      data    = all_arrows,
       mapping = mappingArrows, size = 1,
       arrow   = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
       color   = "black")
   }
   
-  if(!is.null(LinesPP)){
-    if(!is.null(CILinesPP)){
+  if(!is.null(all_lines)){
+    if(!is.null(CIall_lines)){
       g <- g + ggplot2::geom_polygon(
-        data = CILinesPP,
+        data = CIall_lines,
         mapping = mappingLines, fill = "grey60", alpha = .8)
     }
     g <- g + ggplot2::geom_line(
-      data    = LinesPP,
+      data    = all_lines,
       mapping = mappingLines, size = 1, color = "black") 
   }
   
@@ -2451,13 +2500,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
           color   = "black")
     }
     
-    r <- 0
+
+    label_y    <- if(length(temp_label) == 1) 1.10 else 1.25 - .07 * c(1:length(temp_label)) 
     for(i in 1:length(temp_label)){
       
       temp_text <- data.frame(
         label = temp_label[i],
         x = (xRange[1] + xRange[2])/2,
-        y = obsYmax * (y_max_multiplier-r)
+        y = y_max * label_y[i]
       )
       
       g <- g + ggplot2::geom_text(
@@ -2466,34 +2516,23 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         parse   = TRUE,
         hjust   = .5, vjust = 0, size = 6
       )
-      
-      r <- r + .10
-      
     }
   }
   
   
+  # x-axes
   g <- g + ggplot2::scale_x_continuous(xName, limits = xRange)
-  
-  if(!is.null(LinesPP)){
-    g <- g + ggplot2::scale_y_continuous(yName,
-                                         breaks = yBreaks,
-                                         limits = c(0, newymax)) 
-  }else{
-    g <- g + ggplot2::scale_y_continuous(yName,
-                                         breaks = c(0, newymax),
-                                         limits = c(0, newymax),
-                                         labels = c(0, "\U221E" )) 
-  }
-  
+  g <- g + .plotYAxis(all_lines, all_arrows, CI)
+
   
   g <- g + JASPgraphs::themeJaspRaw() + 
-    JASPgraphs::geom_rangeframe(sides = 'lb') +  
+    JASPgraphs::geom_rangeframe(sides = if(!is.null(all_lines) & !is.null(all_arrows)) "lbr" else "lb") +  
     ggplot2::theme(
       legend.title = ggplot2::element_blank(), 
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
-      legend.key.width  = ggplot2::unit(1.5,"cm"))
+      legend.key.width  = ggplot2::unit(1.5,"cm")) + 
+    .plotThemePlus(all_lines, all_arrows)
   
   plot <- g
   class(plot) <- c("JASPgraphs", class(plot))
@@ -2640,7 +2679,6 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   class(plot) <- c("JASPgraphs", class(plot))
   return(plot)
 }
-
 
 
 # all settings dependent on data input

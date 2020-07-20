@@ -62,7 +62,7 @@ Section
 
 	Group
 	{
-		title: qsTr("Enter count data")
+		title: qsTr("Count data")
 		visible: dataTypeA.checked
 
 		IntegerField
@@ -84,7 +84,7 @@ Section
 
 	TextArea
 	{
-		title:		qsTr("Enter comma-separated sequence of observations")
+		title:		qsTr("Comma-separated sequence of observations")
 		visible:	dataTypeB.checked
 		height:		100
 		name:		"data_sequence"

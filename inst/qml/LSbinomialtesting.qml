@@ -675,6 +675,12 @@ Form {
 
 				RadioButton
 				{ 
+					value: "joint";	
+					label: qsTr("Joint")	
+				}
+
+				RadioButton
+				{ 
 					value: "marginal";	
 					label: qsTr("Marginal")	
 				}
