@@ -40,7 +40,22 @@ saveOptions <- function(options){
         priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
       }
     }
+    if(priors[[p]][["name"]] == ""){
+      priors[[p]][["name"]] <- gettextf(
+        "%s %i",
+        ifelse(any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model"),
+        p
+      )
+    }
   }
+
+  if(anyDuplicated(sapply(priors, function(p)p$name)) != 0){
+    JASP:::.quitAnalysis(gettextf(
+      "Please remove duplicates from the %s names.",
+      ifelse(any(names(priors[[p]]) %in% c("PH")), "Hypotheses", "Models")
+      ))
+  }
+    
   return(priors)
 }
 .scale_priors          <- function(priors){
@@ -78,7 +93,7 @@ saveOptions <- function(options){
 }
 
 # plotting functions
-.plotPriorPosteriorLS  <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL, yName = "Density"){
+.plotPriorPosteriorLS  <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL){
   
   mappingArrow <- ggplot2::aes(x = x, xend = x, y = y_start, yend = y_end, color = g)
   mappingLines <- ggplot2::aes(x = x, y = y, color = g)
@@ -198,7 +213,6 @@ saveOptions <- function(options){
     .plotThemePlus(all_lines, all_arrows)
   
   plot <- g
-  class(plot) <- c("JASPgraphs", class(plot))
   
   return(plot)
 }
@@ -318,9 +332,9 @@ saveOptions <- function(options){
   
   
   if (xmax > mean(xr)) {
-    legend.position = c(0.15, 0.875)
+    legend.position = c(0.2, 0.875)
   }else{
-    legend.position = c(0.8,  0.875)
+    legend.position = c(0.8, 0.875)
   }
   
   if(no_legend == FALSE){
@@ -337,11 +351,10 @@ saveOptions <- function(options){
     .plotThemePlus(all_lines, all_arrows)
   
   plot <- g
-  class(plot) <- c("JASPgraphs", class(plot))
   
   return(plot)
 }
-.plotStackedLS         <- function(all_lines, all_arrows, legend, dfPoints = NULL, xName = NULL, yName = "Density",
+.plotStackedLS         <- function(all_lines, all_arrows, legend, dfPoints = NULL, xName = NULL, yName = gettext("Density"),
                                    xRange = c(0,1), lCI = NULL, uCI = NULL, discrete = FALSE, proportions = FALSE){
   
   mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
@@ -349,15 +362,6 @@ saveOptions <- function(options){
   mappingLegend <- ggplot2::aes(x = x, y = y, label = name)
   mappingPoint  <- ggplot2::aes(x = x, y = y)
   
-  if(discrete){
-    xBreaks <- JASPgraphs::getPrettyAxisBreaks(c(ceiling(xRange[1]),floor(xRange[2])))
-    if(!proportions){
-      xBreaks <- round(xBreaks)
-      xBreaks[length(xBreaks)] <- floor(xRange[2])
-    }
-  }else{
-    xBreaks <- JASPgraphs::getPrettyAxisBreaks(xRange)
-  }
   
   if(!is.null(all_lines)){
     
@@ -471,7 +475,7 @@ saveOptions <- function(options){
   #                            size = 8, hjust = 1, vjust = 0)
   
   g <- g + ggplot2::scale_colour_manual(values = rep("black", nrow(legend))) +
-    ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks) +
+    .plotXAxis(xName, xRange, discrete) +
     ggplot2::scale_y_continuous(yName, limits = c(0, newymax),breaks = legend$y, labels = legend$name) + 
     ggplot2::coord_cartesian(clip = 'off')
   
@@ -493,7 +497,6 @@ saveOptions <- function(options){
     )
   
   plot <- g
-  class(plot) <- c("JASPgraphs", class(plot))
   
   return(plot)
 }
@@ -585,7 +588,7 @@ saveOptions <- function(options){
       mapping = mappingLines, size = 1)
   
   g <- g +
-    ggplot2::scale_x_continuous(xName, limits = c(0, newXmax), breaks = xBreaks) +
+    ggplot2::scale_x_continuous(xName, limits = c(x_start, newXmax), breaks = xBreaks) +
     ggplot2::scale_y_continuous(yName, limits = yRange, breaks = yBreaks) +
     ggplot2::scale_colour_manual(values = clr)
   
@@ -701,7 +704,6 @@ saveOptions <- function(options){
     .plotThemePlus(all_lines, all_arrows)
   
   plot <- g
-  class(plot) <- c("JASPgraphs", class(plot))
   return(plot)
 }
 .plotPredictionLS      <- function(dfHist, CI, xRange, xName, yName, nRound = 0, xBlacked = NULL,
@@ -842,7 +844,6 @@ saveOptions <- function(options){
       legend.key.width  = ggplot2::unit(1.5,"cm"))
   
   plot <- g
-  class(plot) <- c("JASPgraphs", class(plot))
   return(plot)
 }
 .plotAccuracyLS        <- function(dfHist, xName = xName, yName = yName){
@@ -884,7 +885,6 @@ saveOptions <- function(options){
       axis.text.x       = ggplot2::element_text(angle = 45))
   
   plot <- g
-  class(plot) <- c("JASPgraphs", class(plot))
   return(plot)
   
 }
@@ -987,18 +987,18 @@ saveOptions <- function(options){
   
   if(!is.null(all_lines) & !is.null(all_arrows)){
     return(ggplot2::scale_y_continuous(
-      "Density",
+      gettext("Density"),
       breaks = y_breaks,
       limits = y_range,
       sec.axis = ggplot2::sec_axis(
         ~ .,
-        name   = "Probability",
+        name   = gettext("Probability"),
         breaks = y_pos2,
         labels = y_breaks2)
     ))
   }else{
     return(ggplot2::scale_y_continuous(
-      ifelse(is.null(all_lines), "Probability", "Density"),
+      ifelse(is.null(all_lines), gettext("Probability"), gettext("Density")),
       breaks = y_breaks,
       limits = y_range
     ))

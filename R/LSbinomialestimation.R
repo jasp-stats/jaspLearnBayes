@@ -217,47 +217,46 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   return(as.numeric(x))
 }
 .summaryBinomialLS     <- function(jaspResults, data, ready){
-  summaryTable <- createJaspTable(title = "Data Summary")
+  summaryTable <- createJaspTable(title = gettext("Data Summary"))
   
   summaryTable$position <- 1
   summaryTable$dependOn(c("dataSummary", .BinomialLS_data_dependencies))
   
-  summaryTable$addColumnInfo(name = "variable",   title = "",            type = "string")
-  summaryTable$addColumnInfo(name = "counts",     title = "Counts",      type = "integer")
-  summaryTable$addColumnInfo(name = "proportion", title = "Proportion",  type = "number")
+  summaryTable$addColumnInfo(name = "variable",   title = "",                     type = "string")
+  summaryTable$addColumnInfo(name = "counts",     title = gettext("Counts"),      type = "integer")
+  summaryTable$addColumnInfo(name = "proportion", title = gettext("Proportion"),  type = "number")
   
   summaryTable$setExpectedSize(3)
   
   jaspResults[["summaryTable"]] <- summaryTable
   
   if(ready[1]){
-    summaryTable$addRows(list(variable   = "Successes", 
+    summaryTable$addRows(list(variable   = gettext("Successes"), 
                               counts     = data$nSuccesses, 
                               proportion = ifelse(is.nan(data$nSuccesses / (data$nSuccesses + data$nFailures)), "",
                                                   data$nSuccesses / (data$nSuccesses + data$nFailures))))
-    summaryTable$addRows(list(variable   = "Failures",
+    summaryTable$addRows(list(variable   = gettext("Failures"),
                               counts     = data$nFailures, 
                               proportion = ifelse(is.nan(data$nFailures / (data$nSuccesses + data$nFailures)), "",
                                                   data$nFailures / (data$nSuccesses + data$nFailures))))
-    summaryTable$addRows(list(variable   = "Total",
+    summaryTable$addRows(list(variable   = gettext("Total"),
                               counts     = data$nSuccesses + data$nFailures, 
-                              proportion = "")) #ifelse(is.nan((data$nSuccesses + data$nFailures) / (data$nSuccesses + data$nFailures)), "",
-    #        (data$nSuccesses + data$nFailures) / (data$nSuccesses + data$nFailures))))
+                              proportion = ""))
   }
   
   return()
 }
 .estimatesBinomialLS   <- function(jaspResults, data, ready, options){
-  estimatesTable <- createJaspTable(title = "Estimation Summary")
+  estimatesTable <- createJaspTable(title = gettext("Estimation Summary"))
   
   estimatesTable$position <- 2
   estimatesTable$dependOn(.BinomialLS_data_dependencies)
   
-  estimatesTable$addColumnInfo(name = "hypothesis",   title = "Model",           type = "string")
-  estimatesTable$addColumnInfo(name = "prior",        title = "Prior (θ)",       type = "string")
-  estimatesTable$addColumnInfo(name = "priorMed",     title = "Prior Median",    type = "number")
-  estimatesTable$addColumnInfo(name = "posterior",    title = "Posterior (θ)",   type = "string")
-  estimatesTable$addColumnInfo(name = "posteriorMed", title = "Posterior Median",type = "number")
+  estimatesTable$addColumnInfo(name = "hypothesis",   title = gettext("Model"),           type = "string")
+  estimatesTable$addColumnInfo(name = "prior",        title = gettext("Prior (θ)"),       type = "string")
+  estimatesTable$addColumnInfo(name = "priorMed",     title = gettext("Prior Median"),    type = "number")
+  estimatesTable$addColumnInfo(name = "posterior",    title = gettext("Posterior (θ)"),   type = "string")
+  estimatesTable$addColumnInfo(name = "posteriorMed", title = gettext("Posterior Median"),type = "number")
   
   estimatesTable$setExpectedSize(length(options$priors))
   
@@ -269,7 +268,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     
   }else if(!ready[1]){
     
-    jaspResults[["estimatesTable"]]$setError("Please specify successes and failures.")
+    jaspResults[["estimatesTable"]]$setError(gettext("Please specify successes and failures."))
     
   }else if(ready[2]){
     
@@ -303,14 +302,17 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     }
     
     # add footnote clarifying what dataset was used
-    estimatesTable$addFootnote(paste0("These results are based on ", data$nSuccesses," ", ifelse(data$nSuccesses == 1, "success", "successes"),
-                                      "  and ", data$nFailures, " ",ifelse(data$nFailures == 1, "failure", "failures"), "."))
+    estimatesTable$addFootnote(gettextf(
+      "These results are based on %i %s and %i %s.",
+      data$nSuccesses, ifelse(data$nSuccesses == 1, gettext("success"), gettext("successes")),
+      data$nFailures,  ifelse(data$nFailures  == 1, gettext("failure"), gettext("failures"))
+    ))
     
   }
   
 }
 .estimatesSequentialBinomialLS <- function(jaspResults, data, ready, options){
-  estimatesSequentialTable <- createJaspTable(title = "Sequential Posterior Updating")
+  estimatesSequentialTable <- createJaspTable(title = gettext("Sequential Posterior Updating"))
   
   estimatesSequentialTable$position <- 10
   estimatesSequentialTable$dependOn(c("doIterative", .BinomialLS_data_dependencies))
@@ -367,7 +369,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsSimpleBinomialLS <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
   
-  plotsSimple <- createJaspPlot(title = paste0(type, " Plots"), width = 530, height = 400, aspectRatio = 0.7)
+  plotsSimple <- createJaspPlot(title = gettextf("%s Plots", type), width = 530, height = 400, aspectRatio = 0.7)
   
   plotsSimple$position <- ifelse(type == "Prior", 3, 4)
   plotsSimple$dependOn(c(.BinomialLS_data_dependencies,
@@ -405,7 +407,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     }
   }
   
-  xName  <- bquote("Population proportion"~theta)
+  xName  <- bquote(.(gettext("Population proportion"))~theta)
   
   if(options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "overlying"){
     p <- .plotOverlyingLS(all_lines, all_arrows, xName = xName, palette = options$colorPalette)
@@ -419,7 +421,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsBothBinomialLS   <- function(jaspResults, data, ready, options){
   
-  plotsBoth <- createJaspContainer(title = "Prior and Posterior Plots")
+  plotsBoth <- createJaspContainer(title = gettext("Prior and Posterior Plots"))
   
   plotsBoth$position <- 5
   plotsBoth$dependOn(c(.BinomialLS_data_dependencies, "plotsBoth", "plotsBothSampleProportion"))
@@ -451,7 +453,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
       dfArrowPP <- NULL
       dfLinesPP <- NULL
       
-      xName  <- bquote("Population proportion"~theta)
+      xName  <- bquote(.(gettext("Population proportion"))~theta)
       
       if(options$priors[[i]]$type == "spike"){
         dfArrowPP  <- .dataArrowBinomialLS(options$priors[[i]])
@@ -483,7 +485,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIndividualBinomialLS  <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
   
-  plotsIndividual <- createJaspContainer(title = paste0(type, " Plots"))
+  plotsIndividual <- createJaspContainer(title = gettextf("%s Plots",type))
   
   plotsIndividual$position <- ifelse(type == "Prior", 3, 4)
   plotsIndividual$dependOn(c(.BinomialLS_data_dependencies,
@@ -527,7 +529,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
       
       plotsIndividual[[options$priors[[i]]$name]] <- temp_plot
       
-      xName  <- bquote("Population proportion"~theta)
+      xName  <- bquote(.(gettext("Population proportion"))~theta)
       
       dfArrowPP   <- NULL
       dfLinesPP   <- NULL
@@ -592,7 +594,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIterativeOverlyingBinomialLS <- function(jaspResults, data, ready, options){
   
-  plotsIterative <- createJaspPlot(title = "Sequential Analysis: Point Estimate", width = 530, height = 400, aspectRatio = 0.7)
+  plotsIterative <- createJaspPlot(title = gettext("Sequential Analysis: Point Estimate"), width = 530, height = 400, aspectRatio = 0.7)
   
   plotsIterative$position <- 6
   plotsIterative$dependOn(c(.BinomialLS_data_dependencies, "plotsIterative", "plotsIterativeCenter",
@@ -712,7 +714,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
             ))
           
         }else if(nrow(temp_CIPP) > 2){
-          stop("More than bimodal CIs are not implemented in the Sequential analysis plot.")
+          JASP:::.quitAnalysis(gettext("More than bimodal CIs are not implemented in the Sequential analysis plot."))
         }
       }
       
@@ -736,8 +738,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     
   }
   
-  yName  <- bquote("Population proportion"~theta)
-  xName  <- "Observations"
+  yName  <- bquote(.(gettext("Population proportion"))~~theta)
+  xName  <- gettext("Observations")
   
   p <- .plotIterativeLS(plot_data_lines, plot_data_CI, xName = xName, yName = yName, palette = options$colorPalette)
   
@@ -751,7 +753,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIterativeStackedBinomialLS   <- function(jaspResults, data, ready, options){
   
-  plotsIterative <- createJaspContainer(title = "Sequential Analysis: Point Estimate")
+  plotsIterative <- createJaspContainer(title = gettext("Sequential Analysis: Point Estimate"))
   
   plotsIterative$position <- 6
   plotsIterative$dependOn(c(.BinomialLS_data_dependencies, "plotsIterative"))
@@ -822,7 +824,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         
       }
       
-      xName  <- bquote("Population proportion"~theta)
+      xName  <- bquote(.(gettext("Population proportion"))~theta)
       
       temp_plot$plotObject <- .plotStackedLS(all_lines, all_arrows, legend, xName = xName)
     }
@@ -832,7 +834,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIterativeIntervalOverlyingBinomialLS <- function(jaspResults, data, ready, options){
   
-  plotsIterativeInterval <- createJaspPlot(title = "Sequential Analysis: Interval", width = 530, height = 400, aspectRatio = 0.7)
+  plotsIterativeInterval <- createJaspPlot(title = gettext("Sequential Analysis: Interval"), width = 530, height = 400, aspectRatio = 0.7)
   
   plotsIterativeInterval$position <- 8
   plotsIterativeInterval$dependOn(c(.BinomialLS_data_dependencies, "plotsIterativeInterval",
@@ -882,7 +884,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   }
   
   yName  <- bquote("P("~{.(options$plotsIterativeIntervalLower)<=theta}<=.(options$plotsIterativeIntervalUpper)~")")
-  xName  <- "Observations"
+  xName  <- gettext("Observations")
   
   p <- .plotIterativeLS(plot_data_lines, all_CI = NULL, xName = xName, yName = yName, palette = options$colorPalette)
   
@@ -894,7 +896,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIterativeIntervalStackedBinomialLS   <- function(jaspResults, data, ready, options){
   
-  plotsIterativeInterval <- createJaspContainer(title = "Sequential Analysis: Interval")
+  plotsIterativeInterval <- createJaspContainer(title = gettext("Sequential Analysis: Interval"))
   
   plotsIterativeInterval$position <- 8
   plotsIterativeInterval$dependOn(c(.BinomialLS_data_dependencies, "plotsIterativeInterval",
@@ -967,7 +969,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         
       }
       
-      xName  <- bquote("Population proportion"~theta)
+      xName  <- bquote(.(gettext("Population proportion"))~theta)
       
       temp_plot$plotObject <- .plotStackedLS(all_lines, all_arrows, legend, xName = xName,
                                              lCI = options$plotsIterativeIntervalLower, uCI = options$plotsIterativeIntervalUpper)
@@ -977,16 +979,16 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   }
 }
 .tablepredictionsBinomialLS <- function(jaspResults, data, ready, options){
-  predictionsTable <- createJaspTable(title = "Prediction Summary")
+  predictionsTable <- createJaspTable(title = gettext("Prediction Summary"))
   
   predictionsTable$position <- 11
   predictionsTable$dependOn(c(.BinomialLS_data_dependencies, "predictionTable", "predictionN"))
   
-  predictionsTable$addColumnInfo(name = "hypothesis",     title = "Model",                  type = "string")
-  predictionsTable$addColumnInfo(name = "posterior",      title = "Posterior (θ)",          type = "string")
-  predictionsTable$addColumnInfo(name = "posteriorMean",  title = "Posterior Mean",         type = "number")
-  predictionsTable$addColumnInfo(name = "predictive",     title = "Prediction (Successes)", type = "string")
-  predictionsTable$addColumnInfo(name = "predictiveMean", title = "Prediction Mean",        type = "number")
+  predictionsTable$addColumnInfo(name = "hypothesis",     title = gettext("Model"),                  type = "string")
+  predictionsTable$addColumnInfo(name = "posterior",      title = gettext("Posterior (θ)"),          type = "string")
+  predictionsTable$addColumnInfo(name = "posteriorMean",  title = gettext("Posterior Mean"),         type = "number")
+  predictionsTable$addColumnInfo(name = "predictive",     title = gettext("Prediction (Successes)"), type = "string")
+  predictionsTable$addColumnInfo(name = "predictiveMean", title = gettext("Prediction Mean"),        type = "number")
   
   # title <- paste0(options$predictionTableCI, "% Prediction Interval")
   # predictionsTable$addColumnInfo(name = "lowerCI", type = "number", format = "sf:4;dp:3", title = "Lower", overtitle = title)
@@ -1003,7 +1005,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     
   }else if(!ready[1]){
     
-    jaspResults[["predictionsTable"]]$setError("Please specify successes and failures.")
+    jaspResults[["predictionsTable"]]$setError(gettext("Please specify successes and failures."))
     
   }else if(ready[2]){
     
@@ -1029,16 +1031,19 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     }
     
     # add footnote clarifying what dataset was used
-    predictionsTable$addFootnote(paste0("The prediction for ", options$predictionN, " ", ifelse(options$predictionN == 1, "observation", "observations"), 
-                                        " is based on ", data$nSuccesses," ", ifelse(data$nSuccesses == 1, "success", "successes"),
-                                        "  and ", data$nFailures, " ",ifelse(data$nFailures == 1, "failure", "failures"), "."))
+    predictionsTable$addFootnote(gettextf(
+      "The prediction for %s %s is based on %s %s and %s %s.",
+      options$predictionN, ifelse(options$predictionN == 1, gettext("observation"), gettext("observations")),
+      data$nSuccesses, ifelse(data$nSuccesses == 1, gettext("success"), gettext("successes")),
+      data$nFailures, ifelse(data$nFailures == 1, gettext("failure"), gettext("failures"))
+      ))
     
   }
   
 }
 .plotsPredictionsIndividualBinomialLS      <- function(jaspResults, data, ready, options){
   
-  plotsPredictionsIndividual <- createJaspContainer(title = "Prediction Plots")
+  plotsPredictionsIndividual <- createJaspContainer(title = gettext("Prediction Plots"))
   
   plotsPredictionsIndividual$position <- 12
   plotsPredictionsIndividual$dependOn(c(.BinomialLS_data_dependencies, "predictionN",
@@ -1071,12 +1076,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
       plotsPredictionsIndividual[[options$priors[[i]]$name]] <- temp_plot
       
       if(options$predictionPlotProp){
-        xName  <- "Sample proportions"
-        yName  <- "Density"
+        xName  <- gettext("Sample proportions")
+        yName  <- gettext("Density")
         xRange <- c(-.5/options$predictionN,1 + .5/options$predictionN)
       }else{
-        xName  <- "Number of successes"
-        yName  <- "Probability"
+        xName  <- gettext("Number of successes")
+        yName  <- gettext("Probability")
         xRange <- c(0, options$predictionN)
       }
       
@@ -1104,25 +1109,22 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
           
           if(options$plotsPredictionUpper > options$predictionN){
             
-            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError("The upper CI limit is higher than the number of future 
-                                                                            observations. Please, change the value of the upper CI limit 
-                                                                            in the settings panel.")
+            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError(
+            gettext("The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."))
             
             return()
           }
           if(options$plotsPredictionLower > options$predictionN){
             
-            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError("The lower CI limit is higher than the number of future 
-                                                                            observations. Please, change the value of the lower CI limit 
-                                                                            in the settings panel.")
+            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError(gettext(
+            "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."))
             
             return()
           }
           if(options$plotsPredictionLower > options$plotsPredictionUpper){
             
-            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError("The lower CI limit is higher than the upper CI limit.
-                                                                             Please, change the value of the CI limits 
-                                                                             in the settings panel.")
+            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError(gettext(
+            "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."))
             
             return()
           }
@@ -1155,7 +1157,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsPredictionsBinomialLS <- function(jaspResults, data, ready, options){
   
-  plotsPredictions <- createJaspPlot(title = "Prediction Plots", width = 530, height = 400, aspectRatio = 0.7)
+  plotsPredictions <- createJaspPlot(title = gettext("Prediction Plots"), width = 530, height = 400, aspectRatio = 0.7)
   
   plotsPredictions$position <- 12
   plotsPredictions$dependOn(c(.BinomialLS_data_dependencies, "predictionN",
@@ -1169,12 +1171,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   }else{
     
     if(options$predictionPlotProp){
-      xName  <- "Sample proportions"
-      yName  <- "Density"
+      xName  <- gettext("Sample proportions")
+      yName  <- gettext("Density")
       xRange <- c(-.5/options$predictionN,1+.5/options$predictionN)
     }else{
-      xName  <- "Number of successes"
-      yName  <- "Probability"
+      xName  <- gettext("Number of successes")
+      yName  <- gettext("Probability")
       xRange <- c(-.5, options$predictionN+.5)
     }
     
@@ -1210,27 +1212,27 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .tableIterativeBinomialLS   <- function(jaspResults, data, ready, options){
   
-  tableIterative <- createJaspTable(title = "Sequential Analysis: Point Estimate")
+  tableIterative <- createJaspTable(title = gettext("Sequential Analysis: Point Estimate"))
   
   tableIterative$position <- 7
   tableIterative$dependOn(c(.BinomialLS_data_dependencies, "plotsIterative", "plotsIterativeCenter",
                             "plotsIterativeIndividualCI", "plotsIterativeCoverage", "colorPalette", "plotsIterativeUpdatingTable"))
   
   
-  tableIterative$addColumnInfo(name = "iteration", title = "Observations", type = "integer")
+  tableIterative$addColumnInfo(name = "iteration", title = gettext("Observations"), type = "integer")
   if(ready[2]){
     if(options$plotsIterativeIndividualCI){
       if(options$plotsIterativeIndividualType == "central"){
-        CI_title <- paste(options$plotsIterativeCoverage*100, "% CI", sep = "")
+        CI_title <- gettextf("%i %% CI", options$plotsIterativeCoverage*100)
       }else if(options$plotsIterativeIndividualType == "HPD"){
-        CI_title <- paste(options$plotsIterativeCoverage*100, "% HPD", sep = "")
+        CI_title <- gettextf("%i %% HPD", options$plotsIterativeCoverage*100)
       }else if(options$plotsIterativeIndividualType == "support"){
-        CI_title <- paste("SI (BF=",options$plotsIterativeBF,")", sep = "")
+        CI_title <- gettextf("SI (BF=%s)", options$plotsIterativeBF)
       }
       for(i in 1:length(options$priors)){
         tableIterative$addColumnInfo(
           name  = paste(options$priors[[i]]$name,"center", sep = "_"),
-          title = ifelse(options$plotsIterativeCenter == "mean", "Mean", "Median"),
+          title = ifelse(options$plotsIterativeCenter == "mean", gettext("Mean"), gettext("Median")),
           overtitle = options$priors[[i]]$name,
           type = "number")
         tableIterative$addColumnInfo(
@@ -1311,14 +1313,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .tableIterativeIntervalBinomialLS  <- function(jaspResults, data, ready, options){
   
-  tableIterativeInterval <- createJaspTable(title = "Sequential Analysis: Interval")
+  tableIterativeInterval <- createJaspTable(title = gettext("Sequential Analysis: Interval"))
   
   tableIterativeInterval$position <- 9
   tableIterativeInterval$dependOn(c(.BinomialLS_data_dependencies, "plotsIterativeInterval",
                                     "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "plotsIterativeIntervalUpdatingTable"))
   
   
-  tableIterativeInterval$addColumnInfo(name = "iteration", title = "Observations", type = "integer")
+  tableIterativeInterval$addColumnInfo(name = "iteration", title = gettext("Observations"), type = "integer")
   if(ready[2]){
     for(i in 1:length(options$priors)){
       tableIterativeInterval$addColumnInfo(

@@ -22,7 +22,7 @@
   if(prior$type == "spike"){
     
     output <- list(
-      distribution = paste0("spike at ", prior$parPoint_inp),
+      distribution = gettextf("spike at %s", prior$parPoint_inp),
       mean         = prior$parPoint,
       median       = prior$parPoint,
       lCI          = prior$parPoint,
@@ -46,7 +46,7 @@
     }
     
     output <- list(
-      distribution = paste0("beta (",text_Alpha, ", ",text_Beta, ")"),
+      distribution = gettextf("beta (%s, %s)", text_Alpha, text_Beta),
       mean         = (prior$parAlpha + data$nSuccesses) / (prior$parAlpha + data$nSuccesses + prior$parBeta + data$nFailures),
       median       = qbeta(.5,   prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
       lCI          = qbeta(.025, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
@@ -114,7 +114,7 @@
   if(prior$type == "spike"){
     
     output <- list(
-      distribution = paste0("binomial (", options$predictionN, ", ", prior$parPoint_inp,")"),
+      distribution = gettextf("binomial (%i, %s)", options$predictionN, prior$parPoint_inp),
       mean         = prior$parPoint * options$predictionN,
       median       = qbinom(.5, options$predictionN, prior$parPoint),
       lCI          = qbinom(    (1 - options$predictionTableCI)/2, options$predictionN, prior$parPoint),
@@ -138,7 +138,7 @@
     }
     
     output <- list(
-      distribution = paste0("beta-binomial (",options$predictionN, ", ", text_Alpha, ", ",  text_Beta, ")"),
+      distribution = gettextf("beta-binomial (%i, %s, %s)", options$predictionN, text_Alpha, text_Beta),
       mean         = (prior$parAlpha + data$nSuccesses) * options$predictionN / (prior$parAlpha + data$nSuccesses + prior$parBeta + data$nFailures),
       median       = .qbetabinomLS(.5, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
       lCI          = .qbetabinomLS(    (1 - options$predictionTableCI)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),

@@ -16,7 +16,7 @@
 #
 
 LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
-  saveOptions(options)
+
   # a vector of two, first for data, second for hypotheses
   ready <- .readyBinomialLS(options)
   
@@ -79,15 +79,15 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 
 .testsBinomialLS              <- function(jaspResults, data, ready, options){
-  testsTable <- createJaspTable(title = "Testing Summary")
+  testsTable <- createJaspTable(title = gettext("Testing Summary"))
   
   testsTable$position <- 2
   testsTable$dependOn(.BinomialLS_data_dependencies)
   
-  testsTable$addColumnInfo(name = "hypothesis",   title = "Hypothesis",          type = "string")
-  testsTable$addColumnInfo(name = "prior",        title = "P(H)",                type = "number")
-  testsTable$addColumnInfo(name = "log_lik",      title = "log(likelihood)",     type = "number")
-  testsTable$addColumnInfo(name = "posterior",    title = "P(H|data)",           type = "number")
+  testsTable$addColumnInfo(name = "hypothesis",   title = gettext("Hypothesis"),          type = "string")
+  testsTable$addColumnInfo(name = "prior",        title = gettext("P(H)"),                type = "number")
+  testsTable$addColumnInfo(name = "log_lik",      title = gettext("log(likelihood)"),     type = "number")
+  testsTable$addColumnInfo(name = "posterior",    title = gettext("P(H|data)"),           type = "number")
   
   testsTable$setExpectedSize(length(options$priors))
   
@@ -99,7 +99,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     
   }else if(!ready[1]){
     
-    jaspResults[["testsTable"]]$setError("Please specify successes and failures.")
+    jaspResults[["testsTable"]]$setError(gettext("Please specify successes and failures."))
     
   }else if(ready[2]){
     
@@ -117,17 +117,22 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     }
     
     # add footnote clarifying what dataset was used
-    testsTable$addFootnote(paste0("These results are based on ", data$nSuccesses," ", ifelse(data$nSuccesses == 1, "success", "successes"),
-                                  "  and ", data$nFailures, " ",ifelse(data$nFailures == 1, "failure", "failures"), "."))
+    testsTable$addFootnote(gettextf(
+      "These results are based on %i %s and %i %s.",
+      data$nSuccesses, ifelse(data$nSuccesses == 1, gettext("success"), gettext("successes")),
+      data$nFailures,  ifelse(data$nFailures  == 1, gettext("failure"), gettext("failures"))
+    ))
     
   }
   
 }
 .plotsSimpleBinomial2LS       <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
   
-  title <- paste0(
+  title <- gettextf(
+    "%s %s Plot",
     tools::toTitleCase(options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]]),
-    " ",type, " ", "Plot")
+    type
+    )
   plotsSimple <- createJaspPlot(title = title, width = 530, height = 400, aspectRatio = 0.7)
   
   plotsSimple$position <- ifelse(type == "Prior", 3, 6)
@@ -152,7 +157,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
   temp_results <- .testBinomialLS(data, options$priors)
 
   if(any(is.nan(temp_results$posterior))){
-    plotsSimple$setError("The plot could not be created because the posterior model probabilities are not defined.")
+    plotsSimple$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
     return()
   }
   
@@ -190,7 +195,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     dfPoints <- NULL
   }
   
-  xName  <- bquote("Population proportion"~theta)
+  xName  <- bquote(.(gettext("Population proportion"))~theta)
   
   if(options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "joint"){
     
@@ -286,7 +291,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIndividualBinomial2LS   <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
   
-  plotsIndividual <- createJaspContainer(title = paste0("Conditional ", type, " Plots"))
+  plotsIndividual <- createJaspContainer(title = gettextf("Conditional %s Plots", type))
   
   plotsIndividual$position <- ifelse(type == "Prior", 3, 6)
   plotsIndividual$dependOn(c(.BinomialLS_data_dependencies,
@@ -334,7 +339,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       
       plotsIndividual[[options$priors[[i]]$name]] <- temp_plot
       
-      xName  <- bquote("Population proportion"~theta)
+      xName  <- bquote(.(gettext("Population proportion"))~theta)
       
       dfArrowPP   <- NULL
       dfLinesPP   <- NULL
@@ -399,9 +404,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsPredictionsBinomial2LS  <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
   
-  title <- paste0(
+  title <- gettextf(
+    "%s %s Plot",
     tools::toTitleCase(options[[ifelse(type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]]),
-    " ",type, " ", "Plot")
+    type)
   plotsPredictions <- createJaspPlot(title = title, width = 530, height = 400, aspectRatio = 0.7)
   
   plotsPredictions$position <- ifelse(type == "Prior", 4, 12)
@@ -436,20 +442,20 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       temp_data    <- data
       
       if(any(is.nan(temp_results$posterior))){
-        plotsPredictions$setError("The plot could not be created because the posterior model probabilities are not defined.")
+        plotsPredictions$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
         return()
       }
     }
     
     if(type == "Posterior" & options$predictionPostPlotProp){
-      xName  <- "Sample proportions"
-      yName  <- "Density"
+      xName  <- gettext("Sample proportions")
+      yName  <- gettext("Density")
       xRange <- c(-.5/predictionN, 1 + .5/predictionN)
       proportions <- options$predictionPostPlotProp
       nRound <- 3
     }else{
-      xName  <- "Number of successes"
-      yName  <- "Probability"
+      xName  <- gettext("Number of successes")
+      yName  <- gettext("Probability")
       xRange <- c(-.5, predictionN + .5)
       nRound <- 0
       proportions <- FALSE
@@ -491,7 +497,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
                               palette = options[[ifelse(type == "Prior", "colorPalette","colorPalettePrediction")]], nRound = nRound,
                               discrete = TRUE, proportions = proportions)
       }else if(options[[ifelse(type == "Prior", "plotsPredictionJointType", "plotsPredictionPostJointType")]] == "stacked"){
-        p <- .plotStackedLS(all_lines, NULL, legend, dfPoints = dfPoint, xName = xName, xRange = xRange, proportions = proportions)
+        p <- .plotStackedLS(all_lines, NULL, legend, dfPoints = dfPoint, xName = xName, xRange = xRange,
+                            proportions = proportions, discrete = TRUE)
       }
       
 
@@ -583,10 +590,6 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       }
       
       if(type == "Posterior" & options$predictionPostPlotProp){
-      #  if(options$plotsPredictionPostMarginalCI){
-      #    dfCI$x_start <- dfCI$x_start / predictionN
-      #    dfCI$x_end   <- dfCI$x_end   / predictionN
-      #  }
         xRange <- c(-.5/predictionN, 1 + .5/predictionN)
       }else{
         xRange <- c(0, predictionN)
@@ -607,7 +610,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsPredictionsIndividualBinomial2LS  <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
   
-  plotsPredictionsIndividual <- createJaspContainer(title = paste0("Conditional ",type," Prediction Plots"))
+  plotsPredictionsIndividual <- createJaspContainer(title = gettextf("Conditional %s Prediction Plots", type))
   
   plotsPredictionsIndividual$position <- ifelse(type == "Prior", 4, 12)
   plotsPredictionsIndividual$dependOn(c(.BinomialLS_data_dependencies,
@@ -661,13 +664,13 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       plotsPredictionsIndividual[[options$priors[[i]]$name]] <- temp_plot
       
       if(type == "Posterior" & options$predictionPostPlotProp){
-        xName  <- "Sample proportions"
-        yName  <- "Density"
+        xName  <- gettext("Sample proportions")
+        yName  <- gettext("Density")
         xRange <- c(-.5/predictionN, 1 + .5/predictionN)
         proportions <- options$predictionPostPlotProp
       }else{
-        xName  <- "Number of successes"
-        yName  <- "Probability"
+        xName  <- gettext("Number of successes")
+        yName  <- gettext("Probability")
         xRange <- c(0, predictionN)
         proportions <- FALSE
       }
@@ -699,26 +702,23 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
           
           if(options[[ifelse(type == "Prior","plotsPredictionUpper","plotsPredictionPostUpper")]] > predictionN){
             
-            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError("The upper CI limit is higher than the number of future 
-                                                                            observations. Please, change the value of the upper CI limit 
-                                                                            in the settings panel.")
+            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError(gettext(
+            "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."))
             
             return()
           }
           if(options[[ifelse(type == "Prior","plotsPredictionLower","plotsPredictionPostLower")]]  > predictionN){
             
-            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError("The lower CI limit is higher than the number of future 
-                                                                            observations. Please, change the value of the lower CI limit 
-                                                                            in the settings panel.")
+            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError(gettext(
+            "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."))
             
             return()
           }
           if(options[[ifelse(type == "Prior","plotsPredictionLower","plotsPredictionPostLower")]] 
              > options[[ifelse(type == "Prior","plotsPredictionUpper","plotsPredictionPostUpper")]]){
             
-            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError("The lower CI limit is higher than the upper CI limit.
-                                                                             Please, change the value of the CI limits 
-                                                                             in the settings panel.")
+            plotsPredictionsIndividual[[options$priors[[i]]$name]]$setError(gettext(
+            "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."))
             
             return()
           }
@@ -761,7 +761,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsPredAccuracyBinomial2LS <- function(jaspResults, data, ready, options){
   
-  title <- paste0(tools::toTitleCase(options$predictiveAccuracyType), " Predictive Accuracy Plot")
+  title <- gettextf("%s Predictive Accuracy Plot", tools::toTitleCase(options$predictiveAccuracyType))
   
   plotsPredAccuracy <- createJaspPlot(title = title, width = 530, height = 400, aspectRatio = 0.7)
   
@@ -781,8 +781,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     
     dfHist_all   <- NULL
     xRange       <- c(0, predictionN)
-    xName        <- "Hypothesis"
-    yName        <- "Probability"
+    xName        <- gettext("Hypothesis")
+    yName        <- gettext("Probability")
     
     
     if(options$predictiveAccuracyType == "conditional"){
@@ -799,7 +799,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       "g" = sapply(options$priors,function(x)x$name))
 
     if(any(is.nan(dfHist_all$y))){
-      plotsPredAccuracy$setError("The plot could not be created because the posterior model probabilities are not defined.")
+      plotsPredAccuracy$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
       return()
     }
     
@@ -813,7 +813,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsIterativeOverlyingBinomial2LS <- function(jaspResults, data, ready, options){
   
-  plotsIterative <- createJaspPlot(title = "Sequential Analysis", width = 530, height = 400, aspectRatio = 0.7)
+  plotsIterative <- createJaspPlot(title = gettext("Sequential Analysis"), width = 530, height = 400, aspectRatio = 0.7)
   
   plotsIterative$position <- 7
   plotsIterative$dependOn(c(.BinomialLS_data_dependencies, "plotsIterative", "plotsIterativeType",
@@ -871,10 +871,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       temp_y <- temp_results[,"log_lik"] - temp_results[temp_results$name == options$BF_comparison,"log_lik"]
       
       if(!options$BF_log){
-        yName  <- paste("BF against", options$BF_comparison)
+        yName  <- gettextf("BF against %s", options$BF_comparison)
         temp_y <- exp(temp_y)
       }else{
-        yName  <- paste("log(BF) against", options$BF_comparison)
+        yName  <- gettextf("log(BF) against %s", options$BF_comparison)
       }
       
     }
@@ -900,7 +900,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     
   }
   
-  xName  <- "Observations"
+  xName  <- gettext("Observations")
   
   if(options$plotsIterativeType == "BF"){
     BF_log <- options$BF_log
@@ -919,20 +919,20 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .tableIterativeBinomial2LS <- function(jaspResults, data, ready, options){
   
-  title <- paste0(
-    "Sequential Analysis ",
-    "[", ifelse(options$BF_log & options$plotsIterativeType == "BF", "log(", ""),
-    tools::toTitleCase(options$plotsIterativeType),
-    ifelse(options$BF_log & options$plotsIterativeType == "BF", ")", ""), "]",
-    ": Updating Table")
-  tableIterative <- createJaspTable(title = title)
+  if(options$BF_log & options$plotsIterativeType == "BF"){
+    type <- gettext("log(BF)")
+  }else{
+    type <- tools::toTitleCase(options$plotsIterativeType)
+  }
+
+  tableIterative <- createJaspTable(title = gettextf("Sequential Analysis [%s]: Updating Table", type))
   
   tableIterative$position <- 8
   tableIterative$dependOn(c(.BinomialLS_data_dependencies, "plotsIterative", "plotsIterativeType",
                             "plotsIterativeUpdatingTable"))
   
   
-  tableIterative$addColumnInfo(name = "iteration", title = "Observations", type = "integer")
+  tableIterative$addColumnInfo(name = "iteration", title = gettext("Observations"), type = "integer")
   if(ready[2]){
     for(i in 1:length(options$priors)){
       tableIterative$addColumnInfo(
@@ -949,12 +949,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
   }
   if(options$plotsIterativeType == "BF"){
     if(options$BF_comparison == ""){
-      tableIterative$setError("Please specify a hypothesis for comparison.")
+      tableIterative$setError(gettext("Please specify a hypothesis for comparison."))
       jaspResults[["tableIterative"]] <- tableIterative
       return()
     }
     if(length(options$priors) < 2){
-      tableIterative$setError("At least 2 hypotheses need to be specified.")
+      tableIterative$setError(gettext("At least 2 hypotheses need to be specified."))
       jaspResults[["tableIterative"]] <- tableIterative
       return()
     }
@@ -991,10 +991,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       temp_y <- temp_results[,"log_lik"] - temp_results[temp_results$name == options$BF_comparison,"log_lik"]
       
       if(!options$BF_log){
-        yName  <- paste("BF against", options$BF_comparison)
+        yName  <- gettextf("BF against %s", options$BF_comparison)
         temp_y <- exp(temp_y)
       }else{
-        yName  <- paste("log(BF) against", options$BF_comparison)
+        yName  <- gettextf("log(BF) against %s", options$BF_comparison)
       }
       
     }
@@ -1015,7 +1015,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsBothBinomialLS2      <- function(jaspResults, data, ready, options){
   
-  plotsBoth <- createJaspContainer(title = paste0(tools::toTitleCase(options$plotsBothType), " Prior and Posterior Plot"))
+  plotsBoth <- createJaspContainer(title = gettextf("%s Prior and Posterior Plot", tools::toTitleCase(options$plotsBothType)))
   
   plotsBoth$position <- 7
   plotsBoth$dependOn(c(.BinomialLS_data_dependencies, "plotsBoth", "plotsBothType", "plotsBothSampleProportion"))
@@ -1033,7 +1033,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
   if(any(is.nan(temp_results$posterior))){
     plotsBoth_error <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
     jaspResults[["plotsBoth"]][["plotsBoth_error"]] <- plotsBoth_error
-    plotsBoth_error$setError("The plot could not be created because the posterior model probabilities are not defined.")
+    plotsBoth_error$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
     return()
   }
   
@@ -1066,7 +1066,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
   }else{
     dfPointsPP <- NULL
   }
-  xName  <- bquote("Population proportion"~theta)
+  xName  <- bquote(.(gettext("Population proportion"))~theta)
   
   if(options$plotsBothType == "joint"){
     
@@ -1120,7 +1120,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsBothIndividualBinomial2LS <- function(jaspResults, data, ready, options){
 
-  plotsBoth <- createJaspContainer(title = "Conditional Prior and Posterior Plots")
+  plotsBoth <- createJaspContainer(title = gettext("Conditional Prior and Posterior Plots"))
   
   plotsBoth$position <- 7
   plotsBoth$dependOn(c(.BinomialLS_data_dependencies, "plotsBoth", "plotsBothType", "plotsBothSampleProportion"))
@@ -1152,7 +1152,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
       dfArrowPP <- NULL
       dfLinesPP <- NULL
       
-      xName  <- bquote("Population proportion"~theta)
+      xName  <- bquote(.(gettext("Population proportion"))~theta)
       
       if(options$priors[[i]]$type == "spike"){
         dfArrowPP  <- .dataArrowBinomialLS(options$priors[[i]])
