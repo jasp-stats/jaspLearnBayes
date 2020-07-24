@@ -424,7 +424,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         
       }
       
-      p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfCI, dfCILinesPP, c(0,1), xName, nRound = 3)
+      p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfCI, dfCILinesPP, NULL, c(0,1), xName, nRound = 3)
       temp_plot$plotObject <- p
     }
     
@@ -875,8 +875,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     predictionsTable$addFootnote(gettextf(
       "The prediction for %s %s is based on %s %s and %s %s.",
       options[["predictionN"]], ifelse(options[["predictionN"]] == 1, gettext("observation"), gettext("observations")),
-      data[,"nSuccesses"], ifelse(data[,"nSuccesses"] == 1, gettext("success"), gettext("successes")),
-      data[,"nFailures"], ifelse(data[,"nFailures"] == 1, gettext("failure"), gettext("failures"))
+      data$nSuccesses, ifelse(data$nSuccesses == 1, gettext("success"), gettext("successes")),
+      data$nFailures, ifelse(data$nFailures == 1, gettext("failure"), gettext("failures"))
       ))
     
   }

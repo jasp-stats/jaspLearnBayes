@@ -555,6 +555,7 @@ Section
 
 		}
 
+		CheckBox{name: "plotsPosteriorObserved"; label: qsTr("Sample proportion"); checked: false	}
 	}
 
 

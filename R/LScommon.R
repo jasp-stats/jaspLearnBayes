@@ -613,13 +613,14 @@ saveOptions <- function(options){
   
   return(plot)
 }
-.plotIndividualLS      <- function(all_lines, all_arrows, CI, CIall_lines, xRange, xName, yName = NULL, nRound = 3){ 
+.plotIndividualLS      <- function(all_lines, all_arrows, CI, CIall_lines, dfPoints = NULL, xRange, xName, yName = NULL, nRound = 3){ 
   
   mappingLines   <- ggplot2::aes(x = x, y = y, group = g,)
   mappingArrows  <- ggplot2::aes(x = x , xend = x, y = y_start, yend = y_end, group = g)
   mappingArrows1 <- ggplot2::aes(x = x_start , xend = x_end, y = y, yend = y, group = g)
   mappingArrows2 <- ggplot2::aes(x = x_end , xend = x_start, y = y, yend = y, group = g)
   mappingText    <- ggplot2::aes(x = x, y = y, label = label)
+  mappingPoint   <- ggplot2::aes(x = x, y = y)
   
   # get the y_axis max
   y_max <- .getYMax(all_lines, all_arrows)
@@ -688,6 +689,11 @@ saveOptions <- function(options){
     }
   }
   
+  if(!is.null(dfPoints)){
+    g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = FALSE,
+                                 inherit.aes = FALSE, size = 4, shape = 4, 
+                                 stroke = 1.25, fill = "grey")
+  }
   
   # x-axes
   g <- g + ggplot2::scale_x_continuous(xName, limits = xRange)

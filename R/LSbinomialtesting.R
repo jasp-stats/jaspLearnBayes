@@ -144,6 +144,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
                          ifelse(type == "Prior", "plotsPriorMarginalCoverage", "plotsPosteriorMarginalCoverage"),
                          ifelse(type == "Prior", "plotsPriorMarginalLower",    "plotsPosteriorMarginalLower"),
                          ifelse(type == "Prior", "plotsPriorMarginalUpper",    "plotsPosteriorMarginalUpper"),
+                         if(type == "Posterior") "plotsPosteriorObserved",
                          "colorPalette", "scaleSpikes"))
   
   
@@ -185,7 +186,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     }
   }
   
-  if(options[["plotsPredictionsObserved"]]){
+  if(type == "Posterior" && options[["plotsPosteriorObserved"]]){
     dfPoints <- data.frame(
       x = data$nSuccesses/(data$nSuccesses + data$nFailures),
       y = 0,
@@ -202,7 +203,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     if(options[[ifelse(type == "Prior", "plotsPriorJointType", "plotsPosteriorJointType")]] == "overlying"){
       p <- .plotOverlyingLS(all_lines, all_arrows, dfPoints, xName = xName, palette = options[["colorPalette"]])  
     }else if(options[[ifelse(type == "Prior", "plotsPriorJointType", "plotsPosteriorJointType")]] == "stacked"){
-      p <- .plotStackedLS(all_lines, all_arrows, legend, xName = xName)
+      p <- .plotStackedLS(all_lines, all_arrows, legend, dfPoints, xName = xName)
     }
     
     
@@ -301,6 +302,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
                              ifelse(type == "Prior", "plotsPriorCoverage",     "plotsPosteriorCoverage"),
                              ifelse(type == "Prior", "plotsPriorLower",        "plotsPosteriorLower"),
                              ifelse(type == "Prior", "plotsPriorUpper",        "plotsPosteriorUpper"),
+                             if(type == "Posterior") "plotsPosteriorObserved",
                              "scaleSpikes"))
   
   jaspResults[[paste0("plots",type)]] <- plotsIndividual
@@ -332,6 +334,16 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     }
     
     temp_results <- .testBinomialLS(data, options[["priors"]])
+    
+    if(type == "Posterior" && options[["plotsPosteriorObserved"]]){
+      dfPoints <- data.frame(
+        x = data$nSuccesses/(data$nSuccesses + data$nFailures),
+        y = 0,
+        g = "Observed"
+      )
+    }else{
+      dfPoints <- NULL
+    }
     
     for(i in 1:length(options[["priors"]])){
       
@@ -393,7 +405,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
         }
         
       }
-      p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfCI, dfCILinesPP, c(0,1), xName, nRound = 3)
+      p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfCI, dfCILinesPP, dfPoints, c(0,1), xName, nRound = 3)
       temp_plot$plotObject <- p
     }
     
