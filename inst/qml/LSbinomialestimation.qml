@@ -25,7 +25,7 @@ import "../qml" as LS
 Form {
 	id: form
 
-	LS.LSdatainput{}
+	LS.LSbinomialdatainput{}
 
 	Section
 	{

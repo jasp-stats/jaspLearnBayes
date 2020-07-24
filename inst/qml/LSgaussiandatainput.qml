@@ -46,7 +46,7 @@ Section
 		RadioButton
 		{
 			value:		"dataCounts"
-			label:		qsTr("Specify counts")
+			label:		qsTr("Specify data summary")
 			id:			dataTypeA
 			checked:	!mainWindow.dataAvailable
 		}
@@ -62,23 +62,23 @@ Section
 
 	Group
 	{
-		title: qsTr("Count data")
+		title: qsTr("Data summary")
 		visible: dataTypeA.checked
 
 		IntegerField
 		{
-			name:			"nSuccesses"
-			label:			qsTr("Successes")
+			name:			"mean"
+			label:			qsTr("Mean")
 			defaultValue: 	0
-			id: 			nSuccesses
+			id: 			mean
 		}
 
 		IntegerField
 		{
-			name:			"nFailures"
-			label:			qsTr("Failures")
+			name:			"sd"
+			label:			qsTr("SD")
 			defaultValue:	0
-			id:				nFailures
+			id:				sd
 		}
 	}
 
@@ -90,35 +90,6 @@ Section
 		name:		"data_sequence"
 		textType:	"source"
 		separators:	[",",";","\n"]
-	}
-
-	Group
-	{
-		visible:	dataTypeB.checked
-
-		VariablesForm
-		{
-			preferredHeight:	200
-
-			AvailableVariablesList
-			{
-				name:	"levels_Seq"
-				title:	qsTr("Levels")
-				source:	"data_sequence"
-			}
-
-			AssignedVariablesList
-			{
-				name:	"key_success_Seq"
-				title:	qsTr("Successes")
-			}
-
-			AssignedVariablesList
-			{
-				name:	"key_failure_Seq"
-				title:	qsTr("Failures")
-			}
-		}
 	}
 
 	Group
@@ -140,33 +111,10 @@ Section
 				name:				"selectedVariable"
 				title:				qsTr("Selected")
 				singleVariable:		true
-				suggestedColumns:	["ordinal", "nominal","nominalText"]
+				allowedColumns:		["scale"]
 			}
 		}
 
-		VariablesForm
-		{
-			preferredHeight: 200
-
-			AvailableVariablesList
-			{
-				name:	"levels_Var"
-				title:	qsTr("Levels")
-				source:	[{name: "selectedVariable", use: "levels"}]
-			}
-
-			AssignedVariablesList
-			{
-				name:	"key_success_Var"
-				title:	qsTr("Successes")
-			}
-
-			AssignedVariablesList
-			{
-				name:	"key_failure_Var"
-				title:	qsTr("Failures")
-			}
-		}
 	}
 
 	CheckBox

@@ -23,5 +23,113 @@ import JASP.Theme 1.0
 import "../qml" as LS
 
 Form {
+	id: form
+
+	LS.LSgaussiandatainput{}
+
+	Section
+	{
+		expanded: true
+		title: qsTr("Model")
+				
+		ColumnLayout
+		{
+			spacing:				0
+			Layout.preferredWidth:	parent.width
+
+			RowLayout
+			{
+				Label { text: qsTr("Model");				Layout.preferredWidth: 280 * preferencesModel.uiScale}
+				Label { text: qsTr("Distribution");			Layout.preferredWidth: 130 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameter (θ)");		Layout.preferredWidth: 150 * preferencesModel.uiScale}
+			}
+			ComponentsList
+			{
+				name:					"priors"
+				optionKey:				"type"
+				defaultValues: 			[]
+				preferredHeight: 		90 * preferencesModel.uiScale
+				rowComponent: 			RowLayout
+				{
+					Row
+					{
+						spacing:				4 * preferencesModel.uiScale
+						Layout.preferredWidth:	285 * preferencesModel.uiScale
+						TextField
+						{
+							label: 				""
+							name: 				"name"
+							value:				""
+							fieldWidth:			140 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+					}
+					Row
+					{
+						spacing: 4 * preferencesModel.uiScale
+						Layout.preferredWidth: 110 * preferencesModel.uiScale
+						DropDown
+						{
+							id: typeItem
+							name: "type"
+							useExternalBorder: true
+							values:
+							[
+								{ label: qsTr("Spike"),		value: "spike"},
+								{ label: qsTr("Normal"),	value: "normal"}
+							]
+						}
+					}
+					Row
+					{
+						spacing:				4 * preferencesModel.uiScale
+						Layout.preferredWidth:	150 * preferencesModel.uiScale
+						FormulaField
+						{
+							label:				qsTr("μ")
+							name:				"parMu"
+							visible:			typeItem.currentValue === "normal"
+							value:				"0"
+							fieldWidth:			70
+							useExternalBorder:	false
+							showBorder:			true
+						}
+						FormulaField
+						{
+							label:				qsTr("σ")
+							name:				"parSigma"
+							visible:			typeItem.currentValue === "normal"
+							value:				"1"
+							min:				0
+							inclusive:			JASP.None
+							fieldWidth:			70
+							useExternalBorder:	false
+							showBorder:			true
+						}
+						FormulaField
+						{
+							label:				qsTr("θ")
+							name:				"parPoint"
+							visible:			typeItem.currentValue === "spike"
+							value:				"0.5"
+							min:				0
+							max:				1
+							inclusive:			JASP.None
+							fieldWidth:			70
+							useExternalBorder:	false
+							showBorder:			true
+						}
+					}
+				}
+			}
+		}
+	}
+
+	LS.LStestinginference{}
+
+	LS.LStestingsequential{}
+
+	LS.LStestingpredictions{}
 
 }
