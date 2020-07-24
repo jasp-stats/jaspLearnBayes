@@ -15,42 +15,202 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# data load and summary
+.readyBinomialLS       <- function(options){
+  # are data ready
+  if(options[["dataType"]] == "dataCounts"){
+    
+    ready <- TRUE
+    
+  }else if(options[["dataType"]] == "dataSequence"){
+    
+    if(nchar(options[["data_sequence"]]) > 0){
+      
+      if(length(options[["key_success_Seq"]]) == 0){
+        ready <- FALSE
+      }else{
+        ready <- TRUE
+      }
+      
+    }else{
+      ready <- TRUE
+    }
+    
+  }else if(options[["dataType"]] == "dataVariable"){
+    
+    if(options[["selectedVariable"]] != ""){
+      
+      if(length(options[["key_success_Var"]]) == 0){
+        ready <- FALSE
+      }else{
+        ready <- TRUE
+      }
+      
+    }else{
+      ready <- TRUE
+    }
+    
+  }
+  
+  # are priors ready
+  ready <- c(ready, length(options[["priors"]]) > 0)
+  
+  return(ready)
+}
+.readDataBinomialLS    <- function(dataset, options){
+  
+  data <- list()
+  
+  if(options[["dataType"]] == "dataCounts"){
+    
+    data$y <- NULL
+    data[,"nSuccesses"] <- options[["nSuccesses"]]
+    data[,"nFailures"]  <- options[["nFailures"]]
+    
+  }else{
+    
+    if((options[["dataType"]]== "dataVariable" && options[["selectedVariable"]] == "") |
+       (options[["dataType"]]== "dataSequence" && options[["data_sequence"]] == "")){
+      
+      data$y <- NULL
+      
+    }else{
+      
+      if(options[["dataType"]]== "dataSequence"){
+        
+        temp_y <- options[["data_sequence"]]
+        temp_y <- gsub(",", "\n", temp_y)
+        temp_y <- gsub(";", "\n", temp_y)
+        temp_y <- unlist(strsplit(temp_y, split = "\n"))
+        temp_y <- trimws(temp_y, which = c("both"))
+        temp_y <- temp_y[temp_y != ""]
+        
+      }else if(options[["dataType"]] == "dataVariable"){
+        
+        # this is stupidly written #rework
+        if (!is.null(dataset)){
+          temp_y <- dataset
+        }else{
+          temp_y <- .readDataSetToEnd(columns = options[["selectedVariable"]])[,1]
+        }
+        
+      }
+      
+      data$y <- .cleanDataBinomialLS(temp_y, options)
+      
+    }
+    
+    data$[["nSuccesses"]] <- sum(data[,"y"] == 1)
+    data[["nFailures"]]   <- sum(data[,"y"] == 0)
+    
+  } 
+  
+  return(data)
+  
+}
+.cleanDataBinomialLS   <- function(x, options){
+  
+  # doubling the menu allows to store the keys while user switches between different input methods
+  if(options[["dataType"]] == "dataSequence"){
+    key_success <- options[["key_success_Seq"]]
+    key_failure <- options[["key_failure_Seq"]]
+  }else{
+    key_success <- options[["key_success_Var"]]
+    key_failure <- options[["key_failure_Var"]]
+  }
+  
+  x <- na.omit(x)
+  x <- as.character(x)
+  
+  # treat everything else then success as a failure if only successes are supplied
+  if(length(key_failure) == 0){
+    
+    temp_ks <- x %in% key_success
+    
+    x[temp_ks]  <- 1
+    x[!temp_ks] <- 0
+    
+  }else{
+    # use only variables specified in successes or failures
+    
+    x <- x[x %in% c(key_success, key_failure)]
+    
+    temp_ks <- x %in% key_success
+    temp_kf <- x %in% key_failure
+    
+    x[temp_ks] <- 1
+    x[temp_kf] <- 0
+    
+  }
+  
+  return(as.numeric(x))
+}
+.summaryBinomialLS     <- function(jaspResults, data, ready){
+  summaryTable <- createJaspTable(title = gettext("Data Summary"))
+  
+  summaryTable$position <- 1
+  summaryTable$dependOn(c("dataSummary", .BinomialLS_data_dependencies))
+  
+  summaryTable$addColumnInfo(name = "variable",   title = "",                     type = "string")
+  summaryTable$addColumnInfo(name = "counts",     title = gettext("Counts"),      type = "integer")
+  summaryTable$addColumnInfo(name = "proportion", title = gettext("Proportion"),  type = "number")
+  
+  summaryTable$setExpectedSize(3)
+  
+  jaspResults[["summaryTable"]] <- summaryTable
+  
+  if(ready[1]){
+    summaryTable$addRows(list(variable   = gettext("Successes"), 
+                              counts     = data[,"nSuccesses"], 
+                              proportion = ifelse(is.nan(data[,"nSuccesses"] / (data[,"nSuccesses"] + data[,"nFailures"])), "",
+                                                  data[,"nSuccesses"] / (data[,"nSuccesses"] + data[,"nFailures"]))))
+    summaryTable$addRows(list(variable   = gettext("Failures"),
+                              counts     = data[,"nFailures"], 
+                              proportion = ifelse(is.nan(data[,"nFailures"] / (data[,"nSuccesses"] + data[,"nFailures"])), "",
+                                                  data[,"nFailures"] / (data[,"nSuccesses"] + data[,"nFailures"]))))
+    summaryTable$addRows(list(variable   = gettext("Total"),
+                              counts     = data[,"nSuccesses"] + data[,"nFailures"], 
+                              proportion = ""))
+  }
+  
+  return()
+}
 
 # computational functions
 .estimateBinomialLS         <- function(data, prior){
   
-  if(prior$type == "spike"){
+  if(prior[["type"]] == "spike"){
     
     output <- list(
-      distribution = gettextf("spike at %s", prior$parPoint_inp),
-      mean         = prior$parPoint,
-      median       = prior$parPoint,
-      lCI          = prior$parPoint,
-      uCI          = prior$parPoint
+      distribution = gettextf("spike at %s", prior[["parPoint_inp"]]),
+      mean         = prior[["parPoint"]],
+      median       = prior[["parPoint"]],
+      lCI          = prior[["parPoint"]],
+      uCI          = prior[["parPoint"]]
     )
     
     return(output)
     
-  }else if(prior$type == "beta"){
+  }else if(prior[["type"]] == "beta"){
     
     # in order to keep decimals as decimals if user fills them that way
-    if(!is.na(as.numeric(prior$parAlpha_inp))){
-      text_Alpha <- prior$parAlpha + data$nSuccesses
+    if(!is.na(as.numeric(prior[["parAlpha_inp"]]))){
+      text_Alpha <- prior[["parAlpha"]] + data[,"nSuccesses"]
     }else{
-      text_Alpha <- MASS::fractions(prior$parAlpha + data$nSuccesses)
+      text_Alpha <- MASS::fractions(prior[["parAlpha"]] + data[,"nSuccesses"])
     }
-    if(!is.na(as.numeric(prior$parBeta_inp))){
-      text_Beta <- prior$parBeta + data$nFailures
+    if(!is.na(as.numeric(prior[["parBeta_inp"]]))){
+      text_Beta <- prior[["parBeta"]] + data[,"nFailures"]
     }else{
-      text_Beta <- MASS::fractions(prior$parBeta + data$nFailures)
+      text_Beta <- MASS::fractions(prior[["parBeta"]] + data[,"nFailures"])
     }
     
     output <- list(
       distribution = gettextf("beta (%s, %s)", text_Alpha, text_Beta),
-      mean         = (prior$parAlpha + data$nSuccesses) / (prior$parAlpha + data$nSuccesses + prior$parBeta + data$nFailures),
-      median       = qbeta(.5,   prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-      lCI          = qbeta(.025, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-      uCI          = qbeta(.975, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+      mean         = (prior[["parAlpha"]] + data[,"nSuccesses"]) / (prior[["parAlpha"]] + data[,"nSuccesses"] + prior[["parBeta"]] + data[,"nFailures"]),
+      median       = qbeta(.5,   prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]),
+      lCI          = qbeta(.025, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]),
+      uCI          = qbeta(.975, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])
     )
     
     
@@ -63,7 +223,7 @@
   prior     <- rep(NA, length(priors))
   log_lik   <- rep(NA, length(priors))
   
-  obs_prop  <- data$nSuccesses / (data$nSuccesses + data$nFailures)
+  obs_prop  <- data[,"nSuccesses"] / (data[,"nSuccesses"] + data[,"nFailures"])
   
   for(i in 1:length(priors)){
     
@@ -71,16 +231,16 @@
     prior[i]   <- temp_prior$PH
     names[i]   <- temp_prior$name
     
-    if(data$nSuccesses + data$nFailures > 0){
+    if(data[,"nSuccesses"] + data[,"nFailures"] > 0){
       
-      if(temp_prior$type == "spike"){
+      if(temp_prior[["type"]] == "spike"){
         
-        log_lik[i]   <- stats::dbinom(data$nSuccesses, data$nSuccesses + data$nFailures, temp_prior$parPoint, log = TRUE)
+        log_lik[i]   <- stats::dbinom(data[,"nSuccesses"], data[,"nSuccesses"] + data[,"nFailures"], temp_prior[["parPoint"]], log = TRUE)
         
-      }else if(temp_prior$type == "beta"){
+      }else if(temp_prior[["type"]] == "beta"){
         
-        log_lik[i]   <- extraDistr::dbbinom(data$nSuccesses, data$nSuccesses + data$nFailures, 
-                                            temp_prior$parAlpha, temp_prior$parBeta, log = TRUE)
+        log_lik[i]   <- extraDistr::dbbinom(data[,"nSuccesses"], data[,"nSuccesses"] + data[,"nFailures"], 
+                                            temp_prior[["parAlpha"]], temp_prior[["parBeta"]], log = TRUE)
         
       }
       
@@ -89,7 +249,7 @@
     
   }
   
-  if(data$nSuccesses + data$nFailures > 0){
+  if(data[,"nSuccesses"] + data[,"nFailures"] > 0){
     
     PH_log_lik <- log(prior) + log_lik
     norm_const <- log(sum(exp(PH_log_lik))) 
@@ -111,38 +271,38 @@
 }
 .predictBinomialLS          <- function(data, prior, options){
   
-  if(prior$type == "spike"){
+  if(prior[["type"]] == "spike"){
     
     output <- list(
-      distribution = gettextf("binomial (%i, %s)", options$predictionN, prior$parPoint_inp),
-      mean         = prior$parPoint * options$predictionN,
-      median       = qbinom(.5, options$predictionN, prior$parPoint),
-      lCI          = qbinom(    (1 - options$predictionTableCI)/2, options$predictionN, prior$parPoint),
-      uCI          = qbinom(1 - (1 - options$predictionTableCI)/2, options$predictionN, prior$parPoint)
+      distribution = gettextf("binomial (%i, %s)", options[["predictionN"]], prior[["parPoint_inp"]]),
+      mean         = prior[["parPoint"]] * options[["predictionN"]],
+      median       = qbinom(.5, options[["predictionN"]], prior[["parPoint"]]),
+      lCI          = qbinom(    (1 - options[["predictionTableCI"]])/2, options[["predictionN"]], prior[["parPoint"]]),
+      uCI          = qbinom(1 - (1 - options[["predictionTableCI"]])/2, options[["predictionN"]], prior[["parPoint"]])
     )
     
     return(output)
     
-  }else if(prior$type == "beta"){
+  }else if(prior[["type"]] == "beta"){
     
     # in order to keep decimals as decimals if user fills them that way
-    if(!is.na(as.numeric(prior$parAlpha_inp))){
-      text_Alpha <- prior$parAlpha + data$nSuccesses
+    if(!is.na(as.numeric(prior[["parAlpha_inp"]]))){
+      text_Alpha <- prior[["parAlpha"]] + data[,"nSuccesses"]
     }else{
-      text_Alpha <- MASS::fractions(prior$parAlpha + data$nSuccesses)
+      text_Alpha <- MASS::fractions(prior[["parAlpha"]] + data[,"nSuccesses"])
     }
-    if(!is.na(as.numeric(prior$parBeta_inp))){
-      text_Beta <- prior$parBeta + data$nSuccesses
+    if(!is.na(as.numeric(prior[["parBeta_inp"]]))){
+      text_Beta <- prior[["parBeta"]] + data[,"nSuccesses"]
     }else{
-      text_Beta <- MASS::fractions(prior$parBeta + data$nFailures)
+      text_Beta <- MASS::fractions(prior[["parBeta"]] + data[,"nFailures"])
     }
     
     output <- list(
-      distribution = gettextf("beta-binomial (%i, %s, %s)", options$predictionN, text_Alpha, text_Beta),
-      mean         = (prior$parAlpha + data$nSuccesses) * options$predictionN / (prior$parAlpha + data$nSuccesses + prior$parBeta + data$nFailures),
-      median       = .qbetabinomLS(.5, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-      lCI          = .qbetabinomLS(    (1 - options$predictionTableCI)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-      uCI          = .qbetabinomLS(1 - (1 - options$predictionTableCI)/2, options$predictionN, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+      distribution = gettextf("beta-binomial (%i, %s, %s)", options[["predictionN"]], text_Alpha, text_Beta),
+      mean         = (prior[["parAlpha"]] + data[,"nSuccesses"]) * options[["predictionN"]] / (prior[["parAlpha"]] + data[,"nSuccesses"] + prior[["parBeta"]] + data[,"nFailures"]),
+      median       = .qbetabinomLS(.5, options[["predictionN"]], prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]),
+      lCI          = .qbetabinomLS(    (1 - options[["predictionTableCI"]])/2, options[["predictionN"]], prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]),
+      uCI          = .qbetabinomLS(1 - (1 - options[["predictionTableCI"]])/2, options[["predictionN"]], prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])
     )
     
     return(output)
@@ -464,8 +624,8 @@
 .dataLinesBinomialLS        <- function(data, prior){
   
   x_seq   <- seq(.0005, .9995, .001)
-  y_post  <- round((pbeta(x_seq + .0005, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures) - pbeta(x_seq - .0005, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures))*length(x_seq),10)
-  y_prior <- round((pbeta(x_seq + .0005, prior$parAlpha, prior$parBeta) - pbeta(x_seq - .0005, prior$parAlpha, prior$parBeta))*length(x_seq),10)
+  y_post  <- round((pbeta(x_seq + .0005, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]) - pbeta(x_seq - .0005, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]))*length(x_seq),10)
+  y_prior <- round((pbeta(x_seq + .0005, prior[["parAlpha"]], prior[["parBeta"]]) - pbeta(x_seq - .0005, prior[["parAlpha"]], prior[["parBeta"]]))*length(x_seq),10)
   
   linesGroup <- c(y_post, y_prior)
   thetaGroup <- c(x_seq, x_seq)
@@ -476,19 +636,19 @@
 }
 .dataPointsBinomialLS       <- function(data, prior){
   
-  theta <- data$nSuccesses / (data$nSuccesses + data$nFailures)
+  theta <- data[,"nSuccesses"] / (data[,"nSuccesses"] + data[,"nFailures"])
   
   pointXVal <- c(theta, theta)
   
-  if(prior$type == "spike"){
-    if(prior$parPoint == theta){
+  if(prior[["type"]] == "spike"){
+    if(prior[["parPoint"]] == theta){
       pointYVal <- c(1, 1)
     }else{
       pointYVal <- c(0, 0)
     }
-  }else if(prior$type == "beta"){
-    pointYVal <- c(dbeta(theta, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-                   dbeta(theta, prior$parAlpha, prior$parBeta))
+  }else if(prior[["type"]] == "beta"){
+    pointYVal <- c(dbeta(theta, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]),
+                   dbeta(theta, prior[["parAlpha"]], prior[["parBeta"]]))
   }
   
   nameGroup <- c("Observed", "Observed")
@@ -499,18 +659,18 @@
   
   if(type == "parameter"){
     
-    if(prior$type == "spike"){
-      x <- matrix(prior$parPoint, ncol = 2, nrow = 1)
-    }else if(prior$type == "beta"){
-      x <- .betaHDILS(prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures, coverage)
+    if(prior[["type"]] == "spike"){
+      x <- matrix(prior[["parPoint"]], ncol = 2, nrow = 1)
+    }else if(prior[["type"]] == "beta"){
+      x <- .betaHDILS(prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"], coverage)
     }
     
   }else if(type == "prediction"){
     
-    if(prior$type == "spike"){
-      x <- .binomialHDILS(n, prior$parPoint, coverage)
-    }else if(prior$type == "beta"){
-      x <- .betabinomialHDILS(n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures, coverage)
+    if(prior[["type"]] == "spike"){
+      x <- .binomialHDILS(n, prior[["parPoint"]], coverage)
+    }else if(prior[["type"]] == "beta"){
+      x <- .betabinomialHDILS(n, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"], coverage)
     }
     
   }
@@ -522,10 +682,10 @@
   
   if(type == "parameter"){
     
-    if(prior$type == "spike"){
-      x <- matrix(prior$parPoint, ncol = 2, nrow = 1)
-    }else if(prior$type == "beta"){
-      x <- qbeta(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+    if(prior[["type"]] == "spike"){
+      x <- matrix(prior[["parPoint"]], ncol = 2, nrow = 1)
+    }else if(prior[["type"]] == "beta"){
+      x <- qbeta(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])
     }
     
   }else if(type == "prediction"){
@@ -533,12 +693,12 @@
     # distribution function and the lower boundary is not part of the interval. Wanted to write custom 
     # quantile function for the lower bound, however, the aproximation in R reusults in inability to fix
     # the borderline cases: CI for BinomialLS distribution with 3 trials, probabily .5 and coverage 75% 
-    if(prior$type == "spike"){
-      x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior$parPoint)
-    }else if(prior$type == "beta"){
+    if(prior[["type"]] == "spike"){
+      x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior[["parPoint"]])
+    }else if(prior[["type"]] == "beta"){
       x <- c(
-        .qbetabinomLS((1 - coverage)/2 + 1e-5, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures),
-        .qbetabinomLS(1 - (1 - coverage)/2,     n , prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+        .qbetabinomLS((1 - coverage)/2 + 1e-5, n, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]),
+        .qbetabinomLS(1 - (1 - coverage)/2,     n , prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])
       )
     }
     
@@ -551,23 +711,23 @@
   
   if(type == "parameter"){
     
-    if(prior$type == "spike"){
-      coverage <- ifelse(lCI <= prior$parPoint & prior$parPoint <= uCI, 1, 0)
-    }else if(prior$type == "beta"){
-      coverage <- pbeta(uCI, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures) -
-        pbeta(lCI, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+    if(prior[["type"]] == "spike"){
+      coverage <- ifelse(lCI <= prior[["parPoint"]] & prior[["parPoint"]] <= uCI, 1, 0)
+    }else if(prior[["type"]] == "beta"){
+      coverage <- pbeta(uCI, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]) -
+        pbeta(lCI, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])
     }
     
   }else if(type == "prediction"){
     
-    if(prior$type == "spike"){
+    if(prior[["type"]] == "spike"){
       
-      coverage <- sum(sapply(lCI:uCI, function(s)dbinom(s, n, prior$parPoint)))
+      coverage <- sum(sapply(lCI:uCI, function(s)dbinom(s, n, prior[["parPoint"]])))
       
-    }else if(prior$type == "beta"){
+    }else if(prior[["type"]] == "beta"){
       
       coverage <- sum(sapply(lCI:uCI, function(s)
-        extraDistr::dbbinom(s, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)))
+        extraDistr::dbbinom(s, n, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])))
     }
     
   }
@@ -577,20 +737,20 @@
 }
 .dataSupportBinomialLS      <- function(data, prior, BF){
   
-  if(prior$type == "spike"){
+  if(prior[["type"]] == "spike"){
     coverage <- 1
-    lCI      <- prior$parPoint
-    uCI      <- prior$parPoint
-  }else if(prior$type == "beta"){
+    lCI      <- prior[["parPoint"]]
+    uCI      <- prior[["parPoint"]]
+  }else if(prior[["type"]] == "beta"){
     
-    x        <- .betaSupportLS(prior$parAlpha, prior$parBeta, data$nSuccesses, data$nFailures, BF)
+    x        <- .betaSupportLS(prior[["parAlpha"]], prior[["parBeta"]], data[,"nSuccesses"], data[,"nFailures"], BF)
     
     if(nrow(x) > 0){
       lCI      <- x$lCI
       uCI      <- x$uCI
       coverage <- sum(sapply(1:length(lCI),function(i){
-        pbeta(uCI[i], prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures) - 
-          pbeta(lCI[i], prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures)
+        pbeta(uCI[i], prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]) - 
+          pbeta(lCI[i], prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"])
       }))
     }else{
       lCI      <- NA
@@ -604,7 +764,7 @@
 }
 .dataProportionBinomialLS   <- function(data){
   
-  theta <- data$nSuccesses / (data$nSuccesses + data$nFailures)
+  theta <- data[,"nSuccesses"] / (data[,"nSuccesses"] + data[,"nFailures"])
   dat   <- data.frame(x = theta, y = 0, g = "Sample proportion")
   
   return(dat)
@@ -613,11 +773,11 @@
   
   x <- 0:n
   
-  if(prior$type == "spike"){
-    y <- dbinom(x, n, prior$parPoint)
-  }else if(prior$type == "beta"){
+  if(prior[["type"]] == "spike"){
+    y <- dbinom(x, n, prior[["parPoint"]])
+  }else if(prior[["type"]] == "beta"){
     
-    y <- sapply(x, function(s)extraDistr::dbbinom(s, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures))
+    y <- sapply(x, function(s)extraDistr::dbbinom(s, n, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]))
   }
   
   dat <- data.frame(x = x, y = y)
@@ -627,10 +787,10 @@
   
   x <- 0:n
   
-  if(prior$type == "spike"){
-    y <- dbinom(x, n, prior$parPoint)
-  }else if(prior$type == "beta"){
-    y <- sapply(x, function(s)extraDistr::dbbinom(s, n, prior$parAlpha + data$nSuccesses, prior$parBeta + data$nFailures))
+  if(prior[["type"]] == "spike"){
+    y <- dbinom(x, n, prior[["parPoint"]])
+  }else if(prior[["type"]] == "beta"){
+    y <- sapply(x, function(s)extraDistr::dbbinom(s, n, prior[["parAlpha"]] + data[,"nSuccesses"], prior[["parBeta"]] + data[,"nFailures"]))
   }
   
   x_new <- x[sort(rep(1:length(x),2))] + c(-.5, +.5)
@@ -640,6 +800,6 @@
   return(dat)
 }
 .dataArrowBinomialLS        <- function(prior){
-  dat       <- data.frame(x = prior$parPoint, y_start = 0, y_end = 1, g = "Prior = Posterior")
+  dat       <- data.frame(x = prior[["parPoint"]], y_start = 0, y_end = 1, g = "Prior = Posterior")
   return(dat)
 }
