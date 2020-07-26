@@ -78,12 +78,7 @@
       
       if(options[["dataType"]]== "dataSequence"){
         
-        temp_y <- options[["data_sequence"]]
-        temp_y <- gsub(",", "\n", temp_y)
-        temp_y <- gsub(";", "\n", temp_y)
-        temp_y <- unlist(strsplit(temp_y, split = "\n"))
-        temp_y <- trimws(temp_y, which = c("both"))
-        temp_y <- temp_y[temp_y != ""]
+        temp_y <- .clean_sequence(options[["data_sequence"]])
         
       }else if(options[["dataType"]] == "dataVariable"){
         
@@ -634,27 +629,6 @@
   dat        <- data.frame(x = thetaGroup, y = linesGroup, g = nameGroup)
   return(dat)
 }
-.dataPointsBinomialLS       <- function(data, prior){
-  
-  theta <- data$nSuccesses / (data$nSuccesses + data$nFailures)
-  
-  pointXVal <- c(theta, theta)
-  
-  if(prior[["type"]] == "spike"){
-    if(prior[["parPoint"]] == theta){
-      pointYVal <- c(1, 1)
-    }else{
-      pointYVal <- c(0, 0)
-    }
-  }else if(prior[["type"]] == "beta"){
-    pointYVal <- c(dbeta(theta, prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures),
-                   dbeta(theta, prior[["parAlpha"]], prior[["parBeta"]]))
-  }
-  
-  nameGroup <- c("Observed", "Observed")
-  dat       <- data.frame(x = pointXVal, y = pointYVal, g = nameGroup)
-  return(dat)
-}
 .dataHPDBinomialLS          <- function(data, prior, coverage, n = NULL, type = c("parameter", "prediction")){
   
   if(type == "parameter"){
@@ -803,3 +777,10 @@
   dat       <- data.frame(x = prior[["parPoint"]], y_start = 0, y_end = 1, g = "Prior = Posterior")
   return(dat)
 }
+
+# all settings dependent on data input
+.BinomialLS_data_dependencies <- c("dataType",
+                                   "nSuccesses", "nFailures",                                 # for Counts
+                                   "data_sequence",    "key_success_Seq", "key_failure_Seq",  # for Sequence
+                                   "selectedVariable", "key_success_Var", "key_failure_Var")  # for Variable
+

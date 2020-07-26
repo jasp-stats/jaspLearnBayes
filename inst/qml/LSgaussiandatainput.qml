@@ -65,23 +65,33 @@ Section
 		title: qsTr("Data summary")
 		visible: dataTypeA.checked
 
-		IntegerField
+		DoubleField
 		{
 			name:			"mean"
 			label:			qsTr("Mean")
 			defaultValue: 	0
-			id: 			mean
 		}
 
-		IntegerField
+		DoubleField
 		{
-			name:			"sd"
+			name:			"SD_summary"
 			label:			qsTr("SD")
 			defaultValue:	0
-			id:				sd
+			min:			0
+			inclusive:		JASP.None
+		}
+
+		DoubleField
+		{
+			name:			"N"
+			label:			qsTr("Observations")
+			defaultValue:	0
+			min:			0
+			inclusive:		JASP.None
 		}
 	}
 
+		
 	TextArea
 	{
 		title:		qsTr("Comma-separated sequence of observations")
@@ -90,6 +100,16 @@ Section
 		name:		"data_sequence"
 		textType:	"source"
 		separators:	[",",";","\n"]
+	}
+
+	DoubleField
+	{
+		name:			"SD_sequence"
+		visible:		dataTypeB.checked
+		label:			qsTr("SD")
+		defaultValue:	0
+		min:			0
+		inclusive:		JASP.None
 	}
 
 	Group
@@ -112,6 +132,15 @@ Section
 				title:				qsTr("Selected")
 				singleVariable:		true
 				allowedColumns:		["scale"]
+			}
+
+			DoubleField
+			{
+				name:			"SD_variable"
+				label:			qsTr("SD")
+				defaultValue:	0
+				min:			0
+				inclusive:		JASP.None
 			}
 		}
 

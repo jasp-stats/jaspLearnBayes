@@ -17,5 +17,18 @@
 
 LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL){
 
+  # a vector of two, first for data, second for hypotheses
+  ready <- .readyGaussianLS(options)
+  
+  # evaluate the expressions in priors
+  if(ready[2])options[["priors"]] <- .evaluate_priors(options[["priors"]])
+  
+  # load, check, transform and process data
+  if(ready[1])data <- .readDataGaussianLS(dataset, options)
+  
+  # data summary table if requested (but not if the data counts were added directly)
+  if(options[["dataSummary"]] && !options[["dataType"]] == "dataCounts").summaryGaussianLS(jaspResults, data, ready)
+  
+  
   return()
 }

@@ -35,7 +35,7 @@ saveOptions <- function(options){
   for(p in 1:length(priors)){
     for(i in 1:length(priors[[p]])){
       temp_p <- priors[[p]][[i]]
-      if(names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "PH")){
+      if(names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "parMu", "parSigma", "PH")){
         priors[[p]][[paste(names(priors[[p]])[i],"inp", sep = "_")]] <- priors[[p]][[i]]
         priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
       }
@@ -91,9 +91,17 @@ saveOptions <- function(options){
   
   return(cbind.data.frame("lCI" = x_seq[x_start], "uCI" = x_seq[x_end]))
 }
+.clean_sequence        <- function(sequence){
+  sequence <- gsub(",", "\n", sequence)
+  sequence <- gsub(";", "\n", sequence)
+  sequence <- unlist(strsplit(sequence, split = "\n"))
+  sequence <- trimws(sequence, which = c("both"))
+  sequence <- sequence[sequence != ""]
+  return(sequence)
+}
 
 # plotting functions
-.plotPriorPosteriorLS  <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL){
+.plotPriorPosteriorLS  <- function(all_lines, all_arrows, dfPoints = NULL, xName = NULL, xRange = c(0,1)){
   
   mappingArrow <- ggplot2::aes(x = x, xend = x, y = y_start, yend = y_end, color = g)
   mappingLines <- ggplot2::aes(x = x, y = y, color = g)
@@ -147,7 +155,7 @@ saveOptions <- function(options){
     x_high <- all_lines$x[which.max(all_lines$y)]
   }
   
-  g <- g + ggplot2::scale_x_continuous(xName, limits = c(0, 1))
+  g <- g + .plotXAxis(xName, xRange, FALSE)
   g <- g + .plotYAxis(all_lines, all_arrows, NULL)
   
   if(!is.null(dfPoints)){
@@ -427,7 +435,7 @@ saveOptions <- function(options){
       all_arrows[all_arrows$g == legend[i,2], "y_start"] <- all_arrows[all_arrows$g == legend[i,2], "y_start"] + yBreak*(i-1)
       all_arrows[all_arrows$g == legend[i,2], "y_end"]   <- all_arrows[all_arrows$g == legend[i,2], "y_end"]   + yBreak*(i-1)
       all_arrowsL[all_arrowsL$g == legend[i,2], "y"]     <- all_arrowsL[all_arrowsL$g == legend[i,2], "y"]     + yBreak*(i-1)
-    }else if(legend$type[i] == "beta"){
+    }else if(legend$type[i] %in% c("beta", "normal")){
       all_lines[all_lines$g == legend[i,2], "y"]   <- all_lines[all_lines$g == legend[i,2], "y"]   + yBreak*(i-1)
       all_linesD[all_linesD$g == legend[i,2], "y"] <- all_linesD[all_linesD$g == legend[i,2], "y"] + yBreak*(i-1)
       all_linesL[all_linesL$g == legend[i,2], "y"] <- all_linesL[all_linesL$g == legend[i,2], "y"] + yBreak*(i-1)
@@ -446,7 +454,7 @@ saveOptions <- function(options){
           data = all_arrowsL[all_arrowsL$g == legend$name[i],],
           mapping = mappingLines)
     }
-    if(legend$type[i] == "beta"){
+    if(legend$type[i] %in% c("beta", "normal")){
       g <- g + ggplot2::geom_line(
         data = all_lines[all_lines$g == legend$name[i],],
         mapping = mappingLines, size = 1) + 
@@ -501,7 +509,7 @@ saveOptions <- function(options){
   return(plot)
 }
 .plotIterativeLS       <- function(all_lines, all_CI, xName = "Observations", yName = NULL, x_start = 0,
-                                   palette = "colorblind", BF_log = NULL){
+                                   palette = "colorblind", BF_log = NULL, yRange = NULL){
   
   all_lines      <- do.call("rbind", all_lines)
   all_lines$name <- factor(all_lines$name, levels = sort(levels(all_lines$name)))
@@ -514,14 +522,15 @@ saveOptions <- function(options){
     xBreaks <- x_start:obsXmax
   }
   
-  if(is.null(BF_log)){
-    yRange <- c(0, 1)
-  }else if(BF_log){
-    yRange <- range(c(all_lines$y, 0))
-  }else if(!BF_log){
-    yRange <- range(c(all_lines$y, 1))
+  if(is.null(yRange)){
+    if(is.null(BF_log)){
+      yRange <- c(0, 1)
+    }else if(BF_log){
+      yRange <- range(c(all_lines$y, 0))
+    }else if(!BF_log){
+      yRange <- range(c(all_lines$y, 1))
+    }    
   }
-  yBreaks <- JASPgraphs::getPrettyAxisBreaks(yRange)
   
   
   mappingLines   <- ggplot2::aes(x = x, y = y, 
@@ -587,10 +596,9 @@ saveOptions <- function(options){
       data    = all_lines,
       mapping = mappingLines, size = 1)
   
-  g <- g +
-    ggplot2::scale_x_continuous(xName, limits = c(x_start, newXmax), breaks = xBreaks) +
-    ggplot2::scale_y_continuous(yName, limits = yRange, breaks = yBreaks) +
-    ggplot2::scale_colour_manual(values = clr)
+  g <- g + .plotXAxis(xName, c(x_start, newXmax), TRUE)
+  g <- g + .plotYAxis2(yName, yRange)
+  g <- g + ggplot2::scale_colour_manual(values = clr)
   
   
   if (mean(all_lines$y[all_lines$x == max(all_lines$x)]) > .5) {
@@ -624,7 +632,7 @@ saveOptions <- function(options){
   
   # get the y_axis max
   y_max <- .getYMax(all_lines, all_arrows)
-  
+
   # set the CI text
   if(!is.null(CI)){
     # text for the interval
@@ -696,7 +704,7 @@ saveOptions <- function(options){
   }
   
   # x-axes
-  g <- g + ggplot2::scale_x_continuous(xName, limits = xRange)
+  g <- g + .plotXAxis(xName, xRange, FALSE)
   g <- g + .plotYAxis(all_lines, all_arrows, CI)
   
   
@@ -923,7 +931,8 @@ saveOptions <- function(options){
   if(CI$g[1] == "HPD"){
     temp_label <- paste(c(temp_cov,"['HPD']:",temp_int), collapse = "")
   }else if(CI$g[1] == "custom"){
-    temp_label  <- paste(c("P({",CI$x_start,"<=x}<=",(CI$x_end),")","=='",round(CI$coverage[1]*100)," %'"), collapse = "")
+    temp_label  <- paste(c("P({",format(round(CI$x_start, nRound), nsmall = nRound),"<=x}<=",
+                           (format(round(CI$x_end, nRound), nsmall = nRound)),")","=='",round(CI$coverage[1]*100)," %'"), collapse = "")
   }else if(CI$g[1] == "support"){
     temp_label <- paste(c("SI['[BF = ",CI$BF[1],"]']:",temp_int), collapse = "")
   }else if(CI$g[1] == "central"){
@@ -968,6 +977,8 @@ saveOptions <- function(options){
     x_breaks <- round(x_breaks)
     x_breaks <- unique(x_breaks[x_breaks >= x_range[1] &  x_breaks <= x_range[2]])
   }
+  x_range <- range(c(x_range, x_breaks))
+  
   return(ggplot2::scale_x_continuous(x_name, limits = x_range, breaks = x_breaks))
 }
 .plotYAxis             <- function(all_lines, all_arrows, CI){
@@ -1009,6 +1020,13 @@ saveOptions <- function(options){
       limits = y_range
     ))
   }
+}
+.plotYAxis2            <- function(y_name, y_range){
+  
+  y_breaks <- JASPgraphs::getPrettyAxisBreaks(y_range)
+  y_range <- range(c(y_range, y_breaks))
+  
+  return(ggplot2::scale_y_continuous(y_name, limits = y_range, breaks = y_breaks))
 }
 .plotThemePlus         <- function(all_lines, all_arrows){
   if(!is.null(all_lines) & !is.null(all_arrows)){

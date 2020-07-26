@@ -200,7 +200,7 @@ Section
 		label: qsTr("Prior and posterior distribution")
 		checked: false
 
-		CheckBox{name: "plotsBothSampleProportion"; label: qsTr("Sample proportion"); checked: false}
+		CheckBox{name: "plotsBothSampleProportion"; label: qsTr("Observed data"); checked: false}
 	}
 
 }
