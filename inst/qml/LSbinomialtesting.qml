@@ -20,12 +20,15 @@ import QtQuick.Layouts 1.3
 import JASP.Controls 1.0
 import JASP.Widgets 1.0
 import JASP.Theme 1.0
-import "../qml" as LS
+import "../qml/qml_components" as LS
 
 Form {
 	id: form
 
-	LS.LSbinomialdatainput{}
+	LS.LSbinomialdatainput
+	{
+		id:	binomialDataInput
+	}
 
 	Section
 	{
@@ -37,8 +40,6 @@ Form {
 		{
 			spacing:				0
 			Layout.preferredWidth:	parent.width
-
-			//Label { text: qsTr("Effect"); Layout.preferredHeight: 20 * preferencesModel.uiScale}
 
 			RowLayout
 			{
@@ -63,7 +64,7 @@ Form {
 						{
 							label: 				""
 							name: 				"name"
-							value:				""
+							value:				"Hypothesis " + rowIndex
 							fieldWidth:			140 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
@@ -151,7 +152,10 @@ Form {
 
 	LS.LStestinginference{}
 
-	LS.LStestingsequential{}
+	LS.LStestingsequential
+	{
+		enabled: binomialDataInput.dataType.value !== "dataCounts"
+	}
 
 	LS.LStestingpredictions{}
 

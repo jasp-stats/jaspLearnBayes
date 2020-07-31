@@ -23,15 +23,15 @@ import JASP.Theme 1.0
 
 Section
 {
-	expanded: false
-	title: qsTr("Sequential analysis")
-	enabled: dataTypeB.checked || dataTypeC.checked
+	expanded:	false
+	title:		qsTr("Sequential analysis")
+	enabled:	dataTypeB.checked || dataTypeC.checked
 
 	CheckBox
 	{
-		name: "plotsIterative"
-		label: qsTr("Test results")
-		checked: false
+		name:		"plotsIterative"
+		label:		qsTr("Test results")
+		checked:	false
 
 		RadioButtonGroup
 		{
@@ -41,22 +41,22 @@ Section
 			RadioButton { value: "marginal";		label: qsTr("Normalized")}
 			RadioButton
 			{
-				value: "BF"
-				label: qsTr("Bayes factor")
+				value:	"BF"
+				label:	qsTr("Bayes factor")
 
 				DropDown
-					{
-					name: "BF_comparison"
-					label: qsTr("Against")
-					indexDefaultValue: 0
-					source: "priors"
+				{
+					name:				"BF_comparison"
+					label:				qsTr("Against")
+					indexDefaultValue:	0
+					source:				"priors"
 				}
 
 				CheckBox
 				{
-					name: "BF_log"
-					label: qsTr("log(BF)")
-					checked: false
+					name:				"BF_log"
+					label:				qsTr("log(BF)")
+					checked:			false
 				}
 
 			}
@@ -64,8 +64,8 @@ Section
 
 		CheckBox
 		{
-			name:  "plotsIterativeUpdatingTable"
-			label: qsTr("Updating table")
+			name:	"plotsIterativeUpdatingTable"
+			label:	qsTr("Updating table")
 		}
 
 	}

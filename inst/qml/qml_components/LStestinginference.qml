@@ -27,6 +27,7 @@ Section
 	title: qsTr("Inference")
 	columns: 2
 
+	property alias plotsBothSampleProportion: plotsBothSampleProportion.label
 
 	DropDown
 	{
@@ -589,7 +590,12 @@ Section
 
 		}
 
-		CheckBox{name: "plotsBothSampleProportion"; label: qsTr("Sample proportion"); checked: false}
+		CheckBox
+		{
+			name:		"plotsBothSampleProportion"
+			id:			plotsBothSampleProportion
+			label:		qsTr("Observed proportion")
+			checked:	false}
 	}
 
 }
