@@ -22,5 +22,12 @@ import JASP.Widgets 1.0
 import JASP.Theme 1.0
 
 Form {
+	columns: 1
+	TextField { name: "n"; label: qsTr("The number of players"); fieldWidth: 50 }
+	TextField { name: "k"; label: qsTr("The number of points for each player when interrupted (comma delimited)"); fieldWidth: 50 }
+	TextField { name: "t"; label: qsTr("The number of points required to win the game"); fieldWidth: 50 }
+	TextField { name: "p"; label: qsTr("For every play, the probability that each player wins the point (comma delimited)"); fieldWidth: 50 }
+	TextField { name: "s"; label: qsTr("The number of simulated games"); fieldWidth: 50 }
+	CheckBox { name: "check"; label: qsTr("95% credible interval (highest posterior density)"); checked: true }
 
 }
