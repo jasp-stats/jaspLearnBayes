@@ -4,3 +4,7 @@ export(LSgaussianestimation)
 export(LSgaussiantesting)
 export(LSgameofchance)
 export(LSgameofskills)
+  import('MGLM');
+  import('HDInterval');
+  import('DT');
+  import('MCMCpack');
