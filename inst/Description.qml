@@ -18,6 +18,8 @@ Description
 	Package { name: "HDInterval" }
 	Package { name: "DT" }
 	Package { name: "MCMCpack" }
+	Package { name: "extraDistr" }
+	Package { name: "ggplot2" }
 
 
 	GroupTitle
