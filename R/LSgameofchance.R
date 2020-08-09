@@ -155,6 +155,12 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   p <- as.numeric(unlist(strsplit(input$p,",")))/sum(as.numeric(unlist(strsplit(input$p,","))))
   
   ## check errors
+  if(input$n != length(k))
+    JASP:::.quitAnalysis(gettextf(
+      "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings.",
+      input$n,
+      length(k)
+    ))
   #need(max(k()) < input$t, paste("Warning: Player", which(k() == max(k())),
   #                               " has already won the game. Adjust the inputs!")),
   #.hasErrors(dataset, type = "limits",
