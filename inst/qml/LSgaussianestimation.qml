@@ -20,12 +20,15 @@ import QtQuick.Layouts 1.3
 import JASP.Controls 1.0
 import JASP.Widgets 1.0
 import JASP.Theme 1.0
-import "../qml" as LS
+import "../qml/qml_components" as LS
 
 Form {
 	id: form
 
-	LS.LSgaussiandatainput{}
+	LS.LSgaussiandatainput
+	{
+		id:	gaussianDataInput
+	}
 
 	Section
 	{
@@ -59,7 +62,7 @@ Form {
 						{
 							label: 				""
 							name: 				"name"
-							value:				""
+							value:				"Models " + rowIndex
 							fieldWidth:			140 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
@@ -126,9 +129,18 @@ Form {
 		}
 	}
 
-	LS.LSestimationinference{}
+	LS.LSestimationinference
+	{
+		plotsBothSampleProportion: qsTr("Observed data")
+	}
 
-	LS.LSestimationsequential{}
+	LS.LSestimationsequential
+	{
+		enabled: gaussianDataInput.dataType.value !== "dataCounts"
+	}
 
-	LS.LSestimationpredictions{}
+	LS.LSestimationpredictions
+	{
+		predictionPlotProp: qsTr("Sample means")
+	}
 }
