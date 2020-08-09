@@ -15,10 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-library(MGLM)
-library(HDInterval)
-library(DT)
-library(MCMCpack)
+
 #source("combinations.R")
 
 
@@ -104,7 +101,7 @@ compare_function2 <- function(k1, t, p, simulation){
   ## Calculating the probability using negative multinomial distribution and resursive function
   p_calculated <- 0
   for (l in 1:(prod(k)/k[1])){
-    p_calculated <- p_calculated + exp(dnegmn(Y = combinations(k)[l,2:length(k)],
+    p_calculated <- p_calculated + exp(MGLM::dnegmn(Y = combinations(k)[l,2:length(k)],
                                               beta = combinations(k)[1], prob = p[2:length(p)]))
   }
   
@@ -191,10 +188,9 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   
   # column specification
   CIPlot0 <- ggplot2::ggplot(data= NULL) + 
-    ggtitle("Probability of Player 1 Winning") +
-    xlab("Number of Simulated Games") + 
-    ylab("Pr(Winning the Game)") +
-    coord_cartesian(xlim = c(0, input$s), ylim = c(0, 1)) 
+    ggplot2::xlab("Number of Simulated Games") + 
+    ggplot2::ylab("Pr(Winning the Game)") +
+    ggplot2::coord_cartesian(xlim = c(0, input$s), ylim = c(0, 1)) 
   
   ## fill in the table and the plot 
   if (input$n == 2 & max(k) < input$t){
@@ -220,13 +216,15 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
       y.upper <- CredInt[1,]
       y.lower <- CredInt[2,]
       CIPlot0 <- CIPlot0 + 
-        geom_polygon(aes(x = c(1:input$s,input$s:1), y = c(y.upper, rev(y.lower))), 
+        ggplot2::geom_polygon(ggplot2::aes(x = c(1:input$s,input$s:1), y = c(y.upper, rev(y.lower))), 
                      fill = "lightsteelblue")  # CI
     }
     
-    CIPlot$plotObject <- CIPlot0 + 
-      geom_line(color = "darkred", aes(x = c(1:input$s), y = rep(result[[2]], input$s))) +  # analytical prob
-      geom_line(data= NULL, aes(x = c(1:input$s), y = result[[4]])) # simulated prob
+    CIPlot0 <- CIPlot0 + 
+      ggplot2::geom_line(color = "darkred", aes(x = c(1:input$s), y = rep(result[[2]], input$s))) +  # analytical prob
+      ggplot2::geom_line(data= NULL, aes(x = c(1:input$s), y = result[[4]])) # simulated prob
+    
+    CIPlot$plotObject <- JASPgraphs::themeJasp(CIPlot0)
     
     
   }else if (input$n >= 3 & max(k) < input$t){
@@ -261,13 +259,15 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
       y.upper <- CredInt[1,]
       y.lower <- CredInt[2,]
       CIPlot0 <- CIPlot0 + 
-        geom_polygon(aes(x = c(1:input$s,input$s:1), y = c(y.upper, rev(y.lower))), 
+        ggplot2::geom_polygon(ggplot2::aes(x = c(1:input$s,input$s:1), y = c(y.upper, rev(y.lower))), 
                      fill = "lightsteelblue")  # CI
     }
     
-    CIPlot$plotObject <- CIPlot0 + 
-      geom_line(color = "darkred", aes(x = c(1:input$s), y = rep(result[[2]], input$s))) +   # analytical prob
-      geom_line(data= NULL, aes(x = c(1:input$s), y = result[[4]][1,])) # simulated prob
+    CIPlot0 <- CIPlot0 + 
+      ggplot2::geom_line(color = "darkred", ggplot2::aes(x = c(1:input$s), y = rep(result[[2]], input$s))) +   # analytical prob
+      ggplot2::geom_line(data= NULL, ggplot2::aes(x = c(1:input$s), y = result[[4]][1,])) # simulated prob
+    
+    CIPlot$plotObject <- JASPgraphs::themeJasp(CIPlot0)
     
   }
   
