@@ -169,27 +169,27 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
 
   
   ## Summary Table
-  summaryTable <- createJaspTable(title = "Summary Table")
+  summaryTable <- createJaspTable(title = gettext("Summary Table"))
   
   summaryTable$dependOn(c("n", "k", "t", "p", "s", "check"))
   summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   
-  summaryTable$addColumnInfo(name = "players",   title = "Players",   type = "string")
-  summaryTable$addColumnInfo(name = "pPoint",   title = "Pr(win a point)",   type = "string")
-  summaryTable$addColumnInfo(name = "pA",   title = "Analytical",   type = "string", 
-                             overtitle = "Pr(win the game)")
-  summaryTable$addColumnInfo(name = "pS",   title = "Simulated",   type = "string", 
-                             overtitle = "Pr(win the game)")
+  summaryTable$addColumnInfo(name = "players",  title = gettext("Players"),          type = "string")
+  summaryTable$addColumnInfo(name = "pPoint",   title = gettext("Pr(win a point)"),  type = "number")
+  summaryTable$addColumnInfo(name = "pA",       title = gettext("Analytical"),       type = "number", 
+                             overtitle = gettext("Pr(win the game)"))
+  summaryTable$addColumnInfo(name = "pS",       title = gettext("Simulated"),         type = "number", 
+                             overtitle = gettext("Pr(win the game)"))
   
   ## Credible Interval Plot
-  CIPlot <- createJaspPlot(title = "Probability of Player 1 Winning",  width = 480, height = 320)
+  CIPlot <- createJaspPlot(title = gettext("Probability of Player 1 Winning"),  width = 480, height = 320)
   CIPlot$dependOn(c("n", "k", "t", "p", "s", "check"))
   CIPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   
   # column specification
   CIPlot0 <- ggplot2::ggplot(data= NULL) + 
-    ggplot2::xlab("Number of Simulated Games") + 
-    ggplot2::ylab("Pr(Winning the Game)") +
+    ggplot2::xlab(gettext("Number of Simulated Games")) + 
+    ggplot2::ylab(gettext("Pr(Winning the Game)")) +
     ggplot2::coord_cartesian(xlim = c(0, input$s), ylim = c(0, 1)) 
   
   ## fill in the table and the plot 
