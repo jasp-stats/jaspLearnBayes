@@ -8,3 +8,5 @@ export(LSgameofskills)
   import('HDInterval');
   import('DT');
   import('MCMCpack');
+  import('extraDistr');
+  import('ggplot2');

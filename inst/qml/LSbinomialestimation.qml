@@ -25,6 +25,8 @@ import "../qml/qml_components" as LS
 Form {
 	id: form
 
+	LS.LSintrotext{}
+	
 	LS.LSbinomialdatainput
 	{
 		id:	binomialDataInput
@@ -115,7 +117,7 @@ Form {
 						}
 						FormulaField
 						{
-							label:				qsTr("θ")
+							label:				qsTr("θ₀")
 							name:				"parPoint"
 							visible:			typeItem.currentValue === "spike"
 							value:				"0.5"
@@ -137,6 +139,7 @@ Form {
 	LS.LSestimationsequential
 	{
 		enabled: binomialDataInput.dataType.value !== "dataCounts"
+		onEnabledChanged: if(!enabled) expanded = false
 	}
 
 	LS.LSestimationpredictions{}

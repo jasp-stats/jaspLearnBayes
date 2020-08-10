@@ -44,19 +44,48 @@ Section
 				value:	"BF"
 				label:	qsTr("Bayes factor")
 
-				DropDown
+				Group
 				{
-					name:				"BF_comparison"
-					label:				qsTr("Against")
-					indexDefaultValue:	0
-					source:				"priors"
-				}
+					columns: 2
+					RadioButtonGroup
+					{
+						name:	"bfTypeSequential"
+						RadioButton
+						{
+							value:	"inclusion"
+							label:	qsTr("vs. all")
+							checked: true
+						}
 
-				CheckBox
-				{
-					name:				"BF_log"
-					label:				qsTr("log(BF)")
-					checked:			false
+						RadioButton
+						{
+							value:	"best"
+							label:	qsTr("vs. best")
+						}
+
+						RadioButton
+						{
+							name:	"vs"
+							label:	qsTr("vs.")
+							childrenOnSameRow: true
+
+							DropDown
+							{
+								name:				"bfTypevsNameSequential"
+								indexDefaultValue:	0
+								source:				"priors"
+							}
+						}
+					}
+
+					RadioButtonGroup
+					{
+						name: "bayesFactorTypeSequential"
+
+						RadioButton { label: qsTr("BF\u2081\u2080")			; name: "BF10"; checked: true}
+						RadioButton { label: qsTr("BF\u2080\u2081")			; name: "BF01"}
+						RadioButton { label: qsTr("log(BF\u2081\u2080)")	; name: "LogBF10"}
+					}
 				}
 
 			}

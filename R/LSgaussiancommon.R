@@ -28,7 +28,7 @@
     
   }else if(options[["dataType"]] == "dataVariable"){
     
-    ready <- !(options[["selectedVariable"]] != "" || is.null(options[["SD_variable"]]) || options[["SD_variable"]] == 0)
+    ready <- !(options[["selectedVariable"]] == "" || is.null(options[["SD_variable"]]) || options[["SD_variable"]] == 0)
     
   }
   
@@ -87,23 +87,51 @@
  
   return(as.numeric(x))
 }
-.summaryGaussianLS     <- function(jaspResults, data, ready){
-  summaryTable <- createJaspTable(title = gettext("Data Summary"))
+.summaryGaussianLS     <- function(jaspResults, data, options, analysis){
   
-  summaryTable$position <- 1
-  summaryTable$dependOn(c("dataSummary", .GaussianLS_data_dependencies))
+  if(!options[["dataSummary"]] && !options[["introText"]])
+    return()
   
-  summaryTable$addColumnInfo(name = "observations",  title = gettext("Observations"),  type = "integer")
-  summaryTable$addColumnInfo(name = "mean",          title = gettext("Mean"),          type = "number")
-  summaryTable$addColumnInfo(name = "sd",            title = gettext("SD"),            type = "number")
+  if(is.null(jaspResults[["summaryContainer"]])){
+    summaryContainer <- createJaspContainer("Data Input")
+    summaryContainer$position <- 1
+    jaspResults[["summaryContainer"]] <- summaryContainer 
+  }else{
+    summaryContainer <- jaspResults[["summaryContainer"]]
+  }
   
-  jaspResults[["summaryTable"]] <- summaryTable
   
-  if(ready[1]){
+  if(options[["introText"]] && is.null(summaryContainer[['summaryText']])){
     
-    summaryTable$addRows(list(observations = data$N,
-                              mean         = data$mean, 
-                              sd           = data$SD))
+    summaryText <- createJaspHtml()
+    summaryText$dependOn(c("introText", "dataSummary"))
+    summaryText$position <- 1
+    
+    summaryText[['text']] <- .explanatoryTextLS("data", options, analysis)
+    
+    summaryContainer[['summaryText']] <- summaryText    
+  }
+  
+  
+  if(options[["dataSummary"]] && options[["dataType"]] != "dataCounts" && is.null(summaryContainer[['summaryTable']])){
+    
+    summaryTable <- createJaspTable(title = gettext("Data Summary"))
+    
+    summaryTable$position <- 1
+    summaryTable$dependOn(c("dataSummary", .GaussianLS_data_dependencies))
+    
+    summaryTable$addColumnInfo(name = "observations",  title = gettext("Observations"),  type = "integer")
+    summaryTable$addColumnInfo(name = "mean",          title = gettext("Mean"),          type = "number")
+    summaryTable$addColumnInfo(name = "sd",            title = gettext("SD"),            type = "number")
+    
+    summaryContainer[["summaryTable"]] <- summaryTable
+    
+    if(.readyGaussianLS(options)){
+      
+      summaryTable$addRows(list(observations = data$N,
+                                mean         = data$mean, 
+                                sd           = data$SD))
+    }
   }
   
   return()
@@ -185,7 +213,7 @@
         
       }else if(temp_prior[["type"]] == "normal"){
         
-        log_lik[i]   <- stats::dnorm(data$mean, prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2/data$N ), log = TRUE)
+        log_lik[i]   <- stats::dnorm(data$mean, prior[["parMu"]], sqrt( data$SD^2/data$N + prior[["parSigma"]]^2 ), log = TRUE)
         
       }
       
@@ -246,21 +274,41 @@
     return(output)
   }
 }
-.normalSupportLS            <- function(data, prior, range, BF){
-  
-  temp_lines <- .dataLinesGaussianLS(data, prior, "parameter", NULL, range)
+.normalSupportLS            <- function(data, prior, BF){
 
-  x_seq   <- temp_lines$x[temp_lines$g == "Prior"]  
-  y_prior <- temp_lines$y[temp_lines$g == "Prior"]
-  y_post  <- temp_lines$y[temp_lines$g == "Posterior"]
+  if(is.null(data)){
+    return(cbind.data.frame("lCI" = NA, "uCI" = NA))
+  }
   
-  bf_res  <- y_post/y_prior
-  
-  TF_seq  <- bf_res>BF
-  
-  support <- .aproximateSupportLS(x_seq, TF_seq)
+  prior_mean <- prior[["parMu"]]
+  prior_SD   <- prior[["parSigma"]]
+  post_mean  <- .estimateGaussianMeanLS(prior, data)
+  post_SD    <- .estimateGaussianSDLS(prior, data)
 
-  return(support)
+  lSI <- stats::uniroot(
+    .normalSupportFunLS,
+    BF       = BF,
+    mu_prior = prior_mean,
+    sd_prior = prior_SD,
+    mu_post  = post_mean,
+    sd_post  = post_SD,
+    lower    = -666 * prior_SD,     # can't use -Inf :(
+    upper    = post_mean)$root
+  
+  uSI <- stats::uniroot(
+    .normalSupportFunLS,
+    BF       = BF,
+    mu_prior = prior_mean,
+    sd_prior = prior_SD,
+    mu_post  = post_mean,
+    sd_post  = post_SD,
+    lower    = post_mean,
+    upper    = 666 * prior_SD)$root
+  
+  return(cbind.data.frame("lCI" = lSI, "uCI" = uSI))
+}
+.normalSupportFunLS         <- function(x, BF, mu_prior, sd_prior, mu_post, sd_post){
+  exp( stats::dnorm(x, mu_post, sd_post, TRUE) -  stats::dnorm(x, mu_prior, sd_prior, TRUE) ) - BF
 }
 
 # plotting functions
@@ -319,6 +367,31 @@
   
   return(range)
    
+}
+.rangeGaussianSupportLS     <- function(data, prior,  BF){
+
+  if(prior[["type"]] == "spike"){
+    rangesCI <- data.frame("lCI" = prior[["parPoint"]], "uCI" = prior[["parPoint"]])
+  }else if(prior[["type"]] == "normal"){
+    rangesCI <- .normalSupportLS(data, prior, BF)
+  }
+  ranges   <- .rangeGaussianLS(data, prior, "parameter")
+  ranges   <- rbind(ranges, rangesCI)
+  
+  range  <- c(min(ranges[,1], na.rm = T), max(ranges[,2], na.rm = T))
+  range  <- range(JASPgraphs::getPrettyAxisBreaks(range))
+  
+  return(range)
+  
+}
+.rangeGaussiansSupportLS    <- function(data, priors, BF){
+  
+  ranges <- sapply(priors, function(p).rangeGaussianSupportLS(data, p, BF), simplify = FALSE)
+  ranges <- do.call(rbind, ranges)
+  range  <- c(min(ranges[,1]), max(ranges[,2]))
+  
+  return(range)
+  
 }
 .dataLinesGaussianLS        <- function(data, prior,  type = "parameter", N = 0, range = NULL, points = 200){
   
@@ -568,7 +641,7 @@
   return(dat)
 }
 .dataSupportGaussianLS      <- function(data, prior, BF, range = NULL){
-  
+
   if(prior[["type"]] == "spike"){
 
     lCI <- prior[["parPoint"]]
@@ -577,10 +650,10 @@
   }else if(prior[["type"]] == "normal"){
     
     if(is.null(range)){
-      range <- .rangeGaussianLS(data, prior, "parameter", NULL)
+      range <- .rangeGaussianSupportLS(data, prior, BF)
     }
     
-    x <- .normalSupportLS(data, prior, range, BF)
+    x <- .normalSupportLS(data, prior, BF)
     
     if(nrow(x) > 0){
       lCI      <- x$lCI
@@ -597,4 +670,4 @@
 
 
 # all settings dependent on data input
-.GaussianLS_data_dependencies <- c("dataType", "data_sequence", "selectedVariable")
+.GaussianLS_data_dependencies <- c("dataType", "data_sequence", "selectedVariable", "priors")

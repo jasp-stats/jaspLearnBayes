@@ -25,6 +25,8 @@ import "../qml/qml_components" as LS
 Form {
 	id: form
 
+	LS.LSintrotext{}
+	
 	LS.LSgaussiandatainput
 	{
 		id:	gaussianDataInput
@@ -44,7 +46,7 @@ Form {
 			{
 				Label { text: qsTr("Model");				Layout.preferredWidth: 280 * preferencesModel.uiScale}
 				Label { text: qsTr("Distribution");			Layout.preferredWidth: 130 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameter (θ)");		Layout.preferredWidth: 150 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameter (μ)");		Layout.preferredWidth: 150 * preferencesModel.uiScale}
 			}
 			ComponentsList
 			{
@@ -90,7 +92,7 @@ Form {
 						Layout.preferredWidth:	150 * preferencesModel.uiScale
 						FormulaField
 						{
-							label:				qsTr("μ")
+							label:				qsTr("μ₀")
 							name:				"parMu"
 							visible:			typeItem.currentValue === "normal"
 							value:				"0"
@@ -100,7 +102,7 @@ Form {
 						}
 						FormulaField
 						{
-							label:				qsTr("σ")
+							label:				qsTr("σ₀")
 							name:				"parSigma"
 							visible:			typeItem.currentValue === "normal"
 							value:				"1"
@@ -112,7 +114,7 @@ Form {
 						}
 						FormulaField
 						{
-							label:				qsTr("θ")
+							label:				qsTr("μ₀")
 							name:				"parPoint"
 							visible:			typeItem.currentValue === "spike"
 							value:				"0.5"
@@ -141,6 +143,6 @@ Form {
 
 	LS.LSestimationpredictions
 	{
-		predictionPlotProp: qsTr("Sample means")
+		predictionPlotProp: qsTr("Show sample means")
 	}
 }
