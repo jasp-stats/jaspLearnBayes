@@ -16,10 +16,10 @@
 #
 
 
-library(MGLM)
-library(HDInterval)
-library(DT)
-library(MCMCpack)
+#library(MGLM)
+#library(HDInterval)
+#library(DT)
+#library(MCMCpack)
 #source("combinations.R")
 
 
