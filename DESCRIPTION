@@ -1,4 +1,4 @@
-Package: LearnBayes
+Package: jaspLearnBayes
 Type: Package
 Title: Learn Bayes Module for JASP
 Version: 0.1
