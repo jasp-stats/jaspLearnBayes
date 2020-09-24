@@ -15,11 +15,11 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 //
-import QtQuick 2.8
-import QtQuick.Layouts 1.3
-import JASP.Controls 1.0
-import JASP.Widgets 1.0
-import JASP.Theme 1.0
+import QtQuick			2.8
+import QtQuick.Layouts	1.3
+import JASP.Controls	1.0
+import JASP.Widgets		1.0
+import JASP				1.0
 
 Section
 {
@@ -27,7 +27,10 @@ Section
 	title: qsTr("Inference")
 	columns: 2
 
-	property alias plotsBothSampleProportion: plotsBothSampleProportion.label
+	property alias plotsPredictionsObserved:	plotsPredictionsObserved.label
+	property alias plotsPosteriorObserved:		plotsPosteriorObserved.label
+	property alias plotsBothSampleProportion:	plotsBothSampleProportion.label
+	property alias bfTypevsName: 				bfTypevsName.source
 
 	DropDown
 	{
@@ -77,8 +80,8 @@ Section
 				DropDown
 				{
 					name:				"bfTypevsName"
+					id:					bfTypevsName
 					indexDefaultValue:	0
-					source:				"priors"
 				}
 			}
 		}
@@ -112,6 +115,20 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPriorEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPriorEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPriorCI"
 					label: qsTr("CI")
 					id: plotsPriorCI
@@ -135,8 +152,8 @@ Section
 								 plotsPriorTypeCI.currentText == "HPD"
 						enabled: plotsPriorCI.checked
 						name: "plotsPriorCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -197,6 +214,20 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPriorMarginalEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPriorMarginalEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPriorMarginalCI"
 					label: qsTr("CI")
 					id: plotsPriorMarginalCI
@@ -219,8 +250,8 @@ Section
 								 plotsPriorMarginalType.currentText == "HPD"
 						enabled: plotsPriorMarginalCI.checked
 						name: "plotsPriorMarginalCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -263,11 +294,26 @@ Section
 		RadioButtonGroup
 		{
 			name: "plotsPredictionType"
+
 			RadioButton
 			{
 				value: "conditional"
 				label: qsTr("Conditional")
 				checked: true
+
+				CheckBox
+				{
+					label:	qsTr("Point estimate")
+					name: "plotsPredictionEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPredictionEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
 
 				CheckBox
 				{
@@ -278,7 +324,6 @@ Section
 
 					DropDown
 					{
-						visible: plotsPredictionCI.checked
 						name: "plotsPredictionTypeCI"
 						label: ""
 						values: ["central", "HPD", "custom"]
@@ -296,8 +341,8 @@ Section
 								 plotsPredictionTypeCI.currentText == "HPD"
 						enabled: plotsPredictionCI.checked
 						name: "plotsPredictionCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -360,11 +405,25 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPredictionMarginalEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPredictionMarginalEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPredictionMarginalCI"
 					label: qsTr("CI")
 					id: plotsPredictionMarginalCI
 					childrenOnSameRow: true
-
+				
 					DropDown
 					{
 						name: "plotsPredictionMarginalTypeCI"
@@ -383,8 +442,8 @@ Section
 								 plotsPredictionMarginalTypeCI.currentText == "HPD"
 						enabled: plotsPredictionMarginalCI.checked
 						name: "plotsPredictionMarginalCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -417,7 +476,8 @@ Section
 		CheckBox
 		{
 			name:		"plotsPredictionsObserved"
-			label:		qsTr("Observed data")
+			id:			plotsPredictionsObserved
+			label:		qsTr("Observed proportion")
 			checked:	false
 		}
 	}
@@ -456,6 +516,20 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPosteriorEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPosteriorEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPosteriorCI"
 					label: qsTr("CI")
 					id: plotsPosteriorCI
@@ -463,7 +537,6 @@ Section
 
 					DropDown
 					{
-						visible: plotsPosteriorCI.checked
 						name: "plotsPosteriorTypeCI"
 						label: ""
 						values: ["central", "HPD", "custom","support"]
@@ -480,8 +553,8 @@ Section
 								 plotsPosteriorTypeCI.currentText == "HPD"
 						enabled: plotsPosteriorCI.checked
 						name: "plotsPosteriorCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -553,6 +626,20 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPosteriorMarginalEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPosteriorMarginalEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPosteriorMarginalCI"
 					label: qsTr("CI")
 					id: plotsPosteriorMarginalCI
@@ -576,8 +663,8 @@ Section
 								 plotsPosteriorMarginalType.currentText == "HPD"
 						enabled: plotsPosteriorMarginalCI.checked
 						name: "plotsPosteriorMarginalCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -587,7 +674,7 @@ Section
 						enabled: plotsPosteriorMarginalCI.checked
 						name: "plotsPosteriorMarginalLower"
 						label: qsTr("lower")
-						id: plotsMarginalPosteriorLower
+						id: plotsPosteriorMarginalLower
 						fieldWidth: 50
 						defaultValue: 0.25; min: 0; max: plotsPosteriorMarginalUpper.value; inclusive: JASP.MinMax
 					}
@@ -619,7 +706,13 @@ Section
 
 		}
 
-		CheckBox{name: "plotsPosteriorObserved"; label: qsTr("Observed data"); checked: false	}
+		CheckBox
+		{
+			name:	"plotsPosteriorObserved"
+			id:		plotsPosteriorObserved
+			label:	qsTr("Observed proportion")
+			checked: false
+		}
 	}
 
 
@@ -658,7 +751,8 @@ Section
 			name:		"plotsBothSampleProportion"
 			id:			plotsBothSampleProportion
 			label:		qsTr("Observed proportion")
-			checked:	false}
+			checked:	false
+		}
 	}
 
 }

@@ -15,11 +15,11 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 //
-import QtQuick 2.8
-import QtQuick.Layouts 1.3
-import JASP.Controls 1.0
-import JASP.Widgets 1.0
-import JASP.Theme 1.0
+import QtQuick			2.8
+import QtQuick.Layouts	1.3
+import JASP.Controls	1.0
+import JASP.Widgets		1.0
+import JASP				1.0
 
 Section
 {
@@ -43,6 +43,13 @@ Section
 		{
 			name: "predictionTable"
 			label: qsTr("Summary")
+
+			DropDown
+			{
+				label:	qsTr("Point estimate")
+				name: "predictionTableEstimate"
+				values: ["mean", "median", "mode"]
+			}
 		}
 
 
@@ -67,16 +74,34 @@ Section
 
 			CheckBox
 			{
-				name: "plotsPredictionsPost"; label: qsTr("Posterior predictive distribution"); checked: false	;
+				name:		"plotsPredictionsPost"
+				label:		qsTr("Posterior predictive distribution")
+				checked:	false
+
 				RadioButtonGroup
 				{
 					name: "plotsPredictionPostType"
+
 					RadioButton
 					{
 						value: "conditional"
 						label: qsTr("Conditional")
 						checked: true
 
+						CheckBox
+						{
+							label:	qsTr("Point estimate")
+							name: "plotsPredictionPostEstimate"
+							childrenOnSameRow: true
+
+							DropDown
+							{
+								name: "plotsPredictionPostEstimateType"
+								label: ""
+								values: ["mean", "median", "mode"]
+							}
+						}
+						
 						CheckBox
 						{
 							name: "plotsPredictionPostCI"
@@ -86,7 +111,6 @@ Section
 
 							DropDown
 							{
-								visible: plotsPredictionPostCI.checked
 								name: "plotsPredictionPostTypeCI"
 								label: ""
 								values: ["central", "HPD", "custom"]
@@ -104,8 +128,8 @@ Section
 										 plotsPredictionPostTypeCI.currentText == "HPD"
 								enabled: plotsPredictionPostCI.checked
 								name: "plotsPredictionPostCoverage"
-								label: qsTr("probability")
-								fieldWidth: 40
+								label: qsTr("mass")
+								fieldWidth: 50
 								defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 							}
 
@@ -168,6 +192,21 @@ Section
 
 						CheckBox
 						{
+							label:	qsTr("Point estimate")
+							name: "plotsPredictionPostMarginalEstimate"
+							childrenOnSameRow: true
+
+							DropDown
+							{
+								name: "plotsPredictionPostMarginalEstimateType"
+								label: ""
+								values: ["mean", "median", "mode"]
+							}
+						}
+				
+
+						CheckBox
+						{
 							name: "plotsPredictionPostMarginalCI"
 							label: qsTr("CI")
 							id: plotsPredictionPostMarginalCI
@@ -191,18 +230,18 @@ Section
 										 plotsPredictionPostMarginalTypeCI.currentText == "HPD"
 								enabled: plotsPredictionPostMarginalCI.checked
 								name: "plotsPredictionPostMarginalCoverage"
-								label: qsTr("probability")
-								fieldWidth: 40
+								label: qsTr("mass")
+								fieldWidth: 50
 								defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 							}
 
 							DoubleField
 							{
+								id: plotsPredictionPostMarginalLower
 								visible: plotsPredictionPostMarginalTypeCI.currentText == "custom"
 								enabled: plotsPredictionPostMarginalCI.checked
 								name: "plotsPredictionPostMarginalLower"
 								label: qsTr("lower")
-								id: plotsMarginalPredictionPostLower
 								fieldWidth: 50
 								defaultValue: 0; min: 0; max: plotsPredictionPostMarginalUpper.value; inclusive: JASP.MinMax
 							}
@@ -225,6 +264,12 @@ Section
 						name:	"predictionPostPlotProp"
 						id:		predictionPlotProp
 						label:	qsTr("Show sample proportions")
+					}
+
+					CheckBox
+					{
+						name:	"predictionPostPlotTable"
+						label:	qsTr("Predictions table")
 					}
 				}
 

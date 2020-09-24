@@ -20,6 +20,7 @@ import QtQuick.Layouts 1.3
 import JASP.Controls 1.0
 import JASP.Widgets 1.0
 import JASP.Theme 1.0
+import JASP 1.0
 
 Section
 {
@@ -53,6 +54,16 @@ Section
 		}
 	}
 
+
+	DropDown
+	{
+		Layout.columnSpan:	2
+		name:		"pointEstimate"
+		label:		qsTr("Point estimate")
+		values:		["mean", "median", "mode"]
+	}
+
+
 	CheckBox
 	{
 		name: "plotsPrior"; label: qsTr("Prior distribution"); checked: false	;
@@ -64,6 +75,20 @@ Section
 			RadioButton {
 				value: "individual"
 				label: qsTr("Individual")
+
+				CheckBox
+				{
+					label:	qsTr("Point estimate")
+					name: "plotsPriorIndividualEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPriorIndividualEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
 
 				CheckBox
 				{
@@ -89,8 +114,8 @@ Section
 									plotsPriorIndividualType.currentText == "HPD"
 						enabled: plotsPriorIndividualCI.checked
 						name: "plotsPriorCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -132,6 +157,20 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPosteriorIndividualEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPosteriorIndividualEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPosteriorIndividualCI"
 					label: qsTr("CI")
 					id: plotsPosteriorIndividualCI
@@ -139,7 +178,6 @@ Section
 
 					DropDown
 					{
-						visible: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorIndividualType"
 						label: ""
 						values: ["central", "HPD", "custom", "support"]
@@ -155,8 +193,8 @@ Section
 									plotsPosteriorIndividualType.currentText == "HPD"
 						enabled: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 

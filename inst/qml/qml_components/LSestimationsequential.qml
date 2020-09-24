@@ -15,11 +15,11 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 //
-import QtQuick 2.8
-import QtQuick.Layouts 1.3
-import JASP.Controls 1.0
-import JASP.Widgets 1.0
-import JASP.Theme 1.0
+import QtQuick			2.8
+import QtQuick.Layouts	1.3
+import JASP.Controls	1.0
+import JASP.Widgets		1.0
+import JASP				1.0
 
 Section
 {
@@ -41,12 +41,11 @@ Section
 				value: "overlying"
 				label: qsTr("All")
 
-			
-				RadioButtonGroup
+				DropDown
 				{
-					name: "plotsIterativeCenter"
-					RadioButton{value: "mean"; label: qsTr("Mean")}
-					RadioButton{value: "median"; label: qsTr("Median")}
+					label: qsTr("Point estimate")
+					name: "plotsIterativeEstimateType"
+					values: ["mean", "median", "mode"]
 				}
 
 				Group
@@ -74,8 +73,8 @@ Section
 									plotsIterativeIndividualType.currentText == "HPD"
 						enabled: plotsIterativeIndividualCI.checked
 						name: "plotsIterativeCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -106,20 +105,21 @@ Section
 	CheckBox
 	{
 		name: "plotsIterativeInterval"
+		id: plotsIterativeInterval
 		label: qsTr("Interval")
 		checked: false
 
 		RadioButtonGroup
 		{
 			name: "plotsIterativeIntervalType"
-			id: "plotsIterativeIntervalType"
+			id: plotsIterativeIntervalType
 
 			Group
 			{
 				columns: 2
 				DoubleField
 				{
-					enabled: plotsIterativeIntervalType.checked
+					enabled: plotsIterativeInterval.checked
 					name: "plotsIterativeIntervalLower"
 					label: qsTr("lower")
 					id: plotsIterativeIntervalLower
@@ -129,7 +129,7 @@ Section
 
 				DoubleField
 				{
-					enabled: plotsIterativeIntervalType.checked
+					enabled: plotsIterativeInterval.checked
 					name: "plotsIterativeIntervalUpper"
 					label: qsTr("upper")
 					id: plotsIterativeIntervalUpper

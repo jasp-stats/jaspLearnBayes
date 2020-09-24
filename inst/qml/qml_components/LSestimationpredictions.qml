@@ -15,11 +15,11 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 //
-import QtQuick 2.8
-import QtQuick.Layouts 1.3
-import JASP.Controls 1.0
-import JASP.Widgets 1.0
-import JASP.Theme 1.0
+import QtQuick			2.8
+import QtQuick.Layouts	1.3
+import JASP.Controls	1.0
+import JASP.Widgets		1.0
+import JASP				1.0
 
 Section
 {
@@ -43,6 +43,13 @@ Section
 		{
 			name: "predictionTable"
 			label: qsTr("Summary")
+
+			DropDown
+			{
+				label:	qsTr("Point estimate")
+				name: "predictionTableEstimate"
+				values: ["mean", "median", "mode"]
+			}
 		}
 
 		Group
@@ -81,6 +88,20 @@ Section
 
 						CheckBox
 						{
+							label:	qsTr("Point estimate")
+							name: "plotsPredictionEstimate"
+							childrenOnSameRow: true
+
+							DropDown
+							{
+								name: "plotsPredictionEstimateType"
+								label: ""
+								values: ["mean", "median", "mode"]
+							}
+						}
+						
+						CheckBox
+						{
 							name: "plotsPredictionCI"
 							label: qsTr("CI")
 							id: plotsPredictionCI
@@ -88,7 +109,6 @@ Section
 
 							DropDown
 							{
-								visible: plotsPredictionCI.checked
 								name: "plotsPredictionType"
 								label: ""
 								values: ["central", "HPD", "custom"]
@@ -105,8 +125,8 @@ Section
 											plotsPredictionType.currentText == "HPD"
 								enabled: plotsPredictionCI.checked
 								name: "plotsPredictionCoverage"
-								label: qsTr("probability")
-								fieldWidth: 40
+								label: qsTr("mass")
+								fieldWidth: 50
 								defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 							}
 
