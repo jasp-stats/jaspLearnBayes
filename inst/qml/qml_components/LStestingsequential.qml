@@ -24,8 +24,10 @@ import JASP.Theme 1.0
 Section
 {
 	expanded:	false
-	title:		qsTr("Sequential analysis")
+	title:		qsTr("Sequential Analysis")
 	enabled:	dataTypeB.checked || dataTypeC.checked
+
+	property alias bfTypevsNameSequential: 	bfTypevsNameSequential.source
 
 	CheckBox
 	{
@@ -72,8 +74,8 @@ Section
 							DropDown
 							{
 								name:				"bfTypevsNameSequential"
+								id:					bfTypevsNameSequential
 								indexDefaultValue:	0
-								source:				"priors"
 							}
 						}
 					}

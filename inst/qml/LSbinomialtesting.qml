@@ -15,17 +15,34 @@
 // License along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 //
-import QtQuick 2.8
-import QtQuick.Layouts 1.3
-import JASP.Controls 1.0
-import JASP.Widgets 1.0
-import JASP.Theme 1.0
+import QtQuick			2.8
+import QtQuick.Layouts	1.3
+import JASP.Controls	1.0
+import JASP.Widgets		1.0
+import JASP				1.0
 import "../qml/qml_components" as LS
 
 Form {
 	id: form
+	columns: 2
 
 	LS.LSintrotext{}
+
+	DropDown
+	{
+		name: "colorPalette"
+		label: qsTr("Color palette")
+		indexDefaultValue: 0
+		values:
+			[
+			{ label: qsTr("Colorblind"),		value: "colorblind"		},
+			{ label: qsTr("Colorblind Alt."),	value: "colorblind3"	},
+			{ label: qsTr("Viridis"),			value: "viridis"		},
+			{ label: qsTr("ggplot2"),			value: "ggplot2"		},
+			{ label: qsTr("Gray"),				value: "gray"			}
+			]
+	}
+
 
 	LS.LSbinomialdatainput
 	{
@@ -45,28 +62,26 @@ Form {
 
 			RowLayout
 			{
-				Label { text: qsTr("Hypothesis");			Layout.preferredWidth: 155 * preferencesModel.uiScale}
-				Label { text: qsTr("Prior probability");	Layout.preferredWidth: 125 * preferencesModel.uiScale}
-				Label { text: qsTr("Distribution");			Layout.preferredWidth: 130 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameter (θ)");		Layout.preferredWidth: 150 * preferencesModel.uiScale}
+				Label { text: qsTr("Hypothesis");			Layout.leftMargin: 5 * preferencesModel.uiScale; Layout.preferredWidth: 148 * preferencesModel.uiScale}
+				Label { text: qsTr("Prior probability");	Layout.preferredWidth: 100 * preferencesModel.uiScale	}
+				Label { text: qsTr("Distribution");			Layout.preferredWidth: 80 * preferencesModel.uiScale	}
+				Label { text: qsTr("Parameter (θ)");																}
 			}
 			ComponentsList
 			{
 				name:					"priors"
-				optionKey:				"type"
 				defaultValues: 			[]
-				preferredHeight: 		90 * preferencesModel.uiScale
 				rowComponent: 			RowLayout
 				{
 					Row
 					{
 						spacing:				4 * preferencesModel.uiScale
-						Layout.preferredWidth:	160 * preferencesModel.uiScale
+						Layout.preferredWidth:	150 * preferencesModel.uiScale
 						TextField
 						{
 							label: 				""
 							name: 				"name"
-							value:				"Hypothesis " + rowIndex
+							startValue:			qsTr("Hypothesis ") + (rowIndex + 1)
 							fieldWidth:			140 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
@@ -75,7 +90,7 @@ Form {
 					Row
 					{
 						spacing:				4 * preferencesModel.uiScale
-						Layout.preferredWidth:	120 * preferencesModel.uiScale
+						Layout.preferredWidth:	100 * preferencesModel.uiScale
 						FormulaField
 						{
 							label: 				qsTr("P(H)")
@@ -91,7 +106,7 @@ Form {
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 110 * preferencesModel.uiScale
+						Layout.preferredWidth: 80 * preferencesModel.uiScale
 						DropDown
 						{
 							id: typeItem
@@ -116,9 +131,10 @@ Form {
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
-							fieldWidth:			70
+							fieldWidth:			70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
+							controlXOffset:		6 * preferencesModel.uiScale
 						}
 						FormulaField
 						{
@@ -128,7 +144,7 @@ Form {
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
-							fieldWidth:			70
+							fieldWidth:			70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
 						}
@@ -141,7 +157,7 @@ Form {
 							min:				0
 							max:				1
 							inclusive:			JASP.None
-							fieldWidth:			70
+							fieldWidth:			70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
 						}
@@ -152,11 +168,14 @@ Form {
 
 	}
 
-	LS.LStestinginference{}
+	LS.LStestinginference{
+		bfTypevsName:				"priors.name"
+	}
 
 	LS.LStestingsequential
 	{
-		enabled: binomialDataInput.dataType.value !== "dataCounts"
+		enabled:					binomialDataInput.dataType.value !== "dataCounts"
+		bfTypevsNameSequential:		"priors.name"
 	}
 
 	LS.LStestingpredictions{}
