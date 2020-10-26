@@ -1,8 +1,5 @@
 context("Learn Bayes - Binomial Testing")
 
-skip_on_travis()
-
-
 # the conditional == individual plots are comprehensivelly tested in estimation part 
 
 ### output for all default settings (spike + beta)
