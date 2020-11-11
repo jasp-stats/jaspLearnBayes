@@ -4,7 +4,7 @@ import JASP.Module 	1.0
 Description
 {
 	title :			"Learn Bayes"
-	name: 			"LearnBayes"
+	name: 			"jaspLearnBayes"
 	icon:			"learning-stats.png"
 	description:	"Learning Bayesian Statistics with JASP"
 	version:		"0.1"
