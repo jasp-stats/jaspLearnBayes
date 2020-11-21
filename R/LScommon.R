@@ -16,13 +16,27 @@
 #
 
 # general functions
-.evaluatePriors       <- function(priors){
+.evaluatePriors       <- function(priors, type){
   for(p in 1:length(priors)){
     for(i in 1:length(priors[[p]])){
       tempP <- priors[[p]][[i]]
       if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "parMu", "parSigma", "PH")){
         priors[[p]][[paste0(names(priors[[p]])[i],"Inp")]] <- priors[[p]][[i]]
         priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
+        
+        if(names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parMu", "parSigma", "PH") && priors[[p]][[i]] <= 0){
+          .quitAnalysis(
+            gettextf(
+              "The parameter '%1$s' for model/hypothesis '%2$s' must be positive.",
+              gsub("par", "", names(priors[[p]])[i]),
+              priors[[p]][["name"]]))
+        }else if(names(priors[[p]])[i] =="parPoint" && (priors[[p]][[i]] < 0 || priors[[p]][[i]] > 1) && type %in% c("binEst", "binTest")){
+          .quitAnalysis(
+            gettextf(
+              "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1.",
+              gsub("par", "", names(priors[[p]])[i]),
+              priors[[p]][["name"]]))
+        }
       }
     }
     if (priors[[p]][["name"]] == ""){

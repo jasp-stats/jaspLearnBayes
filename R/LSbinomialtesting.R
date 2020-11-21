@@ -28,7 +28,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
   
   # evaluate the expressions in priors
   if (ready["priors"])
-    options[["priors"]] <- .evaluatePriors(options[["priors"]])
+    options[["priors"]] <- .evaluatePriors(options[["priors"]], "binTest")
   # scale the prior probabilities
   if (ready["priors"])
     options[["priors"]] <- .scalePriors(options[["priors"]])

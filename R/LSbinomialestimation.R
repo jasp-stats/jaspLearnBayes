@@ -30,7 +30,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   
   # evaluate the expressions in priors
   if (ready["priors"])
-    options[["priors"]] <- .evaluatePriors(options[["priors"]])
+    options[["priors"]] <- .evaluatePriors(options[["priors"]], "binEst")
   
   # load, check, transform and process data
   if (ready["data"])

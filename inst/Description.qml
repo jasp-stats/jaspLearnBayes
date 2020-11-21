@@ -3,10 +3,10 @@ import JASP.Module 	1.0
 
 Description
 {
-	title :			"Learn Bayes"
-	name: 			"LearnBayes"
+	title :			qsTr("Learn Bayes")
+	name: 			qsTr("jaspLearnBayes")
 	icon:			"learning-stats.png"
-	description:	"Learning Bayesian Statistics with JASP"
+	description:	qsTr("Learning Bayesian Statistics with JASP")
 	version:		"0.1"
 	requiresData:	false
 	author:			"JASP Team"
@@ -14,69 +14,61 @@ Description
 	website:		"www.jasp-stats.org"
 	license:		"GPL (>= 2)"
 
-	Package { name: "MGLM" }
-	Package { name: "HDInterval" }
-	Package { name: "DT" }
-	Package { name: "MCMCpack" }
-	Package { name: "extraDistr" }
-	Package { name: "ggplot2" }
-
-
 	GroupTitle
 	{
-		title: 	"Counts"
+		title: 	qsTr("Counts")
 		icon:	"analysis-bayesian-crosstabs.svg"
 	}
 	
 	Analysis
 	{
-		title:	"Binomial Estimation"
+		title:	qsTr("Binomial Estimation")
 		qml:	"LSbinomialestimation.qml"
 		func:	"LSbinomialestimation"
 	}
 
 	Analysis
 	{
-		title:	"Binomial Testing"
+		title:	qsTr("Binomial Testing")
 		qml:	"LSbinomialtesting.qml"
 		func:	"LSbinomialtesting"
 	}
 
 	GroupTitle
 	{
-		title: 	"Continuous"
+		title: 	qsTr("Continuous")
 		icon:	"analysis-bayesian-ttest.svg"
 	}
 	
 	Analysis
 	{
-		title:	"Gaussian Estimation"
+		title:	qsTr("Gaussian Estimation")
 		qml:	"LSgaussianestimation.qml"
 		func:	"LSgaussianestimation"
 	}
 
 	Analysis
 	{
-		title:	"Gaussian Testing"
-		qml:		"LSgaussiantesting.qml"
+		title:	qsTr("Gaussian Testing")
+		qml:	"LSgaussiantesting.qml"
 		func:	"LSgaussiantesting"
 	}
 	
 	GroupTitle
 	{
-		title: 	"Problem of Points"
+		title: 	qsTr("Problem of Points")
 	}
 	
 	Analysis
 	{
-		title:	"Game of Chance"
+		title:	qsTr("Game of Chance")
 		qml:	"LSgameofchance.qml"
 		func:	"LSgameofchance"
 	}
 
 	Analysis
 	{
-		title:	"Game of Skills"
+		title:	qsTr("Game of Skills")
 		qml:	"LSgameofskills.qml"
 		func:	"LSgameofskills"
 	}
