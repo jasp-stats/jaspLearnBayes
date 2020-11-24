@@ -34,7 +34,7 @@ Section
 	{
 		columns:	3
 		name:		"dataType"
-		title:		qsTr("Input type")
+		title:		qsTr("Input Type")
 		id:			dataType
 
 		RadioButton
@@ -65,7 +65,7 @@ Section
 
 	Group
 	{
-		title: qsTr("Count data")
+		title: qsTr("Count Data")
 		visible: dataTypeA.checked
 
 		IntegerField
@@ -87,10 +87,10 @@ Section
 
 	TextArea
 	{
-		title:		qsTr("Comma-separated sequence of observations")
+		title:		qsTr("Comma-separated Sequence of Observations")
 		visible:	dataTypeB.checked
 		height:		100
-		name:		"data_sequence"
+		name:     "dataSequenceInput"
 		textType:	JASP.TextTypeSource
 		separators:	[",",";","\n"]
 	}
@@ -105,20 +105,20 @@ Section
 
 			AvailableVariablesList
 			{
-				name:	"levels_Seq"
+				name:	"levelsSeq"
 				title:	qsTr("Levels")
-				source:	"data_sequence"
+				source:	"dataSequenceInput"
 			}
 
 			AssignedVariablesList
 			{
-				name:	"key_success_Seq"
+				name:	"keySuccessSeq"
 				title:	qsTr("Successes")
 			}
 
 			AssignedVariablesList
 			{
-				name:	"key_failure_Seq"
+				name:	"keyFailureSeq"
 				title:	qsTr("Failures")
 			}
 		}
@@ -144,6 +144,14 @@ Section
 				title:				qsTr("Selected")
 				singleVariable:		true
 				allowedColumns:		["ordinal", "nominal","nominalText"]
+
+				onCountChanged:
+				{
+					while (keySuccessVar.count > 0)
+						keySuccessVar.itemDoubleClicked(0)
+					while (keyFailureVar.count > 0)
+						keyFailureVar.itemDoubleClicked(0)
+				}
 			}
 		}
 
@@ -153,20 +161,22 @@ Section
 
 			AvailableVariablesList
 			{
-				name:	"levels_Var"
+				name:	"levelsVar"
 				title:	qsTr("Levels")
 				source:	[{name: "selectedVariable", use: "levels"}]
 			}
 
 			AssignedVariablesList
 			{
-				name:	"key_success_Var"
+				id:		keySuccessVar
+				name:	"keySuccessVar"
 				title:	qsTr("Successes")
 			}
 
 			AssignedVariablesList
 			{
-				name:	"key_failure_Var"
+				id:		keyFailureVar
+				name:	"keyFailureVar"
 				title:	qsTr("Failures")
 			}
 		}

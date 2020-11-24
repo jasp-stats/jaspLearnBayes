@@ -20,38 +20,24 @@ import QtQuick.Layouts 1.3
 import JASP.Controls 1.0
 import JASP.Widgets 1.0
 import JASP.Theme 1.0
+import JASP 1.0
 
 Section
 {
-	expanded: true
+	expanded: false
 	title: qsTr("Inference")
 	columns: 2
 
 	property alias plotsBothSampleProportion: plotsBothSampleProportion.label
 
-	Group
+	DropDown
 	{
-		Layout.columnSpan: 2
-
-		Group
-		{
-
-			DropDown
-			{
-				name: "colorPalette"
-				label: qsTr("Color palette")
-				indexDefaultValue: 0
-				values:
-					[
-					{ label: qsTr("Colorblind"),		value: "colorblind"		},
-					{ label: qsTr("Colorblind Alt."),	value: "colorblind3"	},
-					{ label: qsTr("Viridis"),			value: "viridis"		},
-					{ label: qsTr("ggplot2"),			value: "ggplot2"		},
-					{ label: qsTr("Gray"),				value: "gray"			}
-					]
-			}
-		}
+		Layout.columnSpan:	2
+		name:		"pointEstimate"
+		label:		qsTr("Point estimate")
+		values:		["mean", "median", "mode"]
 	}
+
 
 	CheckBox
 	{
@@ -64,6 +50,20 @@ Section
 			RadioButton {
 				value: "individual"
 				label: qsTr("Individual")
+
+				CheckBox
+				{
+					label:	qsTr("Point estimate")
+					name: "plotsPriorIndividualEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPriorIndividualEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
 
 				CheckBox
 				{
@@ -89,8 +89,8 @@ Section
 									plotsPriorIndividualType.currentText == "HPD"
 						enabled: plotsPriorIndividualCI.checked
 						name: "plotsPriorCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("Mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -98,7 +98,7 @@ Section
 						visible: plotsPriorIndividualType.currentText == "custom"
 						enabled: plotsPriorIndividualCI.checked
 						name: "plotsPriorLower"
-						label: qsTr("lower")
+						label: qsTr("Lower")
 						id: plotsPriorLower
 						fieldWidth: 50
 						defaultValue: 0.25; min: 0; max: plotsPriorUpper.value; inclusive: JASP.MinMax
@@ -108,7 +108,7 @@ Section
 						visible: plotsPriorIndividualType.currentText == "custom"
 						enabled: plotsPriorIndividualCI.checked
 						name: "plotsPriorUpper"
-						label: qsTr("upper")
+						label: qsTr("Upper")
 						id: plotsPriorUpper
 						fieldWidth: 50
 						defaultValue: 0.75; min: plotsPriorLower.value; max: 1; inclusive: JASP.MinMax
@@ -132,6 +132,20 @@ Section
 
 				CheckBox
 				{
+					label:	qsTr("Point estimate")
+					name: "plotsPosteriorIndividualEstimate"
+					childrenOnSameRow: true
+
+					DropDown
+					{
+						name: "plotsPosteriorIndividualEstimateType"
+						label: ""
+						values: ["mean", "median", "mode"]
+					}
+				}
+
+				CheckBox
+				{
 					name: "plotsPosteriorIndividualCI"
 					label: qsTr("CI")
 					id: plotsPosteriorIndividualCI
@@ -139,7 +153,6 @@ Section
 
 					DropDown
 					{
-						visible: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorIndividualType"
 						label: ""
 						values: ["central", "HPD", "custom", "support"]
@@ -155,8 +168,8 @@ Section
 									plotsPosteriorIndividualType.currentText == "HPD"
 						enabled: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorCoverage"
-						label: qsTr("probability")
-						fieldWidth: 40
+						label: qsTr("Mass")
+						fieldWidth: 50
 						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
 					}
 
@@ -164,7 +177,7 @@ Section
 						visible: plotsPosteriorIndividualType.currentText == "custom"
 						enabled: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorLower"
-						label: qsTr("lower")
+						label: qsTr("Lower")
 						id: plotsPosteriorLower
 						fieldWidth: 50
 						defaultValue: 0.25; min: 0; max: plotsPosteriorUpper.value; inclusive: JASP.MinMax
@@ -174,19 +187,19 @@ Section
 						visible: plotsPosteriorIndividualType.currentText == "custom"
 						enabled: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorUpper"
-						label: qsTr("upper")
+						label: qsTr("Upper")
 						id: plotsPosteriorUpper
 						fieldWidth: 50
 						defaultValue: 0.75; min: plotsPosteriorLower.value; max: 1; inclusive: JASP.MinMax
 					}
 
-					DoubleField{
+					FormulaField{
 						visible: plotsPosteriorIndividualType.currentText == "support"
 						enabled: plotsPosteriorIndividualCI.checked
 						name: "plotsPosteriorBF"
 						label: qsTr("BF")
 						fieldWidth: 50
-						defaultValue: 1; min: 0; inclusive: JASP.None
+						defaultValue: "1"; min: 0; inclusive: JASP.None
 					}
 				}
 
