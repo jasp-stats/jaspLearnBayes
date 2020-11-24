@@ -4,7 +4,7 @@ import JASP.Module 	1.0
 Description
 {
 	title :			qsTr("Learn Bayes")
-	name: 			qsTr("jaspLearnBayes")
+	name: 			"jaspLearnBayes"
 	icon:			"learning-stats.png"
 	description:	qsTr("Learning Bayesian Statistics with JASP")
 	version:		"0.1"
