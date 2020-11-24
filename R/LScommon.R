@@ -19,7 +19,6 @@
 .evaluatePriors       <- function(priors, type){
   for(p in 1:length(priors)){
     for(i in 1:length(priors[[p]])){
-      tempP <- priors[[p]][[i]]
       if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "parMu", "parSigma", "PH")){
         priors[[p]][[paste0(names(priors[[p]])[i],"Inp")]] <- priors[[p]][[i]]
         priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
