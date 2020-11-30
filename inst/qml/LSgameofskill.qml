@@ -24,57 +24,40 @@ import JASP.Theme 1.0
 
 Form {
 	columns: 1
-	IntegerField 
-	{ 
-		name: "n"; 
-		label: qsTr("The number of players");
-		defaultValue: 4 
-		fieldWidth: 50 
-	}
 
-	TextField 
-	{ 
-		name: "alpha"; 
-		label: qsTr("The hyperparameters of the beta (or Dirichlet) prior for 2 (or more than 2) players (comma delimited)"); 
-		fieldWidth: 50
-		value: "1,1,1,1"
-		  
-	}
-
-
-	TextField 
-	{ 
-		name: "k"; 
-		label: qsTr("The number of points for each player when interrupted (comma delimited)"); 
-		fieldWidth: 50
-		value: "1,1,1,1"
-		
-		
-		
+	SimpleTableView
+	{
+		name:				"players"
+		cornerText:			"Player"
+		buttonAddText:		"Add player"
+		buttonDeleteText:	"Delete player"
+		values:				["Prior skill parameter", "Points gained"]
+		columnName:			""
+        initialColumnCount: 2
+        buttonsInRow:       true
+        function getColHeaderText(defaultName, colIndex) { return String.fromCharCode(65 + colIndex); }
 	}
 
 	IntegerField  
 	{ 
-		name: "t"; 
-		label: qsTr("The number of points required to win the game"); 
+		name: "winPoints"; 
+		label: qsTr("Points needed to win the game"); 
 		fieldWidth: 50
 		defaultValue: 2 
 	}
 
-	
-
 	IntegerField   
 	{ 
-		name: "s"; 
-		label: qsTr("The number of simulated games"); 
+		name: "nSims"; 
+		label: qsTr("Number of simulated games"); 
 		fieldWidth: 50
 		defaultValue: 500  
 	}
 
 	CheckBox 
 	{ 
-		name: "check"; 
-		label: qsTr("95% credible interval (highest posterior density)"); 
+		name: "CI"; 
+		label: qsTr("95% HPD"); 
 		checked: true 
 	}
 

@@ -56,7 +56,8 @@ Description
 	
 	GroupTitle
 	{
-		title: 	qsTr("Problem of Points")
+		title:	qsTr("The Problem of Points")
+		icon:	"learn-bayes-epees.svg"
 	}
 	
 	Analysis
@@ -68,8 +69,8 @@ Description
 
 	Analysis
 	{
-		title:	qsTr("Game of Skills")
-		qml:	"LSgameofskills.qml"
-		func:	"LSgameofskills"
+		title:	qsTr("Game of Skill")
+		qml:	"LSgameofskill.qml"
+		func:	"LSgameofskill"
 	}
 }
