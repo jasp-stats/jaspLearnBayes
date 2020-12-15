@@ -1,3 +1,4 @@
+import(jaspBase)
 export(LSbinomialestimation)
 export(LSbinomialtesting)
 export(LSgaussianestimation)
