@@ -8,14 +8,17 @@ Website: www.jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
 Description: Learning Bayesian Statistics with JASP
 Encoding: UTF-8
-License: GPL (>= 2)Imports:
+License: GPL (>= 2)
+Imports:
+  extraDistr,
   ggplot2,
+  HDInterval,
   jaspBase,
   jaspGraphs,
+  MASS,
   MCMCpack,
-  HDInterval,
   MGLM,
-  extraDistr
+  scales
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs

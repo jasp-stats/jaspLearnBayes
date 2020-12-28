@@ -82,7 +82,7 @@
   x <- na.omit(x)
 
   if(anyNA(as.numeric(x))){
-    JASP:::.quitAnalysis(gettextf("Only numeric values are allowed in the input."))
+    .quitAnalysis(gettextf("Only numeric values are allowed in the input."))
   }
 
   return(as.numeric(x))
@@ -356,7 +356,7 @@
     }
   }
 
-  range <- range(JASPgraphs::getPrettyAxisBreaks(range))
+  range <- range(jaspGraphs::getPrettyAxisBreaks(range))
   return(range)
 }
 .rangeGaussiansLS           <- function(data, priors, type = "parameter", N = 0, prob = .99){
@@ -379,7 +379,7 @@
   ranges   <- rbind(ranges, rangesCI)
 
   range  <- c(min(ranges[,1], na.rm = T), max(ranges[,2], na.rm = T))
-  range  <- range(JASPgraphs::getPrettyAxisBreaks(range))
+  range  <- range(jaspGraphs::getPrettyAxisBreaks(range))
 
   return(range)
 

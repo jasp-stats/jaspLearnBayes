@@ -631,7 +631,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
               ))
 
           } else if (nrow(tempCIPP) > 2)
-            JASP:::.quitAnalysis(gettext("More than bimodal CIs are not implemented in the Sequential analysis plot."))
+            .quitAnalysis(gettext("More than bimodal CIs are not implemented in the Sequential analysis plot."))
         }
 
       }
