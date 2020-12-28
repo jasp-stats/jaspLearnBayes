@@ -22,7 +22,7 @@
       if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "parMu", "parSigma", "PH")){
         priors[[p]][[paste0(names(priors[[p]])[i],"Inp")]] <- priors[[p]][[i]]
         priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
-        
+
         if(names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parMu", "parSigma", "PH") && priors[[p]][[i]] <= 0){
           .quitAnalysis(
             gettextf(
@@ -46,14 +46,14 @@
       )
     }
   }
-  
+
   if (anyDuplicated(sapply(priors, function(p)p$name)) != 0){
     quitAnalysis(gettextf(
       "Please remove duplicates from the %s names.",
       ifelse(any(names(priors[[p]]) %in% c("PH")), "Hypotheses", "Models")
     ))
   }
-  
+
   return(priors)
 }
 .scalePriors          <- function(priors){
@@ -67,9 +67,9 @@
 .aproximateSupportLS   <- function(xSeq, seqTF){
   xStart <- NULL
   xEnd   <- NULL
-  
+
   r <- rle(seqTF)
-  
+
   if (length(r$values) > 0){
     for(i in 1:length(r$values)){
       if (r$values[i]){
@@ -80,13 +80,13 @@
           xStart <- c(xStart, sum(r$lengths[1:(i-1)])+1)
           xEnd   <- c(xEnd,   sum(r$lengths[1:i]))
         }
-      } 
+      }
     }
   } else {
     xStart <- NA
     xEnd   <- NA
   }
-  
+
   return(cbind.data.frame("lCI" = xSeq[xStart], "uCI" = xSeq[xEnd]))
 }
 .cleanSequence        <- function(sequence){
@@ -153,29 +153,29 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
 # plotting functions
 .plotPriorPosteriorLS  <- function(allLines, allArrows, dfPoints = NULL, xName = NULL, xRange = c(0,1)){
-  
+
   mappingArrow <- ggplot2::aes(x = x, xend = x, y = yStart, yend = yEnd, color = g)
   mappingLines <- ggplot2::aes(x = x, y = y, color = g)
   mappingPoint <- ggplot2::aes(x = x, y = y, color = g)
-  
+
   if (!is.null(allLines))allLines   <- do.call("rbind", allLines)
   if (!is.null(allArrows))allArrows <- do.call("rbind", allArrows)
-  
+
   # get the y_axis max
   yMax <- .getYMax(allLines, allArrows)
-  
-  g <- ggplot2::ggplot() 
-  
+
+  g <- ggplot2::ggplot()
+
   if (!is.null(allArrows)){
-    
+
     for(i in nrow(allArrows):1){
-      
+
       tempArrow       <- allArrows[i,]
       tempArrow$yEnd <- tempArrow$yEnd * .scalingSpikes(allLines, allArrows)
-      
+
       if (tempArrow$yEnd < .Machine$double.eps)
         tempArrow$yEnd <- 1e-5
-      
+
       g <- g + ggplot2::geom_segment(
         data        = tempArrow,
         mapping     = mappingArrow,
@@ -188,36 +188,36 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           mapping = mappingArrow,
           size    = 1)
     }
-    
+
     xHigh <- max(allArrows$x)
   }
-  
+
   if (!is.null(allLines)){
-    
+
     for(i in 1:length(unique(allLines$g))){
-      
+
       tempLine <- allLines[allLines$g == unique(allLines$g)[i], ]
       tempType <- i
-      
+
       g <- g + ggplot2::geom_line(
         data     = tempLine,
         mapping  = mappingLines,
         size     = 1,
         linetype = tempType)
     }
-    
+
     xHigh <- allLines$x[which.max(allLines$y)]
   }
-  
+
   g <- g + .plotXAxis(xName, xRange, FALSE)
   g <- g + .plotYAxis(allLines, allArrows, NULL)
-  
+
   if (!is.null(dfPoints)){
-    
+
     g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = TRUE,
-                                 inherit.aes = FALSE, size = 4, shape = 4, 
+                                 inherit.aes = FALSE, size = 4, shape = 4,
                                  stroke = 1.25, fill = "grey")
-    
+
     if (!is.null(allArrows)){
       g <- g + ggplot2::scale_color_manual("",
                                            values  = c(c("black", "gray")[1:length(unique(allArrows$g))], "black"),
@@ -225,7 +225,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                                            guide   = ggplot2::guide_legend(override.aes = list(
                                              linetype = if (length(unique(allArrows$g)) == 1) c(1, NA) else c(1, 2, NA),
                                              shape    = if (length(unique(allArrows$g)) == 1) c(NA, 4) else c(NA, NA, 4)
-                                           )))  
+                                           )))
     } else {
       g <- g + ggplot2::scale_color_manual("",
                                            values  = c("black", "gray", "black")[c(1:length(unique(allLines$g)), 3)],
@@ -233,11 +233,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                                            guide   = ggplot2::guide_legend(override.aes = list(
                                              linetype = c( 1,  2, NA)[c(1:length(unique(allLines$g)), 3)],
                                              shape    = c(NA, NA,  4)[c(1:length(unique(allLines$g)), 3)]
-                                           ))) 
+                                           )))
     }
-    
+
   } else {
-    
+
     if (!is.null(allArrows)){
       g <- g + ggplot2::scale_color_manual("",
                                            values  = c("black", "gray")[1:length(unique(allArrows$g))],
@@ -245,7 +245,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                                            guide   = ggplot2::guide_legend(override.aes = list(
                                              linetype = if (length(unique(allArrows$g)) == 1) c(1) else c(1, 2),
                                              shape    = if (length(unique(allArrows$g)) == 1) c(NA) else c(NA, NA)
-                                           ))) 
+                                           )))
     } else {
       g <- g + ggplot2::scale_color_manual("",
                                            values  = c( "black", "gray")[1:length(unique(allLines$g))],
@@ -253,49 +253,49 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                                            guide   = ggplot2::guide_legend(override.aes = list(
                                              linetype = c( 1,  2)[1:length(unique(allLines$g))],
                                              shape    = c(NA, NA)[1:length(unique(allLines$g))]
-                                           ))) 
+                                           )))
     }
-    
+
   }
-  
-  
+
+
   if (xHigh > .5) {
     legend.position = c(0.25, 1)
   } else {
     legend.position = c(0.75, 1)
   }
-  
+
   g <- g + jaspGraphs::themeJaspRaw(legend.position = legend.position)
   g <- g + jaspGraphs::geom_rangeframe(sides = if (!is.null(allLines) & !is.null(allArrows)) "lbr" else "lb") +
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
-      legend.key.width  = ggplot2::unit(1.5,"cm")) + 
+      legend.key.width  = ggplot2::unit(1.5,"cm")) +
     .plotThemePlus(allLines, allArrows) +
     ggplot2::theme(legend.position = "right")
-  
+
   plot <- g
-  
+
   return(plot)
 }
 .plotOverlyingLS       <- function(allLines, allArrows, dfPoints = NULL, pointEstimate = NULL, CI = NULL, xName = NULL, yName = NULL,
                                    xRange = c(0,1), palette = "colorblind", noLegend = FALSE, nRound = 3, discrete = FALSE,
                                    proportions = FALSE){
-  
+
   mappingLines   <- ggplot2::aes(x = x, y = y, group = g, color = g)
   mappingArrows  <- ggplot2::aes(x = x , xend = x, y = yStart, yend = yEnd, group = g, color = g)
   mappingArrows1 <- ggplot2::aes(x = xStart , xend = xEnd, y = y, yend = y, group = g)
   mappingArrows2 <- ggplot2::aes(x = xEnd , xend = xStart, y = y, yend = y, group = g)
   mappingText    <- ggplot2::aes(x = x, y = y, label = label)
   mappingPoint   <- ggplot2::aes(x = x, y = y)
-  
+
   if (!is.null(allLines))allLines   <- do.call("rbind", allLines)
   if (!is.null(allArrows))allArrows <- do.call("rbind", allArrows)
-  
+
   # get the y_axis max
   yMax <- .getYMax(allLines, allArrows)
-  
+
   # set the CI text
   # set the CI text
   if (!is.null(CI) || !is.null(pointEstimate)){
@@ -304,26 +304,26 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   } else {
     tempLabel <- NULL
   }
-  
+
   if (!is.null(CI)){
     CI         <- cbind.data.frame(CI, "y" = yMax * 1.05)
   }
-  
+
 
   g <- ggplot2::ggplot()
-  
+
   if (!is.null(allArrows)){
-    
+
     allArrowsScaled       <- allArrows
     allArrowsScaled$yEnd  <- allArrowsScaled$yEnd * .scalingSpikes(allLines, allArrows)
     allArrowsScaled$yEnd[allArrowsScaled$yEnd < .Machine$double.eps] <- 1e-5
-    
+
     if (!is.null(pointEstimate)){
       if (pointEstimate$spike[1]){
         pointEstimate$y <- pointEstimate$y  * .scalingSpikes(allLines, allArrows)
       }
     }
-    
+
     g <- g + ggplot2::geom_segment(
       data        = allArrowsScaled,
       mapping     = mappingArrows,
@@ -336,35 +336,35 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       mapping = mappingArrows,
       size    = 1)
   }
-  
+
   if (!is.null(allLines)){
     g <- g + ggplot2::geom_line(data = allLines, mapping = mappingLines, size = 1, show.legend = !all(allLines$g == "__marginal"))
   }
-  
+
   if (!is.null(dfPoints)){
     g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = FALSE,
-                                 inherit.aes = FALSE, size = 4, shape = 4, 
+                                 inherit.aes = FALSE, size = 4, shape = 4,
                                  stroke = 1.25, fill = "grey")
   }
-  
+
   if (!is.null(pointEstimate)){
     if (!anyNA(pointEstimate$x)){
       g <- g + ggplot2::geom_point(data = pointEstimate, mapping = mappingPoint, show.legend = FALSE,
-                                   inherit.aes = FALSE, size = 4, shape = 21, 
-                                   stroke = 1.25, fill = "grey") 
+                                   inherit.aes = FALSE, size = 4, shape = 21,
+                                   stroke = 1.25, fill = "grey")
     }
   }
-  
+
   if (noLegend == TRUE){
     g <- g + ggplot2::scale_colour_manual(values = "black")
   } else {
     g <- g + jaspGraphs::scale_JASPcolor_discrete(palette)
   }
-  
+
   # axes
   g <- g + .plotXAxis(xName, xRange, discrete)
   g <- g + .plotYAxis(allLines, allArrows, if (!is.null(CI) || !is.null(pointEstimate)) "notNull" else NULL)
-  
+
   # legend
   if (!is.null(allLines)){
     xr   <- range(allLines$x)
@@ -375,7 +375,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     idx  <- which.max(allArrows$yEnd)
     xmax <- allArrows$x[idx]
   }
-  
+
   if (!is.null(CI)){
     if (!is.na(CI$xStart[1])){
       g <- g + ggplot2::geom_segment(
@@ -389,17 +389,17 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           color   = "black")
     }
   }
-  
+
   if (!is.null(CI) || !is.null(pointEstimate)){
-    labelY    <- if (length(tempLabel) == 1) 1.10 else 1.25 - .07 * c(1:length(tempLabel)) 
+    labelY    <- if (length(tempLabel) == 1) 1.10 else 1.25 - .07 * c(1:length(tempLabel))
     for(i in 1:length(tempLabel)){
-      
+
       tempText <- data.frame(
         label = tempLabel[i],
         x = (xRange[1] + xRange[2])/2,
         y = yMax * labelY[i]
       )
-      
+
       g <- g + ggplot2::geom_text(
         data    = tempText,
         mapping = mappingText,
@@ -408,99 +408,99 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
     }
   }
-  
-  
+
+
   if (xmax > mean(xr)) {
     legend.position = c(0.2, 0.8)
   } else {
     legend.position = c(0.8, 0.8)
   }
-  
+
   if (noLegend == FALSE){
     g <- g + jaspGraphs::themeJaspRaw(legend.position = legend.position)
   } else {
     g <- g + jaspGraphs::themeJaspRaw()
   }
-  g <- g + jaspGraphs::geom_rangeframe(sides = if (!is.null(allLines) & !is.null(allArrows)) "lbr" else "lb") +  
+  g <- g + jaspGraphs::geom_rangeframe(sides = if (!is.null(allLines) & !is.null(allArrows)) "lbr" else "lb") +
     ggplot2::theme(
       legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
-      legend.key.width  = ggplot2::unit(1.5,"cm")) + 
+      legend.key.width  = ggplot2::unit(1.5,"cm")) +
     .plotThemePlus(allLines, allArrows) +
     ggplot2::theme(legend.position = "right")
-  
+
   plot <- g
-  
+
   return(plot)
 }
 .plotStackedLS         <- function(allLines, allArrows, legend, dfPoints = NULL, xName = NULL, yName = gettext("Density"),
                                    xRange = c(0,1), lCI = NULL, uCI = NULL, discrete = FALSE, proportions = FALSE){
-  
+
   mappingLines  <- ggplot2::aes(x = x, y = y, group = g, color = g)
   mappingArrows <- ggplot2::aes(x = x , xend = x, y = yStart, yend = yEnd, group = g, color = g)
   mappingLegend <- ggplot2::aes(x = x, y = y, label = name)
   mappingPoint  <- ggplot2::aes(x = x, y = y)
-  
-  
+
+
   if (!is.null(allLines)){
-    
+
     allLinesD <- allLines
     allLinesL <- allLines
-    
+
     for(i in 1:length(allLinesD)){
       if (is.null(lCI) & is.null(uCI)){
         allLinesD[[i]] <- rbind.data.frame(
           data.frame(x = xRange[1], y = 0, g = allLinesD[[i]]$g[1]),
           allLinesD[[i]],
-          data.frame(x = xRange[2], y = 0, g = allLinesD[[i]]$g[1])     
+          data.frame(x = xRange[2], y = 0, g = allLinesD[[i]]$g[1])
         )
       } else {
         allLinesD[[i]] <- rbind.data.frame(
           data.frame(x = lCI, y = 0, g = allLinesD[[i]]$g[1]),
           allLinesD[[i]][allLinesD[[i]]$x > lCI & allLinesD[[i]]$x < uCI,],
-          data.frame(x = uCI, y = 0, g = allLinesD[[i]]$g[1])     
+          data.frame(x = uCI, y = 0, g = allLinesD[[i]]$g[1])
         )
       }
       allLinesL[[i]] <- data.frame(x = xRange, y = rep(0, 2), g = allLinesD[[i]]$g[1] )
     }
-    
+
     allLines  <- do.call("rbind", allLines)
     allLinesD <- do.call("rbind", allLinesD)
     allLinesL <- do.call("rbind", allLinesL)
   }
-  
+
   if (!is.null(allArrows)){
-    
+
     allArrowsL <- list()
     for(i in 1:length(allArrows)){
       allArrowsL[[i]] <- data.frame(y = rep(allArrows[[i]]$yStart, 2), x = xRange,
                                      g = rep(allArrows[[i]]$g, 2))
     }
-    
+
     allArrows <- do.call("rbind", allArrows)
     allArrowsL<- do.call("rbind", allArrowsL)
   }
-  
+
   legend      <- data.frame(legend)
   colnames(legend) <- c("type", "name")
   legend$type <- as.character(legend$type)
   legend$name <- as.character(legend$name)
-  
+
   if (!is.null(allLines)){
     obsYmax <- max(allLines$y)
     if (!is.null(allArrows)){
       allArrows$yEnd <- obsYmax
     }
   } else {
-    obsYmax <- max(allArrows$yEnd)    
+    obsYmax <- max(allArrows$yEnd)
   }
-  yBreak  <- obsYmax/3 
+  yBreak  <- obsYmax/3
   newymax <- obsYmax + yBreak*nrow(legend)
-  
+
   legend$y <- yBreak*(0:(nrow(legend)-1))
   legend$x <- xRange[1]
-  
+
   # changing y-coordinates to "stack" the plots
   for(i in 1:nrow(legend)){
     if (legend$type[i] == "spike"){
@@ -513,9 +513,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       allLinesL[allLinesL$g == legend[i,2], "y"] <- allLinesL[allLinesL$g == legend[i,2], "y"] + yBreak*(i-1)
     }
   }
-  
+
   g <- ggplot2::ggplot()
-  
+
   for(i in nrow(legend):1){
     if (legend$type[i] == "spike"){
       g <- g + ggplot2::geom_segment(
@@ -529,45 +529,45 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     if (legend$type[i] %in% c("beta", "normal")){
       g <- g + ggplot2::geom_line(
         data = allLines[allLines$g == legend$name[i],],
-        mapping = mappingLines, size = 1) + 
+        mapping = mappingLines, size = 1) +
         ggplot2::geom_polygon(
           data = allLinesD[allLinesD$g == legend$name[i],],
           mapping = mappingLines, fill = "grey60", alpha = .8)
-      
+
       if (!is.null(lCI) & !is.null(uCI)){
         g <- g + ggplot2::geom_line(
           data = allLinesL[allLinesL$g == legend$name[i],],
           mapping = mappingLines
         )
       }
-      
+
     }
   }
-  
+
   if (!is.null(dfPoints)){
     g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = FALSE,
-                                 inherit.aes = FALSE, size = 4, shape = 4, 
+                                 inherit.aes = FALSE, size = 4, shape = 4,
                                  stroke = 1.25, fill = "grey")
   }
-  
+
   #legend$name <- sapply(legend$name, function(x)paste(c(x, "    "), collapse = ""))
   #g <- g + ggplot2::geom_text(data = legend, mapping = mappingLegend,
   #                            size = 8, hjust = 1, vjust = 0)
-  
+
   g <- g + ggplot2::scale_colour_manual(values = rep("black", nrow(legend))) +
     .plotXAxis(xName, xRange, discrete) +
-    ggplot2::scale_y_continuous(yName, limits = c(0, newymax),breaks = legend$y, labels = legend$name) + 
+    ggplot2::scale_y_continuous(yName, limits = c(0, newymax),breaks = legend$y, labels = legend$name) +
     ggplot2::coord_cartesian(clip = 'off')
-  
-  
-  g <- g + jaspGraphs::themeJaspRaw() + 
-    jaspGraphs::geom_rangeframe(sides = 'b') + 
+
+
+  g <- g + jaspGraphs::themeJaspRaw() +
+    jaspGraphs::geom_rangeframe(sides = 'b') +
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
       legend.key.width  = ggplot2::unit(1.5,"cm"),
-      
+
       axis.line.y  = ggplot2::element_blank(),
       #axis.text.y  = ggplot2::element_blank(),
       axis.ticks.y = ggplot2::element_blank(),
@@ -575,17 +575,17 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       legend.position = "none"
       #plot.margin  = ggplot2::unit(c(0,0,0,max(sapply(legend$name,nchar))/60), "npc")
     )
-  
+
   plot <- g
-  
+
   return(plot)
 }
 .plotIterativeLS       <- function(allLines, allCI, xName = "Observations", yName = NULL, xStart = 0,
                                    palette = "colorblind", BFlog = NULL, yRange = NULL){
-  
+
   allLines      <- do.call("rbind", allLines)
   allLines$name <- factor(allLines$name, levels = sort(levels(allLines$name)))
-  
+
   obsXmax    <- max(allLines$x)
   newXmax    <- obsXmax
   if (obsXmax > 10){
@@ -593,7 +593,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   } else {
     xBreaks <- xStart:obsXmax
   }
-  
+
   if (is.null(yRange)){
     if (is.null(BFlog)){
       yRange <- c(0, 1)
@@ -601,18 +601,18 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       yRange <- range(c(allLines$y, 0))
     } else if (!BFlog){
       yRange <- range(c(allLines$y, 1))
-    }    
+    }
   }
-  
-  
-  mappingLines   <- ggplot2::aes(x = x, y = y, 
+
+
+  mappingLines   <- ggplot2::aes(x = x, y = y,
                                  group = name, color = name)
-  mappinglCI     <- ggplot2::aes(x = x, y = y1, 
+  mappinglCI     <- ggplot2::aes(x = x, y = y1,
                                  group = name, color = name)
-  mappinguCI     <- ggplot2::aes(x = x, y = y2, 
+  mappinguCI     <- ggplot2::aes(x = x, y = y2,
                                  group = name, color = name)
   mappingPolygon <- ggplot2::aes(x = x, y = y, group = name, fill = name)
-  
+
   clr  <- scales::gradient_n_pal(jaspGraphs::JASPcolors(palette))(seq(0, 1, length.out = length(unique(allLines$name))))
   #clr  <- jaspGraphs::colorBrewerJasp(n = length(unique(allLines$name)))
   if (length(allCI) > 0){
@@ -622,10 +622,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     }
     clr1 <- clr[order(order(namesCI))]
   }
-  
-  
+
+
   g <- ggplot2::ggplot()
-  
+
   if (length(allCI) > 0){
     for(i in length(allCI):1){
       if (is.null(allCI[[i]]))next
@@ -635,8 +635,8 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         y = c(tempData$y1, rev(tempData$y2)),
         name = rep(tempData$name,2)
       )
-      
-      g <- g + 
+
+      g <- g +
         ggplot2::geom_polygon(
           data    = tempPoly,
           mapping = mappingPolygon, fill = clr1[i], alpha = .3) +
@@ -648,7 +648,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           mapping = mappinglCI, size = 1, linetype = 2)
     }
   }
-  
+
   if (!is.null(BFlog)){
     if (BFlog){
       g <- g +
@@ -662,50 +662,50 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           mapping = ggplot2::aes(x = x, y = y), size = 1, show.legend = F, linetype = 3)
     }
   }
-  
+
   g <- g +
     ggplot2::geom_line(
       data    = allLines,
       mapping = mappingLines, size = 1)
-  
+
   g <- g + .plotXAxis(xName, c(xStart, newXmax), TRUE)
   g <- g + .plotYAxis2(yName, yRange)
   g <- g + ggplot2::scale_colour_manual(values = clr)
-  
-  
+
+
   if (mean(allLines$y[allLines$x == max(allLines$x)]) > .5) {
     legend.position = c(0.8, 0.03 + length(unique(allLines$name))/10)
   } else {
     legend.position = c(0.8, 1.03)
   }
-  
-  g <- g + jaspGraphs::themeJaspRaw(legend.position = legend.position) + 
-    jaspGraphs::geom_rangeframe(sides = 'lb') + 
+
+  g <- g + jaspGraphs::themeJaspRaw(legend.position = legend.position) +
+    jaspGraphs::geom_rangeframe(sides = 'lb') +
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 2, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
       legend.key.width  = ggplot2::unit(1.5,"cm"),
     ) +
     ggplot2::theme(legend.position = "right")
-  
+
   plot <- g
   class(plot) <- c("jaspGraphs", class(plot))
-  
+
   return(plot)
 }
-.plotIndividualLS      <- function(allLines, allArrows, pointEstimate, CI, CIallLines, dfPoints = NULL, xRange, xName, yName = NULL, nRound = 3){ 
-  
+.plotIndividualLS      <- function(allLines, allArrows, pointEstimate, CI, CIallLines, dfPoints = NULL, xRange, xName, yName = NULL, nRound = 3){
+
   mappingLines   <- ggplot2::aes(x = x, y = y, group = g,)
   mappingArrows  <- ggplot2::aes(x = x , xend = x, y = yStart, yend = yEnd, group = g)
   mappingArrows1 <- ggplot2::aes(x = xStart , xend = xEnd, y = y, yend = y, group = g)
   mappingArrows2 <- ggplot2::aes(x = xEnd , xend = xStart, y = y, yend = y, group = g)
   mappingText    <- ggplot2::aes(x = x, y = y, label = label)
   mappingPoint   <- ggplot2::aes(x = x, y = y)
-  
+
   # get the y_axis max
   yMax <- .getYMax(allLines, allArrows)
-  
+
   # set the CI text
   if (!is.null(CI) || !is.null(pointEstimate)){
     # text for the interval
@@ -715,22 +715,22 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
   if (!is.null(CI))
     CI <- cbind.data.frame(CI, "y" = yMax * 1.05)
-  
+
   g <- ggplot2::ggplot()
-  
+
   if (!is.null(allArrows)){
-    
+
     tempArrows        <- allArrows
     tempArrows$yEnd   <- tempArrows$yEnd * .scalingSpikes(allLines, allArrows)
     tempArrows$yEnd[tempArrows$yEnd < .Machine$double.eps] <- 1e-5
-    
+
     g <- g + ggplot2::geom_segment(
       data    = allArrows,
       mapping = mappingArrows, size = 1,
       arrow   = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
       color   = "black")
   }
-  
+
   if (!is.null(allLines)){
     if (!is.null(CIallLines)){
       g <- g + ggplot2::geom_polygon(
@@ -739,9 +739,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     }
     g <- g + ggplot2::geom_line(
       data    = allLines,
-      mapping = mappingLines, size = 1, color = "black") 
+      mapping = mappingLines, size = 1, color = "black")
   }
-  
+
   if (!is.null(CI)){
     if (!is.na(CI$xStart[1])){
       g <- g + ggplot2::geom_segment(
@@ -755,17 +755,17 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           color   = "black")
     }
   }
-  
+
   if (!is.null(CI) || !is.null(pointEstimate)){
-    labelY    <- if (length(tempLabel) == 1) 1.10 else 1.25 - .07 * c(1:length(tempLabel)) 
+    labelY    <- if (length(tempLabel) == 1) 1.10 else 1.25 - .07 * c(1:length(tempLabel))
     for(i in 1:length(tempLabel)){
-      
+
       tempText <- data.frame(
         label = tempLabel[i],
         x = (xRange[1] + xRange[2])/2,
         y = yMax * labelY[i]
       )
-      
+
       g <- g + ggplot2::geom_text(
         data    = tempText,
         mapping = mappingText,
@@ -774,48 +774,48 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
     }
   }
-  
+
   if (!is.null(dfPoints)){
     g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = FALSE,
-                                 inherit.aes = FALSE, size = 4, shape = 4, 
+                                 inherit.aes = FALSE, size = 4, shape = 4,
                                  stroke = 1.25, fill = "grey")
   }
-  
+
   if (!is.null(pointEstimate)){
     if (!anyNA(pointEstimate$x)){
       g <- g + ggplot2::geom_point(data = pointEstimate, mapping = mappingPoint, show.legend = FALSE,
-                                   inherit.aes = FALSE, size = 4, shape = 21, 
-                                   stroke = 1.25, fill = "grey") 
+                                   inherit.aes = FALSE, size = 4, shape = 21,
+                                   stroke = 1.25, fill = "grey")
     }
   }
-  
+
   # x-axes
   g <- g + .plotXAxis(xName, xRange, FALSE)
   g <- g + .plotYAxis(allLines, allArrows, tempLabel)
-  
-  
-  g <- g + jaspGraphs::themeJaspRaw() + 
-    jaspGraphs::geom_rangeframe(sides = if (!is.null(allLines) & !is.null(allArrows)) "lbr" else "lb") +  
+
+
+  g <- g + jaspGraphs::themeJaspRaw() +
+    jaspGraphs::geom_rangeframe(sides = if (!is.null(allLines) & !is.null(allArrows)) "lbr" else "lb") +
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
-      legend.key.width  = ggplot2::unit(1.5,"cm")) + 
+      legend.key.width  = ggplot2::unit(1.5,"cm")) +
     .plotThemePlus(allLines, allArrows) +
     ggplot2::theme(legend.position = "right")
-  
+
   plot <- g
   return(plot)
 }
 .plotPredictionLS      <- function(dfHist, pointEstimate, CI, xRange, xName, yName, nRound = 0, xBlacked = NULL,
                                    proportions = FALSE, predictionN = NULL){
-  
+
   mappingHistogram  <- ggplot2::aes(x = x, y = y, fill = col)
   mappingArrows1    <- ggplot2::aes(x = xStartAdj , xend = xEndAdj, y = y, yend = y, group = g)
   mappingArrows2    <- ggplot2::aes(x = xEndAdj,  xend = xStartAdj, y = y, yend = y, group = g)
   mappingText       <- ggplot2::aes(x = x, y = y, label = label)
   mappingPoint      <- ggplot2::aes(x = x, y = y)
-  
+
   if (!is.null(CI) || !is.null(pointEstimate)){
     # text for the interval
     tempLabel <- .CIlabelLS(CI, nRound, pointEstimate)
@@ -823,7 +823,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   } else {
     tempLabel <- NULL
   }
-  
+
   if (proportions){
     xBreaks    <- jaspGraphs::getPrettyAxisBreaks(xRange)
     xBreaks[1] <- 0
@@ -832,22 +832,22 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     xBreaks  <- round(jaspGraphs::getPrettyAxisBreaks(xRange))
     xBreaks[length(xBreaks)] <- predictionN
   }
-  
-  
+
+
   if (xBreaks[length(xBreaks)] > xRange[2])xBreaks[length(xBreaks)] <- xRange[2]
-  
+
   obsYmax    <- max(dfHist$y)
   if (all(round(dfHist$y[1], 5) == round(dfHist$y, 5)))
     obsYmax <- obsYmax * 1.2
   yBreaks    <- jaspGraphs::getPrettyAxisBreaks(c(0, obsYmax))
   breaksYmax <- yBreaks[length(yBreaks)]
   newymax    <- max(ifelse(!is.null(CI) || !is.null(pointEstimate), yMaxMultiplier + .05, 1.10) * obsYmax, breaksYmax)
-  
+
   dfHist$col <- "a"
   if (!is.null(CI)){
-    
+
     CI <- cbind.data.frame(CI, "y" = obsYmax * 1.10)
-    
+
     if (!proportions){
       CI$xStartAdj <- CI$xStart - .5
       CI$xEndAdj   <- CI$xEnd   + .5
@@ -855,14 +855,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       CI$xStartAdj <- CI$xStart - .5/(predictionN + 1)
       CI$xEndAdj   <- CI$xEnd   + .5/(predictionN + 1)
     }
-    
+
     for(i in 1:nrow(CI)){
       dfHist$col[dfHist$x >= CI$xStart[i] & dfHist$x <= CI$xEnd[i]] <- "b"
     }
   }
   if (!is.null(xBlacked))
     dfHist[dfHist$x == xBlacked,"col"] <- "c"
-  
+
   g <- ggplot2::ggplot()
   g <- g + ggplot2::geom_bar(
     data     = dfHist,
@@ -871,8 +871,8 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     col      = "black",
     stat     = "identity"
   )
-  
-  
+
+
   if (!is.null(CI)){
     if (!is.na(CI$xStart[1])){
       g <- g + ggplot2::geom_segment(
@@ -886,92 +886,92 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           color   = "black")
     }
   }
-  
+
   if (!is.null(CI) || !is.null(pointEstimate)){
     r <- 0
     for(i in 1:length(tempLabel)){
-      
+
       tempText <- data.frame(
         label = tempLabel[i],
         x = (xRange[1] + xRange[2])/2,
         y = obsYmax * (yMaxMultiplier-r)
       )
-      
+
       g <- g + ggplot2::geom_text(
         data    = tempText,
         mapping = mappingText,
         parse   = TRUE,
         hjust   = .5, vjust = 0, size = 6
       )
-      
+
       r <- r + .10
     }
   }
-  
+
   if (!is.null(pointEstimate)){
     if (!anyNA(pointEstimate$x)){
       g <- g + ggplot2::geom_point(data = pointEstimate, mapping = mappingPoint, show.legend = FALSE,
-                                   inherit.aes = FALSE, size = 4, shape = 21, 
-                                   stroke = 1.25, fill = "grey") 
+                                   inherit.aes = FALSE, size = 4, shape = 21,
+                                   stroke = 1.25, fill = "grey")
     }
   }
-  
+
   # control fill
   if (is.null(CI)){
-    fillColor <- c("grey90") 
+    fillColor <- c("grey90")
   } else {
     if (nrow(CI) == 1){
       if (all(xRange[1]:xRange[2] %in% CI$xStart:CI$xEnd)){
-        fillColor <- c("grey50") 
+        fillColor <- c("grey50")
       } else {
-        fillColor <- c("grey90", "grey50") 
+        fillColor <- c("grey90", "grey50")
       }
     } else {
       if (all(xRange[1]:xRange[2] %in% c(unlist(sapply(1:nrow(CI), function(i)CI$xStart[i]:CI$xEnd[i]))))){
-        fillColor <- c("grey50") 
+        fillColor <- c("grey50")
       } else {
-        fillColor <- c("grey90", "grey50") 
+        fillColor <- c("grey90", "grey50")
       }
     }
   }
   if (!is.null(xBlacked))
     fillColor <- c(fillColor, "steelblue")
-  
-  
+
+
   if (!proportions){
     g <- g + ggplot2::scale_x_continuous(xName, breaks = xBreaks, limits = c(xRange[1] - .5, xRange[2] + .5))
   } else {
     g <- g + ggplot2::scale_x_continuous(xName, breaks = xBreaks, limits = c(xRange[1] - .5/(predictionN+1), xRange[2] + .5/(predictionN+1)))
   }
-  g <- g + ggplot2::scale_y_continuous(yName, breaks = yBreaks, limits = c(0, newymax)) 
+  g <- g + ggplot2::scale_y_continuous(yName, breaks = yBreaks, limits = c(0, newymax))
   g <- g + ggplot2::scale_colour_manual(values = fillColor, aesthetics = "fill")
-  
-  
-  g <- g + jaspGraphs::themeJaspRaw() + 
-    jaspGraphs::geom_rangeframe(sides = 'lb') +  
+
+
+  g <- g + jaspGraphs::themeJaspRaw() +
+    jaspGraphs::geom_rangeframe(sides = 'lb') +
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
       legend.key.width  = ggplot2::unit(1.5,"cm"))
-  
+
   plot <- g
   return(plot)
 }
 .plotAccuracyLS        <- function(dfHist, xName = xName, yName = yName){
-  
+
   mappingHistogram  <- ggplot2::aes(x = x, y = y, fill = col)
-  
+
   yBreaks  <- jaspGraphs::getPrettyAxisBreaks(c(0, dfHist$y))
   xBreaks  <- 1:nrow(dfHist)
   xRange   <- c(.5, nrow(dfHist) + .5)
-  
+
   obsYmax  <- max(dfHist$y)
   breaksYmax <- yBreaks[length(yBreaks)]
   newymax    <- max(1.10 * obsYmax, breaksYmax)
-  
+
   dfHist$col <- "a"
-  
+
   g <- ggplot2::ggplot()
   g <- g + ggplot2::geom_bar(
     data     = dfHist,
@@ -980,30 +980,30 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     col      = "black",
     stat     = "identity"
   )
-  
-  
+
+
   g <- g + ggplot2::scale_x_continuous(xName, breaks = xBreaks, labels = dfHist$g, limits = xRange)
-  g <- g + ggplot2::scale_y_continuous(yName, breaks = yBreaks, limits = c(0, newymax)) 
+  g <- g + ggplot2::scale_y_continuous(yName, breaks = yBreaks, limits = c(0, newymax))
   g <- g + ggplot2::scale_colour_manual(values = "grey90", aesthetics = "fill")
-  
-  
-  g <- g + jaspGraphs::themeJaspRaw() + 
-    jaspGraphs::geom_rangeframe(sides = 'lb') +  
+
+
+  g <- g + jaspGraphs::themeJaspRaw() +
+    jaspGraphs::geom_rangeframe(sides = 'lb') +
     ggplot2::theme(
-      legend.title = ggplot2::element_blank(), 
+      legend.title = ggplot2::element_blank(),
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
       legend.key.width  = ggplot2::unit(1.5,"cm"),
       axis.text.x       = if (nrow(dfHist) > 3) ggplot2::element_text(angle = 45))
-  
+
   plot <- g
   return(plot)
-  
+
 }
 
 # support functions
 .CIlabelLS            <- function(CI, nRound, PE = NULL){
-  
+
   if (!is.null(CI)){
     tempInt <- sapply(1:nrow(CI), function(i){
       if (is.na(CI$xStart[i])){
@@ -1023,11 +1023,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     )
     tempInt <- paste(tempInt, collapse = " and " )
     tempInt <- paste("'",tempInt,"'")
-    
+
     # text for the coverage
     tempCov <- paste0(c("'",round(CI$coverage[1]*100), "% CI'"), collapse = "")
-    
-    
+
+
     if (CI$g[1] == "HPD"){
       tempLabel <- paste(c(tempCov,"['HPD']:",tempInt), collapse = "")
     } else if (CI$g[1] == "custom"){
@@ -1038,11 +1038,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     } else if (CI$g[1] == "central"){
       tempLabel <- paste(c(tempCov,":",tempInt), collapse = "")
     }
-    
+
   } else {
     tempLabel <- NULL
   }
-  
+
   if (!is.null(PE)){
     if (nrow(PE) > 1)
       PE <- PE[1,]
@@ -1056,13 +1056,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       tempLabel <- tempPe
     }
   }
-  
+
   if (nchar(tempLabel) > 75){
     tempO <- gregexpr(" and", substr(tempLabel, 1, 65))
-    tempLabel <- c(paste(substr(tempLabel, 1, tempO[[1]][length(tempO[[1]])]-1), "'", sep = ""), 
+    tempLabel <- c(paste(substr(tempLabel, 1, tempO[[1]][length(tempO[[1]])]-1), "'", sep = ""),
                     paste("'",substr(tempLabel, tempO[[1]][length(tempO[[1]])], nchar(tempLabel)), sep = ""))
   }
-  
+
   return(tempLabel)
 }
 .getYMax               <- function(allLines, allArrows){
@@ -1071,8 +1071,8 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     if (all(round(allLines$y[1], 5) == round(allLines$y, 5)))
         maxXLines <- maxXLines * 1.2
   }
-    
-  
+
+
   if (!is.null(allLines) & !is.null(allArrows)){
     yBreaks  <- jaspGraphs::getPrettyAxisBreaks(c(0, maxXLines))
     yMax     <- max(c(allLines$y, yBreaks))
@@ -1095,9 +1095,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 }
 .plotXAxis             <- function(xName, xRange, discrete){
-  
+
   xBreaks <- jaspGraphs::getPrettyAxisBreaks(xRange)
-  
+
   if (discrete){
     xBreaks <- round(xBreaks)
     xBreaks <- unique(xBreaks[xBreaks >= xRange[1] &  xBreaks <= xRange[2]])
@@ -1107,13 +1107,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       xBreaks <- c(xBreaks, floor(xRange[2]))
   }
   xRange <- range(c(xRange, xBreaks))
-  
+
   return(ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks))
 }
 .plotYAxis             <- function(allLines, allArrows, CI){
-  
+
   yMax <- .getYMax(allLines, allArrows)
-  
+
   if (!is.null(allLines) & !is.null(allArrows)){
     yBreaks  <- jaspGraphs::getPrettyAxisBreaks(c(0, yMax))
     yBreaks2 <- jaspGraphs::getPrettyAxisBreaks(c(0, max(allArrows$yEnd)))
@@ -1123,14 +1123,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   } else {
     yBreaks  <- jaspGraphs::getPrettyAxisBreaks(c(0, yMax))
   }
-  
+
   # set the y-scale plotting range
   if (!is.null(CI)){
-    yRange    <- c(0, max(c(yMax * 1.20), max(yBreaks))) 
+    yRange    <- c(0, max(c(yMax * 1.20), max(yBreaks)))
   } else {
-    yRange    <- c(0, max(c(yMax, max(yBreaks)))) 
+    yRange    <- c(0, max(c(yMax, max(yBreaks))))
   }
-  
+
   if (!is.null(allLines) & !is.null(allArrows)){
     return(ggplot2::scale_y_continuous(
       gettext("Density"),
@@ -1151,10 +1151,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 }
 .plotYAxis2            <- function(yName, yRange){
-  
+
   yBreaks <- jaspGraphs::getPrettyAxisBreaks(yRange)
   yRange  <- range(c(yRange, yBreaks))
-  
+
   return(ggplot2::scale_y_continuous(yName, limits = yRange, breaks = yBreaks))
 }
 .plotThemePlus         <- function(allLines, allArrows){
@@ -1163,7 +1163,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ggplot2::theme(
         axis.title.y.right = ggplot2::element_text(vjust = 3),
         plot.margin = ggplot2::margin(t = 3, r = 10, b = 0, l = 1))
-    )    
+    )
   } else {
     return(
       ggplot2::theme(
@@ -1175,52 +1175,52 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
 # containers and common outputs
 .introductoryTextLS            <- function(jaspResults, options, analysis){
-  
+
   if (!is.null(jaspResults[['introText']])) return()
-  
+
   intro <- createJaspHtml()
   intro$dependOn(c("introText"))
   intro$position <- 0
-  
+
   intro[['text']] <- .explanatoryTextLS("main", NULL, analysis)
-  
+
   jaspResults[['introText']] <- intro
-  
-  return()  
+
+  return()
 }
 
 
 
 .estimatesContainerLS          <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["estimatesContainer"]])){
     estimatesContainer <- createJaspContainer("Model")
     estimatesContainer$position <- 2
     estimatesContainer$dependOn("pointEstimate")
-    jaspResults[["estimatesContainer"]] <- estimatesContainer 
+    jaspResults[["estimatesContainer"]] <- estimatesContainer
   } else {
     estimatesContainer <- jaspResults[["estimatesContainer"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(estimatesContainer[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("estimates", options, analysis)
-    
-    estimatesContainer[['introText']] <- introText    
+
+    estimatesContainer[['introText']] <- introText
   }
-  
+
   return(estimatesContainer)
 }
 .containerPlotsLS              <- function(jaspResults, options, analysis, type){
-  
+
   if (is.null(jaspResults[[paste0("containerPlots", type)]])){
     containerPlots <- createJaspContainer(title = gettextf(
-      "%1$s %2$s Plots", 
+      "%1$s %2$s Plots",
       switch(
         options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
         "overlying" = gettext("All"),
@@ -1233,53 +1233,53 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")
     ))
     containerPlots$position <- ifelse(type == "Prior", 3, 4)
-    jaspResults[[paste0("containerPlots", type)]] <- containerPlots 
+    jaspResults[[paste0("containerPlots", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlots", type)]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerPlots[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("parameter_plots", options, analysis, type)
-    
-    containerPlots[['introText']] <- introText    
+
+    containerPlots[['introText']] <- introText
   }
-  
+
   return(containerPlots)
 }
 .containerPlotsBothLS          <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerBoth"]])){
     containerBoth <- createJaspContainer(title = gettext("Prior and Posterior Plots"))
     containerBoth$position <- 5
     containerBoth$dependOn("plotsBoth")
-    
+
     jaspResults[["containerBoth"]] <- containerBoth
   } else {
     containerBoth <- jaspResults[["containerBoth"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerBoth[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("both_plots", options, analysis)
-    
-    containerBoth[['introText']] <- introText    
+
+    containerBoth[['introText']] <- introText
   }
-  
+
   return(containerBoth)
 }
 .containerSequentialPointLS    <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerIterative"]])){
     containerIterative <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis: Point Estimate",
@@ -1291,28 +1291,28 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )))
     containerIterative$position <- 6
     containerIterative$dependOn(c("plotsIterative", "plotsIterativeType", "plotsIterativeEstimateType"))
-    
+
     jaspResults[["containerIterative"]] <- containerIterative
   } else {
     containerIterative <- jaspResults[["containerIterative"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerIterative[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("sequential_point", options, analysis)
-    
-    containerIterative[['introText']] <- introText    
+
+    containerIterative[['introText']] <- introText
   }
-  
+
   return(containerIterative)
 }
 .containerSequentialIntervalLS <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerIterativeInterval"]])){
     containerIterativeInterval <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis: Interval",
@@ -1324,80 +1324,80 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )))
     containerIterativeInterval$position <- 7
     containerIterativeInterval$dependOn(c("plotsIterativeInterval", "plotsIterativeIntervalType"))
-    
+
     jaspResults[["containerIterativeInterval"]] <- containerIterativeInterval
   } else {
     containerIterativeInterval <- jaspResults[["containerIterativeInterval"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerIterativeInterval[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn(c("introText", "plotsIterativeIntervalType"))
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("sequential_interval", options, analysis)
-    
-    containerIterativeInterval[['introText']] <- introText    
+
+    containerIterativeInterval[['introText']] <- introText
   }
-  
+
   return(containerIterativeInterval)
 }
 .containerSequentialUpdatingLS <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerIterativeUpdating"]])){
     containerIterativeUpdating <- createJaspContainer(title = gettext("Sequential Posterior Updating"))
     containerIterativeUpdating$position <- 8
     containerIterativeUpdating$dependOn("doIterative")
-    
+
     jaspResults[["containerIterativeUpdating"]] <- containerIterativeUpdating
   } else {
     containerIterativeUpdating <- jaspResults[["containerIterativeUpdating"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerIterativeUpdating[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("sequential_updating", options, analysis)
-    
-    containerIterativeUpdating[['introText']] <- introText    
+
+    containerIterativeUpdating[['introText']] <- introText
   }
-  
+
   return(containerIterativeUpdating)
 }
 .containerPredictionsLS        <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerPredictions"]])){
     containerPredictions <- createJaspContainer(title = gettext("Prediction Summary"))
     containerPredictions$position <- 9
     containerPredictions$dependOn(c("predictionTable", "predictionTableEstimate"))
-    
+
     jaspResults[["containerPredictions"]] <- containerPredictions
   } else {
     containerPredictions <- jaspResults[["containerPredictions"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerPredictions[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("predictions", options, analysis)
-    
-    containerPredictions[['introText']] <- introText    
+
+    containerPredictions[['introText']] <- introText
   }
-  
+
   return(containerPredictions)
 }
 .containerPredictionPlotsLS    <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerPredictionPlots"]])){
     containerPredictionPlots <- createJaspContainer(title = gettextf(
       "%s Prediction Plots",
@@ -1409,28 +1409,28 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )))
     containerPredictionPlots$position <- 10
     containerPredictionPlots$dependOn(c("plotsPredictions", "predictionPlotType"))
-    
+
     jaspResults[["containerPredictionPlots"]] <- containerPredictionPlots
   } else {
     containerPredictionPlots <- jaspResults[["containerPredictionPlots"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerPredictionPlots[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis)
-    
-    containerPredictionPlots[['introText']] <- introText    
+
+    containerPredictionPlots[['introText']] <- introText
   }
-  
+
   return(containerPredictionPlots)
 }
 .containerPlots2LS             <- function(jaspResults, options, analysis, type){
-  
+
   if (is.null(jaspResults[[paste0("containerPlots", type)]])){
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Plots",
@@ -1446,27 +1446,27 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")
     ))
     containerPlots$position <- ifelse(type == "Prior", 3, 6)
-    jaspResults[[paste0("containerPlots", type)]] <- containerPlots 
+    jaspResults[[paste0("containerPlots", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlots", type)]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerPlots[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("parameter_plots", options, analysis, type)
-    
-    containerPlots[['introText']] <- introText    
+
+    containerPlots[['introText']] <- introText
   }
-  
+
   return(containerPlots)
 }
 .containerPrediction2PlotsLS   <- function(jaspResults, options, analysis, type){
-  
+
   if (is.null(jaspResults[[paste0("containerPlotsPrediction", type)]])){
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Prediction Plots",
@@ -1483,27 +1483,27 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       if (type == "Posterior") "predictionN"
     ))
     containerPlots$position <- ifelse(type == "Prior", 4, 10)
-    jaspResults[[paste0("containerPlotsPrediction", type)]] <- containerPlots 
+    jaspResults[[paste0("containerPlotsPrediction", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlotsPrediction", type)]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerPlots[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn(c("introText", ifelse(type == "Prior", "plotsPredictionType", "plotsPredictionPostType")))
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis, type)
-    
-    containerPlots[['introText']] <- introText    
+
+    containerPlots[['introText']] <- introText
   }
-  
+
   return(containerPlots)
 }
 .containerPlotsBoth2LS         <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerBoth"]])){
     containerBoth <- createJaspContainer(title = gettextf(
       "%s Prior and Posterior Plots",
@@ -1515,31 +1515,31 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )))
     containerBoth$position <- 7
     containerBoth$dependOn(c("plotsBoth", "plotsBothType"))
-    
+
     jaspResults[["containerBoth"]] <- containerBoth
   } else {
     containerBoth <- jaspResults[["containerBoth"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerBoth[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("both_plots", options, analysis)
-    
-    containerBoth[['introText']] <- introText    
+
+    containerBoth[['introText']] <- introText
   }
-  
+
   return(containerBoth)
 }
 .containerPredictiveAccuracyLS <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerPredictiveAccuracy"]])){
     containerPredictiveAccuracy <- createJaspContainer(title = gettextf(
-      "%s Predictive Accuracy Plot", 
+      "%s Predictive Accuracy Plot",
       switch(
         options[["plotsPredictiveAccuracyType"]],
         "conditional" = gettext("Conditional"),
@@ -1548,28 +1548,28 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )))
     containerPredictiveAccuracy$position <- 5
     containerPredictiveAccuracy$dependOn(c("plotsPredictiveAccuracy", "plotsPredictiveAccuracyType"))
-    
+
     jaspResults[["containerPredictiveAccuracy"]] <- containerPredictiveAccuracy
   } else {
     containerPredictiveAccuracy <- jaspResults[["containerPredictiveAccuracy"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerPredictiveAccuracy[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("predictive_accuracy", options, analysis)
-    
-    containerPredictiveAccuracy[['introText']] <- introText    
+
+    containerPredictiveAccuracy[['introText']] <- introText
   }
-  
+
   return(containerPredictiveAccuracy)
 }
 .containerSequentialTestsLS    <- function(jaspResults, options, analysis){
-  
+
   if (is.null(jaspResults[["containerSequentialTests"]])){
     containerSequentialTests <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis",
@@ -1582,35 +1582,35 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )))
     containerSequentialTests$position <- 8
     containerSequentialTests$dependOn(c("plotsIterative", "plotsIterativeType"))
-    
+
     jaspResults[["containerSequentialTests"]] <- containerSequentialTests
   } else {
     containerSequentialTests <- jaspResults[["containerSequentialTests"]]
   }
-  
-  
+
+
   if (options[["introText"]] && is.null(containerSequentialTests[['introText']])){
-    
+
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
-    
+
     introText[['text']] <- .explanatoryTextLS("sequential_tests", options, analysis)
-    
-    containerSequentialTests[['introText']] <- introText    
+
+    containerSequentialTests[['introText']] <- introText
   }
-  
+
   return(containerSequentialTests)
 }
 
 # explanatory text
 .explanatoryTextLS  <- function(text, options = NULL, analysis = NULL, type = NULL){
-  
+
   estimation <- grepl("Est", analysis, fixed = TRUE)
   binomial   <- grepl("bin", analysis, fixed = TRUE)
-  
+
   if (text == "main"){
-    
+
     introText <- gettextf(
       "Welcome to the %s analysis from the Learn Bayes module. This analysis illustrates Bayesian %s using %s examples.",
       switch(
@@ -1623,13 +1623,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse(estimation, gettext("estimation"), gettext("testing")),
       ifelse(binomial,   gettext("binomial"),   gettext("Gaussian"))
     )
-    
+
     parameterInfo <- ifelse(
       binomial,
       gettextf("%s (the population proportion of successes)", "\u03B8"),
       gettextf("%s (the population mean, variance is assumed to be known)", "\u03BC")
     )
-    
+
     overviewText <- gettextf(
       "The analysis is split into 5 sections:
       <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>
@@ -1651,11 +1651,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
              gettext("Posterior prediction - for assesing the predictions from the updated models. In addition, multiple models can be shown in one figure (All), with a depth effect (Stacked), or in individual figures (Individual)."),
              gettext("Posterior prediction - for assesing the predictions from the updated hypotheses. In addition, predictions from multiple hypotheses can be shown when considered alone (Conditional), after multiplication by the prior (Joint), and combined together (Marginal)."))
     )
-    
+
     out <- paste0(introText, "\n\n", overviewText)
-    
+
   } else if (text == "data"){
-    
+
     mainText   <- gettext("The 'Data' section allows you to specify data input for the analysis.")
     optionText <- switch(
       options[["dataType"]],
@@ -1682,15 +1682,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         )
       )
     )
-    
+
     out <- paste0(mainText, " ", optionText)
-    
+
   } else if (text == "estimates"){
-    
+
     estimationFormulas <- switch(
       analysis,
       "binEst"   = gettextf(
-        "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes: 
+        "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         options[["pointEstimate"]],
@@ -1701,51 +1701,51 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           "mode"   = gettextf("mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if%1$s, %2$s > 1", "\u03B1", "\u03B2")
         )),
       "gaussEst" = gettextf(
-        "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s: 
+        "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>",
         "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["pointEstimate"]]),
     )
-    
+
     tableDescription <- gettextf(
       "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:
-    <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>", 
+    <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>",
       ifelse(binomial, "\u03B8", "\u03BC"),
       .estimateTextLS(options[["pointEstimate"]]),
       options[["pointEstimate"]]
     )
-    
+
     out <- paste0(estimationFormulas, "\n", tableDescription)
-    
+
   } else if (text == "tests"){
-    
+
     testsFormulas <- switch(
       analysis,
       "binTest"   = gettextf(
-        "The 'Binomial Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes: 
+        "The 'Binomial Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The marginal likelihood corresponds to a binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with the chance parameter equal to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The marginal likelihood corresponds to a beta-binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with parameters %3$s and %4$s corresponding to the shape parameters of the prior beta distribution.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2"),
       "gaussTest" = gettextf(
-        "The 'Gaussian Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population mean of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s: 
+        "The 'Gaussian Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population mean of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the location of the spike, and standard deviation as %2$s/%7$sN, where 'N' stands for the number of observations.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with mean %3$s and standard deviation %4$s. The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the mean of the prior distribution, and standard deviation of %7$s( %2$s%6$s/N + %4$s%6$s ).</li></ul>",
         "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A"),
     )
-    
+
     testsFormulas2 <- gettextf(
       "The posterior probabilities 'P(H|data)' are then computed using Bayes formula,
         <center>P(H|data) = P(H) * P(data|H) / P(data),</center> where 'P(H)' represents the prior probability of the hypothesis, 'P(data|H)' the marginal likelihood of the data given the hypothesis, and 'P(data)' the probability of the data. The factor 'P(data)' equals the sum of marginal likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H%2$s)*P(H%2$s).",
       "\u2211", "\u1D62"
     )
-    
+
     testsFormulas3 <- gettextf(
       "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,
         <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,
         <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option.",
       "\u2081", "\u2080"
     )
-    
+
     tableDescription <- gettextf(
       "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:
-    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>", 
+    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>",
       ifelse(options[["bfType"]] == "inclusion",
              gettext("'Inclusion BF' - the inclusion Bayes factor for the hypothesis (change from prior to posterior odds for including the hypothesis)"),
              gettextf("'BF' - the Bayes factor comparing the predictive performance of the current hypothesis to the %s",
@@ -1754,11 +1754,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                              "to the hypothesis specified in 'vs.' Dropdown menu"))
       )
     )
-    
+
     out <- paste0(testsFormulas, "\n", testsFormulas2, "\n\n", testsFormulas3, "\n\n", tableDescription)
-    
+
   } else if (text == "parameter_plots"){
-    
+
     generalText <- gettextf(
       "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %4$s distributions are visualized as continuous lines.",
       ifelse(type == "Prior", gettext("Prior distribution"), gettext("Posterior distribution")),
@@ -1766,9 +1766,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse(binomial, "\u03B8", "\u03BC"),
       ifelse(binomial, gettext("beta"), gettext("normal"))
     )
-    
+
     if (estimation){
-      
+
       specificText <- switch(
         options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
         "overlying"    = gettextf(
@@ -1785,11 +1785,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           ifelse(binomial, "\u03B8", "\u03BC"),
           .CIsTextLS(type == "Posterior"))
       )
-      
+
       out <- paste0(generalText, " ", specificText)
-      
+
     } else {
-      
+
       generalText2 <- switch(
         text,
         "Prior"     = "",
@@ -1798,7 +1798,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           ifelse(binomial, gettext("proportion of successes"), gettext("mean"))
         )
       )
-      
+
       specificText <- switch(
         options[[ifelse(type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
         "conditional" = gettextf(
@@ -1818,13 +1818,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           ifelse(type == "Prior", gettext(""), gettext("The result represents the best estimate given all hypotheses and our prior beliefs about them together.")),
           .CIsTextLS(type == "Posterior"))
       )
-      
+
       out <- paste0(generalText, generalText2, " ", specificText)
-      
+
     }
-    
+
   } else if (text == "both_plots"){
-    
+
     generalText <- gettextf(
       "The 'Prior and posterior distribution' option displays the prior and posterior distribution of the parameter %1$s for the individual %2$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %3$s distributions are visualized as continuous lines. Prior distributions are visualized as dashed grey lines and the posterior distribution as solid black lines. In addition, the observed data summary can be visualized as a black cross by selecting the '%4$s' checkbox.",
       ifelse(binomial,   "\u03B8", "\u03BC"),
@@ -1832,13 +1832,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse(binomial,   gettext("beta"), gettext("normal")),
       ifelse(binomial,   gettext("Observed proportion"), gettext("Observed data"))
     )
-    
+
     if (estimation){
-      
+
       out <- generalText
-      
+
     } else {
-      
+
       specificText <- switch(
         options[["plotsBothType"]],
         "conditional" = gettextf(
@@ -1849,35 +1849,35 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           ifelse(binomial, "\u03B8", "\u03BC")),
         "marginal"    = gettext("The 'Marginal' option collapses across all individual prior and posterior distributions, weighting them by their prior and posterior probability.")
       )
-      
+
       out <- paste0(generalText, " ", specificText)
-      
+
     }
-    
+
   } else if (text == "sequential_point"){
-    
+
     generalText <- gettextf(
       "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis).",
       ifelse(binomial, "\u03B8", "\u03BC")
     )
-    
+
     specificText <- switch(
       options[["plotsIterativeType"]],
       "overlying"    = gettextf("The 'All' option shows either the mean ('Mean') or the median ('Median') for all specified models in one figure, allowing for easier comparison. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s", .CIsTextLS()),
       "stacked"      = gettext("The 'Stacked' option shows all of the prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis.")
     )
-    
+
     tableText <- gettext("The 'Updating table' option generates a numerical summary of the displayed figures.")
-    
+
     out <- paste0(generalText, " ", specificText, " ", tableText)
-    
+
   } else if (text == "sequential_interval"){
-    
+
     generalText <- gettextf(
       "The 'Interval' option displays a sequential plot with the probability of parameter %s lying inside of the interval ranging from ('lower') to ('upper'), (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis).",
       ifelse(binomial, "\u03B8", "\u03BC")
     )
-    
+
     specificText <- switch(
       options[["plotsIterativeIntervalType"]],
       "overlying"    = gettextf(
@@ -1886,22 +1886,22 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ),
       "stacked"      = gettext("The 'Stacked' option visualizes the interval for all prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis.")
     )
-    
+
     tableText <- gettext("The 'Updating table' option generates a numerical summary of the displayed figures.")
-    
+
     out <- paste0(generalText, " ", specificText, " ", tableText)
-    
+
   } else if (text == "sequential_updating"){
-    
+
     out <- gettextf(
       "The 'Posterior updating table' option generates a numerical summary of the updating process for parameter %s. The 'Observation' column tracks how many observations have been already encountered for the corresponding posterior distribution. The first row (observation = 0) corresponds to the prior distribution and the last row corresponds to the final posterior distribution after the prior distribution was updated with all observations.",
       ifelse(binomial, "\u03B8", "\u03BC"))
-    
-    
+
+
     estimationFormulas <- switch(
       analysis,
       "binEst"   = gettextf(
-        "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes: 
+        "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         options[["pointEstimate"]],
@@ -1912,13 +1912,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           "mode"   = gettextf("mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if%1$s, %2$s > 1", "\u03B1", "\u03B2")
         )),
       "gaussEst" = gettextf(
-        "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s: 
+        "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>",
         "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["pointEstimate"]]),
     )
-    
+
   } else if (text == "predictions"){
-    
+
     predictionsText <- gettextf(
       "The 'Posterior prediction' section allows the prediction of future data based on the estimated models%s",
       ifelse(estimation,
@@ -1926,9 +1926,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
              gettext(" and the marginal prediction based on the hypotheses weighted by the posterior probabilities.")
       )
     )
-    
+
     if (binomial){
-      
+
       predictionsFormulas <- gettextf(
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
@@ -1945,19 +1945,19 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           "mode"   = ""  # and I couldn't find analytical solution for this at all
         )
       )
-      
+
     } else {
-      
+
       predictionsFormulas <- gettextf(
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions.",
         "\u03BC", "\u03C3", "\u03C3\u209A", "\u221A", "\u00B2", options[["predictionTableEstimate"]]
       )
-      
+
     }
-    
+
     tableDescription <- gettextf(
       "The 'Prediction Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:
-    <ul><li>'Model' - the specified model names</li><li>'Posterior (%1$s)' - the estimated posterior distribution for parameter %1$s (used for prediction)</li>%2$s<li>'Posterior %4$s' - the %5$s of the specified posterior distribution</li><li>'Prediction%3$s' - the predictive distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted data</li></ul>", 
+    <ul><li>'Model' - the specified model names</li><li>'Posterior (%1$s)' - the estimated posterior distribution for parameter %1$s (used for prediction)</li>%2$s<li>'Posterior %4$s' - the %5$s of the specified posterior distribution</li><li>'Prediction%3$s' - the predictive distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted data</li></ul>",
       ifelse(binomial, "\u03B8", "\u03BC"),
       ifelse(estimation, "", "<li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li>"),
       ifelse(binomial, gettext(" (Successes)"), ""),
@@ -1974,13 +1974,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "mode"   = gettext("mode")
       )
     )
-    
+
     out <- paste0(predictionsText, " ", predictionsFormulas, "\n\n", tableDescription)
-    
+
   } else if (text == "prediction_plots"){
-    
+
     if (estimation){
-      
+
       # only posterior prediction plots are available for estimation
       generalText <- gettextf(
         "The 'Posterior predictive distribution' option displays figures of predictive distributions based on posterior distributions of the individual models. The '%1$s' checkbox transforms the figures with predicted data%2$s into figures with %3$s.",
@@ -1988,18 +1988,18 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         ifelse(binomial, gettext(" (number of successes)"), ""),
         ifelse(binomial, gettext("sample proportions"), gettext("sample means"))
       )
-      
+
       specificText <- switch(
         options[["plotsPredictionType"]],
         "overlying"    = gettext("The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."),
         "stacked"      = gettext("The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."),
         "individual"   = gettextf("The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s",.CIsTextLS())
       )
-      
+
       out <- paste0(generalText, " ", specificText)
-      
+
     } else {
-      
+
       generalText <- gettextf(
         "The '%1$s' option displays figures of predictive distributions based on posterior distributions of the individual models. %2$s",
         ifelse(type == "Prior", gettext("Prior predictive distribution"), gettext("Posterior predictive distribution")),
@@ -2016,7 +2016,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                  ifelse(type == "Posterior" && binomial, gettext(" and the 'Predictions table' checkbox shows exact probabilities for every predicted number of successes."), ".")
                ))
       )
-      
+
       specificText <- switch(
         options[[ifelse(type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]],
         "conditional" = gettextf(
@@ -2036,28 +2036,28 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           ifelse(type == "Prior", gettext(""), gettext("The result represents the best estimate given all hypotheses and our prior beliefs about them together.")),
           .CIsTextLS(FALSE))
       )
-      
+
       out <- paste0(generalText, " ", specificText)
-      
+
     }
-    
+
   } else if (text == "predictive_accuracy"){
-    
+
     generalText <- gettext("The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses.")
-    
+
     specificText <- switch(
       options[["plotsPredictiveAccuracyType"]],
       "conditional" = gettext("The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."),
       "joint"       = gettext("The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."),
       "marginal"    = gettext("The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses).")
     )
-    
+
     out <- paste0(generalText, " ", specificText)
-    
+
   } else if (text == "sequential_tests"){
-    
+
     generalText <- gettext("The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis).")
-    
+
     specificText <- switch(
       options[["plotsIterativeType"]],
       "conditional" = gettext("The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."),
@@ -2065,13 +2065,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       "marginal"    = gettext("The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."),
       "BF"          = gettextf("The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown. The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option.", "\u2081", "\u2080")
     )
-    
+
     tableText <- gettext("The 'Updating table' option generates a numerical summary of the displayed figure.")
-    
+
     out <- paste0(generalText, " ", specificText, " ", tableText)
-    
+
   }
-  
+
   return(out)
 }
 .CIsTextLS          <- function(SI = FALSE){
