@@ -19,8 +19,8 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
 
   # input values
   nPlayers  <- length(options[["players"]])
-  probWin   <- sapply(options[["players"]], function(p)p$values[[1]])
-  xPoints   <- sapply(options[["players"]], function(p)p$values[[2]])
+  probWin   <- sapply(options[["players"]], function(p)p[["values"]][[1]])
+  xPoints   <- sapply(options[["players"]], function(p)p[["values"]][[2]])
   winPoints <- options[["winPoints"]]
   nSims     <- options[["nSims"]]
 
@@ -76,8 +76,8 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   ## fill in the table and the plot
   if (nPlayers == 2 & max(xPoints) < winPoints){
 
-    # output of compare_function1, when there are two players
-    result <- compare_function1(probWin[1], xPoints[1], xPoints[2], winPoints, nSims)
+    # output of compareChanceTwoPlayers, when there are two players
+    result <- compareChanceTwoPlayers(probWin[1], xPoints[1], xPoints[2], winPoints, nSims)
 
     # fill in the table
     summaryTable$addRows(list(players = 1, pPoint = probWin[1],   pointsGained = xPoints[1], pA = result[[2]],   pS = result[[1]]))
@@ -91,7 +91,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
       SimulMatrix <- matrix(0, nrow = 1000, ncol = nSims) # the matrix of samples from posterior distribution based on simulated result
 
       for (i in 1:nSims){
-        SimulMatrix[, i] <- rbeta(1000, SimulResult[i]*i+1, i-SimulResult[i]*i+1)
+        SimulMatrix[ , i] <- rbeta(1000, SimulResult[i]*i+1, i-SimulResult[i]*i+1)
       }
       CredInt <- apply(SimulMatrix, 2, HDInterval::hdi) # record the credibility interval
       y.upper <- CredInt[1,]
@@ -107,15 +107,15 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
 
 
   }else if (nPlayers >= 3 & max(xPoints) < winPoints){
-    # output of compare_function2, when there are three or more players
-    result <- compare_function2(xPoints, winPoints, probWin, nSims)
+    # output of compareChanceNPlayers, when there are three or more players
+    result <- compareChanceNPlayers(xPoints, winPoints, probWin, nSims)
 
     # a vector of analytical p for all players, calculated by switching with player 1
     Analytical_Prob <- vector()
     for (i in 1:length(probWin)){
       k_copy <- replace(xPoints, c(1, i), xPoints[c(i, 1)])
       p_copy <- replace(probWin, c(1, i), probWin[c(i, 1)])
-      Analytical_Prob[i] <- compare_function2(k_copy, winPoints, p_copy, nSims)[[2]]
+      Analytical_Prob[i] <- compareChanceNPlayers(k_copy, winPoints, p_copy, nSims)[[2]]
     }
 
     # fill in the table
@@ -137,7 +137,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
       SimulMatrix <- matrix(0, nrow = 1000, ncol = nSims) # the matrix of samples from posterior distribution based on simulated result
 
       for (i in 1:nSims){
-        SimulMatrix[, i] <- MCMCpack::rdirichlet(1000, result[[4]][,i]*i+1)[,1]
+        SimulMatrix[ , i] <- MCMCpack::rdirichlet(1000, result[[4]][ ,i]*i+1)[ ,1]
       }
       CredInt <- apply(SimulMatrix, 2, HDInterval::hdi) # record the credibility interval
       y.upper <- CredInt[1,]
