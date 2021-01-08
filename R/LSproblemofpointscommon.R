@@ -5,18 +5,28 @@
 # y: a vector containing the number of trials each player needs to win
 # a: a vector containing all the parameters for the Dirichlet multinomial distribution, indicating the competence of each player
 
-pDirichletNegMultinom <- function(y, a){
-  dDirichletNegMultinom <- function(y, a){
-    #y <- c(4,3,2)
-    #a <- c(2,3,4)
-    ySum <- sum(y)
-    aSum <- sum(a)
-    p1 <- gamma(ySum) / (gamma(y[1]) * prod(gamma(y+1))/gamma(y[1]+1))
-    p2 <- gamma(aSum) / (prod(gamma(a)))
-    p3 <- (prod(gamma(y + a))) / gamma(ySum + aSum)
-    return (p1 * p2 * p3)
-  }
 
+
+dDirichletNegMultinom <- function(y, a, log = FALSE) {
+  
+  ySum <- sum(y)
+  aSum <- sum(a)
+  
+  lp1 <- lgamma(ySum) - (lgamma(y[1]) + sum(lgamma(y+1)) - lgamma(y[1]+1))
+  lp2 <- lgamma(aSum) - sum(lgamma(a))
+  lp3 <- sum(lgamma(y + a)) - lgamma(ySum + aSum)
+  
+  logDensity <- lp1 + lp2 + lp3
+  if (log)
+    return(logDensity)
+  else
+    return(exp(logDensity))
+  
+}
+
+pDirichletNegMultinom <- function(y, a){
+
+  
   #calculate the prob
   pCalculated <- 0
   for (l in 1:(prod(y)/y[1])){         #generate all the situations that player 1 wins
@@ -24,6 +34,9 @@ pDirichletNegMultinom <- function(y, a){
   }
   return(pCalculated)
 }
+
+
+
 
 
 
@@ -49,7 +62,7 @@ combinations <- function(k){
     sets <- matrix(ncol = n, nrow = prod(k)/k[1])
     for (i in 1:length(x1[ ,1])){
       for (j in 1:k[n]){
-        sets[(i-1)*(k[n])+j, ] <- append(x1[i, ],j-1)
+        sets[(i-1)*(k[n])+j, ] <- c(x1[i, ],j-1)
       }
     }
     
@@ -63,7 +76,7 @@ compareChanceTwoPlayers <- function(p,m1,n1,t,simulation){
   m <- t - m1 # m: the number of success that player 1 should have to win the game
   n <- t - n1 # n: the number of success that player 2 should have to win the game
 
-  recordGame <- vector()
+  recordGame <- numeric(simulation)
   for (i in 1:simulation){
     # copy m and n
     recordTrial <- rbind(m, n)
@@ -74,10 +87,11 @@ compareChanceTwoPlayers <- function(p,m1,n1,t,simulation){
 
     # if recordTrial[1, ] = 0, record 1,player 1 wins this single trial;
     # if recordTrial[2, ] = 0, record 0, player 2 wins
-    recordGame[i] <- recordTrial[2, ]^recordTrial[1, ]
+    # recordGame[i] <- recordTrial[2, ]^recordTrial[1, ]
+    recordGame[i] <- if (recordTrial[2, ] == 0) 0 else 1
 
   }
-  pSimulated <- sum(recordGame)/simulation    # estimated probability that player 1 wins
+  pSimulated <- mean(recordGame)    # estimated probability that player 1 wins
 
   # plot the simulated probability over the number of times the simulation is performed
   pCumulative <- recordGame
@@ -100,7 +114,7 @@ compareChanceNPlayers <- function(k1, t, p, simulation){
   # normalize the probability if they do not sum to one
   p <- p/sum(p)
 
-  recordGame <- vector()# initializing the vector to record the results of all the games
+  recordGame <- numeric(simulation)# initializing the vector to record the results of all the games
   for (i in 1:simulation){
     # copy the trials players need to succeed and update after each trial
     recordTrial <- k # each row stands for simulations
@@ -145,7 +159,7 @@ compareChanceNPlayers <- function(k1, t, p, simulation){
 compareSkillTwoPlayers <- function(m, n, t, alpha = 1, beta = 1, simulation){
 
   # first estimating the probability that player 1 wins
-  recordGame <- vector()
+  recordGame <- numeric(simulation)
   for (i in 1:simulation){
     # copy m and n
     mCopy <- m
@@ -159,8 +173,12 @@ compareSkillTwoPlayers <- function(m, n, t, alpha = 1, beta = 1, simulation){
       }
 
     }
-    # if mCopy = t, record 1,player 1 wins the single trial; if nCopy = t, record 0, player 2 win the trial
-    recordGame[i] <- (t-nCopy)^(t-mCopy)
+    # if mCopy == t, record 1,player 1 wins the single trial; 
+    # if nCopy == t, record 0, player 2 win the trial
+    #recordGame[i] <- (t-nCopy)^(t-mCopy)
+    recordGame[i] <- if (nCopy == t) 0 else 1.
+    
+    
   }
   pSimulated <- sum(recordGame)/simulation    # estimated probability that player 1 wins
 
@@ -181,7 +199,7 @@ compareSkillTwoPlayers <- function(m, n, t, alpha = 1, beta = 1, simulation){
 
 compareSkillNPlayers <- function(k, t, alpha, simulation){
   # first estimating the probability that player 1 wins
-  recordGame <- vector()
+  recordGame <- numeric(simulation)
   for (i in 1:simulation){
     # record the result of every trial
     recordTrial <- matrix(k,nrow = length(k),ncol = 1)
