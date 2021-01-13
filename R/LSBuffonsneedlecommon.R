@@ -12,7 +12,7 @@ simulate_throws <- function(observations, lengthRatio){
   #seed1 <- runif(1, 10, 100)
   #seed <- input$goButton[[1]] + seed1
   
-  seed <- runif(1, 10, 100)
+  #seed <- runif(1, 10, 100)
   
   # initialization
   xe <- vector("numeric", observations)
@@ -21,11 +21,11 @@ simulate_throws <- function(observations, lengthRatio){
   ys <- vector("numeric", observations)
   
   # simulation for the location of midpoint (x,y) and the angle (alpha)    
-  set.seed(seed)
+  #set.seed(seed)
   mNx <<- runif(observations, -10, 10)
-  set.seed(seed + 1)
+  #set.seed(seed + 1)
   mNy <<- runif(observations, -10, 10)
-  set.seed(seed + 2)
+  #set.seed(seed + 2)
   alpha <<- runif(observations, 0, pi)
       
   ind1 <- which(alpha > pi/2)
