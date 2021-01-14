@@ -51,7 +51,8 @@ Form {
 		name: "nSims"; 
 		label: qsTr("Number of simulated games"); 
 		fieldWidth: 50
-		defaultValue: 500  
+		defaultValue: 500
+		min: 100
 	}
 
 	CheckBox 
