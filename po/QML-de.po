@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2021-01-17 19:32+0000\n"
-"Last-Translator: Thomas Langkamp <thomas.lassdiesonnerein@gmx.de>\n"
+"Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/de/>\n"
 "Language: de\n"
@@ -38,15 +38,13 @@ msgctxt "Description|"
 msgid "Continuous"
 msgstr "Kontinuierlich"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Gaussian Estimation"
-msgstr "Ising-Schätzer"
+msgstr "Gaußsche Schätzung"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Gaussian Testing"
-msgstr "Gaußsch"
+msgstr "Gaußsches Testen"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
