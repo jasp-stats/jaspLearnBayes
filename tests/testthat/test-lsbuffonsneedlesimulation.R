@@ -46,7 +46,7 @@
 #to avoid version mismatches between plots from different analyses please validate ALL plots
 #jaspTools::manageTestPlots()
 
-#jaspTools::testAnalysis("LSgameofchance")
-#jaspTools::manageTestPlots("LSgameofchance")
+#jaspTools::testAnalysis("LSBuffonsneedlesimulation")
+#jaspTools::manageTestPlots("LSBuffonsneedlesimulation")
 
 
