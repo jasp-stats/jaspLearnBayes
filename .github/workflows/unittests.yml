@@ -23,9 +23,57 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: ${{ matrix.config.r }}
+      - name: Install system dependencies on macOS
+        # if: runner.os == 'macOS'
+        run: |
+          if [ "${{ runner.os }}" = 'macOS' ]; then
+            brew install --cask xquartz
+          fi
+        shell: bash
+
+      - name: Clone jasp-required-files
+        run: |
+          if [ "${{ runner.os }}" = 'macOS' ]; then
+            branch='MacOS-Original'
+          else
+            branch='Windows'
+          fi
+          echo "branch=$branch"
+          git clone --branch=$branch https://github.com/jasp-stats/jasp-required-files.git pkgs
+        working-directory: ..
+        shell: bash
+
+      - name: Set R library path
+        run: |
+          libPath <- if (.Platform$OS.type == "windows") "/R/library" else "/Frameworks/R.framework/Versions/3.6/Resources/library/"
+          path <- normalizePath(file.path("..", "pkgs", libPath), winslash = "/")
+          cat("\n.libPaths(c('", path, "', .libPaths()))\n", file = "~/.Rprofile", sep = "", append = TRUE)
+        shell: Rscript {0}
+
+      - name: Install JAGS on macOS
+        # if: inputs.requiresJAGS && runner.os == 'macOS'
+        run: |
+          if [ 'true' = 'true' ] && [ "${{ runner.os }}" = 'macOS' ]; then
+            rm '/usr/local/bin/gfortran'
+            brew install jags
+          fi
+        shell: bash
+
+      - name: Locate JAGS on Windows
+        # if: inputs.requiresJAGS && runner.os == 'Windows'
+        run: |
+          if (.Platform$OS.type == "windows" && "true" == "true") {
+            path <- normalizePath(file.path("..", "pkgs", "64", "JAGS"), winslash = "/")
+            cat("\nSys.setenv(JAGS_HOME = '", path, "')\n", file = "~/.Rprofile", sep = "", append = TRUE)
+          }
+        shell: Rscript {0}
+
+      - name: Setup jaspTools
+        run: |
+          install.packages("remotes")
+          remotes::install_github("jasp-stats/jaspTools")
+          jaspTools::setupJaspTools()
+        shell: Rscript {0}
 
       - uses: jasp-stats/jasp-actions/setup-test-env@master
 
