@@ -97,8 +97,9 @@ Form {
 							useExternalBorder: true
 							values:
 							[
-								{ label: qsTr("Spike"),		value: "spike"},
-								{ label: qsTr("Beta"),		value: "beta"}
+								{ label: qsTr("Beta"),		value: "beta"},
+								{ label: qsTr("Spike"),		value: "spike"}
+								
 							]
 						}
 					}
