@@ -460,7 +460,7 @@ Section
 		{
 			name:		"plotsPredictionsObserved"
 			id:			plotsPredictionsObserved
-			label:		qsTr("Observed proportion")
+			label:		qsTr("Observed number of successes")
 			checked:	false
 		}
 
