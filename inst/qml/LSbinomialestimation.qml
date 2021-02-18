@@ -99,7 +99,6 @@ Form {
 							[
 								{ label: qsTr("Beta"),		value: "beta"},
 								{ label: qsTr("Spike"),		value: "spike"}
-								
 							]
 						}
 					}
@@ -150,7 +149,7 @@ Form {
 		}
 	}
 
-	LS.LSestimationinference{}
+	LS.LSestimationpriorandposterior{}
 
 	LS.LSestimationsequential
 	{

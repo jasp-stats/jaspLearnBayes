@@ -169,7 +169,9 @@ Form {
 
 	}
 
-	LS.LStestinginference{
+	LS.LStestingpriorandposterior{}
+
+	LS.LStestingpredictiveperformance{
 		bfTypevsName:				"priors.name"
 	}
 

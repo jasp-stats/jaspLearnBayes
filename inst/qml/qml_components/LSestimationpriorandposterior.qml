@@ -25,7 +25,7 @@ import JASP 1.0
 Section
 {
 	expanded: false
-	title: qsTr("Inference")
+	title: qsTr("Prior and Posterior Distributions")
 	columns: 2
 
 	property alias plotsPosteriorIndividualProportion: plotsPosteriorIndividualProportion.label
