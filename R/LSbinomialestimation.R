@@ -56,12 +56,10 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   if (options[["plotsPosterior"]]){
     if (options[["plotsPosteriorType"]] != "individual")
       .plotsSimpleBinomialLS(jaspResults, data, ready, options, type = "Posterior")
-    if (options[["plotsPosteriorType"]] == "individual").plotsIndividualBinomialLS(jaspResults, data, ready, options, type = "Posterior")
+    if (options[["plotsPosteriorType"]] == "individual")
+      .plotsIndividualBinomialLS(jaspResults, data, ready, options, type = "Posterior")
   }
 
-  # prior and posterior
-  if (options[["plotsBoth"]])
-    .plotsBothBinomialLS(jaspResults, data, ready, options)
 
   ### sequential analysis
   # point estimate
@@ -305,7 +303,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   return()
 }
 .plotsIndividualBinomialLS         <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
-
+  saveRDS(options, file = "C:/Projects/JASP/jaspLearnBayes/do-not-share/options.RDS")
+  saveRDS(data,    file = "C:/Projects/JASP/jaspLearnBayes/do-not-share/data.RDS")
   containerPlots <- .containerPlotsLS(jaspResults, options, "binEst", type)
 
   if (is.null(containerPlots[[paste0("plots",type)]])){
@@ -321,7 +320,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
                                ifelse(type == "Prior", "plotsPriorCoverage",       "plotsPosteriorCoverage"),
                                ifelse(type == "Prior", "plotsPriorLower",          "plotsPosteriorLower"),
                                ifelse(type == "Prior", "plotsPriorUpper",          "plotsPosteriorUpper"),
-                               if(type == "Posterior") "plotsPosteriorBF"))
+                               if(type == "Posterior") c("plotsPosteriorBF", "plotsPosteriorIndividualPrior", "plotsPosteriorIndividualProportion")))
 
     containerPlots[[paste0("plots",type)]] <- plotsIndividual
 
@@ -341,17 +340,19 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 
     } else {
 
-      if (type == "Prior"){
+      if (type == "Prior")
         tempData <- list(
           nSuccesses = 0,
           nFailures  = 0
         )
-      } else
+      else if (type == "Posterior")
         tempData <- data
+
+
 
       for(i in 1:length(options[["priors"]])){
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
+        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["plotsPosteriorIndividualPrior"]] || options[["plotsPosteriorIndividualProportion"]])){ 700 }else{ 530 }, height = 400)
 
         plotsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
 
@@ -359,6 +360,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 
         dfArrowPP   <- NULL
         dfLinesPP   <- NULL
+        dfLinesPP2  <- NULL
         dfCI        <- NULL
         dfCILinesPP <- NULL
 
@@ -403,16 +405,28 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         }
 
 
-        if (options[["priors"]][[i]]$type == "spike")
+        if (options[["priors"]][[i]]$type == "spike"){
           dfArrowPP  <- .dataArrowBinomialLS(options[["priors"]][[i]])
-        else if (options[["priors"]][[i]]$type == "beta"){
+          if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]){
+            dfArrowPP$g <- "Prior = Posterior"
+          } else
+            dfArrowPP$g <- type
+        } else if (options[["priors"]][[i]]$type == "beta"){
 
           dfLinesPP  <- .dataLinesBinomialLS(data, options[["priors"]][[i]])
-          dfLinesPP  <- dfLinesPP[dfLinesPP$g == type,]
+
+          if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]){
+            if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])){
+              dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
+              dfLinesPP$g <- "Prior = Posterior"
+            }
+          } else
+            dfLinesPP  <- dfLinesPP[dfLinesPP$g == type,]
+
 
           if (!is.null(dfCI)){
             for(r in 1:nrow(dfCI)){
-              tempCILinesPP   <- dfLinesPP[dfLinesPP$x >= dfCI$xStart[r] & dfLinesPP$x <= dfCI$xEnd[r],]
+              tempCILinesPP   <- dfLinesPP[dfLinesPP$x >= dfCI$xStart[r] & dfLinesPP$x <= dfCI$xEnd[r] & dfLinesPP$g %in% c(type, "Prior = Posterior"),]
               tempCILinesPP$g <- paste(c(as.character(dfCI$g), r), collapse = "")
               tempCILinesPP   <- rbind.data.frame(
                 data.frame(x = dfCI$xStart[r], y = 0, g = tempCILinesPP$g[1]),
@@ -431,8 +445,17 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         } else
           dfPointEstimate <- NULL
 
+        if (type == "Posterior" && options[["plotsPosteriorIndividualProportion"]]){
+          dfPointsPP <- .dataProportionBinomialLS(data)
+          if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+        } else
+          dfPointsPP <- NULL
 
-        p <- .plotIndividualLS(dfLinesPP, dfArrowPP, dfPointEstimate, dfCI, dfCILinesPP, NULL, c(0,1), xName, nRound = 3)
+        p <- .plotIndividualLS(allLines = dfLinesPP, allArrows = dfArrowPP,
+                               pointEstimate = dfPointEstimate, CI = dfCI, CIallLines = dfCILinesPP,
+                               xRange = c(0,1), xName = xName,
+                               dfPoints = dfPointsPP, nRound = 3,
+                               showLegend = (type == "Posterior" && (options[["plotsPosteriorIndividualProportion"]] || options[["plotsPosteriorIndividualPrior"]])))
         tempPlot$plotObject <- p
       }
     }
@@ -1122,6 +1145,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 }
 .plotsPredictionsIndividualBinomialLS      <- function(jaspResults, data, ready, options){
 
+
   containerPredictionPlots <- .containerPredictionPlotsLS(jaspResults, options, "binEst")
 
   if (is.null(containerPredictionPlots[["plotsPredictions"]])){
@@ -1215,8 +1239,10 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
             dfCI$xEnd   <- dfCI$xEnd  /options[["predictionN"]]
           }
           nRound <- 3
-        } else
+        } else {
           nRound <- 0
+        }
+
 
         if (options[["plotsPredictionEstimate"]]){
           dfPointEstimate <- .estimateDataPointBinomial(data, options[["priors"]][[i]], N = options[["predictionN"]],

@@ -694,14 +694,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   return(plot)
 }
-.plotIndividualLS      <- function(allLines, allArrows, pointEstimate, CI, CIallLines, dfPoints = NULL, xRange, xName, yName = NULL, nRound = 3){
+.plotIndividualLS      <- function(allLines, allArrows, pointEstimate, CI, CIallLines, dfPoints = NULL, xRange, xName, yName = NULL, showLegend = FALSE, nRound = 3){
 
-  mappingLines   <- ggplot2::aes(x = x, y = y, group = g,)
-  mappingArrows  <- ggplot2::aes(x = x , xend = x, y = yStart, yend = yEnd, group = g)
-  mappingArrows1 <- ggplot2::aes(x = xStart , xend = xEnd, y = y, yend = y, group = g)
-  mappingArrows2 <- ggplot2::aes(x = xEnd , xend = xStart, y = y, yend = y, group = g)
+  mappingLines   <- ggplot2::aes(x = x, y = y, color = g)
+  mappingArrows  <- ggplot2::aes(x = x , xend = x, y = yStart, yend = yEnd, color = g)
+  mappingArrows1 <- ggplot2::aes(x = xStart , xend = xEnd, y = y, yend = y)
+  mappingArrows2 <- ggplot2::aes(x = xEnd , xend = xStart, y = y, yend = y)
   mappingText    <- ggplot2::aes(x = x, y = y, label = label)
-  mappingPoint   <- ggplot2::aes(x = x, y = y)
+  mappingPoint   <- ggplot2::aes(x = x, y = y, color = g)
 
   # get the y_axis max
   yMax <- .getYMax(allLines, allArrows)
@@ -726,20 +726,30 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
     g <- g + ggplot2::geom_segment(
       data    = allArrows,
-      mapping = mappingArrows, size = 1,
-      arrow   = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")),
-      color   = "black")
+      mapping = mappingArrows,
+      size    = 1,
+      arrow   = ggplot2::arrow(length = ggplot2::unit(0.5, "cm")))
   }
 
   if (!is.null(allLines)){
     if (!is.null(CIallLines)){
       g <- g + ggplot2::geom_polygon(
         data = CIallLines,
-        mapping = mappingLines, fill = "grey60", alpha = .8)
+        mapping = ggplot2::aes(x = x, y = y), fill = "grey60", alpha = .8, show.legend = FALSE)
     }
-    g <- g + ggplot2::geom_line(
-      data    = allLines,
-      mapping = mappingLines, size = 1, color = "black")
+
+    for(i in 1:length(unique(allLines$g))){
+
+      tempLine <- allLines[allLines$g == unique(allLines$g)[i], ]
+      tempType <- i
+
+      g <- g + ggplot2::geom_line(
+        data     = tempLine,
+        mapping  = mappingLines,
+        size     = 1,
+        show.legend = showLegend,
+        linetype = tempType)
+    }
   }
 
   if (!is.null(CI)){
@@ -776,23 +786,65 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
   if (!is.null(dfPoints)){
-    g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = FALSE,
+    g <- g + ggplot2::geom_point(data = dfPoints, mapping = mappingPoint, show.legend = showLegend,
                                  inherit.aes = FALSE, size = 4, shape = 4,
                                  stroke = 1.25, fill = "grey")
   }
 
   if (!is.null(pointEstimate)){
     if (!anyNA(pointEstimate$x)){
-      g <- g + ggplot2::geom_point(data = pointEstimate, mapping = mappingPoint, show.legend = FALSE,
+      g <- g + ggplot2::geom_point(
+        data = pointEstimate, mapping = ggplot2::aes(x = x, y = y), show.legend = FALSE,
                                    inherit.aes = FALSE, size = 4, shape = 21,
                                    stroke = 1.25, fill = "grey")
     }
   }
 
+
+
+
+  if (!is.null(dfPoints)){
+    if (!is.null(allArrows)){
+      g <- g + ggplot2::scale_color_manual("",
+                                           values  = c(c("black", "gray")[1:length(unique(allArrows$g))], "black"),
+                                           breaks  = c(as.character(allArrows$g), as.character(unique(dfPoints$g))),
+                                           guide   = ggplot2::guide_legend(override.aes = list(
+                                             linetype = if (length(unique(allArrows$g)) == 1) c(1, NA) else c(1, 2, NA),
+                                             shape    = if (length(unique(allArrows$g)) == 1) c(NA, 4) else c(NA, NA, 4)
+                                           )))
+    } else {
+      g <- g + ggplot2::scale_color_manual("",
+                                           values  = c("black", "gray", "black")[c(1:length(unique(allLines$g)), 3)],
+                                           breaks  = c(unique(as.character(allLines$g)), as.character(unique(dfPoints$g))),
+                                           guide   = ggplot2::guide_legend(override.aes = list(
+                                             linetype = c( 1,  2, NA)[c(1:length(unique(allLines$g)), 3)],
+                                             shape    = c(NA, NA,  4)[c(1:length(unique(allLines$g)), 3)]
+                                           )))
+    }
+  } else {
+    if (!is.null(allArrows)){
+      g <- g + ggplot2::scale_color_manual("",
+                                           values  = c("black", "gray")[1:length(unique(allArrows$g))],
+                                           breaks  = as.character(allArrows$g),
+                                           guide   = ggplot2::guide_legend(override.aes = list(
+                                             linetype = if (length(unique(allArrows$g)) == 1) c(1) else c(1, 2),
+                                             shape    = if (length(unique(allArrows$g)) == 1) c(NA) else c(NA, NA)
+                                           )))
+    } else {
+      g <- g + ggplot2::scale_color_manual("",
+                                           values  = c( "black", "gray")[1:length(unique(allLines$g))],
+                                           breaks  = c(unique(as.character(allLines$g))),
+                                           guide   = ggplot2::guide_legend(override.aes = list(
+                                             linetype = c( 1,  2)[1:length(unique(allLines$g))],
+                                             shape    = c(NA, NA)[1:length(unique(allLines$g))]
+                                           )))
+    }
+  }
+
+
   # x-axes
   g <- g + .plotXAxis(xName, xRange, FALSE)
   g <- g + .plotYAxis(allLines, allArrows, tempLabel)
-
 
   g <- g + jaspGraphs::themeJaspRaw() +
     jaspGraphs::geom_rangeframe(sides = if (!is.null(allLines) & !is.null(allArrows)) "lbr" else "lb") +
@@ -801,8 +853,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       legend.text  = ggplot2::element_text(margin = ggplot2::margin(0, 0, 2, 0)),
       legend.key.height = ggplot2::unit(1, "cm"),
       legend.key.width  = ggplot2::unit(1.5,"cm")) +
-    .plotThemePlus(allLines, allArrows) +
-    ggplot2::theme(legend.position = "right")
+    .plotThemePlus(allLines, allArrows)
+
+  if (showLegend)
+    g <- g + ggplot2::theme(legend.position =  "right")
 
   plot <- g
   return(plot)

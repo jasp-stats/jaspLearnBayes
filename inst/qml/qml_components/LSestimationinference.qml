@@ -28,7 +28,7 @@ Section
 	title: qsTr("Inference")
 	columns: 2
 
-	property alias plotsBothSampleProportion: plotsBothSampleProportion.label
+	property alias plotsPosteriorIndividualProportion: plotsPosteriorIndividualProportion.label
 
 	DropDown
 	{
@@ -203,24 +203,23 @@ Section
 					}
 				}
 
+				CheckBox
+				{
+					name:		"plotsPosteriorIndividualPrior"
+					label:		qsTr("Prior distribution")
+					checked:	false
+				}
+
+				CheckBox
+				{
+					name:		"plotsPosteriorIndividualProportion"
+					label:		qsTr("Observed proportion")
+					id:			plotsPosteriorIndividualProportion
+					checked:	false
+				}
+
 			}
 
-		}
-	}
-
-	CheckBox
-	{
-		Layout.columnSpan: 2
-		name: "plotsBoth"
-		label: qsTr("Prior and posterior distribution")
-		checked: false
-
-		CheckBox
-		{
-			name:		"plotsBothSampleProportion"
-			label:		qsTr("Observed proportion")
-			id:			plotsBothSampleProportion
-			checked:	false
 		}
 	}
 
