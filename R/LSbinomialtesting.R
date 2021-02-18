@@ -177,14 +177,19 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
         else if (options[["bfType"]] == "best")
           tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[which.max(tempResults$logLik)])
         else if (options[["bfType"]] == "vs")
-          tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[sapply(options[["priors"]], function(p)p$name) == options[["bfTypevsName"]]])
+          if (options[["priors"]][[i]][["name"]] == options[["bfTypevsName"]])
+            tempBF <- ""
+          else
+            tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[sapply(options[["priors"]], function(p)p$name) == options[["bfTypevsName"]]])
 
-        if (options[["bayesFactorType"]] == "BF10")
-          tempRow$bf <- tempBF
-        else if (options[["bayesFactorType"]] == "BF01")
-          tempRow$bf <- 1/tempBF
-        else if (options[["bayesFactorType"]] == "LogBF10")
-          tempRow$bf <- log(tempBF)
+        if (tempBF != "") {
+          if (options[["bayesFactorType"]] == "BF10")
+            tempRow$bf <- tempBF
+          else if (options[["bayesFactorType"]] == "BF01")
+            tempRow$bf <- 1/tempBF
+          else if (options[["bayesFactorType"]] == "LogBF10")
+            tempRow$bf <- log(tempBF)
+        }
 
         testsTable$addRows(tempRow)
       }
@@ -1082,6 +1087,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
 
     }
 
+    if (any(is.nan(unlist(results))) || any(is.infinite(unlist(results)))){
+      plotsIterative$setError(gettextf("Plotting not possible: One of the Bayes factor is equal to infinity."))
+      return()
+    }
 
     plotDataLines <- list()
     for(h in 1:length(options[["priors"]])){
