@@ -17,8 +17,6 @@
 
 LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
 
-  saveOptions(options)
-
   # introductory text
   if(options[["introText"]]).introductoryTextLS(jaspResults, options, "gauss_est")
 

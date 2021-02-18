@@ -303,8 +303,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
   return()
 }
 .plotsIndividualBinomialLS         <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")){
-  saveRDS(options, file = "C:/Projects/JASP/jaspLearnBayes/do-not-share/options.RDS")
-  saveRDS(data,    file = "C:/Projects/JASP/jaspLearnBayes/do-not-share/data.RDS")
+
   containerPlots <- .containerPlotsLS(jaspResults, options, "binEst", type)
 
   if (is.null(containerPlots[[paste0("plots",type)]])){
