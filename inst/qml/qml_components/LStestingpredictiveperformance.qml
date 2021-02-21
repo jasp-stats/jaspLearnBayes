@@ -264,24 +264,13 @@ Section
 			RadioButtonGroup
 			{
 				name:	"bfType"
-				RadioButton
-				{
-					value:	"inclusion"
-					label:	qsTr("vs. rest")
-					checked: true
-				}
 
 				RadioButton
 				{
-					value:	"best"
-					label:	qsTr("vs. best")
-				}
-
-				RadioButton
-				{
-					name:	"vs"
-					label:	qsTr("vs.")
-					childrenOnSameRow: true
+					name:				"vs"
+					label:				qsTr("vs.")
+					childrenOnSameRow:	true
+					checked:			true
 
 					DropDown
 					{
@@ -290,6 +279,20 @@ Section
 						indexDefaultValue:	0
 					}
 				}
+				
+				RadioButton
+				{
+					value:	"inclusion"
+					label:	qsTr("vs. rest")
+				}
+
+				RadioButton
+				{
+					value:	"best"
+					label:	qsTr("vs. best")
+				}
+
+
 			}
 
 			RadioButtonGroup
