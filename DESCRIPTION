@@ -1,7 +1,7 @@
 Package: jaspLearnBayes
 Type: Package
 Title: Learn Bayes Module for JASP
-Version: 0.1.0
+Version: 0.15
 Date: 2020-11-21
 Author: JASP Team
 Website: www.jasp-stats.org
