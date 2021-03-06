@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-02-08 09:50+0000\n"
+"Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -32,27 +38,25 @@ msgctxt "Description|"
 msgid "Continuous"
 msgstr "Kontinuierlich"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Gaussian Estimation"
-msgstr "Ising-Schätzer"
+msgstr "Gaußsche Schätzung"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Gaussian Testing"
-msgstr "Gaußsch"
+msgstr "Gaußsches Testen"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
-msgstr ""
+msgstr "Das Problem der Punkte"
 
 msgctxt "Description|"
 msgid "Game of Chance"
-msgstr ""
+msgstr "Spiel der Chance"
 
 msgctxt "Description|"
 msgid "Game of Skill"
-msgstr ""
+msgstr "Spiel der Fähigkeiten"
 
 msgctxt "LSbinomialestimation|"
 msgid "Color palette"
@@ -184,117 +188,99 @@ msgstr "θ₀"
 
 msgctxt "LSgameofchance|"
 msgid "Points needed to win the game"
-msgstr ""
+msgstr "Punkte zum gewinnen des Spiels"
 
-#, fuzzy
 msgctxt "LSgameofchance|"
 msgid "Number of simulated games"
-msgstr "Stichprobenumfang: "
+msgstr "Anzahl simulierter Spiele"
 
 msgctxt "LSgameofchance|"
 msgid "95% HPD"
-msgstr ""
+msgstr "95% HPD"
 
 msgctxt "LSgameofskill|"
 msgid "Points needed to win the game"
-msgstr ""
+msgstr "Punkte zum gewinnen des Spiels"
 
-#, fuzzy
 msgctxt "LSgameofskill|"
 msgid "Number of simulated games"
-msgstr "Stichprobenumfang: "
+msgstr "Anzahl simulierter Spiele"
 
 msgctxt "LSgameofskill|"
 msgid "95% HPD"
-msgstr ""
+msgstr "95% HPD"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Model"
 msgstr "Modell"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Distribution"
 msgstr "Verteilung"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Parameter (μ)"
-msgstr "Parameter (θ)"
+msgstr "Parameter (μ)"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Spike"
 msgstr "Punktmasse"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "μ₀"
-msgstr "θ₀"
+msgstr "μ₀"
 
 msgctxt "LSgaussianestimation|"
 msgid "σ₀"
-msgstr ""
+msgstr "σ₀"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Observed data"
-msgstr "Beobachtet"
+msgstr "Beobachtete Daten"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
-msgstr "Mittelwerte anzeigen"
+msgstr "Stichprobenmittelwerte anzeigen"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Hypothesis"
 msgstr "Hypothese"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Distribution"
 msgstr "Verteilung"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Parameter (μ)"
-msgstr "Parameter (θ)"
+msgstr "Parameter (μ)"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Spike"
 msgstr "Punktmasse"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "μ₀"
-msgstr "θ₀"
+msgstr "μ₀"
 
 msgctxt "LSgaussiantesting|"
 msgid "σ₀"
-msgstr ""
+msgstr "σ₀"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Observed data"
-msgstr "Beobachtet"
+msgstr "Beobachtete Daten"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Sample means"
-msgstr "Stichprobe"
+msgstr "Stichprobenmittelwerte"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
@@ -512,61 +498,50 @@ msgctxt "LSestimationsequential|"
 msgid "Posterior updating table"
 msgstr "Posterior-Aktualisierungstabelle"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
 msgstr "Daten"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
 msgstr "Eingabetyp"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Select variable"
 msgstr "Variable auswählen"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Specify data summary"
-msgstr "Datenzusammenfassung"
+msgstr "Datenzusammenfassung angeben"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Enter sequence"
 msgstr "Sequenz eingeben"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data summary"
 msgstr "Datenzusammenfassung"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Mean"
 msgstr "Mittelwert"
 
 msgctxt "LSgaussiandatainput|"
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Observations"
-msgstr "Iterationen"
+msgstr "Beobachtungen"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Comma-separated sequence of observations"
 msgstr "Komma-getrennte Sequenz von Beobachtungen"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Available"
 msgstr "Verfügbar"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Selected"
 msgstr "Ausgewählt"
