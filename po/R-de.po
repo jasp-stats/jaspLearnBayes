@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-01-05 09:39\n"
+"POT-Creation-Date: 2021-03-06 14:42\n"
 "PO-Revision-Date: 2021-02-08 10:50+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -1078,6 +1078,11 @@ msgid "Mode"
 msgstr "Modus"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
+msgstr ""
+"Warnung: Die Spieleranzahl muss mindestens 2 sein. Passe die Eingaben an!"
+
+#, fuzzy
+msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
 "Warnung: Die Spieleranzahl muss mindestens 2 sein. Passe die Eingaben an!"
 
