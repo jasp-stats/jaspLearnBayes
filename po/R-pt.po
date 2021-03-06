@@ -1,26 +1,31 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: JASP 0.9.2\n"
+"Project-Id-Version: R 3.6.1\n"
+"Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:42\n"
-"PO-Revision-Date: 2021-03-06 09:51+0000\n"
-"Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
-"jasplearnbayes-r/es/>\n"
-"Language: es\n"
+"PO-Revision-Date: 2020-12-02 21:29+0000\n"
+"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
+"jaspLearnBayes/pt/>\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Language: en_US\n"
+"X-Source-Language: American English\n"
+"X-Qt-Contexts: true\n"
 
+#, fuzzy
 msgid "Data Summary"
-msgstr ""
+msgstr "Acervo de dados"
 
 msgid "Counts"
 msgstr ""
 
+#, fuzzy
 msgid "Proportion"
-msgstr ""
+msgstr "Opções de Diagramas"
 
 msgid "Successes"
 msgstr ""
@@ -43,23 +48,29 @@ msgstr ""
 msgid "beta-binomial (%i, %s, %s)"
 msgstr ""
 
+#, fuzzy
 msgid "Estimation Summary"
-msgstr ""
+msgstr "Estimador"
 
+#, fuzzy
 msgid "Model"
-msgstr ""
+msgstr "Modelo"
 
+#, fuzzy
 msgid "Prior (%s)"
-msgstr ""
+msgstr "Anterior"
 
+#, fuzzy
 msgid "Prior %s"
-msgstr ""
+msgstr "Anterior"
 
+#, fuzzy
 msgid "Posterior (%s)"
-msgstr ""
+msgstr "Amostras posteriores"
 
+#, fuzzy
 msgid "Posterior %s"
-msgstr ""
+msgstr "Amostras posteriores"
 
 msgid "Please specify successes and failures."
 msgstr ""
@@ -70,8 +81,9 @@ msgstr ""
 msgid "Observation"
 msgstr ""
 
+#, fuzzy
 msgid "Population proportion"
-msgstr ""
+msgstr "Coeficiente de Correlação População"
 
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
@@ -89,8 +101,9 @@ msgstr ""
 msgid "Prediction (Successes)"
 msgstr ""
 
+#, fuzzy
 msgid "Prediction %s"
-msgstr ""
+msgstr "Correção"
 
 msgid "Prediction std. deviation"
 msgstr ""
@@ -169,11 +182,13 @@ msgstr ""
 msgid "Joint probability"
 msgstr ""
 
+#, fuzzy
 msgid "Posterior probability"
-msgstr ""
+msgstr "Amostras posteriores"
 
+#, fuzzy
 msgid "Observations"
-msgstr ""
+msgstr "Opções"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr ""
@@ -707,14 +722,16 @@ msgid ""
 "interval.</li>%s</ul>"
 msgstr ""
 
+#, fuzzy
 msgid "Mean"
-msgstr "Media"
+msgstr "Médias"
 
 msgid "Median"
 msgstr ""
 
+#, fuzzy
 msgid "Mode"
-msgstr ""
+msgstr "Modelo"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
@@ -754,8 +771,9 @@ msgid ""
 "player when interrupted (%2$i). Please check the appropriate settings."
 msgstr ""
 
+#, fuzzy
 msgid "Prior Skill"
-msgstr ""
+msgstr "Anterior"
 
 msgid "Only numeric values are allowed in the input."
 msgstr ""
@@ -775,23 +793,28 @@ msgstr ""
 msgid "USE '.dataArrowGaussianLS()'"
 msgstr ""
 
+#, fuzzy
 msgid "Prior (μ)"
-msgstr ""
+msgstr "Anterior"
 
+#, fuzzy
 msgid "Prior Mean"
-msgstr ""
+msgstr "Anterior"
 
+#, fuzzy
 msgid "Posterior (μ)"
-msgstr ""
+msgstr "RÂ² Posterior"
 
+#, fuzzy
 msgid "Posterior Mean"
-msgstr ""
+msgstr "Amostras posteriores"
 
 msgid "Population mean"
 msgstr ""
 
+#, fuzzy
 msgid "Prediction"
-msgstr ""
+msgstr "Correção"
 
 msgid "Prediction Mean"
 msgstr ""
@@ -802,8 +825,9 @@ msgstr ""
 msgid "The prediction for %s future %s is based on %s."
 msgstr ""
 
+#, fuzzy
 msgid "Sample means"
-msgstr ""
+msgstr "Tamanho da amostra"
 
 msgid "Future data"
 msgstr ""

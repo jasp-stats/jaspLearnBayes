@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2021-01-05 09:39\n"
+"Project-Id-Version: jaspLearnBayes 0.15\n"
+"POT-Creation-Date: 2021-03-06 14:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -398,6 +398,9 @@ msgid "Mode"
 msgstr ""
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
+msgstr ""
+
+msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
 
 msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
