@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:42\n"
-"PO-Revision-Date: 2021-03-16 11:02+0000\n"
+"PO-Revision-Date: 2021-03-23 15:29+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
@@ -53,7 +53,6 @@ msgstr ""
 msgid "Estimation Summary"
 msgstr "Estimador"
 
-#, fuzzy
 msgid "Model"
 msgstr "Modelo"
 
@@ -726,10 +725,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Mean"
-msgstr "Médias"
+msgstr "Média"
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "Mode"
 msgstr "Moda"
