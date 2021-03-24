@@ -19,7 +19,7 @@ Description
 		title: 	qsTr("Counts")
 		icon:	"analysis-bayesian-crosstabs.svg"
 	}
-	
+
 	Analysis
 	{
 		title:	qsTr("Binomial Estimation")
@@ -39,7 +39,7 @@ Description
 		title: 	qsTr("Continuous")
 		icon:	"analysis-bayesian-ttest.svg"
 	}
-	
+
 	Analysis
 	{
 		title:	qsTr("Gaussian Estimation")
@@ -53,13 +53,13 @@ Description
 		qml:	"LSgaussiantesting.qml"
 		func:	"LSgaussiantesting"
 	}
-	
+
 	GroupTitle
 	{
 		title:	qsTr("The Problem of Points")
 		icon:	"learn-bayes-epees.svg"
 	}
-	
+
 	Analysis
 	{
 		title:	qsTr("Game of Chance")
@@ -72,5 +72,18 @@ Description
 		title:	qsTr("Game of Skill")
 		qml:	"LSgameofskill.qml"
 		func:	"LSgameofskill"
+	}
+
+	GroupTitle
+	{
+		title:	qsTr("Miscellaneous")
+		icon:	"learn-bayes-epees.svg"
+	}
+
+	Analysis
+	{
+		title:	qsTr("Binary Classification")
+		qml:	"LSbinaryclassification.qml"
+		func:	"LSbinaryclassification"
 	}
 }
