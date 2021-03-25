@@ -69,12 +69,14 @@ Form {
 			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive"); checked: true }
 			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot") }
 			CheckBox { name: "plotROC";								label: qsTr("ROC") }
-			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")}
+			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence") }
+			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot") }
 		}
 
 		Group
 		{
 			title: qsTr("Tables")
+			CheckBox { name: "statistics";  label: qsTr("Statistics") }
 			CheckBox
 			{
 				name: "confusionMatrix"; label: qsTr("Confusion matrix")
@@ -85,6 +87,7 @@ Form {
 					RadioButton { name: "number";	label: qsTr("Number")					}
 					RadioButton { name: "both";		label: qsTr("Both")						}
 				}
+				CheckBox { name: "confusionMatrixAddInfo"; label: qsTr("Additional info"); checked: true }
 			}
 		}
 	}
