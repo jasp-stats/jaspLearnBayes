@@ -22,11 +22,12 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   results <- .bcComputeResults(jaspResults, dataset, options)
   .bcTableStatistics           (results, jaspResults, dataset, options)
   .bcTableConfusion            (results, jaspResults, dataset, options)
-  .bcPlotPriorPosteriorPositive(results, jaspResults, dataset, options)
-  .bcPlotIconPlot              (results, jaspResults, dataset, options)
-  .bcPlotROC                   (results, jaspResults, dataset, options)
-  .bcPlotVaryingPrevalence     (results, jaspResults, dataset, options)
-  .bcPlotAlluvial              (results, jaspResults, dataset, options)
+  .bcPlots                     (results, jaspResults, dataset, options)
+  # .bcPlotPriorPosteriorPositive(results, jaspResults, dataset, options)
+  # .bcPlotIconPlot              (results, jaspResults, dataset, options)
+  # .bcPlotROC                   (results, jaspResults, dataset, options)
+  # .bcPlotVaryingPrevalence     (results, jaspResults, dataset, options)
+  # .bcPlotAlluvial              (results, jaspResults, dataset, options)
 }
 
 .bcComputeResults <- function(jaspResults, dataset, options) {
@@ -34,6 +35,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   results <- switch(options[["inputType"]],
                     pointEstimates     = .bcComputeResultsPointEstimates(options),
+                    uncertainEstimates = .bcComputeResultsUncertainEstimates(options),
                     list(sensitivity = NA, specificity = NA))
 
   jaspResults[["results"]] <-
@@ -47,9 +49,53 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 }
 
 .bcComputeResultsPointEstimates <- function(options) {
-  prevalence              <- options[["prevalence"]]
-  sensitivity             <- options[["sensitivity"]]
-  specificity             <- options[["specificity"]]
+  results <- .bcStatistics(
+    prevalence  = options[["prevalence"]],
+    sensitivity = options[["sensitivity"]],
+    specificity = options[["specificity"]]
+    )
+
+  class(results) <- "bcPointEstimates"
+  return(results)
+}
+
+summary.bcPointEstimates <- function(results, ...) {
+  output <- data.frame(
+    statistic      = .bcTexts("statistic")[names(results)],
+    estimate       = unlist(results),
+    notation       = .bcTexts("notation")[names(results)],
+    interpretation = .bcTexts("interpretation")[names(results)]
+    )
+
+  return(output)
+}
+
+.bcComputeResultsUncertainEstimates <- function(options) {
+  prevalence  <- rbeta(n=5e3, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
+  sensitivity <- rbeta(n=5e3, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
+  specificity <- rbeta(n=5e3, options[["specificityAlpha"]], options[["specificityBeta"]])
+  results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
+
+  class(results) <- "bcUncertainEstimates"
+  return(results)
+}
+
+summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
+  alpha <- 1-ciLevel
+
+  output <- data.frame(
+    statistic      = .bcTexts("statistic")[names(results)],
+    estimate       = vapply(results, mean, numeric(1)),
+    lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2),
+    upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2),
+    notation       = .bcTexts("notation")[names(results)],
+    interpretation = .bcTexts("interpretation")[names(results)]
+    )
+
+  return(output)
+}
+
+.bcStatistics <- function(prevalence, sensitivity, specificity) {
   truePositive            <- prevalence*sensitivity
   falsePositive           <- (1-prevalence)*(1-specificity)
   trueNegative            <- (1-prevalence)*specificity
@@ -75,7 +121,6 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     accuracy                = accuracy
   )
 
-  class(results) <- "bcPointEstimates"
   return(results)
 }
 
@@ -83,33 +128,31 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   UseMethod(".bcTableStatistics")
 }
 
-.bcTableStatistics.bcPointEstimates <- function(results, jaspResults, dataset, options) {
+.bcTableStatistics.default <- function(results, jaspResults, dataset, options) {
   if( isFALSE(options[["statistics"]])     ) return()
   if(!is.null(jaspResults[["statistics"]]) ) return()
 
   table <- createJaspTable(title = gettext("Statistics"), position = 1)
-  table$dependOn(c("prevalence", "sensitivity", "specificity", "introText", "statistics"))
+  table$dependOn(optionsFromObject = jaspResults[["results"]], options = c("statistics", "introText"))
   table$showSpecifiedColumnsOnly <- TRUE
 
-  table$addColumnInfo(name = "stat",  title = "")
-  table$addColumnInfo(name = "value", title = gettext("Value"), type = "number")
+  table$addColumnInfo(name = "statistic",  title = "")
+  table$addColumnInfo(name = "estimate", title = gettext("Value"), type = "number")
 
-  if(options[["introText"]]) {
-    table$addColumnInfo(name = "notat", title = gettext("Notation"))
-    table$addColumnInfo(name = "intrp", title = gettext("Interpretation"))
+
+  if(!inherits(results, "bcPointEstimates")) {
+    table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = gettext("Credible interval"), type = "number")
+    table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = gettext("Credible interval"), type = "number")
   }
 
-  data <- data.frame(
-    stat  = gettext(c("Prevalence", "Sensitivity", "Specificity", "True positive", "False positive", "True negative", "False negative", "Positive predictive value", "Negative predictive value", "False discovery rate", "False omission rate", "Accuracy")),
-    value = unlist(results),
-    notat = .bcTexts("notation")[names(results)],
-    intrp = .bcTexts("interpretation")[names(results)]
-  )
+  if(options[["introText"]]) {
+    table$addColumnInfo(name = "notation", title = gettext("Notation"))
+    table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
+  }
 
-  table$setData(data)
+  table$setData(summary(results))
   jaspResults[["statistics"]] <- table
 }
-
 
 .bcTableConfusion <- function(results, jaspResults, dataset, options) {
   UseMethod(".bcTableConfusion")
@@ -200,6 +243,23 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["confusionMatrix"]] <- table
 }
 
+.bcPlots <- function(results, jaspResults, dataset, options) {
+
+  if(is.null(jaspResults[["plots"]])) {
+    plotsContainer <- createJaspContainer(title = gettext("Plots"))
+    plotsContainer$dependOn(optionsFromObject = jaspResults[["results"]])
+    plotsContainer$position <- 2
+    jaspResults[["plots"]] <- plotsContainer
+  } else {
+    plotsContainer <- jaspResults[["plots"]]
+  }
+
+  .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options)
+  .bcPlotIconPlot              (results, plotsContainer, dataset, options)
+  .bcPlotROC                   (results, plotsContainer, dataset, options)
+  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options)
+  .bcPlotAlluvial              (results, plotsContainer, dataset, options)
+}
 
 .bcPlotPriorPosteriorPositive <- function(results, jaspResults, dataset, options) {
   UseMethod(".bcPlotPriorPosteriorPositive")
@@ -237,7 +297,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["plotPriorPosteriorPositive"]] <-
     createJaspPlot(title        = gettext("Probability positive"),
                    plot         = plot,
-                   dependencies = c("prevalence", "sensitivity", "specificity"),
+                   dependencies = "plotPriorPosteriorPositive",
                    position     = 3,
                    width        = 400
                   )
@@ -301,7 +361,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["plotIconPlot"]] <-
     createJaspPlot(title        = gettext("Icon plot"),
                    plot         = plot,
-                   dependencies = c("prevalence", "sensitivity", "specificity"),
+                   dependencies = "plotIconPlot",
                    position     = 3,
                    aspectRatio  = 1,
                    width        = 400
@@ -346,7 +406,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["plotROC"]] <-
     createJaspPlot(title        = gettext("Receiving Operating Characteristic Curve"),
                    plot         = plot,
-                   dependencies = c("prevalence", "sensitivity", "specificity"),
+                   dependencies = "plotROC",
                    position     = 4,
                    aspectRatio  = 1,
                    width        = 400
@@ -382,7 +442,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["plotVaryingPrevalence"]] <-
     createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
                    plot         = plot,
-                   dependencies = c("prevalence", "sensitivity", "specificity"),
+                   dependencies = "plotVaryingPrevalence",
                    position     = 6,
                    width        = 400
                    )
@@ -420,16 +480,30 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["plotAlluvial"]] <-
     createJaspPlot(title        = gettext("Alluvial plot"),
                    plot         = plot,
-                   dependencies = c("prevalence", "sensitivity", "specificity"),
+                   dependencies = "plotAlluvial",
                    position     = 8,
                    width        = 600, height = 500
     )
 }
 
 
-.bcTexts <- function(what = c("interpretation", "notation")) {
+.bcTexts <- function(what = c("statistic", "interpretation", "notation")) {
   what <- match.arg(what)
   out <- switch(what,
+    statistic = c(
+      prevalence              = gettext("Prevalence"),
+      sensitivity             = gettext("Sensitivity"),
+      specificity             = gettext("Specificity"),
+      truePositive            = gettext("True positive"),
+      falsePositive           = gettext("False positive"),
+      trueNegative            = gettext("True negative"),
+      falseNegative           = gettext("False negative"),
+      positivePredictiveValue = gettext("Positive predictive value"),
+      negativePredictiveValue = gettext("Negative predictive value"),
+      falseDiscoveryRate      = gettext("False discovery rate"),
+      falseOmissionRate       = gettext("False omission rate"),
+      accuracy                = gettext("Accuracy")
+    ),
     interpretation = c(
       prevalence              = gettext("Proportion of a population affected by the condition."),
       sensitivity             = gettext("(True positive fraction) Proportion of those who are affected by the condition and are correctly tested positive."),
@@ -456,7 +530,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
      negativePredictiveValue = gettext("P(Condition = negative | Test = negative)"),
      falseDiscoveryRate      = gettext("P(Condition = negative | Test = positive)"),
      falseOmissionRate       = gettext("P(Condition = positive | Test = negative)"),
-     accuracy                = gettextf("P(Condition = positive %1$s Test = positive) + P(Condition = negative %1$s Test = negative)", "\u2227")
+     accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    )
   )
 
