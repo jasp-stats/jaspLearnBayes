@@ -16,20 +16,23 @@
 #
 
 LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) {
+  options <- .bcParseOptions(jaspResults, options)
+
+  results <- .bcComputeResults(jaspResults, dataset, options)
+  .bcTables                    (results, jaspResults, dataset, options)
+  .bcPlots                     (results, jaspResults, dataset, options)
+}
+
+.bcParseOptions <- function(jaspResults, options) {
   options <- .parseAndStoreFormulaOptions(jaspResults, options,
                                           levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = "")))
 
-  results <- .bcComputeResults(jaspResults, dataset, options)
-  .bcTableStatistics           (results, jaspResults, dataset, options)
-  .bcTableConfusion            (results, jaspResults, dataset, options)
-  .bcPlots                     (results, jaspResults, dataset, options)
-  # .bcPlotPriorPosteriorPositive(results, jaspResults, dataset, options)
-  # .bcPlotIconPlot              (results, jaspResults, dataset, options)
-  # .bcPlotROC                   (results, jaspResults, dataset, options)
-  # .bcPlotVaryingPrevalence     (results, jaspResults, dataset, options)
-  # .bcPlotAlluvial              (results, jaspResults, dataset, options)
+  if(options[["inputType"]] == "pointEstimates") options[["credibleInterval"]] <- FALSE
+
+  return(options)
 }
 
+# Results computation and reshaping ----
 .bcComputeResults <- function(jaspResults, dataset, options) {
   if(!is.null(jaspResults[["results"]])) return(jaspResults[["results"]]$object)
 
@@ -63,8 +66,11 @@ summary.bcPointEstimates <- function(results, ...) {
   output <- data.frame(
     statistic      = .bcTexts("statistic")[names(results)],
     estimate       = unlist(results),
+    lowerCI        = NA,
+    upperCI        = NA,
     notation       = .bcTexts("notation")[names(results)],
-    interpretation = .bcTexts("interpretation")[names(results)]
+    interpretation = .bcTexts("interpretation")[names(results)],
+    stringsAsFactors = FALSE
     )
 
   return(output)
@@ -89,7 +95,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2),
     upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2),
     notation       = .bcTexts("notation")[names(results)],
-    interpretation = .bcTexts("interpretation")[names(results)]
+    interpretation = .bcTexts("interpretation")[names(results)],
+    stringsAsFactors = FALSE
     )
 
   return(output)
@@ -104,6 +111,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
   falseDiscoveryRate      <- 1-positivePredictiveValue
   falseOmissionRate       <- 1-negativePredictiveValue
+  falsePositiveFraction   <- 1-sensitivity
+  falseNegativeFraction   <- 1-specificity
   accuracy                <- truePositive + trueNegative
 
   results <- list(
@@ -118,31 +127,47 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     negativePredictiveValue = negativePredictiveValue,
     falseDiscoveryRate      = falseDiscoveryRate,
     falseOmissionRate       = falseOmissionRate,
+    falsePositiveFraction   = falsePositiveFraction,
+    falseNegativeFraction   = falseNegativeFraction,
     accuracy                = accuracy
   )
 
   return(results)
 }
 
-.bcTableStatistics <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcTableStatistics")
+# Output tables ----
+.bcTables <- function(results, jaspResults, dataset, options) {
+
+  if(is.null(jaspResults[["plots"]])) {
+    tablesContainer <- createJaspContainer(title = gettext("Tables"))
+    tablesContainer$dependOn(optionsFromObject = jaspResults[["results"]], options = c("credibleInterval", "ciLevel"))
+    tablesContainer$position <- 1
+    jaspResults[["tables"]] <- tablesContainer
+  } else {
+    tablesContainer <- jaspResults[["tables"]]
+  }
+
+  .bcTableStatistics(results, tablesContainer, dataset, options)
+  .bcTableConfusion (results, tablesContainer, dataset, options)
 }
 
-.bcTableStatistics.default <- function(results, jaspResults, dataset, options) {
+.bcTableStatistics <- function(results, jaspResults, dataset, options) {
   if( isFALSE(options[["statistics"]])     ) return()
   if(!is.null(jaspResults[["statistics"]]) ) return()
 
   table <- createJaspTable(title = gettext("Statistics"), position = 1)
-  table$dependOn(optionsFromObject = jaspResults[["results"]], options = c("statistics", "introText"))
+  table$dependOn(options = c("statistics", "introText"))
   table$showSpecifiedColumnsOnly <- TRUE
 
   table$addColumnInfo(name = "statistic",  title = "")
   table$addColumnInfo(name = "estimate", title = gettext("Value"), type = "number")
 
 
-  if(!inherits(results, "bcPointEstimates")) {
-    table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = gettext("Credible interval"), type = "number")
-    table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = gettext("Credible interval"), type = "number")
+  if(options[["credibleInterval"]]) {
+    table$addFootnote(message = .bcTexts("footnote")[["credibleInterval"]])
+    ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
+    table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
+    table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
   }
 
   if(options[["introText"]]) {
@@ -150,23 +175,20 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
   }
 
-  table$setData(summary(results))
+  table$setData(summary(results, ciLevel = options[["ciLevel"]]))
   jaspResults[["statistics"]] <- table
 }
 
 .bcTableConfusion <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcTableConfusion")
-}
-
-.bcTableConfusion.bcPointEstimates <- function(results, jaspResults, dataset, options) {
   if( isFALSE(options[["confusionMatrix"]])     ) return()
   if(!is.null(jaspResults[["confusionMatrix"]]) ) return()
 
   table <- createJaspTable(title = gettext("Confusion matrix"), position = 2)
-  table$dependOn(c("prevalence", "sensitivity", "specificity", "confusionMatrix", "confusionMatrixType", "confusionMatrixAddInfo"))
+  table$dependOn(options = c("confusionMatrix", "confusionMatrixType", "confusionMatrixAddInfo"))
   table$showSpecifiedColumnsOnly <- TRUE
   table$transpose <- TRUE
 
+  ciText <- gettextf("%s%% CI", 100*options[["ciLevel"]])
 
   table$addColumnInfo(name = "head", title = gettext(""))
 
@@ -179,6 +201,12 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     table$addColumnInfo(name = "pos_value", title = gettext("Value"), overtitle = gettext("Positive test"), type = "number")
   }
 
+  if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+    table$addFootnote(message = .bcTexts("footnote")[["credibleInterval"]])
+    table$addColumnInfo(name = "pos_lower", title = gettextf("Lower %s", ciText), type = "number")
+    table$addColumnInfo(name = "pos_upper", title = gettextf("Upper %s", ciText), type = "number")
+  }
+
   if(options[["confusionMatrixType"]] == "text") {
     table$addColumnInfo(name = "neg",  title = gettext("Negative test"))
   } else if(options[["confusionMatrixType"]] == "number") {
@@ -186,6 +214,11 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   } else {
     table$addColumnInfo(name = "neg",  title = gettext("Outcome"), overtitle = gettext("Negative test"))
     table$addColumnInfo(name = "neg_value", title = gettext("Value"), overtitle = gettext("Negative test"), type = "number")
+  }
+
+  if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+    table$addColumnInfo(name = "neg_lower", title = gettextf("Lower %s", ciText), type = "number")
+    table$addColumnInfo(name = "neg_upper", title = gettextf("Upper %s", ciText), type = "number")
   }
 
   if(isTRUE(options[["confusionMatrixAddInfo"]])) {
@@ -198,6 +231,11 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       table$addColumnInfo(name = "add1_value", title = gettext("Value"), overtitle = gettext("Positive/Total"), type = "number")
     }
 
+    if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+      table$addColumnInfo(name = "add1_lower", title = gettextf("Lower %s", ciText), type = "number")
+      table$addColumnInfo(name = "add1_upper", title = gettextf("Upper %s", ciText), type = "number")
+    }
+
 
     if(options[["confusionMatrixType"]] == "text") {
       table$addColumnInfo(name = "add2", title = gettext("Negative/Total"))
@@ -208,6 +246,11 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       table$addColumnInfo(name = "add2_value", title = gettext("Value"), overtitle = gettext("Negative/Total"), type = "number")
     }
 
+    if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+      table$addColumnInfo(name = "add2_lower", title = gettextf("Lower %s", ciText), type = "number")
+      table$addColumnInfo(name = "add2_upper", title = gettextf("Upper %s", ciText), type = "number")
+    }
+
     if(options[["confusionMatrixType"]] == "text") {
       table$addColumnInfo(name = "tot", title = gettext("Total"))
     } else if(options[["confusionMatrixType"]] == "number") {
@@ -216,33 +259,57 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       table$addColumnInfo(name = "tot", title = gettext("Outcome"), overtitle = gettext("Total"))
       table$addColumnInfo(name = "tot_value", title = gettext("Value"), overtitle = gettext("Total"), type = "number")
     }
+
+    if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+      table$addColumnInfo(name = "tot_lower", title = gettextf("Lower %s", ciText), type = "number")
+      table$addColumnInfo(name = "tot_upper", title = gettextf("Upper %s", ciText), type = "number")
+    }
   }
 
+  .bcFillTableConfusion(results, table, options)
+
+  jaspResults[["confusionMatrix"]] <- table
+}
+
+.bcFillTableConfusion <- function(results, table, options) {
+  tab <- summary(results)
 
   df <- data.frame(
-    head = gettext(c("Positive condition", "Negative condition", "True/Total")),
-    pos  = gettext(c("True positive", "False positive", "Positive predictive value")),
-    pos_value = unlist(results[c("truePositive", "falsePositive", "positivePredictiveValue")]),
-    neg  = gettext(c("False negative", "True negative", "Negative predictive value")),
-    neg_value = unlist(results[c("falseNegative", "trueNegative", "negativePredictiveValue")]),
-    add1 = gettext(c("Sensitivity", "False positive fraction", "Accuracy")),
-    add1_value = c(results[["sensitivity"]], 1-results[["sensitivity"]], results[["accuracy"]]),
-    add2 = gettext(c("False negative fraction", "Specificity", "")),
-    add2_value = c(1-results[["specificity"]], results[["specificity"]], NA),
-    tot = gettext(c("Prevalence", "Rareness", "")),
-    tot_value = c(results[["prevalence"]], 1-results[["prevalence"]], NA)
+    head       = gettext(c("Positive condition", "Negative condition", "True/Total")),
+
+    pos        = tab[c("truePositive", "falsePositive", "positivePredictiveValue"), "statistic", drop=TRUE],
+    pos_value  = tab[c("truePositive", "falsePositive", "positivePredictiveValue"), "estimate",  drop=TRUE],
+    pos_lower  = tab[c("truePositive", "falsePositive", "positivePredictiveValue"), "lowerCI",   drop=TRUE],
+    pos_upper  = tab[c("truePositive", "falsePositive", "positivePredictiveValue"), "upperCI",   drop=TRUE],
+
+    neg        = tab[c("falseNegative", "trueNegative", "negativePredictiveValue"), "statistic", drop=TRUE],
+    neg_value  = tab[c("falseNegative", "trueNegative", "negativePredictiveValue"), "estimate",  drop=TRUE],
+    neg_lower  = tab[c("falseNegative", "trueNegative", "negativePredictiveValue"), "lowerCI",   drop=TRUE],
+    neg_upper  = tab[c("falseNegative", "trueNegative", "negativePredictiveValue"), "upperCI",   drop=TRUE],
+
+    add1       = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "statistic", drop=TRUE],
+    add1_value = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "estimate",  drop=TRUE],
+    add1_lower = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "lowerCI",   drop=TRUE],
+    add1_upper = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "upperCI",   drop=TRUE],
+
+    add2       = c(tab[c("falseNegativeFraction", "specificity"), "statistic", drop=TRUE], ""),
+    add2_value = c(tab[c("falseNegativeFraction", "specificity"), "estimate",  drop=TRUE], NA),
+    add2_lower = c(tab[c("falseNegativeFraction", "specificity"), "lowerCI",   drop=TRUE], NA),
+    add2_upper = c(tab[c("falseNegativeFraction", "specificity"), "upperCI",   drop=TRUE], NA),
+
+    tot        = c(gettext(c("Prevalence", "Rareness")), ""),
+    tot_value  = c(tab["prevalence", "estimate", drop=TRUE], 1-tab["prevalence", "estimate", drop=TRUE], NA),
+    tot_lower  = c(tab["prevalence", "lowerCI",  drop=TRUE], 1-tab["prevalence", "lowerCI",  drop=TRUE], NA),
+    tot_upper  = c(tab["prevalence", "upperCI",  drop=TRUE], 1-tab["prevalence", "upperCI",  drop=TRUE], NA)
   )
 
   if(isFALSE(options[["confusionMatrixAddInfo"]]))
     df <- df[1:2,]
 
-
-
   table$setData(df)
-
-  jaspResults[["confusionMatrix"]] <- table
 }
 
+# Output plots ----
 .bcPlots <- function(results, jaspResults, dataset, options) {
 
   if(is.null(jaspResults[["plots"]])) {
@@ -254,6 +321,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     plotsContainer <- jaspResults[["plots"]]
   }
 
+  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options)
   .bcPlotIconPlot              (results, plotsContainer, dataset, options)
   .bcPlotROC                   (results, plotsContainer, dataset, options)
@@ -299,7 +367,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
                    plot         = plot,
                    dependencies = "plotPriorPosteriorPositive",
                    position     = 3,
-                   width        = 400
+                   width        = 500
                   )
 
   return()
@@ -431,20 +499,28 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     x = rep(results[["prevalence"]], 2),
     y = c(results[["positivePredictiveValue"]], results[["negativePredictiveValue"]])
   )
+
   plot <- ggplot2::ggplot(data = data) +
     ggplot2::geom_vline(xintercept = results[["prevalence"]], linetype = 2) +
-    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = positivePredictiveValue), size = 2, color = "steelblue") +
-    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = negativePredictiveValue), size = 2, color = "firebrick") +
-    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = x, y = y), size = 5)
+    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = positivePredictiveValue, color = "steelblue"), size = 2) +
+    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = negativePredictiveValue, color = "firebrick"), size = 2) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = x, y = y), size = 5) +
+    ggplot2::xlab(gettext("Prevalence")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      values = c("steelblue", "firebrick"),
+      labels = gettext(c("Positive", "Negative"))
+      )
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
   jaspResults[["plotVaryingPrevalence"]] <-
     createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
                    plot         = plot,
                    dependencies = "plotVaryingPrevalence",
                    position     = 6,
-                   width        = 400
+                   width        = 500
                    )
 }
 
@@ -487,7 +563,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 }
 
 
-.bcTexts <- function(what = c("statistic", "interpretation", "notation")) {
+.bcTexts <- function(what = c("statistic", "interpretation", "notation", "footnote")) {
   what <- match.arg(what)
   out <- switch(what,
     statistic = c(
@@ -502,6 +578,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       negativePredictiveValue = gettext("Negative predictive value"),
       falseDiscoveryRate      = gettext("False discovery rate"),
       falseOmissionRate       = gettext("False omission rate"),
+      falsePositiveFraction   = gettext("False positive fraction"),
+      falseNegativeFraction   = gettext("False negative fraction"),
       accuracy                = gettext("Accuracy")
     ),
     interpretation = c(
@@ -516,6 +594,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       negativePredictiveValue = gettext("Proportion of those who tested negative and are not affected by the condition."),
       falseDiscoveryRate      = gettext("Proportion of false positives in the pool of those that test positive."),
       falseOmissionRate       = gettext("Proportion of false negatives in the pool of those that test negative."),
+      falsePositiveFraction   = gettext("Complement proportion to sensitivity."),
+      falseNegativeFraction   = gettext("Complement proportion to specificity."),
       accuracy                = gettext("Proportion of the population that is true positive or true negative.")
    ),
    notation = c(
@@ -530,7 +610,12 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
      negativePredictiveValue = gettext("P(Condition = negative | Test = negative)"),
      falseDiscoveryRate      = gettext("P(Condition = negative | Test = positive)"),
      falseOmissionRate       = gettext("P(Condition = positive | Test = negative)"),
+     falsePositiveFraction   = gettext("P(Test = positive | Condition = negative)"),
+     falseNegativeFraction   = gettext("P(Test = negative | Condition = positive)"),
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
+   ),
+   footnote = c(
+     credibleInterval = gettext("Central credible intervals are based on 5,000 samples.")
    )
   )
 

@@ -91,4 +91,20 @@ Form {
 			}
 		}
 	}
+
+	Section
+	{
+		title: qsTr("Options")
+
+		CheckBox
+		{
+			name:					"credibleInterval"
+			label:					qsTr("Credible intervals")
+			childrenOnSameRow:		true
+			checked:				true
+			visible:				inputType.value !== "pointEstimates"
+			CIField { name: "ciLevel" }
+		}
+
+	}
 }
