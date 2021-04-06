@@ -34,15 +34,30 @@ Form {
 			name: "inputType"; id: inputType; columns: 3; title: qsTr("Input type")
 			RadioButton { name: "pointEstimates";		label: qsTr("Point estimates"); checked: true	}
 			RadioButton { name: "uncertainEstimates";	label: qsTr("Uncertain estimates")				}
-			RadioButton { name: "data";					label: qsTr("Load data and specify cut-off")	}
+			RadioButton { name: "data";					label: qsTr("Load data and specify threshold")	}
 		}
 
 		Group
 		{
 			visible: inputType.value === "pointEstimates"
-			FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0; max: 1; defaultValue: "0.8"	}
+			title: qsTr("Estimates")
+			FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0; max: 1; defaultValue: "0.8" }
 			FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0; max: 1; defaultValue: "0.8"	}
 			FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0; max: 1; defaultValue: "0.1"	}
+		}
+
+		Group
+		{
+			visible: inputType.value === "data"
+			VariablesForm
+			{
+				preferredHeight: jaspTheme.smallDefaultVariablesFormHeight
+				AvailableVariablesList { name: "allVariablesList" }
+				AssignedVariablesList { name: "marker";	title: qsTr("Marker");	suggestedColumns: ["scale"];				singleVariable: true	}
+				AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
+			}
+
+			FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"	}
 		}
 
 		Group
@@ -50,12 +65,12 @@ Form {
 			visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
 			columns: 2
 			title: inputType.value === "data" ? qsTr("Priors") : qsTr("Estimates")
-			FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; max: 1; defaultValue: "8"	}
-			FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; max: 1; defaultValue: "2"	}
-			FormulaField { name: "specificityAlpha"; label: qsTr("Specificity ~ Beta(α = ");	afterLabel: ", ";		min: 0; max: 1; defaultValue: "8"	}
-			FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; max: 1; defaultValue: "2"	}
-			FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; max: 1; defaultValue: "1"	}
-			FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; max: 1; defaultValue: "9"	}
+			FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
+			FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
+			FormulaField { name: "specificityAlpha"; label: qsTr("Specificity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
+			FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
+			FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
+			FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
 		}
 	}
 
@@ -66,11 +81,12 @@ Form {
 		Group
 		{
 			title: qsTr("Plots")
-			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive"); checked: true }
-			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot") }
-			CheckBox { name: "plotROC";								label: qsTr("ROC") }
-			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence") }
-			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot") }
+			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive"); checked: true	}
+			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
+			CheckBox { name: "plotROC";								label: qsTr("ROC")									}
+			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")			}
+			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot")						}
+			CheckBox { name: "plotSignal";							label: qsTr("Signal detection")	; visible: false					}
 		}
 
 		Group

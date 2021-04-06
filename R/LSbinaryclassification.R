@@ -17,33 +17,68 @@
 
 LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) {
   options <- .bcParseOptions(jaspResults, options)
+  ready   <- .bcIsReady     (options)
+  dataset <- .bcReadData    (jaspResults, dataset, options, ready)
 
-  results <- .bcComputeResults(jaspResults, dataset, options)
-  .bcTables                    (results, jaspResults, dataset, options)
-  .bcPlots                     (results, jaspResults, dataset, options)
+  results <- .bcComputeResults(jaspResults, dataset, options, ready)
+  .bcTables                    (results, jaspResults, dataset, options, ready)
+  .bcPlots                     (results, jaspResults, dataset, options, ready)
 }
 
 .bcParseOptions <- function(jaspResults, options) {
   options <- .parseAndStoreFormulaOptions(jaspResults, options,
-                                          levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = "")))
+                                          c(levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = "")),
+                                            "threshold")
+                                          )
 
   if(options[["inputType"]] == "pointEstimates") options[["credibleInterval"]] <- FALSE
 
   return(options)
 }
 
+.bcIsReady <- function(options) {
+  if(options[["inputType"]] != "data") return(TRUE)
+
+  if(options[["marker"]] != "" && options[["labels"]] != "") {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+.bcReadData <- function(jaspResults, dataset, options, ready) {
+  if(options[["inputType"]] != "data" || !ready) return(NULL)
+
+  if(is.null(dataset)) {
+    dataset <- .readDataSetToEnd(columns = c(options[["marker"]], options[["labels"]]))
+    dataset <- dataset[complete.cases(dataset),]
+
+    labels <- dataset[[options[["labels"]]]]
+    levels <- levels(labels)
+    if(length(levels) != 2) .quitAnalysis(gettext("The 'labels' variable must have two levels!"))
+
+    dataset <- data.frame(
+      marker    = dataset[[options[["marker"]]]],
+      condition = labels == levels[1],
+      test      = dataset[[options[["marker"]]]] >= options[["threshold"]]
+    )
+  }
+
+  return(dataset)
+}
+
 # Results computation and reshaping ----
-.bcComputeResults <- function(jaspResults, dataset, options) {
+.bcComputeResults <- function(jaspResults, dataset, options, ready) {
   if(!is.null(jaspResults[["results"]])) return(jaspResults[["results"]]$object)
 
   results <- switch(options[["inputType"]],
                     pointEstimates     = .bcComputeResultsPointEstimates(options),
                     uncertainEstimates = .bcComputeResultsUncertainEstimates(options),
-                    list(sensitivity = NA, specificity = NA))
+                    data               = .bcComputeResultsFromData(options, dataset, ready)
+                    )
 
   jaspResults[["results"]] <-
     createJaspState(object       = results,
-                    dependencies = c("inputType",
+                    dependencies = c("inputType", "marker", "labels", "threshold",
                                      levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = ""))
                                      )
                     )
@@ -77,9 +112,9 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options) {
-  prevalence  <- rbeta(n=5e3, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
-  sensitivity <- rbeta(n=5e3, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
-  specificity <- rbeta(n=5e3, options[["specificityAlpha"]], options[["specificityBeta"]])
+  prevalence  <- rbeta(n=1e4, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
+  sensitivity <- rbeta(n=1e4, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
+  specificity <- rbeta(n=1e4, options[["specificityAlpha"]], options[["specificityBeta"]])
   results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
 
   class(results) <- "bcUncertainEstimates"
@@ -100,6 +135,24 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     )
 
   return(output)
+}
+
+.bcComputeResultsFromData <- function(options, dataset, ready) {
+  if(!ready) return(.bcComputeResultsUncertainEstimates(options))
+
+  res <- list(
+    prevalenceAlpha = options[["prevalenceAlpha"]]   + sum( dataset[["condition"]]),
+    prevalenceBeta  = options[["prevalenceBeta"]]    + sum(!dataset[["condition"]]),
+    sensitivityAlpha = options[["sensitivityAlpha"]] + sum( dataset[["condition"]] &  dataset[["test"]]),
+    sensitivityBeta  = options[["sensitivityBeta"]]  + sum( dataset[["condition"]] & !dataset[["test"]]),
+    specificityAlpha = options[["specificityAlpha"]] + sum(!dataset[["condition"]] & !dataset[["test"]]),
+    specificityBeta  = options[["specificityBeta"]]  + sum(!dataset[["condition"]] &  dataset[["test"]])
+  )
+
+  results <- .bcComputeResultsUncertainEstimates(res)
+
+  class(results) <- c("bcUncertainEstimates", "bcData")
+  return(results)
 }
 
 .bcStatistics <- function(prevalence, sensitivity, specificity) {
@@ -136,7 +189,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 }
 
 # Output tables ----
-.bcTables <- function(results, jaspResults, dataset, options) {
+.bcTables <- function(results, jaspResults, dataset, options, ready) {
 
   if(is.null(jaspResults[["plots"]])) {
     tablesContainer <- createJaspContainer(title = gettext("Tables"))
@@ -147,11 +200,11 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     tablesContainer <- jaspResults[["tables"]]
   }
 
-  .bcTableStatistics(results, tablesContainer, dataset, options)
-  .bcTableConfusion (results, tablesContainer, dataset, options)
+  .bcTableStatistics(results, tablesContainer, dataset, options, ready)
+  .bcTableConfusion (results, tablesContainer, dataset, options, ready)
 }
 
-.bcTableStatistics <- function(results, jaspResults, dataset, options) {
+.bcTableStatistics <- function(results, jaspResults, dataset, options, ready) {
   if( isFALSE(options[["statistics"]])     ) return()
   if(!is.null(jaspResults[["statistics"]]) ) return()
 
@@ -175,11 +228,12 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
   }
 
-  table$setData(summary(results, ciLevel = options[["ciLevel"]]))
+  if(ready) table$setData(summary(results, ciLevel = options[["ciLevel"]]))
+
   jaspResults[["statistics"]] <- table
 }
 
-.bcTableConfusion <- function(results, jaspResults, dataset, options) {
+.bcTableConfusion <- function(results, jaspResults, dataset, options, ready) {
   if( isFALSE(options[["confusionMatrix"]])     ) return()
   if(!is.null(jaspResults[["confusionMatrix"]]) ) return()
 
@@ -266,7 +320,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     }
   }
 
-  .bcFillTableConfusion(results, table, options)
+  if(ready) .bcFillTableConfusion(results, table, options)
 
   jaspResults[["confusionMatrix"]] <- table
 }
@@ -310,7 +364,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 }
 
 # Output plots ----
-.bcPlots <- function(results, jaspResults, dataset, options) {
+.bcPlots <- function(results, jaspResults, dataset, options, ready) {
 
   if(is.null(jaspResults[["plots"]])) {
     plotsContainer <- createJaspContainer(title = gettext("Plots"))
@@ -321,12 +375,13 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     plotsContainer <- jaspResults[["plots"]]
   }
 
-  if(!inherits(results, "bcPointEstimates")) return()
+  if(!inherits(results, "bcPointEstimates") || !ready) return()
   .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options)
   .bcPlotIconPlot              (results, plotsContainer, dataset, options)
   .bcPlotROC                   (results, plotsContainer, dataset, options)
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options)
   .bcPlotAlluvial              (results, plotsContainer, dataset, options)
+  .bcPlotSignal                (results, plotsContainer, dataset, options)
 }
 
 .bcPlotPriorPosteriorPositive <- function(results, jaspResults, dataset, options) {
@@ -562,7 +617,33 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     )
 }
 
+.bcPlotSignal <- function(results, plotsContainer, dataset, options) {
+  UseMethod(".bcPlotSignal")
+}
 
+.bcPlotSignal.bcPointEstimates <- function(results, plotsContainer, dataset, options) {
+  if( isFALSE(options[["plotSignal"]])     ) return()
+  if(!is.null(jaspResults[["plotSignal"]]) ) return()
+
+  threshold    <- qnorm(results[["specificity"]])
+  meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::stat_function(fun = dnorm, args = list(mean = 0, sd = 1)) +
+    ggplot2::stat_function(fun = dnorm, args = list(mean = meanPositive, sd = 1))
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  jaspResults[["plotSignal"]] <-
+    createJaspPlot(title        = gettext("Signal detection"),
+                   plot         = plot,
+                   dependencies = "plotSignal",
+                   position     = 8,
+                   width        = 600, height = 500
+    )
+}
+
+# Helpers ----
 .bcTexts <- function(what = c("statistic", "interpretation", "notation", "footnote")) {
   what <- match.arg(what)
   out <- switch(what,
@@ -615,7 +696,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(
-     credibleInterval = gettext("Central credible intervals are based on 5,000 samples.")
+     credibleInterval = gettext("Central credible intervals are based on 10,000 samples.")
    )
   )
 
