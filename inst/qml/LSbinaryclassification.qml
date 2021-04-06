@@ -86,7 +86,7 @@ Form {
 			CheckBox { name: "plotROC";								label: qsTr("ROC")									}
 			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot")						}
-			CheckBox { name: "plotSignal";							label: qsTr("Signal detection")	; visible: false					}
+			CheckBox { name: "plotSignal";							label: qsTr("Signal detection"); 					}
 		}
 
 		Group

@@ -375,23 +375,36 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     plotsContainer <- jaspResults[["plots"]]
   }
 
-  if(!inherits(results, "bcPointEstimates") || !ready) return()
-  .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options)
-  .bcPlotIconPlot              (results, plotsContainer, dataset, options)
-  .bcPlotROC                   (results, plotsContainer, dataset, options)
-  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options)
-  .bcPlotAlluvial              (results, plotsContainer, dataset, options)
-  .bcPlotSignal                (results, plotsContainer, dataset, options)
+  if(!inherits(results, "bcPointEstimates")) return()
+  .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options, ready, position = 1)
+  .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
+  .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
+  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
+  .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
+  .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
 }
 
-.bcPlotPriorPosteriorPositive <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcPlotPriorPosteriorPositive")
-}
-
-
-.bcPlotPriorPosteriorPositive.bcPointEstimates <- function(results, jaspResults, dataset, options) {
+## Prior posterior plot ----
+.bcPlotPriorPosteriorPositive <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotPriorPosteriorPositive"]])     ) return()
-  if(!is.null(jaspResults[["plotPriorPosteriorPositive"]]) ) return()
+  if(!is.null(plotsContainer[["plotPriorPosteriorPositive"]]) ) return()
+
+  plotsContainer[["plotPriorPosteriorPositive"]] <-
+    createJaspPlot(title        = gettext("Probability positive"),
+                   dependencies = "plotPriorPosteriorPositive",
+                   position     = position,
+                   width        = 500
+    )
+
+  if(ready) plotsContainer[["plotPriorPosteriorPositive"]]$plotObject <-
+    .bcFillPlotPriorPosteriorPositive(results, dataset, options)
+}
+
+.bcFillPlotPriorPosteriorPositive <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotPriorPosteriorPositive")
+}
+
+.bcFillPlotPriorPosteriorPositive.bcPointEstimates <- function(results, dataset, options) {
 
   data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
                       result = gettext(c("Negative", "Positive")))
@@ -417,24 +430,32 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
-  jaspResults[["plotPriorPosteriorPositive"]] <-
-    createJaspPlot(title        = gettext("Probability positive"),
-                   plot         = plot,
-                   dependencies = "plotPriorPosteriorPositive",
-                   position     = 3,
-                   width        = 500
-                  )
-
-  return()
+  return(plot)
 }
 
-.bcPlotIconPlot <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcPlotIconPlot")
-}
-
-.bcPlotIconPlot.bcPointEstimates <- function(results, jaspResults, dataset, options) {
+## Icon plot ----
+.bcPlotIconPlot <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotIconPlot"]])     ) return()
-  if(!is.null(jaspResults[["plotIconPlot"]]) ) return()
+  if(!is.null(plotsContainer[["plotIconPlot"]]) ) return()
+
+  plotsContainer[["plotIconPlot"]] <-
+    createJaspPlot(title        = gettext("Icon plot"),
+                   dependencies = "plotIconPlot",
+                   position     = position,
+                   aspectRatio  = 1,
+                   width        = 400
+    )
+
+  if(ready) plotsContainer[["plotIconPlot"]]$plotObject <-
+    .bcFillPlotIconPlot(results, dataset, options)
+
+}
+
+.bcFillPlotIconPlot <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotIconPlot")
+}
+
+.bcFillPlotIconPlot.bcPointEstimates <- function(results, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
@@ -481,24 +502,32 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- jaspGraphs::themeJasp(plot, xAxis = FALSE, yAxis = FALSE, legend.position = "right")
 
-  jaspResults[["plotIconPlot"]] <-
-    createJaspPlot(title        = gettext("Icon plot"),
-                   plot         = plot,
-                   dependencies = "plotIconPlot",
-                   position     = 3,
-                   aspectRatio  = 1,
-                   width        = 400
-    )
+  return(plot)
 }
 
-
-.bcPlotROC <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcPlotROC")
-}
-
-.bcPlotROC.bcPointEstimates <- function(results, jaspResults, dataset, options) {
+## ROC curve plot ----
+.bcPlotROC <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotROC"]])     ) return()
-  if(!is.null(jaspResults[["plotROC"]]) ) return()
+  if(!is.null(plotsContainer[["plotROC"]]) ) return()
+
+  plotsContainer[["plotROC"]] <-
+    createJaspPlot(
+      title        = gettext("Receiving Operating Characteristic Curve"),
+      dependencies = "plotROC",
+      position     = position,
+      aspectRatio  = 1,
+      width        = 400
+      )
+
+  if(ready) plotsContainer[["plotROC"]]$plotObject <-
+    .bcFillPlotROC(results, dataset, options)
+}
+
+.bcFillPlotROC <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotROC")
+}
+
+.bcFillPlotROC.bcPointEstimates <- function(results, dataset, options) {
 
   threshold    <- qnorm(results[["specificity"]])
   meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
@@ -526,23 +555,30 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- jaspGraphs::themeJasp(plot)
 
-  jaspResults[["plotROC"]] <-
-    createJaspPlot(title        = gettext("Receiving Operating Characteristic Curve"),
-                   plot         = plot,
-                   dependencies = "plotROC",
-                   position     = 4,
-                   aspectRatio  = 1,
-                   width        = 400
-                   )
+  return(plot)
 }
 
-.bcPlotVaryingPrevalence <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcPlotVaryingPrevalence")
-}
-
-.bcPlotVaryingPrevalence.bcPointEstimates <- function(results, jaspResults, dataset, options) {
+## Varying prevalence plot ----
+.bcPlotVaryingPrevalence <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotVaryingPrevalence"]])     ) return()
-  if(!is.null(jaspResults[["plotVaryingPrevalence"]]) ) return()
+  if(!is.null(plotsContainer[["plotVaryingPrevalence"]]) ) return()
+
+  plotsContainer[["plotVaryingPrevalence"]] <-
+    createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
+                   dependencies = "plotVaryingPrevalence",
+                   position     = 6,
+                   width        = 500
+    )
+
+  if(ready) plotsContainer[["plotVaryingPrevalence"]]$plotObject <-
+    .bcFillPlotVaryingPrevalence(results, dataset, options)
+}
+
+.bcFillPlotVaryingPrevalence <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotVaryingPrevalence")
+}
+
+.bcFillPlotVaryingPrevalence.bcPointEstimates <- function(results, dataset, options) {
 
   data <- .bcComputeResultsPointEstimates(modifyList(results, list(prevalence = seq(0, 1, by=0.01))))
   data <- data.frame(prevalence = data[["prevalence"]],
@@ -570,22 +606,31 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
-  jaspResults[["plotVaryingPrevalence"]] <-
-    createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
-                   plot         = plot,
-                   dependencies = "plotVaryingPrevalence",
-                   position     = 6,
-                   width        = 500
-                   )
+  return(plot)
 }
 
-.bcPlotAlluvial <- function(results, jaspResults, dataset, options) {
-  UseMethod(".bcPlotAlluvial")
-}
-
-.bcPlotAlluvial.bcPointEstimates <- function(results, jaspResults, dataset, options) {
+## Alluvial plot ----
+.bcPlotAlluvial <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotAlluvial"]])     ) return()
-  if(!is.null(jaspResults[["plotAlluvial"]]) ) return()
+  if(!is.null(plotsContainer[["plotAlluvial"]]) ) return()
+
+  plotsContainer[["plotAlluvial"]] <-
+    createJaspPlot(title        = gettext("Alluvial plot"),
+                   dependencies = "plotAlluvial",
+                   position     = position,
+                   width        = 600,
+                   height       = 500
+    )
+
+  if(ready) plotsContainer[["plotAlluvial"]]$plotObject <-
+    .bcFillPlotAlluvial(results, dataset, options)
+}
+
+.bcFillPlotAlluvial <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotAlluvial")
+}
+
+.bcFillPlotAlluvial.bcPointEstimates <- function(results, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
@@ -608,22 +653,31 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
-  jaspResults[["plotAlluvial"]] <-
-    createJaspPlot(title        = gettext("Alluvial plot"),
-                   plot         = plot,
-                   dependencies = "plotAlluvial",
+  return(plot)
+}
+
+## Signal detection plot ----
+.bcPlotSignal <- function(results, plotsContainer, dataset, options, ready, position) {
+  if( isFALSE(options[["plotSignal"]])     ) return()
+  if(!is.null(plotsContainer[["plotSignal"]]) ) return()
+
+  plotsContainer[["plotSignal"]] <-
+    createJaspPlot(title        = gettext("Signal detection"),
+                   dependencies = "plotSignal",
                    position     = 8,
                    width        = 600, height = 500
     )
+
+  if(ready) plotsContainer[["plotSignal"]]$plotObject <-
+    .bcFillPlotSignal(results, dataset, options)
+
 }
 
-.bcPlotSignal <- function(results, plotsContainer, dataset, options) {
-  UseMethod(".bcPlotSignal")
+.bcFillPlotSignal <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotSignal")
 }
 
-.bcPlotSignal.bcPointEstimates <- function(results, plotsContainer, dataset, options) {
-  if( isFALSE(options[["plotSignal"]])     ) return()
-  if(!is.null(jaspResults[["plotSignal"]]) ) return()
+.bcFillPlotSignal.bcPointEstimates <- function(results, dataset, options) {
 
   threshold    <- qnorm(results[["specificity"]])
   meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
@@ -634,13 +688,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
-  jaspResults[["plotSignal"]] <-
-    createJaspPlot(title        = gettext("Signal detection"),
-                   plot         = plot,
-                   dependencies = "plotSignal",
-                   position     = 8,
-                   width        = 600, height = 500
-    )
+  return(plot)
 }
 
 # Helpers ----
