@@ -19,7 +19,8 @@ Imports:
   MCMCpack,
   MGLM,
   scales,
-  ggalluvial
+  ggalluvial,
+  ragg
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs
