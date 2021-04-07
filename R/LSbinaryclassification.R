@@ -112,9 +112,16 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options) {
-  prevalence  <- rbeta(n=1e4, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
-  sensitivity <- rbeta(n=1e4, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
-  specificity <- rbeta(n=1e4, options[["specificityAlpha"]], options[["specificityBeta"]])
+  prevalence <- sensitivity <- specificity <- numeric(1e4)
+  for(i in seq_len(1e4)) {
+    prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
+    invalid <- TRUE
+    while(invalid) {
+      sensitivity[i] <- rbeta(n=1L, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
+      specificity[i] <- rbeta(n=1L, options[["specificityAlpha"]], options[["specificityBeta"]])
+      invalid <- (1-specificity[i]) > sensitivity[i]
+    }
+  }
   results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
 
   class(results) <- "bcUncertainEstimates"
@@ -141,8 +148,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   if(!ready) return(.bcComputeResultsUncertainEstimates(options))
 
   res <- list(
-    prevalenceAlpha = options[["prevalenceAlpha"]]   + sum( dataset[["condition"]]),
-    prevalenceBeta  = options[["prevalenceBeta"]]    + sum(!dataset[["condition"]]),
+    prevalenceAlpha  = options[["prevalenceAlpha"]]  + sum( dataset[["condition"]]),
+    prevalenceBeta   = options[["prevalenceBeta"]]   + sum(!dataset[["condition"]]),
     sensitivityAlpha = options[["sensitivityAlpha"]] + sum( dataset[["condition"]] &  dataset[["test"]]),
     sensitivityBeta  = options[["sensitivityBeta"]]  + sum( dataset[["condition"]] & !dataset[["test"]]),
     specificityAlpha = options[["specificityAlpha"]] + sum(!dataset[["condition"]] & !dataset[["test"]]),
@@ -593,15 +600,14 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- ggplot2::ggplot(data = data) +
     ggplot2::geom_vline(xintercept = results[["prevalence"]], linetype = 2) +
-    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = positivePredictiveValue, color = "steelblue"), size = 2) +
-    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = negativePredictiveValue, color = "firebrick"), size = 2) +
+    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = positivePredictiveValue, color = gettext("Positive")), size = 2) +
+    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = negativePredictiveValue, color = gettext("Negative")), size = 2) +
     jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = x, y = y), size = 5) +
     ggplot2::xlab(gettext("Prevalence")) +
     ggplot2::ylab(gettext("Predictive Value")) +
     ggplot2::scale_color_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick"),
-      labels = gettext(c("Positive", "Negative"))
+      values = c("steelblue", "firebrick")
       )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
@@ -664,7 +670,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   plotsContainer[["plotSignal"]] <-
     createJaspPlot(title        = gettext("Signal detection"),
                    dependencies = "plotSignal",
-                   position     = 8,
+                   position     = position,
                    width        = 600, height = 500
     )
 
@@ -682,9 +688,22 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   threshold    <- qnorm(results[["specificity"]])
   meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
 
+  lowerLimitX <- min(qnorm(0.01, c(0, meanPositive)))
+  upperLimitX <- max(qnorm(0.99, c(0, meanPositive)))
+
   plot <- ggplot2::ggplot() +
-    ggplot2::stat_function(fun = dnorm, args = list(mean = 0, sd = 1)) +
-    ggplot2::stat_function(fun = dnorm, args = list(mean = meanPositive, sd = 1))
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-options[["prevalence"]]), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "steelblue"), alpha = 0.7)  +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-options[["prevalence"]]), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkorange"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = options[["prevalence"]]), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "red"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = options[["prevalence"]]), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkgreen"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-options[["prevalence"]]), size = 1) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = options[["prevalence"]]), size = 1) +
+    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1.5) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX)),
+                                limits = c(lowerLimitX, upperLimitX)) +
+    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::xlab(gettext("Marker")) +
+    ggplot2::ylab(gettext("Density"))
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
@@ -749,4 +768,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   )
 
   return(out)
+}
+
+.bcwdnorm <- function(x, mean = 0, sd = 1, w = 1) {
+  w * dnorm(x, mean = mean, sd = sd)
 }
