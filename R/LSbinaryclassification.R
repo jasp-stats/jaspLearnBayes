@@ -82,7 +82,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   jaspResults[["results"]] <-
     createJaspState(object       = results,
-                    dependencies = c("inputType", "marker", "labels", "threshold",
+                    dependencies = c("inputType", "marker", "labels", "threshold", "numberOfSamples",
                                      levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = ""))
                                      )
                     )
@@ -116,9 +116,9 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options) {
-  prevalence <- sensitivity <- specificity <- numeric(1e4)
-  startProgressbar(expectedTicks = 1e4, label = gettext("Computing samples"))
-  for(i in seq_len(1e4)) {
+  prevalence <- sensitivity <- specificity <- numeric(options[["numberOfSamples"]])
+  startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Computing samples"))
+  for(i in seq_len(options[["numberOfSamples"]])) {
     prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
     invalid <- TRUE
     while(invalid) {
@@ -205,7 +205,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 # Output tables ----
 .bcTables <- function(results, jaspResults, dataset, options, ready) {
 
-  if(is.null(jaspResults[["plots"]])) {
+  if(is.null(jaspResults[["tables"]])) {
     tablesContainer <- createJaspContainer(title = gettext("Tables"))
     tablesContainer$dependOn(optionsFromObject = jaspResults[["results"]], options = c("credibleInterval", "ciLevel"))
     tablesContainer$position <- 1
@@ -218,9 +218,9 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   .bcTableConfusion (results, tablesContainer, dataset, options, ready)
 }
 
-.bcTableStatistics <- function(results, jaspResults, dataset, options, ready) {
+.bcTableStatistics <- function(results, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["statistics"]])     ) return()
-  if(!is.null(jaspResults[["statistics"]]) ) return()
+  if(!is.null(tablesContainer[["statistics"]]) ) return()
 
   table <- createJaspTable(title = gettext("Statistics"), position = 1)
   table$dependOn(options = c("statistics", "introText"))
@@ -229,9 +229,11 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   table$addColumnInfo(name = "statistic",  title = "")
   table$addColumnInfo(name = "estimate", title = gettext("Estimate"), type = "number")
 
+  if(options[["inputType"]] != "pointEstimates")
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
 
   if(options[["credibleInterval"]]) {
-    table$addFootnote(message = .bcTexts("footnote")[["credibleInterval"]])
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
     ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
     table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
     table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
@@ -244,7 +246,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   if(ready) table$setData(summary(results, ciLevel = options[["ciLevel"]]))
 
-  jaspResults[["statistics"]] <- table
+  tablesContainer[["statistics"]] <- table
 }
 
 .bcTableConfusion <- function(results, jaspResults, dataset, options, ready) {
@@ -266,11 +268,11 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     table$addColumnInfo(name = "pos_value",  title = gettext("Positive test"), type = "number")
   } else {
     table$addColumnInfo(name = "pos",  title = gettext("Outcome"), overtitle = gettext("Positive test"))
-    table$addColumnInfo(name = "pos_value", title = gettext("Value"), overtitle = gettext("Positive test"), type = "number")
+    table$addColumnInfo(name = "pos_value", title = gettext("Estimate"), overtitle = gettext("Positive test"), type = "number")
   }
 
   if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
-    table$addFootnote(message = .bcTexts("footnote")[["credibleInterval"]])
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
     table$addColumnInfo(name = "pos_lower", title = gettextf("Lower %s", ciText), type = "number")
     table$addColumnInfo(name = "pos_upper", title = gettextf("Upper %s", ciText), type = "number")
   }
@@ -281,7 +283,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     table$addColumnInfo(name = "neg_value",  title = gettext("Negative test"), type = "number")
   } else {
     table$addColumnInfo(name = "neg",  title = gettext("Outcome"), overtitle = gettext("Negative test"))
-    table$addColumnInfo(name = "neg_value", title = gettext("Value"), overtitle = gettext("Negative test"), type = "number")
+    table$addColumnInfo(name = "neg_value", title = gettext("Estimate"), overtitle = gettext("Negative test"), type = "number")
   }
 
   if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
@@ -296,7 +298,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       table$addColumnInfo(name = "add1_value", title = gettext("Positive/Total"), type = "number")
     } else {
       table$addColumnInfo(name = "add1", title = gettext("Outcome"), overtitle = gettext("Positive/Total"))
-      table$addColumnInfo(name = "add1_value", title = gettext("Value"), overtitle = gettext("Positive/Total"), type = "number")
+      table$addColumnInfo(name = "add1_value", title = gettext("Estimate"), overtitle = gettext("Positive/Total"), type = "number")
     }
 
     if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
@@ -311,7 +313,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       table$addColumnInfo(name = "add2_value", title = gettext("Negative/Total"), type = "number")
     } else {
       table$addColumnInfo(name = "add2", title = gettext("Outcome"), overtitle = gettext("Negative/Total"))
-      table$addColumnInfo(name = "add2_value", title = gettext("Value"), overtitle = gettext("Negative/Total"), type = "number")
+      table$addColumnInfo(name = "add2_value", title = gettext("Estimate"), overtitle = gettext("Negative/Total"), type = "number")
     }
 
     if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
@@ -325,7 +327,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       table$addColumnInfo(name = "tot_value", title = gettext("Total"), type = "number")
     } else {
       table$addColumnInfo(name = "tot", title = gettext("Outcome"), overtitle = gettext("Total"))
-      table$addColumnInfo(name = "tot_value", title = gettext("Value"), overtitle = gettext("Total"), type = "number")
+      table$addColumnInfo(name = "tot_value", title = gettext("Estimate"), overtitle = gettext("Total"), type = "number")
     }
 
     if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
@@ -336,11 +338,18 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   if(ready) .bcFillTableConfusion(results, table, options)
 
+  # footnotes
+  if(options[["inputType"]] != "pointEstimates")
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
+
+  if(options[["credibleInterval"]])
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
+
   jaspResults[["confusionMatrix"]] <- table
 }
 
 .bcFillTableConfusion <- function(results, table, options) {
-  tab <- summary(results)
+  tab <- summary(results, ciLevel = options[["ciLevel"]])
 
   df <- data.frame(
     head       = gettext(c("Positive condition", "Negative condition", "True/Total")),
@@ -395,7 +404,6 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
   .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
   .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
-  if(!inherits(results, "bcPointEstimates")) return()
 }
 
 ## Prior posterior plot ----
@@ -886,7 +894,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 }
 
 # Helpers ----
-.bcTexts <- function(what = c("statistic", "interpretation", "notation", "footnote")) {
+.bcTexts <- function(what = c("statistic", "interpretation", "notation", "footnote"), options = NULL) {
   what <- match.arg(what)
   out <- switch(what,
     statistic = c(
@@ -938,7 +946,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(
-     credibleInterval = gettext("Central credible intervals are based on 10,000 samples.")
+     credibleInterval  = gettextf("Central credible intervals are based on %i samples.", options[["numberOfSamples"]]),
+     posteriorEstimate = gettextf("Parameter estimates are posterior means based on %i samples.", options[["numberOfSamples"]])
    )
   )
 

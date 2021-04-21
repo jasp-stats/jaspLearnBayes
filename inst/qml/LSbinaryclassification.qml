@@ -23,8 +23,6 @@ import JASP.Theme 1.0
 import "../qml/qml_components" as LS
 
 Form {
-	LS.LSintrotext {}
-
 	Section
 	{
 		title: qsTr("Input")
@@ -111,15 +109,29 @@ Form {
 	Section
 	{
 		title: qsTr("Options")
+		LS.LSintrotext {Layout.columnSpan: 2}
 
-		CheckBox
+		Group
 		{
-			name:					"credibleInterval"
-			label:					qsTr("Credible intervals")
-			childrenOnSameRow:		true
-			checked:				true
-			visible:				inputType.value !== "pointEstimates"
-			CIField { name: "ciLevel" }
+			visible: inputType.value !== "pointEstimates"
+			columns: 1
+			CheckBox
+			{
+				name:					"credibleInterval"
+				label:					qsTr("Credible intervals")
+				childrenOnSameRow:		true
+				checked:				true
+				CIField { name: "ciLevel" }
+			}
+
+			IntegerField
+			{
+				name: "numberOfSamples"
+				label: qsTr("Number of posterior samples")
+				defaultValue: 10000
+				min: 100
+				fieldWidth: 50
+			}
 		}
 
 	}
