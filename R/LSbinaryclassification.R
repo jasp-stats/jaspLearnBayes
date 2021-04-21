@@ -21,8 +21,9 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   dataset <- .bcReadData    (jaspResults, dataset, options, ready)
 
   results <- .bcComputeResults(jaspResults, dataset, options, ready)
-  .bcTables                    (results, jaspResults, dataset, options, ready)
-  .bcPlots                     (results, jaspResults, dataset, options, ready)
+
+  .bcTables(results, jaspResults, dataset, options, ready)
+  .bcPlots (results, jaspResults, dataset, options, ready)
 }
 
 .bcParseOptions <- function(jaspResults, options) {
@@ -45,6 +46,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     return(FALSE)
   }
 }
+
 .bcReadData <- function(jaspResults, dataset, options, ready) {
   if(options[["inputType"]] != "data" || !ready) return(NULL)
 
@@ -58,10 +60,12 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
     dataset <- data.frame(
       marker    = dataset[[options[["marker"]]]],
-      condition = labels == levels[1],
+      condition = labels == levels[2], # second level is "positive" condition
       test      = dataset[[options[["marker"]]]] >= options[["threshold"]]
     )
   }
+
+  # TODO: add check whether marker of condition == TRUE is larger than marker of condition == FALSE
 
   return(dataset)
 }
@@ -113,6 +117,7 @@ summary.bcPointEstimates <- function(results, ...) {
 
 .bcComputeResultsUncertainEstimates <- function(options) {
   prevalence <- sensitivity <- specificity <- numeric(1e4)
+  startProgressbar(expectedTicks = 1e4, label = gettext("Computing samples"))
   for(i in seq_len(1e4)) {
     prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
     invalid <- TRUE
@@ -121,6 +126,8 @@ summary.bcPointEstimates <- function(results, ...) {
       specificity[i] <- rbeta(n=1L, options[["specificityAlpha"]], options[["specificityBeta"]])
       invalid <- (1-specificity[i]) > sensitivity[i]
     }
+
+    progressbarTick()
   }
   results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
 
@@ -220,7 +227,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   table$showSpecifiedColumnsOnly <- TRUE
 
   table$addColumnInfo(name = "statistic",  title = "")
-  table$addColumnInfo(name = "estimate", title = gettext("Value"), type = "number")
+  table$addColumnInfo(name = "estimate", title = gettext("Estimate"), type = "number")
 
 
   if(options[["credibleInterval"]]) {
@@ -382,8 +389,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     plotsContainer <- jaspResults[["plots"]]
   }
 
-  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options, ready, position = 1)
+  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
@@ -434,6 +441,46 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     ggplot2::xlab(gettext("Test result")) +
     ggplot2::ylab(gettext("P(positive)")) +
     ggplot2::scale_fill_discrete(name = NULL)
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
+.bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, dataset, options) {
+  data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
+                      result = gettext(c("Negative", "Positive")))
+  data$mean <- data$lower <- data$upper <- numeric(length(nrow(data)))
+  alpha <- 1-options[["ciLevel"]]
+
+  for(i in 1:nrow(data)) {
+    if(data$test[i] == gettext("Not tested")) {
+      data$mean [i] <- mean    (results[["prevalence"]])
+      data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2)
+      data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2)
+    } else if(data$result[i] == gettext("Negative")) {
+      data$mean [i] <- mean    (results[["falseOmissionRate"]])
+      data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2)
+      data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2)
+    } else {
+      data$mean [i] <- mean    (results[["positivePredictiveValue"]])
+      data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2)
+      data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2)
+    }
+  }
+
+  plot <- ggplot2::ggplot(data    = data,
+                          mapping = ggplot2::aes(x=result, y=mean, fill=test, ymin=lower, ymax=upper)) +
+    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(width=0.7), col = "black", width=0.7) +
+    ggplot2::xlab(gettext("Test result")) +
+    ggplot2::ylab(gettext("P(positive)")) +
+    ggplot2::scale_fill_discrete(name = NULL)
+
+  if(options[["credibleInterval"]]) {
+    plot <- plot +
+      ggplot2::geom_errorbar(position = ggplot2::position_dodge(width=0.7), size = 1, width = 0.5)
+  }
+
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
@@ -718,10 +765,10 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       prevalence              = gettext("Prevalence"),
       sensitivity             = gettext("Sensitivity"),
       specificity             = gettext("Specificity"),
-      truePositive            = gettext("True positive"),
-      falsePositive           = gettext("False positive"),
-      trueNegative            = gettext("True negative"),
-      falseNegative           = gettext("False negative"),
+      truePositive            = gettext("True positive rate"),
+      falsePositive           = gettext("False positive rate"),
+      trueNegative            = gettext("True negative rate"),
+      falseNegative           = gettext("False negative rate"),
       positivePredictiveValue = gettext("Positive predictive value"),
       negativePredictiveValue = gettext("Negative predictive value"),
       falseDiscoveryRate      = gettext("False discovery rate"),
