@@ -394,8 +394,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
   .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
-  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
+  if(!inherits(results, "bcPointEstimates")) return()
 }
 
 ## Prior posterior plot ----
@@ -834,27 +834,51 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   UseMethod(".bcFillPlotSignal")
 }
 
-.bcFillPlotSignal.bcPointEstimates <- function(results, dataset, options) {
-
-  threshold    <- qnorm(results[["specificity"]])
-  meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
+.bcFillPlotSignal.default <- function(results, dataset, options) {
+  summaryResults <- summary(results)
+  threshold    <- qnorm(summaryResults["specificity", "estimate"])
+  meanPositive <- qnorm(summaryResults["sensitivity", "estimate"], mean = threshold)
 
   lowerLimitX <- min(qnorm(0.01, c(0, meanPositive)))
   upperLimitX <- max(qnorm(0.99, c(0, meanPositive)))
 
+  prevalence <- summaryResults["prevalence", "estimate"]
   plot <- ggplot2::ggplot() +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-options[["prevalence"]]), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "steelblue"), alpha = 0.7)  +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-options[["prevalence"]]), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkorange"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = options[["prevalence"]]), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "red"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = options[["prevalence"]]), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkgreen"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-options[["prevalence"]]), size = 1) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = options[["prevalence"]]), size = 1) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "steelblue"), alpha = 0.7)  +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkorange"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "red"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkgreen"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), size = 1) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), size = 1) +
     ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1.5) +
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX)),
                                 limits = c(lowerLimitX, upperLimitX)) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Density"))
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
+.bcFillPlotSignal.bcData <- function(results, dataset, options) {
+  breaks <- hist(dataset[["marker"]], plot = FALSE)[["breaks"]]
+  binWidth <- breaks[2] - breaks[1]
+  group <- character(nrow(dataset))
+  group[ dataset$condition &  dataset$test] <- gettext("True positive")
+  group[!dataset$condition &  dataset$test] <- gettext("False positive")
+  group[ dataset$condition & !dataset$test] <- gettext("False negative")
+  group[!dataset$condition & !dataset$test] <- gettext("True negative")
+
+  dataset$group <- factor(group, levels = gettext(c("True positive", "False positive", "False negative", "True negative")))
+  plot <- ggplot2::ggplot(data = dataset, mapping = ggplot2::aes(x = marker, fill = group)) +
+    ggplot2::geom_histogram(position = "identity", alpha = 0.4, color = "black", binwidth = binWidth, boundary = options[["threshold"]]) +
+    ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1.5) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]])) +
+    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::xlab(gettext("Marker")) +
+    ggplot2::ylab(gettext("Count"))
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
