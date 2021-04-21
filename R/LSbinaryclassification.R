@@ -393,8 +393,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
-  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
+  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
 }
 
@@ -787,7 +787,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   UseMethod(".bcFillPlotAlluvial")
 }
 
-.bcFillPlotAlluvial.bcPointEstimates <- function(results, dataset, options) {
+.bcFillPlotAlluvial.default <- function(results, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
@@ -796,7 +796,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     gettext(c("True positive", "False positive", "False negative", "True negative")),
     levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
   )
-  data$prop <- unlist(results[c("truePositive", "falsePositive", "falseNegative", "trueNegative")])
+  data$prop <- summary(results)[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
 
   plot <- ggplot2::ggplot(data = data,
                           mapping = ggplot2::aes(y = prop, axis1 = cond, axis2 = test)) +
