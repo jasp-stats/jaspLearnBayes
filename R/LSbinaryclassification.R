@@ -390,10 +390,10 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   }
 
   .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options, ready, position = 1)
-  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
+  if(!inherits(results, "bcPointEstimates")) return()
   .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
   .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
 }
@@ -405,7 +405,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plotsContainer[["plotPriorPosteriorPositive"]] <-
     createJaspPlot(title        = gettext("Probability positive"),
-                   dependencies = "plotPriorPosteriorPositive",
+                   dependencies = c("plotPriorPosteriorPositive", "credibleInterval", "ciLevel"),
                    position     = position,
                    width        = 500
     )
@@ -559,6 +559,14 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   return(plot)
 }
 
+.bcFillPlotIconPlot.bcUncertainEstimates <- function(results, dataset, options) {
+  plot <- ggplot2::ggplot()
+
+  plot <- jaspGraphs::themeJasp(plot, xAxis = FALSE, yAxis = FALSE, legend.position = "right")
+
+  return(plot)
+}
+
 ## ROC curve plot ----
 .bcPlotROC <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotROC"]])     ) return()
@@ -567,7 +575,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   plotsContainer[["plotROC"]] <-
     createJaspPlot(
       title        = gettext("Receiving Operating Characteristic Curve"),
-      dependencies = "plotROC",
+      dependencies = c("plotROC", "credibleInterval", "ciLevel"),
       position     = position,
       aspectRatio  = 1,
       width        = 400
@@ -594,18 +602,59 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   )
 
   pointData <- data.frame(
-    falsePositiveFraction = 1-results[["specificity"]],
+    falsePositiveFraction = results[["falsePositiveFraction"]],
     truePositiveFraction  = results[["sensitivity"]]
   )
-  plot <- ggplot2::ggplot(data = data,
+  plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x = falsePositiveFraction,
-                                                 y =  truePositiveFraction)
+                                                 y = truePositiveFraction)
                           ) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_line(size = 2) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False positive fraction (1-Specificity)")) +
     ggplot2::ylab(gettext("True positive fraction (Sensitivity)"))
+
+  plot <- jaspGraphs::themeJasp(plot)
+
+  return(plot)
+}
+
+.bcFillPlotROC.bcUncertainEstimates <- function(results, dataset, options) {
+  alpha <- 1-options[["ciLevel"]]
+
+  threshold <- qnorm(results[["specificity"]])
+  meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
+
+  falsePositiveFraction <- seq(0, 1, by = 0.01)
+  varyingThreshold <- qnorm(falsePositiveFraction, lower.tail = FALSE)
+  data <- data.frame(falsePositiveFraction = falsePositiveFraction,
+                     mean = NA, lower = NA, upper = NA)
+
+  for(i in seq_along(falsePositiveFraction)) {
+    truePositiveFraction <- pnorm(varyingThreshold[i], meanPositive, lower.tail = FALSE)
+
+    data[i, "mean"]  <- median    (truePositiveFraction)
+    data[i, "lower"] <- quantile(truePositiveFraction, p =   alpha/2)
+    data[i, "upper"] <- quantile(truePositiveFraction, p = 1-alpha/2)
+  }
+
+  plot <- ggplot2::ggplot(data    = data,
+                          mapping = ggplot2::aes(x    = falsePositiveFraction,
+                                                 y    = mean,
+                                                 ymin = lower,
+                                                 ymax = upper)
+                          ) +
+    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
+
+  if(options[["credibleInterval"]])
+    plot <- plot + ggplot2::geom_ribbon(alpha = 0.5)
+
+  plot <- plot +
+    ggplot2::geom_line(size = 2) +
+    ggplot2::xlab(gettext("False positive fraction (1-Specificity)")) +
+    ggplot2::ylab(gettext("True positive fraction (Sensitivity)"))
+
 
   plot <- jaspGraphs::themeJasp(plot)
 
@@ -619,7 +668,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plotsContainer[["plotVaryingPrevalence"]] <-
     createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
-                   dependencies = "plotVaryingPrevalence",
+                   dependencies = c("plotVaryingPrevalence", "credibleInterval", "ciLevel"),
                    position     = 6,
                    width        = 500
     )
@@ -656,6 +705,61 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       name   = gettext("Predictive Value"),
       values = c("steelblue", "firebrick")
       )
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
+.bcFillPlotVaryingPrevalence.bcUncertainEstimates <- function(results, dataset, options) {
+  alpha <- 1-options[["ciLevel"]]
+  sensitivity <- results[["sensitivity"]]
+  specificity <- results[["specificity"]]
+
+  prevalence <- seq(0, 1, by = 0.01)
+  data <- data.frame(prevalence = prevalence,
+                     meanPPV = NA, lowerPPV = NA, upperPPV = NA,
+                     meanNPV = NA, lowerNPV = NA, upperNPV = NA)
+
+  for(i in seq_along(prevalence)) {
+    truePositive            <- prevalence[i]*sensitivity
+    falsePositive           <- (1-prevalence[i])*(1-specificity)
+    trueNegative            <- (1-prevalence[i])*specificity
+    falseNegative           <- prevalence[i]*(1-sensitivity)
+    positivePredictiveValue <- truePositive / (truePositive + falsePositive)
+    negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
+
+    data[i, "meanPPV"]  <- mean    (positivePredictiveValue)
+    data[i, "lowerPPV"] <- quantile(positivePredictiveValue, p =   alpha/2)
+    data[i, "upperPPV"] <- quantile(positivePredictiveValue, p = 1-alpha/2)
+
+    data[i, "meanNPV"]  <- mean    (negativePredictiveValue)
+    data[i, "lowerNPV"] <- quantile(negativePredictiveValue, p =   alpha/2)
+    data[i, "upperNPV"] <- quantile(negativePredictiveValue, p = 1-alpha/2)
+  }
+
+  plot <- ggplot2::ggplot(data = data)
+
+  if(options[["credibleInterval"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(x = prevalence, ymin = lowerPPV, ymax = upperPPV, fill = gettext("Positive")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(x = prevalence, ymin = lowerNPV, ymax = upperNPV, fill = gettext("Negative")), alpha = 0.5)
+  }
+
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = meanPPV, color = gettext("Positive")), size = 2) +
+    ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = meanNPV, color = gettext("Negative")), size = 2) +
+    ggplot2::xlab(gettext("Prevalence")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      values = c("steelblue", "firebrick")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Predictive Value"),
+      values = c("steelblue", "firebrick")
+    )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
