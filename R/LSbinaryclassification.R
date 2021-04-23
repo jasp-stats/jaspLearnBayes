@@ -16,6 +16,8 @@
 #
 
 LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) {
+  .bcIntro(jaspResults, options)
+
   options <- .bcParseOptions(jaspResults, options)
   ready   <- .bcIsReady     (options)
   dataset <- .bcReadData    (jaspResults, dataset, options, ready)
@@ -24,6 +26,47 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   .bcTables(results, jaspResults, dataset, options, ready)
   .bcPlots (results, jaspResults, dataset, options, ready)
+}
+
+.bcIntro <- function(jaspResults, options) {
+  if(isFALSE(options[["introText"]])) return()
+  if(!is.null(jaspResults[["introText"]])) return()
+
+  bayes <- system.file("icons", "bayes.png", package = "jaspLearnBayes")
+  #bayes <- "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/410.svg"
+  text <- gettextf('This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.
+                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).
+                   Common binary classification applications are:
+                   <ul>
+                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient suffers from a certain disease or not.</li>
+                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is a spam or not.</li>
+                     <li><b>Quality control</b> where the classification determines whether an industry standard has been met or not.</li>
+                   </ul>
+                   Due to the fact that binary classification is often used in medical testing, terminology in binary classification problems borrows from medical dictionary (e.g., prevalence, condition, marker).
+
+                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule. In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative). In many applications, the conditions or the test may not be symmetric, therefore various types of errors are of interest additionally to an overall accuracy measure. These types of errors distinguish, for example, whether a patient suffers from a condition but the test came out negative (false negative), or whether a patient does not suffer from a condition but the test came out positive (false positive).
+
+                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>. Sensitivity is the probability of testing positive if the condition is positive. Specificity is the probability of testing negative if the condition is negative. Propert of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.
+                   Skewed characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical. For example, in certain situations it is more likely that a patient does not have a certain desease than does, even after testing positive for that disease.
+
+                   Formally, the probability that a subject has a positive condition after the test came out positive is obtained by applying the <b>Bayes theorem</b>:
+
+                   <img src = "%s", width = "50%%">
+
+                   <h5>References</h5>
+                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.
+
+                   <a href="https://wikipedia.org/wiki/Binary_classification">https://wikipedia.org/wiki/Binary_classification</a>
+
+                   <a href="https://wikipedia.org/wiki/Evaluation_of_binary_classifiers">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>
+
+                   <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
+                   ', bayes)
+
+  jaspResults[["introText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
+                                               text         = text,
+                                               dependencies = "introText",
+                                               position     = 1)
 }
 
 .bcParseOptions <- function(jaspResults, options) {
@@ -212,7 +255,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   if(is.null(jaspResults[["tables"]])) {
     tablesContainer <- createJaspContainer(title = gettext("Tables"))
     tablesContainer$dependOn(optionsFromObject = jaspResults[["results"]], options = c("credibleInterval", "ciLevel"))
-    tablesContainer$position <- 1
+    tablesContainer$position <- 2
     jaspResults[["tables"]] <- tablesContainer
   } else {
     tablesContainer <- jaspResults[["tables"]]
@@ -396,7 +439,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   if(is.null(jaspResults[["plots"]])) {
     plotsContainer <- createJaspContainer(title = gettext("Plots"))
     plotsContainer$dependOn(optionsFromObject = jaspResults[["results"]])
-    plotsContainer$position <- 2
+    plotsContainer$position <- 3
     jaspResults[["plots"]] <- plotsContainer
   } else {
     plotsContainer <- jaspResults[["plots"]]
@@ -452,7 +495,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
                           ) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), col = "black") +
     ggplot2::xlab(gettext("Test result")) +
-    ggplot2::ylab(gettext("P(positive)")) +
+    ggplot2::ylab(gettext("P(Condition = positive)")) +
     ggplot2::scale_fill_discrete(name = NULL)
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
@@ -486,7 +529,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
                           mapping = ggplot2::aes(x=result, y=mean, fill=test, ymin=lower, ymax=upper)) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(width=0.7), col = "black", width=0.7) +
     ggplot2::xlab(gettext("Test result")) +
-    ggplot2::ylab(gettext("P(positive)")) +
+    ggplot2::ylab(gettext("P(Condition = positive)")) +
     ggplot2::scale_fill_discrete(name = NULL)
 
   if(options[["credibleInterval"]]) {
