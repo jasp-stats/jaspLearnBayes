@@ -39,9 +39,9 @@ Form {
 		{
 			visible: inputType.value === "pointEstimates"
 			title: qsTr("Estimates")
+			FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0; max: 1; defaultValue: "0.1"	}
 			FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0; max: 1; defaultValue: "0.8" }
 			FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0; max: 1; defaultValue: "0.8"	}
-			FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0; max: 1; defaultValue: "0.1"	}
 		}
 
 		Group
@@ -63,12 +63,12 @@ Form {
 			visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
 			columns: 2
 			title: inputType.value === "data" ? qsTr("Priors") : qsTr("Estimates")
+			FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
+			FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
 			FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
 			FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
 			FormulaField { name: "specificityAlpha"; label: qsTr("Specificity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
 			FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
-			FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
-			FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
 		}
 	}
 
@@ -85,6 +85,24 @@ Form {
 			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot")						}
 			CheckBox { name: "plotSignal";							label: qsTr("Signal detection"); 					}
+			CheckBox
+			{
+				name: "plotEstimates"; label: qsTr("Estimates"); columns: 2
+				CheckBox { name: "plotPrevalence";  label: qsTr("Prevalence");  checked: true; Layout.columnSpan: 2 }
+				CheckBox { name: "plotSensitivity"; label: qsTr("Sensitivity"); checked: true }
+				CheckBox { name: "plotSpecificity"; label: qsTr("Specificity"); checked: true }
+				CheckBox { name: "plotTruePositive"; label: qsTr("True positive rate") }
+				CheckBox { name: "plotFalsePositive"; label: qsTr("False positive rate") }
+				CheckBox { name: "plotTrueNegative"; label: qsTr("True negative rate") }
+				CheckBox { name: "plotFalseNegative"; label: qsTr("False negative rate") }
+				CheckBox { name: "plotPPV"; label: qsTr("Positive predictive value") }
+				CheckBox { name: "plotNPV"; label: qsTr("Negative predictive value") }
+				CheckBox { name: "plotFDR"; label: qsTr("False discovery rate") }
+				CheckBox { name: "plotFOR"; label: qsTr("False omission rate") }
+				CheckBox { name: "plotFPF"; label: qsTr("False positive fraction") }
+				CheckBox { name: "plotFNF"; label: qsTr("False negative fraction") }
+				CheckBox { name: "plotAccuracy"; label: qsTr("Accuracy") }
+			}
 		}
 
 		Group

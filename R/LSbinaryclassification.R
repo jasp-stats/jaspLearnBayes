@@ -408,6 +408,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
   .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
   .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
+  .bcPlotEstimates             (results, plotsContainer, dataset, options, ready, position = 7)
 }
 
 ## Prior posterior plot ----
@@ -930,6 +931,69 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     ggplot2::ylab(gettext("Count"))
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
+## Estimates plot ----
+.bcPlotEstimates <- function(results, plotsContainer, dataset, options, ready, position) {
+  if( isFALSE(options[["plotEstimates"]]) ) return()
+  if(!is.null(plotsContainer[["plotEstimates"]]) ) return()
+
+  plots <- c("plotPrevalence",
+             "plotSensitivity",  "plotSpecificity",
+             "plotTruePositive", "plotFalsePositive",
+             "plotTrueNegative", "plotFalseNegative",
+             "plotPPV",          "plotNPV",
+             "plotFDR",          "plotFOR",
+             "plotFPF",          "plotFNF",
+             "plotAccuracy")
+  selectedPlots <- unlist(options[plots])
+
+  plotsContainer[["plotEstimates"]] <-
+    createJaspPlot(title        = gettext("Estimates"),
+                   dependencies = c("plotEstimates", plots),
+                   position     = position,
+                   width        = 600,
+                   height       = 50 + 50 * sum(selectedPlots)
+    )
+
+  if(ready && any(selectedPlots)) plotsContainer[["plotEstimates"]]$plotObject <-
+    .bcFillPlotEstimates(results, dataset, options, selectedPlots)
+
+}
+
+.bcFillPlotEstimates <- function(results, dataset, options, selectedPlots) {
+  UseMethod(".bcFillPlotEstimates")
+}
+
+.bcFillPlotEstimates.default <- function(results, dataset, options, selectedPlots) {
+  data <- summary(results, ciLevel = options[["ciLevel"]])
+  rows <- c("prevalence",
+            "sensitivity",             "specificity",
+            "truePositive",            "falsePositive",
+            "trueNegative",            "falseNegative",
+            "positivePredictiveValue", "negativePredictiveValue",
+            "falseDiscoveryRate",      "falseOmissionRate",
+            "falsePositiveFraction",   "falseNegativeFraction",
+            "accuracy")[selectedPlots]
+
+  data <- data[rows,]
+  data[["statistic"]] <- factor(data[["statistic"]], levels = rev(data[["statistic"]]))
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic))
+
+  if(options[["credibleInterval"]])
+    plot <- plot + ggplot2::geom_errorbarh(mapping = ggplot2::aes(xmin=lowerCI,xmax=upperCI),
+                                           height = 0.25, size = 1)
+
+  plot <- plot + jaspGraphs::geom_point(size = 6) +
+    ggplot2::xlim(c(0,1)) +
+    ggplot2::xlab(gettext("Estimate")) +
+    ggplot2::ylab(NULL)
+
+
+  plot <- jaspGraphs::themeJasp(plot)
 
   return(plot)
 }
