@@ -115,9 +115,12 @@ summary.bcPointEstimates <- function(results, ...) {
   return(output)
 }
 
-.bcComputeResultsUncertainEstimates <- function(options) {
+.bcComputeResultsUncertainEstimates <- function(options, progress = TRUE) {
   prevalence <- sensitivity <- specificity <- numeric(options[["numberOfSamples"]])
-  startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Computing samples"))
+
+  if(progress)
+    startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Computing samples"))
+
   for(i in seq_len(options[["numberOfSamples"]])) {
     prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
     invalid <- TRUE
@@ -127,7 +130,7 @@ summary.bcPointEstimates <- function(results, ...) {
       invalid <- (1-specificity[i]) > sensitivity[i]
     }
 
-    progressbarTick()
+    if(progress) progressbarTick()
   }
   results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
 
@@ -151,7 +154,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   return(output)
 }
 
-.bcComputeResultsFromData <- function(options, dataset, ready) {
+.bcComputeResultsFromData <- function(options, dataset, ready, progress = TRUE) {
   if(!ready) return(.bcComputeResultsUncertainEstimates(options))
 
   res <- list(
@@ -160,12 +163,13 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     sensitivityAlpha = options[["sensitivityAlpha"]] + sum( dataset[["condition"]] &  dataset[["test"]]),
     sensitivityBeta  = options[["sensitivityBeta"]]  + sum( dataset[["condition"]] & !dataset[["test"]]),
     specificityAlpha = options[["specificityAlpha"]] + sum(!dataset[["condition"]] & !dataset[["test"]]),
-    specificityBeta  = options[["specificityBeta"]]  + sum(!dataset[["condition"]] &  dataset[["test"]])
+    specificityBeta  = options[["specificityBeta"]]  + sum(!dataset[["condition"]] &  dataset[["test"]]),
+    numberOfSamples  = options[["numberOfSamples"]]
   )
 
-  results <- .bcComputeResultsUncertainEstimates(res)
+  results <- .bcComputeResultsUncertainEstimates(res, progress = progress)
 
-  class(results) <- c("bcUncertainEstimates", "bcData")
+  class(results) <- c("bcData", "bcUncertainEstimates")
   return(results)
 }
 
@@ -505,7 +509,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
                    dependencies = "plotIconPlot",
                    position     = position,
                    aspectRatio  = 1,
-                   width        = 500,
+                   width        = 600,
                    height       = 400
     )
 
@@ -636,16 +640,59 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   for(i in seq_along(falsePositiveFraction)) {
     truePositiveFraction <- pnorm(varyingThreshold[i], meanPositive, lower.tail = FALSE)
 
-    data[i, "mean"]  <- median    (truePositiveFraction)
-    data[i, "lower"] <- quantile(truePositiveFraction, p =   alpha/2)
-    data[i, "upper"] <- quantile(truePositiveFraction, p = 1-alpha/2)
+    data[i, "estimate"]  <- median    (truePositiveFraction)
+    data[i, "lower"]     <- quantile(truePositiveFraction, p =   alpha/2)
+    data[i, "upper"]     <- quantile(truePositiveFraction, p = 1-alpha/2)
   }
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x    = falsePositiveFraction,
-                                                 y    = mean,
+                                                 y    = estimate,
                                                  ymin = lower,
                                                  ymax = upper)
+                          ) +
+    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
+
+  if(options[["credibleInterval"]])
+    plot <- plot + ggplot2::geom_ribbon(alpha = 0.5)
+
+  plot <- plot +
+    ggplot2::geom_line(size = 2) +
+    ggplot2::xlab(gettext("False positive fraction (1-Specificity)")) +
+    ggplot2::ylab(gettext("True positive fraction (Sensitivity)"))
+
+
+  plot <- jaspGraphs::themeJasp(plot)
+
+  return(plot)
+}
+
+.bcFillPlotROC.bcData <- function(results, dataset, options) {
+
+  thresholds <- quantile(dataset$marker, p = seq(0, 1, by = 0.05))
+
+  data <- data.frame(
+    estimate = numeric(length(thresholds)),
+    lowerCI  = numeric(length(thresholds)),
+    upperCI  = numeric(length(thresholds))
+  )
+
+  opts <- options
+  opts$numberOfSamples <- 1000
+  for(i in seq_along(thresholds)) {
+    dataset[["test"]] <- dataset[["marker"]] >= thresholds[i]
+    res <- summary(.bcComputeResultsFromData(opts, dataset, TRUE, FALSE), ciLevel = options[["ciLevel"]])
+    data[i, c("estimate", "lowerCI", "upperCI")] <-
+      unlist(res["sensitivity", c("estimate", "lowerCI", "upperCI"),drop=TRUE])
+  }
+
+  data$falsePositiveFraction <- seq(1, 0, by = -0.05)
+
+  plot <- ggplot2::ggplot(data    = data,
+                          mapping = ggplot2::aes(x = falsePositiveFraction,
+                                                 y = estimate,
+                                                 ymin = lowerCI,
+                                                 ymax = upperCI)
                           ) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
 
@@ -808,7 +855,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     ggplot2::scale_x_discrete(limits = c("cond", "test"),
                               labels = gettext(c("Condition", "Test"))) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue")) +
-    ggplot2::ylab(gettext("Proportion in population"))
+    ggplot2::ylab(gettext("Proportion of population"))
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
