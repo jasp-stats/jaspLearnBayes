@@ -505,7 +505,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
                    dependencies = "plotIconPlot",
                    position     = position,
                    aspectRatio  = 1,
-                   width        = 400
+                   width        = 500,
+                   height       = 400
     )
 
   if(ready) plotsContainer[["plotIconPlot"]]$plotObject <-
@@ -517,7 +518,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   UseMethod(".bcFillPlotIconPlot")
 }
 
-.bcFillPlotIconPlot.bcPointEstimates <- function(results, dataset, options) {
+.bcFillPlotIconPlot.default <- function(results, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
@@ -526,51 +527,44 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     gettext(c("True positive", "False positive", "False negative", "True negative")),
     levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
   )
-  data$prop <- unlist(results[c("truePositive", "falsePositive", "falseNegative", "trueNegative")])
+  data$prop <- summary(results)[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
 
-  # if(any(data$prop < 1e-3)) {
-  #   npoints <- 1e4
-  #   xside <-  yside <- 1e2
-  # } else
-
-  if(any(data$prop < 1e-2)) {
+  if(any(data$prop < 1e-4)) {
+    npoints <- 1e6
+    xside <- yside <- 1e3
+  } else if(any(data$prop < 1e-2)) {
     npoints <- 1e4
-    xside   <- 10
-    yside   <- 1e3
+    xside <- yside <- 1e2
   } else {
     npoints <- 1e2
     xside <- yside <- 10
   }
 
   data$n <- round(npoints*data$prop, digits = 0)
-
   data <- data.frame(
     outcome = rep(data$out, data$n),
     x = rep(c(1:xside,xside:1), times = yside/2),
-    y = rep(seq_len(yside), each = xside)
+    y = rep(seq_len(yside), each = xside),
+    image = system.file("icons", "person.svg", package = "jaspLearnBayes")
   )
-  plot <- ggplot2::ggplot(data=data, mapping = ggplot2::aes(x=x,y=y,fill=outcome))
 
-  if(npoints <= 100) {
-    plot <- plot + ggplot2::geom_tile(color = "black")
+  plot <- ggplot2::ggplot(data=data, mapping = ggplot2::aes(x=x,y=y))
+
+  if(npoints <= 1e2) {
+    plot <- plot + ggimage::geom_image(mapping = ggplot2::aes(col=outcome,image=image)) +
+      ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative")))
   } else {
-    plot <- plot + ggplot2::geom_tile()
+    plot <- plot + ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome)) +
+      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative")))
   }
 
   plot <- plot +
     ggplot2::coord_fixed(ratio = xside/yside) +
-    ggplot2::ylab(NULL) + ggplot2::xlab(NULL)
+    ggplot2::ylab(NULL) + ggplot2::xlab(NULL) +
+    ggplot2::scale_x_discrete(labels = NULL, breaks = NULL) +
+    ggplot2::scale_y_discrete(labels = NULL, breaks = NULL)
 
-
-  plot <- jaspGraphs::themeJasp(plot, xAxis = FALSE, yAxis = FALSE, legend.position = "right")
-
-  return(plot)
-}
-
-.bcFillPlotIconPlot.bcUncertainEstimates <- function(results, dataset, options) {
-  plot <- ggplot2::ggplot()
-
-  plot <- jaspGraphs::themeJasp(plot, xAxis = FALSE, yAxis = FALSE, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, xAxis = FALSE, yAxis = FALSE, legend.position = "right", legend.justification = )
 
   return(plot)
 }

@@ -20,6 +20,8 @@ Imports:
   MGLM,
   scales,
   ggalluvial,
+  ggimage,
+  rsvg,
   ragg
 Remotes:
   jasp-stats/jaspBase,
