@@ -51,7 +51,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    Formally, the probability that a subject has a positive condition after the test came out positive is obtained by applying the <b>Bayes theorem</b>:
 
-                   <img src = "%s", width = "50%%">
+                   <img src = "file://%s", width="500">
 
                    <h5>References</h5>
                    Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.
