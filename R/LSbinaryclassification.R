@@ -181,7 +181,7 @@ summary.bcPointEstimates <- function(results, ...) {
   return(results)
 }
 
-summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
+summary.bcUncertainEstimates <- function(results, ciLevel) {
   alpha <- 1-ciLevel
 
   output <- data.frame(
@@ -591,7 +591,7 @@ coef.bcPosteriorParams <- function(results) {
     gettext(c("True positive", "False positive", "False negative", "True negative")),
     levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
   )
-  data$prop <- summary(results)[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
+  data$prop <- summary(results, ciLevel = options[["ciLevel"]])[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
 
   if(any(data$prop < 1e-4)) {
     npoints <- 1e6
@@ -906,7 +906,7 @@ coef.bcPosteriorParams <- function(results) {
     gettext(c("True positive", "False positive", "False negative", "True negative")),
     levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
   )
-  data$prop <- summary(results)[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
+  data$prop <- summary(results, ciLevel = options[["ciLevel"]])[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
 
   plot <- ggplot2::ggplot(data = data,
                           mapping = ggplot2::aes(y = prop, axis1 = cond, axis2 = test)) +
@@ -945,7 +945,7 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 .bcFillPlotSignal.default <- function(results, dataset, options) {
-  summaryResults <- summary(results)
+  summaryResults <- summary(results, ciLevel = options[["ciLevel"]])
   threshold    <- qnorm(summaryResults["specificity", "estimate"])
   meanPositive <- qnorm(summaryResults["sensitivity", "estimate"], mean = threshold)
 
