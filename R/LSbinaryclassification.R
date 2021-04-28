@@ -49,7 +49,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                    Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>. Sensitivity is the probability of testing positive if the condition is positive. Specificity is the probability of testing negative if the condition is negative. Property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.
                    Skewed characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical. For example, in certain situations it is more likely that a patient does not have a certain disease than does, even after testing positive for that disease.
 
-                   Formally, the probability that a subject has a positive condition after the test came out positive is obtained by applying the <b>Bayes theorem</b>:
+                   Formally, the probability that a subject has a positive condition after the test came out positive (i.e., positive predictive value) is obtained by applying the <b>Bayes theorem</b>:
 
                    <img src = "file://%s", width="500">
 
@@ -656,69 +656,39 @@ coef.bcPosteriorParams <- function(results) {
   UseMethod(".bcFillPlotROC")
 }
 
-.bcFillPlotROC.bcPointEstimates <- function(results, dataset, options) {
+.bcFillPlotROC.default <- function(results, dataset, options) {
+  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
 
-  threshold    <- qnorm(results[["specificity"]])
-  meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
+  threshold    <- qnorm(summ["specificity", "estimate"])
+  meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
 
-  falsePositiveRate <- seq(0, 1, by = 0.01)
-  varyingThreshold <- qnorm(falsePositiveRate, lower.tail = FALSE)
+  varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
   data <- data.frame(
-    falsePositiveRate = falsePositiveRate,
-    truePositiveRate  = pnorm(varyingThreshold, meanPositive, lower.tail = FALSE)
+    fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
+    tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
   )
 
-  pointData <- data.frame(
-    falsePositiveRate = results[["falsePositiveRate"]],
-    truePositiveRate  = results[["sensitivity"]]
-  )
-  plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x = falsePositiveRate,
-                                                 y = truePositiveRate)
-                          ) +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
-    ggplot2::geom_line(size = 2) +
-    jaspGraphs::geom_point(data = pointData, size = 5) +
-    ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
-    ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
+  pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
+                          tpr = summ["sensitivity",       "estimate"])
 
-  plot <- jaspGraphs::themeJasp(plot)
-
-  return(plot)
-}
-
-.bcFillPlotROC.bcUncertainEstimates <- function(results, dataset, options) {
-  alpha <- 1-options[["ciLevel"]]
-
-  threshold <- qnorm(results[["specificity"]])
-  meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
-
-  falsePositiveRate <- seq(0, 1, by = 0.01)
-  varyingThreshold <- qnorm(falsePositiveRate, lower.tail = FALSE)
-  data <- data.frame(falsePositiveRate = falsePositiveRate,
-                     mean = NA, lower = NA, upper = NA)
-
-  for(i in seq_along(falsePositiveRate)) {
-    truePositiveRate <- pnorm(varyingThreshold[i], meanPositive, lower.tail = FALSE)
-
-    data[i, "estimate"]  <- median    (truePositiveRate)
-    data[i, "lower"]     <- quantile(truePositiveRate, p =   alpha/2)
-    data[i, "upper"]     <- quantile(truePositiveRate, p = 1-alpha/2)
-  }
+  ciData <- data.frame(x    = unlist(summ["falsePositiveRate", c("lowerCI", "upperCI")]),
+                       ymin = summ["sensitivity", "lowerCI"],
+                       ymax = summ["sensitivity", "upperCI"])
 
   plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x    = falsePositiveRate,
-                                                 y    = estimate,
-                                                 ymin = lower,
-                                                 ymax = upper)
+                          mapping = ggplot2::aes(x    = fpr,
+                                                 y    = tpr)
                           ) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
 
   if(options[["credibleInterval"]])
-    plot <- plot + ggplot2::geom_ribbon(alpha = 0.5)
+    plot <- plot + ggplot2::geom_ribbon(data    = ciData,
+                                        mapping = ggplot2::aes(x=x,ymin=ymin,ymax=ymax),
+                                        alpha   = 0.5, inherit.aes = FALSE)
 
   plot <- plot +
-    ggplot2::geom_line(size = 2) +
+    ggplot2::geom_line(size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
     ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
 
