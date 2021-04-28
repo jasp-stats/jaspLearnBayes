@@ -6,7 +6,7 @@ Description
 	title :			qsTr("Learn Bayes")
 	name: 			"jaspLearnBayes"
 	icon:			"learning-stats.png"
-	description:	qsTr("Learning Bayesian Statistics with JASP")
+	description:	qsTr("Learn Bayesian statistics with simple examples and supporting text")
 	version:		"0.1"
 	requiresData:	false
 	author:			"JASP Team"
