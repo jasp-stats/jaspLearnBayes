@@ -200,21 +200,13 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 .bcComputeResultsFromData <- function(options, dataset, ready, progress = TRUE) {
   if(!ready) return(.bcComputeResultsUncertainEstimates(options))
 
-  res <- list(
-    prevalenceAlpha  = options[["prevalenceAlpha"]]  + sum( dataset[["condition"]]),
-    prevalenceBeta   = options[["prevalenceBeta"]]   + sum(!dataset[["condition"]]),
-    sensitivityAlpha = options[["sensitivityAlpha"]] + sum( dataset[["condition"]] &  dataset[["test"]]),
-    sensitivityBeta  = options[["sensitivityBeta"]]  + sum( dataset[["condition"]] & !dataset[["test"]]),
-    specificityAlpha = options[["specificityAlpha"]] + sum(!dataset[["condition"]] & !dataset[["test"]]),
-    specificityBeta  = options[["specificityBeta"]]  + sum(!dataset[["condition"]] &  dataset[["test"]]),
-    numberOfSamples  = options[["numberOfSamples"]]
-  )
-
-  results <- .bcComputeResultsUncertainEstimates(res, progress = progress)
+  results <- .bcGetPosterior(options, dataset)
+  results <- .bcComputeResultsUncertainEstimates(results, progress = progress)
 
   class(results) <- c("bcData", "bcUncertainEstimates")
   return(results)
 }
+
 
 .bcStatistics <- function(prevalence, sensitivity, specificity) {
   truePositive            <- prevalence*sensitivity
@@ -225,8 +217,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
   falseDiscoveryRate      <- 1-positivePredictiveValue
   falseOmissionRate       <- 1-negativePredictiveValue
-  falsePositiveFraction   <- 1-sensitivity
-  falseNegativeFraction   <- 1-specificity
+  falsePositiveRate   <- 1-specificity
+  falseNegativeRate   <- 1-sensitivity
   accuracy                <- truePositive + trueNegative
 
   results <- list(
@@ -241,12 +233,36 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     negativePredictiveValue = negativePredictiveValue,
     falseDiscoveryRate      = falseDiscoveryRate,
     falseOmissionRate       = falseOmissionRate,
-    falsePositiveFraction   = falsePositiveFraction,
-    falseNegativeFraction   = falseNegativeFraction,
+    falsePositiveRate   = falsePositiveRate,
+    falseNegativeRate   = falseNegativeRate,
     accuracy                = accuracy
   )
 
   return(results)
+}
+
+.bcGetPosterior <- function(options, dataset, threshold = NULL) {
+  if(!is.null(threshold)) dataset[["test"]] <- dataset[["marker"]] >= threshold
+  results <- list(
+    prevalenceAlpha  = options[["prevalenceAlpha"]]  + sum( dataset[["condition"]]),
+    prevalenceBeta   = options[["prevalenceBeta"]]   + sum(!dataset[["condition"]]),
+    sensitivityAlpha = options[["sensitivityAlpha"]] + sum( dataset[["condition"]] &  dataset[["test"]]),
+    sensitivityBeta  = options[["sensitivityBeta"]]  + sum( dataset[["condition"]] & !dataset[["test"]]),
+    specificityAlpha = options[["specificityAlpha"]] + sum(!dataset[["condition"]] & !dataset[["test"]]),
+    specificityBeta  = options[["specificityBeta"]]  + sum(!dataset[["condition"]] &  dataset[["test"]]),
+    numberOfSamples  = options[["numberOfSamples"]]
+  )
+
+  class(results) <- "bcPosteriorParams"
+  return(results)
+}
+
+coef.bcPosteriorParams <- function(results) {
+  .bcStatistics(
+    prevalence  = results[["prevalenceAlpha"]]  / (results[["prevalenceAlpha"]]  + results[["prevalenceBeta"]] ),
+    sensitivity = results[["sensitivityAlpha"]] / (results[["sensitivityAlpha"]] + results[["sensitivityBeta"]]),
+    specificity = results[["specificityAlpha"]] / (results[["specificityAlpha"]] + results[["specificityBeta"]])
+  )
 }
 
 # Output tables ----
@@ -411,15 +427,15 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
     neg_lower  = tab[c("falseNegative", "trueNegative", "negativePredictiveValue"), "lowerCI",   drop=TRUE],
     neg_upper  = tab[c("falseNegative", "trueNegative", "negativePredictiveValue"), "upperCI",   drop=TRUE],
 
-    add1       = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "statistic", drop=TRUE],
-    add1_value = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "estimate",  drop=TRUE],
-    add1_lower = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "lowerCI",   drop=TRUE],
-    add1_upper = tab[c("sensitivity", "falsePositiveFraction", "accuracy"), "upperCI",   drop=TRUE],
+    add1       = tab[c("sensitivity", "falsePositiveRate", "accuracy"), "statistic", drop=TRUE],
+    add1_value = tab[c("sensitivity", "falsePositiveRate", "accuracy"), "estimate",  drop=TRUE],
+    add1_lower = tab[c("sensitivity", "falsePositiveRate", "accuracy"), "lowerCI",   drop=TRUE],
+    add1_upper = tab[c("sensitivity", "falsePositiveRate", "accuracy"), "upperCI",   drop=TRUE],
 
-    add2       = c(tab[c("falseNegativeFraction", "specificity"), "statistic", drop=TRUE], ""),
-    add2_value = c(tab[c("falseNegativeFraction", "specificity"), "estimate",  drop=TRUE], NA),
-    add2_lower = c(tab[c("falseNegativeFraction", "specificity"), "lowerCI",   drop=TRUE], NA),
-    add2_upper = c(tab[c("falseNegativeFraction", "specificity"), "upperCI",   drop=TRUE], NA),
+    add2       = c(tab[c("falseNegativeRate", "specificity"), "statistic", drop=TRUE], ""),
+    add2_value = c(tab[c("falseNegativeRate", "specificity"), "estimate",  drop=TRUE], NA),
+    add2_lower = c(tab[c("falseNegativeRate", "specificity"), "lowerCI",   drop=TRUE], NA),
+    add2_upper = c(tab[c("falseNegativeRate", "specificity"), "upperCI",   drop=TRUE], NA),
 
     tot        = c(gettext(c("Prevalence", "Rareness")), ""),
     tot_value  = c(tab["prevalence", "estimate", drop=TRUE], 1-tab["prevalence", "estimate", drop=TRUE], NA),
@@ -628,11 +644,12 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       dependencies = c("plotROC", "credibleInterval", "ciLevel"),
       position     = position,
       aspectRatio  = 1,
-      width        = 400
+      width        = 450
       )
 
   if(ready) plotsContainer[["plotROC"]]$plotObject <-
-    .bcFillPlotROC(results, dataset, options)
+    .bcFillPlotROC(results, dataset, options) +
+      ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
 }
 
 .bcFillPlotROC <- function(results, dataset, options) {
@@ -644,26 +661,26 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   threshold    <- qnorm(results[["specificity"]])
   meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
 
-  falsePositiveFraction <- seq(0, 1, by = 0.01)
-  varyingThreshold <- qnorm(falsePositiveFraction, lower.tail = FALSE)
+  falsePositiveRate <- seq(0, 1, by = 0.01)
+  varyingThreshold <- qnorm(falsePositiveRate, lower.tail = FALSE)
   data <- data.frame(
-    falsePositiveFraction = falsePositiveFraction,
-    truePositiveFraction  = pnorm(varyingThreshold, meanPositive, lower.tail = FALSE)
+    falsePositiveRate = falsePositiveRate,
+    truePositiveRate  = pnorm(varyingThreshold, meanPositive, lower.tail = FALSE)
   )
 
   pointData <- data.frame(
-    falsePositiveFraction = results[["falsePositiveFraction"]],
-    truePositiveFraction  = results[["sensitivity"]]
+    falsePositiveRate = results[["falsePositiveRate"]],
+    truePositiveRate  = results[["sensitivity"]]
   )
   plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x = falsePositiveFraction,
-                                                 y = truePositiveFraction)
+                          mapping = ggplot2::aes(x = falsePositiveRate,
+                                                 y = truePositiveRate)
                           ) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_line(size = 2) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
-    ggplot2::xlab(gettext("False positive fraction (1-Specificity)")) +
-    ggplot2::ylab(gettext("True positive fraction (Sensitivity)"))
+    ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
+    ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
 
   plot <- jaspGraphs::themeJasp(plot)
 
@@ -676,21 +693,21 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
   threshold <- qnorm(results[["specificity"]])
   meanPositive <- qnorm(results[["sensitivity"]], mean = threshold)
 
-  falsePositiveFraction <- seq(0, 1, by = 0.01)
-  varyingThreshold <- qnorm(falsePositiveFraction, lower.tail = FALSE)
-  data <- data.frame(falsePositiveFraction = falsePositiveFraction,
+  falsePositiveRate <- seq(0, 1, by = 0.01)
+  varyingThreshold <- qnorm(falsePositiveRate, lower.tail = FALSE)
+  data <- data.frame(falsePositiveRate = falsePositiveRate,
                      mean = NA, lower = NA, upper = NA)
 
-  for(i in seq_along(falsePositiveFraction)) {
-    truePositiveFraction <- pnorm(varyingThreshold[i], meanPositive, lower.tail = FALSE)
+  for(i in seq_along(falsePositiveRate)) {
+    truePositiveRate <- pnorm(varyingThreshold[i], meanPositive, lower.tail = FALSE)
 
-    data[i, "estimate"]  <- median    (truePositiveFraction)
-    data[i, "lower"]     <- quantile(truePositiveFraction, p =   alpha/2)
-    data[i, "upper"]     <- quantile(truePositiveFraction, p = 1-alpha/2)
+    data[i, "estimate"]  <- median    (truePositiveRate)
+    data[i, "lower"]     <- quantile(truePositiveRate, p =   alpha/2)
+    data[i, "upper"]     <- quantile(truePositiveRate, p = 1-alpha/2)
   }
 
   plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x    = falsePositiveFraction,
+                          mapping = ggplot2::aes(x    = falsePositiveRate,
                                                  y    = estimate,
                                                  ymin = lower,
                                                  ymax = upper)
@@ -702,8 +719,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
   plot <- plot +
     ggplot2::geom_line(size = 2) +
-    ggplot2::xlab(gettext("False positive fraction (1-Specificity)")) +
-    ggplot2::ylab(gettext("True positive fraction (Sensitivity)"))
+    ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
+    ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
 
 
   plot <- jaspGraphs::themeJasp(plot)
@@ -713,40 +730,40 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
 
 .bcFillPlotROC.bcData <- function(results, dataset, options) {
 
-  thresholds <- quantile(dataset$marker, p = seq(0, 1, by = 0.05))
+  thresholds <- c(dataset$marker, options[["threshold"]])
 
   data <- data.frame(
-    estimate = numeric(length(thresholds)),
-    lowerCI  = numeric(length(thresholds)),
-    upperCI  = numeric(length(thresholds))
+    fpf = numeric(length(thresholds)+2), tpf = numeric(length(thresholds)+2)
   )
-
-  opts <- options
-  opts$numberOfSamples <- 1000
-  for(i in seq_along(thresholds)) {
-    dataset[["test"]] <- dataset[["marker"]] >= thresholds[i]
-    res <- summary(.bcComputeResultsFromData(opts, dataset, TRUE, FALSE), ciLevel = options[["ciLevel"]])
-    data[i, c("estimate", "lowerCI", "upperCI")] <-
-      unlist(res["sensitivity", c("estimate", "lowerCI", "upperCI"),drop=TRUE])
+  data[1,] <- c(0, 0)
+  data[2,] <- c(1, 1)
+  for(i in seq_along(thresholds)+2) {
+    res <- coef(.bcGetPosterior(options = options, dataset = dataset, threshold = thresholds[i]))
+    data[i,] <- unlist(res[c("falsePositiveRate", "sensitivity")])
   }
 
-  data$falsePositiveFraction <- seq(1, 0, by = -0.05)
+  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
+  pointData <- data.frame(fpf = summ["falsePositiveRate", "estimate"],
+                          tpf = summ["sensitivity",           "estimate"])
+  ciData <- data.frame(x    = unlist(summ["falsePositiveRate", c("lowerCI", "upperCI")]),
+                       ymin = summ["sensitivity", "lowerCI"],
+                       ymax = summ["sensitivity", "upperCI"])
 
   plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x = falsePositiveFraction,
-                                                 y = estimate,
-                                                 ymin = lowerCI,
-                                                 ymax = upperCI)
+                          mapping = ggplot2::aes(x = fpf, y = tpf)
                           ) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
 
   if(options[["credibleInterval"]])
-    plot <- plot + ggplot2::geom_ribbon(alpha = 0.5)
+    plot <- plot + ggplot2::geom_ribbon(data    = ciData,
+                                        mapping = ggplot2::aes(x=x,ymin=ymin,ymax=ymax),
+                                        alpha   = 0.5, inherit.aes = FALSE)
 
   plot <- plot +
-    ggplot2::geom_line(size = 2) +
-    ggplot2::xlab(gettext("False positive fraction (1-Specificity)")) +
-    ggplot2::ylab(gettext("True positive fraction (Sensitivity)"))
+    ggplot2::geom_step(size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
+    ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
 
 
   plot <- jaspGraphs::themeJasp(plot)
@@ -1018,7 +1035,7 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
             "trueNegative",            "falseNegative",
             "positivePredictiveValue", "negativePredictiveValue",
             "falseDiscoveryRate",      "falseOmissionRate",
-            "falsePositiveFraction",   "falseNegativeFraction",
+            "falsePositiveRate",   "falseNegativeRate",
             "accuracy")[selectedPlots]
 
   data <- data[rows,]
@@ -1049,22 +1066,22 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       prevalence              = gettext("Prevalence"),
       sensitivity             = gettext("Sensitivity"),
       specificity             = gettext("Specificity"),
-      truePositive            = gettext("True positive rate"),
-      falsePositive           = gettext("False positive rate"),
-      trueNegative            = gettext("True negative rate"),
-      falseNegative           = gettext("False negative rate"),
+      truePositive            = gettext("True positive"),
+      falsePositive           = gettext("False positive"),
+      trueNegative            = gettext("True negative"),
+      falseNegative           = gettext("False negative"),
       positivePredictiveValue = gettext("Positive predictive value"),
       negativePredictiveValue = gettext("Negative predictive value"),
       falseDiscoveryRate      = gettext("False discovery rate"),
       falseOmissionRate       = gettext("False omission rate"),
-      falsePositiveFraction   = gettext("False positive fraction"),
-      falseNegativeFraction   = gettext("False negative fraction"),
+      falsePositiveRate   = gettext("False positive rate"),
+      falseNegativeRate   = gettext("False negative rate"),
       accuracy                = gettext("Accuracy")
     ),
     interpretation = c(
       prevalence              = gettext("Proportion of a population affected by the condition."),
-      sensitivity             = gettext("(True positive fraction) Proportion of those who are affected by the condition and are correctly tested positive."),
-      specificity             = gettext("(True negative fraction) Proportion of those who are not affected by the condition and are correctly tested negative."),
+      sensitivity             = gettext("(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive."),
+      specificity             = gettext("(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative."),
       truePositive            = gettext("Proportion of a population affected by a condition and correctly tested positive."),
       falsePositive           = gettext("Proportion of a population not affected by a condition and incorrectly tested negative."),
       trueNegative            = gettext("Proportion of a population affected by a condition and incorrectly tested negative."),
@@ -1073,8 +1090,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
       negativePredictiveValue = gettext("Proportion of those who tested negative and are not affected by the condition."),
       falseDiscoveryRate      = gettext("Proportion of false positives in the pool of those that test positive."),
       falseOmissionRate       = gettext("Proportion of false negatives in the pool of those that test negative."),
-      falsePositiveFraction   = gettext("Complement proportion to sensitivity."),
-      falseNegativeFraction   = gettext("Complement proportion to specificity."),
+      falsePositiveRate   = gettext("Complement proportion to specificity."),
+      falseNegativeRate   = gettext("Complement proportion to sensitivity."),
       accuracy                = gettext("Proportion of the population that is true positive or true negative.")
    ),
    notation = c(
@@ -1089,8 +1106,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel = 0.95) {
      negativePredictiveValue = gettext("P(Condition = negative | Test = negative)"),
      falseDiscoveryRate      = gettext("P(Condition = negative | Test = positive)"),
      falseOmissionRate       = gettext("P(Condition = positive | Test = negative)"),
-     falsePositiveFraction   = gettext("P(Test = positive | Condition = negative)"),
-     falseNegativeFraction   = gettext("P(Test = negative | Condition = positive)"),
+     falsePositiveRate   = gettext("P(Test = positive | Condition = negative)"),
+     falseNegativeRate   = gettext("P(Test = negative | Condition = positive)"),
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(
