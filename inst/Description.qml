@@ -77,7 +77,7 @@ Description
 	GroupTitle
 	{
 		title:	qsTr("Miscellaneous")
-		icon:	"learn-bayes-epees.svg"
+		icon:	"ellipsis.svg"
 	}
 
 	Analysis
