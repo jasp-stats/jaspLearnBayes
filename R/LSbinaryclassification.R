@@ -733,7 +733,7 @@ coef.bcPosteriorParams <- function(results) {
   thresholds <- c(dataset$marker, options[["threshold"]])
 
   data <- data.frame(
-    fpf = numeric(length(thresholds)+2), tpf = numeric(length(thresholds)+2)
+    fpr = numeric(length(thresholds)+2), tpr = numeric(length(thresholds)+2)
   )
   data[1,] <- c(0, 0)
   data[2,] <- c(1, 1)
@@ -743,14 +743,14 @@ coef.bcPosteriorParams <- function(results) {
   }
 
   summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
-  pointData <- data.frame(fpf = summ["falsePositiveRate", "estimate"],
-                          tpf = summ["sensitivity",           "estimate"])
+  pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
+                          tpr = summ["sensitivity",           "estimate"])
   ciData <- data.frame(x    = unlist(summ["falsePositiveRate", c("lowerCI", "upperCI")]),
                        ymin = summ["sensitivity", "lowerCI"],
                        ymax = summ["sensitivity", "upperCI"])
 
   plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x = fpf, y = tpf)
+                          mapping = ggplot2::aes(x = fpr, y = tpr)
                           ) +
     ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
 
