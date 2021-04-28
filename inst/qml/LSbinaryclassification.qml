@@ -82,6 +82,7 @@ Form {
 			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive"); checked: true	}
 			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
 			CheckBox { name: "plotROC";								label: qsTr("ROC")									}
+			CheckBox { name: "plotTestCharacteristics";				label: qsTr("Test characteristics by threshold")	}
 			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot")						}
 			CheckBox { name: "plotSignal";							label: qsTr("Signal detection"); 					}

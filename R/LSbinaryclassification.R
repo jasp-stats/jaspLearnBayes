@@ -464,10 +464,11 @@ coef.bcPosteriorParams <- function(results) {
   .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
-  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 4)
-  .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 5)
-  .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 6)
-  .bcPlotEstimates             (results, plotsContainer, dataset, options, ready, position = 7)
+  .bcPlotTestCharacteristics   (results, plotsContainer, dataset, options, ready, position = 4)
+  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 5)
+  .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 6)
+  .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 7)
+  .bcPlotEstimates             (results, plotsContainer, dataset, options, ready, position = 8)
 }
 
 ## Prior posterior plot ----
@@ -741,6 +742,202 @@ coef.bcPosteriorParams <- function(results) {
   return(plot)
 }
 
+## Test characteristics ----
+.bcPlotTestCharacteristics <- function(results, plotsContainer, dataset, options, ready, position) {
+  if( isFALSE(options[["plotTestCharacteristics"]])     ) return()
+  if(!is.null(plotsContainer[["plotTestCharacteristics"]]) ) return()
+
+  plotsContainer[["plotTestCharacteristics"]] <-
+    createJaspPlot(title        = gettext("Test characteristics"),
+                   dependencies = c("plotTestCharacteristics", "credibleInterval", "ciLevel"),
+                   position     = position,
+                   width        = 500
+    )
+
+  if(ready) plotsContainer[["plotTestCharacteristics"]]$plotObject <-
+    .bcFillPlotTestCharacteristics(results, dataset, options)
+}
+
+
+.bcFillPlotTestCharacteristics <- function(results, dataset, options) {
+  UseMethod(".bcFillPlotTestCharacteristics")
+}
+
+.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, dataset, options) {
+  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
+
+  threshold    <- qnorm(summ["specificity", "estimate"])
+  meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
+
+  varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+  data <- data.frame(
+    threshold = varyingThreshold,
+    tpr = pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE),
+    tnr = pnorm(varyingThreshold, lower.tail = TRUE)
+  )
+  pointData <- data.frame(
+    x = threshold,
+    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+  )
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test threshold")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(varyingThreshold)) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Characteristic"),
+      values = c("steelblue", "firebrick")
+    )
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
+.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, dataset, options) {
+  alpha <- 1-options[["ciLevel"]]
+
+  nPoints <- 101
+  data <- data.frame(
+    threshold = numeric(nPoints),
+    tpr       = numeric(nPoints),
+    tprLower  = numeric(nPoints),
+    tprUpper  = numeric(nPoints),
+    tnr       = numeric(nPoints),
+    tnrLower  = numeric(nPoints),
+    tnrUpper  = numeric(nPoints)
+  )
+
+  thresholdPosterior    <- qnorm(results[["specificity"]])
+  meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
+
+  varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["numberOfSamples"]])
+  for(i in seq_len(options[["numberOfSamples"]]))
+    varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+
+  for(i in seq_len(nPoints)) {
+    tpr <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
+    tnr <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
+
+    data[i, "threshold"] <- mean(varyingThreshold[i,])
+    data[i, "tpr"]       <- mean(tpr)
+    data[i, "tprLower"]  <- quantile(tpr, p =   alpha/2)
+    data[i, "tprUpper"]  <- quantile(tpr, p = 1-alpha/2)
+    data[i, "tnr"]       <- mean(tnr)
+    data[i, "tnrLower"]  <- quantile(tnr, p =   alpha/2)
+    data[i, "tnrUpper"]  <- quantile(tnr, p = 1-alpha/2)
+  }
+
+  summ <- summary(results, ciLevel = options[["ciLevel"]])
+  threshold <- mean(qnorm(results[["specificity"]]))
+  pointData <- data.frame(
+    x = threshold,
+    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+  )
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1)
+
+  if(options[["credibleInterval"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tprLower,ymax=tprUpper, fill = gettext("Sensitivity")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tnrLower,ymax=tnrUpper, fill = gettext("Specificity")), alpha = 0.5)
+  }
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2, alpha = 0.8) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2, alpha = 0.8) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test threshold")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold)) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Characteristic"),
+      values = c("steelblue", "firebrick")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Characteristic"),
+      values = c("steelblue", "firebrick")
+    )
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
+.bcFillPlotTestCharacteristics.bcData <- function(results, dataset, options) {
+  if(nrow(dataset) < 100) {
+    thresholds <- c(dataset$marker, options[["threshold"]])
+  } else {
+    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.01)), options[["threshold"]])
+  }
+
+  data <- data.frame(
+    threshold = thresholds,
+    tpr       = numeric(length(thresholds)),
+    tprLower  = numeric(length(thresholds)),
+    tprUpper  = numeric(length(thresholds)),
+    tnr       = numeric(length(thresholds)),
+    tnrLower  = numeric(length(thresholds)),
+    tnrUpper  = numeric(length(thresholds))
+  )
+
+  for(i in seq_len(nrow(data))) {
+    res <- .bcGetPosterior(options = options, dataset = dataset, threshold = data$threshold[i])
+    res <- .bcComputeResultsUncertainEstimates(res, progress = FALSE)
+    res <- summary(res, ciLevel = options[["ciLevel"]])
+
+    data[i,"tpr"]      <- res["sensitivity", "estimate"]
+    data[i,"tprLower"] <- res["sensitivity", "lowerCI" ]
+    data[i,"tprUpper"] <- res["sensitivity", "upperCI" ]
+    data[i,"tnr"]      <- res["specificity", "estimate"]
+    data[i,"tnrLower"] <- res["specificity", "lowerCI" ]
+    data[i,"tnrUpper"] <- res["specificity", "upperCI" ]
+
+  }
+
+  summ <- summary(results, ciLevel = options[["ciLevel"]])
+  pointData <- data.frame(
+    x = options[["threshold"]],
+    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+  )
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1)
+
+  if(options[["credibleInterval"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tprLower,ymax=tprUpper, fill = gettext("Sensitivity")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tnrLower,ymax=tnrUpper, fill = gettext("Specificity")), alpha = 0.5)
+  }
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2, alpha = 0.8) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2, alpha = 0.8) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test threshold")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold)) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Characteristic"),
+      values = c("steelblue", "firebrick")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Characteristic"),
+      values = c("steelblue", "firebrick")
+    )
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+
+  return(plot)
+}
+
 ## Varying prevalence plot ----
 .bcPlotVaryingPrevalence <- function(results, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["plotVaryingPrevalence"]])     ) return()
@@ -749,7 +946,7 @@ coef.bcPosteriorParams <- function(results) {
   plotsContainer[["plotVaryingPrevalence"]] <-
     createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
                    dependencies = c("plotVaryingPrevalence", "credibleInterval", "ciLevel"),
-                   position     = 6,
+                   position     = position,
                    width        = 500
     )
 
