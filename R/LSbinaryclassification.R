@@ -629,7 +629,7 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_x_discrete(labels = NULL, breaks = NULL) +
     ggplot2::scale_y_discrete(labels = NULL, breaks = NULL)
 
-  plot <- jaspGraphs::themeJasp(plot, xAxis = FALSE, yAxis = FALSE, legend.position = "right", legend.justification = )
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
 
   return(plot)
 }
