@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-03-06 14:42\n"
-"PO-Revision-Date: 2021-04-26 20:31+0000\n"
+"PO-Revision-Date: 2021-05-03 19:31+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
@@ -729,6 +729,7 @@ msgstr "Média"
 msgid "Median"
 msgstr "Mediana"
 
+#, fuzzy
 msgid "Mode"
 msgstr "Moda"
 
