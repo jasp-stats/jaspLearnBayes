@@ -95,6 +95,7 @@ Form {
 			}
 			CheckBox { name: "confusionMatrixAddInfo"; label: qsTr("Additional info"); checked: true }
 		}
+		CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
 	}
 
 	Section

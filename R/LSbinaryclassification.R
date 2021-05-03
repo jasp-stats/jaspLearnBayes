@@ -232,12 +232,12 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 
 .bcGetPosterior <- function(options, dataset = NULL, threshold = NULL) {
   if(!is.null(threshold)) dataset[["test"]] <- dataset[["marker"]] >= threshold
-  if(is.null(dataset) && options[["inputType"]] == "uncertainEstimates") {
+  if(options[["inputType"]] == "uncertainEstimates") {
     tp <- options[["truePositive"]]
     fp <- options[["falsePositive"]]
     fn <- options[["falseNegative"]]
     tn <- options[["trueNegative"]]
-  } else if(!is.null(dataset) && options[["inputType"]] == "data") {
+  } else if(options[["inputType"]] == "data") {
     tp <- sum( dataset[["condition"]] &  dataset[["test"]])
     fp <- sum(!dataset[["condition"]] &  dataset[["test"]])
     fn <- sum( dataset[["condition"]] & !dataset[["test"]])
@@ -302,8 +302,9 @@ coef.bcPosteriorParams <- function(results) {
     tablesContainer <- jaspResults[["tables"]]
   }
 
-  .bcTableStatistics(results, tablesContainer, dataset, options, ready)
-  .bcTableConfusion (results, tablesContainer, dataset, options, ready)
+  .bcTableStatistics    (results, tablesContainer, dataset, options, ready)
+  .bcTableConfusion     (results, tablesContainer, dataset, options, ready)
+  .bcTablePriorPosterior(results, tablesContainer, dataset, options, ready)
 }
 
 .bcTableStatistics <- function(results, tablesContainer, dataset, options, ready) {
@@ -311,7 +312,7 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(tablesContainer[["statistics"]]) ) return()
 
   table <- createJaspTable(title = gettext("Statistics"), position = 1)
-  table$dependOn(options = c("statistics", "introText"))
+  table$dependOn(options = "statistics")
   table$showSpecifiedColumnsOnly <- TRUE
 
   table$addColumnInfo(name = "statistic",  title = "")
@@ -327,19 +328,17 @@ coef.bcPosteriorParams <- function(results) {
     table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
   }
 
-  if(options[["introText"]]) {
-    table$addColumnInfo(name = "notation", title = gettext("Notation"))
-    table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
-  }
+  table$addColumnInfo(name = "notation", title = gettext("Notation"))
+  table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
 
   if(ready) table$setData(summary(results, ciLevel = options[["ciLevel"]]))
 
   tablesContainer[["statistics"]] <- table
 }
 
-.bcTableConfusion <- function(results, jaspResults, dataset, options, ready) {
+.bcTableConfusion <- function(results, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["confusionMatrix"]])     ) return()
-  if(!is.null(jaspResults[["confusionMatrix"]]) ) return()
+  if(!is.null(tablesContainer[["confusionMatrix"]]) ) return()
 
   table <- createJaspTable(title = gettext("Confusion Matrix"), position = 2)
   table$dependOn(options = c("confusionMatrix", "confusionMatrixType", "confusionMatrixAddInfo"))
@@ -433,7 +432,7 @@ coef.bcPosteriorParams <- function(results) {
   if(options[["credibleInterval"]])
     table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
 
-  jaspResults[["confusionMatrix"]] <- table
+  tablesContainer[["confusionMatrix"]] <- table
 }
 
 .bcFillTableConfusion <- function(results, table, options) {
@@ -472,6 +471,35 @@ coef.bcPosteriorParams <- function(results) {
     df <- df[1:2,]
 
   table$setData(df)
+}
+
+.bcTablePriorPosterior <- function(results, tablesContainer, dataset, options, ready) {
+  if( isFALSE(options[["priorPosterior"]])     ) return()
+  if(!is.null(tablesContainer[["priorPosterior"]]) ) return()
+
+  table <- createJaspTable(title = gettext("Priors and Posteriors"), position = 3)
+  table$dependOn(options = "priorPosterior")
+
+  table$addColumnInfo(name = "parameter", title = gettext("Parameter"), format = "string")
+  table$addColumnInfo(name = "prior",     title = gettext("Prior"),     format = "string")
+  table$addColumnInfo(name = "posterior", title = gettext("Posterior"), format = "string")
+
+  tablesContainer[["priorPosterior"]] <- table
+
+  if(!ready) return()
+
+  post <- .bcGetPosterior(options, dataset)
+  data <- data.frame(
+    parameter = gettext(c("Prevalence", "Sensitivity", "Specificity")),
+    prior     = gettextf("beta(%s,%s)",
+                         options[c("prevalenceAlpha", "sensitivityAlpha", "specificityAlpha")],
+                         options[c("prevalenceBeta",  "sensitivityBeta",  "specificityBeta")]),
+    posterior = gettextf("beta(%s,%s)",
+                         post[c("prevalenceAlpha", "sensitivityAlpha", "specificityAlpha")],
+                         post[c("prevalenceBeta",  "sensitivityBeta",  "specificityBeta")])
+  )
+
+  table$setData(data)
 }
 
 # Output plots ----
