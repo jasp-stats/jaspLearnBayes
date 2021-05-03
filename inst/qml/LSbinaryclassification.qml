@@ -106,7 +106,15 @@ Form {
 		{
 			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive")					}
 			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
-			CheckBox { name: "plotROC";								label: qsTr("ROC")									}
+			CheckBox
+			{
+				name: "plotROC"; label: qsTr("ROC")
+				CheckBox
+				{
+					name: "plotRocLines"; label: qsTr("Add realizations from the posterior"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"; childrenOnSameRow: true;
+					IntegerField{ name: "plotRocLinesNr"; min: 0; defaultValue: 100; max: 1000 }
+				}
+			}
 			CheckBox { name: "plotTestCharacteristics";				label: qsTr("Test characteristics by threshold")	}
 			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot")						}
@@ -156,7 +164,7 @@ Form {
 				name: "numberOfSamples"
 				label: qsTr("Number of posterior samples")
 				defaultValue: 10000
-				min: 100
+				min: 1000
 				fieldWidth: 50
 			}
 		}

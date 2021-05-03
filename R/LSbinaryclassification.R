@@ -710,7 +710,7 @@ coef.bcPosteriorParams <- function(results) {
   plotsContainer[["plotROC"]] <-
     createJaspPlot(
       title        = gettext("Receiving Operating Characteristic Curve"),
-      dependencies = c("plotROC", "credibleInterval", "ciLevel"),
+      dependencies = c("plotROC", "credibleInterval", "ciLevel", "plotRocLines", "plotRocLinesNr"),
       position     = position,
       width        = 500,
       height       = 500,
@@ -726,7 +726,7 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 .bcFillPlotROC.default <- function(results, dataset, options) {
-  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
+  summ <- summary(results, ciLevel = options[["ciLevel"]])
 
   threshold    <- qnorm(summ["specificity", "estimate"])
   meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
@@ -740,22 +740,46 @@ coef.bcPosteriorParams <- function(results) {
   pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
                           tpr = summ["sensitivity",       "estimate"])
 
-  ciData <- data.frame(x    = unlist(summ["falsePositiveRate", c("lowerCI", "upperCI")]),
-                       ymin = summ["sensitivity", "lowerCI"],
-                       ymax = summ["sensitivity", "upperCI"])
-
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x    = fpr,
                                                  y    = tpr)
-                          ) +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
+                          )
 
-  if(options[["credibleInterval"]])
-    plot <- plot + ggplot2::geom_ribbon(data    = ciData,
-                                        mapping = ggplot2::aes(x=x,ymin=ymin,ymax=ymax),
-                                        alpha   = 0.5, inherit.aes = FALSE)
+  if(options[["credibleInterval"]]) {
+    densityData <- data.frame(
+      fpr = results[["falsePositiveRate"]],
+      tpr = results[["sensitivity"]]
+    )
+    breakLevel <- .bcGetLevel2D(densityData$fpr, densityData$tpr, options[["ciLevel"]])
+
+    plot <- plot +
+      ggplot2::stat_density2d(data = densityData, geom = "polygon",
+                              mapping = ggplot2::aes(fill = ggplot2::after_stat(level)),
+                              bins = 5) +
+      ggplot2::scale_fill_distiller(palette = "Blues", direction = 1) +
+      ggplot2::geom_density2d(data = densityData, breaks = breakLevel,
+                              size = 1, col = "black", linetype = 2)
+  }
+
+  if(options[["inputType"]] == "uncertainEstimates" && options[["plotRocLines"]]) {
+    for(i in seq_len(options[["plotRocLinesNr"]])) {
+      threshold    <- qnorm(results[["specificity"]][i])
+      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
+
+      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- data.frame(
+        fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
+        tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+      )
+
+      plot <- plot +
+        ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
+    }
+  }
+
 
   plot <- plot +
+    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_line(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
@@ -784,21 +808,46 @@ coef.bcPosteriorParams <- function(results) {
   summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
   pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
                           tpr = summ["sensitivity",           "estimate"])
-  ciData <- data.frame(x    = unlist(summ["falsePositiveRate", c("lowerCI", "upperCI")]),
-                       ymin = summ["sensitivity", "lowerCI"],
-                       ymax = summ["sensitivity", "upperCI"])
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x = fpr, y = tpr)
-                          ) +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2)
+                          )
 
-  if(options[["credibleInterval"]])
-    plot <- plot + ggplot2::geom_ribbon(data    = ciData,
-                                        mapping = ggplot2::aes(x=x,ymin=ymin,ymax=ymax),
-                                        alpha   = 0.5, inherit.aes = FALSE)
+  if(options[["credibleInterval"]]) {
+    densityData <- data.frame(
+      fpr = results[["falsePositiveRate"]],
+      tpr = results[["sensitivity"]]
+    )
+    breakLevel <- .bcGetLevel2D(densityData$fpr, densityData$tpr, options[["ciLevel"]])
+
+    plot <- plot +
+      ggplot2::stat_density2d(data = densityData, geom = "polygon",
+                              mapping = ggplot2::aes(fill = ggplot2::after_stat(level)),
+                              bins = 5) +
+      ggplot2::scale_fill_distiller(palette = "Blues", direction = 1) +
+      ggplot2::geom_density2d(data = densityData, breaks = breakLevel,
+                              size = 1, col = "black", linetype = 2)
+
+  }
+
+  if(options[["plotRocLines"]]) {
+    for(i in seq_len(options[["plotRocLinesNr"]])) {
+      threshold    <- qnorm(results[["specificity"]][i])
+      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
+
+      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- data.frame(
+        fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
+        tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+      )
+
+      plot <- plot +
+        ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
+    }
+  }
 
   plot <- plot +
+    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_step(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
@@ -1374,4 +1423,15 @@ coef.bcPosteriorParams <- function(results) {
 
 .bcwdnorm <- function(x, mean = 0, sd = 1, w = 1) {
   w * dnorm(x, mean = mean, sd = sd)
+}
+
+
+.bcGetLevel2D <- function(x, y, confLevel) {
+  # https://stackoverflow.com/a/23448933/7997788
+  kk <- MASS::kde2d(x,y, n = 25)
+  dx <- diff(kk$x[1:2])
+  dy <- diff(kk$y[1:2])
+  sz <- sort(kk$z)
+  c1 <- cumsum(sz) * dx * dy
+  approx(c1, sz, xout = 1-confLevel)$y
 }
