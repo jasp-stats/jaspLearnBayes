@@ -130,6 +130,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   jaspResults[["results"]] <-
     createJaspState(object       = results,
                     dependencies = c("inputType", "marker", "labels", "threshold", "numberOfSamples",
+                                     "truePositive", "falsePositive", "falseNegative", "trueNegative",
                                      levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = ""))
                                      )
                     )
@@ -163,28 +164,12 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options, progress = TRUE) {
-  prevalence <- sensitivity <- specificity <- numeric(options[["numberOfSamples"]])
+  results <- .bcGetPosterior(options)
+  results <- .bcDrawPosteriorSamples(results, progress = progress)
 
-  if(progress)
-    startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Drawing samples"))
-
-  for(i in seq_len(options[["numberOfSamples"]])) {
-    prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
-    invalid <- TRUE
-    while(invalid) {
-      sensitivity[i] <- rbeta(n=1L, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
-      specificity[i] <- rbeta(n=1L, options[["specificityAlpha"]], options[["specificityBeta"]])
-      invalid <- (1-specificity[i]) > sensitivity[i]
-    }
-
-    if(progress) progressbarTick()
-  }
-  results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
-
-  class(results) <- "bcUncertainEstimates"
+  class(results) <- c("bcUncertainEstimates")
   return(results)
 }
-
 summary.bcUncertainEstimates <- function(results, ciLevel) {
   alpha <- 1-ciLevel
 
@@ -202,10 +187,10 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 }
 
 .bcComputeResultsFromData <- function(options, dataset, ready, progress = TRUE) {
-  if(!ready) return(.bcComputeResultsUncertainEstimates(options))
+  if(!ready) return(.bcDrawPosteriorSamples(options))
 
   results <- .bcGetPosterior(options, dataset)
-  results <- .bcComputeResultsUncertainEstimates(results, progress = progress)
+  results <- .bcDrawPosteriorSamples(results, progress = progress)
 
   class(results) <- c("bcData", "bcUncertainEstimates")
   return(results)
@@ -245,15 +230,28 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
   return(results)
 }
 
-.bcGetPosterior <- function(options, dataset, threshold = NULL) {
+.bcGetPosterior <- function(options, dataset = NULL, threshold = NULL) {
   if(!is.null(threshold)) dataset[["test"]] <- dataset[["marker"]] >= threshold
+  if(is.null(dataset) && options[["inputType"]] == "uncertainEstimates") {
+    tp <- options[["truePositive"]]
+    fp <- options[["falsePositive"]]
+    fn <- options[["falseNegative"]]
+    tn <- options[["trueNegative"]]
+  } else if(!is.null(dataset) && options[["inputType"]] == "data") {
+    tp <- sum( dataset[["condition"]] &  dataset[["test"]])
+    fp <- sum(!dataset[["condition"]] &  dataset[["test"]])
+    fn <- sum( dataset[["condition"]] & !dataset[["test"]])
+    tn <- sum(!dataset[["condition"]] & !dataset[["test"]])
+  } else {
+    tp <- fp <- fn <- tn <- 0
+  }
   results <- list(
-    prevalenceAlpha  = options[["prevalenceAlpha"]]  + sum( dataset[["condition"]]),
-    prevalenceBeta   = options[["prevalenceBeta"]]   + sum(!dataset[["condition"]]),
-    sensitivityAlpha = options[["sensitivityAlpha"]] + sum( dataset[["condition"]] &  dataset[["test"]]),
-    sensitivityBeta  = options[["sensitivityBeta"]]  + sum( dataset[["condition"]] & !dataset[["test"]]),
-    specificityAlpha = options[["specificityAlpha"]] + sum(!dataset[["condition"]] & !dataset[["test"]]),
-    specificityBeta  = options[["specificityBeta"]]  + sum(!dataset[["condition"]] &  dataset[["test"]]),
+    prevalenceAlpha  = options[["prevalenceAlpha"]]  + tp + fn,
+    prevalenceBeta   = options[["prevalenceBeta"]]   + fp + tn,
+    sensitivityAlpha = options[["sensitivityAlpha"]] + tp,
+    sensitivityBeta  = options[["sensitivityBeta"]]  + fn,
+    specificityAlpha = options[["specificityAlpha"]] + tn,
+    specificityBeta  = options[["specificityBeta"]]  + fp,
     numberOfSamples  = options[["numberOfSamples"]]
   )
 
@@ -267,6 +265,29 @@ coef.bcPosteriorParams <- function(results) {
     sensitivity = results[["sensitivityAlpha"]] / (results[["sensitivityAlpha"]] + results[["sensitivityBeta"]]),
     specificity = results[["specificityAlpha"]] / (results[["specificityAlpha"]] + results[["specificityBeta"]])
   )
+}
+
+.bcDrawPosteriorSamples <- function(options, progress = TRUE) {
+  prevalence <- sensitivity <- specificity <- numeric(options[["numberOfSamples"]])
+
+  if(progress)
+    startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Drawing samples"))
+
+  for(i in seq_len(options[["numberOfSamples"]])) {
+    prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
+    invalid <- TRUE
+    while(invalid) {
+      sensitivity[i] <- rbeta(n=1L, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
+      specificity[i] <- rbeta(n=1L, options[["specificityAlpha"]], options[["specificityBeta"]])
+      invalid <- (1-specificity[i]) > sensitivity[i]
+    }
+
+    if(progress) progressbarTick()
+  }
+  results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
+
+  class(results) <- "bcUncertainEstimates"
+  return(results)
 }
 
 # Output tables ----
@@ -913,7 +934,7 @@ coef.bcPosteriorParams <- function(results) {
 
   for(i in seq_len(nrow(data))) {
     res <- .bcGetPosterior(options = options, dataset = dataset, threshold = data$threshold[i])
-    res <- .bcComputeResultsUncertainEstimates(res, progress = FALSE)
+    res <- .bcDrawPosteriorSamples(res, progress = FALSE)
     res <- summary(res, ciLevel = options[["ciLevel"]])
 
     data[i,"tpr"]      <- res["sensitivity", "estimate"]
