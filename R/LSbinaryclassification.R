@@ -35,16 +35,19 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   bayes <- system.file("icons", "bayes.png", package = "jaspLearnBayes")
   #bayes <- "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/410.svg"
   text <- gettextf('This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.
+
                    Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).
+
                    Common binary classification applications are:
                    <ul>
                      <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient suffers from a certain disease or not.</li>
                      <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is a spam or not.</li>
                      <li><b>Quality control</b> where the classification determines whether an industry standard has been met or not.</li>
                    </ul>
+
                    Due to the fact that binary classification is often used in medical testing, terminology in binary classification problems borrows from medical dictionary (e.g., prevalence, condition, marker).
 
-                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule. In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative). In many applications, the conditions or the test may not be symmetric, therefore various types of errors are of interest additionally to an overall accuracy measure. These types of errors distinguish, for example, whether a patient suffers from a condition but the test came out negative (false negative), or whether a patient does not suffer from a condition but the test came out positive (false positive).
+                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule. In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative). In many applications, the conditions or the test may not be symmetric, therefore various types of errors are of interest in addition to an overall accuracy measure. These types of errors distinguish, for example, whether a patient suffers from a condition but the test came out negative (false negative), or whether a patient does not suffer from a condition but the test came out positive (false positive).
 
                    Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>. Sensitivity is the probability of testing positive if the condition is positive. Specificity is the probability of testing negative if the condition is negative. Property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.
                    Skewed characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical. For example, in certain situations it is more likely that a patient does not have a certain disease than does, even after testing positive for that disease.
@@ -99,7 +102,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
     labels <- dataset[[options[["labels"]]]]
     levels <- levels(labels)
-    if(length(levels) != 2) .quitAnalysis(gettext("The 'labels' variable must have two levels!"))
+    if(length(levels) != 2) .quitAnalysis(gettext("The 'Positive condition (binary)' variable must have two levels!"))
 
     dataset <- data.frame(
       marker    = dataset[[options[["marker"]]]],
@@ -108,7 +111,8 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     )
   }
 
-  # TODO: add check whether marker of condition == TRUE is larger than marker of condition == FALSE
+  if(mean(subset(dataset, condition)$marker) < mean(subset(dataset, !condition)$marker))
+    .quitAnalysis(gettext("Mean of marker in positive condition needs to be larger than the mean of marker in negative condition."))
 
   return(dataset)
 }
@@ -186,9 +190,9 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 
   output <- data.frame(
     statistic      = .bcTexts("statistic")[names(results)],
-    estimate       = vapply(results, mean, numeric(1)),
-    lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2),
-    upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2),
+    estimate       = vapply(results, mean, numeric(1), na.rm=TRUE),
+    lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2, na.rm=TRUE),
+    upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2, na.rm=TRUE),
     notation       = .bcTexts("notation")[names(results)],
     interpretation = .bcTexts("interpretation")[names(results)],
     stringsAsFactors = FALSE
@@ -217,8 +221,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
   negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
   falseDiscoveryRate      <- 1-positivePredictiveValue
   falseOmissionRate       <- 1-negativePredictiveValue
-  falsePositiveRate   <- 1-specificity
-  falseNegativeRate   <- 1-sensitivity
+  falsePositiveRate       <- 1-specificity
+  falseNegativeRate       <- 1-sensitivity
   accuracy                <- truePositive + trueNegative
 
   results <- list(
@@ -233,8 +237,8 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
     negativePredictiveValue = negativePredictiveValue,
     falseDiscoveryRate      = falseDiscoveryRate,
     falseOmissionRate       = falseOmissionRate,
-    falsePositiveRate   = falsePositiveRate,
-    falseNegativeRate   = falseNegativeRate,
+    falsePositiveRate       = falsePositiveRate,
+    falseNegativeRate       = falseNegativeRate,
     accuracy                = accuracy
   )
 
@@ -316,7 +320,7 @@ coef.bcPosteriorParams <- function(results) {
   if( isFALSE(options[["confusionMatrix"]])     ) return()
   if(!is.null(jaspResults[["confusionMatrix"]]) ) return()
 
-  table <- createJaspTable(title = gettext("Confusion matrix"), position = 2)
+  table <- createJaspTable(title = gettext("Confusion Matrix"), position = 2)
   table$dependOn(options = c("confusionMatrix", "confusionMatrixType", "confusionMatrixAddInfo"))
   table$showSpecifiedColumnsOnly <- TRUE
   table$transpose <- TRUE
@@ -477,10 +481,11 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(plotsContainer[["plotPriorPosteriorPositive"]]) ) return()
 
   plotsContainer[["plotPriorPosteriorPositive"]] <-
-    createJaspPlot(title        = gettext("Probability positive"),
+    createJaspPlot(title        = gettext("Probability Positive"),
                    dependencies = c("plotPriorPosteriorPositive", "credibleInterval", "ciLevel"),
                    position     = position,
-                   width        = 500
+                   width        = 500,
+                   height       = 500,
     )
 
   if(ready) plotsContainer[["plotPriorPosteriorPositive"]]$plotObject <-
@@ -511,11 +516,11 @@ coef.bcPosteriorParams <- function(results) {
                           mapping = ggplot2::aes(x=result, y=probPositive, fill=test)
                           ) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), col = "black") +
-    ggplot2::xlab(gettext("Test result")) +
+    ggplot2::xlab(gettext("Test Result")) +
     ggplot2::ylab(gettext("P(Condition = positive)")) +
     ggplot2::scale_fill_discrete(name = NULL)
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -528,24 +533,24 @@ coef.bcPosteriorParams <- function(results) {
 
   for(i in 1:nrow(data)) {
     if(data$test[i] == gettext("Not tested")) {
-      data$mean [i] <- mean    (results[["prevalence"]])
-      data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2)
-      data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2)
+      data$mean [i] <- mean    (results[["prevalence"]], na.rm=TRUE)
+      data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2, na.rm=TRUE)
+      data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2, na.rm=TRUE)
     } else if(data$result[i] == gettext("Negative")) {
-      data$mean [i] <- mean    (results[["falseOmissionRate"]])
-      data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2)
-      data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2)
+      data$mean [i] <- mean    (results[["falseOmissionRate"]], na.rm=TRUE)
+      data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2, na.rm=TRUE)
+      data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2, na.rm=TRUE)
     } else {
-      data$mean [i] <- mean    (results[["positivePredictiveValue"]])
-      data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2)
-      data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2)
+      data$mean [i] <- mean    (results[["positivePredictiveValue"]], na.rm=TRUE)
+      data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2, na.rm=TRUE)
+      data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2, na.rm=TRUE)
     }
   }
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x=result, y=mean, fill=test, ymin=lower, ymax=upper)) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(width=0.7), col = "black", width=0.7) +
-    ggplot2::xlab(gettext("Test result")) +
+    ggplot2::xlab(gettext("Test Result")) +
     ggplot2::ylab(gettext("P(Condition = positive)")) +
     ggplot2::scale_fill_discrete(name = NULL)
 
@@ -555,7 +560,7 @@ coef.bcPosteriorParams <- function(results) {
   }
 
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -566,12 +571,11 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(plotsContainer[["plotIconPlot"]]) ) return()
 
   plotsContainer[["plotIconPlot"]] <-
-    createJaspPlot(title        = gettext("Icon plot"),
+    createJaspPlot(title        = gettext("Icon Plot"),
                    dependencies = "plotIconPlot",
                    position     = position,
-                   aspectRatio  = 1,
-                   width        = 600,
-                   height       = 400
+                   width        = 500,
+                   height       = 500
     )
 
   if(ready) plotsContainer[["plotIconPlot"]]$plotObject <-
@@ -617,10 +621,12 @@ coef.bcPosteriorParams <- function(results) {
 
   if(npoints <= 1e2) {
     plot <- plot + ggimage::geom_image(mapping = ggplot2::aes(col=outcome,image=image)) +
-      ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative")))
+      ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+      ggplot2::guides(col=ggplot2::guide_legend(ncol=2))
   } else {
     plot <- plot + ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome)) +
-      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative")))
+      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+      ggplot2::guides(fill=ggplot2::guide_legend(ncol=2))
   }
 
   plot <- plot +
@@ -629,7 +635,7 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_x_discrete(labels = NULL, breaks = NULL) +
     ggplot2::scale_y_discrete(labels = NULL, breaks = NULL)
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -644,8 +650,8 @@ coef.bcPosteriorParams <- function(results) {
       title        = gettext("Receiving Operating Characteristic Curve"),
       dependencies = c("plotROC", "credibleInterval", "ciLevel"),
       position     = position,
-      aspectRatio  = 1,
-      width        = 450
+      width        = 500,
+      height       = 500,
       )
 
   if(ready) plotsContainer[["plotROC"]]$plotObject <-
@@ -690,8 +696,8 @@ coef.bcPosteriorParams <- function(results) {
   plot <- plot +
     ggplot2::geom_line(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
-    ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
-    ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
+    ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
+    ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
 
 
   plot <- jaspGraphs::themeJasp(plot)
@@ -733,8 +739,8 @@ coef.bcPosteriorParams <- function(results) {
   plot <- plot +
     ggplot2::geom_step(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
-    ggplot2::xlab(gettext("False positive rate (1-Specificity)")) +
-    ggplot2::ylab(gettext("True positive rate (Sensitivity)"))
+    ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
+    ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
 
 
   plot <- jaspGraphs::themeJasp(plot)
@@ -748,10 +754,11 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(plotsContainer[["plotTestCharacteristics"]]) ) return()
 
   plotsContainer[["plotTestCharacteristics"]] <-
-    createJaspPlot(title        = gettext("Test characteristics"),
+    createJaspPlot(title        = gettext("Test Characteristics"),
                    dependencies = c("plotTestCharacteristics", "credibleInterval", "ciLevel"),
                    position     = position,
-                   width        = 500
+                   width        = 500,
+                   height       = 500,
     )
 
   if(ready) plotsContainer[["plotTestCharacteristics"]]$plotObject <-
@@ -784,7 +791,7 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2) +
     ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2) +
     jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
-    ggplot2::xlab(gettext("Test threshold")) +
+    ggplot2::xlab(gettext("Test Threshold")) +
     ggplot2::ylab(NULL) +
     ggplot2::ylim(c(0, 1)) +
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(varyingThreshold)) +
@@ -793,7 +800,7 @@ coef.bcPosteriorParams <- function(results) {
       values = c("steelblue", "firebrick")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -823,17 +830,17 @@ coef.bcPosteriorParams <- function(results) {
     tpr <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
     tnr <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
 
-    data[i, "threshold"] <- mean(varyingThreshold[i,])
-    data[i, "tpr"]       <- mean(tpr)
-    data[i, "tprLower"]  <- quantile(tpr, p =   alpha/2)
-    data[i, "tprUpper"]  <- quantile(tpr, p = 1-alpha/2)
-    data[i, "tnr"]       <- mean(tnr)
-    data[i, "tnrLower"]  <- quantile(tnr, p =   alpha/2)
-    data[i, "tnrUpper"]  <- quantile(tnr, p = 1-alpha/2)
+    data[i, "threshold"] <- mean(varyingThreshold[i,], na.rm=TRUE)
+    data[i, "tpr"]       <- mean(tpr, na.rm=TRUE)
+    data[i, "tprLower"]  <- quantile(tpr, p =   alpha/2, na.rm=TRUE)
+    data[i, "tprUpper"]  <- quantile(tpr, p = 1-alpha/2, na.rm=TRUE)
+    data[i, "tnr"]       <- mean(tnr, na.rm=TRUE)
+    data[i, "tnrLower"]  <- quantile(tnr, p =   alpha/2, na.rm=TRUE)
+    data[i, "tnrUpper"]  <- quantile(tnr, p = 1-alpha/2, na.rm=TRUE)
   }
 
   summ <- summary(results, ciLevel = options[["ciLevel"]])
-  threshold <- mean(qnorm(results[["specificity"]]))
+  threshold <- mean(qnorm(results[["specificity"]]), na.rm=TRUE)
   pointData <- data.frame(
     x = threshold,
     y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
@@ -852,7 +859,7 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2, alpha = 0.8) +
     ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2, alpha = 0.8) +
     jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
-    ggplot2::xlab(gettext("Test threshold")) +
+    ggplot2::xlab(gettext("Test Threshold")) +
     ggplot2::ylab(NULL) +
     ggplot2::ylim(c(0, 1)) +
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold)) +
@@ -865,7 +872,7 @@ coef.bcPosteriorParams <- function(results) {
       values = c("steelblue", "firebrick")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -874,7 +881,7 @@ coef.bcPosteriorParams <- function(results) {
   if(nrow(dataset) < 100) {
     thresholds <- c(dataset$marker, options[["threshold"]])
   } else {
-    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.01)), options[["threshold"]])
+    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.01), na.rm=TRUE), options[["threshold"]])
   }
 
   data <- data.frame(
@@ -920,7 +927,7 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2, alpha = 0.8) +
     ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2, alpha = 0.8) +
     jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
-    ggplot2::xlab(gettext("Test threshold")) +
+    ggplot2::xlab(gettext("Test Threshold")) +
     ggplot2::ylab(NULL) +
     ggplot2::ylim(c(0, 1)) +
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold)) +
@@ -933,7 +940,7 @@ coef.bcPosteriorParams <- function(results) {
       values = c("steelblue", "firebrick")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -944,10 +951,11 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(plotsContainer[["plotVaryingPrevalence"]]) ) return()
 
   plotsContainer[["plotVaryingPrevalence"]] <-
-    createJaspPlot(title        = gettext("PPV and NPV by prevalence"),
+    createJaspPlot(title        = gettext("PPV and NPV by Prevalence"),
                    dependencies = c("plotVaryingPrevalence", "credibleInterval", "ciLevel"),
                    position     = position,
-                   width        = 500
+                   width        = 500,
+                   height       = 500,
     )
 
   if(ready) plotsContainer[["plotVaryingPrevalence"]]$plotObject <-
@@ -983,7 +991,7 @@ coef.bcPosteriorParams <- function(results) {
       values = c("steelblue", "firebrick")
       )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -1006,13 +1014,13 @@ coef.bcPosteriorParams <- function(results) {
     positivePredictiveValue <- truePositive / (truePositive + falsePositive)
     negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
 
-    data[i, "meanPPV"]  <- mean    (positivePredictiveValue)
-    data[i, "lowerPPV"] <- quantile(positivePredictiveValue, p =   alpha/2)
-    data[i, "upperPPV"] <- quantile(positivePredictiveValue, p = 1-alpha/2)
+    data[i, "meanPPV"]  <- mean    (positivePredictiveValue, na.rm=TRUE)
+    data[i, "lowerPPV"] <- quantile(positivePredictiveValue, p =   alpha/2, na.rm=TRUE)
+    data[i, "upperPPV"] <- quantile(positivePredictiveValue, p = 1-alpha/2, na.rm=TRUE)
 
-    data[i, "meanNPV"]  <- mean    (negativePredictiveValue)
-    data[i, "lowerNPV"] <- quantile(negativePredictiveValue, p =   alpha/2)
-    data[i, "upperNPV"] <- quantile(negativePredictiveValue, p = 1-alpha/2)
+    data[i, "meanNPV"]  <- mean    (negativePredictiveValue, na.rm=TRUE)
+    data[i, "lowerNPV"] <- quantile(negativePredictiveValue, p =   alpha/2, na.rm=TRUE)
+    data[i, "upperNPV"] <- quantile(negativePredictiveValue, p = 1-alpha/2, na.rm=TRUE)
   }
 
   plot <- ggplot2::ggplot(data = data)
@@ -1038,7 +1046,7 @@ coef.bcPosteriorParams <- function(results) {
       values = c("steelblue", "firebrick")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -1049,10 +1057,10 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(plotsContainer[["plotAlluvial"]]) ) return()
 
   plotsContainer[["plotAlluvial"]] <-
-    createJaspPlot(title        = gettext("Alluvial plot"),
+    createJaspPlot(title        = gettext("Alluvial Plot"),
                    dependencies = "plotAlluvial",
                    position     = position,
-                   width        = 600,
+                   width        = 500,
                    height       = 500
     )
 
@@ -1083,9 +1091,10 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_x_discrete(limits = c("cond", "test"),
                               labels = gettext(c("Condition", "Test"))) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue")) +
-    ggplot2::ylab(gettext("Proportion of population"))
+    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
+    ggplot2::ylab(gettext("Proportion of Population"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -1096,10 +1105,11 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(plotsContainer[["plotSignal"]]) ) return()
 
   plotsContainer[["plotSignal"]] <-
-    createJaspPlot(title        = gettext("Signal detection"),
+    createJaspPlot(title        = gettext("Signal Detection"),
                    dependencies = "plotSignal",
                    position     = position,
-                   width        = 600, height = 500
+                   width        = 500,
+                   height       = 500
     )
 
   if(ready) plotsContainer[["plotSignal"]]$plotObject <-
@@ -1131,10 +1141,11 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX)),
                                 limits = c(lowerLimitX, upperLimitX)) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Density"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -1154,10 +1165,11 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1.5) +
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]])) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Count"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "right")
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
@@ -1181,7 +1193,7 @@ coef.bcPosteriorParams <- function(results) {
     createJaspPlot(title        = gettext("Estimates"),
                    dependencies = c("plotEstimates", plots),
                    position     = position,
-                   width        = 600,
+                   width        = 500,
                    height       = 50 + 50 * sum(selectedPlots)
     )
 
@@ -1273,8 +1285,8 @@ coef.bcPosteriorParams <- function(results) {
      negativePredictiveValue = gettext("P(Condition = negative | Test = negative)"),
      falseDiscoveryRate      = gettext("P(Condition = negative | Test = positive)"),
      falseOmissionRate       = gettext("P(Condition = positive | Test = negative)"),
-     falsePositiveRate   = gettext("P(Test = positive | Condition = negative)"),
-     falseNegativeRate   = gettext("P(Test = negative | Condition = positive)"),
+     falsePositiveRate       = gettext("P(Test = positive | Condition = negative)"),
+     falseNegativeRate       = gettext("P(Test = negative | Condition = positive)"),
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(

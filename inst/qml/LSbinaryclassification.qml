@@ -39,9 +39,9 @@ Form {
 		{
 			visible: inputType.value === "pointEstimates"
 			title: qsTr("Estimates")
-			FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0; max: 1; defaultValue: "0.1"	}
-			FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0; max: 1; defaultValue: "0.8" }
-			FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0; max: 1; defaultValue: "0.8"	}
+			FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0.00001; max: 0.99999; defaultValue: "0.1"	}
+			FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0.00001; max: 0.99999; defaultValue: "0.8" }
+			FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0.00001; max: 0.99999; defaultValue: "0.8"	}
 		}
 
 		Group
@@ -62,7 +62,7 @@ Form {
 		{
 			visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
 			columns: 2
-			title: inputType.value === "data" ? qsTr("Priors") : qsTr("Estimates")
+			title: qsTr("Priors")
 			FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
 			FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
 			FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
@@ -100,8 +100,8 @@ Form {
 				CheckBox { name: "plotNPV"; label: qsTr("Negative predictive value") }
 				CheckBox { name: "plotFDR"; label: qsTr("False discovery rate") }
 				CheckBox { name: "plotFOR"; label: qsTr("False omission rate") }
-				CheckBox { name: "plotFPF"; label: qsTr("False positive fraction") }
-				CheckBox { name: "plotFNF"; label: qsTr("False negative fraction") }
+				CheckBox { name: "plotFPF"; label: qsTr("False positive rate") }
+				CheckBox { name: "plotFNF"; label: qsTr("False negative rate") }
 				CheckBox { name: "plotAccuracy"; label: qsTr("Accuracy") }
 			}
 		}
