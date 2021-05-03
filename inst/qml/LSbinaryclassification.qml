@@ -104,7 +104,11 @@ Form {
 
 		Group
 		{
-			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive")					}
+			CheckBox
+			{
+				name: "plotPriorPosteriorPositive";	label: qsTr("Probability positive")
+				CheckBox { name: "plotPriorPosteriorPositiveDistribution"; label: qsTr("Show entire distribution"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"}
+			}
 			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
 			CheckBox
 			{
@@ -135,7 +139,14 @@ Form {
 				CheckBox { name: "plotFOR"; label: qsTr("False omission rate") }
 				CheckBox { name: "plotFPF"; label: qsTr("False positive rate") }
 				CheckBox { name: "plotFNF"; label: qsTr("False negative rate") }
-				CheckBox { name: "plotAccuracy"; label: qsTr("Accuracy") }
+				CheckBox { name: "plotAccuracy"; label: qsTr("Accuracy"); Layout.columnSpan: 2 }
+				RadioButtonGroup
+				{
+					name: "plotEstimatesType"; title: qsTr("Plot type")
+					visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
+					RadioButton { name: "interval"; label: qsTr("Interval") }
+					RadioButton { name: "halfEye";  label: qsTr("Half-eye") }
+				}
 			}
 		}
 

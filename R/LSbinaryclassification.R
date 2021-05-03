@@ -531,7 +531,7 @@ coef.bcPosteriorParams <- function(results) {
 
   plotsContainer[["plotPriorPosteriorPositive"]] <-
     createJaspPlot(title        = gettext("Probability Positive"),
-                   dependencies = c("plotPriorPosteriorPositive", "credibleInterval", "ciLevel"),
+                   dependencies = c("plotPriorPosteriorPositive", "credibleInterval", "ciLevel", "plotPriorPosteriorPositiveDistribution"),
                    position     = position,
                    width        = 500,
                    height       = 500,
@@ -577,44 +577,68 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 .bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, dataset, options) {
-  data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
-                      result = gettext(c("Negative", "Positive")))
-  data$mean <- data$lower <- data$upper <- numeric(length(nrow(data)))
-  alpha <- 1-options[["ciLevel"]]
-
-  for(i in 1:nrow(data)) {
-    if(data$test[i] == gettext("Not tested")) {
-      data$mean [i] <- mean    (results[["prevalence"]], na.rm=TRUE)
-      data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2, na.rm=TRUE)
-      data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2, na.rm=TRUE)
-    } else if(data$result[i] == gettext("Negative")) {
-      data$mean [i] <- mean    (results[["falseOmissionRate"]], na.rm=TRUE)
-      data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2, na.rm=TRUE)
-      data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2, na.rm=TRUE)
-    } else {
-      data$mean [i] <- mean    (results[["positivePredictiveValue"]], na.rm=TRUE)
-      data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2, na.rm=TRUE)
-      data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2, na.rm=TRUE)
+  if(options[["plotPriorPosteriorPositiveDistribution"]]) {
+    data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
+                        result = gettext(c("Negative", "Positive")),
+                        iter   = seq_len(options[["numberOfSamples"]]))
+    data$value <- NA
+    for(i in 1:nrow(data)) {
+      if(data$test[i] == gettext("Not tested")) {
+        data$value[i] <- results[["prevalence"]][data[i, "iter"]]
+      } else if(data$result[i] == gettext("Negative")) {
+        data$value[i] <- results[["falseOmissionRate"]][data[i, "iter"]]
+      } else {
+        data$value[i] <- results[["positivePredictiveValue"]][data[i, "iter"]]
+      }
     }
-  }
 
-  plot <- ggplot2::ggplot(data    = data,
-                          mapping = ggplot2::aes(x=result, y=mean, fill=test, ymin=lower, ymax=upper)) +
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(width=0.7), col = "black", width=0.7) +
-    ggplot2::xlab(gettext("Test Result")) +
-    ggplot2::ylab(gettext("P(Condition = positive)")) +
-    ggplot2::scale_fill_discrete(name = NULL) +
-    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$upper)))
+    plot <- ggplot2::ggplot(data = data,
+                            mapping = ggplot2::aes(x=result, y=value, fill=test)) +
+      #ggplot2::geom_violin(position = ggplot2::position_dodge(width = 0.7), col = "black", width = 0.7) +
+      ggdist::stat_eye(position = ggplot2::position_dodge(width = 0.7), width = 1) +
+      ggplot2::xlab(gettext("Test Result")) +
+      ggplot2::ylab(gettext("P(Condition = positive)")) +
+      ggplot2::scale_fill_discrete(name = NULL)
 
-  if(options[["credibleInterval"]]) {
-    plot <- plot +
-      ggplot2::geom_errorbar(position = ggplot2::position_dodge(width=0.7), size = 1, width = 0.5) +
-      ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$upper)),
-                                  limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$upper))))
   } else {
-    plot <- plot +
-      ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$mean)),
-                                  limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$mean))))
+    data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
+                        result = gettext(c("Negative", "Positive")))
+    data$mean <- data$lower <- data$upper <- numeric(length(nrow(data)))
+    alpha <- 1-options[["ciLevel"]]
+
+    for(i in 1:nrow(data)) {
+      if(data$test[i] == gettext("Not tested")) {
+        data$mean [i] <- mean    (results[["prevalence"]], na.rm=TRUE)
+        data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2, na.rm=TRUE)
+        data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2, na.rm=TRUE)
+      } else if(data$result[i] == gettext("Negative")) {
+        data$mean [i] <- mean    (results[["falseOmissionRate"]], na.rm=TRUE)
+        data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2, na.rm=TRUE)
+        data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2, na.rm=TRUE)
+      } else {
+        data$mean [i] <- mean    (results[["positivePredictiveValue"]], na.rm=TRUE)
+        data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2, na.rm=TRUE)
+        data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2, na.rm=TRUE)
+      }
+    }
+
+    plot <- ggplot2::ggplot(data    = data,
+                            mapping = ggplot2::aes(x=result, y=mean, fill=test, ymin=lower, ymax=upper)) +
+      ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(width=0.7), col = "black", width=0.7) +
+      ggplot2::xlab(gettext("Test Result")) +
+      ggplot2::ylab(gettext("P(Condition = positive)")) +
+      ggplot2::scale_fill_discrete(name = NULL)
+
+    if(options[["credibleInterval"]]) {
+      plot <- plot +
+        ggplot2::geom_errorbar(position = ggplot2::position_dodge(width=0.7), size = 1, width = 0.5) +
+        ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$upper)),
+                                    limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$upper))))
+    } else {
+      plot <- plot +
+        ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$mean)),
+                                    limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$mean))))
+    }
   }
 
 
@@ -1314,7 +1338,7 @@ coef.bcPosteriorParams <- function(results) {
 
   plotsContainer[["plotEstimates"]] <-
     createJaspPlot(title        = gettext("Estimates"),
-                   dependencies = c("plotEstimates", plots),
+                   dependencies = c("plotEstimates", plots, "plotEstimatesType"),
                    position     = position,
                    width        = 500,
                    height       = 50 + 50 * sum(selectedPlots)
@@ -1330,6 +1354,57 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 .bcFillPlotEstimates.default <- function(results, dataset, options, selectedPlots) {
+  if(options[["plotEstimatesType"]] == "interval") {
+    data <- summary(results, ciLevel = options[["ciLevel"]])
+    rows <- c("prevalence",
+              "sensitivity",             "specificity",
+              "truePositive",            "falsePositive",
+              "trueNegative",            "falseNegative",
+              "positivePredictiveValue", "negativePredictiveValue",
+              "falseDiscoveryRate",      "falseOmissionRate",
+              "falsePositiveRate",   "falseNegativeRate",
+              "accuracy")[selectedPlots]
+
+    data <- data[rows,]
+    data[["statistic"]] <- factor(data[["statistic"]], levels = rev(data[["statistic"]]))
+
+    plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic))
+
+    if(options[["credibleInterval"]])
+      plot <- plot + ggplot2::geom_errorbarh(mapping = ggplot2::aes(xmin=lowerCI,xmax=upperCI),
+                                             height = 0.25, size = 1)
+
+    plot <- plot + jaspGraphs::geom_point(size = 6)
+
+  } else {
+    cols <- c("prevalence",
+              "sensitivity",             "specificity",
+              "truePositive",            "falsePositive",
+              "trueNegative",            "falseNegative",
+              "positivePredictiveValue", "negativePredictiveValue",
+              "falseDiscoveryRate",      "falseOmissionRate",
+              "falsePositiveRate",   "falseNegativeRate",
+              "accuracy")[selectedPlots]
+    data <- as.data.frame(results[cols])
+    colNames <- summary(results, ciLevel = 0.95)[cols, "statistic"]
+    colnames(data) <- colNames
+    data <- tidyr::pivot_longer(data = data, cols = tidyr::everything(),
+                                names_to = "statistic", values_to = "estimate")
+    data[["statistic"]] <- factor(data[["statistic"]], levels = rev(colNames))
+    plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic)) +
+      ggdist::stat_halfeye()
+  }
+
+  plot <- plot + ggplot2::xlim(c(0,1)) +
+    ggplot2::xlab(gettext("Estimate")) +
+    ggplot2::ylab(NULL)
+
+  plot <- jaspGraphs::themeJasp(plot)
+
+  return(plot)
+}
+
+.bcFillPlotEstimates.bcPointEstimates <- function(results, dataset, options, selectedPlots) {
   data <- summary(results, ciLevel = options[["ciLevel"]])
   rows <- c("prevalence",
             "sensitivity",             "specificity",
@@ -1343,17 +1418,12 @@ coef.bcPosteriorParams <- function(results) {
   data <- data[rows,]
   data[["statistic"]] <- factor(data[["statistic"]], levels = rev(data[["statistic"]]))
 
-  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic))
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic)) +
+    jaspGraphs::geom_point(size = 6)
 
-  if(options[["credibleInterval"]])
-    plot <- plot + ggplot2::geom_errorbarh(mapping = ggplot2::aes(xmin=lowerCI,xmax=upperCI),
-                                           height = 0.25, size = 1)
-
-  plot <- plot + jaspGraphs::geom_point(size = 6) +
-    ggplot2::xlim(c(0,1)) +
+  plot <- plot + ggplot2::xlim(c(0,1)) +
     ggplot2::xlab(gettext("Estimate")) +
     ggplot2::ylab(NULL)
-
 
   plot <- jaspGraphs::themeJasp(plot)
 
@@ -1376,8 +1446,8 @@ coef.bcPosteriorParams <- function(results) {
       negativePredictiveValue = gettext("Negative predictive value"),
       falseDiscoveryRate      = gettext("False discovery rate"),
       falseOmissionRate       = gettext("False omission rate"),
-      falsePositiveRate   = gettext("False positive rate"),
-      falseNegativeRate   = gettext("False negative rate"),
+      falsePositiveRate       = gettext("False positive rate"),
+      falseNegativeRate       = gettext("False negative rate"),
       accuracy                = gettext("Accuracy")
     ),
     interpretation = c(
@@ -1392,8 +1462,8 @@ coef.bcPosteriorParams <- function(results) {
       negativePredictiveValue = gettext("Proportion of those who tested negative and are not affected by the condition."),
       falseDiscoveryRate      = gettext("Proportion of false positives in the pool of those that test positive."),
       falseOmissionRate       = gettext("Proportion of false negatives in the pool of those that test negative."),
-      falsePositiveRate   = gettext("Complement proportion to specificity."),
-      falseNegativeRate   = gettext("Complement proportion to sensitivity."),
+      falsePositiveRate       = gettext("Complement proportion to specificity."),
+      falseNegativeRate       = gettext("Complement proportion to sensitivity."),
       accuracy                = gettext("Proportion of the population that is true positive or true negative.")
    ),
    notation = c(

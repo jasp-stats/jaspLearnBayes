@@ -22,7 +22,8 @@ Imports:
   ggalluvial,
   ggimage,
   rsvg,
-  ragg
+  ragg,
+  ggdist
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs
