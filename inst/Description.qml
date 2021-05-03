@@ -16,6 +16,19 @@ Description
 
 	GroupTitle
 	{
+		title:	qsTr("Binary Classification")
+		icon:	"ellipsis.svg"
+	}
+
+	Analysis
+	{
+		title:	qsTr("Binary Classification")
+		qml:	"LSbinaryclassification.qml"
+		func:	"LSbinaryclassification"
+	}
+
+	GroupTitle
+	{
 		title: 	qsTr("Counts")
 		icon:	"analysis-bayesian-crosstabs.svg"
 	}
@@ -74,16 +87,4 @@ Description
 		func:	"LSgameofskill"
 	}
 
-	GroupTitle
-	{
-		title:	qsTr("Miscellaneous")
-		icon:	"ellipsis.svg"
-	}
-
-	Analysis
-	{
-		title:	qsTr("Binary Classification")
-		qml:	"LSbinaryclassification.qml"
-		func:	"LSbinaryclassification"
-	}
 }

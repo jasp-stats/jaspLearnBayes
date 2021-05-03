@@ -23,62 +23,86 @@ import JASP.Theme 1.0
 import "../qml/qml_components" as LS
 
 Form {
-	Section
+	columns: 1
+	RadioButtonGroup
 	{
-		title: qsTr("Input")
-		columns: 1
-		RadioButtonGroup
+		name: "inputType"; id: inputType; columns: 3; title: qsTr("Input type")
+		RadioButton { name: "pointEstimates";		label: qsTr("Point estimates"); checked: true	}
+		RadioButton { name: "uncertainEstimates";	label: qsTr("Uncertain estimates")				}
+		RadioButton { name: "data";					label: qsTr("Load data and specify threshold")	}
+	}
+
+	Group
+	{
+		visible: inputType.value === "pointEstimates"
+		title: qsTr("Estimates")
+		FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0.00001; max: 0.99999; defaultValue: "0.1"	}
+		FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0.00001; max: 0.99999; defaultValue: "0.8" }
+		FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0.00001; max: 0.99999; defaultValue: "0.8"	}
+	}
+
+	Group
+	{
+		visible: inputType.value === "data"
+		VariablesForm
 		{
-			name: "inputType"; id: inputType; columns: 3; title: qsTr("Input type")
-			RadioButton { name: "pointEstimates";		label: qsTr("Point estimates"); checked: true	}
-			RadioButton { name: "uncertainEstimates";	label: qsTr("Uncertain estimates")				}
-			RadioButton { name: "data";					label: qsTr("Load data and specify threshold")	}
+			preferredHeight: jaspTheme.smallDefaultVariablesFormHeight
+			AvailableVariablesList { name: "allVariablesList" }
+			AssignedVariablesList { name: "marker";	title: qsTr("Marker");	suggestedColumns: ["scale"];				singleVariable: true	}
+			AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
 		}
 
-		Group
-		{
-			visible: inputType.value === "pointEstimates"
-			title: qsTr("Estimates")
-			FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0.00001; max: 0.99999; defaultValue: "0.1"	}
-			FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0.00001; max: 0.99999; defaultValue: "0.8" }
-			FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0.00001; max: 0.99999; defaultValue: "0.8"	}
-		}
+		FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"	}
+	}
 
-		Group
+	Group
+	{
+		visible: inputType.value === "uncertainEstimates"
+		columns: 2
+		title: qsTr("Data")
+		IntegerField { name: "truePositive";  label: qsTr("True positive");  min: 0; defaultValue: 0	}
+		IntegerField { name: "falsePositive"; label: qsTr("False positive"); min: 0; defaultValue: 0	}
+		IntegerField { name: "falseNegative"; label: qsTr("False negative"); min: 0; defaultValue: 0	}
+		IntegerField { name: "trueNegative";  label: qsTr("True negative");  min: 0; defaultValue: 0	}
+	}
+
+	Group
+	{
+		visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
+		columns: 2
+		title: qsTr("Priors")
+		FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
+		FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
+		FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
+		FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
+		FormulaField { name: "specificityAlpha"; label: qsTr("Specificity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
+		FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
+	}
+
+	Group
+	{
+		title: qsTr("Tables")
+		CheckBox { name: "statistics";  label: qsTr("Statistics");	checked: true }
+		CheckBox
 		{
-			visible: inputType.value === "data"
-			VariablesForm
+			name: "confusionMatrix"; label: qsTr("Confusion matrix")
+			RadioButtonGroup
 			{
-				preferredHeight: jaspTheme.smallDefaultVariablesFormHeight
-				AvailableVariablesList { name: "allVariablesList" }
-				AssignedVariablesList { name: "marker";	title: qsTr("Marker");	suggestedColumns: ["scale"];				singleVariable: true	}
-				AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
+				name: "confusionMatrixType"
+				RadioButton { name: "text";		label: qsTr("Text");	checked: true	}
+				RadioButton { name: "number";	label: qsTr("Number")					}
+				RadioButton { name: "both";		label: qsTr("Both")						}
 			}
-
-			FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"	}
-		}
-
-		Group
-		{
-			visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
-			columns: 2
-			title: qsTr("Priors")
-			FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
-			FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
-			FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
-			FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
-			FormulaField { name: "specificityAlpha"; label: qsTr("Specificity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
-			FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
+			CheckBox { name: "confusionMatrixAddInfo"; label: qsTr("Additional info"); checked: true }
 		}
 	}
 
 	Section
 	{
-		title: qsTr("Output")
+		title: qsTr("Plots")
 
 		Group
 		{
-			title: qsTr("Plots")
 			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive")					}
 			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
 			CheckBox { name: "plotROC";								label: qsTr("ROC")									}
@@ -106,23 +130,6 @@ Form {
 			}
 		}
 
-		Group
-		{
-			title: qsTr("Tables")
-			CheckBox { name: "statistics";  label: qsTr("Statistics");	checked: true }
-			CheckBox
-			{
-				name: "confusionMatrix"; label: qsTr("Confusion matrix")
-				RadioButtonGroup
-				{
-					name: "confusionMatrixType"
-					RadioButton { name: "text";		label: qsTr("Text");	checked: true	}
-					RadioButton { name: "number";	label: qsTr("Number")					}
-					RadioButton { name: "both";		label: qsTr("Both")						}
-				}
-				CheckBox { name: "confusionMatrixAddInfo"; label: qsTr("Additional info"); checked: true }
-			}
-		}
 	}
 
 	Section
