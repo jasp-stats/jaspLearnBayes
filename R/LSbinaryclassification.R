@@ -166,7 +166,7 @@ summary.bcPointEstimates <- function(results, ...) {
   prevalence <- sensitivity <- specificity <- numeric(options[["numberOfSamples"]])
 
   if(progress)
-    startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Computing samples"))
+    startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Drawing samples"))
 
   for(i in seq_len(options[["numberOfSamples"]])) {
     prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
@@ -518,7 +518,9 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), col = "black") +
     ggplot2::xlab(gettext("Test Result")) +
     ggplot2::ylab(gettext("P(Condition = positive)")) +
-    ggplot2::scale_fill_discrete(name = NULL)
+    ggplot2::scale_fill_discrete(name = NULL) +
+    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$probPositive)),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$probPositive))))
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
@@ -552,11 +554,18 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(width=0.7), col = "black", width=0.7) +
     ggplot2::xlab(gettext("Test Result")) +
     ggplot2::ylab(gettext("P(Condition = positive)")) +
-    ggplot2::scale_fill_discrete(name = NULL)
+    ggplot2::scale_fill_discrete(name = NULL) +
+    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$upper)))
 
   if(options[["credibleInterval"]]) {
     plot <- plot +
-      ggplot2::geom_errorbar(position = ggplot2::position_dodge(width=0.7), size = 1, width = 0.5)
+      ggplot2::geom_errorbar(position = ggplot2::position_dodge(width=0.7), size = 1, width = 0.5) +
+      ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$upper)),
+                                  limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$upper))))
+  } else {
+    plot <- plot +
+      ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$mean)),
+                                  limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$mean))))
   }
 
 
@@ -620,11 +629,15 @@ coef.bcPosteriorParams <- function(results) {
   plot <- ggplot2::ggplot(data=data, mapping = ggplot2::aes(x=x,y=y))
 
   if(npoints <= 1e2) {
-    plot <- plot + ggimage::geom_image(mapping = ggplot2::aes(col=outcome,image=image)) +
+    plot <- plot +
+      ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome), alpha = 0) +
+      ggimage::geom_image(mapping = ggplot2::aes(col=outcome,image=image)) +
+      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
       ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
-      ggplot2::guides(col=ggplot2::guide_legend(ncol=2))
+      ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1)), col = FALSE)
   } else {
-    plot <- plot + ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome)) +
+    plot <- plot +
+      ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome)) +
       ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
       ggplot2::guides(fill=ggplot2::guide_legend(ncol=2))
   }
@@ -786,15 +799,18 @@ coef.bcPosteriorParams <- function(results) {
     x = threshold,
     y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
   )
+  segmentData <- data.frame(x = threshold, xend = threshold, y = 0, yend = 1)
+
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
-    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1) +
+    ggplot2::geom_segment(data = segmentData, ggplot2::aes(x=x, y=y, xend=xend, yend=yend), linetype = 2, size = 1) +
     ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Sensitivity")), size = 2) +
     ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Specificity")), size = 2) +
     jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
     ggplot2::xlab(gettext("Test Threshold")) +
     ggplot2::ylab(NULL) +
     ggplot2::ylim(c(0, 1)) +
-    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(varyingThreshold)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(varyingThreshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(varyingThreshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
       values = c("steelblue", "firebrick")
@@ -862,7 +878,8 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::xlab(gettext("Test Threshold")) +
     ggplot2::ylab(NULL) +
     ggplot2::ylim(c(0, 1)) +
-    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
       values = c("steelblue", "firebrick")
@@ -930,7 +947,8 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::xlab(gettext("Test Threshold")) +
     ggplot2::ylab(NULL) +
     ggplot2::ylim(c(0, 1)) +
-    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
       values = c("steelblue", "firebrick")
@@ -980,7 +998,7 @@ coef.bcPosteriorParams <- function(results) {
   )
 
   plot <- ggplot2::ggplot(data = data) +
-    ggplot2::geom_vline(xintercept = results[["prevalence"]], linetype = 2) +
+    ggplot2::geom_segment(ggplot2::aes(x = results[["prevalence"]], y = 0, xend = results[["prevalence"]], yend = 1), linetype = 2, size = 1) +
     ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = positivePredictiveValue, color = gettext("Positive")), size = 2) +
     ggplot2::geom_line(mapping = ggplot2::aes(x = prevalence, y = negativePredictiveValue, color = gettext("Negative")), size = 2) +
     jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = x, y = y), size = 5) +
@@ -1091,7 +1109,7 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_x_discrete(limits = c("cond", "test"),
                               labels = gettext(c("Condition", "Test"))) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue")) +
-    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
+    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1))) +
     ggplot2::ylab(gettext("Proportion of Population"))
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
@@ -1137,9 +1155,11 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkgreen"), alpha = 0.7) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), size = 1) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), size = 1) +
-    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1.5) +
+    ggplot2::geom_segment(ggplot2::aes(x = threshold, y = 0, xend = threshold, yend = Inf), linetype = 2, size = 1.5) +
     ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX)),
                                 limits = c(lowerLimitX, upperLimitX)) +
+    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))))) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
@@ -1151,9 +1171,11 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 .bcFillPlotSignal.bcData <- function(results, dataset, options) {
-  breaks <- hist(dataset[["marker"]], plot = FALSE)[["breaks"]]
-  binWidth <- breaks[2] - breaks[1]
-  group <- character(nrow(dataset))
+  histogram <- hist(dataset[["marker"]], plot = FALSE)
+  counts    <- histogram[["counts"]]
+  breaks    <- histogram[["breaks"]]
+  binWidth  <- breaks[2] - breaks[1]
+  group     <- character(nrow(dataset))
   group[ dataset$condition &  dataset$test] <- gettext("True positive")
   group[!dataset$condition &  dataset$test] <- gettext("False positive")
   group[ dataset$condition & !dataset$test] <- gettext("False negative")
@@ -1162,8 +1184,11 @@ coef.bcPosteriorParams <- function(results) {
   dataset$group <- factor(group, levels = gettext(c("True positive", "False positive", "False negative", "True negative")))
   plot <- ggplot2::ggplot(data = dataset, mapping = ggplot2::aes(x = marker, fill = group)) +
     ggplot2::geom_histogram(position = "identity", alpha = 0.4, color = "black", binwidth = binWidth, boundary = options[["threshold"]]) +
-    ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1.5) +
-    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]])) +
+    ggplot2::geom_segment(ggplot2::aes(x = options[["threshold"]], y = 0, xend = options[["threshold"]], yend = Inf), linetype = 2, size = 1.5) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]]),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]]))) +
+    ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(counts),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(counts))) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +

@@ -79,7 +79,7 @@ Form {
 		Group
 		{
 			title: qsTr("Plots")
-			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive"); checked: true	}
+			CheckBox { name: "plotPriorPosteriorPositive";			label: qsTr("Probability positive")					}
 			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
 			CheckBox { name: "plotROC";								label: qsTr("ROC")									}
 			CheckBox { name: "plotTestCharacteristics";				label: qsTr("Test characteristics by threshold")	}
@@ -109,7 +109,7 @@ Form {
 		Group
 		{
 			title: qsTr("Tables")
-			CheckBox { name: "statistics";  label: qsTr("Statistics") }
+			CheckBox { name: "statistics";  label: qsTr("Statistics");	checked: true }
 			CheckBox
 			{
 				name: "confusionMatrix"; label: qsTr("Confusion matrix")
