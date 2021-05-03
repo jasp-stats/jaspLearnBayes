@@ -101,7 +101,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     dataset <- dataset[complete.cases(dataset),]
 
     labels <- dataset[[options[["labels"]]]]
-    levels <- levels(labels)
+    levels <- levels(as.factor(labels))
     if(length(levels) != 2) .quitAnalysis(gettext("The 'Positive condition (binary)' variable must have two levels!"))
 
     dataset <- data.frame(

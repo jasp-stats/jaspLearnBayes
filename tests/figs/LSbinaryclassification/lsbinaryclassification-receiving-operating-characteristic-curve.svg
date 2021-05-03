@@ -52,7 +52,7 @@
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='384.34' y='534.28' style='font-size: 17.00px; font-family: Liberation Sans;' textLength='33.08px' lengthAdjust='spacingAndGlyphs'>0.50</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='529.40' y='534.28' style='font-size: 17.00px; font-family: Liberation Sans;' textLength='33.08px' lengthAdjust='spacingAndGlyphs'>0.75</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='674.45' y='534.28' style='font-size: 17.00px; font-family: Liberation Sans;' textLength='33.08px' lengthAdjust='spacingAndGlyphs'>1.00</text></g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='253.49' y='566.78' style='font-size: 20.40px; font-family: Liberation Sans;' textLength='294.78px' lengthAdjust='spacingAndGlyphs'>False positive rate (1-Specificity)</text></g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text transform='translate(19.01,397.88) rotate(-90)' style='font-size: 20.40px; font-family: Liberation Sans;' textLength='267.95px' lengthAdjust='spacingAndGlyphs'>True positive rate (Sensitivity)</text></g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='248.41' y='566.78' style='font-size: 20.40px; font-family: Liberation Sans;' textLength='304.95px' lengthAdjust='spacingAndGlyphs'>False Positive Rate (1-Specificity)</text></g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text transform='translate(19.01,402.97) rotate(-90)' style='font-size: 20.40px; font-family: Liberation Sans;' textLength='278.12px' lengthAdjust='spacingAndGlyphs'>True Positive Rate (Sensitivity)</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='167.54' y='11.70' style='font-size: 17.00px; font-family: Liberation Sans;' textLength='466.69px' lengthAdjust='spacingAndGlyphs'>LSbinaryclassification-receiving-operating-characteristic-curve</text></g>
 </svg>
