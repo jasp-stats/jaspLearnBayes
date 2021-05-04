@@ -20,10 +20,11 @@ Imports:
   MGLM,
   scales,
   ggalluvial,
-  ggimage,
-  rsvg,
   ragg,
-  ggdist
+  ggdist,
+  grid,
+  grDevices,
+  png
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs

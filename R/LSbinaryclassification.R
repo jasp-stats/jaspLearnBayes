@@ -696,15 +696,15 @@ coef.bcPosteriorParams <- function(results) {
     outcome = rep(data$out, data$n),
     x = rep(c(1:xside,xside:1), times = yside/2),
     y = rep(seq_len(yside), each = xside),
-    image = system.file("icons", "person.svg", package = "jaspLearnBayes")
+    img = system.file("icons", "person.png", package = "jaspLearnBayes")
   )
 
   plot <- ggplot2::ggplot(data=data, mapping = ggplot2::aes(x=x,y=y))
 
   if(npoints <= 1e2) {
     plot <- plot +
-      ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome), alpha = 0) +
-      ggimage::geom_image(mapping = ggplot2::aes(col=outcome,image=image)) +
+      ggplot2::geom_raster(mapping = ggplot2::aes(fill=outcome), alpha = 0) +
+      geom_png(mapping = ggplot2::aes(w=0.75,h=0.75,img=img,col=outcome)) +
       ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
       ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
       ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1)), col = FALSE)
@@ -1504,4 +1504,27 @@ coef.bcPosteriorParams <- function(results) {
   sz <- sort(kk$z)
   c1 <- cumsum(sz) * dx * dy
   approx(c1, sz, xout = 1-confLevel)$y
+}
+
+GeomPNG <- ggplot2::ggproto("GeomPNG", ggplot2::Geom,
+                            required_aes = c("x", "y", "w", "h", "img"),
+                            default_aes = ggplot2::aes(col = "grey"),
+                            draw_group = function(data, panel_params, coord) {
+                              img <- png::readPNG(data$img)
+                              fillColor <- grDevices::col2rgb(data$col[1])
+                              img[,,1] <- fillColor["red",  ]*img[,,4]/255
+                              img[,,2] <- fillColor["green",]*img[,,4]/255
+                              img[,,3] <- fillColor["blue",] *img[,,4]/255
+                              size <- coord$transform(data.frame(x=data$w, y=data$h), panel_params)
+                              data <- coord$transform(data, panel_params)
+
+                              grid::rasterGrob(image = img, x = data$x, y = data$y, width = size$x, height = size$y,
+                                               just = c(0.5, 0.5), default.units = "native")
+                            }
+)
+
+geom_png <- function(mapping = NULL, data = NULL) {
+  ggplot2::layer(data = data, mapping = mapping, geom = GeomPNG,
+                 stat = ggplot2::StatIdentity, position = ggplot2::PositionIdentity,
+                 show.legend = FALSE)
 }
