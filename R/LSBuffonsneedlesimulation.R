@@ -22,90 +22,203 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   a <- options[["a"]]
   b <- options[["b"]]
   lengthRatio <- options[["length"]]
-
+  CI <- options[["CI"]]
+  plot1 = options[["plot1"]]
+  plot2 = options[["plot2"]]
+  plot3 = options[["plot3"]]
+  color = options[["color"]]
+  CIArrow = options[["CIArrow"]]
+  legend1 = options[["legend1"]]
+  legend2 = options[["legend2"]]
+  
+  
   # example d for computation
   d <- 5
-  l <- lengthRatio * d / 100
-
-  # some warnings
-  #if(crosses > observations)
-  #  .quitAnalysis(gettext("Warning: Number of crosses needs to be smaller than or equal to number of observations!"))
+  l <- lengthRatio*d/100
   
   # simulation results
-  simulateResults <- simulate_throws(observations, lengthRatio)
-  crosses <- simulateResults[["k"]]
-  xs = simulateResults[["xs"]] 
-  xe = simulateResults[["xe"]] 
-  ys = simulateResults[["ys"]] 
-  ye = simulateResults[["ye"]] 
+  #simulateResults <- simulate_throws(observations, lengthRatio)
+
+  
+  if(is.null(jaspResults[["simulateResults"]])){ #test whether the state is empty
+  
+    # if empty, create a new state
+    simulateResults <- createJaspState()
+    simulateResults$dependOn(c("observations", "lengthRatio")) #, "a", "b", "lengthRatio", "CI"))
+    results <- simulate_throws(observations, lengthRatio)    
+    simulateResults$object <- results
+    jaspResults[["simulateResults"]] <- simulateResults
+    }
+  # if not, retrieve the values
+  crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
+  xs <- jaspResults[["simulateResults"]][["object"]][["xs"]] 
+  xe <- jaspResults[["simulateResults"]][["object"]][["xe"]] 
+  ys <- jaspResults[["simulateResults"]][["object"]][["ys"]] 
+  ye <- jaspResults[["simulateResults"]][["object"]][["ye"]]
+  
+  xsCrosses <- jaspResults[["simulateResults"]][["object"]][["xsCrosses"]] 
+  xeCrosses <- jaspResults[["simulateResults"]][["object"]][["xeCrosses"]] 
+  ysCrosses <- jaspResults[["simulateResults"]][["object"]][["ysCrosses"]] 
+  yeCrosses <- jaspResults[["simulateResults"]][["object"]][["yeCrosses"]]   
+
+  
 
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
-
-  summaryTable$dependOn(c("crosses", "observations", "a", "b", "lengthRatio"))
+  summaryTable$position <- 1
+  
+  summaryTable$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI"))
   summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "string")
-  summaryTable$addColumnInfo(name = "lowerCI", title = gettext("95% CI (Lower)"), type = "string")
-  summaryTable$addColumnInfo(name = "Median", title = gettext("Median"),   type = "string")
-  summaryTable$addColumnInfo(name = "upperCI", title = gettext("95% CI (upper)"), type = "string")
-
+  summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Observations"), type = "string")
+  summaryTable$addColumnInfo(name = "Median", title = gettext(paste("Median for", "\u03c0")), type = "string")
+  summaryTable$addColumnInfo(name = "lowerCI", title = gettext("Lower"), type = "string", 
+                             overtitle = paste0(CI*100, "% Credible Interval"))
+  summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "string", 
+                             overtitle = paste0(CI*100, "% Credible Interval"))
+  
   
   # fill in the table
-  CI95lower <- 2 * l / (qbeta(.025, crosses, observations - crosses, lower.tail = FALSE) * d)
+  CI95lower <- 2 * l / (qbeta((1-CI)/2, crosses, observations - crosses, lower.tail = FALSE) * d)
+  CI95lower = round(CI95lower, digit = 2)
+  
   med <- 2 * l / (qbeta(.5, crosses, observations - crosses, lower.tail = FALSE) * d)
-  CI95upper <- 2 * l / (qbeta(.975, crosses, observations - crosses, lower.tail = FALSE) * d)
-  summaryTable$addRows(list(NumCrosses = crosses, lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
-
-  ## Simulation Plot
-  simulPlot <- createJaspPlot(title = "Simulation",  width = 400, height = 400)
-  simulPlot$dependOn(c("observations", "a", "b", "lengthRatio"))
-  simulPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
+  med = round(med, digit = 2)
   
-  simulPlot0 <- ggplot2::ggplot(data= NULL) +
-    ggplot2::coord_cartesian(xlim = c(-13, 13), ylim = c(-13, 13))
+  CI95upper <- 2 * l / (qbeta(1-(1-CI)/2, crosses, observations - crosses, lower.tail = FALSE) * d)
+  CI95upper = round(CI95upper, digit = 2)
   
-  # fill in the plot
-  simulPlot$plotObject <- jaspGraphs::themeJasp(simulPlot0) +
-    ggplot2::xlab("") +
-    ggplot2::ylab("") +
-    ggplot2::geom_segment(ggplot2::aes(x = rep(-13,5), y = c(-10,-5,0,5,10), 
-                                       xend = rep(13,5), yend = c(-10,-5,0,5,10))) +
-    ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye), color = "blue")
-  
-  ## Distribution Plot
-  distPlot <- createJaspPlot(title = "Prior and Posterior distribution",  width = 480, height = 320)
-  distPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio"))
-  distPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
-  
-  # values
-  x <- seq(2,4,0.01)
-  yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), a + crosses, b + observations - crosses)
-  yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), a, b)
-  # axis specification
-  distPlot0 <- ggplot2::ggplot(data= NULL) +
-    ggplot2::xlab("") +
-    ggplot2::ylab("") +
-    ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.2*max(yPost)))
-    #ggplot2::ggtitle("Prior and Posterior distribution") +
-  
-  # fill in the plot
-  distPlot$plotObject <- jaspGraphs::themeJasp(distPlot0, legend.position = "right") +
-    ggplot2::geom_line(ggplot2::aes(x = x, y = yPost, color = "Posterior for Pi")) +
-    ggplot2::geom_line(ggplot2::aes(x = rep(pi, 100), 
-                                    y = seq(0, 1.2*max(yPost), 1.2*max(yPost)/99), 
-                                    color = "pi")) +
-    ggplot2::geom_line(ggplot2::aes(x = x, y = yPrior, color = "Implied Prior for Pi")) +   
-
-    ggplot2::scale_color_manual(name = " ",
-                                values = c("Posterior for Pi" = "black", 
-                                           "pi" = "red", 
-                                           "Implied Prior for Pi" = "blue"))
-  
-  
+  summaryTable$addRows(list(NumCrosses = crosses, NumObservations = observations,
+                            lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
   jaspResults[["summaryTable"]] <- summaryTable
-  jaspResults[["simulPlot"]] <- simulPlot
-  jaspResults[["distPlot"]] <- distPlot
+  
+  
+  ## 1. Simulation Plot 
+  if (plot1){
+    simulPlot <- createJaspPlot(title = "Needle Plot",  width = 400, height = 400)
+    simulPlot$position <- 2
+    simulPlot$dependOn(c("observations", "a", "b", "lengthRatio", "CI", "plot1"))
+    simulPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
+    
+    simulPlot0 <- ggplot2::ggplot(data= NULL) +
+      ggplot2::coord_cartesian(xlim = c(-15, 15), ylim = c(-15, 15)) +
+      ggplot2::xlab("") +
+      ggplot2::ylab("") +
+      ggplot2::geom_segment(ggplot2::aes(x = rep(-13,5), y = c(-10,-5,0,5,10), 
+                                         xend = rep(13,5), yend = c(-10,-5,0,5,10))) +
+      ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye), color = "blue")
+    
+    # fill in the plot
+    if (color){
+      simulPlot$plotObject <- jaspGraphs::themeJasp(simulPlot0) +
+        ggplot2::geom_segment(ggplot2::aes(x = xsCrosses, y = ysCrosses, 
+                                           xend = xeCrosses, yend = yeCrosses), color = "orange") 
+    }else{
+      simulPlot$plotObject <- jaspGraphs::themeJasp(simulPlot0)
+      }
+    jaspResults[["simulPlot"]] <- simulPlot
+  }
+  
+  ## 2. prior and posterior plot for proportion of crosses
+  if (plot2){
+
+    propPlot <- createJaspPlot(title = paste("Prior and Posterior for Proportion of Crosses"),
+                               width = 480, height = 320)
+    propPlot$position <- 3
+    propPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI", "plot2"))
+    propPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
+    
+    # values
+    xValue <- seq(0,1,0.005)
+    propPost <- dbeta(xValue, a + crosses, b + observations - crosses)
+    propPrior <-dbeta(xValue, a, b)
+    dataProp = data.frame(values = c(xValue, xValue),
+                      density = c(propPost, propPrior),
+                      group = c(rep("Posterior",201), rep("Prior",201))
+    )
+    
+    # axis specification
+    propPlot0 <- ggplot2::ggplot(data = dataProp,  ggplot2::aes(x = values, y = density)) +
+      ggplot2::xlab("Proportion of Crosses") +
+      ggplot2::ylab("Density") #+
+      #ggplot2::coord_cartesian(xlim = c(0, 1), ylim = c(0, 1.6*max(propPost)))
+    
+    # fill in the plot
+    propPlot$plotObject <- jaspGraphs::themeJasp(propPlot0) +
+      ggplot2::geom_line(ggplot2::aes(linetype = group), size = 1) +
+      ggplot2::scale_linetype_manual("", values = c("Posterior" = "solid",
+                                                    "Prior" = "dashed")) 
+      
+    if (legend1){
+      propPlot$plotObject <-  propPlot$plotObject + 
+        ggplot2::theme(legend.position = c(.17, .9))
+    }
+    jaspResults[["propPlot"]] <- propPlot
+  }
+  
+
+  ## 3. Distribution Plot
+  if (plot3){
+    distPlot <- createJaspPlot(title = paste("Implied Prior and Posterior for", "\u03c0"),
+                               width = 480, height = 320)
+    distPlot$position <- 4
+    distPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI", "plot3"))
+    distPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
+    
+    # values
+    x <- seq(2,4,0.01)
+    yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), a + crosses, b + observations - crosses)
+    yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), a, b)
+    yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
+    
+    data = data.frame(values = c(x, x, rep(pi, 100)),
+                      density = c(yPost, yPrior, yPi),
+                      group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("\u03c0", 100))
+    )
+    data$group<-factor(data$group, levels=c("Implied Posterior","Implied Prior","\u03c0"))
+    
+    
+    # axis specification
+    distPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
+      ggplot2::ggtitle("") + # for , pi
+      ggplot2::xlab("\u03c0") +
+      ggplot2::ylab("Density") +
+      ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost)))
+  
+    # fill in the plot
+    distPlot$plotObject <- jaspGraphs::themeJasp(distPlot0) +
+      ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
+      ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
+                                                 "Implied Prior" = "black",
+                                                 "\u03c0" = "red")) +
+      ggplot2::scale_linetype_manual("", values = c("Implied Posterior" = "solid",
+                                                    "Implied Prior" = "dashed",
+                                                    "\u03c0" = "solid"))
+    if (legend2){
+      distPlot$plotObject <-  distPlot$plotObject + 
+        ggplot2::theme(legend.position = c(.24, .9))
+    }
+      
+      
+    if (CIArrow){
+      distPlot$plotObject <- distPlot$plotObject +
+        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
+                          label = paste0(CI*100, "% CI: ",
+                                         "[",CI95lower,", ", CI95upper, "]"),
+                          size = 6
+        ) + 
+        ggplot2::annotate("segment", x = CI95lower, xend = CI95upper, 
+                          y = 1.45*max(yPost), yend = 1.45*max(yPost),
+                          arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
+                          size = 1)
+        
+        
+    }
+    jaspResults[["distPlot"]] <- distPlot
+  }
+
+
 
   return()
 }

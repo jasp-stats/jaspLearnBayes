@@ -76,21 +76,23 @@ Description
 
 	GroupTitle
 	{
-		title:	qsTr("Buffon's needle")
+		title:	qsTr("Buffon's Needle")
 		icon:	"learning-stats-Buttons-needle.png"
 	}
 
 	Analysis
 	{
-		title:	qsTr("Manipulation")
-		qml:	"LSBuffonsneedlemanipulation.qml"
-		func:	"LSBuffonsneedlemanipulation"
+		title:	qsTr("Simulating Buffon's Needle")
+		qml:	"LSBuffonsneedlesimulation.qml"
+		func:	"LSBuffonsneedlesimulation"
 	}
 
 	Analysis
 	{
-		title:	qsTr("Simulation")
-		qml:	"LSBuffonsneedlesimulation.qml"
-		func:	"LSBuffonsneedlesimulation"
+		title:	qsTr("Manipulating Buffon's Needle")
+		qml:	"LSBuffonsneedlemanipulation.qml"
+		func:	"LSBuffonsneedlemanipulation"
 	}
+
+
 }

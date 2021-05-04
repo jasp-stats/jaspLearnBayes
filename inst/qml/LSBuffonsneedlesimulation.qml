@@ -25,33 +25,33 @@ Form
 {
 	columns: 1
 
-
-
-	Slider
-	{
-  	name: "length"
-  	label: qsTr("Proportion of needle length to inter-line distance in %")
-  	value: 80
-	vertical: false
+	IntegerField 
+	{ 
+	name: "length"; 
+	label: qsTr("Proportion of needle length to interline distance:")
+	defaultValue: 80
+	afterLabel: qsTr("%")
+	min: 1
 	max: 100
-	decimals: 0
 	}
 
 
 	IntegerField   
 	{ 
 		name:			"n"
-		label:			qsTr("Observations:")
+		label:			qsTr("Number of throws:")
 		fieldWidth:		50
 		defaultValue:	100
 		min: 0  
 	}
 
-
+	Group
+	{
+  	title: qsTr("Prior for the proportion of crosses")
 	IntegerField   
 	{ 
 		name:			"a"
-		label:			qsTr("Prior parameter a: ")
+		label:			qsTr("Beta prior: parameter a")
 		fieldWidth:		50
 		defaultValue:	1
 		min: 0  
@@ -60,11 +60,89 @@ Form
 	IntegerField   
 	{ 
 		name:			"b"
-		label:			qsTr("Prior parameter b:")
+		label:			qsTr("Beta prior: parameter b")
 		fieldWidth:		50
 		defaultValue:	1
 		min: 0  
 	}
+
+	}
+
+	CIField 
+	{ 
+	name: "CI"; 
+	label: qsTr("Credible interval on " + "\u03c0")
+	defaultValue: 95 
+	}
+
+	Group
+	{
+  	title: qsTr("Plot")
+
+	CheckBox 
+	{ 
+	name: "plot1";
+	label: qsTr("Needle plot"); 
+	checked: true 
+
+
+
+	
+	CheckBox 
+	{ 
+	name: "color";
+	label: qsTr("Color crossing needles"); 
+	checked: false 
+	}
+	}
+
+
+
+	
+
+	CheckBox 
+	{ 
+	name: "plot2";
+	label: qsTr("Prior and posterior for the proportion of crosses");
+
+	CheckBox 
+	{ 
+	name: "legend1"; 
+	label: qsTr("Legend")
+	checked: false
+	}
+ 
+	}
+
+	CheckBox 
+	{ 
+	name: "plot3";
+	label: qsTr("Implied prior and posterior for " + "\u03c0"); 
+	checked: true
+ 
+	CheckBox 
+	{ 
+	name: "CIArrow"; 
+	label: qsTr("Credible interval")
+	checked: false
+	}
+
+	CheckBox 
+	{ 
+	name: "legend2"; 
+	label: qsTr("Legend")
+	checked: false
+	}
+	
+
+	}
+
+
+	
+	}
+
+
+
 
 }
 
