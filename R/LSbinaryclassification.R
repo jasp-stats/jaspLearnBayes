@@ -1510,7 +1510,7 @@ GeomPNG <- ggplot2::ggproto("GeomPNG", ggplot2::Geom,
                             required_aes = c("x", "y", "w", "h", "img"),
                             default_aes = ggplot2::aes(col = "grey"),
                             draw_group = function(data, panel_params, coord) {
-                              img <- png::readPNG(data$img)
+                              img <- png::readPNG(as.character(data$img))
                               fillColor <- grDevices::col2rgb(data$col[1])
                               img[,,1] <- fillColor["red",  ]*img[,,4]/255
                               img[,,2] <- fillColor["green",]*img[,,4]/255
