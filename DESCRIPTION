@@ -18,7 +18,13 @@ Imports:
   MASS,
   MCMCpack,
   MGLM,
-  scales
+  scales,
+  ggalluvial,
+  ragg,
+  ggdist,
+  grid,
+  grDevices,
+  png
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs
