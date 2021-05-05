@@ -41,13 +41,14 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 
   
   if(is.null(jaspResults[["simulateResults"]])){ #test whether the state is empty
-  
+
     # if empty, create a new state
     simulateResults <- createJaspState()
-    simulateResults$dependOn(c("observations", "lengthRatio")) #, "a", "b", "lengthRatio", "CI"))
-    results <- simulate_throws(observations, lengthRatio)    
-    simulateResults$object <- results
+    simulateResults$dependOn(c("n", "length")) #, "a", "b", "lengthRatio", "CI"))
     jaspResults[["simulateResults"]] <- simulateResults
+    
+    jaspResults[["simulateResults"]]$object <- simulate_throws(observations, lengthRatio)  
+
     }
   # if not, retrieve the values
   crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
@@ -59,7 +60,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   xsCrosses <- jaspResults[["simulateResults"]][["object"]][["xsCrosses"]] 
   xeCrosses <- jaspResults[["simulateResults"]][["object"]][["xeCrosses"]] 
   ysCrosses <- jaspResults[["simulateResults"]][["object"]][["ysCrosses"]] 
-  yeCrosses <- jaspResults[["simulateResults"]][["object"]][["yeCrosses"]]   
+  yeCrosses <- jaspResults[["simulateResults"]][["object"]][["yeCrosses"]]  
+  
+ 
 
   
 
@@ -67,7 +70,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
   summaryTable$position <- 1
   
-  summaryTable$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI"))
+  summaryTable$dependOn(c("n", "length", "a", "b", "CI"))
   summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "string")
@@ -98,7 +101,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   if (plot1){
     simulPlot <- createJaspPlot(title = "Needle Plot",  width = 400, height = 400)
     simulPlot$position <- 2
-    simulPlot$dependOn(c("observations", "a", "b", "lengthRatio", "CI", "plot1"))
+    simulPlot$dependOn(c("n", "a", "b", "length", "CI", "plot1"))
     simulPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     simulPlot0 <- ggplot2::ggplot(data= NULL) +
@@ -126,7 +129,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
     propPlot <- createJaspPlot(title = paste("Prior and Posterior for Proportion of Crosses"),
                                width = 480, height = 320)
     propPlot$position <- 3
-    propPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI", "plot2"))
+    propPlot$dependOn(c("n", "a", "b", "length", "CI", "plot2"))
     propPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     # values
@@ -163,7 +166,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
     distPlot <- createJaspPlot(title = paste("Implied Prior and Posterior for", "\u03c0"),
                                width = 480, height = 320)
     distPlot$position <- 4
-    distPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI", "plot3"))
+    distPlot$dependOn(c("n", "a", "b", "length", "CI", "plot3"))
     distPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     # values

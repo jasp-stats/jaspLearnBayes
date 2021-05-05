@@ -45,7 +45,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
   summaryTable$position <- 1
-  summaryTable$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI"))
+  summaryTable$dependOn(c("k", "n", "a", "b", "length", "CI"))
   summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "string")
@@ -75,7 +75,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     propPlot <- createJaspPlot(title = paste("Prior and Posterior for Proportion of Crosses"),
                                width = 480, height = 320)
     propPlot$position <- 2
-    propPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI", "plot2"))
+    propPlot$dependOn(c("k", "n", "a", "b", "length", "CI", "plot2"))
     propPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     # values
@@ -110,7 +110,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   if (plot3){
     distPlot <- createJaspPlot(title = paste("Implied Prior and Posterior for", "\u03c0"),  width = 480, height = 320)
     distPlot$position <- 3
-    distPlot$dependOn(c("crosses", "observations", "a", "b", "lengthRatio", "CI", "plot3", "CIArrow"))
+    distPlot$dependOn(c("k", "n", "a", "b", "length", "CI", "plot3", "CIArrow"))
     distPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     # values

@@ -4,8 +4,8 @@
 
 #input$obs: number of  observations
 #input$k: number of crosses
-observations = 10
-lengthRatio = 80
+#observations = 10
+#lengthRatio = 80
 simulate_throws <- function(observations, lengthRatio){
   
   d <- 5 # distance of two adjacent lines
