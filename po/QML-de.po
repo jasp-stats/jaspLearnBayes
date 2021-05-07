@@ -13,10 +13,6 @@ msgid "Learn Bayes"
 msgstr "Bayes lernen"
 
 msgctxt "Description|"
-msgid "Learning Bayesian Statistics with JASP"
-msgstr "Lerne Bayessche Statistik mit JASP"
-
-msgctxt "Description|"
 msgid "Counts"
 msgstr "Häufigkeiten"
 
@@ -783,3 +779,231 @@ msgstr "log(BF₁₀)"
 msgctxt "LStestingsequential|"
 msgid "Updating table"
 msgstr "Aktualisierungstabelle"
+
+msgctxt "Description|"
+msgid "Learn Bayesian statistics with simple examples and supporting text"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Binary Classification"
+msgstr ""
+
+#, fuzzy
+msgctxt "LSbinaryclassification|"
+msgid "Input type"
+msgstr "Eingabetyp"
+
+msgctxt "LSbinaryclassification|"
+msgid "Point estimates"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Uncertain estimates"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Load data and specify threshold"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Estimates"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Prevalence"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Sensitivity"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Specificity"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Marker"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Positive condition (binary)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Test threshold"
+msgstr ""
+
+#, fuzzy
+msgctxt "LSbinaryclassification|"
+msgid "Data"
+msgstr "Daten"
+
+msgctxt "LSbinaryclassification|"
+msgid "True positive"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "False positive"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "False negative"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "True negative"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Priors"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Prevalence ~ Beta(α = "
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid ")"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Sensitivity ~ Beta(α = "
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Specificity ~ Beta(α = "
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Tables"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Statistics"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Confusion matrix"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Text"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Number"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Both"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Additional info"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Priors and posteriors"
+msgstr ""
+
+#, fuzzy
+msgctxt "LSbinaryclassification|"
+msgid "Plots"
+msgstr "Abbildungen"
+
+msgctxt "LSbinaryclassification|"
+msgid "Probability positive"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Show entire distribution"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Icon plot"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "ROC"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Add realizations from the posterior"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Test characteristics by threshold"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "PPV and NPV by prevalence"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Alluvial plot"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Signal detection"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "True positive rate"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "False positive rate"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "True negative rate"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "False negative rate"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Positive predictive value"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Negative predictive value"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "False discovery rate"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "False omission rate"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Accuracy"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Plot type"
+msgstr ""
+
+#, fuzzy
+msgctxt "LSbinaryclassification|"
+msgid "Interval"
+msgstr "Intervall"
+
+msgctxt "LSbinaryclassification|"
+msgid "Half-eye"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Options"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Credible intervals"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Number of posterior samples"
+msgstr ""
