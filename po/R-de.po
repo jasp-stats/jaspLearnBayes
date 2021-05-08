@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-05-07 13:16\n"
-"PO-Revision-Date: 2021-04-10 17:26+0000\n"
+"PO-Revision-Date: 2021-05-09 10:32+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -82,283 +82,357 @@ msgid ""
 "                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem"
 "\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
+"Diese Analyse demonstriert die <b>binäre Klassifikation</b>, ein gängiges "
+"statistisches Verfahren, bei dem Fälle anhand einer Klassifikationsregel in "
+"zwei Gruppen eingeteilt werden.\n"
+"\n"
+"                   Die binäre Klassifizierung ist ein Verfahren, bei dem "
+"Daten über den Fall dichotomisiert werden, um zu einer binären Entscheidung "
+"zu gelangen (z. B. ja/nein, wahr/falsch).\n"
+"\n"
+"                   Gängige Anwendungen der binären Klassifikation sind:\n"
+"                   <ul>\n"
+"                     <li><b>Medizinische Tests und Diagnosen</b>, bei denen "
+"die Klassifizierung feststellt, ob ein Patient an einer bestimmten Krankheit "
+"leidet oder nicht.</li>\n"
+"                     <li><b>Spam-Erkennung</b>, bei der die Klassifizierung "
+"feststellt, ob eine Nachricht (z. B. eine E-Mail) Spam ist oder nicht.</li>\n"
+"                     <li><b>Qualitätskontrolle</b>, bei der die "
+"Klassifizierung feststellt, ob ein Industriestandard eingehalten wurde oder "
+"nicht.</li>\n"
+"                   </ul>\n"
+"\n"
+"                   Da die binäre Klassifikation häufig in medizinischen "
+"Tests verwendet wird, sind die Begriffe in binären Klassifikationsproblemen "
+"dem medizinischen Wörterbuch entlehnt (z. B. Prävalenz, Zustand, Marker).\n"
+"\n"
+"                   In der Praxis gibt es eine wichtige Unterscheidung "
+"zwischen dem <i>wahren</i> Zustand des Falls und der <i>zugewiesenen "
+"Einordnung</i>, die durch die Klassifikationsregel gegeben ist. In JASP wird "
+"der wahre Zustand als <b>Zustand</b> (positiv/negativ) und die zugewiesene "
+"Einordnung als <b>Test</b> (positiv/negativ) bezeichnet. In vielen "
+"Anwendungen sind die Zustände oder der Test möglicherweise nicht "
+"symmetrisch, daher sind neben einem allgemeinen Genauigkeitsmaß auch "
+"verschiedene Fehlerarten von Interesse. Diese Fehlertypen unterscheiden z. "
+"B., ob ein Patient an einer Krankheit leidet, der Test aber negativ "
+"ausgefallen ist (falsch negativ), oder ob ein Patient nicht an einer "
+"Krankheit leidet, der Test aber positiv ausgefallen ist (falsch positiv).\n"
+"\n"
+"                   Die Eigenschaften eines Tests werden üblicherweise durch "
+"seine <b>Sensitivität</b> und <b>Spezifität</b> beschrieben. Die "
+"Sensitivität ist die Wahrscheinlichkeit, positiv zu testen, wenn der Zustand "
+"positiv ist. Spezifität ist die Wahrscheinlichkeit, negativ zu testen, wenn "
+"der Zustand negativ ist. Die Eigenschaft des Zustands ist die <b>Prävalenz</"
+"b>, d. h. der Anteil der Fälle, die einen positiven Zustand in der "
+"Grundgesamtheit haben.\n"
+"                   Asymmetrische Eigenschaften des Tests oder der Prävalenz "
+"können zu Situationen führen, die dem ungeschulten Auge als paradox "
+"erscheinen können. Zum Beispiel ist es in bestimmten Situationen "
+"wahrscheinlicher, dass ein Patient eine bestimmte Krankheit nicht hat, als "
+"dass er sie hat, selbst wenn er positiv auf diese Krankheit getestet wurde.\n"
+"\n"
+"                   Formal erhält man die Wahrscheinlichkeit, dass ein Fall "
+"einen positiven Zustand hat, nachdem der Test positiv ausgefallen ist (d. h. "
+"der positive prädiktive Wert), durch Anwendung des <b>Satzes von Bayes</b>:\n"
+"\n"
+"                   <img src = \"file://%s\", width=\"500\">\n"
+"\n"
+"                   <h5>References</h5>\n"
+"                   Pepe, M. S. (2003). <i>The statistical evaluation of "
+"medical tests for classification and prediction</i>. Oxford University Press."
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>"
+"\n"
+"\n"
+"                   <a href=\"https://de.wikipedia.org/wiki/"
+"Beurteilung_eines_bin%C3%A4ren_Klassifikators\">https://de.wikipedia.org/"
+"wiki/Beurteilung_eines_bin%C3%A4ren_Klassifikators</a>\n"
+"\n"
+"                   <a href=\"https://de.wikipedia.org/wiki/Satz_von_Bayes\""
+">https://de.wikipedia.org/wiki/Satz_von_Bayes</a>"
 
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "Willkommen zur binären Klassifizierung mit JASP!"
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "Die Variable 'Positiver Zustand (binär)' muss zwei Stufen haben!"
 
 msgid ""
 "Mean of marker in positive condition needs to be larger than the mean of "
 "marker in negative condition."
 msgstr ""
+"Der Mittelwert des Markers im positiven Zustand muss größer sein als der "
+"Mittelwert des Markers im negativen Zustand."
 
 msgid "Drawing samples"
-msgstr ""
+msgstr "Stichprobe ziehen"
 
 msgid "Tables"
-msgstr ""
+msgstr "Tabellen"
 
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiken"
 
 msgid "Estimate"
-msgstr ""
+msgstr "Schätzung"
 
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "%s%% Glaubwürdigkeitsintervall"
 
 msgid "Lower"
-msgstr ""
+msgstr "Untere"
 
 msgid "Upper"
-msgstr ""
+msgstr "Obere"
 
 msgid "Notation"
-msgstr ""
+msgstr "Notation"
 
 msgid "Interpretation"
-msgstr ""
+msgstr "Interpretation"
 
 msgid "Confusion Matrix"
-msgstr ""
+msgstr "Konfusionsmatrix"
 
-#, fuzzy
 msgid "%s%% CI"
-msgstr "%i %% KI"
+msgstr "%s%% KI"
 
 msgid "Positive test"
-msgstr ""
+msgstr "Positiver Test"
 
 msgid "Outcome"
-msgstr ""
+msgstr "Ergebnis"
 
-#, fuzzy
 msgid "Lower %s"
-msgstr "Prior %s"
+msgstr "Untere %s"
 
 msgid "Upper %s"
-msgstr ""
+msgstr "Obere %s"
 
 msgid "Negative test"
-msgstr ""
+msgstr "Negativer Test"
 
 msgid "Positive/Total"
-msgstr ""
+msgstr "Positiv/Gesamt"
 
 msgid "Negative/Total"
-msgstr ""
+msgstr "Negativ/Gesamt"
 
 msgid "Total"
 msgstr "Gesamt"
 
 msgid "Positive condition"
-msgstr ""
+msgstr "Positiver Zustand"
 
 msgid "Negative condition"
-msgstr ""
+msgstr "Negativer Zustand"
 
-#, fuzzy
 msgid "True/Total"
-msgstr "Gesamt"
+msgstr "Richtig/Gesamt"
 
 msgid "Prevalence"
-msgstr ""
+msgstr "Prävalenz"
 
 msgid "Rareness"
-msgstr ""
+msgstr "Seltenheit"
 
-#, fuzzy
 msgid "Priors and Posteriors"
-msgstr "Prior- und Posterior-Abbildungen"
+msgstr "Priors und Posteriors"
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parameter"
 
-#, fuzzy
 msgid "Prior"
-msgstr "Prior %s"
+msgstr "Prior"
 
-#, fuzzy
 msgid "Posterior"
-msgstr "Posterior %s"
+msgstr "Posterior"
 
-#, fuzzy
 msgid "Sensitivity"
-msgstr "Dichte"
+msgstr "Sensitivität"
 
 msgid "Specificity"
-msgstr ""
+msgstr "Spezifizität"
 
-#, fuzzy
 msgid "beta(%s,%s)"
-msgstr "Beta (%s, %s)"
+msgstr "Beta(%s,%s)"
 
 msgid "Plots"
-msgstr ""
+msgstr "Abbildungen"
 
-#, fuzzy
 msgid "Probability Positive"
-msgstr "Wahrscheinlichkeit"
+msgstr "Wahrscheinlichkeit Positiv"
 
 msgid "Not tested"
-msgstr ""
+msgstr "Nicht getestet"
 
 msgid "Tested"
-msgstr ""
+msgstr "Getestet"
 
 msgid "Negative"
-msgstr ""
+msgstr "Negativ"
 
 msgid "Positive"
-msgstr ""
+msgstr "Positiv"
 
 msgid "Test Result"
-msgstr ""
+msgstr "Testergebnis"
 
-#, fuzzy
 msgid "P(Condition = positive)"
-msgstr "Bedingte Wahrscheinlichkeit"
+msgstr "P(Zustand = positiv)"
 
 msgid "Icon Plot"
-msgstr ""
+msgstr "Icon-Plot"
 
 msgid "True positive"
-msgstr ""
+msgstr "Richtig positiv"
 
 msgid "False positive"
-msgstr ""
+msgstr "Falsch positiv"
 
 msgid "False negative"
-msgstr ""
+msgstr "Falsch negativ"
 
 msgid "True negative"
-msgstr ""
+msgstr "Richtig negativ"
 
 msgid "Receiving Operating Characteristic Curve"
-msgstr ""
+msgstr "Operationscharakteristiks-Kurve"
 
 msgid "False Positive Rate (1-Specificity)"
-msgstr ""
+msgstr "Falsch-Positiv-Rate (1-Spezifität)"
 
 msgid "True Positive Rate (Sensitivity)"
-msgstr ""
+msgstr "Richtig-Positiv-Rate (Sensitivität)"
 
 msgid "Test Characteristics"
-msgstr ""
+msgstr "Testcharakteristiken"
 
 msgid "Test Threshold"
-msgstr ""
+msgstr "Test-Schwellenwert"
 
 msgid "Characteristic"
-msgstr ""
+msgstr "Charakteristik"
 
 msgid "PPV and NPV by Prevalence"
-msgstr ""
+msgstr "PPW und NPW nach Prävalenz"
 
-#, fuzzy
 msgid "Predictive Value"
-msgstr "Mittelwert Vorhersage"
+msgstr "Prädiktiver Wert"
 
 msgid "Alluvial Plot"
-msgstr ""
+msgstr "Flussdiagramm"
 
-#, fuzzy
 msgid "Condition"
-msgstr "Vorhersage"
+msgstr "Zustand"
 
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
-#, fuzzy
 msgid "Proportion of Population"
-msgstr "Anteil der Erfolge"
+msgstr "Anteil der Grundgesamtheit"
 
 msgid "Signal Detection"
-msgstr ""
+msgstr "Signal-Erkennung"
 
 msgid "Marker"
-msgstr ""
+msgstr "Marker"
 
 msgid "Density"
 msgstr "Dichte"
 
-#, fuzzy
 msgid "Count"
-msgstr "Anzahlen"
+msgstr "Anzahl"
 
 msgid "Estimates"
-msgstr ""
+msgstr "Schätzungen"
 
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Positiv prädiktiver Wert"
 
 msgid "Negative predictive value"
-msgstr ""
+msgstr "Negativ prädiktiver Wert"
 
 msgid "False discovery rate"
-msgstr ""
+msgstr "Falscherkennungsrate"
 
 msgid "False omission rate"
-msgstr ""
+msgstr "Falsche Auslassungsrate"
 
 msgid "False positive rate"
-msgstr ""
+msgstr "Falsch-positiv-Rate"
 
 msgid "False negative rate"
-msgstr ""
+msgstr "Falsch-negativ-Rate"
 
 msgid "Accuracy"
-msgstr ""
+msgstr "Genauigkeit"
 
 msgid "Proportion of a population affected by the condition."
-msgstr ""
+msgstr "Anteil einer Grundgesamtheit, die von dem Zustand betroffen ist."
 
 msgid ""
 "(True positive rate) Proportion of those who are affected by the condition "
 "and are correctly tested positive."
 msgstr ""
+"(Richtig-positiv-Rate) Anteil derjenigen, die von dem Zustand betroffen sind "
+"und korrekt positiv getestet werden."
 
 msgid ""
 "(True negative rate) Proportion of those who are not affected by the "
 "condition and are correctly tested negative."
 msgstr ""
+"(Richtig-negativ-Rate) Anteil derer, die nicht von dem Zustand betroffen "
+"sind und korrekt negativ getestet werden."
 
 msgid ""
 "Proportion of a population affected by a condition and correctly tested "
 "positive."
 msgstr ""
+"Anteil einer Grundgesamtheit, der von einem Zustand betroffen ist und "
+"korrekt positiv getestet wurde."
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
 "tested negative."
 msgstr ""
+"Anteil einer Grundgesamtheit, der nicht von einem Zustand betroffen ist und "
+"fälschlicherweise negativ getestet wurde."
 
 msgid ""
 "Proportion of a population affected by a condition and incorrectly tested "
 "negative."
 msgstr ""
+"Anteil einer Grundgesamtheit, der von einem Zustand betroffen ist und "
+"fälschlicherweise negativ getestet wurde."
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
 "negative."
 msgstr ""
+"Anteil einer Grundgesamtheit, der nicht von einem Zustand betroffen ist und "
+"korrekt negativ getestet wurde."
 
 msgid ""
 "Proportion of those who tested positive and are affected by the condition."
 msgstr ""
+"Anteil derjenigen, die positiv getestet wurden und von dem Zustand betroffen "
+"sind."
 
 msgid ""
 "Proportion of those who tested negative and are not affected by the "
 "condition."
 msgstr ""
+"Anteil derjenigen, die negativ getestet wurden und nicht von dem Zustand "
+"betroffen sind."
 
 msgid "Proportion of false positives in the pool of those that test positive."
-msgstr ""
+msgstr "Anteil der Falsch-Positiven im Pool derer, die positiv testen."
 
 msgid "Proportion of false negatives in the pool of those that test negative."
-msgstr ""
+msgstr "Anteil der Falsch-Negativen im Pool derer, die negativ testen."
 
 msgid "Complement proportion to specificity."
 msgstr ""
@@ -368,53 +442,57 @@ msgstr ""
 
 msgid "Proportion of the population that is true positive or true negative."
 msgstr ""
+"Anteil der Grundgesamtheit, der richtig positiv oder richtig negativ ist."
 
 msgid "P(Test = positive | Condition = positive)"
-msgstr ""
+msgstr "P(Test = positiv | Zustand = positiv)"
 
 msgid "P(Test = negative | Condition = negative)"
-msgstr ""
+msgstr "P(Test = negativ | Zustand = negativ)"
 
 msgid "P(Condition = positive %s Test = positive)"
-msgstr ""
+msgstr "P(Zustand = positiv %s Test = positiv)"
 
 msgid "P(Condition = negative %s Test = positive)"
-msgstr ""
+msgstr "P(Zustand = negativ %s Test = positiv)"
 
 msgid "P(Condition = negative %s Test = negative)"
-msgstr ""
+msgstr "P(Zustand = negativ %s Test = negativ)"
 
 msgid "P(Condition = positive %s Test = negative)"
-msgstr ""
+msgstr "P(Zustand = positiv %s Test = negativ)"
 
 msgid "P(Condition = positive | Test = positive)"
-msgstr ""
+msgstr "P(Zustand = positiv | Test = positiv)"
 
 msgid "P(Condition = negative | Test = negative)"
-msgstr ""
+msgstr "P(Zustand = negativ | Test = negativ)"
 
 msgid "P(Condition = negative | Test = positive)"
-msgstr ""
+msgstr "P(Zustand = negativ | Test = positiv)"
 
 msgid "P(Condition = positive | Test = negative)"
-msgstr ""
+msgstr "P(Zustand = positiv | Test = negativ)"
 
 msgid "P(Test = positive | Condition = negative)"
-msgstr ""
+msgstr "P(Test = positiv | Zustand = negativ)"
 
 msgid "P(Test = negative | Condition = positive)"
-msgstr ""
+msgstr "P(Test = negativ | Zustand = positiv)"
 
 msgid ""
 "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s "
 "Test = negative)"
 msgstr ""
+"P(Zustand = positiv %1$s Test = positiv %2$s Zustand = negativ %1$s Test = "
+"negativ)"
 
 msgid "Central credible intervals are based on %i samples."
-msgstr ""
+msgstr "Zentrale Glaubwürdigkeitsintervalle basieren auf %i-Stichproben."
 
 msgid "Parameter estimates are posterior means based on %i samples."
 msgstr ""
+"Parameterschätzungen sind Posterior-Mittelwerte auf Basis von %i Stichproben."
 
 msgid "Data Summary"
 msgstr "Datenzusammenfassung"
@@ -423,7 +501,7 @@ msgid "Counts"
 msgstr "Anzahlen"
 
 msgid "Proportion"
-msgstr "Verhältnis"
+msgstr "Anteil"
 
 msgid "Successes"
 msgstr "Erfolge"
