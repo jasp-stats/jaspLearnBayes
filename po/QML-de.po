@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-05-09 11:32+0000\n"
+"Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -783,112 +789,111 @@ msgstr "Aktualisierungstabelle"
 msgctxt "Description|"
 msgid "Learn Bayesian statistics with simple examples and supporting text"
 msgstr ""
+"Lerne Bayessche Statistik mit einfachen Beispielen und unterstützendem Text"
 
 msgctxt "Description|"
 msgid "Binary Classification"
-msgstr ""
+msgstr "Binäre Klassifikation"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Input type"
 msgstr "Eingabetyp"
 
 msgctxt "LSbinaryclassification|"
 msgid "Point estimates"
-msgstr ""
+msgstr "Punktschätzungen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Uncertain estimates"
-msgstr ""
+msgstr "Unsichere Schätzungen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Load data and specify threshold"
-msgstr ""
+msgstr "Daten laden und Schwellenwert festlegen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Estimates"
-msgstr ""
+msgstr "Schätzungen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Prevalence"
-msgstr ""
+msgstr "Prävalenz"
 
 msgctxt "LSbinaryclassification|"
 msgid "Sensitivity"
-msgstr ""
+msgstr "Sensitivität"
 
 msgctxt "LSbinaryclassification|"
 msgid "Specificity"
-msgstr ""
+msgstr "Spezifizität"
 
 msgctxt "LSbinaryclassification|"
 msgid "Marker"
-msgstr ""
+msgstr "Marker"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive condition (binary)"
-msgstr ""
+msgstr "Positiver Zustand (binär)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test threshold"
-msgstr ""
+msgstr "Test-Schwellenwert"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Data"
 msgstr "Daten"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive"
-msgstr ""
+msgstr "Richtig positiv"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive"
-msgstr ""
+msgstr "Falsch positiv"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative"
-msgstr ""
+msgstr "Falsch negativ"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative"
-msgstr ""
+msgstr "Richtig negativ"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
-msgstr ""
+msgstr "Priors"
 
 msgctxt "LSbinaryclassification|"
 msgid "Prevalence ~ Beta(α = "
-msgstr ""
+msgstr "Prävalenz ~ Beta(α = "
 
 msgctxt "LSbinaryclassification|"
 msgid ")"
-msgstr ""
+msgstr ")"
 
 msgctxt "LSbinaryclassification|"
 msgid "Sensitivity ~ Beta(α = "
-msgstr ""
+msgstr "Sensitivität ~ Beta(α = "
 
 msgctxt "LSbinaryclassification|"
 msgid "Specificity ~ Beta(α = "
-msgstr ""
+msgstr "Spezifität ~ Beta(α = "
 
 msgctxt "LSbinaryclassification|"
 msgid "Tables"
-msgstr ""
+msgstr "Tabellen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiken"
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "Konfusionsmatrix"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number"
@@ -896,28 +901,27 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 msgctxt "LSbinaryclassification|"
 msgid "Additional info"
-msgstr ""
+msgstr "Weitere Infos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
-msgstr ""
+msgstr "Priors und Posteriors"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Plots"
 msgstr "Abbildungen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
-msgstr ""
+msgstr "Wahrscheinlichkeit Positiv"
 
 msgctxt "LSbinaryclassification|"
 msgid "Show entire distribution"
-msgstr ""
+msgstr "Gesamte Verteilung anzeigen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Icon plot"
@@ -929,7 +933,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
-msgstr ""
+msgstr "Realisierungen vom Posterior hinzufügen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
@@ -937,57 +941,56 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
-msgstr ""
+msgstr "PPW und NPW nach Prävalenz"
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
-msgstr ""
+msgstr "Flussdiagramm"
 
 msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
-msgstr ""
+msgstr "Signal-Erkennung"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr ""
+msgstr "Richtig-positiv-Rate"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
-msgstr ""
+msgstr "Falsch-positiv-Rate"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr ""
+msgstr "Richtig-negativ-Rate"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
-msgstr ""
+msgstr "Falsch-negativ-Rate"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Positiv prädiktiver Wert"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative predictive value"
-msgstr ""
+msgstr "Negativ prädiktiver Wert"
 
 msgctxt "LSbinaryclassification|"
 msgid "False discovery rate"
-msgstr ""
+msgstr "Falscherkennungsrate"
 
 msgctxt "LSbinaryclassification|"
 msgid "False omission rate"
-msgstr ""
+msgstr "Falsche Auslassungsrate"
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
-msgstr ""
+msgstr "Genauigkeit"
 
 msgctxt "LSbinaryclassification|"
 msgid "Plot type"
-msgstr ""
+msgstr "Abbildungstyp"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Interval"
 msgstr "Intervall"
@@ -998,12 +1001,12 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Options"
-msgstr ""
+msgstr "Optionen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Glaubwürdigkeitsintervalle"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
-msgstr ""
+msgstr "Umfang der Posterior-Stichprobe"
