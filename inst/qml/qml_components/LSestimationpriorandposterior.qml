@@ -24,94 +24,122 @@ import JASP 1.0
 
 Section
 {
-	expanded: false
-	title: qsTr("Prior and Posterior Distributions")
-	columns: 2
+	expanded:	false
+	title:		qsTr("Prior and Posterior Distributions")
+	columns:	2
 
-	property alias plotsPosteriorIndividualProportion: plotsPosteriorIndividualProportion.label
+	property string analysisType:							"binomial"
+	property alias	plotsPosteriorIndividualProportion:		plotsPosteriorIndividualProportion.label
 
 	DropDown
 	{
 		Layout.columnSpan:	2
-		name:		"pointEstimate"
-		label:		qsTr("Point estimate")
-		values:		["mean", "median", "mode"]
+		name:				"pointEstimate"
+		label:				qsTr("Point estimate")
+		values:				["mean", "median", "mode"]
 	}
 
 
 	CheckBox
 	{
-		name: "plotsPrior"; label: qsTr("Prior distribution"); checked: false	;
+		name:		"plotsPrior"
+		label:		qsTr("Prior distribution")
+		checked:	false
+
 		RadioButtonGroup
 		{
-			name: "plotsPriorType"
-			RadioButton { value: "overlying"; 	label: qsTr("All"); checked: true}
-			RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
-			RadioButton {
-				value: "individual"
-				label: qsTr("Individual")
+			name:	"plotsPriorType"
+
+			RadioButton
+			{
+				value:		"overlying"
+				label:		qsTr("All")
+				checked:	true
+			}
+			
+			RadioButton
+			{
+				value:		"stacked"
+				label:		qsTr("Stacked")
+			}
+
+			RadioButton 
+			{
+				value:		"individual"
+				label:		qsTr("Individual")
 
 				CheckBox
 				{
-					label:	qsTr("Point estimate")
-					name: "plotsPriorIndividualEstimate"
-					childrenOnSameRow: true
+					label:				qsTr("Point estimate")
+					name:				"plotsPriorIndividualEstimate"
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPriorIndividualEstimateType"
-						label: ""
-						values: ["mean", "median", "mode"]
+						name:		"plotsPriorIndividualEstimateType"
+						label:		""
+						values:		["mean", "median", "mode"]
 					}
 				}
 
 				CheckBox
 				{
-					name: "plotsPriorIndividualCI"
-					label: qsTr("CI")
-					id: plotsPriorIndividualCI
-					childrenOnSameRow: true
+					name:				"plotsPriorIndividualCI"
+					label:				qsTr("CI")
+					id: 				plotsPriorIndividualCI
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPriorIndividualType"
-						label: ""
-						values: ["central", "HPD", "custom"]
-						id: plotsPriorIndividualType
+						name:		"plotsPriorIndividualType"
+						label:		""
+						values:		["central", "HPD", "custom"]
+						id:			plotsPriorIndividualType
 					}
 				}
 
 				Group
 				{
 					columns: 2
-					CIField{
-						visible: plotsPriorIndividualType.currentText == "central" |
-									plotsPriorIndividualType.currentText == "HPD"
-						enabled: plotsPriorIndividualCI.checked
-						name: "plotsPriorCoverage"
-						label: qsTr("Mass")
-						fieldWidth: 50
-						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+					CIField
+					{
+						visible:		plotsPriorIndividualType.currentText == "central" | plotsPriorIndividualType.currentText == "HPD"
+						enabled:		plotsPriorIndividualCI.checked
+						name:			"plotsPriorCoverage"
+						label:			qsTr("Mass")
+						fieldWidth:		50
+						defaultValue:	95
+						min:			0
+						max:			100
+						inclusive:		JASP.MaxOnly
 					}
 
-					DoubleField{
-						visible: plotsPriorIndividualType.currentText == "custom"
-						enabled: plotsPriorIndividualCI.checked
-						name: "plotsPriorLower"
-						label: qsTr("Lower")
-						id: plotsPriorLower
-						fieldWidth: 50
-						defaultValue: 0.25; min: 0; max: plotsPriorUpper.value; inclusive: JASP.MinMax
+					DoubleField
+					{
+						visible:		plotsPriorIndividualType.currentText == "custom"
+						enabled:		plotsPriorIndividualCI.checked
+						name:			"plotsPriorLower"
+						label:			qsTr("Lower")
+						id:				plotsPriorLower
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
+						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						max:			plotsPriorUpper.value
+						inclusive:		JASP.MinMax
 					}
 
-					DoubleField{
-						visible: plotsPriorIndividualType.currentText == "custom"
-						enabled: plotsPriorIndividualCI.checked
-						name: "plotsPriorUpper"
-						label: qsTr("Upper")
-						id: plotsPriorUpper
-						fieldWidth: 50
-						defaultValue: 0.75; min: plotsPriorLower.value; max: 1; inclusive: JASP.MinMax
+					DoubleField
+					{
+						visible:		plotsPriorIndividualType.currentText == "custom"
+						enabled:		plotsPriorIndividualCI.checked
+						name:			"plotsPriorUpper"
+						label:			qsTr("Upper")
+						id:				plotsPriorUpper
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						min:			plotsPriorLower.value
+						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						inclusive:		JASP.MinMax
 					}
 				}
 			}
@@ -120,86 +148,117 @@ Section
 
 	CheckBox
 	{
-		name: "plotsPosterior"; label: qsTr("Posterior distribution"); checked: false	;
+		name:		"plotsPosterior"
+		label:		qsTr("Posterior distribution")
+		checked:	false
+
 		RadioButtonGroup
 		{
-			name: "plotsPosteriorType"
-			RadioButton { value: "overlying"; 	label: qsTr("All"); checked: true}
-			RadioButton { value: "stacked"; 	label: qsTr("Stacked")	}
-			RadioButton {
-				value: "individual"
-				label: qsTr("Individual")
+			name: 	"plotsPosteriorType"
+
+			RadioButton
+			{
+				value:		"overlying"
+				label:		qsTr("All")
+				checked:	true
+			}
+
+			RadioButton
+			{
+				value:		"stacked"
+				label:		qsTr("Stacked")
+			}
+
+			RadioButton
+			{
+				value:	"individual"
+				label:	qsTr("Individual")
 
 				CheckBox
 				{
-					label:	qsTr("Point estimate")
-					name: "plotsPosteriorIndividualEstimate"
-					childrenOnSameRow: true
+					label:				qsTr("Point estimate")
+					name:				"plotsPosteriorIndividualEstimate"
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPosteriorIndividualEstimateType"
-						label: ""
-						values: ["mean", "median", "mode"]
+						name:	"plotsPosteriorIndividualEstimateType"
+						label:	""
+						values:	["mean", "median", "mode"]
 					}
 				}
 
 				CheckBox
 				{
-					name: "plotsPosteriorIndividualCI"
-					label: qsTr("CI")
-					id: plotsPosteriorIndividualCI
-					childrenOnSameRow: true
+					name:				"plotsPosteriorIndividualCI"
+					label:				qsTr("CI")
+					id:					plotsPosteriorIndividualCI
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPosteriorIndividualType"
-						label: ""
-						values: ["central", "HPD", "custom", "support"]
-						id: plotsPosteriorIndividualType
+						name:		"plotsPosteriorIndividualType"
+						label:		""
+						values:		["central", "HPD", "custom", "support"]
+						id:			plotsPosteriorIndividualType
 					}
 				}
 
 				Group
 				{
 					columns: 2
-					CIField{
-						visible: plotsPosteriorIndividualType.currentText == "central" |
-									plotsPosteriorIndividualType.currentText == "HPD"
-						enabled: plotsPosteriorIndividualCI.checked
-						name: "plotsPosteriorCoverage"
-						label: qsTr("Mass")
-						fieldWidth: 50
-						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+
+					CIField
+					{
+						visible:		plotsPosteriorIndividualType.currentText == "central" | plotsPosteriorIndividualType.currentText == "HPD"
+						enabled:		plotsPosteriorIndividualCI.checked
+						name:			"plotsPosteriorCoverage"
+						label:			qsTr("Mass")
+						fieldWidth:		50
+						defaultValue: 	95
+						min:			0
+						max:			100
+						inclusive:		JASP.MaxOnly
 					}
 
-					DoubleField{
-						visible: plotsPosteriorIndividualType.currentText == "custom"
-						enabled: plotsPosteriorIndividualCI.checked
-						name: "plotsPosteriorLower"
-						label: qsTr("Lower")
-						id: plotsPosteriorLower
-						fieldWidth: 50
-						defaultValue: 0.25; min: 0; max: plotsPosteriorUpper.value; inclusive: JASP.MinMax
+					DoubleField
+					{
+						visible:		plotsPosteriorIndividualType.currentText == "custom"
+						enabled:		plotsPosteriorIndividualCI.checked
+						name:			"plotsPosteriorLower"
+						label:			qsTr("Lower")
+						id:				plotsPosteriorLower
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
+						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						max:			plotsPosteriorUpper.value
+						inclusive:		JASP.MinMax
 					}
 
-					DoubleField{
-						visible: plotsPosteriorIndividualType.currentText == "custom"
-						enabled: plotsPosteriorIndividualCI.checked
-						name: "plotsPosteriorUpper"
-						label: qsTr("Upper")
-						id: plotsPosteriorUpper
-						fieldWidth: 50
-						defaultValue: 0.75; min: plotsPosteriorLower.value; max: 1; inclusive: JASP.MinMax
+					DoubleField
+					{
+						visible:		plotsPosteriorIndividualType.currentText == "custom"
+						enabled:		plotsPosteriorIndividualCI.checked
+						name:			"plotsPosteriorUpper"
+						label:			qsTr("Upper")
+						id:				plotsPosteriorUpper
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						min:			plotsPosteriorLower.value
+						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						inclusive:		JASP.MinMax
 					}
 
-					FormulaField{
-						visible: plotsPosteriorIndividualType.currentText == "support"
-						enabled: plotsPosteriorIndividualCI.checked
-						name: "plotsPosteriorBF"
-						label: qsTr("BF")
-						fieldWidth: 50
-						defaultValue: "1"; min: 0; inclusive: JASP.None
+					FormulaField
+					{
+						visible:		plotsPosteriorIndividualType.currentText == "support"
+						enabled:		plotsPosteriorIndividualCI.checked
+						name:			"plotsPosteriorBF"
+						label:			qsTr("BF")
+						fieldWidth:		50
+						defaultValue:	"1"
+						min:			0
+						inclusive:		JASP.None
 					}
 				}
 

@@ -18,19 +18,19 @@
 LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL){
 
   # introductory text
-  if(options[["introText"]]).introductoryTextLS(jaspResults, options, "gauss_test")
+  if(options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
 
   # evaluate the expressions in priors
-  if(ready[2])options[["priors"]] <- .evaluate_priors(options[["priors"]])
+  if(ready[2])options[["priors"]] <- .evaluatePriors(options[["priors"]])
 
   # load, check, transform and process data
   if(ready[1])data <- .readDataGaussianLS(dataset, options)
 
   # data summary table if requested (but not if the data counts were added directly)
-  .summaryGaussianLS(jaspResults, data, options, "gauss_test")
+  .summaryGaussianLS(jaspResults, data, options, "gaussTest")
 
   ### inference
   # summary table
@@ -57,7 +57,7 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL){
     introText$dependOn("introText")
     introText$position <- 1
 
-    introText[['text']] <- .explanatoryTextLS("tests", options, "gauss_test")
+    introText[['text']] <- .explanatoryTextLS("tests", options, "gaussTest")
 
     testsContainer[['introText']] <- introText
   }

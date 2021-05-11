@@ -359,7 +359,6 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 
         dfArrowPP   <- NULL
         dfLinesPP   <- NULL
-        dfLinesPP2  <- NULL
         dfCI        <- NULL
         dfCILinesPP <- NULL
 

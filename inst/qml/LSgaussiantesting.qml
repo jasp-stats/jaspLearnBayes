@@ -27,6 +27,21 @@ Form {
 
 	LS.LSintrotext{}
 	
+	DropDown
+	{
+		name:				"colorPalette"
+		label:				qsTr("Color palette")
+		indexDefaultValue:	0
+		values:
+			[
+			{ label: qsTr("Colorblind"),		value: "colorblind"		},
+			{ label: qsTr("Colorblind Alt."),	value: "colorblind3"	},
+			{ label: qsTr("Viridis"),			value: "viridis"		},
+			{ label: qsTr("ggplot2"),			value: "ggplot2"		},
+			{ label: qsTr("Gray"),				value: "gray"			}
+			]
+	}
+
 	LS.LSgaussiandatainput
 	{
 		id:	gaussianDataInput
@@ -51,7 +66,6 @@ Form {
 			ComponentsList
 			{
 				name:					"priors"
-				optionKey:				"type"
 				defaultValues: 			[]
 				preferredHeight: 		90 * preferencesModel.uiScale
 				rowComponent: 			RowLayout
@@ -81,8 +95,8 @@ Form {
 							useExternalBorder: true
 							values:
 							[
-								{ label: qsTr("Spike"),		value: "spike"},
-								{ label: qsTr("Normal"),	value: "normal"}
+								{ label: qsTr("Normal"),	value: "normal"},
+								{ label: qsTr("Spike"),		value: "spike"}
 							]
 						}
 					}
@@ -117,7 +131,7 @@ Form {
 							label:				qsTr("μ₀")
 							name:				"parPoint"
 							visible:			typeItem.currentValue === "spike"
-							value:				"0.5"
+							value:				"0"
 							min:				0
 							max:				1
 							inclusive:			JASP.None
@@ -131,18 +145,31 @@ Form {
 		}
 	}
 
-	LS.LStestinginference
+
+	LS.LStestingpriorandposterior
 	{
-		plotsBothSampleProportion: qsTr("Observed data")
+		analysisType:				"gaussian"
+		plotsPosteriorObserved:		qsTr("Observed data")
+		plotsBothSampleProportion:	qsTr("Observed mean")
+	}
+
+	LS.LStestingpredictiveperformance
+	{
+		analysisType:				"gaussian"
+		bfTypevsName:				"priors.name"
+		plotsPredictionsObserved:	qsTr("Observed mean")
 	}
 
 	LS.LStestingsequential
 	{
-		enabled: gaussianDataInput.dataType.value !== "dataCounts"
+		enabled:					 gaussianDataInput.dataType.value !== "dataCounts"
+		bfTypevsNameSequential:		"priors.name"
 	}
 
-	LS.LStestingpredictions{
-		predictionPlotProp: qsTr("Sample means")
+	LS.LStestingpredictions
+	{
+		analysisType:				"gaussian"
+		predictionPlotProp:			qsTr("Sample means")
 	}
 
 }

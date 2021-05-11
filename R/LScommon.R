@@ -23,7 +23,7 @@
         priors[[p]][[paste0(names(priors[[p]])[i],"Inp")]] <- priors[[p]][[i]]
         priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
 
-        if(names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parMu", "parSigma", "PH") && priors[[p]][[i]] <= 0){
+        if(names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parSigma", "PH") && priors[[p]][[i]] <= 0){
           .quitAnalysis(
             gettextf(
               "The parameter '%1$s' for model/hypothesis '%2$s' must be positive.",
@@ -64,7 +64,7 @@
   }
   return(priors)
 }
-.aproximateSupportLS   <- function(xSeq, seqTF){
+.aproximateSupportLS  <- function(xSeq, seqTF){
   xStart <- NULL
   xEnd   <- NULL
 

@@ -52,3 +52,5 @@ state
 .Rproj.user/*
 Rproj.user
 .Rproj.user
+
+do-not-share/

@@ -412,10 +412,6 @@
 }
 .betaSupportLS              <- function(alpha, beta, successses, failures, BF){
 
-  # old way
-  # xSeq  <- seq(.001,.999,.001)
-  # bfRes <- dbeta(xSeq, alpha + successses, beta + failures)/dbeta(xSeq, alpha, beta)
-
   tempPost  <- .dbetaLS(alpha + successses, beta + failures)
   tempPrior <- .dbetaLS(alpha, beta)
 

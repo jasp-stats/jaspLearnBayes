@@ -27,6 +27,7 @@ Section
 	title: qsTr("Predictive Performance")
 	columns: 2
 
+	property string analysisType:				"binomial"
 	property alias plotsPredictionsObserved:	plotsPredictionsObserved.label
 	property alias bfTypevsName: 				bfTypevsName.source
 
@@ -39,80 +40,86 @@ Section
 
 		RadioButtonGroup
 		{
-			name: "plotsPredictionType"
+			name:	"plotsPredictionType"
 
 			RadioButton
 			{
-				value: "conditional"
-				label: qsTr("Conditional")
-				checked: true
+				value:		"conditional"
+				label:		qsTr("Conditional")
+				checked:	true
 
 				CheckBox
 				{
-					label:	qsTr("Point estimate")
-					name: "plotsPredictionEstimate"
-					childrenOnSameRow: true
+					label:				qsTr("Point estimate")
+					name:				"plotsPredictionEstimate"
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPredictionEstimateType"
-						label: ""
-						values: ["mean", "median", "mode"]
+						name:		"plotsPredictionEstimateType"
+						label:		""
+						values:		["mean", "median", "mode"]
 					}
 				}
 
 				CheckBox
 				{
-					name: "plotsPredictionCI"
-					label: qsTr("CI")
-					id: plotsPredictionCI
-					childrenOnSameRow: true
+					name:				"plotsPredictionCI"
+					label:				qsTr("CI")
+					id:					plotsPredictionCI
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPredictionTypeCI"
-						label: ""
-						values: ["central", "HPD", "custom"]
-						id: plotsPredictionTypeCI
+						name:		"plotsPredictionTypeCI"
+						label:		""
+						values:		["central", "HPD", "custom"]
+						id:			plotsPredictionTypeCI
 					}
 				}
 
 				Group
 				{
-					columns: 2
+					columns:	2
 
 					CIField
 					{
-						visible: plotsPredictionTypeCI.currentText == "central" |
-								 plotsPredictionTypeCI.currentText == "HPD"
-						enabled: plotsPredictionCI.checked
-						name: "plotsPredictionCoverage"
-						label: qsTr("Mass")
-						fieldWidth: 50
-						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+						visible:		plotsPredictionTypeCI.currentText == "central" | plotsPredictionTypeCI.currentText == "HPD"
+						enabled:		plotsPredictionCI.checked
+						name:			"plotsPredictionCoverage"
+						label:			qsTr("Mass")
+						fieldWidth:		50
+						defaultValue:	95
+						min:			0
+						max:			100
+						inclusive:		JASP.MaxOnly
 					}
 
 					IntegerField
 					{
-						visible: plotsPredictionTypeCI.currentText == "custom"
-						enabled: plotsPredictionCI.checked
-						name: "plotsPredictionLower"
-						label: qsTr("Lower")
-						id: plotsPredictionLower
-						fieldWidth: 50
-						defaultValue: 0; min: 0; max: plotsPredictionUpper.value; inclusive: JASP.MinMax
+						visible:		plotsPredictionTypeCI.currentText == "custom"
+						enabled:		plotsPredictionCI.checked
+						name:			"plotsPredictionLower"
+						label:			qsTr("Lower")
+						id:				plotsPredictionLower
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
+						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						max:			plotsPredictionUpper.value; inclusive: JASP.MinMax
 					}
 
 					IntegerField
 					{
-						visible: plotsPredictionTypeCI.currentText == "custom"
-						enabled: plotsPredictionCI.checked
-						name: "plotsPredictionUpper"
-						label: qsTr("Upper")
-						id: plotsPredictionUpper
-						fieldWidth: 50
-						defaultValue: 1
-						min: plotsPredictionLower.value; inclusive: JASP.MinMax
+						visible:		plotsPredictionTypeCI.currentText == "custom"
+						enabled:		plotsPredictionCI.checked
+						name:			"plotsPredictionUpper"
+						label:			qsTr("Upper")
+						id:				plotsPredictionUpper
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						min:			plotsPredictionLower.value
+						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						inclusive:		JASP.MinMax
 					}
 
 				}
@@ -120,24 +127,24 @@ Section
 
 			RadioButton
 			{
-				value: "joint"
-				label: qsTr("Joint")
+				value:	"joint"
+				label:	qsTr("Joint")
 
 				RadioButtonGroup
 				{
-					name: "plotsPredictionJointType"
+					name:	"plotsPredictionJointType"
 
 					RadioButton
 					{
-						value: "overlying"
-						label: qsTr("Overlying")
-						checked: true
+						value:		"overlying"
+						label:		qsTr("Overlying")
+						checked:	true
 					}
 
 					RadioButton
 					{
-						value: "stacked"
-						label: qsTr("Stacked")
+						value:		"stacked"
+						label:		qsTr("Stacked")
 					}
 
 				}
@@ -146,73 +153,81 @@ Section
 
 			RadioButton
 			{
-				value: "marginal";
-				label: qsTr("Marginal")
+				value:	"marginal";
+				label:	qsTr("Marginal")
 
 				CheckBox
 				{
-					label:	qsTr("Point estimate")
-					name: "plotsPredictionMarginalEstimate"
-					childrenOnSameRow: true
+					label:				qsTr("Point estimate")
+					name:				"plotsPredictionMarginalEstimate"
+					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name: "plotsPredictionMarginalEstimateType"
-						label: ""
-						values: ["mean", "median", "mode"]
+						name:		"plotsPredictionMarginalEstimateType"
+						label:		""
+						values:		["mean", "median", "mode"]
 					}
 				}
 
 				CheckBox
 				{
-					name: "plotsPredictionMarginalCI"
-					label: qsTr("CI")
-					id: plotsPredictionMarginalCI
-					childrenOnSameRow: true
+					name:				"plotsPredictionMarginalCI"
+					label:				qsTr("CI")
+					id:					plotsPredictionMarginalCI
+					childrenOnSameRow:	true
 				
 					DropDown
 					{
-						name: "plotsPredictionMarginalTypeCI"
-						label: ""
-						values: ["central", "HPD", "custom"]
-						id: plotsPredictionMarginalTypeCI
+						name:		"plotsPredictionMarginalTypeCI"
+						label:		""
+						values:		["central", "HPD", "custom"]
+						id:			plotsPredictionMarginalTypeCI
 					}
 				}
 
 				Group
 				{
-					columns: 2
+					columns:	2
+
 					CIField
 					{
-						visible: plotsPredictionMarginalTypeCI.currentText == "central" |
-								 plotsPredictionMarginalTypeCI.currentText == "HPD"
-						enabled: plotsPredictionMarginalCI.checked
-						name: "plotsPredictionMarginalCoverage"
-						label: qsTr("Mass")
-						fieldWidth: 50
-						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+						visible:		plotsPredictionMarginalTypeCI.currentText == "central" | plotsPredictionMarginalTypeCI.currentText == "HPD"
+						enabled:		plotsPredictionMarginalCI.checked
+						name:			"plotsPredictionMarginalCoverage"
+						label:			qsTr("Mass")
+						fieldWidth:		50
+						defaultValue:	95
+						min:			0
+						max:			100
+						inclusive:		JASP.MaxOnly
 					}
 
 					DoubleField
 					{
-						visible: plotsPredictionMarginalTypeCI.currentText == "custom"
-						enabled: plotsPredictionMarginalCI.checked
-						name: "plotsPredictionMarginalLower"
-						label: qsTr("Lower")
-						id: plotsPredictionMarginalLower
-						fieldWidth: 50
-						defaultValue: 0; min: 0; max: plotsPredictionMarginalUpper.value; inclusive: JASP.MinMax
+						visible:		plotsPredictionMarginalTypeCI.currentText == "custom"
+						enabled:		plotsPredictionMarginalCI.checked
+						name:			"plotsPredictionMarginalLower"
+						label:			qsTr("Lower")
+						id:				plotsPredictionMarginalLower
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
+						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						max:			plotsPredictionMarginalUpper.value; inclusive: JASP.MinMax
 					}
 
 					DoubleField
 					{
-						visible: plotsPredictionMarginalTypeCI.currentText == "custom"
-						enabled: plotsPredictionMarginalCI.checked
-						name: "plotsPredictionMarginalUpper"
-						label: qsTr("Upper")
-						id: plotsPredictionMarginalUpper
-						fieldWidth: 50
-						defaultValue: 1; min: plotsPredictionMarginalLower.value; inclusive: JASP.MinOnly
+						visible:		plotsPredictionMarginalTypeCI.currentText == "custom"
+						enabled:		plotsPredictionMarginalCI.checked
+						name:			"plotsPredictionMarginalUpper"
+						label:			qsTr("Upper")
+						id:				plotsPredictionMarginalUpper
+						fieldWidth:		50
+						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						min:			plotsPredictionMarginalLower.value
+						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						inclusive:		JASP.MinOnly
 					}
 				}
 			}
@@ -297,7 +312,7 @@ Section
 
 			RadioButtonGroup
 			{
-				name: "bayesFactorType"
+				name:	"bayesFactorType"
 
 				RadioButton { label: qsTr("BF\u2081\u2080")			; name: "BF10"; checked: true}
 				RadioButton { label: qsTr("BF\u2080\u2081")			; name: "BF01"}
