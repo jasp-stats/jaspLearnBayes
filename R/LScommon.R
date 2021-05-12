@@ -1335,38 +1335,31 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   return(containerBoth)
 }
-.containerSequentialPointLS    <- function(jaspResults, options, analysis){
+.containerSequentialOverlyingLS<- function(jaspResults, options, analysis){
 
-  if (is.null(jaspResults[["containerIterative"]])){
-    containerIterative <- createJaspContainer(title = gettextf(
-      "%s Sequential Analysis: Point Estimate",
-      switch(
-        options[["plotsIterativeType"]],
-        "overlying" = gettext("All"),
-        "stacked"   = gettext("Stacked"),
-        "individual"= gettext("Individual")
-      )))
-    containerIterative$position <- 6
-    containerIterative$dependOn(c("plotsIterative", "plotsIterativeType", "plotsIterativeEstimateType"))
+  if (is.null(jaspResults[["containerIterativeOverlying"]])){
+    containerIterativeOverlying <- createJaspContainer(title = gettext("Sequential Analysis: Point Estimate"))
+    containerIterativeOverlying$position <- 6
+    containerIterativeOverlying$dependOn(c("plotsIterativeOverlying", "plotsIterativeEstimateType"))
 
-    jaspResults[["containerIterative"]] <- containerIterative
+    jaspResults[["containerIterativeOverlying"]] <- containerIterativeOverlying
   } else {
-    containerIterative <- jaspResults[["containerIterative"]]
+    containerIterativeOverlying <- jaspResults[["containerIterativeOverlying"]]
   }
 
 
-  if (options[["introText"]] && is.null(containerIterative[['introText']])){
+  if (options[["introText"]] && is.null(containerIterativeOverlying[['introText']])){
 
     introText <- createJaspHtml()
     introText$dependOn("introText")
     introText$position <- 1
 
-    introText[['text']] <- .explanatoryTextLS("sequential_point", options, analysis)
+    introText[['text']] <- .explanatoryTextLS("sequential_overlying", options, analysis)
 
-    containerIterative[['introText']] <- introText
+    containerIterativeOverlying[['introText']] <- introText
   }
 
-  return(containerIterative)
+  return(containerIterativeOverlying)
 }
 .containerSequentialIntervalLS <- function(jaspResults, options, analysis){
 
@@ -1400,6 +1393,32 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
   return(containerIterativeInterval)
+}
+.containerSequentialStackedLS  <- function(jaspResults, options, analysis){
+
+  if (is.null(jaspResults[["containerIterativeStacked"]])){
+    containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Staked"))
+    containerIterativeStacked$position <- 7.5
+    containerIterativeStacked$dependOn("plotsIterativeStacked")
+
+    jaspResults[["containerIterativeStacked"]] <- containerIterativeStacked
+  } else {
+    containerIterativeStacked <- jaspResults[["containerIterativeStacked"]]
+  }
+
+
+  if (options[["introText"]] && is.null(containerIterativeStacked[['introText']])){
+
+    introText <- createJaspHtml()
+    introText$dependOn("introText")
+    introText$position <- 1
+
+    introText[['text']] <- .explanatoryTextLS("sequential_stacked", options, analysis)
+
+    containerIterativeStacked[['introText']] <- introText
+  }
+
+  return(containerIterativeStacked)
 }
 .containerSequentialUpdatingLS <- function(jaspResults, options, analysis){
 
@@ -1911,22 +1930,26 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
     }
 
-  } else if (text == "sequential_point"){
+  } else if (text == "sequential_overlying"){
 
     generalText <- gettextf(
-      "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis).",
-      ifelse(binomial, "\u03B8", "\u03BC")
-    )
-
-    specificText <- switch(
-      options[["plotsIterativeType"]],
-      "overlying"    = gettextf("The 'All' option shows either the mean ('Mean') or the median ('Median') for all specified models in one figure, allowing for easier comparison. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s", .CIsTextLS()),
-      "stacked"      = gettext("The 'Stacked' option shows all of the prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis.")
+      "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %1$s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%2$s",
+      ifelse(binomial, "\u03B8", "\u03BC"),
+      .CIsTextLS()
     )
 
     tableText <- gettext("The 'Updating table' option generates a numerical summary of the displayed figures.")
 
-    out <- paste0(generalText, " ", specificText, " ", tableText)
+    out <- paste0(generalText, " ", tableText)
+
+  } else if (text == "sequential_stacked"){
+
+    generalText <- gettextf(
+      "The 'Stacked distributions' option displays a plot with the sequential updating of the posterior distribution density (x- and y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another, creating a depth effect (z-axis).",
+      ifelse(binomial, "\u03B8", "\u03BC")
+    )
+
+    out <- generalText
 
   } else if (text == "sequential_interval"){
 

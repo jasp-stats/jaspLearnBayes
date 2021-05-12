@@ -532,7 +532,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
 
     plotsIterative$position <- 2
     plotsIterative$dependOn(c(.dataDependenciesGaussianLS, "plotsIterativeEstimateType",
-                              "plotsIterativeIndividualCI", "plotsIterativeCoverage", "plotsIterativeIndividualType", "plotsIterativeBF",
+                              "plotsIterativeOverlyingCI", "plotsIterativeCoverage", "plotsIterativeOverlyingType", "plotsIterativeBF",
                               "colorPalette"))
     containerIterative[["plotsIterative"]] <- plotsIterative
 
@@ -556,7 +556,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
     for(i in iterSeq){
       if(i < 1){
 
-        if(options[["plotsIterativeIndividualCI"]] && options[["plotsIterativeIndividualType"]] == "support"){
+        if(options[["plotsIterativeOverlyingCI"]] && options[["plotsIterativeOverlyingType"]] == "support"){
           range <- rbind(range, .rangeGaussiansSupportLS(NULL, options[["priors"]], options[["plotsIterativeBF"]]))
         }else{
           range <- rbind(range, .rangeGaussiansLS(NULL, options[["priors"]]))
@@ -569,7 +569,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
           SD   = data$SD
         )
 
-        if(options[["plotsIterativeIndividualCI"]] && options[["plotsIterativeIndividualType"]] == "support"){
+        if(options[["plotsIterativeOverlyingCI"]] && options[["plotsIterativeOverlyingType"]] == "support"){
           range <- rbind(range, .rangeGaussiansSupportLS(tempData, options[["priors"]], options[["plotsIterativeBF"]]))
         }else{
           range <- rbind(range, .rangeGaussiansLS(tempData, options[["priors"]]))
@@ -603,9 +603,9 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
           name = options[["priors"]][[h]]$name
         ))
 
-        if(options[["plotsIterativeIndividualCI"]]){
+        if(options[["plotsIterativeOverlyingCI"]]){
 
-          if(options[["plotsIterativeIndividualType"]] %in% c("central", "HPD")){
+          if(options[["plotsIterativeOverlyingType"]] %in% c("central", "HPD")){
 
             tempCIPP <- .dataCentralGaussianLS(
               tempData,
@@ -614,11 +614,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
               type = "parameter"
             )
 
-            if(options[["plotsIterativeIndividualType"]] == "HPD"){
+            if(options[["plotsIterativeOverlyingType"]] == "HPD"){
               tempCIPP$g <- "HPD"
             }
 
-          }else if(options[["plotsIterativeIndividualType"]] == "support"){
+          }else if(options[["plotsIterativeOverlyingType"]] == "support"){
 
             tempCIPP <- .dataSupportGaussianLS(
               tempData,
@@ -960,17 +960,17 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
 
     tableIterative$position <- 3
     tableIterative$dependOn(c(.dataDependenciesGaussianLS, "plotsIterativeEstimateType",
-                              "plotsIterativeIndividualCI", "plotsIterativeCoverage", "colorPalette", "plotsIterativeUpdatingTable"))
+                              "plotsIterativeOverlyingCI", "plotsIterativeCoverage", "colorPalette", "plotsIterativeUpdatingTable"))
     containerIterative[["tableIterative"]] <- tableIterative
 
     tableIterative$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
     if(ready["priors"]){
-      if(options[["plotsIterativeIndividualCI"]]){
-        if(options[["plotsIterativeIndividualType"]] == "central"){
+      if(options[["plotsIterativeOverlyingCI"]]){
+        if(options[["plotsIterativeOverlyingType"]] == "central"){
           CI_title <- gettextf("%i %% CI", options[["plotsIterativeCoverage"]]*100)
-        }else if(options[["plotsIterativeIndividualType"]] == "HPD"){
+        }else if(options[["plotsIterativeOverlyingType"]] == "HPD"){
           CI_title <- gettextf("%i %% HPD", options[["plotsIterativeCoverage"]]*100)
-        }else if(options[["plotsIterativeIndividualType"]] == "support"){
+        }else if(options[["plotsIterativeOverlyingType"]] == "support"){
           CI_title <- gettextf("SI (BF=%s)", options[["plotsIterativeBF"]])
         }
         for(i in 1:length(options[["priors"]])){
@@ -1024,9 +1024,9 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
         tempResults <- .estimateGaussianLS(tempData, options[["priors"]][[h]])
         tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["plotsIterativeEstimateType"]]]]
 
-        if(options[["plotsIterativeIndividualCI"]]){
+        if(options[["plotsIterativeOverlyingCI"]]){
 
-          if(options[["plotsIterativeIndividualType"]] %in% c("central", "HPD")){
+          if(options[["plotsIterativeOverlyingType"]] %in% c("central", "HPD")){
 
             tempCIPP <- .dataCentralGaussianLS(
               tempData,
@@ -1035,11 +1035,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL){
               type = "parameter"
             )
 
-            if(options[["plotsIterativeIndividualType"]] == "HPD"){
+            if(options[["plotsIterativeOverlyingType"]] == "HPD"){
               tempCIPP$g <- "HPD"
             }
 
-          }else if(options[["plotsIterativeIndividualType"]] == "support"){
+          }else if(options[["plotsIterativeOverlyingType"]] == "support"){
 
             tempCIPP <- .dataSupportGaussianLS(
               tempData,

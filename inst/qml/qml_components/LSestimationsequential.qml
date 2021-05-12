@@ -30,84 +30,61 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsIterative"
+		name:		"plotsIterativeOverlying"
 		label:		qsTr("Point estimate")
 		checked:	false
 
-		RadioButtonGroup
+		DropDown
 		{
-			name:	"plotsIterativeType"
+			name:		"plotsIterativeEstimateType"
+			values:		["mean", "median", "mode"]
+		}
 
-			RadioButton
+		CheckBox
+		{
+			name:				"plotsIterativeOverlyingCI"
+			label:				qsTr("CI")
+			id:					plotsIterativeOverlyingCI
+			childrenOnSameRow:	true
+
+			DropDown
 			{
-				value:	"overlying"
-				label:	qsTr("All")
-
-				DropDown
-				{
-					label:		qsTr("Point estimate")
-					name:		"plotsIterativeEstimateType"
-					values:		["mean", "median", "mode"]
-				}
-
-				Group
-				{
-
-					CheckBox
-					{
-						name:				"plotsIterativeIndividualCI"
-						label:				qsTr("CI")
-						id:					plotsIterativeIndividualCI
-						childrenOnSameRow:	true
-
-						DropDown
-						{
-							name:			"plotsIterativeIndividualType"
-							label:			""
-							values:			["central", "HPD", "support"]
-							id:				plotsIterativeIndividualType
-						}
-					}
-
-					CIField
-					{
-						visible:			plotsIterativeIndividualType.currentText == "central" |	plotsIterativeIndividualType.currentText == "HPD"
-						enabled:			plotsIterativeIndividualCI.checked
-						name:				"plotsIterativeCoverage"
-						label:				qsTr("Mass")
-						fieldWidth:			50
-						defaultValue:		95
-						min:				0
-						max:				100
-						inclusive:			JASP.MaxOnly
-					}
-
-					FormulaField
-					{
-						visible:			plotsIterativeIndividualType.currentText == "support"
-						enabled:			plotsIterativeIndividualCI.checked
-						name:				"plotsIterativeBF"
-						label:				qsTr("BF")
-						fieldWidth:			50
-						defaultValue:		"1"
-						min:				0
-						inclusive:			JASP.None
-					}
-				}
-
+				name:			"plotsIterativeOverlyingType"
+				label:			""
+				values:			["central", "HPD", "support"]
+				id:				plotsIterativeOverlyingType
 			}
-			
-			RadioButton
-			{
-				value:	"stacked"
-				label:	qsTr("Stacked")
-			}
+		}
 
-			CheckBox
-			{
-				name: 	"plotsIterativeUpdatingTable"
-				label:	qsTr("Updating table")
-			}
+		CIField
+		{
+			visible:			plotsIterativeOverlyingType.currentText == "central" |	plotsIterativeOverlyingType.currentText == "HPD"
+			enabled:			plotsIterativeOverlyingCI.checked
+			name:				"plotsIterativeCoverage"
+			label:				qsTr("Mass")
+			fieldWidth:			50
+			defaultValue:		95
+			min:				0
+			max:				100
+			inclusive:			JASP.MaxOnly
+		}
+
+		FormulaField
+		{
+			visible:			plotsIterativeOverlyingType.currentText == "support"
+			enabled:			plotsIterativeOverlyingCI.checked
+			name:				"plotsIterativeBF"
+			label:				qsTr("BF")
+			fieldWidth:			50
+			defaultValue:		"1"
+			min:				0
+			inclusive:			JASP.None
+		}
+
+		CheckBox
+		{
+			name: 	"plotsIterativeUpdatingTable"
+			label:	qsTr("Updating table")
 		}
 
 	}
@@ -172,6 +149,12 @@ Section
 				label:	qsTr("Updating table")
 			}
 		}
+	}
+
+	CheckBox
+	{
+		name:	"plotsIterativeStacked"
+		label:	qsTr("Stacked distributions")
 	}
 	
 	CheckBox

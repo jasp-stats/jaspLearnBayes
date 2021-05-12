@@ -22,14 +22,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- FALSE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- FALSE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -75,7 +76,7 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Sequential Updating Plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-2-default-3", dir="LSbinomialestimation")
   })
@@ -204,14 +205,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "HPD"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "HPD"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "stacked"
   options$plotsIterativeIntervalUpdatingTable <- TRUE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- TRUE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -258,13 +260,13 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Sequential Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-2-vol1-3", dir="LSbinomialestimation")
   })
 
   test_that("Sequential Updating Table results match", {
-    table <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_tableIterative"]][["data"]]
+    table <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_tableIterative"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("[0.094, 0.906]", 0.5, "[0.300, 0.300]", 0.3, 0, "[0.044, 0.772]",
                                         0.38572756813239, "[0.300, 0.300]", 0.3, 1, "[0.147, 0.853]",
@@ -494,14 +496,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "HPD"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "HPD"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "stacked"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- TRUE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -547,13 +550,13 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["collection"]][["containerIterative_plotsIterative_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeStacked"]][["collection"]][["containerIterativeStacked_plotsIterative"]][["collection"]][["containerIterativeStacked_plotsIterative_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-1", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["collection"]][["containerIterative_plotsIterative_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeStacked"]][["collection"]][["containerIterativeStacked_plotsIterative"]][["collection"]][["containerIterativeStacked_plotsIterative_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-2", dir="LSbinomialestimation")
   })
@@ -637,14 +640,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -690,7 +694,7 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Sequantial Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "titleless-plot-0-vol3-1", dir="LSbinomialestimation")
   })
@@ -744,14 +748,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -845,14 +850,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -946,14 +952,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1041,14 +1048,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1136,14 +1144,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -1187,7 +1196,7 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Sequential Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-1-spike-1", dir="LSbinomialestimation")
   })
@@ -1258,14 +1267,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -1310,7 +1320,7 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Sequential Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-1-beta-2", dir="LSbinomialestimation")
   })
@@ -1382,14 +1392,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- FALSE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- FALSE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1459,14 +1470,15 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- FALSE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- FALSE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
