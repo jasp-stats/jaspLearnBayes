@@ -351,7 +351,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 
       for(i in 1:length(options[["priors"]])){
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["plotsPosteriorIndividualPrior"]] || options[["plotsPosteriorIndividualProportion"]])){ 700 }else{ 530 }, height = 400)
+        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["plotsPosteriorIndividualPrior"]] || options[["plotsPosteriorIndividualProportion"]])) { 700 } else { 530 }, height = 400)
 
         plotsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
 
