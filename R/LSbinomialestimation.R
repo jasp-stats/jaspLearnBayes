@@ -311,15 +311,18 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
     plotsIndividual <- createJaspContainer()
 
     plotsIndividual$position <- 2
-    plotsIndividual$dependOn(c(.dataDependenciesBinomialLS,
-                               ifelse(type == "Prior", "plotsPriorIndividualEstimate",     "plotsPosteriorIndividualEstimate"),
-                               ifelse(type == "Prior", "plotsPriorIndividualEstimateType", "plotsPosteriorIndividualEstimateType"),
-                               ifelse(type == "Prior", "plotsPriorIndividualCI",   "plotsPosteriorIndividualCI"),
-                               ifelse(type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType"),
-                               ifelse(type == "Prior", "plotsPriorCoverage",       "plotsPosteriorCoverage"),
-                               ifelse(type == "Prior", "plotsPriorLower",          "plotsPosteriorLower"),
-                               ifelse(type == "Prior", "plotsPriorUpper",          "plotsPosteriorUpper"),
-                               if(type == "Posterior") c("plotsPosteriorBF", "plotsPosteriorIndividualPrior", "plotsPosteriorIndividualProportion")))
+    plotsIndividual$dependOn(c(
+      .dataDependenciesBinomialLS,
+      if (type == "Prior") {
+        c("plotsPriorIndividualEstimate", "plotsPriorIndividualEstimateType", "plotsPriorIndividualCI",
+          "plotsPriorIndividualType", "plotsPriorCoverage", "plotsPriorLower", "plotsPriorUpper")
+      } else if (type == "Posterior") {
+        c("plotsPosteriorIndividualEstimate", "plotsPosteriorIndividualEstimateType", "plotsPosteriorIndividualCI",
+          "plotsPosteriorIndividualType", "plotsPosteriorCoverage", "plotsPosteriorLower", "plotsPosteriorUpper",
+          "plotsPosteriorBF", "plotsPosteriorIndividualPrior", "plotsPosteriorIndividualProportion"
+          )
+      }
+    ))
 
     containerPlots[[paste0("plots",type)]] <- plotsIndividual
 
