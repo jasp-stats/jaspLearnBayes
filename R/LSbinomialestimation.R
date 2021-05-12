@@ -406,7 +406,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
         if (options[["priors"]][[i]]$type == "spike"){
           dfArrowPP  <- .dataArrowBinomialLS(options[["priors"]][[i]])
           if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]){
-            dfArrowPP$g <- "Prior = Posterior"
+            dfArrowPP$g <- gettext("Prior = Posterior")
           } else
             dfArrowPP$g <- type
         } else if (options[["priors"]][[i]]$type == "beta"){
@@ -416,7 +416,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
           if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]){
             if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])){
               dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
-              dfLinesPP$g <- "Prior = Posterior"
+              dfLinesPP$g <- gettext("Prior = Posterior")
             }
           } else
             dfLinesPP  <- dfLinesPP[dfLinesPP$g == type,]
@@ -509,7 +509,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL){
 
           if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])){
             dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
-            dfLinesPP$g <- "Prior = Posterior"
+            dfLinesPP$g <- gettext("Prior = Posterior")
           }
 
         }

@@ -465,7 +465,7 @@
 
   linesGroup <- c(yPost, yPrior)
   muGroup    <- c(xSeq,  xSeq)
-  nameGroup  <- c(rep("Posterior", length(xSeq)), rep("Prior", length(xSeq)))
+  nameGroup  <- c(rep(gettext("Posterior"), length(xSeq)), rep(gettext("Prior"), length(xSeq)))
 
   dat        <- data.frame(x = muGroup, y = linesGroup, g = nameGroup)
   return(dat)

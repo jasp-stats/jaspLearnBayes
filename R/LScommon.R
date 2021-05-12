@@ -946,7 +946,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     for(i in 1:length(tempLabel)){
 
       if(!proportions)
-        tempLabel <- gsub("theta", "'Successes'", tempLabel)
+        tempLabel <- gsub("theta", gettext("'Successes'"), tempLabel)
 
       tempText <- data.frame(
         label = tempLabel[i],
