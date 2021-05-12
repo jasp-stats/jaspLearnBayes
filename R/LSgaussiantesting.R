@@ -15,19 +15,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL){
+LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
 
   # introductory text
-  if(options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
+  if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
 
   # evaluate the expressions in priors
-  if(ready[2])options[["priors"]] <- .evaluatePriors(options[["priors"]])
+  if (ready[2])options[["priors"]] <- .evaluatePriors(options[["priors"]])
 
   # load, check, transform and process data
-  if(ready[1])data <- .readDataGaussianLS(dataset, options)
+  if (ready[1])data <- .readDataGaussianLS(dataset, options)
 
   # data summary table if requested (but not if the data counts were added directly)
   .summaryGaussianLS(jaspResults, data, options, "gaussTest")
@@ -40,18 +40,18 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL){
 }
 
 
-.testsGaussianLS              <- function(jaspResults, data, ready, options){
+.testsGaussianLS              <- function(jaspResults, data, ready, options) {
 
-  if(is.null(jaspResults[["testsContainer"]])){
+  if (is.null(jaspResults[["testsContainer"]])) {
     testsContainer <- createJaspContainer("Model")
     testsContainer$position <- 2
     jaspResults[["testsContainer"]] <- testsContainer
-  }else{
+  } else{
     testsContainer <- jaspResults[["testsContainer"]]
   }
 
 
-  if(options[["introText"]] && is.null(testsContainer[['introText']])){
+  if (options[["introText"]] && is.null(testsContainer[['introText']])) {
 
     introText <- createJaspHtml()
     introText$dependOn("introText")
@@ -63,7 +63,7 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL){
   }
 
 
-  if(is.null(testsContainer[['testsTable']])){
+  if (is.null(testsContainer[['testsTable']])) {
 
     testsTable <- createJaspTable(title = gettext("Testing Summary"))
 
