@@ -103,8 +103,8 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPriorLower
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
-						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						defaultValue:	analysisType === "binomial" ? 0.25 : -1
+						min:			analysisType === "binomial" ? 0    : -9999999999
 						max:			plotsPriorUpper.value
 						inclusive:		JASP.MinMax
 					}
@@ -117,9 +117,9 @@ Section
 						label:			qsTr("Upper")
 						id:				plotsPriorUpper
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						defaultValue:	analysisType === "binomial" ? 0.75 : 1
 						min:			plotsPriorLower.value
-						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
 				}
@@ -210,8 +210,8 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPriorMarginalLower
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
-						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						defaultValue:	analysisType === "binomial" ? 0.25 : -1
+						min:			analysisType === "binomial" ? 0    : -9999999999
 						max:			plotsPriorMarginalUpper.value
 						inclusive:		JASP.MinMax
 					}
@@ -224,9 +224,9 @@ Section
 						label:			qsTr("Upper")
 						id:				plotsPriorMarginalUpper
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						defaultValue:	analysisType === "binomial" ? 0.75 : 1
 						min:			plotsPriorMarginalLower.value
-						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
 				}
@@ -307,8 +307,8 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPosteriorLower
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
-						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						defaultValue:	analysisType === "binomial" ? 0.25 : -1
+						min:			analysisType === "binomial" ? 0    : -9999999999
 						max:			plotsPosteriorUpper.value
 						inclusive:		JASP.MinMax
 					}
@@ -321,9 +321,9 @@ Section
 						label:			qsTr("Upper")
 						id:				plotsPosteriorUpper
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						defaultValue:	analysisType === "binomial" ? 0.75 : 1
 						min:			plotsPosteriorLower.value
-						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
 
@@ -428,8 +428,8 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPosteriorMarginalLower
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.25 }else{ -1 }
-						min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+						defaultValue:	analysisType === "binomial" ? 0.25 : -1
+						min:			analysisType === "binomial" ? 0    : -9999999999
 						max:			plotsPosteriorMarginalUpper.value; inclusive: JASP.MinMax
 					}
 
@@ -441,9 +441,9 @@ Section
 						label:			qsTr("Upper")
 						id:				plotsPosteriorMarginalUpper
 						fieldWidth:		50
-						defaultValue:	if(analysisType == "binomial"){ 0.75 }else{ 1 }
+						defaultValue:	analysisType === "binomial" ? 0.75 : 1
 						min:			plotsPosteriorMarginalLower.value
-						max:			if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
 

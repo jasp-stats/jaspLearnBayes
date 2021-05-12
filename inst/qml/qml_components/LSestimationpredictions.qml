@@ -139,8 +139,8 @@ Section
 								label:			qsTr("Lower")
 								id:				plotsPredictionLower
 								fieldWidth:		50
-								defaultValue:	if(analysisType == "binomial"){ 0 }else{ -1 }
-								min:			if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+								defaultValue:	analysisType === "binomial" ? 0 : -1
+								min:			analysisType === "binomial" ? 0 : -9999999999
 								max:			plotsPredictionUpper.value
 								inclusive:		JASP.MinMax
 							}
@@ -153,7 +153,7 @@ Section
 								label:			qsTr("Upper")
 								id:				plotsPredictionUpper
 								fieldWidth:		50
-								defaultValue:	if(analysisType == "binomial"){ 1 }else{ 1 }
+								defaultValue:	analysisType === "binomial" ? 1 : 1
 								min:			plotsPredictionLower.value
 								inclusive:		JASP.MinMax
 							}

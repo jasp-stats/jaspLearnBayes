@@ -111,8 +111,8 @@ Section
 					label:				qsTr("Lower")
 					id:					plotsIterativeIntervalLower
 					fieldWidth:			50
-					defaultValue:		if(analysisType == "binomial"){ 0.25 }else{ -1 }
-					min:				if(analysisType == "binomial"){ 0 }else{ -9999999999 }
+					defaultValue:		analysisType === "binomial" ? 0.25 : -1
+					min:				analysisType === "binomial" ? 0    : -9999999999
 					max:				plotsIterativeIntervalUpper.value
 					inclusive:			JASP.MinOnly
 				}
@@ -124,9 +124,9 @@ Section
 					label:				qsTr("Upper")
 					id:					plotsIterativeIntervalUpper
 					fieldWidth:			50
-					defaultValue:		if(analysisType == "binomial"){ 0.75 }else{ 1 }
+					defaultValue:		analysisType === "binomial" ? 0.75 : 1
 					min:				plotsIterativeIntervalLower.value
-					max:				if(analysisType == "binomial"){ 1 }else{ 9999999999 }
+					max:				analysisType === "binomial" ? 1    : 9999999999
 					inclusive: 			JASP.MaxOnly
 				}
 			}
