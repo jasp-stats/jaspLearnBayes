@@ -1088,7 +1088,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL){
     }
 
     if (any(is.nan(unlist(results))) || any(is.infinite(unlist(results)))){
-      plotsIterative$setError(gettextf("Plotting not possible: One of the Bayes factor is equal to infinity."))
+      plotsIterative$setError(gettext("Plotting not possible: One of the Bayes factor is equal to infinity."))
       return()
     }
 
