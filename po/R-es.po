@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-05-07 13:16\n"
-"PO-Revision-Date: 2021-05-13 22:32+0000\n"
+"PO-Revision-Date: 2021-05-15 20:51+0000\n"
 "Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -103,16 +103,16 @@ msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Estimar"
 
 msgid "%s%% Credible Interval"
 msgstr ""
 
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
 msgid "Notation"
 msgstr ""
@@ -170,13 +170,13 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parámetro"
 
 msgid "Prior"
 msgstr ""
 
 msgid "Posterior"
-msgstr ""
+msgstr "Posterior"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -1099,7 +1099,7 @@ msgid "Median"
 msgstr "Mediana"
 
 msgid "Mode"
-msgstr "Modo"
+msgstr "Moda"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
