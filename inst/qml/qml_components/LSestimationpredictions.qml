@@ -153,7 +153,7 @@ Section
 								label:			qsTr("Upper")
 								id:				plotsPredictionUpper
 								fieldWidth:		50
-								defaultValue:	analysisType === "binomial" ? 1 : 1
+								defaultValue:	1
 								min:			plotsPredictionLower.value
 								inclusive:		JASP.MinMax
 							}

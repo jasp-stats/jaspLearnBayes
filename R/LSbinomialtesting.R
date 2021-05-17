@@ -220,19 +220,17 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       height = 400)
 
     plotsSimple$position <- 2
-    plotsSimple$dependOn(c(
-      .dataDependenciesBinomialLS, "colorPalette", "scaleSpikes",
-      if (type == "Prior") {
-        c("plotsPriorJointType", "plotsPriorMarginalCI", "plotsPriorMarginalType",
-          "plotsPriorMarginalCoverage", "plotsPriorMarginalLower", "plotsPriorMarginalUpper", "plotsPriorMarginalEstimate",
-          "plotsPriorMarginalEstimateType")
-      } else if (type == "Posterior") {
-        c("plotsPosteriorJointType", "plotsPosteriorMarginalCI", "plotsPosteriorMarginalType",
-          "plotsPosteriorMarginalCoverage", "plotsPosteriorMarginalLower", "plotsPosteriorMarginalUpper",
-          "plotsPosteriorMarginalEstimate", "plotsPosteriorMarginalEstimateType", "plotsPosteriorObserved",
-          "plotsPosteriorMarginalBF")
-      }
-    ))
+    if (type == "Prior") {
+      dependencies <- c("plotsPriorJointType", "plotsPriorMarginalCI", "plotsPriorMarginalType",
+        "plotsPriorMarginalCoverage", "plotsPriorMarginalLower", "plotsPriorMarginalUpper", "plotsPriorMarginalEstimate",
+        "plotsPriorMarginalEstimateType")
+    } else if (type == "Posterior") {
+      dependencies <- c("plotsPosteriorJointType", "plotsPosteriorMarginalCI", "plotsPosteriorMarginalType",
+        "plotsPosteriorMarginalCoverage", "plotsPosteriorMarginalLower", "plotsPosteriorMarginalUpper",
+        "plotsPosteriorMarginalEstimate", "plotsPosteriorMarginalEstimateType", "plotsPosteriorObserved",
+        "plotsPosteriorMarginalBF")
+    }
+    plotsSimple$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette", "scaleSpikes"))
 
     containerPlots[[paste0("plots",type)]] <- plotsSimple
 
@@ -388,17 +386,15 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     plotsIndividual <- createJaspContainer()
 
     plotsIndividual$position <- 2
-    plotsIndividual$dependOn(c(
-      .dataDependenciesBinomialLS, "scaleSpikes",
-      if (type == "Prior") {
-        c("plotsPriorEstimate", "plotsPriorEstimateType", "plotsPriorCI", "plotsPriorTypeCI",
+    if (type == "Prior") {
+        dependencies <- c("plotsPriorEstimate", "plotsPriorEstimateType", "plotsPriorCI", "plotsPriorTypeCI",
           "plotsPriorCoverage", "plotsPriorLower", "plotsPriorUpper")
       } else if (type == "Posterior") {
-        c("plotsPosteriorEstimate", "plotsPosteriorEstimateType", "plotsPosteriorCI",
+        dependencies <- c("plotsPosteriorEstimate", "plotsPosteriorEstimateType", "plotsPosteriorCI",
           "plotsPosteriorTypeCI", "plotsPosteriorCoverage", "plotsPosteriorLower", "plotsPosteriorUpper",
           "plotsPosteriorObserved", "plotsPosteriorBF")
       }
-    ))
+    plotsIndividual$dependOn(c(dependencies, .dataDependenciesBinomialLS, "scaleSpikes"))
 
     containerPlots[[paste0("plots",type)]] <- plotsIndividual
 
@@ -515,18 +511,16 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       height = 400)
 
     plotsPredictions$position <- 2
-    plotsPredictions$dependOn(c(
-      .dataDependenciesBinomialLS, "colorPalette",
-      if (type == "Prior") {
-        c("plotsPredictionMarginalEstimate", "plotsPredictionMarginalEstimateType", "plotsPredictionMarginalCI",
+    if (type == "Prior") {
+        dependencies <- c("plotsPredictionMarginalEstimate", "plotsPredictionMarginalEstimateType", "plotsPredictionMarginalCI",
           "plotsPredictionMarginalTypeCI", "plotsPredictionMarginalCoverage", "plotsPredictionMarginalLower",
           "plotsPredictionMarginalUpper", "plotsPredictionJointType", "plotsPredictionsObserved")
       } else if (type == "Posterior") {
-        c("plotsPredictionPostMarginalEstimate", "plotsPredictionPostMarginalEstimateType", "plotsPredictionPostMarginalCI",
+        dependencies <- c("plotsPredictionPostMarginalEstimate", "plotsPredictionPostMarginalEstimateType", "plotsPredictionPostMarginalCI",
           "plotsPredictionPostMarginalTypeCI", "plotsPredictionPostMarginalCoverage", "plotsPredictionPostMarginalLower",
           "plotsPredictionPostMarginalUpper", "plotsPredictionPostJointType", "predictionPostPlotProp")
       }
-    ))
+    plotsPredictions$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette"))
 
     containerPlots[[paste0("plotsPredictions",type)]] <- plotsPredictions
 
@@ -721,18 +715,16 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     plotsPredictionsIndividual <- createJaspContainer()
 
     plotsPredictionsIndividual$position <- 2
-    plotsPredictionsIndividual$dependOn(c(
-      .dataDependenciesBinomialLS, "colorPalette",
-      if (type == "Prior") {
-        c("plotsPredictionEstimate", "plotsPredictionEstimateType", "plotsPredictionCI",
+    if (type == "Prior") {
+        dependencies <- c("plotsPredictionEstimate", "plotsPredictionEstimateType", "plotsPredictionCI",
           "plotsPredictionTypeCI", "plotsPredictionCoverage", "plotsPredictionLower",
           "plotsPredictionUpper", "plotsPredictionsObserved")
       } else if (type == "Posterior") {
-        c("plotsPredictionPostEstimate", "plotsPredictionPostEstimateType", "plotsPredictionPostCI",
+        dependencies <- c("plotsPredictionPostEstimate", "plotsPredictionPostEstimateType", "plotsPredictionPostCI",
           "plotsPredictionPostTypeCI", "plotsPredictionPostCoverage", "plotsPredictionPostLower",
           "plotsPredictionPostUpper", "predictionPostPlotProp")
       }
-    ))
+    plotsPredictionsIndividual$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette"))
 
 
     containerPlots[[paste0("plotsPredictions",type)]] <- plotsPredictionsIndividual

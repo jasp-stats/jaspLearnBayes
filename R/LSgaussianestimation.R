@@ -298,17 +298,15 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     plotsIndividual <- createJaspContainer()
 
     plotsIndividual$position <- 2
-    plotsIndividual$dependOn(c(
-      .dataDependenciesGaussianLS,
-      if (type == "Prior") {
-        c("plotsPriorIndividualEstimate", "plotsPriorIndividualEstimateType", "plotsPriorIndividualCI",
-          "plotsPriorIndividualType", "plotsPriorCoverage", "plotsPriorLower", "plotsPriorUpper")
-      } else if (type == "Posterior") {
-        c("plotsPosteriorIndividualEstimate", "plotsPosteriorIndividualEstimateType", "plotsPosteriorIndividualCI",
-          "plotsPosteriorIndividualType", "plotsPosteriorCoverage", "plotsPosteriorLower", "plotsPosteriorUpper",
-          "plotsPosteriorBF", "plotsPosteriorIndividualPrior", "plotsPosteriorIndividualProportion")
-      }
-    ))
+    if (type == "Prior") {
+      dependencies <- c("plotsPriorIndividualEstimate", "plotsPriorIndividualEstimateType", "plotsPriorIndividualCI",
+        "plotsPriorIndividualType", "plotsPriorCoverage", "plotsPriorLower", "plotsPriorUpper")
+    } else if (type == "Posterior") {
+      dependencies <- c("plotsPosteriorIndividualEstimate", "plotsPosteriorIndividualEstimateType", "plotsPosteriorIndividualCI",
+        "plotsPosteriorIndividualType", "plotsPosteriorCoverage", "plotsPosteriorLower", "plotsPosteriorUpper",
+        "plotsPosteriorBF", "plotsPosteriorIndividualPrior", "plotsPosteriorIndividualProportion")
+    }
+    plotsIndividual$dependOn(c(dependencies, .dataDependenciesGaussianLS))
 
     containerPlots[[paste0("plots",type,"individual")]] <- plotsIndividual
 
