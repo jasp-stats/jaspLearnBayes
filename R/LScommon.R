@@ -584,7 +584,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
                                    palette = "colorblind", BFlog = NULL, yRange = NULL) {
 
   allLines      <- do.call("rbind", allLines)
-  allLines$name <- factor(allLines$name, levels = sort(levels(allLines$name)))
+  allLines$name <- factor(allLines$name, levels = sort(unique(allLines$name)))
 
   obsXmax    <- max(allLines$x)
   newXmax    <- obsXmax
