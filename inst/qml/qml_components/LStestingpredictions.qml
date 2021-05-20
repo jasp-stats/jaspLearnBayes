@@ -23,39 +23,40 @@ import JASP				1.0
 
 Section
 {
-	expanded: false
-	title: qsTr("Posterior Prediction")
+	expanded:	false
+	title:		qsTr("Posterior Prediction")
 
+	property string analysisType:			"binomial"
 	property alias predictionPlotProp: predictionPlotProp.label
 
 	Group
 	{
 		IntegerField
 		{
-			name: "predictionN"
-			label: qsTr("Number of future trials")
-			id: predictionN
-			min: 1
-			defaultValue: 10
+			name:			"predictionN"
+			label:			qsTr("Number of future trials")
+			id:				predictionN
+			min:			1
+			defaultValue:	10
 		}
 
 		CheckBox
 		{
-			name: "predictionTable"
-			label: qsTr("Summary")
+			name:		"predictionTable"
+			label:		qsTr("Summary")
 
 			DropDown
 			{
-				label:	qsTr("Point estimate")
-				name: "predictionTableEstimate"
-				values: ["mean", "median", "mode"]
+				label:		qsTr("Point estimate")
+				name:		"predictionTableEstimate"
+				values:		["mean", "median", "mode"]
 			}
 		}
 
 
 		Group
 		{
-			title: qsTr("Plots")
+			title:	qsTr("Plots")
 
 			CheckBox
 			{
@@ -65,80 +66,86 @@ Section
 
 				RadioButtonGroup
 				{
-					name: "plotsPredictionPostType"
+					name:	"plotsPredictionPostType"
 
 					RadioButton
 					{
-						value: "conditional"
-						label: qsTr("Conditional")
-						checked: true
+						value:		"conditional"
+						label:		qsTr("Conditional")
+						checked:	true
 
 						CheckBox
 						{
-							label:	qsTr("Point estimate")
-							name: "plotsPredictionPostEstimate"
-							childrenOnSameRow: true
+							label:				qsTr("Point estimate")
+							name:				"plotsPredictionPostEstimate"
+							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name: "plotsPredictionPostEstimateType"
-								label: ""
-								values: ["mean", "median", "mode"]
+								name:		"plotsPredictionPostEstimateType"
+								label:		""
+								values:		["mean", "median", "mode"]
 							}
 						}
 						
 						CheckBox
 						{
-							name: "plotsPredictionPostCI"
-							label: qsTr("CI")
-							id: plotsPredictionPostCI
-							childrenOnSameRow: true
+							name:				"plotsPredictionPostCI"
+							label:				qsTr("CI")
+							id:					plotsPredictionPostCI
+							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name: "plotsPredictionPostTypeCI"
-								label: ""
-								values: ["central", "HPD", "custom"]
-								id: plotsPredictionPostTypeCI
+								name:		"plotsPredictionPostTypeCI"
+								label:		""
+								values:		["central", "HPD", "custom"]
+								id:			plotsPredictionPostTypeCI
 							}
 						}
 
 						Group
 						{
-							columns: 2
+							columns:	2
 
 							CIField
 							{
-								visible: plotsPredictionPostTypeCI.currentText == "central" |
-										 plotsPredictionPostTypeCI.currentText == "HPD"
-								enabled: plotsPredictionPostCI.checked
-								name: "plotsPredictionPostCoverage"
-								label: qsTr("mass")
-								fieldWidth: 50
-								defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+								visible:		plotsPredictionPostTypeCI.currentText == "central" | plotsPredictionPostTypeCI.currentText == "HPD"
+								enabled:		plotsPredictionPostCI.checked
+								name:			"plotsPredictionPostCoverage"
+								label:			qsTr("mass")
+								fieldWidth:		50
+								defaultValue:	95
+								min:			0
+								max:			100
+								inclusive:		JASP.MaxOnly
 							}
 
 							IntegerField
 							{
-								visible: plotsPredictionPostTypeCI.currentText == "custom"
-								enabled: plotsPredictionPostCI.checked
-								name: "plotsPredictionPostLower"
-								label: qsTr("lower")
-								id: plotsPredictionPostLower
-								fieldWidth: 50
-								defaultValue: 0; min: 0; max: plotsPredictionPostUpper.value; inclusive: JASP.MinMax
+								visible:		plotsPredictionPostTypeCI.currentText == "custom"
+								enabled:		plotsPredictionPostCI.checked
+								name:			"plotsPredictionPostLower"
+								label:			qsTr("lower")
+								id:				plotsPredictionPostLower
+								fieldWidth:		50
+								defaultValue:	0
+								min:			0
+								max:			plotsPredictionPostUpper.value
+								inclusive:		JASP.MinMax
 							}
 
 							IntegerField
 							{
-								visible: plotsPredictionPostTypeCI.currentText == "custom"
-								enabled: plotsPredictionPostCI.checked
-								name: "plotsPredictionPostUpper"
-								label: qsTr("upper")
-								id: plotsPredictionPostUpper
-								fieldWidth: 50
-								defaultValue: 1
-								min: plotsPredictionPostLower.value; inclusive: JASP.MinMax
+								visible:		plotsPredictionPostTypeCI.currentText == "custom"
+								enabled:		plotsPredictionPostCI.checked
+								name:			"plotsPredictionPostUpper"
+								label:			qsTr("upper")
+								id:				plotsPredictionPostUpper
+								fieldWidth:		50
+								defaultValue:	1
+								min:			plotsPredictionPostLower.value
+								inclusive:		JASP.MinMax
 							}
 
 						}
@@ -146,24 +153,24 @@ Section
 
 					RadioButton
 					{
-						value: "joint"
-						label: qsTr("Joint")
+						value:		"joint"
+						label:		qsTr("Joint")
 
 						RadioButtonGroup
 						{
-							name: "plotsPredictionPostJointType"
+							name:	"plotsPredictionPostJointType"
 
 							RadioButton
 							{
-								value: "overlying"
-								label: qsTr("Overlying")
-								checked: true
+								value:		"overlying"
+								label:		qsTr("Overlying")
+								checked:	true
 							}
 
 							RadioButton
 							{
-								value: "stacked"
-								label: qsTr("Stacked")
+								value:		"stacked"
+								label:		qsTr("Stacked")
 							}
 
 						}
@@ -172,74 +179,82 @@ Section
 
 					RadioButton
 					{
-						value: "marginal";
-						label: qsTr("Marginal")
+						value:	"marginal";
+						label:	qsTr("Marginal")
 
 						CheckBox
 						{
-							label:	qsTr("Point estimate")
-							name: "plotsPredictionPostMarginalEstimate"
-							childrenOnSameRow: true
+							label:				qsTr("Point estimate")
+							name:				"plotsPredictionPostMarginalEstimate"
+							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name: "plotsPredictionPostMarginalEstimateType"
-								label: ""
-								values: ["mean", "median", "mode"]
+								name:		"plotsPredictionPostMarginalEstimateType"
+								label:		""
+								values:		["mean", "median", "mode"]
 							}
 						}
 				
 
 						CheckBox
 						{
-							name: "plotsPredictionPostMarginalCI"
-							label: qsTr("CI")
-							id: plotsPredictionPostMarginalCI
-							childrenOnSameRow: true
+							name:					"plotsPredictionPostMarginalCI"
+							label:					qsTr("CI")
+							id:						plotsPredictionPostMarginalCI
+							childrenOnSameRow:		true
 
 							DropDown
 							{
-								name: "plotsPredictionPostMarginalTypeCI"
-								label: ""
-								values: ["central", "HPD", "custom"]
-								id: plotsPredictionPostMarginalTypeCI
+								name:		"plotsPredictionPostMarginalTypeCI"
+								label:		""
+								values:		["central", "HPD", "custom"]
+								id:			plotsPredictionPostMarginalTypeCI
 							}
 						}
 
 						Group
 						{
-							columns: 2
+							columns:	2
+
 							CIField
 							{
-								visible: plotsPredictionPostMarginalTypeCI.currentText == "central" |
-										 plotsPredictionPostMarginalTypeCI.currentText == "HPD"
-								enabled: plotsPredictionPostMarginalCI.checked
-								name: "plotsPredictionPostMarginalCoverage"
-								label: qsTr("Mass")
-								fieldWidth: 50
-								defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+								visible:			plotsPredictionPostMarginalTypeCI.currentText == "central" | plotsPredictionPostMarginalTypeCI.currentText == "HPD"
+								enabled:			plotsPredictionPostMarginalCI.checked
+								name:				"plotsPredictionPostMarginalCoverage"
+								label:				qsTr("Mass")
+								fieldWidth:			50
+								defaultValue:		95
+								min:				0
+								max:				100
+								inclusive:			JASP.MaxOnly
 							}
 
 							DoubleField
 							{
-								id: plotsPredictionPostMarginalLower
-								visible: plotsPredictionPostMarginalTypeCI.currentText == "custom"
-								enabled: plotsPredictionPostMarginalCI.checked
-								name: "plotsPredictionPostMarginalLower"
-								label: qsTr("Lower")
-								fieldWidth: 50
-								defaultValue: 0; min: 0; max: plotsPredictionPostMarginalUpper.value; inclusive: JASP.MinMax
+								id:					plotsPredictionPostMarginalLower
+								visible:			plotsPredictionPostMarginalTypeCI.currentText == "custom"
+								enabled:			plotsPredictionPostMarginalCI.checked
+								name:				"plotsPredictionPostMarginalLower"
+								label:				qsTr("Lower")
+								fieldWidth:			50
+								defaultValue:		analysisType === "binomial" ? 0 : -1
+								min:				analysisType === "binomial" ? 0 : -9999999999
+								max:				plotsPredictionPostMarginalUpper.value
+								inclusive:			JASP.MinMax
 							}
 
 							DoubleField
 							{
-								visible: plotsPredictionPostMarginalTypeCI.currentText == "custom"
-								enabled: plotsPredictionPostMarginalCI.checked
-								name: "plotsPredictionPostMarginalUpper"
-								label: qsTr("Upper")
-								id: plotsPredictionPostMarginalUpper
-								fieldWidth: 50
-								defaultValue: 1; min: plotsPredictionPostMarginalLower.value; inclusive: JASP.MinOnly
+								visible:			plotsPredictionPostMarginalTypeCI.currentText == "custom"
+								enabled:			plotsPredictionPostMarginalCI.checked
+								name:				"plotsPredictionPostMarginalUpper"
+								label:				qsTr("Upper")
+								id:					plotsPredictionPostMarginalUpper
+								fieldWidth:			50
+								defaultValue:		analysisType === "binomial" ? 1 : 1 
+								min:				plotsPredictionPostMarginalLower.value
+								inclusive:			JASP.MinOnly
 							}
 						}
 					}

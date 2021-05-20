@@ -26,78 +26,91 @@ Section
 	expanded: false
 	title: qsTr("Posterior Prediction")
 
-	property alias predictionPlotProp: predictionPlotProp.label
+	property string analysisType:			"binomial"
+	property alias 	predictionPlotProp:		predictionPlotProp.label
 
 	Group
 	{
 		IntegerField
 		{
-			name: "predictionN"
-			label: qsTr("Number of future trials")
-			id: predictionN
-			min: 1
-			defaultValue: 10
+			name:			"predictionN"
+			label:			qsTr("Number of future trials")
+			id:				predictionN
+			min:			1
+			defaultValue:	10
 		}
 
 		CheckBox
 		{
-			name: "predictionTable"
-			label: qsTr("Summary")
+			name:		"predictionTable"
+			label:		qsTr("Summary")
 
 			DropDown
 			{
-				label:	qsTr("Point estimate")
-				name: "predictionTableEstimate"
-				values: ["mean", "median", "mode"]
+				label:		qsTr("Point estimate")
+				name:		"predictionTableEstimate"
+				values:		["mean", "median", "mode"]
 			}
 		}
 
 		Group
 		{
-			title: qsTr("Plots")
+			title:	qsTr("Plots")
 			
 			CheckBox
 			{
-				label: qsTr("Posterior predictive distribution")
-				name: "plotsPredictions"
+				label:	qsTr("Posterior predictive distribution")
+				name:	"plotsPredictions"
 
 				RadioButtonGroup
 				{
-					name: "predictionPlotType"
-					RadioButton { value: "overlying"; 	label: qsTr("All"); checked: true}
-					RadioButton { value: "stacked"; 	label: qsTr("Stacked")}
+					name:	"predictionPlotType"
+
 					RadioButton
 					{
-						value: "individual"
-						label: qsTr("Individual")
+						value:		"overlying"
+						label:		qsTr("All")
+						checked:	true
+					}
+
+					RadioButton
+					{
+						value:		"stacked"
+						label:		qsTr("Stacked")
+					}
+
+					RadioButton
+					{
+						value:		"individual"
+						label:		qsTr("Individual")
 
 						CheckBox
 						{
-							label:	qsTr("Point estimate")
-							name: "plotsPredictionEstimate"
-							childrenOnSameRow: true
+							label:				qsTr("Point estimate")
+							name:				"plotsPredictionEstimate"
+							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name: "plotsPredictionEstimateType"
-								label: ""
-								values: ["mean", "median", "mode"]
+								name:		"plotsPredictionEstimateType"
+								label:		""
+								values:		["mean", "median", "mode"]
 							}
 						}
 						
 						CheckBox
 						{
-							name: "plotsPredictionCI"
-							label: qsTr("CI")
-							id: plotsPredictionCI
-							childrenOnSameRow: true
+							name:				"plotsPredictionCI"
+							label:				qsTr("CI")
+							id:					plotsPredictionCI
+							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name: "plotsPredictionType"
-								label: ""
-								values: ["central", "HPD", "custom"]
-								id: plotsPredictionType
+								name:			"plotsPredictionType"
+								label:			""
+								values:			["central", "HPD", "custom"]
+								id:				plotsPredictionType
 							}
 						}	
 
@@ -105,35 +118,44 @@ Section
 						{
 							columns: 2
 
-							CIField{
-								visible: plotsPredictionType.currentText == "central" |
-											plotsPredictionType.currentText == "HPD"
-								enabled: plotsPredictionCI.checked
-								name: "plotsPredictionCoverage"
-								label: qsTr("Mass")
-								fieldWidth: 50
-								defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
+							CIField
+							{
+								visible:		plotsPredictionType.currentText == "central" | plotsPredictionType.currentText == "HPD"
+								enabled:		plotsPredictionCI.checked
+								name:			"plotsPredictionCoverage"
+								label:			qsTr("Mass")
+								fieldWidth:		50
+								defaultValue:	95
+								min:			0
+								max:			100
+								inclusive:		JASP.MaxOnly
 							}
 
-							IntegerField{
-								visible: plotsPredictionType.currentText == "custom"
-								enabled: plotsPredictionCI.checked
-								name: "plotsPredictionLower"
-								label: qsTr("Lower")
-								id: plotsPredictionLower
-								fieldWidth: 50
-								defaultValue: 0; min: 0; max: plotsPredictionUpper.value; inclusive: JASP.MinMax
+							IntegerField
+							{
+								visible:		plotsPredictionType.currentText == "custom"
+								enabled:		plotsPredictionCI.checked
+								name:			"plotsPredictionLower"
+								label:			qsTr("Lower")
+								id:				plotsPredictionLower
+								fieldWidth:		50
+								defaultValue:	analysisType === "binomial" ? 0 : -1
+								min:			analysisType === "binomial" ? 0 : -9999999999
+								max:			plotsPredictionUpper.value
+								inclusive:		JASP.MinMax
 							}
 
-							IntegerField{
-								visible: plotsPredictionType.currentText == "custom"
-								enabled: plotsPredictionCI.checked
-								name: "plotsPredictionUpper"
-								label: qsTr("Upper")
-								id: plotsPredictionUpper
-								fieldWidth: 50
-								defaultValue: 1
-								min: plotsPredictionLower.value; max: predictionN.value; inclusive: JASP.MinMax
+							IntegerField
+							{
+								visible:		plotsPredictionType.currentText == "custom"
+								enabled:		plotsPredictionCI.checked
+								name:			"plotsPredictionUpper"
+								label:			qsTr("Upper")
+								id:				plotsPredictionUpper
+								fieldWidth:		50
+								defaultValue:	1
+								min:			plotsPredictionLower.value
+								inclusive:		JASP.MinMax
 							}
 
 						}
@@ -141,9 +163,9 @@ Section
 
 					CheckBox
 					{
-						name: "predictionPlotProp"
-						id:	predictionPlotProp
-						label: qsTr("Show sample proportions")
+						name:	"predictionPlotProp"
+						id:		predictionPlotProp
+						label:	qsTr("Show sample proportions")
 					}
 
 					CheckBox

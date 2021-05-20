@@ -70,27 +70,27 @@ Section
 
 		DoubleField
 		{
-			name:			"mean"
+			name:			"dataCountsMean"
 			label:			qsTr("Mean")
 			defaultValue: 	0
 		}
 
 		DoubleField
 		{
-			name:			"SD_summary"
+			name:			"dataCountsSD"
 			label:			qsTr("SD")
-			defaultValue:	0
+			defaultValue:	1
 			min:			0
 			inclusive:		JASP.None
 		}
 
 		DoubleField
 		{
-			name:			"N"
+			name:			"dataCountsN"
 			label:			qsTr("Observations")
 			defaultValue:	0
 			min:			0
-			inclusive:		JASP.None
+			inclusive:		JASP.MinMax
 		}
 	}
 
@@ -100,17 +100,17 @@ Section
 		title:		qsTr("Comma-separated sequence of observations")
 		visible:	dataTypeB.checked
 		height:		100
-		name:		"data_sequence"
+		name:		"dataSequenceInput"
 		textType:	JASP.TextTypeSource
 		separators:	[",",";","\n"]
 	}
 
 	DoubleField
 	{
-		name:			"SD_sequence"
+		name:			"dataSequenceSD"
 		visible:		dataTypeB.checked
 		label:			qsTr("SD")
-		defaultValue:	0
+		defaultValue:	1
 		min:			0
 		inclusive:		JASP.None
 	}
@@ -131,7 +131,7 @@ Section
 
 			AssignedVariablesList
 			{
-				name:				"selectedVariable"
+				name:				"dataVariableSelected"
 				title:				qsTr("Selected")
 				singleVariable:		true
 				allowedColumns:		["scale"]
@@ -139,9 +139,9 @@ Section
 
 			DoubleField
 			{
-				name:			"SD_variable"
+				name:			"dataVariableSD"
 				label:			qsTr("SD")
-				defaultValue:	0
+				defaultValue:	1
 				min:			0
 				inclusive:		JASP.None
 			}

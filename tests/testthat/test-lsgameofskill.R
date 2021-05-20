@@ -13,14 +13,14 @@
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("LSgameofskill", dataset, options)
-  
-  
+
+
   test_that("Probability of Player 1 Winning plot matches", {
     plotName <- results[["results"]][["CIPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning", dir="LSgameofskill")
   })
-  
+
   test_that("Summary Table results match", {
     table <- results[["results"]][["summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -39,14 +39,14 @@
   set.seed(1)
   dataset <- NULL
   results <- runAnalysis("LSgameofskill", dataset, options)
-  
-  
+
+
   test_that("Probability of Player 1 Winning plot matches", {
     plotName <- results[["results"]][["CIPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning", dir="LSgameofskill")
+    jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning2", dir="LSgameofskill")
   })
-  
+
   test_that("Summary Table results match", {
     table <- results[["results"]][["summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,

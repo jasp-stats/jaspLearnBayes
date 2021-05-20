@@ -23,135 +23,145 @@ import JASP				1.0
 
 Section
 {
-	expanded: false
-	title: qsTr("Sequential Analysis")
+	expanded:	false
+	title:		qsTr("Sequential Analysis")
 
+	property string analysisType:	"binomial"
 
 	CheckBox
 	{
-		name: "plotsIterative"
-		label: qsTr("Point estimate")
-		checked: false
+		name:		"plotsIterativeOverlying"
+		label:		qsTr("Point estimate")
+		checked:	false
 
-		RadioButtonGroup
+		DropDown
 		{
-			name: "plotsIterativeType"
-			RadioButton
+			name:		"plotsIterativeEstimateType"
+			values:		["mean", "median", "mode"]
+		}
+
+		CheckBox
+		{
+			name:				"plotsIterativeOverlyingCI"
+			label:				qsTr("CI")
+			id:					plotsIterativeOverlyingCI
+			childrenOnSameRow:	true
+
+			DropDown
 			{
-				value: "overlying"
-				label: qsTr("All")
-
-				DropDown
-				{
-					label: qsTr("Point estimate")
-					name: "plotsIterativeEstimateType"
-					values: ["mean", "median", "mode"]
-				}
-
-				Group
-				{
-
-					CheckBox
-					{
-						name: "plotsIterativeIndividualCI"
-						label: qsTr("CI")
-						id: plotsIterativeIndividualCI
-						childrenOnSameRow: true
-
-						DropDown
-						{
-							name: "plotsIterativeIndividualType"
-							label: ""
-							values: ["central", "HPD", "support"]
-							id: plotsIterativeIndividualType
-						}
-					}
-
-					CIField
-					{
-						visible: plotsIterativeIndividualType.currentText == "central" |
-									plotsIterativeIndividualType.currentText == "HPD"
-						enabled: plotsIterativeIndividualCI.checked
-						name: "plotsIterativeCoverage"
-						label: qsTr("Mass")
-						fieldWidth: 50
-						defaultValue: 95; min: 0; max: 100; inclusive: JASP.MaxOnly
-					}
-
-					FormulaField
-					{
-						visible: plotsIterativeIndividualType.currentText == "support"
-						enabled: plotsIterativeIndividualCI.checked
-						name: "plotsIterativeBF"
-						label: qsTr("BF")
-						fieldWidth: 50
-						defaultValue: "1"; min: 0; inclusive: JASP.None
-					}
-				}
-
+				name:			"plotsIterativeOverlyingType"
+				label:			""
+				values:			["central", "HPD", "support"]
+				id:				plotsIterativeOverlyingType
 			}
-			
-			RadioButton { value: "stacked"; label: qsTr("Stacked")}
+		}
 
-			CheckBox
-			{
-				name:  "plotsIterativeUpdatingTable"
-				label: qsTr("Updating table")
-			}
+		CIField
+		{
+			visible:			plotsIterativeOverlyingType.currentText == "central" |	plotsIterativeOverlyingType.currentText == "HPD"
+			enabled:			plotsIterativeOverlyingCI.checked
+			name:				"plotsIterativeCoverage"
+			label:				qsTr("Mass")
+			fieldWidth:			50
+			defaultValue:		95
+			min:				0
+			max:				100
+			inclusive:			JASP.MaxOnly
+		}
+
+		FormulaField
+		{
+			visible:			plotsIterativeOverlyingType.currentText == "support"
+			enabled:			plotsIterativeOverlyingCI.checked
+			name:				"plotsIterativeBF"
+			label:				qsTr("BF")
+			fieldWidth:			50
+			defaultValue:		"1"
+			min:				0
+			inclusive:			JASP.None
+		}
+
+		CheckBox
+		{
+			name: 	"plotsIterativeUpdatingTable"
+			label:	qsTr("Updating table")
 		}
 
 	}
 
 	CheckBox
 	{
-		name: "plotsIterativeInterval"
-		id: plotsIterativeInterval
-		label: qsTr("Interval")
-		checked: false
+		name:		"plotsIterativeInterval"
+		id:			plotsIterativeInterval
+		label:		qsTr("Interval")
+		checked:	false
 
 		RadioButtonGroup
 		{
-			name: "plotsIterativeIntervalType"
-			id: plotsIterativeIntervalType
+			name:		"plotsIterativeIntervalType"
+			id:			plotsIterativeIntervalType
 
 			Group
 			{
 				columns: 2
 				DoubleField
 				{
-					enabled: plotsIterativeInterval.checked
-					name: "plotsIterativeIntervalLower"
-					label: qsTr("Lower")
-					id: plotsIterativeIntervalLower
-					fieldWidth: 50
-					defaultValue: 0.25; min: 0; max: plotsIterativeIntervalUpper.value; inclusive: JASP.MinOnly
+					enabled:			plotsIterativeInterval.checked
+					name:				"plotsIterativeIntervalLower"
+					label:				qsTr("Lower")
+					id:					plotsIterativeIntervalLower
+					fieldWidth:			50
+					defaultValue:		analysisType === "binomial" ? 0.25 : -1
+					min:				analysisType === "binomial" ? 0    : -9999999999
+					max:				plotsIterativeIntervalUpper.value
+					inclusive:			JASP.MinOnly
 				}
 
 				DoubleField
 				{
-					enabled: plotsIterativeInterval.checked
-					name: "plotsIterativeIntervalUpper"
-					label: qsTr("Upper")
-					id: plotsIterativeIntervalUpper
-					fieldWidth: 50
-					defaultValue: 0.75; min: plotsIterativeIntervalLower.value; max: 1; inclusive: JASP.MaxOnly
+					enabled:			plotsIterativeInterval.checked
+					name:				"plotsIterativeIntervalUpper"
+					label:				qsTr("Upper")
+					id:					plotsIterativeIntervalUpper
+					fieldWidth:			50
+					defaultValue:		analysisType === "binomial" ? 0.75 : 1
+					min:				plotsIterativeIntervalLower.value
+					max:				analysisType === "binomial" ? 1    : 9999999999
+					inclusive: 			JASP.MaxOnly
 				}
 			}
 
-			RadioButton	{ value: "overlying"; label: qsTr("All")}
-			RadioButton { value: "stacked"; label: qsTr("Stacked")}
-			CheckBox	{
-				name:  "plotsIterativeIntervalUpdatingTable"
-				label: qsTr("Updating table")
+			RadioButton
+			{
+				value:	"overlying"
+				label:	qsTr("All")
+			}
+
+			RadioButton
+			{
+				value:	"stacked"
+				label:	qsTr("Stacked")
+			}
+
+			CheckBox
+			{
+				name: 	"plotsIterativeIntervalUpdatingTable"
+				label:	qsTr("Updating table")
 			}
 		}
+	}
+
+	CheckBox
+	{
+		name:	"plotsIterativeStacked"
+		label:	qsTr("Stacked distributions")
 	}
 	
 	CheckBox
 	{
 		Layout.columnSpan: 2
-		name: "doIterative"
-		label: qsTr("Posterior updating table")
-		checked: false
+		name:		"doIterative"
+		label:		qsTr("Posterior updating table")
+		checked:	false
 	}
 }

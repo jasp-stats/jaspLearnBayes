@@ -114,8 +114,9 @@ Form {
 							useExternalBorder: true
 							values:
 							[
-								{ label: qsTr("Spike"),		value: "spike"},
-								{ label: qsTr("Beta"),		value: "beta"}
+								{ label: qsTr("Beta"),		value: "beta"},
+								{ label: qsTr("Spike"),		value: "spike"}
+								
 							]
 						}
 					}
@@ -156,7 +157,7 @@ Form {
 							value:				"0.5"
 							min:				0
 							max:				1
-							inclusive:			JASP.None
+							inclusive:			JASP.MinMax
 							fieldWidth:			70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
@@ -168,7 +169,9 @@ Form {
 
 	}
 
-	LS.LStestinginference{
+	LS.LStestingpriorandposterior{}
+
+	LS.LStestingpredictiveperformance{
 		bfTypevsName:				"priors.name"
 	}
 

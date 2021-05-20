@@ -16,59 +16,52 @@
 #
 
 # data load and summary
-.readyGaussianLS       <- function(options){
+.readyGaussianLS       <- function(options) {
   # are data ready
-  if(options[["dataType"]] == "dataCounts"){
-
-    ready <- !(is.null(options[["SD_summary"]]) || options[["SD_summary"]] == 0 || is.null(options[["N"]]) || options[["N"]] == 0)
-
-  }else if(options[["dataType"]] == "dataSequence"){
-
-    ready <- !(nchar(options[["data_sequence"]]) == 0 || is.null(options[["SD_sequence"]]) || options[["SD_sequence"]] == 0)
-
-  }else if(options[["dataType"]] == "dataVariable"){
-
-    ready <- !(options[["selectedVariable"]] == "" || is.null(options[["SD_variable"]]) || options[["SD_variable"]] == 0)
-
-  }
+  if (options[["dataType"]] == "dataCounts")
+    readyData <- TRUE
+  else if (options[["dataType"]] == "dataSequence")
+    readyData <- nchar(options[["dataSequenceInput"]]) != 0
+  else if (options[["dataType"]] == "dataVariable")
+    readyData <- options[["dataVariableSelected"]] != ""
 
   # are priors ready
-  ready <- c(ready, length(options[["priors"]]) > 0)
+  ready <- c("data" = readyData, "priors" = length(options[["priors"]]) > 0)
 
   return(ready)
 }
-.readDataGaussianLS    <- function(dataset, options){
+.readDataGaussianLS    <- function(dataset, options) {
 
   data <- list()
 
-  if(options[["dataType"]] == "dataCounts"){
+  if (options[["dataType"]] == "dataCounts") {
 
     data$y    <- NULL
-    data$mean <- options[["mean"]]
-    data$SD   <- options[["SD_summary"]]
-    data$N    <- options[["N"]]
+    data$mean <- options[["dataCountsMean"]]
+    data$SD   <- options[["dataCountsSD"]]
+    data$N    <- options[["dataCountsN"]]
 
-  }else{
+  } else{
 
-    if(options[["dataType"]] == "dataSequence"){
+    if (options[["dataType"]] == "dataSequence") {
 
-      temp_y   <- .clean_sequence(options[["data_sequence"]])
-      data$SD  <- options[["SD_sequence"]]
+      tempY   <- .cleanSequence(options[["dataSequenceInput"]])
+      data$SD <- options[["dataSequenceSD"]]
 
-    }else if(options[["dataType"]] == "dataVariable"){
+    } else if (options[["dataType"]] == "dataVariable") {
 
       # this is stupidly written #rework
-      if (!is.null(dataset)){
-        temp_y <- dataset
-      }else{
-        temp_y <- .readDataSetToEnd(columns = options[["selectedVariable"]])[,1]
+      if (!is.null(dataset)) {
+        tempY <- dataset
+      } else{
+        tempY <- .readDataSetToEnd(columns = options[["selectedVariable"]])[,1]
       }
 
-      data$SD  <- options[["SD_variable"]]
+      data$SD <- options[["dataVariableSD"]]
 
     }
 
-    data$y    <- .cleanDataGaussianLS(temp_y, options)
+    data$y    <- .cleanDataGaussianLS(tempY, options)
     data$mean <- mean(data$y)
     data$N    <- length(data$y)
 
@@ -77,31 +70,31 @@
   return(data)
 
 }
-.cleanDataGaussianLS   <- function(x, options){
+.cleanDataGaussianLS   <- function(x, options) {
 
   x <- na.omit(x)
 
-  if(anyNA(as.numeric(x))){
+  if (anyNA(as.numeric(x))) {
     .quitAnalysis(gettextf("Only numeric values are allowed in the input."))
   }
 
   return(as.numeric(x))
 }
-.summaryGaussianLS     <- function(jaspResults, data, options, analysis){
+.summaryGaussianLS     <- function(jaspResults, data, options, analysis) {
 
-  if(!options[["dataSummary"]] && !options[["introText"]])
+  if (!options[["dataSummary"]] && !options[["introText"]])
     return()
 
-  if(is.null(jaspResults[["summaryContainer"]])){
+  if (is.null(jaspResults[["summaryContainer"]])) {
     summaryContainer <- createJaspContainer("Data Input")
     summaryContainer$position <- 1
     jaspResults[["summaryContainer"]] <- summaryContainer
-  }else{
+  } else{
     summaryContainer <- jaspResults[["summaryContainer"]]
   }
 
 
-  if(options[["introText"]] && is.null(summaryContainer[['summaryText']])){
+  if (options[["introText"]] && is.null(summaryContainer[['summaryText']])) {
 
     summaryText <- createJaspHtml()
     summaryText$dependOn(c("introText", "dataSummary"))
@@ -113,12 +106,12 @@
   }
 
 
-  if(options[["dataSummary"]] && options[["dataType"]] != "dataCounts" && is.null(summaryContainer[['summaryTable']])){
+  if (options[["dataSummary"]] && options[["dataType"]] != "dataCounts" && is.null(summaryContainer[['summaryTable']])) {
 
     summaryTable <- createJaspTable(title = gettext("Data Summary"))
 
     summaryTable$position <- 1
-    summaryTable$dependOn(c("dataSummary", .GaussianLS_data_dependencies))
+    summaryTable$dependOn(c("dataSummary", .dataDependenciesGaussianLS))
 
     summaryTable$addColumnInfo(name = "observations",  title = gettext("Observations"),  type = "integer")
     summaryTable$addColumnInfo(name = "mean",          title = gettext("Mean"),          type = "number")
@@ -126,7 +119,7 @@
 
     summaryContainer[["summaryTable"]] <- summaryTable
 
-    if(.readyGaussianLS(options)){
+    if (.readyGaussianLS(options)) {
 
       summaryTable$addRows(list(observations = data$N,
                                 mean         = data$mean,
@@ -138,43 +131,45 @@
 }
 
 # computational functions
-.estimateGaussianLS         <- function(data, prior, CI = .95){
+.estimateGaussianLS         <- function(data, prior, CI = .95) {
 
-  if(prior[["type"]] == "spike"){
+  if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("spike at %s", prior[["parPoint_inp"]]),
+      distribution = gettextf("spike at %s", prior[["parPointInp"]]),
       mean         = prior[["parPoint"]],
       median       = prior[["parPoint"]],
+      mode         = prior[["parPoint"]],
       lCI          = prior[["parPoint"]],
       uCI          = prior[["parPoint"]]
     )
 
     return(output)
 
-  }else if(prior[["type"]] == "normal"){
+  } else if (prior[["type"]] == "normal") {
 
-    if(is.null(data)){
+    if (is.null(data)) {
 
       output <- list(
-        distribution = gettextf("normal (%s, %s)", prior[["parMu_inp"]], prior[["parSigma_inp"]]),
+        distribution = gettextf("normal (%s, %s)", prior[["parMuInp"]], prior[["parSigmaInp"]]),
         mean         = prior[["parMu"]],
         median       = prior[["parMu"]],
+        mode         = prior[["parMu"]],
         lCI          = stats::qnorm(  (1-CI)/2, prior[["parMu"]], prior[["parSigma"]]),
         uCI          = stats::qnorm(1-(1-CI)/2, prior[["parMu"]], prior[["parSigma"]])
       )
 
-    }else{
+    } else{
 
-      est_mean <- .estimateGaussianMeanLS(prior, data)
-      est_SD   <- .estimateGaussianSDLS(prior, data)
+      estMean <- .estimateGaussianMeanLS(prior, data)
+      estSD   <- .estimateGaussianSDLS(prior, data)
 
       output <- list(
-        distribution = gettextf("normal (%.2f, %.2f)", est_mean, est_SD),
-        mean         = est_mean,
-        median       = est_mean,
-        lCI          = stats::qnorm(  (1-CI)/2, est_mean, est_SD),
-        uCI          = stats::qnorm(1-(1-CI)/2, est_mean, est_SD)
+        distribution = gettextf("normal (%.2f, %.2f)", estMean, estSD),
+        mean         = estMean,
+        median       = estMean,
+        lCI          = stats::qnorm(  (1-CI)/2, estMean, estSD),
+        uCI          = stats::qnorm(1-(1-CI)/2, estMean, estSD)
       )
 
     }
@@ -182,38 +177,39 @@
     return(output)
   }
 }
-.estimateGaussianMeanLS     <- function(prior, data){
+.estimateGaussianMeanLS     <- function(prior, data) {
+
   return(
     ( prior[["parSigma"]]^2 * data$mean)         / ( (data$SD^2/data$N) +  prior[["parSigma"]]^2) +
-    ( data$SD^2             * prior[["parMu"]] ) / ( (data$SD^2/data$N) +  prior[["parSigma"]]^2)
+      ( data$SD^2             * prior[["parMu"]] ) / ( (data$SD^2/data$N) +  prior[["parSigma"]]^2)
   )
 }
-.estimateGaussianSDLS       <- function(prior, data){
+.estimateGaussianSDLS       <- function(prior, data) {
   return(sqrt(
     1/( 1 / prior[["parSigma"]]^2 + data$N / data$SD^2)
   ))
 }
-.testGaussianLS             <- function(data, priors){
+.testGaussianLS             <- function(data, priors) {
 
   names     <- rep(NA, length(priors))
   prior     <- rep(NA, length(priors))
-  log_lik   <- rep(NA, length(priors))
+  logLik   <- rep(NA, length(priors))
 
-  for(i in 1:length(priors)){
+  for (i in 1:length(priors)) {
 
-    temp_prior <- priors[[i]]
-    prior[i]   <- temp_prior$PH
-    names[i]   <- temp_prior$name
+    tempPrior <- priors[[i]]
+    prior[i]   <- tempPrior$PH
+    names[i]   <- tempPrior$name
 
-    if(!is.null(data)){
+    if (!is.null(data)) {
 
-      if(temp_prior[["type"]] == "spike"){
+      if (tempPrior[["type"]] == "spike") {
 
-        log_lik[i]   <- stats::dnorm(data$mean, temp_prior[["parPoint"]], data$SD/sqrt(data$N), log = TRUE)
+        logLik[i]   <- stats::dnorm(data$mean, tempPrior[["parPoint"]], data$SD/sqrt(data$N), log = TRUE)
 
-      }else if(temp_prior[["type"]] == "normal"){
+      } else if (tempPrior[["type"]] == "normal") {
 
-        log_lik[i]   <- stats::dnorm(data$mean, prior[["parMu"]], sqrt( data$SD^2/data$N + prior[["parSigma"]]^2 ), log = TRUE)
+        logLik[i]   <- stats::dnorm(data$mean, prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 )/sqrt(data$N), log = TRUE)
 
       }
 
@@ -222,136 +218,140 @@
   }
 
 
-  PH_log_lik <- log(prior) + log_lik
-  norm_const <- log(sum(exp(PH_log_lik)))
-  posterior  <- exp(PH_log_lik - norm_const)
+  logLikPH  <- log(prior) + logLik
+  normConst <- log(sum(exp(logLikPH)))
+  posterior <- exp(logLikPH - normConst)
 
 
   return(data.frame(
     prior       = prior,
-    log_lik     = log_lik,
+    logLik      = logLik,
     posterior   = posterior,
     name        = names
   ))
 
 }
-.predictGaussianLS          <- function(data, prior, options, N, CI = .95){
+.predictGaussianLS          <- function(data, prior, options, N, CI = .95) {
 
-  if(prior[["type"]] == "spike"){
+  if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("normal (%s, %.2f)", prior[["parPoint_inp"]], data$SD/sqrt(N)),
+      distribution = gettextf("normal (%s, %.2f)", prior[["parPointInp"]], data$SD),
       mean         = prior[["parPoint"]],
       median       = prior[["parPoint"]],
-      lCI          = stats::qnorm(  (1-CI)/2, prior[["parPoint"]], data$SD/sqrt(N)),
-      uCI          = stats::qnorm(1-(1-CI)/2, prior[["parPoint"]], data$SD/sqrt(N))
+      mode         = prior[["parPoint"]],
+      lCI          = stats::qnorm(  (1-CI)/2, prior[["parPoint"]], data$SD),
+      uCI          = stats::qnorm(1-(1-CI)/2, prior[["parPoint"]], data$SD)
     )
 
     return(output)
 
-  }else if(prior[["type"]] == "normal"){
+  } else if (prior[["type"]] == "normal") {
 
-    if(is.null(data)){
+    if (is.null(data)) {
 
-      pred_mean <- prior[["parMu"]]
-      pred_SD   <- sqrt( data$SD^2/N + prior[["parSigma"]]^2 )
+      predMean <- prior[["parMu"]]
+      predSD   <- sqrt( data$SD^2 + prior[["parSigma"]]^2 )
 
-    }else{
+    } else{
 
-      pred_mean <- .estimateGaussianMeanLS(prior, data)
-      pred_SD   <- sqrt( data$SD^2/N + .estimateGaussianSDLS(prior, data)^2 )
+      predMean <- .estimateGaussianMeanLS(prior, data)
+      predSD   <- sqrt( data$SD^2 + .estimateGaussianSDLS(prior, data)^2 )
 
     }
 
     output <- list(
-      distribution = gettextf("normal (%.2f, %.2f)", pred_mean, pred_SD),
-      mean         = pred_mean,
-      median       = pred_mean,
-      lCI          = stats::qnorm(  (1-CI)/2, pred_mean, pred_SD),
-      uCI          = stats::qnorm(1-(1-CI)/2, pred_mean, pred_SD)
+      distribution = gettextf("normal (%.2f, %.2f)", predMean, predSD),
+      mean         = predMean,
+      median       = predMean,
+      mode         = predMean,
+      lCI          = stats::qnorm(  (1-CI)/2, predMean, predSD),
+      uCI          = stats::qnorm(1-(1-CI)/2, predMean, predSD)
     )
 
     return(output)
   }
 }
-.normalSupportLS            <- function(data, prior, BF){
+.normalSupportLS            <- function(data, prior, BF) {
 
-  if(is.null(data)){
+  if (is.null(data)) {
     return(cbind.data.frame("lCI" = NA, "uCI" = NA))
   }
 
-  prior_mean <- prior[["parMu"]]
-  prior_SD   <- prior[["parSigma"]]
-  post_mean  <- .estimateGaussianMeanLS(prior, data)
-  post_SD    <- .estimateGaussianSDLS(prior, data)
+  priorMean <- prior[["parMu"]]
+  priorSD   <- prior[["parSigma"]]
+  postMean  <- .estimateGaussianMeanLS(prior, data)
+  postSD    <- .estimateGaussianSDLS(prior, data)
 
-  lSI <- stats::uniroot(
+  lSI <- tryCatch(stats::uniroot(
     .normalSupportFunLS,
     BF       = BF,
-    mu_prior = prior_mean,
-    sd_prior = prior_SD,
-    mu_post  = post_mean,
-    sd_post  = post_SD,
-    lower    = -666 * prior_SD,     # can't use -Inf :(
-    upper    = post_mean)$root
+    muPrior = priorMean,
+    sdPrior = priorSD,
+    muPost  = postMean,
+    sdPost  = postSD,
+    lower    = -666 * priorSD,     # can't use -Inf :(
+    upper    = postMean)$root, error = function(e)return(NA))
 
-  uSI <- stats::uniroot(
+  uSI <- tryCatch(stats::uniroot(
     .normalSupportFunLS,
     BF       = BF,
-    mu_prior = prior_mean,
-    sd_prior = prior_SD,
-    mu_post  = post_mean,
-    sd_post  = post_SD,
-    lower    = post_mean,
-    upper    = 666 * prior_SD)$root
+    muPrior = priorMean,
+    sdPrior = priorSD,
+    muPost  = postMean,
+    sdPost  = postSD,
+    lower    = postMean,
+    upper    = 666 * priorSD)$root, error = function(e)return(NA))
+
+
 
   return(cbind.data.frame("lCI" = lSI, "uCI" = uSI))
 }
-.normalSupportFunLS         <- function(x, BF, mu_prior, sd_prior, mu_post, sd_post){
-  exp( stats::dnorm(x, mu_post, sd_post, TRUE) -  stats::dnorm(x, mu_prior, sd_prior, TRUE) ) - BF
+.normalSupportFunLS         <- function(x, BF, muPrior, sdPrior, muPost, sdPost) {
+  exp( stats::dnorm(x, muPost, sdPost, TRUE) -  stats::dnorm(x, muPrior, sdPrior, TRUE) ) - BF
 }
 
 # plotting functions
-.rangeGaussianLS            <- function(data, prior,  type = "parameter", N = 0, prob = .99){
+.rangeGaussianLS            <- function(data, prior, type = "parameter", N = 0, prob = .99) {
 
-  if(prior[["type"]] == "spike"){
+  if (prior[["type"]] == "spike") {
 
-    if(type == "parameter"){
+    if (type == "parameter") {
 
       range <- prior[["parPoint"]] + c(-1, +1)
 
-    }else if(type == "prediction"){
+    } else if (type == "prediction") {
 
-      range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), prior[["parPoint"]], data$SD/sqrt(N) )
+      range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), prior[["parPoint"]], data$SD )
 
     }
 
 
-  }else if(prior[["type"]] == "normal"){
+  } else if (prior[["type"]] == "normal") {
 
-    if(is.null(data)){
+    if (is.null(data)) {
 
-      if(type == "parameter"){
+      if (type == "parameter") {
 
         range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), prior[["parMu"]], prior[["parSigma"]])
 
-      }else if(type == "prediction"){
+      } else if (type == "prediction") {
 
-        range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), prior[["parMu"]], sqrt( data$SD^2/N + prior[["parSigma"]]^2 ))
+        range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 ))
       }
 
-    }else{
+    } else{
 
-      post_mean <- .estimateGaussianMeanLS(prior, data)
-      post_SD   <- .estimateGaussianSDLS(prior, data)
+      postMean <- .estimateGaussianMeanLS(prior, data)
+      postSD   <- .estimateGaussianSDLS(prior, data)
 
-      if(type == "parameter"){
+      if (type == "parameter") {
 
-        range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), post_mean, post_SD)
+        range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), postMean, postSD)
 
-      }else if(type == "prediction"){
+      } else if (type == "prediction") {
 
-        range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), post_mean,  sqrt( data$SD^2/N + post_SD^2 ) )
+        range <- stats::qnorm(c((1-prob)/2, 1 - (1-prob)/2), postMean,  sqrt( data$SD^2 + postSD^2 ) )
       }
     }
   }
@@ -359,7 +359,7 @@
   range <- range(jaspGraphs::getPrettyAxisBreaks(range))
   return(range)
 }
-.rangeGaussiansLS           <- function(data, priors, type = "parameter", N = 0, prob = .99){
+.rangeGaussiansLS           <- function(data, priors, type = "parameter", N = 0, prob = .99) {
 
   ranges <- sapply(priors, function(p).rangeGaussianLS(data, p, type, N, prob), simplify = FALSE)
   ranges <- do.call(rbind, ranges)
@@ -368,11 +368,11 @@
   return(range)
 
 }
-.rangeGaussianSupportLS     <- function(data, prior,  BF){
+.rangeGaussianSupportLS     <- function(data, prior,  BF) {
 
-  if(prior[["type"]] == "spike"){
+  if (prior[["type"]] == "spike") {
     rangesCI <- data.frame("lCI" = prior[["parPoint"]], "uCI" = prior[["parPoint"]])
-  }else if(prior[["type"]] == "normal"){
+  } else if (prior[["type"]] == "normal") {
     rangesCI <- .normalSupportLS(data, prior, BF)
   }
   ranges   <- .rangeGaussianLS(data, prior, "parameter")
@@ -382,157 +382,155 @@
   range  <- range(jaspGraphs::getPrettyAxisBreaks(range))
 
   return(range)
-
 }
-.rangeGaussiansSupportLS    <- function(data, priors, BF){
+.rangeGaussiansSupportLS    <- function(data, priors, BF) {
 
   ranges <- sapply(priors, function(p).rangeGaussianSupportLS(data, p, BF), simplify = FALSE)
   ranges <- do.call(rbind, ranges)
   range  <- c(min(ranges[,1]), max(ranges[,2]))
 
   return(range)
-
 }
-.dataLinesGaussianLS        <- function(data, prior,  type = "parameter", N = 0, range = NULL, points = 200){
+.dataLinesGaussianLS        <- function(data, prior,  type = "parameter", N = 1, range = NULL, points = 200) {
 
-  if(is.null(range)){
+  if (is.null(range)) {
     range <- .rangeGaussianLS(data, prior, type, N)
   }
 
-  x_seq   <- seq(range[1], range[2], length.out = points)
+  xSeq   <- seq(range[1], range[2], length.out = points)
 
 
-  if(type == "parameter"){
+  if (type == "parameter") {
 
-    if(prior[["type"]] == "spike"){
+    if (prior[["type"]] == "spike") {
 
       stop("USE '.dataArrowGaussianLS()'")
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      y_prior <- stats::dnorm(x_seq, prior[["parMu"]], prior[["parSigma"]])
+      yPrior <- stats::dnorm(xSeq, prior[["parMu"]], prior[["parSigma"]])
 
     }
 
 
-  }else if(type == "prediction"){
+  } else if (type == "prediction") {
 
-    if(prior[["type"]] == "spike"){
+    if (prior[["type"]] == "spike") {
 
-      y_prior <- stats::dnorm(x_seq, prior[["parPoint"]], sqrt( data$SD^2/N ))
+      yPrior <- stats::dnorm(xSeq, prior[["parPoint"]], data$SD/sqrt(N))
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      y_prior <- stats::dnorm(x_seq, prior[["parMu"]], sqrt( data$SD^2/N + prior[["parSigma"]]^2 ))
+      yPrior <- stats::dnorm(xSeq, prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 )/sqrt(N))
 
     }
 
   }
 
-  if(!is.null(data)){
+  if (!is.null(data)) {
 
-    if(prior[["type"]] == "spike"){
+    if (prior[["type"]] == "spike") {
 
-      if(type == "parameter"){
+      if (type == "parameter") {
 
         stop("USE '.dataArrowGaussianLS()'")
 
-      }else if(type == "prediction"){
+      } else if (type == "prediction") {
 
-        y_post <- stats::dnorm(x_seq, prior[["parPoint"]], sqrt( data$SD^2/N ))
+        yPost <- stats::dnorm(xSeq, prior[["parPoint"]], sqrt( data$SD^2 )/sqrt(N))
 
       }
 
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      post_mean <- .estimateGaussianMeanLS(prior, data)
-      post_SD   <- .estimateGaussianSDLS(prior, data)
+      postMean <- .estimateGaussianMeanLS(prior, data)
+      postSD   <- .estimateGaussianSDLS(prior, data)
 
-      if(type == "parameter"){
+      if (type == "parameter") {
 
-        y_post <- stats::dnorm(x_seq, post_mean, post_SD)
+        yPost <- stats::dnorm(xSeq, postMean, postSD)
 
-      }else if(type == "prediction"){
+      } else if (type == "prediction") {
 
-        y_post <- stats::dnorm(x_seq, post_mean,  sqrt( data$SD^2/N + post_SD^2 ) )
+        yPost <- stats::dnorm(xSeq, postMean,  sqrt( data$SD^2 + postSD^2 )/sqrt(N) )
       }
 
     }
 
-  }else{
-    y_post <- y_prior
+  } else{
+    yPost <- yPrior
   }
 
 
-  linesGroup <- c(y_post, y_prior)
-  muGroup    <- c(x_seq,  x_seq)
-  nameGroup  <- c(rep("Posterior", length(x_seq)), rep("Prior", length(x_seq)))
+  linesGroup <- c(yPost, yPrior)
+  muGroup    <- c(xSeq,  xSeq)
+  nameGroup  <- c(rep(gettext("Posterior"), length(xSeq)), rep(gettext("Prior"), length(xSeq)))
 
   dat        <- data.frame(x = muGroup, y = linesGroup, g = nameGroup)
   return(dat)
 }
-.dataLinesPredGaussianLS    <- function(data, prior,  type = "parameter", N = 0, range = NULL, points = 200){
+.dataLinesPredGaussianLS    <- function(data, prior,  type = "parameter", N = 0, range = NULL, points = 200) {
 
-  if(is.null(range)){
+  if (is.null(range)) {
     range <- .rangeGaussianLS(data, prior, type, N)
   }
 
-  x_seq   <- seq(range[1], range[2], length.out = points)
+  xSeq   <- seq(range[1], range[2], length.out = points)
 
 
-  if(is.null(data)){
-    if(prior[["type"]] == "spike"){
+  if (is.null(data)) {
+    if (prior[["type"]] == "spike") {
 
-      y <- stats::dnorm(x_seq, prior[["parPoint"]], sqrt( data$SD^2/N ) / sqrt(N))
+      y <- stats::dnorm(xSeq, prior[["parPoint"]], data$SD)
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      y <- stats::dnorm(x_seq, prior[["parMu"]], sqrt( data$SD^2/N + prior[["parSigma"]]^2 ) / sqrt(N) )
+      y <- stats::dnorm(xSeq, prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 ) )
 
     }
-  }else{
-    if(prior[["type"]] == "spike"){
+  } else{
+    if (prior[["type"]] == "spike") {
 
-      y <- stats::dnorm(x_seq, prior[["parPoint"]], sqrt( data$SD^2/N ) /sqrt(N) )
+      y <- stats::dnorm(xSeq, prior[["parPoint"]], data$SD )
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      y <- stats::dnorm(x_seq, .estimateGaussianMeanLS(prior, data),  sqrt( data$SD^2/N + .estimateGaussianSDLS(prior, data)^2 ) / sqrt(N) )
+      y <- stats::dnorm(xSeq, .estimateGaussianMeanLS(prior, data),  sqrt( data$SD^2 + .estimateGaussianSDLS(prior, data)^2 ))
 
     }
   }
 
 
-  dat        <- data.frame(x = x_seq, y = y, g = "Prediction")
+  dat        <- data.frame(x = xSeq, y = y, g = "Prediction")
   return(dat)
 }
-.dataArrowGaussianLS        <- function(prior){
-  dat       <- data.frame(x = prior[["parPoint"]], y_start = 0, y_end = 1, g = "Prior = Posterior")
+.dataArrowGaussianLS        <- function(prior) {
+  dat       <- data.frame(x = prior[["parPoint"]], yStart = 0, yEnd = 1, g = "Prior = Posterior")
   return(dat)
 }
-.dataObservedGaussianLS     <- function(data){
+.dataObservedGaussianLS     <- function(data) {
 
   dat   <- data.frame(x = data$mean, y = 0, g = "Sample proportion")
 
   return(dat)
 }
 
-.dataCentralGaussianLS      <- function(data, prior, coverage, N = NULL, type = c("parameter", "prediction")){
+.dataCentralGaussianLS      <- function(data, prior, coverage, N = 1, type = c("parameter", "prediction")) {
 
-  if(type == "parameter"){
+  if (type == "parameter") {
 
-    if(prior[["type"]] == "spike"){
+    if (prior[["type"]] == "spike") {
 
       x <- c(prior[["parPoint"]], prior[["parPoint"]])
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      if(is.null(data)){
+      if (is.null(data)) {
 
         x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parMu"]], prior[["parSigma"]])
 
-      }else{
+      } else{
 
         x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), .estimateGaussianMeanLS(prior, data), .estimateGaussianSDLS(prior, data))
 
@@ -540,32 +538,32 @@
 
     }
 
-  }else if(type == "prediction"){
+  } else if (type == "prediction") {
 
-    if(is.null(data)){
+    if (is.null(data)) {
 
-      if(prior[["type"]] == "spike"){
+      if (prior[["type"]] == "spike") {
 
-        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parPoint"]], data$SD)
+        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parPoint"]], data$SD /sqrt(N))
 
-      }else if(prior[["type"]] == "normal"){
+      } else if (prior[["type"]] == "normal") {
 
-        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parMu"]], sqrt( data$SD^2/N + prior[["parSigma"]]^2 ) )
+        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 ) /sqrt(N) )
 
       }
 
-    }else{
+    } else{
 
-      if(prior[["type"]] == "spike"){
+      if (prior[["type"]] == "spike") {
 
-        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parPoint"]], data$SD/sqrt(N))
+        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["parPoint"]], data$SD /sqrt(N))
 
-      }else if(prior[["type"]] == "normal"){
+      } else if (prior[["type"]] == "normal") {
 
-        post_mean <- .estimateGaussianMeanLS(prior, data)
-        post_SD   <- .estimateGaussianSDLS(prior, data)
+        postMean <- .estimateGaussianMeanLS(prior, data)
+        postSD   <- .estimateGaussianSDLS(prior, data)
 
-        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), post_mean,  sqrt( data$SD^2/N + post_SD^2 ) )
+        x <- stats::qnorm(c((1 - coverage)/2, 1 - (1 - coverage)/2), postMean,  sqrt( data$SD^2 + postSD^2 ) /sqrt(N) )
 
       }
 
@@ -573,25 +571,25 @@
 
   }
 
-  dat       <- data.frame(x_start = x[1], x_end = x[2], g = "central", coverage = coverage)
+  dat       <- data.frame(xStart = x[1], xEnd = x[2], g = "central", coverage = coverage)
   return(dat)
 }
-.dataCustomGaussianLS       <- function(data, prior, lCI, uCI, N = NULL, type = c("parameter", "prediction")){
+.dataCustomGaussianLS       <- function(data, prior, lCI, uCI, N = 1, type = c("parameter", "prediction")) {
 
-  if(type == "parameter"){
+  if (type == "parameter") {
 
-    if(prior[["type"]] == "spike"){
+    if (prior[["type"]] == "spike") {
 
-      coverage <- ifelse(lCI <= prior[["parPoint"]] & prior[["parPoint"]] <= uCI, 1, 0)
+      coverage <- ifelse (lCI <= prior[["parPoint"]] & prior[["parPoint"]] <= uCI, 1, 0)
 
-    }else if(prior[["type"]] == "normal"){
+    } else if (prior[["type"]] == "normal") {
 
-      if(is.null(data)){
+      if (is.null(data)) {
 
         coverage <- stats::pnorm(uCI, prior[["parMu"]], prior[["parSigma"]]) -
           stats::pnorm(lCI, prior[["parMu"]], prior[["parSigma"]])
 
-      }else{
+      } else{
 
         coverage <- stats::pnorm(uCI, .estimateGaussianMeanLS(prior, data), .estimateGaussianSDLS(prior, data)) -
           stats::pnorm(lCI, .estimateGaussianMeanLS(prior, data), .estimateGaussianSDLS(prior, data))
@@ -600,36 +598,36 @@
 
     }
 
-  }else if(type == "prediction"){
+  } else if (type == "prediction") {
 
-    if(is.null(data)){
+    if (is.null(data)) {
 
-      if(prior[["type"]] == "spike"){
+      if (prior[["type"]] == "spike") {
 
-        coverage <- stats::pnorm(uCI, prior[["parPoint"]], data$SD) -
-          stats::pnorm(lCI, prior[["parPoint"]], data$SD)
+        coverage <- stats::pnorm(uCI, prior[["parPoint"]], data$SD /sqrt(N)) -
+          stats::pnorm(lCI, prior[["parPoint"]], data$SD /sqrt(N))
 
-      }else if(prior[["type"]] == "normal"){
+      } else if (prior[["type"]] == "normal") {
 
-        coverage <- stats::pnorm(uCI, prior[["parMu"]], sqrt( data$SD^2/N + prior[["parSigma"]]^2 ) ) -
-          stats::pnorm(lCI, prior[["parMu"]], sqrt( data$SD^2/N + prior[["parSigma"]]^2 ) )
+        coverage <- stats::pnorm(uCI, prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 ) /sqrt(N) ) -
+          stats::pnorm(lCI, prior[["parMu"]], sqrt( data$SD^2 + prior[["parSigma"]]^2 ) /sqrt(N) )
 
       }
 
-    }else{
+    } else{
 
-      if(prior[["type"]] == "spike"){
+      if (prior[["type"]] == "spike") {
 
-        coverage <- stats::pnorm(uCI, prior[["parPoint"]], data$SD/sqrt(N)) -
-          stats::pnorm(lCI, prior[["parPoint"]], data$SD/sqrt(N))
+        coverage <- stats::pnorm(uCI, prior[["parPoint"]], data$SD /sqrt(N)) -
+          stats::pnorm(lCI, prior[["parPoint"]], data$SD /sqrt(N))
 
-      }else if(prior[["type"]] == "normal"){
+      } else if (prior[["type"]] == "normal") {
 
-        post_mean <- .estimateGaussianMeanLS(prior, data)
-        post_SD   <- .estimateGaussianSDLS(prior, data)
+        postMean <- .estimateGaussianMeanLS(prior, data)
+        postSD   <- .estimateGaussianSDLS(prior, data)
 
-        coverage <- stats::pnorm(uCI, post_mean,  sqrt( data$SD^2/N + post_SD^2 ) ) -
-          stats::pnorm(lCI, post_mean,  sqrt( data$SD^2/N + post_SD^2 ) )
+        coverage <- stats::pnorm(uCI, postMean,  sqrt( data$SD^2 + postSD^2 ) /sqrt(N) ) -
+          stats::pnorm(lCI, postMean,  sqrt( data$SD^2 + postSD^2 ) /sqrt(N) )
 
       }
 
@@ -637,37 +635,82 @@
 
   }
 
-  dat       <- data.frame(x_start = lCI, x_end = uCI, g = "custom", coverage = coverage)
+  dat       <- data.frame(xStart = lCI, xEnd = uCI, g = "custom", coverage = coverage)
   return(dat)
 }
-.dataSupportGaussianLS      <- function(data, prior, BF, range = NULL){
+.dataSupportGaussianLS      <- function(data, prior, BF, range = NULL) {
 
-  if(prior[["type"]] == "spike"){
+  if (prior[["type"]] == "spike") {
 
     lCI <- prior[["parPoint"]]
     uCI <- prior[["parPoint"]]
 
-  }else if(prior[["type"]] == "normal"){
+  } else if (prior[["type"]] == "normal") {
 
-    if(is.null(range)){
+    if (is.null(range)) {
       range <- .rangeGaussianSupportLS(data, prior, BF)
     }
 
     x <- .normalSupportLS(data, prior, BF)
 
-    if(nrow(x) > 0){
+    if (!anyNA(x)) {
       lCI      <- x$lCI
       uCI      <- x$uCI
-    }else{
+    } else{
       lCI      <- NA
       uCI      <- NA
     }
   }
 
-  dat <- data.frame(x_start = lCI, x_end = uCI, g = "support", BF = BF)
+  dat <- data.frame(xStart = lCI, xEnd = uCI, g = "support", BF = BF)
+  return(dat)
+}
+.estimateDataPointGaussian  <- function(data, prior, N, type = c("parameter", "prediction"), estimate = c("mean", "median", "mode"), prop) {
+
+  if (type == "parameter") {
+
+    tempEst <- .estimateGaussianLS(data, prior)
+    l <- tempEst[[estimate]]
+
+    if (prior[["type"]] == "spike") {
+
+      x <- prior$parPoint
+      y <- 1
+
+    } else if (prior[["type"]] == "normal") {
+
+      x <- tempEst[[estimate]]
+      y <- stats::dnorm(x, .estimateGaussianMeanLS(prior, data), .estimateGaussianSDLS(prior, data))
+
+    }
+
+  } else if (type == "prediction") {
+
+    options  <- list(predictionN = N)
+    tempPred <- .predictGaussianLS(data, prior, options, prop)
+    l <- tempPred[[estimate]]
+
+    if (prior[["type"]] == "spike") {
+
+      x <- tempPred[[estimate]]
+      if (!prop)
+        y <- stats::dnorm(x, prior$parPoint, data$SD)
+      else
+        y <- stats::dnorm(x, prior$parPoint, data$SD/sqrt(N))
+
+    } else if (prior[["type"]] == "normal") {
+
+      x <- tempPred[[estimate]]
+      if (!prop)
+        y <- stats::dnorm(x, .estimateGaussianMeanLS(prior, data), sqrt( data$SD^2 + .estimateGaussianSDLS(prior, data)^2 ))
+      else
+        y <- stats::dnorm(x, .estimateGaussianMeanLS(prior, data), sqrt( data$SD^2 + .estimateGaussianSDLS(prior, data)^2 )/sqrt(N))
+    }
+  }
+
+  dat <- data.frame(x = x, y = y, estimate = estimate, l = l)
   return(dat)
 }
 
-
 # all settings dependent on data input
-.GaussianLS_data_dependencies <- c("dataType", "data_sequence", "selectedVariable", "priors")
+.dataDependenciesGaussianLS <- c("dataType", "dataCountsMean", "dataCountsSD", "dataCountsN", "dataSequenceInput", "dataSequenceSD", "dataVariableSelected", "dataVariableSD", "priors")

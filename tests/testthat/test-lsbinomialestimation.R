@@ -16,20 +16,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
+  options$plotsPosteriorIndividualPrior <- TRUE
+  options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- FALSE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- FALSE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -65,39 +66,27 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- TRUE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1", 
-                              parPoint = "0.5", type = "spike", value = ""), list(name = "Models Beta", 
-                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.5", type = "beta", 
+  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
+                              parPoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
+                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.5", type = "beta",
                                                                                   value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
-  test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Models Beta"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "models-beta-default-1", dir="LSbinomialestimation")
-  })
-  
-  test_that("Models Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Models Spike"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "models-spike-default-2", dir="LSbinomialestimation")
-  })
-  
+
+
   test_that("Sequential Updating Plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-2-default-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Sequential Interval Updating Plot matches", {
     plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequantial-interval-plot-3-default-4", dir="LSbinomialestimation")
   })
-  
+
   test_that("Updating Table results match", {
     table <- results[["results"]][["containerIterativeUpdating"]][["collection"]][["containerIterativeUpdating_estimatesSequentialTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -153,25 +142,25 @@ context("Learn Bayes - Binomial Estimation")
                                         97, "beta (58, 42)", "spike at 0.5", 98, "beta (58, 43)", "spike at 0.5",
                                         99, "beta (59, 43)", "spike at 0.5", 100))
   })
-  
+
   test_that("Posterior Plots matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-plot-5-default-5", dir="LSbinomialestimation")
   })
-  
+
   test_that("Prior Plots matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-plot-6-default-6", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions Plots matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-7-default-7", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions Table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -179,14 +168,14 @@ context("Learn Bayes - Binomial Estimation")
                              0.5, "Models Beta", "beta (59, 43)", 0.57843137254902, "beta-binomial (1, 59, 43)",
                              0.57843137254902, 0.493810206253452))
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models Spike", "spike at 0.5", 0.5, "spike at 0.5", 0.5, "Models Beta",
                                         "beta (59, 43)", 0.57843137254902, "beta (1, 1)", 0.5))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -210,20 +199,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- TRUE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "HPD"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "HPD"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "stacked"
   options$plotsIterativeIntervalUpdatingTable <- TRUE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- TRUE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -259,35 +249,24 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- TRUE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
-  test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Models Beta"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "models-beta-vol1-1", dir="LSbinomialestimation")
-  })
-  
-  test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Models Point"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "models-point-vol1-2", dir="LSbinomialestimation")
-  })
-  
+
+
+
   test_that("Sequential Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-2-vol1-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Sequential Updating Table results match", {
-    table <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_tableIterative"]][["data"]]
+    table <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_tableIterative"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("[0.094, 0.906]", 0.5, "[0.300, 0.300]", 0.3, 0, "[0.044, 0.772]",
                                         0.38572756813239, "[0.300, 0.300]", 0.3, 1, "[0.147, 0.853]",
@@ -390,19 +369,19 @@ context("Learn Bayes - Binomial Estimation")
                                         0.573288632711558, "[0.300, 0.300]", 0.3, 99, "[0.482, 0.671]",
                                         0.577418036585966, "[0.300, 0.300]", 0.3, 100))
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol1-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol1-4", dir="LSbinomialestimation")
   })
-  
+
   test_that("Sequential Interval Updating Table results match", {
     table <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_tableIterativeInterval"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -441,37 +420,37 @@ context("Learn Bayes - Binomial Estimation")
                                         1, 96, 0.999935755666939, 1, 97, 0.999915048176409, 1, 98, 0.999951527071306,
                                         1, 99, 0.999935760770006, 1, 100))
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol1-5", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol1-6", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol1-7", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol1-8", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-11-vol1-9", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -479,7 +458,7 @@ context("Learn Bayes - Binomial Estimation")
                                         6, 1.62789504128088, "Models Point", "spike at 0.3", 0.3, "binomial (10, 0.3)",
                                         3, 1.44913767461894))
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -487,7 +466,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -511,20 +490,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "HPD"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "HPD"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "stacked"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- TRUE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -560,69 +540,69 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["collection"]][["containerIterative_plotsIterative_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeStacked"]][["collection"]][["containerIterativeStacked_plotsIterative"]][["collection"]][["containerIterativeStacked_plotsIterative_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["collection"]][["containerIterative_plotsIterative_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeStacked"]][["collection"]][["containerIterativeStacked_plotsIterative"]][["collection"]][["containerIterativeStacked_plotsIterative_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-2", dir="LSbinomialestimation")
   })
-  
+
   test_that("Sequential Interval plot matches", {
     plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-interval-plot-2-vol2-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-4", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-5", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-6", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-7", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-8", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-9", dir="LSbinomialestimation")
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -630,7 +610,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -654,20 +634,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -703,33 +684,33 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Sequantial Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "titleless-plot-0-vol3-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol3-2", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol3-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -737,7 +718,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -761,20 +742,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -810,27 +792,27 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol4-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol4-2", dir="LSbinomialestimation")
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -838,7 +820,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -862,20 +844,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -911,27 +894,27 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Models Beta plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol5-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Models Point plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol5-2", dir="LSbinomialestimation")
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -939,7 +922,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -963,20 +946,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1012,21 +996,21 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Prediction plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-0-vol6-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1034,7 +1018,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1058,20 +1042,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "support"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "support"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1107,21 +1092,21 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2", 
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point", 
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
+                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Prediction plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-0-vol7-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1129,7 +1114,7 @@ context("Learn Bayes - Binomial Estimation")
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1153,20 +1138,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
+  options$plotsPosteriorIndividualPrior <- TRUE
+  options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -1202,62 +1188,56 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- TRUE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1", 
+  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "spike", value = ""))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
-  test_that("Models Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Models Spike"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "models-spike", dir="LSbinomialestimation")
-  })
-  
+
+
   test_that("Sequential Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-1-spike-1", dir="LSbinomialestimation")
   })
-  
+
   test_that("Sequential Interval Updating  matches", {
     plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequantial-interval-plot-2-spike-2", dir="LSbinomialestimation")
   })
-  
+
   test_that("Posterior plot matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-plot-3-spike-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Prior plot matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-plot-4-spike-4", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-5-spike-5", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions Summary table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models Spike", "spike at 0.5", 0.5, "binomial (1, 0.5)", 0.5,
                                         0.5))
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models Spike", "spike at 0.5", 0.5, "spike at 0.5", 0.5))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1281,20 +1261,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- "0"
   options$nFailures <- 0
   options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
+  options$plotsPosteriorIndividualPrior <- TRUE
+  options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- TRUE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- TRUE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- TRUE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- TRUE
   options$plotsPosteriorBF <- 1
@@ -1330,63 +1311,58 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- TRUE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "median"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "1", parBeta = "1", 
+  options$priors <- list(list(name = "Models Beta", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""))
   options$selectedVariable <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
-  test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Models Beta"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "models-beta-beta-1", dir="LSbinomialestimation")
-  })
-  
+
+
+
   test_that("Sequential Updating plot matches", {
-    plotName <- results[["results"]][["containerIterative"]][["collection"]][["containerIterative_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_plotsIterative"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-1-beta-2", dir="LSbinomialestimation")
   })
-  
+
   test_that("Sequential Interval Updating plot matches", {
     plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-interval-plot-2-beta-3", dir="LSbinomialestimation")
   })
-  
+
   test_that("Posterior plot matches", {
     plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-plot-3-beta-4", dir="LSbinomialestimation")
   })
-  
+
   test_that("Prior plot matches", {
     plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-plot-4-beta-5", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions plot matches", {
     plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-5-beta-6", dir="LSbinomialestimation")
   })
-  
+
   test_that("Predictions Summary table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models Beta", "beta (59, 43)", 0.578945969319675, "beta-binomial (1, 59, 43)",
                                         1, 0.493810206253452))
   })
-  
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models Beta", "beta (59, 43)", 0.58, "beta (1, 1)", "[0, 1]"
                                    ))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
@@ -1410,20 +1386,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- list()
   options$nFailures <- 6
   options$nSuccesses <- 3
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- FALSE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- FALSE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- FALSE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- FALSE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1459,8 +1436,8 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5", 
-                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1", 
+  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
+                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
                                                                 parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
   options$selectedVariable <- ""
   set.seed(1)
@@ -1487,20 +1464,21 @@ context("Learn Bayes - Binomial Estimation")
   options$keySuccessVar <- list()
   options$nFailures <- 6
   options$nSuccesses <- 3
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- FALSE
+  options$plotsPosteriorIndividualPrior <- FALSE
+  options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
   options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeIndividualCI <- FALSE
-  options$plotsIterativeIndividualType <- "central"
+  options$plotsIterativeOverlyingCI <- FALSE
+  options$plotsIterativeOverlyingType <- "central"
   options$plotsIterativeInterval <- FALSE
   options$plotsIterativeIntervalLower <- 0.25
   options$plotsIterativeIntervalType <- "overlying"
   options$plotsIterativeIntervalUpdatingTable <- FALSE
   options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeType <- "overlying"
+  options$plotsIterativeOverlying <- TRUE
+  options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
   options$plotsPosterior <- FALSE
   options$plotsPosteriorBF <- 1
@@ -1536,21 +1514,21 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTable <- FALSE
   options$predictionPlotTable <- FALSE
   options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5", 
-                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1", 
+  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
+                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
                                                                 parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
   options$selectedVariable <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
-  
-  
+
+
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models 1", "spike at 0.5", 0.5, "spike at 0.5", 0.5, "Models 2",
                                         "beta (6, 4)", 0.6, "beta (1, 1)", 0.5))
   })
-  
+
   test_that("Data Summary table results match", {
     table <- results[["results"]][["summaryContainer"]][["collection"]][["summaryContainer_summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
