@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-05-07 13:16\n"
-"PO-Revision-Date: 2021-05-03 19:31+0000\n"
+"PO-Revision-Date: 2021-05-15 20:51+0000\n"
 "Last-Translator: Alex França <alex.tonante@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
@@ -107,16 +107,16 @@ msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Estimativas"
 
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "%s%% Intervalo de credibilidade"
 
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
 msgid "Notation"
 msgstr ""
@@ -280,7 +280,6 @@ msgstr ""
 msgid "Marker"
 msgstr ""
 
-#, fuzzy
 msgid "Density"
 msgstr "Densidade"
 
@@ -1113,7 +1112,6 @@ msgid ""
 "interval.</li>%s</ul>"
 msgstr ""
 
-#, fuzzy
 msgid "Mean"
 msgstr "Média"
 
@@ -1169,7 +1167,6 @@ msgstr "Anterior"
 msgid "Only numeric values are allowed in the input."
 msgstr ""
 
-#, fuzzy
 msgid "SD"
 msgstr "DP"
 
