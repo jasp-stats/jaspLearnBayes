@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-05-12 23:32+0000\n"
-"Last-Translator: Michelle Leite <michelleufs@gmail.com>\n"
-"Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
-"jasplearnbayes-qml/pt/>\n"
-"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -29,18 +23,6 @@ msgstr "Estimação binomial"
 
 msgctxt "Description|"
 msgid "Binomial Testing"
-msgstr ""
-
-msgctxt "Description|"
-msgid "Continuous"
-msgstr ""
-
-msgctxt "Description|"
-msgid "Gaussian Estimation"
-msgstr ""
-
-msgctxt "Description|"
-msgid "Gaussian Testing"
 msgstr ""
 
 msgctxt "Description|"
@@ -337,62 +319,6 @@ msgctxt "LSbinomialdatainput|"
 msgid "Data summary"
 msgstr ""
 
-msgctxt "LSestimationinference|"
-msgid "Inference"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Point estimate"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Prior distribution"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "All"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Stacked"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Individual"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "CI"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Mass"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Lower"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Upper"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Posterior distribution"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "BF"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Prior and posterior distribution"
-msgstr ""
-
-msgctxt "LSestimationinference|"
-msgid "Observed proportion"
-msgstr ""
-
 msgctxt "LSestimationpredictions|"
 msgid "Posterior Prediction"
 msgstr ""
@@ -554,115 +480,6 @@ msgstr "Selecionada"
 
 msgctxt "LSintrotext|"
 msgid "Introductory texts"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Inference"
-msgstr ""
-
-#, fuzzy
-msgctxt "LStestinginference|"
-msgid "Bayes Factor"
-msgstr "Fator de Bayes"
-
-msgctxt "LStestinginference|"
-msgid "vs. rest"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "vs. best"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "vs."
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "BF₁₀"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "BF₀₁"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "log(BF₁₀)"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Prior distribution"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Conditional"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Point estimate"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "CI"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Mass"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Lower"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Upper"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Joint"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Overlying"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Stacked"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Marginal"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Prior predictive distribution"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Observed proportion"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Predictions table"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Predictive accuracy"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Normalized"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Posterior distribution"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "BF"
-msgstr ""
-
-msgctxt "LStestinginference|"
-msgid "Prior and posterior distribution"
 msgstr ""
 
 msgctxt "LStestingpredictions|"
@@ -1022,4 +839,269 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
+msgstr ""
+
+msgctxt "LSgaussianestimation|"
+msgid "Color palette"
+msgstr ""
+
+msgctxt "LSgaussianestimation|"
+msgid "Colorblind"
+msgstr ""
+
+msgctxt "LSgaussianestimation|"
+msgid "Colorblind Alt."
+msgstr ""
+
+msgctxt "LSgaussianestimation|"
+msgid "Viridis"
+msgstr ""
+
+msgctxt "LSgaussianestimation|"
+msgid "ggplot2"
+msgstr ""
+
+msgctxt "LSgaussianestimation|"
+msgid "Gray"
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "Color palette"
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "Colorblind"
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "Colorblind Alt."
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "Viridis"
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "ggplot2"
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "Gray"
+msgstr ""
+
+msgctxt "LSgaussiantesting|"
+msgid "Observed mean"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Prior and Posterior Distributions"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Point estimate"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Prior distribution"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "All"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Stacked"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Individual"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "CI"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Mass"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Posterior distribution"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "BF"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Observed proportion"
+msgstr ""
+
+msgctxt "LSestimationsequential|"
+msgid "Stacked distributions"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Predictive Performance"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Prior predictive distribution"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Conditional"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Point estimate"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "CI"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Mass"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Joint"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Overlying"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Stacked"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Marginal"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Observed number of successes"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Predictions table"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Predictive accuracy"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Normalized"
+msgstr ""
+
+#, fuzzy
+msgctxt "LStestingpredictiveperformance|"
+msgid "Bayes Factor"
+msgstr "Fator de Bayes"
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "vs."
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "vs. rest"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "vs. best"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "BF₁₀"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "BF₀₁"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "log(BF₁₀)"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Prior and Posterior Distributions"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Prior distribution"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Conditional"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Point estimate"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "CI"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Mass"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Joint"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Overlying"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Stacked"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Marginal"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Posterior distribution"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "BF"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Observed proportion"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Prior and posterior distribution"
 msgstr ""
