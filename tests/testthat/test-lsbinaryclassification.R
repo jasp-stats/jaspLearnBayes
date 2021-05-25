@@ -255,3 +255,49 @@ test_that("Statistics table results match", {
                                       0.538892152581733, "P(Condition = positive <unicode> Test = positive <unicode> Condition = negative <unicode> Test = negative)",
                                       "Accuracy", 0.599568884863196))
 })
+
+test_that("Analysis handles errors", {
+  set.seed(1)
+  data <- data.frame(bin = factor(sample(1:2, 100, TRUE)), three = factor(sample(1:3, 100, TRUE)))
+  data$marker <- rnorm(100, as.numeric(data$bin))
+  data$badMarker <- 1-data$marker
+  data$miss99 <- NA
+  data$miss99[1] <- data$marker[1]
+
+  # More than two levels
+  options <- jaspTools::analysisOptions("LSbinaryclassification")
+  options$inputType <- "data"
+  options$labels <- "three"
+  options$marker <- "marker"
+
+  results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
+
+  testthat::expect_true(results[["results"]][["error"]])
+  testthat::expect_identical(results[["results"]][["errorMessage"]],
+                             "The 'Positive condition (binary)' variable must have two levels!")
+
+  # Less than one observation per level
+  options <- jaspTools::analysisOptions("LSbinaryclassification")
+  options$inputType <- "data"
+  options$labels <- "bin"
+  options$marker <- "miss99"
+
+  results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
+
+  testthat::expect_true(results[["results"]][["error"]])
+  testthat::expect_identical(results[["results"]][["errorMessage"]],
+                             "Each condition needs at least one observation.")
+
+  # Bad group means
+  options <- jaspTools::analysisOptions("LSbinaryclassification")
+  options$inputType <- "data"
+  options$labels <- "bin"
+  options$marker <- "badMarker"
+
+  results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
+
+  testthat::expect_true(results[["results"]][["error"]])
+  testthat::expect_identical(results[["results"]][["errorMessage"]],
+                             "Mean of marker in positive condition (2) needs to be larger than the mean of marker in negative condition (1).")
+
+})

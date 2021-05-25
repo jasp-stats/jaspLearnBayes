@@ -48,7 +48,7 @@ Form {
 		{
 			preferredHeight: jaspTheme.smallDefaultVariablesFormHeight
 			AvailableVariablesList { name: "allVariablesList" }
-			AssignedVariablesList { name: "marker";	title: qsTr("Marker");	suggestedColumns: ["scale"];				singleVariable: true	}
+			AssignedVariablesList { name: "marker";	title: qsTr("Marker");	allowedColumns: ["scale"];				singleVariable: true	}
 			AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
 		}
 
