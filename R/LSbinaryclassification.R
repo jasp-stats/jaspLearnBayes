@@ -102,7 +102,8 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
     labels <- dataset[[options[["labels"]]]]
     levels <- levels(as.factor(labels))
-    if(length(levels) != 2) .quitAnalysis(gettext("The 'Positive condition (binary)' variable must have two levels!"))
+    if(length(levels) != 2)    .quitAnalysis(gettext("The 'Positive condition (binary)' variable must have two levels!"))
+    if(any(table(labels) < 1)) .quitAnalysis(gettext("Each condition needs at least one observation."))
 
     dataset <- data.frame(
       marker    = dataset[[options[["marker"]]]],
@@ -112,7 +113,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   }
 
   if(mean(subset(dataset, condition)$marker) < mean(subset(dataset, !condition)$marker))
-    .quitAnalysis(gettext("Mean of marker in positive condition needs to be larger than the mean of marker in negative condition."))
+    .quitAnalysis(gettextf("Mean of marker in positive condition (%s) needs to be larger than the mean of marker in negative condition (%s).", levels[2], levels[1]))
 
   return(dataset)
 }
