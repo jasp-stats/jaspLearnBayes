@@ -1052,9 +1052,10 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "vs. rest"
 msgstr "vs. Rest"
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. best"
-msgstr ""
+msgstr "vs. Beste"
 
 #, fuzzy
 msgctxt "LStestingpredictiveperformance|"
