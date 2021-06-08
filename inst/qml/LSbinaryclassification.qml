@@ -36,9 +36,9 @@ Form {
 	{
 		visible: inputType.value === "pointEstimates"
 		title: qsTr("Estimates")
-		FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0.00001; max: 0.99999; defaultValue: "0.1"	}
-		FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0.00001; max: 0.99999; defaultValue: "0.8" }
-		FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0.00001; max: 0.99999; defaultValue: "0.8"	}
+		FormulaField { name: "prevalence";	label: qsTr("Prevalence");	min: 0.00001; max: 0.99999; defaultValue: "0.1"; fieldWidth: 55	}
+		FormulaField { name: "sensitivity"; label: qsTr("Sensitivity");	min: 0.00001; max: 0.99999; defaultValue: "0.8"; fieldWidth: 55 }
+		FormulaField { name: "specificity"; label: qsTr("Specificity");	min: 0.00001; max: 0.99999; defaultValue: "0.8"; fieldWidth: 55	}
 	}
 
 	Group
@@ -52,7 +52,7 @@ Form {
 			AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
 		}
 
-		FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"	}
+		FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"; fieldWidth: 55	}
 	}
 
 	Group
@@ -60,23 +60,28 @@ Form {
 		visible: inputType.value === "uncertainEstimates"
 		columns: 2
 		title: qsTr("Data")
-		IntegerField { name: "truePositive";  label: qsTr("True positive");  min: 0; defaultValue: 0	}
-		IntegerField { name: "falsePositive"; label: qsTr("False positive"); min: 0; defaultValue: 0	}
-		IntegerField { name: "falseNegative"; label: qsTr("False negative"); min: 0; defaultValue: 0	}
-		IntegerField { name: "trueNegative";  label: qsTr("True negative");  min: 0; defaultValue: 0	}
+		IntegerField { name: "truePositive";  label: qsTr("True positive");  min: 0; defaultValue: 0; fieldWidth: 55	}
+		IntegerField { name: "falsePositive"; label: qsTr("False positive"); min: 0; defaultValue: 0; fieldWidth: 55	}
+		IntegerField { name: "falseNegative"; label: qsTr("False negative"); min: 0; defaultValue: 0; fieldWidth: 55	}
+		IntegerField { name: "trueNegative";  label: qsTr("True negative");  min: 0; defaultValue: 0; fieldWidth: 55	}
 	}
 
 	Group
 	{
 		visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
-		columns: 2
+		columns: 3
 		title: qsTr("Priors")
-		FormulaField { name: "prevalenceAlpha";  label: qsTr("Prevalence ~ Beta(α = ");		afterLabel: ", ";		min: 0; defaultValue: "1"	}
-		FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"	}
-		FormulaField { name: "sensitivityAlpha"; label: qsTr("Sensitivity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
-		FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
-		FormulaField { name: "specificityAlpha"; label: qsTr("Specificity ~ Beta(α = ");	afterLabel: ", ";		min: 0; defaultValue: "8"	}
-		FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"	}
+		Text{ text: qsTr("Prevalence") }
+		FormulaField { name: "prevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 55}
+		FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 55	}
+
+		Text{ text: qsTr("Sensitivity") }
+		FormulaField { name: "sensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
+		FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+
+		Text{ text: qsTr("Specificity") }
+		FormulaField { name: "specificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
+		FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
 	}
 
 	Group
