@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-06-10 10:33+0000\n"
+"PO-Revision-Date: 2021-06-12 09:32+0000\n"
 "Last-Translator: Johannes Keyser <johanneskeyser@posteo.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/de/>\n"
@@ -356,7 +356,7 @@ msgstr "Einzeln"
 
 msgctxt "LSestimationpredictions|"
 msgid "CI"
-msgstr "KI"
+msgstr "GI"
 
 msgctxt "LSestimationpredictions|"
 msgid "Mass"
@@ -392,7 +392,7 @@ msgstr "Alle"
 
 msgctxt "LSestimationsequential|"
 msgid "CI"
-msgstr "KI"
+msgstr "GI"
 
 msgctxt "LSestimationsequential|"
 msgid "Mass"
@@ -508,7 +508,7 @@ msgstr "Konditional"
 
 msgctxt "LStestingpredictions|"
 msgid "CI"
-msgstr "KI"
+msgstr "GI"
 
 msgctxt "LStestingpredictions|"
 msgid "mass"
@@ -524,7 +524,7 @@ msgstr "obere"
 
 msgctxt "LStestingpredictions|"
 msgid "Joint"
-msgstr "gemeinsam"
+msgstr "Gemeinsam"
 
 msgctxt "LStestingpredictions|"
 msgid "Overlying"
@@ -536,7 +536,7 @@ msgstr "Gestapelt"
 
 msgctxt "LStestingpredictions|"
 msgid "Marginal"
-msgstr "marginal"
+msgstr "Marginal"
 
 msgctxt "LStestingpredictions|"
 msgid "Mass"
@@ -572,7 +572,7 @@ msgstr "Konditional"
 
 msgctxt "LStestingsequential|"
 msgid "Joint"
-msgstr "Zusammen"
+msgstr "Gemeinsam"
 
 msgctxt "LStestingsequential|"
 msgid "Normalized"
@@ -721,7 +721,7 @@ msgstr "Weitere Infos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
-msgstr "Priors und Posteriors"
+msgstr "Prior und Posterior"
 
 msgctxt "LSbinaryclassification|"
 msgid "Plots"
