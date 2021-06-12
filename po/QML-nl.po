@@ -712,19 +712,7 @@ msgid "Priors"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
-msgid "Prevalence ~ Beta(α = "
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
 msgid ")"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Sensitivity ~ Beta(α = "
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Specificity ~ Beta(α = "
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
@@ -1182,4 +1170,8 @@ msgstr "Waargenomen proportie"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and posterior distribution"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "~ Beta(α = "
 msgstr ""
