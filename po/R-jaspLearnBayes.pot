@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.15\n"
-"POT-Creation-Date: 2021-05-07 13:16\n"
+"POT-Creation-Date: 2021-06-29 17:36\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,10 @@ msgstr ""
 msgid "The 'Positive condition (binary)' variable must have two levels!"
 msgstr ""
 
-msgid "Mean of marker in positive condition needs to be larger than the mean of marker in negative condition."
+msgid "Each condition needs at least one observation."
+msgstr ""
+
+msgid "Mean of marker in positive condition (%s) needs to be larger than the mean of marker in negative condition (%s)."
 msgstr ""
 
 msgid "Drawing samples"
@@ -370,6 +373,9 @@ msgstr ""
 msgid "Population proportion"
 msgstr ""
 
+msgid "Prior = Posterior"
+msgstr ""
+
 msgid "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr ""
 
@@ -457,6 +463,9 @@ msgstr ""
 msgid "Posterior probability"
 msgstr ""
 
+msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
+msgstr ""
+
 msgid "Observations"
 msgstr ""
 
@@ -478,16 +487,22 @@ msgstr ""
 msgid "Incorrect arguments for the inverse cumulative density function"
 msgstr ""
 
+msgid "'Successes'"
+msgstr ""
+
 msgid "%1$s %2$s Plots"
 msgstr ""
 
 msgid "Prior and Posterior Plots"
 msgstr ""
 
-msgid "%s Sequential Analysis: Point Estimate"
+msgid "Sequential Analysis: Point Estimate"
 msgstr ""
 
 msgid "%s Sequential Analysis: Interval"
+msgstr ""
+
+msgid "Sequential Analysis: Staked"
 msgstr ""
 
 msgid "Sequential Posterior Updating"
@@ -553,7 +568,7 @@ msgstr ""
 msgid "The posterior probabilities 'P(H|data)' are then computed using Bayes formula,\n        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> where 'P(H)' represents the prior probability of the hypothesis, 'P(data|H)' the marginal likelihood of the data given the hypothesis, and 'P(data)' the probability of the data. The factor 'P(data)' equals the sum of marginal likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
 msgstr ""
 
-msgid "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgid "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model (selected from the 'vs.' dropdown menu) and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
 
 msgid "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:\n    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>"
@@ -595,16 +610,13 @@ msgstr ""
 msgid "The 'Marginal' option collapses across all individual prior and posterior distributions, weighting them by their prior and posterior probability."
 msgstr ""
 
-msgid "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
-msgstr ""
-
-msgid "The 'All' option shows either the mean ('Mean') or the median ('Median') for all specified models in one figure, allowing for easier comparison. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s"
-msgstr ""
-
-msgid "The 'Stacked' option shows all of the prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgid "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %1$s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%2$s"
 msgstr ""
 
 msgid "The 'Updating table' option generates a numerical summary of the displayed figures."
+msgstr ""
+
+msgid "The 'Stacked distributions' option displays a plot with the sequential updating of the posterior distribution density (x- and y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another, creating a depth effect (z-axis)."
 msgstr ""
 
 msgid "The 'Interval' option displays a sequential plot with the probability of parameter %s lying inside of the interval ranging from ('lower') to ('upper'), (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
@@ -676,7 +688,7 @@ msgstr ""
 msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."
 msgstr ""
 
-msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown. The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown  (the selected hypothesis correponds to the '0' in BF%1$s%2$s). The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
 
 msgid "The 'Updating table' option generates a numerical summary of the displayed figure."
