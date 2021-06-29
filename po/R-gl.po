@@ -1,18 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.6.1\n"
-"Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2020-12-02 21:29+0000\n"
-"Last-Translator: JASP Stats <F.A.M.Meerhoff@uva.nl>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/jasp-engine/"
-"nl/>\n"
-"Language: nl\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: gl_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Virgin-Header: remove this line if you change anything in the header.\n"
+"X-Language: gl_ES\n"
+"X-Source-Language: C\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -83,8 +88,9 @@ msgid ""
 "\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 
+#, fuzzy
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "Benvido a R en JASP!"
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
 msgstr ""
@@ -97,147 +103,166 @@ msgid ""
 "of marker in negative condition (%s)."
 msgstr ""
 
+#, fuzzy
 msgid "Drawing samples"
-msgstr ""
+msgstr "Extraer mostras"
 
 msgid "Tables"
-msgstr ""
+msgstr "Táboas"
 
 msgid "Statistics"
-msgstr ""
+msgstr "Estatísticos"
 
+#, fuzzy
 msgid "Estimate"
-msgstr ""
+msgstr "Estimado"
 
+#, fuzzy
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "Intervalo de credibilidade"
 
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
+#, fuzzy
 msgid "Notation"
-msgstr ""
+msgstr "Rotación"
 
+#, fuzzy
 msgid "Interpretation"
-msgstr ""
+msgstr "Integración"
 
+#, fuzzy
 msgid "Confusion Matrix"
+msgstr "Matriz de desarranxo"
+
+msgid "%s%% CI"
 msgstr ""
 
 #, fuzzy
-msgid "%s%% CI"
-msgstr "%i %% BI"
-
 msgid "Positive test"
-msgstr ""
+msgstr "Positivo"
 
 msgid "Outcome"
-msgstr ""
+msgstr "Resultado"
 
 #, fuzzy
 msgid "Lower %s"
-msgstr "Prior %s"
+msgstr "Inferior"
 
+#, fuzzy
 msgid "Upper %s"
-msgstr ""
+msgstr "Superior"
 
+#, fuzzy
 msgid "Negative test"
-msgstr ""
+msgstr "Negativo"
 
+#, fuzzy
 msgid "Positive/Total"
-msgstr ""
+msgstr "Positivo"
 
+#, fuzzy
 msgid "Negative/Total"
-msgstr ""
+msgstr "Negativo"
 
 msgid "Total"
-msgstr "Totaal"
+msgstr "Total"
 
+#, fuzzy
 msgid "Positive condition"
-msgstr ""
+msgstr "Predición posterior"
 
+#, fuzzy
 msgid "Negative condition"
-msgstr ""
+msgstr "Binomial Negativa"
 
 #, fuzzy
 msgid "True/Total"
-msgstr "Totaal"
+msgstr "Total"
 
+#, fuzzy
 msgid "Prevalence"
-msgstr ""
+msgstr "Preferencias"
 
+#, fuzzy
 msgid "Rareness"
-msgstr ""
+msgstr "Asimetría"
 
 #, fuzzy
 msgid "Priors and Posteriors"
-msgstr "Prior en Posteriors Grafieken"
+msgstr "Previo e posterior"
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parámetro"
 
-#, fuzzy
 msgid "Prior"
-msgstr "Prior %s"
+msgstr "Previo"
 
 #, fuzzy
 msgid "Posterior"
-msgstr "Posterior %s"
+msgstr "R² posterior"
 
 #, fuzzy
 msgid "Sensitivity"
-msgstr "Dichtheid"
+msgstr "Sensibilidade/Especificidade"
 
 msgid "Specificity"
-msgstr ""
+msgstr "Especificidade"
 
-#, fuzzy
 msgid "beta(%s,%s)"
-msgstr "beta (%s, %s)"
+msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "Gráficas"
 
 #, fuzzy
 msgid "Probability Positive"
-msgstr "Kansverdeling"
+msgstr "Probabilidade para:"
 
 msgid "Not tested"
 msgstr ""
 
+#, fuzzy
 msgid "Tested"
-msgstr ""
+msgstr "Proba"
 
 msgid "Negative"
-msgstr ""
+msgstr "Negativo"
 
 msgid "Positive"
-msgstr ""
+msgstr "Positivo"
 
+#, fuzzy
 msgid "Test Result"
-msgstr ""
+msgstr "Comprobar os resultados"
 
 #, fuzzy
 msgid "P(Condition = positive)"
-msgstr "Voorwaardelijke kans"
+msgstr "Estimacións condicionais"
 
+#, fuzzy
 msgid "Icon Plot"
-msgstr ""
+msgstr "Gráfica"
 
+#, fuzzy
 msgid "True positive"
-msgstr ""
+msgstr "Todo positivo"
 
+#, fuzzy
 msgid "False positive"
-msgstr ""
+msgstr "Todo positivo"
 
+#, fuzzy
 msgid "False negative"
-msgstr ""
+msgstr "Todo negativo"
 
+#, fuzzy
 msgid "True negative"
-msgstr ""
+msgstr "Todo negativo"
 
 msgid "Receiving Operating Characteristic Curve"
 msgstr ""
@@ -248,57 +273,61 @@ msgstr ""
 msgid "True Positive Rate (Sensitivity)"
 msgstr ""
 
+#, fuzzy
 msgid "Test Characteristics"
-msgstr ""
+msgstr "Comprobar os resultados"
 
+#, fuzzy
 msgid "Test Threshold"
-msgstr ""
+msgstr "Valor límite"
 
+#, fuzzy
 msgid "Characteristic"
-msgstr ""
+msgstr "Gráficos"
 
 msgid "PPV and NPV by Prevalence"
 msgstr ""
 
 #, fuzzy
 msgid "Predictive Value"
-msgstr "Voorspelling %s"
+msgstr "Precisión de predicións"
 
 msgid "Alluvial Plot"
 msgstr ""
 
 #, fuzzy
 msgid "Condition"
-msgstr "Voorspelling %s"
+msgstr "Condicional"
 
 msgid "Test"
+msgstr "Proba"
+
+msgid "Proportion of Population"
 msgstr ""
 
 #, fuzzy
-msgid "Proportion of Population"
-msgstr "Proportie successen"
-
 msgid "Signal Detection"
-msgstr ""
+msgstr "Selección"
 
 msgid "Marker"
 msgstr ""
 
 msgid "Density"
-msgstr "Dichtheid"
+msgstr "Densidade"
 
-#, fuzzy
 msgid "Count"
-msgstr "Aantallen"
+msgstr "Cantidade"
 
 msgid "Estimates"
-msgstr ""
+msgstr "Estimacións"
 
+#, fuzzy
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Comprobación preditiva posterior"
 
+#, fuzzy
 msgid "Negative predictive value"
-msgstr ""
+msgstr "Valores efectivos negativos"
 
 msgid "False discovery rate"
 msgstr ""
@@ -306,14 +335,17 @@ msgstr ""
 msgid "False omission rate"
 msgstr ""
 
+#, fuzzy
 msgid "False positive rate"
-msgstr ""
+msgstr "Todo positivo"
 
+#, fuzzy
 msgid "False negative rate"
-msgstr ""
+msgstr "Todo negativo"
 
+#, fuzzy
 msgid "Accuracy"
-msgstr ""
+msgstr "Precisión numérica"
 
 msgid "Proportion of a population affected by the condition."
 msgstr ""
@@ -363,11 +395,13 @@ msgstr ""
 msgid "Proportion of false negatives in the pool of those that test negative."
 msgstr ""
 
+#, fuzzy
 msgid "Complement proportion to specificity."
-msgstr ""
+msgstr "Comparar as proporcións de columnas"
 
+#, fuzzy
 msgid "Complement proportion to sensitivity."
-msgstr ""
+msgstr "Comparar as proporcións de columnas"
 
 msgid "Proportion of the population that is true positive or true negative."
 msgstr ""
@@ -419,181 +453,197 @@ msgstr ""
 msgid "Parameter estimates are posterior means based on %i samples."
 msgstr ""
 
+#, fuzzy
 msgid "Data Summary"
-msgstr "Gegevensoverzicht"
+msgstr "Resumo de datos"
 
 msgid "Counts"
-msgstr "Aantallen"
+msgstr "Recontos"
 
+#, fuzzy
 msgid "Proportion"
-msgstr "Proportie"
+msgstr "Proporcións"
 
 msgid "Successes"
-msgstr "Successen"
+msgstr "Acertos"
 
 msgid "Failures"
-msgstr "Mislukkingen"
+msgstr "Fracasos"
 
 msgid "spike at %s"
-msgstr "Puntmassa bij %s"
+msgstr ""
 
 msgid "beta (%s, %s)"
-msgstr "beta (%s, %s)"
+msgstr ""
 
+#, fuzzy
 msgid "binomial (%i, %s)"
-msgstr "binomiaal (%i, %s)"
+msgstr "Proba Binomial"
 
+#, fuzzy
 msgid "beta-binomial (%i, %s, %s)"
-msgstr "beta-binomiaal (%i, %s, %s)"
+msgstr "Binomial Beta"
 
+#, fuzzy
 msgid "Estimation Summary"
-msgstr "Samenvatting Schatting"
+msgstr "Estimación"
 
 msgid "Model"
-msgstr "Model"
+msgstr "Modelo"
 
+#, fuzzy
 msgid "Prior (%s)"
-msgstr "Prior (%s)"
+msgstr "Previos"
 
+#, fuzzy
 msgid "Prior %s"
-msgstr "Prior %s"
+msgstr "Previos"
 
+#, fuzzy
 msgid "Posterior (%s)"
-msgstr "Posterior (%s)"
+msgstr "R² posterior"
 
+#, fuzzy
 msgid "Posterior %s"
-msgstr "Posterior %s"
+msgstr "R² posterior"
 
 msgid "Please specify successes and failures."
-msgstr "Specificeer a.u.b. het aantal successen en mislukkingen."
+msgstr ""
 
 msgid "These results are based on %i %s and %i %s."
-msgstr "Deze resultaten zijn gebaseerd op %i %s en %i %s."
+msgstr ""
 
+#, fuzzy
 msgid "Observation"
-msgstr "Observatie"
+msgstr "desviación"
 
+#, fuzzy
 msgid "Population proportion"
-msgstr "Populatieproportie"
+msgstr "Presentar as proporcións"
 
 #, fuzzy
 msgid "Prior = Posterior"
-msgstr "Prior en Posteriors Grafieken"
+msgstr "Previo e posterior"
 
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr ""
-"Meer dan bimodale BI's zijn niet geïmplementeerd in de sequentiële "
-"analyseplot."
 
 msgid "%i %% CI"
-msgstr "%i %% BI"
+msgstr ""
 
 msgid "%i %% HPD"
-msgstr "%i %% HGI"
+msgstr ""
 
 msgid "SI (BF=%s)"
-msgstr "SI (BF=%s)"
+msgstr ""
 
+#, fuzzy
 msgid "Prediction (Successes)"
-msgstr "Voorspelling (Successen)"
+msgstr "Intervalos de predicións"
 
+#, fuzzy
 msgid "Prediction %s"
-msgstr "Voorspelling %s"
+msgstr "Preditores"
 
+#, fuzzy
 msgid "Prediction std. deviation"
-msgstr "Voorspelling std. afwijking"
+msgstr "Logaritmo da desviación padrón:"
 
 msgid "The prediction for %s %s is based on %s %s and %s %s."
-msgstr "De voorspelling voor %s %s is gebaseerd op %s %s en %s %s."
+msgstr ""
 
+#, fuzzy
 msgid "Predicted sample proportions"
-msgstr "Voorspelde steekproefproporties"
+msgstr "Amosar as proporcións da mostra"
 
+#, fuzzy
 msgid "Predicted number of successes"
-msgstr "Voorspeld aantal successen"
+msgstr "Número de acertos:"
 
 msgid "Probability"
-msgstr "Kansverdeling"
+msgstr "Probabilidade"
 
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
 "change the value of the upper CI limit in the settings panel."
 msgstr ""
-"De bovengrens van het BI is hoger dan het aantal toekomstige waarnemingen. "
-"Wijzig de waarde van de bovengrens in het instellingspaneel."
 
 msgid ""
 "The lower CI limit is higher than the number of future observations. Please, "
 "change the value of the lower CI limit in the settings panel."
 msgstr ""
-"De ondergrens van het BI is hoger dan het aantal toekomstige waarnemingen. "
-"Wijzig de waarde van de bovengrens in het instellingspaneel."
 
 msgid ""
 "The lower CI limit is higher than the upper CI limit. Please, change the "
 "value of the CI limits in the settings panel."
 msgstr ""
-"De ondergrens van het BI is hoger dan de bovengrens van het BI. Wijzig de "
-"waarde van de grenzen van het BI in het instellingspaneel."
 
+#, fuzzy
 msgid "Proportion of Successes"
-msgstr "Proportie successen"
+msgstr "Proporcións"
 
+#, fuzzy
 msgid "Testing Summary"
-msgstr "Toetsoverzicht"
+msgstr "Resumo"
 
 msgid "BF%s"
-msgstr "BF%s"
+msgstr ""
 
+#, fuzzy
 msgid "log(BF%s)"
-msgstr "log(BF%s)"
+msgstr "log(FB₁₀)"
 
 msgid "Hypothesis"
-msgstr "Hypothese"
+msgstr "Hipótese"
 
 msgid "P(H)"
 msgstr "P(H)"
 
+#, fuzzy
 msgid "log(likelihood)"
-msgstr "Log(likelihood)"
+msgstr "Verosimilitude"
 
 msgid "P(H|data)"
-msgstr "P(H|data)"
+msgstr ""
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
 "not defined."
 msgstr ""
-"De grafiek kan niet worden gemaakt omdat de posterior model kansen niet zijn "
-"gedefinieerd."
 
+#, fuzzy
 msgid "P(Successes|%s)"
-msgstr "P(Successen|%s)"
+msgstr "Acertos"
 
+#, fuzzy
 msgid "P(Successes)"
-msgstr "P(Successen)"
+msgstr "Acertos"
 
 msgid "Please specify a hypothesis for comparison."
-msgstr "Specificeer a.u.b. een hypothese om te vergelijken."
+msgstr ""
 
+#, fuzzy
 msgid "Conditional probability"
-msgstr "Voorwaardelijke kans"
+msgstr "Probabilidade previa"
 
+#, fuzzy
 msgid "Joint probability"
-msgstr "Gezamenlijke kans"
+msgstr "Probabilidade previa"
 
+#, fuzzy
 msgid "Posterior probability"
-msgstr "Posterior kans"
+msgstr "Probabilidades posteriores"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 
+#, fuzzy
 msgid "Observations"
-msgstr "Observaties"
+msgstr "Iteracións"
 
 msgid "At least 2 hypotheses need to be specified."
-msgstr "Er moeten ten minste 2 hypothesen worden gespecificeerd."
+msgstr ""
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
 msgstr ""
@@ -603,69 +653,74 @@ msgid ""
 msgstr ""
 
 msgid "%s %i"
-msgstr "%s %i"
+msgstr ""
 
 msgid "Please remove duplicates from the %s names."
-msgstr "Gelieve de duplicaten te verwijderen uit de %s namen."
+msgstr ""
 
 msgid "Incorrect arguments for the inverse cumulative density function"
-msgstr "Onjuiste argumenten voor de inverse cumulatieve dichtheidsfunctie"
+msgstr ""
 
 #, fuzzy
 msgid "'Successes'"
-msgstr "Successen"
+msgstr "Acertos"
 
 msgid "%1$s %2$s Plots"
-msgstr "%1$s %2$s Grafieken"
+msgstr ""
 
+#, fuzzy
 msgid "Prior and Posterior Plots"
-msgstr "Prior en Posteriors Grafieken"
+msgstr "Previo e posterior"
 
 #, fuzzy
 msgid "Sequential Analysis: Point Estimate"
-msgstr "%s Sequentiële Analyse: Puntschatting"
+msgstr "Análise secuencial"
 
+#, fuzzy
 msgid "%s Sequential Analysis: Interval"
-msgstr "%s Sequentiële Analyse: Interval"
+msgstr "Análise secuencial"
 
 #, fuzzy
 msgid "Sequential Analysis: Staked"
-msgstr "%s Sequentiële Analyse: Interval"
+msgstr "Análise secuencial"
 
+#, fuzzy
 msgid "Sequential Posterior Updating"
-msgstr "Sequentiële Posterior Bijwerken"
+msgstr "Táboa posterior de actualización"
 
+#, fuzzy
 msgid "Prediction Summary"
-msgstr "Voorspellingsoverzicht"
+msgstr "Táboa de predicións"
 
+#, fuzzy
 msgid "%s Prediction Plots"
-msgstr "%s Voorspellingsgrafieken"
+msgstr "Intervalos de predicións"
 
 msgid "%1$s %2$s Prediction Plots"
-msgstr "%1$s %2$s Voorspellingsgrafieken"
+msgstr ""
 
+#, fuzzy
 msgid "%s Prior and Posterior Plots"
-msgstr "%s Prior en Posteriors Grafieken"
+msgstr "Masa previa e posterior"
 
+#, fuzzy
 msgid "%s Predictive Accuracy Plot"
-msgstr "%s Voorspellende Precisie Grafiek"
+msgstr "Precisión de predicións"
 
+#, fuzzy
 msgid "%s Sequential Analysis"
-msgstr "%s Sequentiële Analyse"
+msgstr "Análise secuencial"
 
 msgid ""
 "Welcome to the %s analysis from the Learn Bayes module. This analysis "
 "illustrates Bayesian %s using %s examples."
 msgstr ""
-"Welkom bij de %s analyse van de Leer Bayes module. Deze analyse illustreert "
-"Bayesiaanse %s aan de hand van %s voorbeelden."
 
 msgid "%s (the population proportion of successes)"
-msgstr "%s (het populatieaandeel van successen)"
+msgstr ""
 
 msgid "%s (the population mean, variance is assumed to be known)"
 msgstr ""
-"%s (het populatiegemiddelde, variantie wordt verondersteld bekend te zijn)"
 
 msgid ""
 "The analysis is split into 5 sections:\n"
@@ -678,28 +733,14 @@ msgid ""
 "           <li> %s </li>\n"
 "           <li> %s </li> </ol>"
 msgstr ""
-"De analyse is opgesplitst in 5 secties:\n"
-"      <ol> <li> Gegevens - voor het specificeren van de data-invoer voor de "
-"berekeningen. U kunt ofwel een variabele gebruiken uit een gegevensset die "
-"in JASP is geladen, een geaggregeerd overzicht van de gegevens specificeren, "
-"of de waarnemingen een voor een invoeren (en deze bijwerken tijdens de "
-"analyse). </li>\n"
-"           <li> %s </li>\n"
-"           <li> %s </li>\n"
-"           <li> %s </li>\n"
-"           <li> %s </li> </ol>"
 
 msgid "The 'Data' section allows you to specify data input for the analysis."
 msgstr ""
-"In de sectie 'Gegevens' kunt u de gegevensinvoer voor de analyse "
-"specificeren."
 
 msgid ""
 "The 'Select variable' option allows the selection of a variable ('Selected') "
 "from a dataset loaded into JASP. %s"
 msgstr ""
-"Met de optie 'Selecteer variable' kan een variabele ('Geselecteerd') worden "
-"gekozen uit een gegevensset die in JASP is geladen. %s"
 
 msgid ""
 "The 'Specify counts' option allows the use of aggregated data. %1$s This "
@@ -707,19 +748,12 @@ msgid ""
 "of information about the order of observations precludes the use of "
 "sequential analysis."
 msgstr ""
-"Met de optie 'Specificeer aantallen' kunnen geaggregeerde gegevens worden "
-"gebruikt. %1$s Dit betekent dat de %2$s slechts één keer worden bijgewerkt, "
-"met de volledige gegevens. Het gebrek aan informatie over de volgorde van "
-"waarnemingen maakt het gebruik van sequentiële analyse onmogelijk."
 
 msgid ""
 "The 'Enter sequence' option allows manual input of a specific order of "
 "observations. %s"
 msgstr ""
-"De optie 'Voer volgorde in' maakt het mogelijk om handmatig een bepaalde "
-"volgorde van waarnemingen in te voeren. %s"
 
-#, fuzzy
 msgid ""
 "The 'Binomial Estimation' analysis offers two types of prior distributions "
 "for parameter %1$s that represents the underlying population proportion of "
@@ -735,22 +769,7 @@ msgid ""
 "'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) "
 "with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
-"De 'Binomial Estimation'-analyse biedt twee soorten prior verdelingen voor "
-"parameter %1$s die het onderliggende deel van de successen in de populatie "
-"vertegenwoordigt:\n"
-"        <ul><li>'Puntmassa(%2$s)' - voor het concentreren van alle "
-"waarschijnlijkheidsmassa op één punt (%2$s). Dit vertegenwoordigt de prior "
-"overtuiging dat het deel van de populatie is  %2$s met zekerheid. Deze "
-"overtuiging is zo sterk dat geen enkel gegeven deze prior kan ondermijnen. "
-"Vandaar dat de posterior ook een piek is bij %2$s. De prior en de posterior "
-"%5$s komen dan overeen met de locatie van de piek.</li><li>'Beta(%3$s, "
-"%4$s)' - voor het toewijzen van de waarschijnlijkheidsdensiteit over alle "
-"waarden van parameter %1$s volgens een betaverdeling met parameters %3$s en "
-"%4$s. De prior %6$s. Na het observeren van 'S'-successen en 'F'-fouten, "
-"wordt de posterior verdeling aangepast aan de bèta (%3$s + S, %4$s + F) met "
-"een overeenkomstig berekende %5$s.</li></ul>"
 
-#, fuzzy
 msgid ""
 "The 'Gaussian Estimation' analysis offers two types of prior distributions "
 "for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known "
@@ -769,22 +788,6 @@ msgid ""
 "%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s "
 "corresponding to the mean of posterior distribution.</li></ul>"
 msgstr ""
-"De analyse 'Gaussiaanse Schatting' biedt twee soorten prior verdelingen voor "
-"parameter %1$s van een normale verdeling, Normal(%1$s, %2$s), met bekende "
-"standaardafwijking %2$s:\n"
-"        <ul><li>'Puntmassa(%3$s)' - voor het concentreren van alle "
-"waarschijnlijkheidsdensiteiten op één locatie (%3$s). De prior %8$s komt "
-"overeen met de locatie van de puntmassa. De posterior verdeling is weer een "
-"puntmassa op dezelfde locatie en komt overeen met %8$s.</"
-"li><li>'Normaal(%3$s, %4$s)' - voor het toewijzen van de "
-"waarschijnlijkheidsdichtheid over alle waarden van parameter %1$s volgens "
-"een normale verdeling met parameters gemiddelde %3$s en standaardafwijking "
-"%4$s. De prior %8$s komt overeen met de gemiddelde parameter van de normale "
-"verdeling %3$s. Na het zien van 'N'-waarnemingen met een gemiddelde van "
-"%5$s, wordt de posterior verdeling bijgewerkt naar normaal ( (%4$s%6$s*%5$s)/"
-"( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/"
-"%7$s (1/%4$s%6$s + N/%2$s%6$s) ), waarbij %8$s overeenkomt met het "
-"gemiddelde van de posterior verdeling.</li></ul>"
 
 msgid ""
 "The 'Estimation Summary' table displays numerical summaries for the "
@@ -797,18 +800,7 @@ msgid ""
 "distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the "
 "posterior distribution</li></ul>"
 msgstr ""
-"In de tabel 'Samenvatting Schatting' worden numerieke samenvattingen voor de "
-"afzonderlijke modellen weergegeven. De weergegeven puntenschatting kan "
-"worden gewijzigd met de optie 'Puntschatting'. De tabel bestaat uit de "
-"volgende kolommen:\n"
-"    <ul> <li>\"Model\" - de opgegeven modelnamen</li><li>\"Prior (%1$s)\" - "
-"de gespecificeerde prior verdeling voor parameter %1$s</li><li>\"Prior %2$s' "
-"- de %3$s van de gespecificeerde prior verdeling</li><li>\"Posterior "
-"(%1$s)\" - de geschatte posterior verdeling voor de parameter %1$s (d.w.z., "
-"de prior verdeling bijgewerkt met gegevens)</li><li>\"Posterior %2$s\" - de "
-"%3$s van de posteriorverdeling</li></ul>"
 
-#, fuzzy
 msgid ""
 "The 'Binomial Testing' analysis offers two types of prior distributions for "
 "parameter %1$s that represents the underlying population proportion of "
@@ -825,23 +817,7 @@ msgid ""
 "parameters %3$s and %4$s corresponding to the shape parameters of the prior "
 "beta distribution.</li></ul>"
 msgstr ""
-"De analyse 'Binomial Toets' biedt twee soorten prior verdelingen voor "
-"parameter %1$s die het onderliggende deel van de populatie van de successen "
-"vertegenwoordigen: \n"
-"        <ul> <li>'Puntmassa(%2$s)' - voor het concentreren van alle "
-"kansdichtheid op één locatie (%2$s). De marginale waarschijnlijkheid komt "
-"overeen met een binomiale dichtheid die wordt geëvalueerd op het waargenomen "
-"aantal successen, met een grootte die gelijk is aan het aantal waarnemingen "
-"en met de kansparameter gelijk aan de locatie van de piek. </li> "
-"<li>'Beta(%3$s, %4$s)' - voor de toewijzing van de kansdichtheid over alle "
-"waarden van parameter %1$s volgens een bètaverdeling met parameters %3$s en "
-"%4$s. De marginale waarschijnlijkheid komt overeen met een bèta-binomiale "
-"dichtheid die wordt geëvalueerd op het waargenomen aantal successen, met een "
-"grootte die gelijk is aan het aantal waarnemingen, en met parameters %3$s en "
-"%4$s die overeenkomen met de vormparameters van de prior bètadistributie. </"
-"li> </ul>"
 
-#, fuzzy
 msgid ""
 "The 'Gaussian Testing' analysis offers two types of prior distributions for "
 "parameter %1$s that represents the underlying population mean of a normal "
@@ -857,23 +833,6 @@ msgid ""
 "with mean equal to the mean of the prior distribution, and standard "
 "deviation of %7$s( %2$s%6$s/N + %4$s%6$s ).</li></ul>"
 msgstr ""
-"De analyse 'Gaussian Toets'- biedt twee soorten prior verdelingen voor "
-"parameter %1$s die het onderliggende populatiegemiddelde van een normale "
-"verdeling vertegenwoordigt, Normal(%1$s, %2$s), met bekende "
-"standaardafwijking %2$s:\n"
-"        <ul><li>'Puntmassa(%3$s)' - voor het concentreren van alle "
-"waarschijnlijkheidsdensiteiten op één locatie (%3$s). De marginale "
-"waarschijnlijkheid komt overeen met een normale dichtheid die wordt "
-"geëvalueerd op het waargenomen gemiddelde, met een gemiddelde dat gelijk is "
-"aan de locatie van de puntmassa, en standaarddeviatie als %2$s/%7$sN, "
-"waarbij \"N\" staat voor het aantal waarnemingen.</li><li>\"Normal(%3$s, "
-"%4$s)\" - voor het toewijzen van de waarschijnlijkheidsdichtheid over alle "
-"waarden van parameter %1$s volgens een normale verdeling met gemiddelde %3$s "
-"en standaarddeviatie %4$s. De marginale waarschijnlijkheid komt overeen met "
-"een normale dichtheid die wordt geëvalueerd aan de hand van het waargenomen "
-"gemiddelde, met een gemiddelde dat gelijk is aan het gemiddelde van de prior "
-"verdeling, en een standaardafwijking van %7$s ( %2$s%6$s/N + %4$s%6$s ).</"
-"li></ul>"
 
 msgid ""
 "The posterior probabilities 'P(H|data)' are then computed using Bayes "
@@ -885,16 +844,7 @@ msgid ""
 "likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H"
 "%2$s)*P(H%2$s)."
 msgstr ""
-"De posterior kansen 'P(H|data)' worden dan berekend met behulp van de Bayes "
-"formule,\n"
-"        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> waarbij "
-"'P(H)' de prior kans van de hypothese vertegenwoordigt, 'P(data|H)' de "
-"marginale waarschijnlijkheid van de gegevens onder de hypothese, en "
-"'P(data)' de waarschijnlijkheid van de gegevens. De factor 'P(data)' is "
-"gelijk aan de som van de marginale waarschijnlijkheid vermenigvuldigd met de "
-"prior kansen, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
 
-#, fuzzy
 msgid ""
 "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two "
 "models by their prior odds,\n"
@@ -912,21 +862,6 @@ msgid ""
 "evidence in favor of the second hypothesis), or transformed to a log scale "
 "by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
-"De Bayes factoren 'BF' kunnen worden verkregen door de posterior kansen van "
-"twee modellen te delen door hun prior kansen,\n"
-"        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H"
-"%2$s) ),</center> waarbij 'BF%1$s%2$s' staat voor de Bayes factor ten gunste "
-"van het 1e model in vergelijking tot het 2e model en kan worden "
-"geïnterpreteerd als een natuurlijke maatstaf voor relatieve voorspellende "
-"prestaties. Het is ook mogelijk om een Bayes factor te berekenen die de "
-"hypothese vergelijkt met de overige hypothesen 'vs. all', waarbij de tweede "
-"hypothese wordt ingeruild voor de som van de overige hypothesen, die kan "
-"worden vereenvoudigd,\n"
-"        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data) ) / ( P(H%1$s)/"
-"(1-P(H%1$s)) ).</center>De teller en de noemer van de Bayes factoren kunnen "
-"worden omgekeerd door de optie 'BF%2$s%1$s' te kiezen (kwantificeren van het "
-"bewijs ten gunste van de tweede hypothese), of worden omgezet in een "
-"logschaal door de optie 'log(BF%1$s%2$s)' te kiezen."
 
 msgid ""
 "The 'Testing Summary' table displays numerical summaries for the hypotheses. "
@@ -937,58 +872,35 @@ msgid ""
 "posterior probability of the hypothesis (after updating with the data)</"
 "li><li>%s</li></ul>"
 msgstr ""
-"In de tabel 'Toetsoverzicht' worden numerieke samenvattingen voor de "
-"hypothesen weergegeven. Het is samengesteld uit de volgende kolommen:\n"
-"    <ul> <li> 'Hypothese' - de gespecificeerde namen van de hypotheses </li> "
-"<li> 'P(H)' - de eerdere waarschijnlijkheid van de hypothese </li> <li> 'log "
-"(waarschijnlijkheid)' - de log van de marginale waarschijnlijkheid van de "
-"hypothese </li> <li> 'P (H | data)' - de posterior kans van de hypothese (na "
-"bijwerken met de gegevens) </li> <li>%s</li> </ul>"
 
 msgid ""
 "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior "
 "distributions are visualized as arrows (signifying that their density is "
 "infinite) and %4$s distributions are visualized as continuous lines."
 msgstr ""
-"De optie '%1$s' geeft de %2$s grafieken weer voor parameter %3$s. Puntmassa "
-"prior verdelingen worden gevisualiseerd als pijlen (hetgeen betekent dat hun "
-"dichtheid oneindig is) en %4$s verdelingen worden gevisualiseerd als "
-"doorlopende lijnen."
 
 msgid ""
 "The 'All' option shows all %1$s for parameter %2$s on top of each other, "
 "allowing for easier comparison with a common density and probability scale "
 "on the y-axis."
 msgstr ""
-"De optie 'Alle' toont alle %1$s voor parameter %2$s boven op elkaar, "
-"waardoor een eenvoudigere vergelijking met een gemeenschappelijke dichtheid "
-"en waarschijnlijkheidsschaal op de y-as mogelijk is."
 
 msgid ""
 "The 'Stacked' option shows all %1$s for parameter %2$s in one figure with a "
 "depth effect induced by plotting the additional distributions 'further' on "
 "the z-axis."
 msgstr ""
-"De optie 'Gestapeld' toont alle %1$s voor parameter %2$s in één figuur met "
-"een diepte-effect dat wordt geïnduceerd door de extra verdelingen 'verder' "
-"op de z-as uit te zetten."
 
 msgid ""
 "The 'Individual' option shows %1$s for parameter %2$s individually in "
 "separate figures. It is possible to visualize different types of point "
 "estimates ('Point estimate') and credible intervals ('CI'):%3$s"
 msgstr ""
-"De optie 'Individueel' toont %1$s voor parameter %2$s afzonderlijk in "
-"afzonderlijke cijfers. Het is mogelijk om verschillende soorten "
-"puntschattingen ('Puntschatting') en geloofwaardigheidsintervallen ('GI') te "
-"visualiseren: %3$s"
 
 msgid ""
 "Furthermore, the 'Observed data' checkbox allows the visualization of the "
 "observed %s as a black cross in the figure."
 msgstr ""
-"Bovendien maakt het selectievakje 'Waargenomen gegevens' het mogelijk om de "
-"waargenomen %s als een zwart kruisje in de figuur te visualiseren."
 
 msgid ""
 "The 'Conditional' option shows all %1$s for parameter %2$s independently, as "
@@ -996,11 +908,6 @@ msgid ""
 "hypotheses). It is possible to visualize different types of point estimates "
 "('Point estimate') and credible intervals ('CI'):%3$s"
 msgstr ""
-"De optie 'Conditioneel' toont alle %1$s voor parameter %2$s onafhankelijk "
-"van elkaar, alsof ze als individuele modellen werden beschouwd (zonder het "
-"bestaan van andere hypothesen). Het is mogelijk om verschillende soorten "
-"puntschattingen ('Puntschatting') en geloofwaardigheidsintervallen ('GI') te "
-"visualiseren: %3$s"
 
 msgid ""
 "The 'Joint' option shows all %1$s for parameter %2$s when considered "
@@ -1012,25 +919,12 @@ msgid ""
 "one figure with a depth effect induced by plotting the additional "
 "distributions 'further' on the z-axis."
 msgstr ""
-"De optie 'Gezamenlijke' toont alle %1$s voor parameter %2$s wanneer deze "
-"samen worden beschouwd in het licht van de andere hypothesen (door de "
-"dichtheid van de %1$s over de parameter te vermenigvuldigen met de %3$s "
-"waarschijnlijkheid van de hypothese). Bovendien laat de optie 'Overlappend' "
-"toe om alle %1$s boven elkaar te visualiseren, waardoor een eenvoudigere "
-"vergelijking mogelijk is met een gemeenschappelijke dichtheids- en "
-"waarschijnlijkheidsschaal op de y-as en de optie 'Gestapeld' toont alle %1$s "
-"in één figuur met een diepte-effect dat wordt geïnduceerd door de extra "
-"verdelingen 'verder' op de z-as te plotten."
 
 msgid ""
 "The 'Marginal' option collapses across all individual %1$s, weighting them "
 "by their %2$s probability.%3$s It is possible to visualize different types "
 "of point estimates ('Point estimate') and credible intervals ('CI'):%4$s"
 msgstr ""
-"De optie 'Marginaal' wordt samengevouwen over all individuele %1$s, waarbij "
-"ze worden gewogen met hun %2$s waarschijnlijkheid.%3$s Het is mogelijk om "
-"verschillende soorten puntschattingen ('Puntschatting') en "
-"geloofwaardigheidsintervallen ('GI') te visualiseren:%4$s"
 
 msgid ""
 "The 'Prior and posterior distribution' option displays the prior and "
@@ -1041,23 +935,12 @@ msgid ""
 "distribution as solid black lines. In addition, the observed data summary "
 "can be visualized as a black cross by selecting the '%4$s' checkbox."
 msgstr ""
-"De optie 'Prior en posterior verdeling' geeft de prior en posterior "
-"verdeling van de parameter %1$s voor de individuele %2$s weer. Puntmassa "
-"prior verdelingen worden gevisualiseerd als pijlen (wat betekent dat hun "
-"dichtheid oneindig is) en %3$s verdelingen worden gevisualiseerd als "
-"doorlopende lijnen. Prior verdelingen worden gevisualiseerd als gestippelde "
-"grijze lijnen en de posterior verdeling als ononderbroken zwarte lijnen. "
-"Bovendien kan de waargenomen gegevenssamenvatting worden gevisualiseerd als "
-"een zwart kruis door het selectievakje '%4$s' aan te vinken."
 
 msgid ""
 "The 'Conditional' option shows all prior and posterior distributions for "
 "parameter %1$s independently, as if they were considered as individual "
 "models (without the existence of other hypotheses)."
 msgstr ""
-"De optie 'Conditioneel' toont alle prior en posterior verdelingen voor "
-"parameter %1$s onafhankelijk van elkaar, alsof ze als individuele modellen "
-"worden beschouwd (zonder het bestaan van andere hypothesen)."
 
 msgid ""
 "The 'Joint' option shows all prior and posterior distributions for parameter "
@@ -1068,23 +951,12 @@ msgid ""
 "with a depth effect induced by plotting the additional distributions "
 "'further' on the z-axis."
 msgstr ""
-"De optie 'Gezamenlijk' toont alle prior en posterior verdelingen voor "
-"parameter %1$s wanneer deze in het licht van de andere hypothesen samen "
-"worden beschouwd. Bovendien maakt de optie 'Overlappend' optie het mogelijk "
-"om alle %1$s boven elkaar te visualiseren, waardoor de vergelijking met een "
-"gemeenschappelijke dichtheids- en waarschijnlijkheidsschaal op de y-as "
-"gemakkelijker wordt. En de optie 'Gestapeld' optie toont alle %1$s in één "
-"figuur met een diepte-effect dat wordt geïnduceerd door de extra verdelingen "
-"'verder' op de z-as te plotten."
 
 msgid ""
 "The 'Marginal' option collapses across all individual prior and posterior "
 "distributions, weighting them by their prior and posterior probability."
 msgstr ""
-"De optie 'Marginaal' voegt alle individuele prior en posterior verdelingen "
-"samen, waarbij ze worden gewogen op basis van hun eerdere en posterior kans."
 
-#, fuzzy
 msgid ""
 "The 'Point estimate' option displays a plot with the sequential updating of "
 "the point estimate %1$s (y-axis). The figure visualizes the updating process "
@@ -1092,29 +964,18 @@ msgid ""
 "It is possible to visualize different types of point estimates ('Point "
 "estimate') and credible intervals ('CI'):%2$s"
 msgstr ""
-"De optie 'Puntschatting' geeft een grafiek weer met een sequentiële update "
-"van de puntschatting %s (y-as). De figuur visualiseert het "
-"actualiseringsproces alsof de afzonderlijke gegevenspunten na elkaar "
-"aankomen (x-as)."
 
 msgid ""
 "The 'Updating table' option generates a numerical summary of the displayed "
 "figures."
 msgstr ""
-"De optie 'Update tabel' genereert een numeriek overzicht van de getoonde "
-"cijfers."
 
-#, fuzzy
 msgid ""
 "The 'Stacked distributions' option displays a plot with the sequential "
 "updating of the posterior distribution density (x- and y-axis). The figure "
 "visualizes the updating process as if the individual data points were "
 "arriving one after another, creating a depth effect (z-axis)."
 msgstr ""
-"De optie 'Puntschatting' geeft een grafiek weer met een sequentiële update "
-"van de puntschatting %s (y-as). De figuur visualiseert het "
-"actualiseringsproces alsof de afzonderlijke gegevenspunten na elkaar "
-"aankomen (x-as)."
 
 msgid ""
 "The 'Interval' option displays a sequential plot with the probability of "
@@ -1122,27 +983,17 @@ msgid ""
 "('upper'), (y-axis). The figure visualizes the updating process as if the "
 "individual data points were arriving one after another (x-axis)."
 msgstr ""
-"De optie 'Interval' geeft een sequentiële grafiek weer met de kans dat de "
-"parameter %s binnen het interval ligt, variërend van ('onder') tot "
-"('boven'), (y-as). De figuur visualiseert het actualiseringsproces alsof de "
-"afzonderlijke gegevenspunten na elkaar aankomen (x-as)."
 
 msgid ""
 "The 'All' option shows the probability of parameter %s lying inside of the "
 "specified range for all models in one figure, allowing for easier comparison."
 msgstr ""
-"De optie 'Alle' toont de kans dat parameter %s binnen het gespecificeerde "
-"bereik ligt voor alle modellen in één figuur, waardoor een eenvoudigere "
-"vergelijking mogelijk is."
 
 msgid ""
 "The 'Stacked' option visualizes the interval for all prior distribution "
 "updates for each model within one figure with a depth effect induced by "
 "plotting the additional distributions 'further' on the z-axis."
 msgstr ""
-"De optie 'Gestapeld' visualiseert het interval voor alle updates van de "
-"prior verdelingen voor elk model binnen één figuur met een diepte-effect dat "
-"wordt veroorzaakt door de extra verdelingen 'verder' op de z-as te plotten."
 
 msgid ""
 "The 'Posterior updating table' option generates a numerical summary of the "
@@ -1152,15 +1003,7 @@ msgid ""
 "distribution and the last row corresponds to the final posterior "
 "distribution after the prior distribution was updated with all observations."
 msgstr ""
-"De optie 'Posterior update tabel' genereert een numeriek overzicht van het "
-"actualiseringsproces voor parameter %s. In de kolom \"Waarneming\" wordt "
-"bijgehouden hoeveel waarnemingen al zijn aangetroffen voor de "
-"overeenkomstige posterior verdeling. De eerste rij (waarneming = 0) komt "
-"overeen met de prior verdeling en de laatste rij komt overeen met de "
-"posterior verdeling nadat de prior verdeling met alle waarnemingen is "
-"bijgewerkt."
 
-#, fuzzy
 msgid ""
 "The 'Binomial Estimation' analysis offers two types of prior distributions "
 "for parameter %1$s that represents the underlying population proportion of "
@@ -1174,20 +1017,7 @@ msgid ""
 "and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s "
 "+ F) with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
-"De analyse 'Binomiaal Schatting' biedt twee soorten prior verdelingen voor "
-"parameter %1$s die het onderliggende aandeel van de populatie in de "
-"successen vertegenwoordigt:\n"
-"        <ul><li>'Puntmassa(%2$s)' - voor het concentreren van alle "
-"waarschijnlijkheidsdensiteiten op één locatie (%2$s). De prior %5$s komt "
-"overeen met de locatie van de puntmassa. De posterior verdeling is weer een "
-"puntmassa op dezelfde locatie en komt overeen met %5$s</li><li>'Beta(%3$s, "
-"%4$s)' - voor het toewijzen van de waarschijnlijkheidsdichtheid over alle "
-"waarden van parameter %1$s volgens een betaverdeling met parameters %3$s en "
-"%4$s. De prior %6$s. Na het observeren van 'S'-successen en 'F'-"
-"mislukkingen, wordt de posterior verdeling aangepast aan de bèta (%3$s + S, "
-"%4$s + F) met een overeenkomstig berekende %5$s.</li></ul>"
 
-#, fuzzy
 msgid ""
 "The 'Gaussian Estimation' analysis offers two types of prior distributions "
 "for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known "
@@ -1205,29 +1035,11 @@ msgid ""
 "%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></"
 "ul>"
 msgstr ""
-"De analyse 'Gaussiaanse Schatting' biedt twee soorten prior verdelingen voor "
-"parameter %1$s van een normale verdeling, Normal(%1$s, %2$s), met bekende "
-"standaardafwijking %2$s:\n"
-"        <ul><li>'Puntmassa(%3$s)' - voor het concentreren van alle "
-"waarschijnlijkheidsdensiteiten op één locatie (%3$s). De prior %8$s komt "
-"overeen met de locatie van de puntmassa. De posterior verdeling is weer een "
-"puntmassa op dezelfde locatie en komt overeen met %8$s.</"
-"li><li>'Normaal(%3$s, %4$s)' - voor het toewijzen van de "
-"waarschijnlijkheidsdichtheid over alle waarden van parameter %1$s volgens "
-"een normale verdeling met parameters gemiddelde %3$s en standaardafwijking "
-"%4$s. De prior %8$s komt overeen met de gemiddelde parameter van de normale "
-"verdeling %3$s. Na het zien van 'N'-waarnemingen met een gemiddelde van "
-"%5$s, wordt de posterior verdeling bijgewerkt naar normaal ( (%4$s%6$s*%5$s)/"
-"( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/"
-"%7$s (1/%4$s%6$s + N/%2$s%6$s) ), waarbij %8$s overeenkomt met het "
-"gemiddelde van de posterior verdeling.</li></ul>"
 
 msgid ""
 "The 'Posterior prediction' section allows the prediction of future data "
 "based on the estimated models%s"
 msgstr ""
-"De sectie 'Posterior voorspelling' maakt het mogelijk om toekomstige "
-"gegevens te voorspellen op basis van de geschatte modellen%s"
 
 msgid ""
 "For a model with a spike prior distribution for parameter %1$s, predictions "
@@ -1237,13 +1049,6 @@ msgid ""
 "parameter %1$s, the predictive distribution is a beta-binomial distribution "
 "with size N and posterior beta distribution parameters %3$s and %4$s. %6$s"
 msgstr ""
-"Voor een model met een puntmassa prior verdeling voor parameter %1$s, volgen "
-"de voorspellingen voor 'N' toekomstige waarnemingen ('Toekomstige "
-"waarnemingen') een binomiale verdeling met grootte N en toevalsparameter "
-"%2$s die gelijk is aan de locatie van de prior verdeling. %5$s Voor een "
-"model met een bèta prior verdeling voor parameter %1$s is de voorspellende "
-"verdeling een bèta-binomiale verdeling met grootte N en posterior bèta-"
-"verdelingsparameters %3$s en %4$s. %6$s"
 
 msgid ""
 "For a model with a spike prior distribution for parameter %1$s, predictions "
@@ -1258,18 +1063,6 @@ msgid ""
 "In both cases, the %6$s prediction is equal to the mean parameter of the "
 "distribution for predictions."
 msgstr ""
-"Voor een model met een puntmassa prior verdeling voor parameter %1$s, volgen "
-"de voorspellingen voor 'N' toekomstige waarnemingen ('Toekomstige "
-"waarnemingen') met standaarddeviatie %2$s ('SD') een normale verdeling met "
-"gemiddelde parameter gelijk aan de locatie van de prior verdeling %3$s en "
-"standaarddeviatie %2$s/%4$sN. Voor een model met een normale prior verdeling "
-"voor parameter %1$s is de voorspellende verdeling een normale verdeling met "
-"een gemiddelde dat gelijk is aan het gemiddelde van de posterior verdeling "
-"en de standaardafwijking op basis van de standaardafwijking van de posterior "
-"verdeling (%3$s) en de verwachte standaardafwijking van de nieuwe gegevens "
-"(%2$s/%4$sN), %4$s ( %3$s%5$s + (%2$s/%4$sN)%5$s ). In beide gevallen is de "
-"%6$s voorspelling gelijk aan de gemiddelde parameter van de verdeling voor "
-"voorspellingen."
 
 msgid ""
 "The 'Prediction Summary' table displays numerical summaries for the "
@@ -1282,15 +1075,6 @@ msgid ""
 "distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted "
 "data</li></ul>"
 msgstr ""
-"De tabel 'Voorspellingsoverzicht' toont numerieke samenvattingen voor de "
-"afzonderlijke modellen. De weergegeven puntschatting kan worden gewijzigd "
-"met de optie 'Puntschatting'. De tabel bestaat uit de volgende kolommen:\n"
-"    <ul><li>'Model' - de gespecificeerde modelnamen</li><li>'Posterior "
-"(%1$s)' - de geschatte posterior verdeling voor parameter %1$s (gebruikt "
-"voor de voorspelling)</li>%2$s<li>'Posterior %4$s' - de %5$s van de "
-"gespecificeerde posterior verdeling</li><li>'Voorspelling%3$s' - de "
-"voorspellende verdeling voor nieuwe gegevens</li><li>'Voorspelling %4$s' - "
-"de %5$s van de voorspelde gegevens</li></ul>"
 
 msgid ""
 "The 'Posterior predictive distribution' option displays figures of "
@@ -1298,28 +1082,18 @@ msgid ""
 "models. The '%1$s' checkbox transforms the figures with predicted data%2$s "
 "into figures with %3$s."
 msgstr ""
-"De optie 'Posterior voorspellende verdeling' toont cijfers van voorspellende "
-"verdelingen op basis van posterior verdelingen van de individuele modellen. "
-"Het selectievakje '%1$s' zet de cijfers met voorspelde gegevens%2$s om in "
-"cijfers met %3$s."
 
 msgid ""
 "The 'All' option shows all posterior predictive distributions on top of each "
 "other, allowing for easier comparison with a common density scale on the y-"
 "axis."
 msgstr ""
-"De optie 'Alle' toont alle posterior voorspellende verdelingen over elkaar "
-"heen, waardoor de vergelijking met een gemeenschappelijke dichtheidsschaal "
-"op de y-as eenvoudiger wordt."
 
 msgid ""
 "The 'Stacked' option shows all posterior predictive distributions in one "
 "figure with a depth effect induced by plotting the additional distributions "
 "'further' on the z-axis."
 msgstr ""
-"De optie 'Gestapeld' toont alle posterior voorspellende verdelingen in één "
-"figuur met een diepte-effect dat wordt veroorzaakt door de extra verdelingen "
-"'verder' op de z-as te weer te geven."
 
 msgid ""
 "The 'Individual' option shows posterior predictive distributions for each "
@@ -1327,17 +1101,11 @@ msgid ""
 "different types of point estimates ('Point estimate') and credible intervals "
 "('CI'):%s"
 msgstr ""
-"De optie 'Individueel' geeft voor elk model afzonderlijk een voorspellende "
-"posterior verdeling in afzonderlijke cijfers weer. Het is mogelijk om "
-"verschillende soorten puntschattingen ('Puntschatting') en "
-"geloofwaardigheidsintervallen ('GI') te visualiseren:%s"
 
 msgid ""
 "The '%1$s' option displays figures of predictive distributions based on "
 "posterior distributions of the individual models. %2$s"
 msgstr ""
-"De '%1$s' optie geeft cijfers van voorspellende verdelingen weer op basis "
-"van de posterior verdelingen van de individuele modellen. %2$s"
 
 msgid ""
 "The 'Conditional' option shows all %1$s for parameter %2$s independently, as "
@@ -1345,10 +1113,6 @@ msgid ""
 "hypotheses). It is possible to visualize different of credible intervals "
 "('CI'):%3$s"
 msgstr ""
-"De optie 'Conditioneel' toont alle %1$s voor parameter %2$s onafhankelijk "
-"van elkaar, alsof ze als individuele modellen werden beschouwd (zonder het "
-"bestaan van andere hypothesen). Het is mogelijk om verschillende "
-"geloofwaardigheidsintervallen ('GI') te visualiseren: %3$s"
 
 msgid ""
 "The 'Joint' option shows all %1$s for parameter %2$s when considered "
@@ -1360,44 +1124,24 @@ msgid ""
 "with a depth effect induced by plotting the additional distributions "
 "'further' on the z-axis."
 msgstr ""
-"De optie 'Gezamenlijk' toont alle %1$s voor parameter %2$s wanneer deze "
-"samen worden beschouwd in het licht van de andere hypothesen (door de "
-"dichtheid van de %1$s te vermenigvuldigen met de %3$s waarschijnlijkheid van "
-"de hypothese). Bovendien maakt de optie 'Overlappend' het mogelijk om alle "
-"%1$s boven elkaar te visualiseren, waardoor de vergelijking met een "
-"gemeenschappelijke dichtheids- en waarschijnlijkheidsschaal op de y-as "
-"gemakkelijker wordt en de optie 'Gestapeld' alle %1$s in één figuur laat "
-"zien met een diepte-effect dat wordt geïnduceerd door de extra verdelingen "
-"'verder' op de z-as weer te geven."
 
 msgid ""
 "The 'Predictive accuracy' option allows a comparison of the predictive "
 "accuracy across all hypotheses. Predictive accuracy refers to how likely the "
 "data are given the hypotheses."
 msgstr ""
-"De optie 'Voorspellende nauwkeurigheid' maakt een vergelijking van de "
-"voorspellende nauwkeurigheid over alle hypothesen heen mogelijk. De "
-"'Voorspellende nauwkeurigheid' heeft betrekking op hoe waarschijnlijk de "
-"gegevens zijn gegeven de hypothesen."
 
 msgid ""
 "The 'Conditional' option shows all predictive accuracies independently, as "
 "if they were considered as individual models (without the existence of other "
 "hypotheses)."
 msgstr ""
-"De optie 'Conditioneel' toont alle voorspellende nauwkeurigheden "
-"onafhankelijk van elkaar, alsof ze als individuele modellen worden beschouwd "
-"(zonder het bestaan van andere hypothesen)."
 
 msgid ""
 "The 'Joint' option shows all predictive accuracies when taking the prior "
 "probabilities of hypotheses into account (by multiplying conditional "
 "predictive accuracies by prior probabilities of the hypotheses)."
 msgstr ""
-"De optie 'Gezamenlijk' toont alle voorspellende nauwkeurigheden wanneer "
-"rekening wordt gehouden met de eerdere waarschijnlijkheden van hypothesen "
-"(door voorwaardelijke voorspellende nauwkeurigheden te vermenigvuldigen met "
-"eerdere waarschijnlijkheden van de hypothesen)."
 
 msgid ""
 "The 'Normalized' option shows all predictive accuracies considered together "
@@ -1405,10 +1149,6 @@ msgid ""
 "accuracies by the probability of the data, which equals to the posterior "
 "probability of the hypotheses)."
 msgstr ""
-"De optie 'Genormaliseerd' toont alle voorspellende nauwkeurigheden samen in "
-"het licht van de andere hypothesen (door de gezamenlijke voorspellende "
-"nauwkeurigheden te normaliseren door de waarschijnlijkheid van de gegevens, "
-"die gelijk is aan de posterior kans van de hypothesen)."
 
 msgid ""
 "The 'Test results' option displays a plot with the sequential change in the "
@@ -1416,10 +1156,6 @@ msgid ""
 "updating process as if the individual data points were arriving one after "
 "another (x-axis)."
 msgstr ""
-"De optie 'Testresultaten' geeft een plot weer met de sequentiële verandering "
-"in de voorspellende nauwkeurigheid van alle hypothesen (y-as). De figuur "
-"visualiseert het actualiseringsproces alsof de afzonderlijke gegevenspunten "
-"achter elkaar aankomen (x-as)."
 
 msgid ""
 "The 'Normalized' option shows all predictive accuracies considered together "
@@ -1427,13 +1163,7 @@ msgid ""
 "accuracies by the probability of the data, which equals to the posterior "
 "probability of the hypotheses at the given time point)."
 msgstr ""
-"De optie 'Genormaliseerd' toont alle voorspellende nauwkeurigheden samen in "
-"het licht van de andere hypothesen (door de gezamenlijke voorspellende "
-"nauwkeurigheid te normaliseren door de waarschijnlijkheid van de gegevens, "
-"die gelijk is aan de posterior waarschijnlijkheid van de hypothesen op het "
-"gegeven tijdstip)."
 
-#, fuzzy
 msgid ""
 "The 'Bayes factor' option can compare the predictive accuracies of the "
 "hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis "
@@ -1443,20 +1173,11 @@ msgid ""
 "%1$s' option (quantifying the evidence in favor of the second hypothesis), "
 "or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
-"De optie 'Bayes factor' kan de voorspellende nauwkeurigheid van de "
-"hypothesen vergelijken met de rest van de hypothesen ('vs. All'), de beste "
-"hypothese ('vs. best'), of een specifieke hypothese geselecteerd in de 'vs.' "
-"dropdown. De teller en de noemer van de Bayes-factoren kunnen worden "
-"omgekeerd door de optie 'BF%2$s%1$s' te kiezen (kwantificering van het "
-"bewijs ten gunste van de tweede hypothese), of worden getransformeerd naar "
-"een logschaal door de optie 'log(BF%1$s%2$s)' te kiezen."
 
 msgid ""
 "The 'Updating table' option generates a numerical summary of the displayed "
 "figure."
 msgstr ""
-"De optie 'Update table' genereert een numeriek overzicht van de weergegeven "
-"figuur."
 
 msgid ""
 "<ul><li>'central' - a central interval (or quantile) that covers the central "
@@ -1466,33 +1187,21 @@ msgid ""
 "returns the posterior mass of the parameter falling inside the custom "
 "interval.</li>%s</ul>"
 msgstr ""
-"<ul><li>'centraal' - een centraal interval (of kwantiel) dat het centrale "
-"'massa'%% gebied van de distributie omvat</li><li>'HPD' - een hoogste "
-"posterior dichtheidsinterval dat 'massa'%% gebied met het kortste bereik "
-"omvat</li><li>'aangepast' - een interval dat wordt gedefinieerd door een "
-"'onder-' en 'bovengrens'. Het geeft de achterste massa van de parameter "
-"terug die binnen het aangepaste interval valt.</li>%s</ul>"
 
 msgid "Mean"
-msgstr "Gemiddelde"
+msgstr "Media"
 
 msgid "Median"
-msgstr "Mediaan"
+msgstr "Mediana"
 
 msgid "Mode"
-msgstr "Modus"
+msgstr "Modo"
 
-#, fuzzy
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
-"Het aantal iteraties moet minstens 2 iteraties hoger zijn dan het "
-"opwarmingsaantal"
 
-#, fuzzy
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
-"Het aantal iteraties moet minstens 2 iteraties hoger zijn dan het "
-"opwarmingsaantal"
 
 msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
 msgstr ""
@@ -1502,27 +1211,29 @@ msgstr ""
 
 #, fuzzy
 msgid "Summary Table"
-msgstr "Samenvatting"
+msgstr "Resumo"
 
+#, fuzzy
 msgid "Players"
-msgstr ""
+msgstr "Capas"
 
 msgid "p(win 1 point)"
 msgstr ""
 
 #, fuzzy
 msgid "Points Gained"
-msgstr "Puntschatting."
+msgstr "Puntos"
 
+#, fuzzy
 msgid "Analytical"
-msgstr ""
+msgstr "Intervalo analítico"
 
 msgid "p(win the game)"
 msgstr ""
 
 #, fuzzy
 msgid "Simulated"
-msgstr "Geschat"
+msgstr "Estimado"
 
 msgid ""
 "The number of players (%1$i) does not equal the numbers of points for each "
@@ -1531,93 +1242,69 @@ msgstr ""
 
 #, fuzzy
 msgid "Prior Skill"
-msgstr "Prior H"
+msgstr "Previo"
 
 msgid "Only numeric values are allowed in the input."
 msgstr ""
 
 msgid "SD"
-msgstr "SD"
+msgstr ""
 
-#, fuzzy
 msgid "normal (%s, %s)"
-msgstr "binomiaal (%i, %s)"
+msgstr ""
 
-#, fuzzy
 msgid "normal (%.2f, %.2f)"
-msgstr "binomiaal (%i, %s)"
+msgstr ""
 
-#, fuzzy
 msgid "normal (%s, %.2f)"
-msgstr "binomiaal (%i, %s)"
+msgstr ""
 
 msgid "USE '.dataArrowGaussianLS()'"
 msgstr ""
 
 #, fuzzy
 msgid "Prior (μ)"
-msgstr "Prior (%s)"
+msgstr "Previo"
 
 #, fuzzy
 msgid "Prior Mean"
-msgstr "Posterior Gemiddelde"
+msgstr "Mediana posterior"
 
 #, fuzzy
 msgid "Posterior (μ)"
-msgstr "Posterior (%s)"
+msgstr "R² posterior"
 
+#, fuzzy
 msgid "Posterior Mean"
-msgstr "Posterior Gemiddelde"
+msgstr "Mediana posterior"
 
 #, fuzzy
 msgid "Population mean"
-msgstr "Populatiegrootte"
+msgstr "Poboación"
 
 #, fuzzy
 msgid "Prediction"
-msgstr "Voorspelling %s"
+msgstr "Preditores"
 
 #, fuzzy
 msgid "Prediction Mean"
-msgstr "Voorspelling %s"
+msgstr "Táboa de predicións"
 
-#, fuzzy
 msgid "Please, specify the standard deviation of the data."
-msgstr "Specificeer a.u.b. een toegevoegd contrast."
+msgstr ""
 
-#, fuzzy
 msgid "The prediction for %s future %s is based on %s."
-msgstr "De voorspelling voor %s %s is gebaseerd op %s %s en %s %s."
-
-#, fuzzy
-msgid "Sample means"
-msgstr "Steekproefgemiddelde"
-
-msgid "Future data"
 msgstr ""
 
 #, fuzzy
+msgid "Sample means"
+msgstr "Mostras"
+
+#, fuzzy
+msgid "Future data"
+msgstr "Ocultar os datos"
+
+#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inclusie"
+msgstr "Inclusión"
 
-#~ msgid ""
-#~ "The 'All' option shows either the mean ('Mean') or the median ('Median') "
-#~ "for all specified models in one figure, allowing for easier comparison. "
-#~ "It is possible to visualize different types of point estimates ('Point "
-#~ "estimate') and credible intervals ('CI'):%s"
-#~ msgstr ""
-#~ "De optie 'Alle' geeft het gemiddelde ('Gemiddelde') of de mediaan "
-#~ "('Mediaan') voor alle gespecificeerde modellen in één figuur weer, "
-#~ "waardoor een eenvoudigere vergelijking mogelijk is. Het is mogelijk om "
-#~ "verschillende soorten puntschattingen ('Puntschatting') en "
-#~ "geloofwaardigheidsintervallen ('GI') te visualiseren:%s"
-
-#~ msgid ""
-#~ "The 'Stacked' option shows all of the prior distribution updates for each "
-#~ "model within one figure with a depth effect induced by plotting the "
-#~ "additional distributions 'further' on the z-axis."
-#~ msgstr ""
-#~ "De optie 'Gestapeld' toont alle aanpassingen van de prior verdelingen "
-#~ "voor elk model binnen één figuur met een diepte-effect dat wordt "
-#~ "geïnduceerd door de extra verdelingen 'verder' op de z-as te weer te "
-#~ "geven."
