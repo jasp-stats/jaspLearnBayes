@@ -15,7 +15,7 @@
   test_that("Game of Chance two-player plot matches", {
     plotName <- results[["results"]][["CIPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning-two-players", dir = "LSgameofchance")
+    jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning-two-players")
   })
   
   test_that("Game of Chance summaryTable two-player results match", {

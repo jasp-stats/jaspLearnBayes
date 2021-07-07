@@ -41,6 +41,7 @@ Form
 	IntegerField   
 	{ 
 		name:			"n"
+		id: n
 		label:			qsTr("Number of throws:")
 		fieldWidth:		50
 		defaultValue:	100

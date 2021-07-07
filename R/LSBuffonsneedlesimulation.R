@@ -71,9 +71,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Observations"), type = "integer")
   summaryTable$addColumnInfo(name = "Median", title = gettextf("Median for %s", "\u03c0"), type = "number")
   summaryTable$addColumnInfo(name = "lowerCI", title = gettext("Lower"), type = "number", 
-                            overtitle = gettext(paste0(options[["CI"]]*100, "% Credible Interval")))
+                            overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
-                            overtitle = gettext(paste0(options[["CI"]]*100, "% Credible Interval")))
+                            overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   
   
   # fill in the table
@@ -162,20 +162,19 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                          density = c(propPost, propPrior),
                          group = c(rep(gettext("Posterior"),201), rep(gettext("Prior"),201))
    )
+   labels <- c(gettext("Posterior"), gettext("Prior"), "\u03c0")
    
    # axis specification
    propDistPlot0 <- ggplot2::ggplot(data = dataProp,  ggplot2::aes(x = values, y = density)) +
      ggplot2::xlab(gettext("Proportion of Crosses")) +
-     ggplot2::ylab(gettext("Density")) #+
-   #ggplot2::coord_cartesian(xlim = c(0, 1), ylim = c(0, 1.6*max(propPost)))
-   
-   # fill in the plot
-   propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0) +
+     ggplot2::ylab(gettext("Density")) +
      ggplot2::geom_line(ggplot2::aes(linetype = group), size = 1) +
-     #ggplot2::scale_linetype_manual("", values = c(gettext("Posterior") = "solid",
-     #                                              gettext("Prior") = "dashed")) 
      ggplot2::scale_linetype_manual("", values = c("Posterior" = "solid",
-                                                   "Prior" = "dashed")) 
+                                                   "Prior" = "dashed"),
+                                    labels = labels) 
+   # fill in the plot
+   propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0)
+
    
    if (options[["legendPropDistPlot"]]){
      propDistPlot$plotObject <-  propDistPlot$plotObject + 
@@ -200,7 +199,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    piDistPlot$position <- 4
    #piDistPlot$dependOn(c("n", "a", "b", "length", "CI", "showPiDistPlot"))
    piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                       options = c("showPiDistPlot", "legendPiDistPlot"))
+                       options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
    #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
    
    # values
@@ -213,7 +212,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                      density = c(yPost, yPrior, yPi),
                      group = c(rep(gettext("Implied Posterior"),201), rep(gettext("Implied Prior"),201), rep(gettext("\u03c0"), 100))
    )
-   data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
+   #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
+   labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
    
    
    # axis specification
@@ -221,24 +221,19 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
      ggplot2::ggtitle("") + # for , pi
      ggplot2::xlab(gettext("\u03c0")) +
      ggplot2::ylab(gettext("Density")) +
-     ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost)))
-   
-   # fill in the plot
-   piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0) +
-     ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
-     #ggplot2::scale_color_manual("", values = c(gettext("Implied Posterior") = "black",
-     #                                           gettext("Implied Prior") = "black",
-     #                                           gettext("\u03c0") = "red")) +
-     #ggplot2::scale_linetype_manual("", values = c(gettext("Implied Posterior") = "solid",
-     #                                              gettext("Implied Prior") = "dashed",
-     #                                              gettext("\u03c0") = "solid"))
-     
+     ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost))) +
+    ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
      ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
                                                 "Implied Prior" = "black",
-                                                "\u03c0" = "red")) +
+                                                "\u03c0" = "red"),
+                                 labels = labels) +
      ggplot2::scale_linetype_manual("", values = c("Implied Posterior" = "solid",
                                                    "Implied Prior" = "dashed",
-                                                   "\u03c0" = "solid"))
+                                                   "\u03c0" = "solid"),
+                                    labels = labels)
+   # fill in the plot
+   piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
+
    if (options[["legendPiDistPlot"]]){
      piDistPlot$plotObject <-  piDistPlot$plotObject + 
        ggplot2::theme(legend.position = c(.24, .9))
