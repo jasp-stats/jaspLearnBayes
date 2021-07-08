@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-07-09 11:33+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.8-dev\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -483,10 +489,9 @@ msgctxt "LSbinomialestimation|"
 msgid "Colorblind Alt."
 msgstr "Alternativa a daltonismo"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Verde"
 
 #, fuzzy
 msgctxt "LSbinomialestimation|"
@@ -553,10 +558,9 @@ msgctxt "LSbinomialtesting|"
 msgid "Colorblind Alt."
 msgstr "Alternativa a daltonismo"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Verde"
 
 #, fuzzy
 msgctxt "LSbinomialtesting|"
@@ -617,10 +621,9 @@ msgctxt "LSgaussianestimation|"
 msgid "Colorblind Alt."
 msgstr "Alternativa a daltonismo"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Verde"
 
 #, fuzzy
 msgctxt "LSgaussianestimation|"
@@ -687,10 +690,9 @@ msgctxt "LSgaussiantesting|"
 msgid "Colorblind Alt."
 msgstr "Alternativa a daltonismo"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Verde"
 
 #, fuzzy
 msgctxt "LSgaussiantesting|"
@@ -989,7 +991,7 @@ msgstr "Media"
 
 msgctxt "LSgaussiandatainput|"
 msgid "SD"
-msgstr ""
+msgstr "EP"
 
 msgctxt "LSgaussiandatainput|"
 msgid "Observations"
