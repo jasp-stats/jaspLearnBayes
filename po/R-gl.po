@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-07-02 14:03+0000\n"
+"PO-Revision-Date: 2021-07-08 20:34+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -118,9 +118,8 @@ msgstr "Estatísticos"
 msgid "Estimate"
 msgstr "Estimar"
 
-#, fuzzy
 msgid "%s%% Credible Interval"
-msgstr "Intervalo de credibilidade"
+msgstr "Intervalo co %s%% de Credibilidade"
 
 msgid "Lower"
 msgstr "Inferior"
@@ -203,9 +202,8 @@ msgstr "Parámetro"
 msgid "Prior"
 msgstr "Previo"
 
-#, fuzzy
 msgid "Posterior"
-msgstr "R² posterior"
+msgstr "Posterior"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -518,9 +516,8 @@ msgstr ""
 msgid "Observation"
 msgstr "desviación"
 
-#, fuzzy
 msgid "Population proportion"
-msgstr "Presentar as proporcións"
+msgstr "Proporción de poboación"
 
 #, fuzzy
 msgid "Prior = Posterior"
@@ -547,9 +544,8 @@ msgstr "Intervalos de predicións"
 msgid "Prediction %s"
 msgstr "Preditores"
 
-#, fuzzy
 msgid "Prediction std. deviation"
-msgstr "Logaritmo da desviación padrón:"
+msgstr "Desviación padrón da predición:"
 
 msgid "The prediction for %s %s is based on %s %s and %s %s."
 msgstr ""
@@ -589,11 +585,10 @@ msgid "Testing Summary"
 msgstr "Resumo"
 
 msgid "BF%s"
-msgstr ""
+msgstr "FB%s"
 
-#, fuzzy
 msgid "log(BF%s)"
-msgstr "log(FB₁₀)"
+msgstr "log(FB%s)"
 
 msgid "Hypothesis"
 msgstr "Hipótese"
@@ -1225,9 +1220,8 @@ msgstr ""
 msgid "Points Gained"
 msgstr "Puntos"
 
-#, fuzzy
 msgid "Analytical"
-msgstr "Intervalo analítico"
+msgstr "Analítico"
 
 msgid "p(win the game)"
 msgstr ""
@@ -1249,7 +1243,7 @@ msgid "Only numeric values are allowed in the input."
 msgstr ""
 
 msgid "SD"
-msgstr "DS"
+msgstr "EP"
 
 msgid "normal (%s, %s)"
 msgstr ""
