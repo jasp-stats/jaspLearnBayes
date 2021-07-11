@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-07-08 20:34+0000\n"
+"PO-Revision-Date: 2021-07-10 23:34+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -153,9 +153,8 @@ msgstr "Resultado"
 msgid "Lower %s"
 msgstr "Inferior"
 
-#, fuzzy
 msgid "Upper %s"
-msgstr "Superior"
+msgstr "Superior %s"
 
 #, fuzzy
 msgid "Negative test"
@@ -276,9 +275,8 @@ msgstr ""
 msgid "Test Characteristics"
 msgstr "Comprobar os resultados"
 
-#, fuzzy
 msgid "Test Threshold"
-msgstr "Valor límite"
+msgstr "Limiar da Proba"
 
 #, fuzzy
 msgid "Characteristic"
@@ -320,9 +318,8 @@ msgstr "Cantidade"
 msgid "Estimates"
 msgstr "Estimacións"
 
-#, fuzzy
 msgid "Positive predictive value"
-msgstr "Comprobación preditiva posterior"
+msgstr "Valor preditivo positivo"
 
 #, fuzzy
 msgid "Negative predictive value"
@@ -334,9 +331,8 @@ msgstr ""
 msgid "False omission rate"
 msgstr ""
 
-#, fuzzy
 msgid "False positive rate"
-msgstr "Todo positivo"
+msgstr "Cociente de falso positivo"
 
 #, fuzzy
 msgid "False negative rate"
@@ -459,9 +455,8 @@ msgstr "Resumo de datos"
 msgid "Counts"
 msgstr "Recontos"
 
-#, fuzzy
 msgid "Proportion"
-msgstr "Proporcións"
+msgstr "Proporción"
 
 msgid "Successes"
 msgstr "Acertos"
@@ -565,6 +560,8 @@ msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
 "change the value of the upper CI limit in the settings panel."
 msgstr ""
+"O límite superior do IC é maior que o número de observacións futuras. Por "
+"favor, troca o valor do límite superior do IC no panel de configuracións."
 
 msgid ""
 "The lower CI limit is higher than the number of future observations. Please, "
@@ -575,6 +572,8 @@ msgid ""
 "The lower CI limit is higher than the upper CI limit. Please, change the "
 "value of the CI limits in the settings panel."
 msgstr ""
+"O límite inferior do IC é maior que o límite superior do IC . Por favor, "
+"troca os valores dos límites do IC no panel de configuracións."
 
 #, fuzzy
 msgid "Proportion of Successes"
@@ -979,6 +978,11 @@ msgid ""
 "('upper'), (y-axis). The figure visualizes the updating process as if the "
 "individual data points were arriving one after another (x-axis)."
 msgstr ""
+"A opción 'Intervalo' presenta unha gráfica secuencial no que a probabilidade "
+"do parámetro %s está dentro do intervalo que vai desde ('inferior') to "
+"('superior'), (eixe y). A ilustración representa o proceso de actualización "
+"como se os puntos dos datos individuais estiveran chegando un detrás doutro ("
+"eixe x)."
 
 msgid ""
 "The 'All' option shows the probability of parameter %s lying inside of the "
