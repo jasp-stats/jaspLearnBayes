@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-07-10 23:34+0000\n"
+"PO-Revision-Date: 2021-07-15 17:34+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 "X-Virgin-Header: remove this line if you change anything in the header.\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
@@ -191,9 +191,8 @@ msgstr "Preferencias"
 msgid "Rareness"
 msgstr "Asimetría"
 
-#, fuzzy
 msgid "Priors and Posteriors"
-msgstr "Previo e posterior"
+msgstr "Previos e Posteriores"
 
 msgid "Parameter"
 msgstr "Parámetro"
@@ -474,9 +473,8 @@ msgstr ""
 msgid "binomial (%i, %s)"
 msgstr "Proba Binomial"
 
-#, fuzzy
 msgid "beta-binomial (%i, %s, %s)"
-msgstr "Binomial Beta"
+msgstr "Beta-Binomial (%i, %s, %s)"
 
 #, fuzzy
 msgid "Estimation Summary"
@@ -507,16 +505,14 @@ msgstr ""
 msgid "These results are based on %i %s and %i %s."
 msgstr ""
 
-#, fuzzy
 msgid "Observation"
-msgstr "desviación"
+msgstr "Observación"
 
 msgid "Population proportion"
 msgstr "Proporción de poboación"
 
-#, fuzzy
 msgid "Prior = Posterior"
-msgstr "Previo e posterior"
+msgstr "Previo = Posterior"
 
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
@@ -540,7 +536,7 @@ msgid "Prediction %s"
 msgstr "Preditores"
 
 msgid "Prediction std. deviation"
-msgstr "Desviación padrón da predición:"
+msgstr "Desvío padrón da predición"
 
 msgid "The prediction for %s %s is based on %s %s and %s %s."
 msgstr ""
@@ -663,9 +659,8 @@ msgstr "Acertos"
 msgid "%1$s %2$s Plots"
 msgstr ""
 
-#, fuzzy
 msgid "Prior and Posterior Plots"
-msgstr "Previo e posterior"
+msgstr "Gráficas Previa e Posterior"
 
 #, fuzzy
 msgid "Sequential Analysis: Point Estimate"
@@ -694,9 +689,8 @@ msgstr "Intervalos de predicións"
 msgid "%1$s %2$s Prediction Plots"
 msgstr ""
 
-#, fuzzy
 msgid "%s Prior and Posterior Plots"
-msgstr "Masa previa e posterior"
+msgstr "Gráficas %s Previa e Posterior"
 
 #, fuzzy
 msgid "%s Predictive Accuracy Plot"
@@ -1265,9 +1259,8 @@ msgstr ""
 msgid "Prior (μ)"
 msgstr "Previo"
 
-#, fuzzy
 msgid "Prior Mean"
-msgstr "Mediana posterior"
+msgstr "Media Posterior"
 
 #, fuzzy
 msgid "Posterior (μ)"
