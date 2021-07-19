@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-07-15 17:34+0000\n"
+"PO-Revision-Date: 2021-07-19 17:58+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -650,7 +650,7 @@ msgid "Please remove duplicates from the %s names."
 msgstr ""
 
 msgid "Incorrect arguments for the inverse cumulative density function"
-msgstr ""
+msgstr "Argumentos incorrectos para a función de densidade acumulada inversa"
 
 #, fuzzy
 msgid "'Successes'"
@@ -1224,9 +1224,8 @@ msgstr "Analítico"
 msgid "p(win the game)"
 msgstr ""
 
-#, fuzzy
 msgid "Simulated"
-msgstr "Estimado"
+msgstr "Simulado"
 
 msgid ""
 "The number of players (%1$i) does not equal the numbers of points for each "
@@ -1266,9 +1265,8 @@ msgstr "Media Posterior"
 msgid "Posterior (μ)"
 msgstr "R² posterior"
 
-#, fuzzy
 msgid "Posterior Mean"
-msgstr "Mediana posterior"
+msgstr "Mediana Posterior"
 
 #, fuzzy
 msgid "Population mean"
