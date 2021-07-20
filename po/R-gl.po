@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-07-19 17:58+0000\n"
+"PO-Revision-Date: 2021-07-20 19:07+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -140,7 +140,7 @@ msgid "Confusion Matrix"
 msgstr "Matriz de desarranxo"
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "IC do %s%%"
 
 #, fuzzy
 msgid "Positive test"
@@ -183,13 +183,11 @@ msgstr "Binomial Negativa"
 msgid "True/Total"
 msgstr "Total"
 
-#, fuzzy
 msgid "Prevalence"
-msgstr "Preferencias"
+msgstr "Prevalencia"
 
-#, fuzzy
 msgid "Rareness"
-msgstr "Asimetría"
+msgstr "Rareza"
 
 msgid "Priors and Posteriors"
 msgstr "Previos e Posteriores"
@@ -216,9 +214,8 @@ msgstr ""
 msgid "Plots"
 msgstr "Gráficas"
 
-#, fuzzy
 msgid "Probability Positive"
-msgstr "Probabilidade para:"
+msgstr "Probabilidade Positiva"
 
 msgid "Not tested"
 msgstr ""
@@ -245,30 +242,26 @@ msgstr "Estimacións condicionais"
 msgid "Icon Plot"
 msgstr "Gráfica"
 
-#, fuzzy
 msgid "True positive"
-msgstr "Todo positivo"
+msgstr "Verdadeiramente positivo"
 
-#, fuzzy
 msgid "False positive"
-msgstr "Todo positivo"
+msgstr "Falsamente positivo"
 
-#, fuzzy
 msgid "False negative"
-msgstr "Todo negativo"
+msgstr "Falsamente negativo"
 
-#, fuzzy
 msgid "True negative"
-msgstr "Todo negativo"
+msgstr "Verdadeiramente negativo"
 
 msgid "Receiving Operating Characteristic Curve"
 msgstr ""
 
 msgid "False Positive Rate (1-Specificity)"
-msgstr ""
+msgstr "Cociente do Falsamente Positivo (Especificidade 1)"
 
 msgid "True Positive Rate (Sensitivity)"
-msgstr ""
+msgstr "Cociente do Verdadeiramente Positivo (Sensibilidade)"
 
 #, fuzzy
 msgid "Test Characteristics"
@@ -331,74 +324,87 @@ msgid "False omission rate"
 msgstr ""
 
 msgid "False positive rate"
-msgstr "Cociente de falso positivo"
+msgstr "Cociente do falsamente positivo"
 
-#, fuzzy
 msgid "False negative rate"
-msgstr "Todo negativo"
+msgstr "Cociente do falsamente negativo"
 
-#, fuzzy
 msgid "Accuracy"
-msgstr "Precisión numérica"
+msgstr "Precisión"
 
 msgid "Proportion of a population affected by the condition."
-msgstr ""
+msgstr "Proporción da poboación afectada pola condición."
 
 msgid ""
 "(True positive rate) Proportion of those who are affected by the condition "
 "and are correctly tested positive."
 msgstr ""
+"(Cociente do verdadeiramente positivo) Proporción dos que están afectados "
+"pola condición e se proba correctamente que son positivos."
 
 msgid ""
 "(True negative rate) Proportion of those who are not affected by the "
 "condition and are correctly tested negative."
 msgstr ""
+"(Cociente do verdadeiramente negativo) Proporción dos que non están "
+"afectados pola condición e se proba correctamente que son negativos."
 
 msgid ""
 "Proportion of a population affected by a condition and correctly tested "
 "positive."
 msgstr ""
+"Proporción dunha poboación afectada por unha condición e que se proba "
+"correctamente que é positiva."
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
 "tested negative."
 msgstr ""
+"Proporción dunha poboación afectada por unha condición e que se proba "
+"incorrectamente que é negativa."
 
 msgid ""
 "Proportion of a population affected by a condition and incorrectly tested "
 "negative."
 msgstr ""
+"Proporción dunha poboación afectada por unha condición e que se proba "
+"incorrectamente que é negativa."
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
 "negative."
 msgstr ""
+"Proporción dunha poboación non afectada por unha condición e que se proba "
+"correctamente que é negativa."
 
 msgid ""
 "Proportion of those who tested positive and are affected by the condition."
-msgstr ""
+msgstr "Proporción dos que resultan positivos e están afectados pola condición."
 
 msgid ""
 "Proportion of those who tested negative and are not affected by the "
 "condition."
 msgstr ""
+"Proporción dos que resultan negativos e non están afectados pola condición."
 
 msgid "Proportion of false positives in the pool of those that test positive."
 msgstr ""
+"Proporción dos falsamente positivos no grupo dos que resultan positivos."
 
 msgid "Proportion of false negatives in the pool of those that test negative."
 msgstr ""
+"Proporción dos falsamente negativos no grupo dos que resultan negativos."
 
-#, fuzzy
 msgid "Complement proportion to specificity."
-msgstr "Comparar as proporcións de columnas"
+msgstr "Completar a proporción para a especificidade."
 
-#, fuzzy
 msgid "Complement proportion to sensitivity."
-msgstr "Comparar as proporcións de columnas"
+msgstr "Completar a proporción para a sensitividade."
 
 msgid "Proportion of the population that is true positive or true negative."
 msgstr ""
+"Proporción da poboación que é verdadeiramente positiva ou verdadeiramente "
+"negativa."
 
 msgid "P(Test = positive | Condition = positive)"
 msgstr ""
@@ -500,7 +506,7 @@ msgid "Posterior %s"
 msgstr "R² posterior"
 
 msgid "Please specify successes and failures."
-msgstr ""
+msgstr "Por favor, indica os acertos e os fallos."
 
 msgid "These results are based on %i %s and %i %s."
 msgstr ""
@@ -527,9 +533,8 @@ msgstr ""
 msgid "SI (BF=%s)"
 msgstr ""
 
-#, fuzzy
 msgid "Prediction (Successes)"
-msgstr "Intervalos de predicións"
+msgstr "Predición (Acertos)"
 
 #, fuzzy
 msgid "Prediction %s"
@@ -545,9 +550,8 @@ msgstr ""
 msgid "Predicted sample proportions"
 msgstr "Amosar as proporcións da mostra"
 
-#, fuzzy
 msgid "Predicted number of successes"
-msgstr "Número de acertos:"
+msgstr "Número de acertos preditos"
 
 msgid "Probability"
 msgstr "Probabilidade"
@@ -571,9 +575,8 @@ msgstr ""
 "O límite inferior do IC é maior que o límite superior do IC . Por favor, "
 "troca os valores dos límites do IC no panel de configuracións."
 
-#, fuzzy
 msgid "Proportion of Successes"
-msgstr "Proporcións"
+msgstr "Proporción de Acertos"
 
 #, fuzzy
 msgid "Testing Summary"
@@ -603,13 +606,11 @@ msgid ""
 "not defined."
 msgstr ""
 
-#, fuzzy
 msgid "P(Successes|%s)"
-msgstr "Acertos"
+msgstr "P(Acertos|%s)"
 
-#, fuzzy
 msgid "P(Successes)"
-msgstr "Acertos"
+msgstr "P(Acertos)"
 
 msgid "Please specify a hypothesis for comparison."
 msgstr ""
@@ -622,29 +623,28 @@ msgstr "Probabilidade previa"
 msgid "Joint probability"
 msgstr "Probabilidade previa"
 
-#, fuzzy
 msgid "Posterior probability"
-msgstr "Probabilidades posteriores"
+msgstr "Probabilidade posterior"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 
-#, fuzzy
 msgid "Observations"
-msgstr "Iteracións"
+msgstr "Observacións"
 
 msgid "At least 2 hypotheses need to be specified."
-msgstr ""
+msgstr "Cando menos, é necesario indicar 2 hipóteses."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
-msgstr ""
+msgstr "O parámetro '%1$s' para o modelo/a hipótese '%2$s' debe ser positivo."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
 msgstr ""
+"O parámetro '%1$s' para o modelo/a hipótese '%2$s' debe estar entre 0 e 1."
 
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 msgid "Please remove duplicates from the %s names."
 msgstr ""
@@ -652,9 +652,8 @@ msgstr ""
 msgid "Incorrect arguments for the inverse cumulative density function"
 msgstr "Argumentos incorrectos para a función de densidade acumulada inversa"
 
-#, fuzzy
 msgid "'Successes'"
-msgstr "Acertos"
+msgstr "'Acertos'"
 
 msgid "%1$s %2$s Plots"
 msgstr ""
@@ -706,7 +705,7 @@ msgid ""
 msgstr ""
 
 msgid "%s (the population proportion of successes)"
-msgstr ""
+msgstr "%s (a proporción de acertos na poboación)"
 
 msgid "%s (the population mean, variance is assumed to be known)"
 msgstr ""
@@ -1232,68 +1231,59 @@ msgid ""
 "player when interrupted (%2$i). Please check the appropriate settings."
 msgstr ""
 
-#, fuzzy
 msgid "Prior Skill"
-msgstr "Previo"
+msgstr "Habilidade Previa"
 
 msgid "Only numeric values are allowed in the input."
-msgstr ""
+msgstr "Só se admiten valores numéricos na entrada."
 
 msgid "SD"
-msgstr "EP"
+msgstr "DP"
 
 msgid "normal (%s, %s)"
-msgstr ""
+msgstr "Normal (%s, %s)"
 
 msgid "normal (%.2f, %.2f)"
-msgstr ""
+msgstr "Normal (%.2f, %.2f)"
 
 msgid "normal (%s, %.2f)"
-msgstr ""
+msgstr "Normal (%s, %.2f)"
 
 msgid "USE '.dataArrowGaussianLS()'"
-msgstr ""
+msgstr "UTILIZAR '.dataArrowGaussianLS()'"
 
-#, fuzzy
 msgid "Prior (μ)"
-msgstr "Previo"
+msgstr "Previo (μ)"
 
 msgid "Prior Mean"
-msgstr "Media Posterior"
+msgstr "Media Previa"
 
-#, fuzzy
 msgid "Posterior (μ)"
-msgstr "R² posterior"
+msgstr "Posterior (μ)"
 
 msgid "Posterior Mean"
-msgstr "Mediana Posterior"
+msgstr "Media Posterior"
 
-#, fuzzy
 msgid "Population mean"
-msgstr "Poboación"
+msgstr "Media da poboación"
 
-#, fuzzy
 msgid "Prediction"
-msgstr "Preditores"
+msgstr "Predición"
 
-#, fuzzy
 msgid "Prediction Mean"
-msgstr "Táboa de predicións"
+msgstr "Media da Predición"
 
 msgid "Please, specify the standard deviation of the data."
-msgstr ""
+msgstr "Por favor, indica o desvío padrón dos datos."
 
 msgid "The prediction for %s future %s is based on %s."
-msgstr ""
+msgstr "A predición para %s futuro %s baséase en on %s."
 
-#, fuzzy
 msgid "Sample means"
-msgstr "Mostras"
+msgstr "Medias da mostra"
 
-#, fuzzy
 msgid "Future data"
-msgstr "Ocultar os datos"
+msgstr "Datos futuros"
 
-#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inclusión"
+msgstr "Inclusión FB"
