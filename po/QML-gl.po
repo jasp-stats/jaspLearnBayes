@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-07-22 19:33+0000\n"
+"PO-Revision-Date: 2021-07-23 18:59+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/gl/>\n"
@@ -112,7 +112,7 @@ msgstr "Distribución posterior preditiva"
 
 msgctxt "LStestingpredictions|"
 msgid "Posterior Prediction"
-msgstr "Predición posterior"
+msgstr "Predición Posterior"
 
 msgctxt "LStestingpredictions|"
 msgid "Summary"
@@ -708,7 +708,7 @@ msgstr "Escollido"
 
 msgctxt "LSestimationpredictions|"
 msgid "Posterior Prediction"
-msgstr "Predición posterior"
+msgstr "Predición Posterior"
 
 msgctxt "LSestimationpredictions|"
 msgid "Number of future trials"
