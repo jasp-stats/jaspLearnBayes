@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-07-15 17:34+0000\n"
+"PO-Revision-Date: 2021-07-23 18:59+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -89,25 +89,93 @@ msgid ""
 "                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem"
 "\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
+"Esta análise mostra a <b>Clasificación Binaria</b>, que é un procedemento "
+"estatístico habitual cando os elementos se clasifican en dous grupos en base "
+"a unha regra de clasificación.\n"
+"\n"
+"                   A Clasificación Binaria é un procedemento onde os datos "
+"sobre un elemento se fan dicotómicos para acadar unha decisión binaria (p.e. "
+"si/non, verdadeiro/falso).\n"
+"\n"
+"                   As aplicacións habituais da Clasificación Binaria son:\n"
+"                   <ul>\n"
+"                     <li><b>Proba e diagnose médica</b> onde a clasificación "
+"determina se un paciente sofre dalgunha enfermidade ou non.</li>\n"
+"                     <li><b>Detección de spam</b> onde a clasificación "
+"determina se unha mensaxe (p.e. un email) é spam ou non.</li>\n"
+"                     <li><b>Control de calidade</b> onde a clasificación "
+"determina se un estándar industrial conseguiuse ou non.</li>\n"
+"                   </ul>\n"
+"\n"
+"                   Debido ao feito de que a clasificación binaria se utiliza "
+"frecuentemente nos ensaios médicos, a terminoloxía dos problemas de "
+"clasificación binaria está emprestada do dicionario médico (p.e. "
+"prevalencia, condición, marcador).\n"
+"\n"
+"                   Na practica, existe unha importante diferenza entre o "
+"<i>verdadeiro</i> estado dun suxeito e a <i>etiqueta que se lle asigna</i>, "
+"dada unha regra de clasificación. En JASP, o estado verdadeiro denomínase "
+"<b>condición</b> (positiva/negativa) e a etiqueta que se asigna denomínase "
+"<b>proba</b> (positiva/negativa). En moitas aplicacións, as condicións ou a "
+"proba poden non ser simétricas, por iso son interesantes distintos tipos de "
+"erros ademais dunha medida global de precisión. Estes tipos de erros "
+"distinguen, por exemplo, se un paciente sofre dunha condición pero a proba "
+"resulta negativa (falsamente negativa), ou se un paciente non sofre dunha "
+"condición pero a proba resulta positiva (falsamente positiva).\n"
+"\n"
+"                   As propiedades da proba se describen habitualmente en "
+"termos da súa <b>Sensibilidade</b> e <b>Especificidade</b>. A Sensibilidade "
+"é a probabilidade dun resultado positivo da proba, se a condición é "
+"positiva. A Especificidade é a probabilidade dun resultado negativo da "
+"proba, se a condición é negativa. Unha propiedade da condición é a "
+"<b>prevalencia</b>, que é a proporción de suxeitos que teñen a condición "
+"positiva na poboación.\n"
+"                   As características asimétricas da proba ou a prevalencia "
+"poden levar a situacións que poden parecer paradoxais a un observador non "
+"adestrado. Por exemplo, nalgúns casos é máis probable que un paciente non "
+"teña unha doenza que a teña, mesmo despois de dar un resultado positivo "
+"cunha proba para esa doenza.\n"
+"\n"
+"                   Formalmente, a probabilidade de que un suxeito teña unha "
+"condición positiva, despois de que o resultado dunha proba sexa positivo ("
+"i.e. valor preditivo positivo) obtense aplicando o <b>teorema de Bayes</b>:\n"
+"\n"
+"                   <img src = \"file://%s\", width=\"500\">\n"
+"\n"
+"                   <h5>References</h5>\n"
+"                   Pepe, M. S. (2003). <i>The statistical evaluation of "
+"medical tests for classification and prediction</i>. Oxford University Press."
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>"
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
+"Evaluation_of_binary_classifiers</a>\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\""
+">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 
-#, fuzzy
 msgid "Welcome to binary classification with JASP!"
-msgstr "Benvido a R en JASP!"
+msgstr "Benvido á clasificación binaria con JASP!"
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "A variable de 'condición positiva (binaria)' debe ter dous niveis!"
 
 msgid "Each condition needs at least one observation."
-msgstr ""
+msgstr "Cada condición necesita unha observación, cando menos."
 
 msgid ""
 "Mean of marker in positive condition (%s) needs to be larger than the mean "
 "of marker in negative condition (%s)."
 msgstr ""
+"É necesario que a media do marcador na condición positiva (%s) sexa maior "
+"que a media do marcador na condición negativa (%s)."
 
-#, fuzzy
 msgid "Drawing samples"
-msgstr "Extraer mostras"
+msgstr "Extraendo mostras"
 
 msgid "Tables"
 msgstr "Táboas"
@@ -127,69 +195,56 @@ msgstr "Inferior"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgid "Notation"
-msgstr "Rotación"
+msgstr "Notación"
 
-#, fuzzy
 msgid "Interpretation"
-msgstr "Integración"
+msgstr "Interpretación"
 
-#, fuzzy
 msgid "Confusion Matrix"
-msgstr "Matriz de desarranxo"
+msgstr "Matriz de Desarranxo"
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "IC do %s%%"
 
-#, fuzzy
 msgid "Positive test"
-msgstr "Positivo"
+msgstr "Proba positiva"
 
 msgid "Outcome"
 msgstr "Resultado"
 
-#, fuzzy
 msgid "Lower %s"
-msgstr "Inferior"
+msgstr "Inferior %s"
 
 msgid "Upper %s"
 msgstr "Superior %s"
 
-#, fuzzy
 msgid "Negative test"
-msgstr "Negativo"
+msgstr "Proba negativa"
 
-#, fuzzy
 msgid "Positive/Total"
-msgstr "Positivo"
+msgstr "Positivos/Total"
 
-#, fuzzy
 msgid "Negative/Total"
-msgstr "Negativo"
+msgstr "Negativos/Total"
 
 msgid "Total"
 msgstr "Total"
 
-#, fuzzy
 msgid "Positive condition"
-msgstr "Predición posterior"
+msgstr "Condición positiva"
 
-#, fuzzy
 msgid "Negative condition"
-msgstr "Binomial Negativa"
+msgstr "Condición negativa"
 
-#, fuzzy
 msgid "True/Total"
-msgstr "Total"
+msgstr "Verdadeiros/Total"
 
-#, fuzzy
 msgid "Prevalence"
-msgstr "Preferencias"
+msgstr "Prevalencia"
 
-#, fuzzy
 msgid "Rareness"
-msgstr "Asimetría"
+msgstr "Rareza"
 
 msgid "Priors and Posteriors"
 msgstr "Previos e Posteriores"
@@ -203,29 +258,26 @@ msgstr "Previo"
 msgid "Posterior"
 msgstr "Posterior"
 
-#, fuzzy
 msgid "Sensitivity"
-msgstr "Sensibilidade/Especificidade"
+msgstr "Sensibilidade"
 
 msgid "Specificity"
 msgstr "Especificidade"
 
 msgid "beta(%s,%s)"
-msgstr ""
+msgstr "Beta(%s,%s)"
 
 msgid "Plots"
 msgstr "Gráficas"
 
-#, fuzzy
 msgid "Probability Positive"
-msgstr "Probabilidade para:"
+msgstr "Probabilidade Positiva"
 
 msgid "Not tested"
-msgstr ""
+msgstr "Non probado"
 
-#, fuzzy
 msgid "Tested"
-msgstr "Proba"
+msgstr "Probado"
 
 msgid "Negative"
 msgstr "Negativo"
@@ -233,80 +285,68 @@ msgstr "Negativo"
 msgid "Positive"
 msgstr "Positivo"
 
-#, fuzzy
 msgid "Test Result"
-msgstr "Comprobar os resultados"
+msgstr "Resultado da Proba"
 
-#, fuzzy
 msgid "P(Condition = positive)"
-msgstr "Estimacións condicionais"
+msgstr "P(Condición = positiva)"
 
-#, fuzzy
 msgid "Icon Plot"
-msgstr "Gráfica"
+msgstr "Gráfica de Iconas"
 
-#, fuzzy
 msgid "True positive"
-msgstr "Todo positivo"
+msgstr "Verdadeiramente positivos"
 
-#, fuzzy
 msgid "False positive"
-msgstr "Todo positivo"
+msgstr "Falsamente positivos"
 
-#, fuzzy
 msgid "False negative"
-msgstr "Todo negativo"
+msgstr "Falsamente negativos"
 
-#, fuzzy
 msgid "True negative"
-msgstr "Todo negativo"
+msgstr "Verdadeiramente negativos"
 
 msgid "Receiving Operating Characteristic Curve"
-msgstr ""
+msgstr "Curva Característica Operativa da Recepción"
 
 msgid "False Positive Rate (1-Specificity)"
-msgstr ""
+msgstr "Cociente de Falsamente Positivos (Especificidade 1)"
 
 msgid "True Positive Rate (Sensitivity)"
-msgstr ""
+msgstr "Cociente de Verdadeiramente Positivos (Sensibilidade)"
 
-#, fuzzy
 msgid "Test Characteristics"
-msgstr "Comprobar os resultados"
+msgstr "Comprobar as Características"
 
 msgid "Test Threshold"
 msgstr "Limiar da Proba"
 
-#, fuzzy
 msgid "Characteristic"
-msgstr "Gráficos"
+msgstr "Característica"
 
 msgid "PPV and NPV by Prevalence"
-msgstr ""
+msgstr "VPP e VPN por Prevalencia"
 
-#, fuzzy
 msgid "Predictive Value"
-msgstr "Precisión de predicións"
+msgstr "Valor Preditivo"
 
 msgid "Alluvial Plot"
-msgstr ""
+msgstr "Gráfica Aluvial"
 
-#, fuzzy
 msgid "Condition"
-msgstr "Condicional"
+msgstr "Condición"
 
 msgid "Test"
 msgstr "Proba"
 
 msgid "Proportion of Population"
-msgstr ""
+msgstr "Proporción da Poboación"
 
-#, fuzzy
 msgid "Signal Detection"
-msgstr "Selección"
+msgstr "Detección de Sinal"
 
 msgid "Marker"
-msgstr ""
+msgstr "Marcador"
 
 msgid "Density"
 msgstr "Densidade"
@@ -320,136 +360,150 @@ msgstr "Estimacións"
 msgid "Positive predictive value"
 msgstr "Valor preditivo positivo"
 
-#, fuzzy
 msgid "Negative predictive value"
-msgstr "Valores efectivos negativos"
+msgstr "Valor preditivo negativo"
 
 msgid "False discovery rate"
-msgstr ""
+msgstr "Cociente de falso achado"
 
 msgid "False omission rate"
-msgstr ""
+msgstr "Cociente de falsa omisión"
 
 msgid "False positive rate"
-msgstr "Cociente de falso positivo"
+msgstr "Cociente de falsamente positivos"
 
-#, fuzzy
 msgid "False negative rate"
-msgstr "Todo negativo"
+msgstr "Cociente de falsamente negativos"
 
-#, fuzzy
 msgid "Accuracy"
-msgstr "Precisión numérica"
+msgstr "Precisión"
 
 msgid "Proportion of a population affected by the condition."
-msgstr ""
+msgstr "Proporción da poboación afectada pola condición."
 
 msgid ""
 "(True positive rate) Proportion of those who are affected by the condition "
 "and are correctly tested positive."
 msgstr ""
+"(Cociente de verdadeiramente positivos) Proporción dos que están afectados "
+"pola condición e se proba correctamente que son positivos."
 
 msgid ""
 "(True negative rate) Proportion of those who are not affected by the "
 "condition and are correctly tested negative."
 msgstr ""
+"(Cociente de verdadeiramente negativos) Proporción dos que non están "
+"afectados pola condición e se proba correctamente que son negativos."
 
 msgid ""
 "Proportion of a population affected by a condition and correctly tested "
 "positive."
 msgstr ""
+"Proporción dunha poboación afectada por unha condición e que se proba "
+"correctamente que é positiva."
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
 "tested negative."
 msgstr ""
+"Proporción dunha poboación afectada por unha condición e que se proba "
+"incorrectamente que é negativa."
 
 msgid ""
 "Proportion of a population affected by a condition and incorrectly tested "
 "negative."
 msgstr ""
+"Proporción dunha poboación afectada por unha condición e que se proba "
+"incorrectamente que é negativa."
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
 "negative."
 msgstr ""
+"Proporción dunha poboación non afectada por unha condición e que se proba "
+"correctamente que é negativa."
 
 msgid ""
 "Proportion of those who tested positive and are affected by the condition."
-msgstr ""
+msgstr "Proporción dos que resultan positivos e están afectados pola condición."
 
 msgid ""
 "Proportion of those who tested negative and are not affected by the "
 "condition."
 msgstr ""
+"Proporción dos que resultan negativos e non están afectados pola condición."
 
 msgid "Proportion of false positives in the pool of those that test positive."
 msgstr ""
+"Proporción dos falsamente positivos no grupo dos que resultan positivos."
 
 msgid "Proportion of false negatives in the pool of those that test negative."
 msgstr ""
+"Proporción dos falsamente negativos no grupo dos que resultan negativos."
 
-#, fuzzy
 msgid "Complement proportion to specificity."
-msgstr "Comparar as proporcións de columnas"
+msgstr "Completar a proporción para a especificidade."
 
-#, fuzzy
 msgid "Complement proportion to sensitivity."
-msgstr "Comparar as proporcións de columnas"
+msgstr "Completar a proporción para a sensibilidade."
 
 msgid "Proportion of the population that is true positive or true negative."
 msgstr ""
+"Proporción da poboación que é verdadeiramente positiva ou verdadeiramente "
+"negativa."
 
 msgid "P(Test = positive | Condition = positive)"
-msgstr ""
+msgstr "P(Proba = positiva | Condición = positiva)"
 
 msgid "P(Test = negative | Condition = negative)"
-msgstr ""
+msgstr "P(Proba = negativa | Condición = negativa)"
 
 msgid "P(Condition = positive %s Test = positive)"
-msgstr ""
+msgstr "P(Condición = positiva %s Proba = positiva)"
 
 msgid "P(Condition = negative %s Test = positive)"
-msgstr ""
+msgstr "P(Condición = negativa %s Proba = positiva)"
 
 msgid "P(Condition = negative %s Test = negative)"
-msgstr ""
+msgstr "P(Condición = negativa %s Proba = negativa)"
 
 msgid "P(Condition = positive %s Test = negative)"
-msgstr ""
+msgstr "P(Condición = positiva %s Proba = negativa)"
 
 msgid "P(Condition = positive | Test = positive)"
-msgstr ""
+msgstr "P(Condición = positiva | Proba = positiva)"
 
 msgid "P(Condition = negative | Test = negative)"
-msgstr ""
+msgstr "P(Condición = negativa | Proba = negativa)"
 
 msgid "P(Condition = negative | Test = positive)"
-msgstr ""
+msgstr "P(Condición = negativa | Proba = positiva)"
 
 msgid "P(Condition = positive | Test = negative)"
-msgstr ""
+msgstr "P(Condición = positiva | Proba = negativa)"
 
 msgid "P(Test = positive | Condition = negative)"
-msgstr ""
+msgstr "P(Proba = positiva | Condición = negativa)"
 
 msgid "P(Test = negative | Condition = positive)"
-msgstr ""
+msgstr "P(Proba = negativa | Condición = positiva)"
 
 msgid ""
 "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s "
 "Test = negative)"
 msgstr ""
+"P(Condición = positiva %1$s Proba = positiva %2$s Condición = negativa %1$s "
+"Proba = negativa)"
 
 msgid "Central credible intervals are based on %i samples."
-msgstr ""
+msgstr "Os intervalos de credibilidade centrais está baseados en %i mostras."
 
 msgid "Parameter estimates are posterior means based on %i samples."
 msgstr ""
+"As estimacións dos parámetros son medias posteriores, baseadas en %i mostras."
 
-#, fuzzy
 msgid "Data Summary"
-msgstr "Resumo de datos"
+msgstr "Resumo de Datos"
 
 msgid "Counts"
 msgstr "Recontos"
@@ -464,46 +518,40 @@ msgid "Failures"
 msgstr "Fracasos"
 
 msgid "spike at %s"
-msgstr ""
+msgstr "pico en %s"
 
 msgid "beta (%s, %s)"
-msgstr ""
+msgstr "Beta (%s, %s)"
 
-#, fuzzy
 msgid "binomial (%i, %s)"
-msgstr "Proba Binomial"
+msgstr "Binomial (%i, %s)"
 
 msgid "beta-binomial (%i, %s, %s)"
 msgstr "Beta-Binomial (%i, %s, %s)"
 
-#, fuzzy
 msgid "Estimation Summary"
-msgstr "Estimación"
+msgstr "Resumo da Estimación"
 
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgid "Prior (%s)"
-msgstr "Previos"
+msgstr "Previo (%s)"
 
-#, fuzzy
 msgid "Prior %s"
-msgstr "Previos"
+msgstr "Previo %s"
 
-#, fuzzy
 msgid "Posterior (%s)"
-msgstr "R² posterior"
+msgstr "Posterior (%s)"
 
-#, fuzzy
 msgid "Posterior %s"
-msgstr "R² posterior"
+msgstr "Posterior %s"
 
 msgid "Please specify successes and failures."
-msgstr ""
+msgstr "Por favor, indica os acertos e os fracasos."
 
 msgid "These results are based on %i %s and %i %s."
-msgstr ""
+msgstr "Estes resultados baséanse en %i %s e %i %s."
 
 msgid "Observation"
 msgstr "Observación"
@@ -517,37 +565,34 @@ msgstr "Previo = Posterior"
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr ""
+"Na gráfica de análise Secuencial non se implementan máis que ICs bimodais."
 
 msgid "%i %% CI"
-msgstr ""
+msgstr "IC do %i %%"
 
 msgid "%i %% HPD"
-msgstr ""
+msgstr "HPD do %i %%"
 
 msgid "SI (BF=%s)"
-msgstr ""
+msgstr "IS (FB=%s)"
 
-#, fuzzy
 msgid "Prediction (Successes)"
-msgstr "Intervalos de predicións"
+msgstr "Predición (Acertos)"
 
-#, fuzzy
 msgid "Prediction %s"
-msgstr "Preditores"
+msgstr "Predición %s"
 
 msgid "Prediction std. deviation"
 msgstr "Desvío padrón da predición"
 
 msgid "The prediction for %s %s is based on %s %s and %s %s."
-msgstr ""
+msgstr "A predición para %s %s baséase en %s %s e %s %s."
 
-#, fuzzy
 msgid "Predicted sample proportions"
-msgstr "Amosar as proporcións da mostra"
+msgstr "Proporcións preditas da mostra"
 
-#, fuzzy
 msgid "Predicted number of successes"
-msgstr "Número de acertos:"
+msgstr "Número predito de acertos"
 
 msgid "Probability"
 msgstr "Probabilidade"
@@ -563,6 +608,8 @@ msgid ""
 "The lower CI limit is higher than the number of future observations. Please, "
 "change the value of the lower CI limit in the settings panel."
 msgstr ""
+"O límite inferior do IC é maior que o número de observacións futuras. Por "
+"favor, troca o valor do límite inferior do IC no panel de configuracións."
 
 msgid ""
 "The lower CI limit is higher than the upper CI limit. Please, change the "
@@ -571,13 +618,11 @@ msgstr ""
 "O límite inferior do IC é maior que o límite superior do IC . Por favor, "
 "troca os valores dos límites do IC no panel de configuracións."
 
-#, fuzzy
 msgid "Proportion of Successes"
-msgstr "Proporcións"
+msgstr "Proporción de Acertos"
 
-#, fuzzy
 msgid "Testing Summary"
-msgstr "Resumo"
+msgstr "Resumo de Probas"
 
 msgid "BF%s"
 msgstr "FB%s"
@@ -591,125 +636,115 @@ msgstr "Hipótese"
 msgid "P(H)"
 msgstr "P(H)"
 
-#, fuzzy
 msgid "log(likelihood)"
-msgstr "Verosimilitude"
+msgstr "log(verosimilitude)"
 
 msgid "P(H|data)"
-msgstr ""
+msgstr "P(H|datos)"
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
 "not defined."
 msgstr ""
+"A gráfica non se pode xerar porque as probabilidades posteriores do modelo "
+"non están definidas."
 
-#, fuzzy
 msgid "P(Successes|%s)"
-msgstr "Acertos"
+msgstr "P(Acertos|%s)"
 
-#, fuzzy
 msgid "P(Successes)"
-msgstr "Acertos"
+msgstr "P(Acertos)"
 
 msgid "Please specify a hypothesis for comparison."
-msgstr ""
+msgstr "Por favor, indica unha hipótese para a comparación."
 
-#, fuzzy
 msgid "Conditional probability"
-msgstr "Probabilidade previa"
+msgstr "Probabilidade condicionada"
 
-#, fuzzy
 msgid "Joint probability"
-msgstr "Probabilidade previa"
+msgstr "Probabilidade conxunta"
 
-#, fuzzy
 msgid "Posterior probability"
-msgstr "Probabilidades posteriores"
+msgstr "Probabilidade posterior"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
+"Non é posible facer a gráfica: Un dos factores de Bayes é igual a infinito."
 
-#, fuzzy
 msgid "Observations"
-msgstr "Iteracións"
+msgstr "Observacións"
 
 msgid "At least 2 hypotheses need to be specified."
-msgstr ""
+msgstr "Cando menos, é necesario indicar 2 hipóteses."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
-msgstr ""
+msgstr "O parámetro '%1$s' para o modelo/a hipótese '%2$s' debe ser positivo."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
 msgstr ""
+"O parámetro '%1$s' para o modelo/a hipótese '%2$s' debe estar entre 0 e 1."
 
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 msgid "Please remove duplicates from the %s names."
-msgstr ""
+msgstr "Por favor, quita os duplicados dos nomes de %s."
 
 msgid "Incorrect arguments for the inverse cumulative density function"
-msgstr ""
+msgstr "Argumentos incorrectos para a función de densidade acumulada inversa"
 
-#, fuzzy
 msgid "'Successes'"
-msgstr "Acertos"
+msgstr "'Acertos'"
 
 msgid "%1$s %2$s Plots"
-msgstr ""
+msgstr "Gráficas %1$s %2$s"
 
 msgid "Prior and Posterior Plots"
 msgstr "Gráficas Previa e Posterior"
 
-#, fuzzy
 msgid "Sequential Analysis: Point Estimate"
-msgstr "Análise secuencial"
+msgstr "Análise Secuencial: Estimación Puntual"
 
-#, fuzzy
 msgid "%s Sequential Analysis: Interval"
-msgstr "Análise secuencial"
+msgstr "%s Análise Secuencial: Intervalo"
 
-#, fuzzy
 msgid "Sequential Analysis: Staked"
-msgstr "Análise secuencial"
+msgstr "Análise Secuencial: Amoreado"
 
-#, fuzzy
 msgid "Sequential Posterior Updating"
-msgstr "Táboa posterior de actualización"
+msgstr "Actualización Posterior Secuencial"
 
-#, fuzzy
 msgid "Prediction Summary"
-msgstr "Táboa de predicións"
+msgstr "Resumo de Predicións"
 
-#, fuzzy
 msgid "%s Prediction Plots"
-msgstr "Intervalos de predicións"
+msgstr "%s Gráficas de Predición"
 
 msgid "%1$s %2$s Prediction Plots"
-msgstr ""
+msgstr "%1$s %2$s Gráficas de Predición"
 
 msgid "%s Prior and Posterior Plots"
-msgstr "Gráficas %s Previa e Posterior"
+msgstr "%s Gráficas Previa e Posterior"
 
-#, fuzzy
 msgid "%s Predictive Accuracy Plot"
-msgstr "Precisión de predicións"
+msgstr "%s Gráficas de Precisión Preditiva"
 
-#, fuzzy
 msgid "%s Sequential Analysis"
-msgstr "Análise secuencial"
+msgstr "%s Análise Secuencial"
 
 msgid ""
 "Welcome to the %s analysis from the Learn Bayes module. This analysis "
 "illustrates Bayesian %s using %s examples."
 msgstr ""
+"Benvida/o á análise %s do módulo Aprender Bayes. Esta análise expón o %s "
+"baiesiano utilizando %s exemplos."
 
 msgid "%s (the population proportion of successes)"
-msgstr ""
+msgstr "%s (a proporción de acertos na poboación)"
 
 msgid "%s (the population mean, variance is assumed to be known)"
-msgstr ""
+msgstr "%s (a media poboacional, supoñendo que se coñece a varianza)"
 
 msgid ""
 "The analysis is split into 5 sections:\n"
@@ -722,14 +757,25 @@ msgid ""
 "           <li> %s </li>\n"
 "           <li> %s </li> </ol>"
 msgstr ""
+"A análise divídese en 5 seccións:\n"
+"      <ol> <li> Datos - para indicar a achega de datos para os cálculos. "
+"Podes ben utilizar unha variable dun conxunto de datos cargados en JASP, ben "
+"indicar un panorama agregado dos datos, ou ben introducir as observacións "
+"unha por unha (e actualizalas durante a análise). </li>\n"
+"           <li> %s </li>\n"
+"           <li> %s </li>\n"
+"           <li> %s </li>\n"
+"           <li> %s </li> </ol>"
 
 msgid "The 'Data' section allows you to specify data input for the analysis."
-msgstr ""
+msgstr "A sección 'Datos' te permite indicar a achega de datos para a análise."
 
 msgid ""
 "The 'Select variable' option allows the selection of a variable ('Selected') "
 "from a dataset loaded into JASP. %s"
 msgstr ""
+"A opción 'Escoller variable' te permite a selección dunha variable "
+"('Escollida') dun conxunto de datos cargado en JASP. %s"
 
 msgid ""
 "The 'Specify counts' option allows the use of aggregated data. %1$s This "
@@ -737,11 +783,17 @@ msgid ""
 "of information about the order of observations precludes the use of "
 "sequential analysis."
 msgstr ""
+"A opción 'Especificar as cantidades' te permite a utilización de datos "
+"agregados. %1$s Isto quere dicir que %2$só se actualiza unha vez, cos datos "
+"completos. A falla de información sobre a orde das observacións impide a "
+"utilización da análise secuencial."
 
 msgid ""
 "The 'Enter sequence' option allows manual input of a specific order of "
 "observations. %s"
 msgstr ""
+"A opción 'Introducir a secuencia' te permite introducir manualmente a orde "
+"concreta das observacións. %s"
 
 msgid ""
 "The 'Binomial Estimation' analysis offers two types of prior distributions "
@@ -758,6 +810,19 @@ msgid ""
 "'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) "
 "with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
+"A análise da 'Estimación Binomial' ofrece dous tipos de distribucións "
+"previas para o parámetro %1$s que representa a proporción de acertos "
+"subxacente na poboación:\n"
+"        <ul><li>'Pico(%2$s)' - Para concentrar toda a masa de probabilidade "
+"nun punto (%2$s). Isto representa a crenza previa de que a proporción na "
+"poboación é %2$s con certeza. Este convencemento é tan forte que ningún dato "
+"pode modificar esta crenza previa. Por iso, a posterior é tamén un pico en "
+"%2$s. A %5$s previa e posterior corresponde entón á posición do "
+"pico.</li><li>'Beta(%3$s, %4$s)' - Para asignar a densidade de probabilidade "
+"entre tódolos valores do parámetro %1$s de acordo cunha distribución Beta "
+"con parámetros %3$s e %4$s. O %6$s previo. Despois de observar 'S' acertos e "
+"'F' fracasos, a distribución posterior actualízase a Beta(%3$s + S, %4$s + F)"
+" cunha %5$s calculada consecuentemente.</li></ul>"
 
 msgid ""
 "The 'Gaussian Estimation' analysis offers two types of prior distributions "
@@ -777,6 +842,22 @@ msgid ""
 "%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s "
 "corresponding to the mean of posterior distribution.</li></ul>"
 msgstr ""
+"A análise 'Estimación Normal' ofrece dous tipos de distribucións previas do "
+"parámetro %1$s dunha distribución Normal(%1$s, %2$s), cun desvío padrón "
+"coñecido %2$s:\n"
+"        <ul><li>'Pico(%3$s)' - Para concentrar toda a masa de probabilidade "
+"nun punto (%3$s). Isto representa a crenza previa de que a proporción na "
+"poboación é %3$s con certeza. Este convencemento é tan forte que ningún dato "
+"pode modificar esta crenza previa. Por iso, a posterior é tamén un pico en "
+"%3$s. A %8$s previa e posterior corresponde entón á posición do "
+"pico.</li><li>'Normal(%3$s, %4$s)' - Para asignar a densidade de "
+"probabilidade entre tódolos valores do parámetro %1$s de acordo cunha "
+"distribución Normal con parámetros media %3$s e desvío padrón %4$s. O %8$s "
+"previo correspóndese co parámetro da media da distribución Normal %3$s. "
+"Despois de considerar 'N' observacións con media %5$s, a distribución "
+"posterior actualízase a Normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + "
+"(%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) )"
+" correspondéndose %8$s coa media da distribución posterior .</li></ul>"
 
 msgid ""
 "The 'Estimation Summary' table displays numerical summaries for the "
@@ -789,6 +870,15 @@ msgid ""
 "distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the "
 "posterior distribution</li></ul>"
 msgstr ""
+"A táboa 'Resuma de Estimación' presenta resumos numéricos dos modelos "
+"individuais. A estimación puntual presentada pode trocarse utilizando a "
+"opción 'Estimación puntual'. A táboa está formada polas seguintes columnas:\n"
+"    <ul><li>'Modelo' - Nomes dos modelos indicados</li><li>'Previo (%1$s)' - "
+"Distribución previa indicada para o parámetro %1$s</li><li>'Previo %2$s' - "
+"%3$s da distribución previa indicada</li><li>'Posterior (%1$s)' - "
+"Distribución posterior estimada para o parámetro %1$s (i.e. a distribución "
+"previa actualizada coas datos)</li><li>'Posterior %2$s' - %3$s da "
+"distribución posterior </li></ul>"
 
 msgid ""
 "The 'Binomial Testing' analysis offers two types of prior distributions for "
@@ -833,6 +923,14 @@ msgid ""
 "likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H"
 "%2$s)*P(H%2$s)."
 msgstr ""
+"As probabilidades posteriores 'P(H|datos)' calcúlanse entón utilizando a "
+"fórmula de Bayes,\n"
+"        <center>P(H|datos) = P(H) * P(datos|H) / P(datos),</center> onde "
+"'P(H)' representa a probabilidade previa da hipótese, 'P(datos|H)' a "
+"verosimilitude marxinal dos datos coa hipótese dada, e 'P(datos)' a "
+"probabilidade dos datos. O factor 'P(datos)' é igual á suma dos productos "
+"das verosimilitudes marxinais multiplicadas polas probabilidades previas, "
+"P(datos) = %1$s P(datos|H%2$s)*P(H%2$s)."
 
 msgid ""
 "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two "
@@ -861,35 +959,56 @@ msgid ""
 "posterior probability of the hypothesis (after updating with the data)</"
 "li><li>%s</li></ul>"
 msgstr ""
+"A táboa 'Resumo de Probas' presenta resumos numéricos das hipóteses. "
+"Componse das seguintes columnas:\n"
+"    <ul><li>'Hipótese' - Nomes das hipóteses indicadas</li><li>'P(H)' - "
+"Probabilidade previa da hipótese</li><li>'log(verosimilitude)' - Logaritmo "
+"da verosimilitude marxinal da hipótese</li><li>'P(H|datos)' - Probabilidade "
+"posterior da hipótese (logo de actualizarse cos datos)</li><li>%s</li></ul>"
 
 msgid ""
 "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior "
 "distributions are visualized as arrows (signifying that their density is "
 "infinite) and %4$s distributions are visualized as continuous lines."
 msgstr ""
+"A opción '%1$s' presenta as %2$s gráficas para o parámetro %3$s. As "
+"distribucións previas en pico se visualizan como frechas (querendo dicir que "
+"a súa densidade é infinita) e as distribucións %4$s se visualizan como liñas "
+"continuas."
 
 msgid ""
 "The 'All' option shows all %1$s for parameter %2$s on top of each other, "
 "allowing for easier comparison with a common density and probability scale "
 "on the y-axis."
 msgstr ""
+"A opción 'Todo' amosa todo %1$s para o parámetro %2$s enriba de cada un, "
+"permitindo unha comparación máis sinxela cunha escala común de densidade e "
+"probabilidade no eixe y."
 
 msgid ""
 "The 'Stacked' option shows all %1$s for parameter %2$s in one figure with a "
 "depth effect induced by plotting the additional distributions 'further' on "
 "the z-axis."
 msgstr ""
+"A opción 'Amoreado' amosa todo %1$s para o parámetro %2$s nunha imaxe cun "
+"efecto de fondo inducido pola representación gráfica das distribucións "
+"adicionais 'a maiores' no eixe z."
 
 msgid ""
 "The 'Individual' option shows %1$s for parameter %2$s individually in "
 "separate figures. It is possible to visualize different types of point "
 "estimates ('Point estimate') and credible intervals ('CI'):%3$s"
 msgstr ""
+"A opción 'Individual' amosa %1$s para o parámetro %2$s individualmente en "
+"imaxes separadas. É posible visualizar distintos tipos de estimacións "
+"puntuais ('Estimación puntual') e intervalos de credibilidade ('IC'):%3$s"
 
 msgid ""
 "Furthermore, the 'Observed data' checkbox allows the visualization of the "
 "observed %s as a black cross in the figure."
 msgstr ""
+"Amais, o recadriño de 'Datos observados' permite a visualización na imaxe "
+"dos %s observados como cruces negras."
 
 msgid ""
 "The 'Conditional' option shows all %1$s for parameter %2$s independently, as "
@@ -897,6 +1016,11 @@ msgid ""
 "hypotheses). It is possible to visualize different types of point estimates "
 "('Point estimate') and credible intervals ('CI'):%3$s"
 msgstr ""
+"A opción 'Condicionado' amosa tódalas %1$s para o parámetro %2$s "
+"independentemente, como se foran consideradas como modelos individuais (sen "
+"a existencia doutras hipóteses). É posible visualizar distintos tipos de "
+"estimacións puntuais ('Estimación Puntual') e intervalos de credibilidade "
+"('IC'):%3$s"
 
 msgid ""
 "The 'Joint' option shows all %1$s for parameter %2$s when considered "
@@ -914,6 +1038,10 @@ msgid ""
 "by their %2$s probability.%3$s It is possible to visualize different types "
 "of point estimates ('Point estimate') and credible intervals ('CI'):%4$s"
 msgstr ""
+"A opción 'Marxinal' colapsa a través de todas as %1$s individuais, "
+"ponderándoas pola súa probabilidade %2$s.%3$s É posible visualizar distintos "
+"tipos de estimacións puntuais ('Estimación puntual') e intervalos de "
+"credibilidade ('IC'):%4$s"
 
 msgid ""
 "The 'Prior and posterior distribution' option displays the prior and "
@@ -924,12 +1052,23 @@ msgid ""
 "distribution as solid black lines. In addition, the observed data summary "
 "can be visualized as a black cross by selecting the '%4$s' checkbox."
 msgstr ""
+"A opción 'Distribución previa e posterior' presenta a distribución previa e "
+"posterior do parámetro %1$s para a %2$s individual. As distribucións previas "
+"en pico se visualizan como frechas (querendo dicir que a súa densidade é "
+"infinita) e as distribucións %3$s se visualizan como liñas continuas. As "
+"distribucións previas represéntanse como liñas grises descontinuas, e as "
+"distribucións posteriores como liñas negras continuas. Ademais, o resumo dos "
+"datos observados pode visualizarse como unha cruz negra marcando o recadriño "
+"'%4$s'."
 
 msgid ""
 "The 'Conditional' option shows all prior and posterior distributions for "
 "parameter %1$s independently, as if they were considered as individual "
 "models (without the existence of other hypotheses)."
 msgstr ""
+"A opción 'Condicionado' amosa tódalas distribucións previas e posteriores "
+"para o parámetro %1$s independentemente, como se foran consideradas como "
+"modelos individuais (sen a existencia doutras hipóteses)."
 
 msgid ""
 "The 'Joint' option shows all prior and posterior distributions for parameter "
@@ -940,11 +1079,21 @@ msgid ""
 "with a depth effect induced by plotting the additional distributions "
 "'further' on the z-axis."
 msgstr ""
+"A opción 'Conxunto' amosa tódalas distribucións previas e posteriores do "
+"parámetro %1$s, cando se consideran xuntas á vista das outras hipóteses. "
+"Ademais, a opción 'Sobreposto' permite a visualización de todo %1$s enriba "
+"de cada unha, permitindo unha comparación máis doada cunha escala común da "
+"densidade e probabilidade no eixe y; e a opción 'Amoreado' amosa todo %1$s "
+"nunha imaxe cun efecto de fondo inducido pola representación gráfica das "
+"distribucións adicionais 'a maiores' no eixe z."
 
 msgid ""
 "The 'Marginal' option collapses across all individual prior and posterior "
 "distributions, weighting them by their prior and posterior probability."
 msgstr ""
+"A opción 'Marxinal' colapsa a través de todas as distribucións individuais "
+"previas e posteriores, ponderándoas pola súa probabilidade previa e "
+"posterior."
 
 msgid ""
 "The 'Point estimate' option displays a plot with the sequential updating of "
@@ -953,11 +1102,19 @@ msgid ""
 "It is possible to visualize different types of point estimates ('Point "
 "estimate') and credible intervals ('CI'):%2$s"
 msgstr ""
+"A opción 'Estimación puntual' presenta unha gráfica coa actualización "
+"secuencial da estimación puntual %1$s (eixe y). A imaxe representa o "
+"procedemento de actualización como se os puntos individuais de datos "
+"chegasen un despois do outro (eixe x). É posible visualizar distintos tipos "
+"de estimacións puntuais ('Estimación puntual') e intervalos de credibilidade "
+"('IC'):%2$s"
 
 msgid ""
 "The 'Updating table' option generates a numerical summary of the displayed "
 "figures."
 msgstr ""
+"A opción 'Táboa de actualización' xera un resumo numérico das imaxes "
+"presentadas."
 
 msgid ""
 "The 'Stacked distributions' option displays a plot with the sequential "
@@ -965,6 +1122,11 @@ msgid ""
 "visualizes the updating process as if the individual data points were "
 "arriving one after another, creating a depth effect (z-axis)."
 msgstr ""
+"A opción 'Distribucións amoreadas' presenta unha gráfica coa actualización "
+"secuencial da densidade da distribución posterior (eixes x e y). A imaxe "
+"representa o procedemento de actualización como se os putos dos datos "
+"individuais estiveran chegando un detrás doutro, creando un efecto de fondo ("
+"eixe z)."
 
 msgid ""
 "The 'Interval' option displays a sequential plot with the probability of "
@@ -974,20 +1136,27 @@ msgid ""
 msgstr ""
 "A opción 'Intervalo' presenta unha gráfica secuencial no que a probabilidade "
 "do parámetro %s está dentro do intervalo que vai desde ('inferior') to "
-"('superior'), (eixe y). A ilustración representa o proceso de actualización "
-"como se os puntos dos datos individuais estiveran chegando un detrás doutro ("
-"eixe x)."
+"('superior'), (eixe y). A imaxe representa o proceso de actualización como "
+"se os puntos dos datos individuais estiveran chegando un detrás doutro (eixe "
+"x)."
 
 msgid ""
 "The 'All' option shows the probability of parameter %s lying inside of the "
 "specified range for all models in one figure, allowing for easier comparison."
 msgstr ""
+"A opción 'Todo' amosa nunha imaxe, a probabilidade do parámetro %s dentro do "
+"rango indicado para tódolos modelos, permitindo así unha comparación máis "
+"doada."
 
 msgid ""
 "The 'Stacked' option visualizes the interval for all prior distribution "
 "updates for each model within one figure with a depth effect induced by "
 "plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"Coa opción 'Amoreado' se visualiza, nunha imaxe, o intervalo para tódalas "
+"actualizacións da distribución previa para cada modelo, cun efecto de fondo "
+"inducido pola representación gráfica das distribucións adicionais 'a "
+"maiores' no eixe z."
 
 msgid ""
 "The 'Posterior updating table' option generates a numerical summary of the "
@@ -997,6 +1166,13 @@ msgid ""
 "distribution and the last row corresponds to the final posterior "
 "distribution after the prior distribution was updated with all observations."
 msgstr ""
+"A opción 'Táboa posterior de actualización' xera un resumo numérico do "
+"procedemento de actualización do parámetro %s. A columna 'Observación' "
+"rastrexa cantas observacións foron xa atopadas da distribución posterior "
+"correspondente. A primeira fila (observación = 0) correspóndese coa "
+"distribución previa, e a derradeira fila correspóndese coa distribución "
+"posterior final logo de que a distribución previa fose actualizada con "
+"tódalas observacións."
 
 msgid ""
 "The 'Binomial Estimation' analysis offers two types of prior distributions "
@@ -1011,6 +1187,17 @@ msgid ""
 "and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s "
 "+ F) with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
+"A análise da 'Estimación Binomial' ofrece dous tipos de distribucións "
+"previas para o parámetro %1$s que representa a proporción de acertos "
+"subxacente na poboación:\n"
+"        <ul><li>'Pico(%2$s)' - Para concentrar toda a densidade de "
+"probabilidade nun punto (%2$s). A %5$s previa correspóndese coa posición do "
+"pico. A distribución posterior é de novo un pico na mesma posición e a "
+"correspondente %5$s</li><li>'Beta(%3$s, %4$s)' - Para asignar a densidade de "
+"probabilidade entre tódolos valores do parámetro %1$s de acordo cunha "
+"distribución Beta con parámetros %3$s e %4$s. O %6$s previo. Despois de "
+"observar 'S' acertos e 'F' fracasos, a distribución posterior actualízase a "
+"Beta(%3$s + S, %4$s + F) cunha %5$s calculada consecuentemente.</li></ul>"
 
 msgid ""
 "The 'Gaussian Estimation' analysis offers two types of prior distributions "
@@ -1034,6 +1221,8 @@ msgid ""
 "The 'Posterior prediction' section allows the prediction of future data "
 "based on the estimated models%s"
 msgstr ""
+"A sección 'Predición posterior' permite a predición da datos futuros baseada "
+"nos modelos estimados %s"
 
 msgid ""
 "For a model with a spike prior distribution for parameter %1$s, predictions "
@@ -1043,6 +1232,13 @@ msgid ""
 "parameter %1$s, the predictive distribution is a beta-binomial distribution "
 "with size N and posterior beta distribution parameters %3$s and %4$s. %6$s"
 msgstr ""
+"Para un modelo cunha distribución previa en pico para o parámetro %1$s, as "
+"predicións para 'N' observacións futuras ('Observacións futuras') seguen "
+"unha distribución Binomial de tamaño N e parámetro de oportunidade %2$s, "
+"igual á posición da distribución previa. %5$s Para un modelo cunha "
+"distribución previa Beta para o parámetro %1$s, a distribución preditiva é "
+"unha distribución Beta-Binomial de tamaño N e parámetros da distribución "
+"posterior Beta %3$s e %4$s. %6$s"
 
 msgid ""
 "For a model with a spike prior distribution for parameter %1$s, predictions "
@@ -1057,6 +1253,16 @@ msgid ""
 "In both cases, the %6$s prediction is equal to the mean parameter of the "
 "distribution for predictions."
 msgstr ""
+"Para un modelo cunha distribución previa en pico para o parámetro %1$s, as "
+"predicións para 'N' observacións futuras ('Observacións futuras') cun desvío "
+"padrón %2$s ('DP') seguen unha distribución Normal co parámetro da media "
+"igual á posición da distribución previa %3$s, e desvío padrón %2$s/%4$sN. "
+"Para un modelo cunha distribución previa Normal para o parámetro %1$s, a "
+"distribución preditiva é unha distribución Normal con media igual á media da "
+"distribución posterior e desvío padrón baseado no desvío padrón da "
+"distribución posterior (%3$s), e desvío padrón agardado dos novos datos (%2$"
+"s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). Nos dous casos, a predición "
+"de %6$s é igual ao parámetro da media da distribución para as predicións."
 
 msgid ""
 "The 'Prediction Summary' table displays numerical summaries for the "
@@ -1076,18 +1282,28 @@ msgid ""
 "models. The '%1$s' checkbox transforms the figures with predicted data%2$s "
 "into figures with %3$s."
 msgstr ""
+"A opción 'Distribución preditiva posterior' presenta imaxes das "
+"distribucións preditivas baseadas en distribucións posteriores dos modelos "
+"individuais. O cadriño '%1$s' transforma as imaxes con datos preditos %2$s "
+"en imaxes con %3$s."
 
 msgid ""
 "The 'All' option shows all posterior predictive distributions on top of each "
 "other, allowing for easier comparison with a common density scale on the y-"
 "axis."
 msgstr ""
+"A opción 'Todo' amosa tódalas distribucións preditivas posteriores enriba "
+"das outras, permitindo unha comparación máis doada coa escala común de "
+"densidade no eixe y."
 
 msgid ""
 "The 'Stacked' option shows all posterior predictive distributions in one "
 "figure with a depth effect induced by plotting the additional distributions "
 "'further' on the z-axis."
 msgstr ""
+"A opción 'Amoreado' amosa tódalas distribucións preditivas posteriores nunha "
+"imaxe cun efecto de fondo inducido pola representación gráfica das "
+"distribucións adicionais 'a maiores' no eixe z."
 
 msgid ""
 "The 'Individual' option shows posterior predictive distributions for each "
@@ -1095,11 +1311,17 @@ msgid ""
 "different types of point estimates ('Point estimate') and credible intervals "
 "('CI'):%s"
 msgstr ""
+"A opción 'Individual' amosa as distribucións preditivas posteriores "
+"individualmente para cada modelo en imaxes separadas. É posible visualizar "
+"distintos tipos de estimacións puntuais ('Estimación puntual') e intervalos "
+"de credibilidade ('IC'):%s"
 
 msgid ""
 "The '%1$s' option displays figures of predictive distributions based on "
 "posterior distributions of the individual models. %2$s"
 msgstr ""
+"A opción '%1$s' presenta imaxes das distribucións preditivas baseadas en "
+"distribucións posteriores dos modelos individuais. %2$s"
 
 msgid ""
 "The 'Conditional' option shows all %1$s for parameter %2$s independently, as "
@@ -1107,6 +1329,10 @@ msgid ""
 "hypotheses). It is possible to visualize different of credible intervals "
 "('CI'):%3$s"
 msgstr ""
+"A opción 'Condicionado' amosa tódalas %1$s para o parámetro %2$s "
+"independentemente, como se foran consideradas como modelos individuais (sen "
+"a existencia doutras hipóteses). É posible visualizar distintos intervalos "
+"de credibilidade ('IC'):%3$s"
 
 msgid ""
 "The 'Joint' option shows all %1$s for parameter %2$s when considered "
@@ -1124,18 +1350,27 @@ msgid ""
 "accuracy across all hypotheses. Predictive accuracy refers to how likely the "
 "data are given the hypotheses."
 msgstr ""
+"A opción 'Precisión preditiva' permite unha comparación da precisión "
+"preditiva a través de todas as hipóteses. A precisión preditiva refírese a "
+"como son de probables os datos, dadas as hipóteses."
 
 msgid ""
 "The 'Conditional' option shows all predictive accuracies independently, as "
 "if they were considered as individual models (without the existence of other "
 "hypotheses)."
 msgstr ""
+"A opción 'Condicionado' amosa tódalas precisións preditivas "
+"independentemente, como se foran consideradas como modelos individuais (sen "
+"a existencia doutras hipóteses)."
 
 msgid ""
 "The 'Joint' option shows all predictive accuracies when taking the prior "
 "probabilities of hypotheses into account (by multiplying conditional "
 "predictive accuracies by prior probabilities of the hypotheses)."
 msgstr ""
+"A opción 'Conxunto' amosa tódalas precisións preditivas cando se teñen en "
+"conta as probabilidades previas das hipóteses (multiplicando as precisións "
+"preditivas condicionadas polas probabilidades previas das hipóteses)."
 
 msgid ""
 "The 'Normalized' option shows all predictive accuracies considered together "
@@ -1172,6 +1407,8 @@ msgid ""
 "The 'Updating table' option generates a numerical summary of the displayed "
 "figure."
 msgstr ""
+"A opción 'Táboa de actualización' xera un resumo numérico da imaxe "
+"presentada."
 
 msgid ""
 "<ul><li>'central' - a central interval (or quantile) that covers the central "
@@ -1189,113 +1426,104 @@ msgid "Median"
 msgstr "Mediana"
 
 msgid "Mode"
-msgstr "Modo"
+msgstr "Moda"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
+"Aviso: O número de xogadores debe ser cando menos de 2. Axusta as achegas!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
+"Aviso: O número de puntos requiridos para gañar debe ser cando menos de 1!"
 
 msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
-msgstr ""
+msgstr "Aviso: O xogador %1$i xa gañou o xogo. Axusta as achegas!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
+msgstr "Aviso: Valores de entrada non negativos. Axusta as achegas!"
 
-#, fuzzy
 msgid "Summary Table"
-msgstr "Resumo"
+msgstr "Táboa Resumo"
 
-#, fuzzy
 msgid "Players"
-msgstr "Capas"
+msgstr "Xogadores"
 
 msgid "p(win 1 point)"
-msgstr ""
+msgstr "p(gañar 1 punto)"
 
-#, fuzzy
 msgid "Points Gained"
-msgstr "Puntos"
+msgstr "Puntos Gañados"
 
 msgid "Analytical"
 msgstr "Analítico"
 
 msgid "p(win the game)"
-msgstr ""
+msgstr "p(gañar o xogo)"
 
-#, fuzzy
 msgid "Simulated"
-msgstr "Estimado"
+msgstr "Simulado"
 
 msgid ""
 "The number of players (%1$i) does not equal the numbers of points for each "
 "player when interrupted (%2$i). Please check the appropriate settings."
 msgstr ""
+"O número de xogadores (%1$i) noné igual ao número de puntos para cada "
+"xogador cando se parou (%2$i). Por favor, comproba as configuracións "
+"axeitadas."
 
-#, fuzzy
 msgid "Prior Skill"
-msgstr "Previo"
+msgstr "Habilidade Previa"
 
 msgid "Only numeric values are allowed in the input."
-msgstr ""
+msgstr "Só se admiten valores numéricos na achega."
 
 msgid "SD"
-msgstr "EP"
+msgstr "DP"
 
 msgid "normal (%s, %s)"
-msgstr ""
+msgstr "Normal (%s, %s)"
 
 msgid "normal (%.2f, %.2f)"
-msgstr ""
+msgstr "Normal (%.2f, %.2f)"
 
 msgid "normal (%s, %.2f)"
-msgstr ""
+msgstr "Normal (%s, %.2f)"
 
 msgid "USE '.dataArrowGaussianLS()'"
-msgstr ""
+msgstr "UTILIZAR '.dataArrowGaussianLS()'"
 
-#, fuzzy
 msgid "Prior (μ)"
-msgstr "Previo"
+msgstr "Previo (μ)"
 
 msgid "Prior Mean"
+msgstr "Media Previa"
+
+msgid "Posterior (μ)"
+msgstr "Posterior (μ)"
+
+msgid "Posterior Mean"
 msgstr "Media Posterior"
 
-#, fuzzy
-msgid "Posterior (μ)"
-msgstr "R² posterior"
-
-#, fuzzy
-msgid "Posterior Mean"
-msgstr "Mediana posterior"
-
-#, fuzzy
 msgid "Population mean"
-msgstr "Poboación"
+msgstr "Media da poboación"
 
-#, fuzzy
 msgid "Prediction"
-msgstr "Preditores"
+msgstr "Predición"
 
-#, fuzzy
 msgid "Prediction Mean"
-msgstr "Táboa de predicións"
+msgstr "Media da Predición"
 
 msgid "Please, specify the standard deviation of the data."
-msgstr ""
+msgstr "Por favor, indica o desvío padrón dos datos."
 
 msgid "The prediction for %s future %s is based on %s."
-msgstr ""
+msgstr "A predición para %s futuro %s baséase en %s."
 
-#, fuzzy
 msgid "Sample means"
-msgstr "Mostras"
+msgstr "Medias da mostra"
 
-#, fuzzy
 msgid "Future data"
-msgstr "Ocultar os datos"
+msgstr "Datos futuros"
 
-#, fuzzy
 msgid "Inclusion BF"
-msgstr "Inclusión"
+msgstr "Inclusión FB"
