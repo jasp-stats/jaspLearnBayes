@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-07-27 11:33+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/gl/>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -458,11 +464,11 @@ msgstr "Paleta de cores"
 
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind"
-msgstr "Daltonismo"
+msgstr "Daltónica"
 
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind Alt."
-msgstr "Alternativa Daltonismo"
+msgstr "Daltónica Alternativa"
 
 msgctxt "LSbinomialestimation|"
 msgid "Viridis"
@@ -470,7 +476,7 @@ msgstr "Verde"
 
 msgctxt "LSbinomialestimation|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
 msgctxt "LSbinomialestimation|"
 msgid "Gray"
@@ -514,11 +520,11 @@ msgstr "Paleta de cores"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind"
-msgstr "Daltonismo"
+msgstr "Daltónica"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind Alt."
-msgstr "Alternativa Daltonismo"
+msgstr "Daltónica Alternativa"
 
 msgctxt "LSbinomialtesting|"
 msgid "Viridis"
@@ -526,7 +532,7 @@ msgstr "Verde"
 
 msgctxt "LSbinomialtesting|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
 msgctxt "LSbinomialtesting|"
 msgid "Gray"
@@ -570,11 +576,11 @@ msgstr "Paleta de cores"
 
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind"
-msgstr "Daltonismo"
+msgstr "Daltónica"
 
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind Alt."
-msgstr "Alternativa Daltonismo"
+msgstr "Daltónica Alternativa"
 
 msgctxt "LSgaussianestimation|"
 msgid "Viridis"
@@ -582,7 +588,7 @@ msgstr "Verde"
 
 msgctxt "LSgaussianestimation|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
 msgctxt "LSgaussianestimation|"
 msgid "Gray"
@@ -630,11 +636,11 @@ msgstr "Paleta de cores"
 
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind"
-msgstr "Daltonismo"
+msgstr "Daltónica"
 
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind Alt."
-msgstr "Alternativa Daltonismo"
+msgstr "Daltónica Alternativa"
 
 msgctxt "LSgaussiantesting|"
 msgid "Viridis"
@@ -642,7 +648,7 @@ msgstr "Verde"
 
 msgctxt "LSgaussiantesting|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
 msgctxt "LSgaussiantesting|"
 msgid "Gray"
