@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-07-27 11:33+0000\n"
+"PO-Revision-Date: 2021-07-30 10:34+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/gl/>\n"
@@ -300,19 +300,19 @@ msgstr "Datos"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive"
-msgstr "Verdadeiramente positivo"
+msgstr "Verdadeiro positivo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive"
-msgstr "Falsamente positivo"
+msgstr "Falso positivo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative"
-msgstr "Falsamente negativo"
+msgstr "Falso negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative"
-msgstr "Verdadeiramente negativo"
+msgstr "Verdadeiro negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
