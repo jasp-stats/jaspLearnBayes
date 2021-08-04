@@ -1767,14 +1767,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       analysis,
       "binEst"   = gettextf(
         "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
-        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
+        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         options[["pointEstimate"]],
         switch(
           options[["pointEstimate"]],
-          "mean"   = gettextf("mean can be computed as %1$s / (%1$s + %2$s)", "\u03B1", "\u03B2"),
-          "median" = gettextf("median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if%1$s, %2$s > 1", "\u03B1", "\u03B2"),
-          "mode"   = gettextf("mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if%1$s, %2$s > 1", "\u03B1", "\u03B2")
+          "mean"   = gettextf("The prior mean can be computed as %1$s / (%1$s + %2$s).", "\u03B1", "\u03B2"),
+          "median" = gettextf("The prior median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if %1$s, %2$s > 1.", "\u03B1", "\u03B2"),
+          "mode"   = gettextf("The prior mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if %1$s, %2$s > 1.", "\u03B1", "\u03B2")
         )),
       "gaussEst" = gettextf(
         "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
