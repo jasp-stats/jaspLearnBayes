@@ -588,11 +588,6 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   obsXmax    <- max(allLines$x)
   newXmax    <- obsXmax
-  if (obsXmax > 10) {
-    xBreaks <- round(seq(xStart, obsXmax, length.out = 7))
-  } else {
-    xBreaks <- xStart:obsXmax
-  }
 
   if (is.null(yRange)) {
     if (is.null(BFlog)) {
@@ -884,11 +879,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     xBreaks[length(xBreaks)] <- 1
   } else {
     xBreaks  <- round(jaspGraphs::getPrettyAxisBreaks(xRange))
-    xBreaks[length(xBreaks)] <- predictionN
+    xBreaks  <- unique(xBreaks[xBreaks >= xRange[1] &  xBreaks <= predictionN])
+    if (xBreaks[length(xBreaks)] < predictionN)
+      xBreaks <- c(xBreaks[-length(xBreaks)], predictionN)
   }
 
-
-  if (xBreaks[length(xBreaks)] > xRange[2])xBreaks[length(xBreaks)] <- xRange[2]
 
   obsYmax    <- max(dfHist$y)
   if (all(round(dfHist$y[1], 5) == round(dfHist$y, 5)))
@@ -1159,9 +1154,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     xBreaks <- round(xBreaks)
     xBreaks <- unique(xBreaks[xBreaks >= xRange[1] &  xBreaks <= xRange[2]])
     if (xBreaks[1] > ceiling(xRange[1]))
-      xBreaks <- c(ceiling(xRange[1]), xBreaks)
+      xBreaks <- c(ceiling(xRange[1])[-1], xBreaks)
     if (xBreaks[length(xBreaks)] < floor(xRange[2]))
-      xBreaks <- c(xBreaks, floor(xRange[2]))
+      xBreaks <- c(xBreaks[-length(xBreaks)], floor(xRange[2]))
   }
   xRange <- range(c(xRange, xBreaks))
 
