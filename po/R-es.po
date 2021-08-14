@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-08-07 02:51\n"
-"PO-Revision-Date: 2021-05-15 20:51+0000\n"
-"Last-Translator: Paulina Elizabeth Robalino <paulina.e.robalino@gmail.com>\n"
+"PO-Revision-Date: 2021-08-09 00:36+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -100,16 +100,16 @@ msgid "Drawing samples"
 msgstr ""
 
 msgid "Tables"
-msgstr ""
+msgstr "Tablas"
 
 msgid "Statistics"
-msgstr ""
+msgstr "Estadísticas"
 
 msgid "Estimate"
 msgstr "Estimar"
 
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "Intervalo de Credibilidad del %s%%"
 
 msgid "Lower"
 msgstr "Inferior"
@@ -164,7 +164,7 @@ msgid "True/Total"
 msgstr "Total"
 
 msgid "Prevalence"
-msgstr ""
+msgstr "Prevalencia"
 
 msgid "Rareness"
 msgstr ""
@@ -181,12 +181,11 @@ msgstr ""
 msgid "Posterior"
 msgstr "Posterior"
 
-#, fuzzy
 msgid "Sensitivity"
-msgstr "Densidad"
+msgstr "Sensibilidad"
 
 msgid "Specificity"
-msgstr ""
+msgstr "Especificidad"
 
 msgid "beta(%s,%s)"
 msgstr ""
@@ -261,10 +260,10 @@ msgid "Condition"
 msgstr ""
 
 msgid "Test"
-msgstr ""
+msgstr "Contraste"
 
 msgid "Proportion of Population"
-msgstr ""
+msgstr "Prporción de la Población"
 
 msgid "Signal Detection"
 msgstr ""
@@ -280,13 +279,13 @@ msgid "Count"
 msgstr "Recuentos"
 
 msgid "Estimates"
-msgstr ""
+msgstr "Estimaciones"
 
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Valor predictivo positivo"
 
 msgid "Negative predictive value"
-msgstr ""
+msgstr "Valor predictivo negativo"
 
 msgid "False discovery rate"
 msgstr ""
@@ -402,7 +401,7 @@ msgid ""
 msgstr ""
 
 msgid "Central credible intervals are based on %i samples."
-msgstr ""
+msgstr "Los intervalos de credibilidad central se basan en %i muestras."
 
 msgid "Parameter estimates are posterior means based on %i samples."
 msgstr ""
@@ -599,7 +598,7 @@ msgid "Prior and Posterior Plots"
 msgstr ""
 
 msgid "Sequential Analysis: Point Estimate"
-msgstr ""
+msgstr "Análisis Secuencial: Estimación por Punto"
 
 msgid "%s Sequential Analysis: Interval"
 msgstr ""
