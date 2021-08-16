@@ -74,6 +74,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
+
   
   
   # fill in the table
@@ -162,8 +163,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                          density = c(propPost, propPrior),
                          group = c(rep(gettext("Posterior"),201), rep(gettext("Prior"),201))
    )
+
    labels <- c(gettext("Posterior"), gettext("Prior"), "\u03c0")
-   
    # axis specification
    propDistPlot0 <- ggplot2::ggplot(data = dataProp,  ggplot2::aes(x = values, y = density)) +
      ggplot2::xlab(gettext("Proportion of Crosses")) +
@@ -174,6 +175,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                                     labels = labels) 
    # fill in the plot
    propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0)
+
 
    
    if (options[["legendPropDistPlot"]]){
@@ -200,6 +202,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    #piDistPlot$dependOn(c("n", "a", "b", "length", "CI", "showPiDistPlot"))
    piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
                        options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
+
    #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
    
    # values
@@ -212,9 +215,10 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                      density = c(yPost, yPrior, yPi),
                      group = c(rep(gettext("Implied Posterior"),201), rep(gettext("Implied Prior"),201), rep(gettext("\u03c0"), 100))
    )
+
    #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
    labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
-   
+
    
    # axis specification
    piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
@@ -234,6 +238,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    # fill in the plot
    piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
 
+
    if (options[["legendPiDistPlot"]]){
      piDistPlot$plotObject <-  piDistPlot$plotObject + 
        ggplot2::theme(legend.position = c(.24, .9))
@@ -252,8 +257,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
      
      piDistPlot$plotObject <- piDistPlot$plotObject +
        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
-                         label = gettext(paste0(options[["CI"]]*100, "% CI: ",
-                                                "[",CI95lower,", ", CI95upper, "]")),
+                         label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, CI95lower, CI95upper),
+
                          size = 6
        ) + 
        ggplot2::annotate("segment", x = CI95lower, xend = CI95upper, 

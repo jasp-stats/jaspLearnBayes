@@ -1,3 +1,4 @@
+context("Learn Bayes - Game of Chance")
 
 
 ## two players
@@ -16,6 +17,7 @@
     plotName <- results[["results"]][["CIPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning-two-players")
+
   })
   
   test_that("Game of Chance summaryTable two-player results match", {

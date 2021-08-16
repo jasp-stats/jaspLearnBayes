@@ -43,7 +43,8 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100)) 
-  
+
+
   # fill in the table
   CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
   CI95lower = round(CI95lower, digit = 2)
@@ -84,6 +85,8 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
                           density = c(propPost, propPrior),
                           group = c(rep(gettext("Posterior"),201), rep(gettext("Prior"),201))
     )
+    
+    
     labels <- c(gettext("Posterior"), gettext("Prior"), "\u03c0")
     
     # axis specification
@@ -97,7 +100,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     # fill in the plot
     propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0)
-
+    
     if (options[["legendPropDistPlot"]]){
       propDistPlot$plotObject <-  propDistPlot$plotObject + 
         ggplot2::theme(legend.position = c(.17, .9))
@@ -155,7 +158,6 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     # fill in the plot
     piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
-
     
     if (options[["legendPiDistPlot"]]){
       piDistPlot$plotObject <-  piDistPlot$plotObject + 
@@ -175,8 +177,8 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       
       piDistPlot$plotObject <- piDistPlot$plotObject +
         ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
-                          label = gettext(paste0(options[["CI"]]*100, "% CI: ",
-                                                 "[",CI95lower,", ", CI95upper, "]")),
+                          label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, CI95lower, CI95upper),
+
                           size = 6
         ) + 
         ggplot2::annotate("segment", x = CI95lower, xend = CI95upper, 

@@ -1,3 +1,4 @@
+context("Learn Bayes - Game of Skill")
 
 
 ## two players

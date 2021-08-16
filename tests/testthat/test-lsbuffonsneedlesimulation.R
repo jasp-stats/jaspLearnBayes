@@ -1,3 +1,4 @@
+context("Learn Bayes - Buffon's Needle Simulation")
 
 
 ## default settings
