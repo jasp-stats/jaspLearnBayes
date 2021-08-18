@@ -8,4 +8,23 @@ Website: www.jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
 Description: Learn Bayesian statistics with simple examples and supporting text
 License: GPL (>= 2)
+Imports:
+  extraDistr,
+  ggplot2,
+  HDInterval,
+  jaspBase,
+  jaspGraphs,
+  MASS,
+  MCMCpack,
+  MGLM,
+  scales,
+  ggalluvial,
+  ragg,
+  ggdist,
+  grid,
+  grDevices,
+  png
+Remotes:
+  jasp-stats/jaspBase,
+  jasp-stats/jaspGraphs
   
