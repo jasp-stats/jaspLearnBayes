@@ -1,10 +1,31 @@
 Package: jaspLearnBayes
 Type: Package
 Title: Learn Bayes Module for JASP
-Version: 0.1.0
-Date: 2021-08-18
+Version: 0.15
+Date: 2020-11-21
 Author: JASP Team
 Website: www.jasp-stats.org
 Maintainer: JASP Team <info@jasp-stats.org>
 Description: Learn Bayesian statistics with simple examples and supporting text
+Encoding: UTF-8
 License: GPL (>= 2)
+Imports:
+  extraDistr,
+  ggplot2,
+  HDInterval,
+  jaspBase,
+  jaspGraphs,
+  MASS,
+  MCMCpack,
+  MGLM,
+  scales,
+  ggalluvial,
+  ragg,
+  ggdist,
+  grid,
+  grDevices,
+  png
+Remotes:
+  jasp-stats/jaspBase,
+  jasp-stats/jaspGraphs
+  
