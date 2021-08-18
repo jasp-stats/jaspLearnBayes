@@ -16,41 +16,28 @@
 #
 
 LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL){
+  
+  # check whether the state is empty
+  .buffonsNeedleSimulationCheckErrors(jaspResults, options)
 
-  
-  # simulation results
-  #simulateResults <- simulate_throws(options[["n"]], options[["length"]])
-  
-  
-  if(is.null(jaspResults[["simulateResults"]])){ #test whether the state is empty
-    
-    # if empty, create a new state
-    simulateResults <- createJaspState()
-    simulateResults$dependOn(c("n", "length")) #, "a", "b", "options[["length"]]", "options[["CI"]]"))
-    jaspResults[["simulateResults"]] <- simulateResults
-    
-    jaspResults[["simulateResults"]]$object <- simulateThrows(options[["n"]], options[["length"]])  
-    
-  }
-  # if not, retrieve the values
-  crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
-  xs <- jaspResults[["simulateResults"]][["object"]][["xs"]] 
-  xe <- jaspResults[["simulateResults"]][["object"]][["xe"]] 
-  ys <- jaspResults[["simulateResults"]][["object"]][["ys"]] 
-  ye <- jaspResults[["simulateResults"]][["object"]][["ye"]]
-  
-  xsCrosses <- jaspResults[["simulateResults"]][["object"]][["xsCrosses"]] 
-  xeCrosses <- jaspResults[["simulateResults"]][["object"]][["xeCrosses"]] 
-  ysCrosses <- jaspResults[["simulateResults"]][["object"]][["ysCrosses"]] 
-  yeCrosses <- jaspResults[["simulateResults"]][["object"]][["yeCrosses"]]  
-  
+  ## if not, retrieve the values
   .buffonsNeedleSimulationSummaryTable(jaspResults, options)
   .buffonsNeedleSimulationNeedlePlot(jaspResults, options)
   .buffonsNeedleSimulationPropDistPlot(jaspResults, options)
   .buffonsNeedleSimulationPiDistPlot(jaspResults, options)
 }
   
-  
+.buffonsNeedleSimulationCheckErrors <- function(jaspResults, options){
+  if(is.null(jaspResults[["simulateResults"]])){ #test whether the state is empty
+    
+    # if empty, create a new state
+    simulateResults <- createJaspState()
+    simulateResults$dependOn(c("n", "length")) #, "a", "b", "options[["length"]]", "options[["CI"]]"))
+    jaspResults[["simulateResults"]] <- simulateResults
+    jaspResults[["simulateResults"]]$object <- simulateThrows(options[["n"]], options[["length"]])  
+    
+  }
+}  
   
  
 .buffonsNeedleSimulationSummaryTable <- function(jaspResults, options){
