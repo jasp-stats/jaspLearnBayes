@@ -31,7 +31,7 @@ test_that("Needle Plot matches", {
 test_that("Implied Prior and Posterior for  π plot matches", {
   plotName <- results[["results"]][["piDistPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-π")
+  jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-pi")
 })
 
 test_that("Prior and Posterior for Proportion of Crosses plot matches", {
