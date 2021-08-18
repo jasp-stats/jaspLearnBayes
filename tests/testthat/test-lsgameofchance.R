@@ -4,7 +4,7 @@ context("Learn Bayes - Game of Chance")
 ## two players
 {
   options <- jaspTools::analysisOptions("LSgameofchance")
-  options[["players"]] <- list(list("values" = c(1,1)), list("values" = c(2,3)))
+  options$players <- list(list("values" = c(1,1)), list("values" = c(2,3)))
   options$winPoints <- 4
   options$nSims <- 500
   options$CI <- TRUE
