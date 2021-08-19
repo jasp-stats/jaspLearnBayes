@@ -19,8 +19,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   
   # check whether the state is empty
   .buffonsNeedleSimulationCheckErrors(jaspResults, options)
-
-  ## if not, retrieve the values
+      ## if not, retrieve the values
   .buffonsNeedleSimulationSummaryTable(jaspResults, options)
   .buffonsNeedleSimulationNeedlePlot(jaspResults, options)
   .buffonsNeedleSimulationPropDistPlot(jaspResults, options)
@@ -29,7 +28,6 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   
 .buffonsNeedleSimulationCheckErrors <- function(jaspResults, options){
   if(is.null(jaspResults[["simulateResults"]])){ #test whether the state is empty
-    
     # if empty, create a new state
     simulateResults <- createJaspState()
     simulateResults$dependOn(c("n", "length")) #, "a", "b", "options[["length"]]", "options[["CI"]]"))
@@ -38,7 +36,6 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
     
   }
 }  
-  
  
 .buffonsNeedleSimulationSummaryTable <- function(jaspResults, options){
   if(!is.null(jaspResults[["summaryTable"]])) return()
@@ -50,10 +47,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
   summaryTable$position <- 1
-  
   summaryTable$dependOn(c("n", "length", "a", "b", "CI"))
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
-  
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Observations"), type = "integer")
   summaryTable$addColumnInfo(name = "Median", title = gettextf("Median for %s", "\u03c0"), type = "number")
@@ -61,24 +56,21 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
-
-  
   
   # fill in the table
   CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-  CI95lower = round(CI95lower, digit = 2)
+  CI95lower <- round(CI95lower, digit = 2)
   
   med <- 2 * l / (qbeta(.5, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-  med = round(med, digit = 2)
+  med <- round(med, digit = 2)
   
   CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-  CI95upper = round(CI95upper, digit = 2)
+  CI95upper <- round(CI95upper, digit = 2)
   
   summaryTable$addRows(list(NumCrosses = crosses, NumObservations = options[["n"]],
                            lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
   jaspResults[["summaryTable"]] <- summaryTable
 }
-
 
 .buffonsNeedleSimulationNeedlePlot <- function(jaspResults, options) {
   if(!is.null(jaspResults[["needlePlot"]])) return()
@@ -87,7 +79,6 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   xe <- jaspResults[["simulateResults"]][["object"]][["xe"]] 
   ys <- jaspResults[["simulateResults"]][["object"]][["ys"]] 
   ye <- jaspResults[["simulateResults"]][["object"]][["ye"]]
-  
   xsCrosses <- jaspResults[["simulateResults"]][["object"]][["xsCrosses"]] 
   xeCrosses <- jaspResults[["simulateResults"]][["object"]][["xeCrosses"]] 
   ysCrosses <- jaspResults[["simulateResults"]][["object"]][["ysCrosses"]] 
@@ -146,9 +137,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    xValue <- seq(0,1,0.005)
    propPost <- dbeta(xValue, options[["a"]] + crosses, options[["b"]] + options[["n"]] - crosses)
    propPrior <-dbeta(xValue, options[["a"]], options[["b"]])
-   dataProp = data.frame(values = c(xValue, xValue),
+   dataProp <- data.frame(values = c(xValue, xValue),
                          density = c(propPost, propPrior),
-                         group = c(rep(gettext("Posterior"),201), rep(gettext("Prior"),201))
+                         group = c(rep("Posterior",201), rep("Prior",201))
    )
 
    labels <- c(gettext("Posterior"), gettext("Prior"), "\u03c0")
@@ -163,8 +154,6 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    # fill in the plot
    propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0)
 
-
-   
    if (options[["legendPropDistPlot"]]){
      propDistPlot$plotObject <-  propDistPlot$plotObject + 
        ggplot2::theme(legend.position = c(.17, .9))
@@ -198,9 +187,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
    yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
    
-   data = data.frame(values = c(x, x, rep(pi, 100)),
+   data <- data.frame(values = c(x, x, rep(pi, 100)),
                      density = c(yPost, yPrior, yPi),
-                     group = c(rep(gettext("Implied Posterior"),201), rep(gettext("Implied Prior"),201), rep(gettext("\u03c0"), 100))
+                     group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("\u03c0", 100))
    )
 
    #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
@@ -225,22 +214,20 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    # fill in the plot
    piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
 
-
    if (options[["legendPiDistPlot"]]){
      piDistPlot$plotObject <-  piDistPlot$plotObject + 
        ggplot2::theme(legend.position = c(.24, .9))
    }
    
-   
    if (options[["CIArrow"]]){
      CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-     CI95lower = round(CI95lower, digit = 2)
+     CI95lower <- round(CI95lower, digit = 2)
      
      med <- 2 * l / (qbeta(.5, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-     med = round(med, digit = 2)
+     med <- round(med, digit = 2)
      
      CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-     CI95upper = round(CI95upper, digit = 2)
+     CI95upper <- round(CI95upper, digit = 2)
      
      piDistPlot$plotObject <- piDistPlot$plotObject +
        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
@@ -253,14 +240,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                          arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
                          size = 1)
      
-     
    }
    jaspResults[["piDistPlot"]] <- piDistPlot
   }
 }
-
-  
-
-
-
-

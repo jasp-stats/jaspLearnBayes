@@ -22,8 +22,6 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   return()
 }
 
-
-
 .buffonsNeedleManipulationSummaryTable <- function(jaspResults, options){
   if(!is.null(jaspResults[["summaryTable"]])) return()
   # example d for computation
@@ -35,7 +33,6 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   summaryTable$position <- 1
   summaryTable$dependOn(c("k", "n", "a", "b", "length", "CI"))
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
-  
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Observations"), type = "integer")
   summaryTable$addColumnInfo(name = "Median", title = gettextf("Median for %s", "\u03c0"),   type = "number")
@@ -44,22 +41,20 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100)) 
 
-
   # fill in the table
   CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-  CI95lower = round(CI95lower, digit = 2)
+  CI95lower <- round(CI95lower, digit = 2)
   
   med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-  med = round(med, digit = 2)
+  med <- round(med, digit = 2)
   
   CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-  CI95upper = round(CI95upper, digit = 2)
+  CI95upper <- round(CI95upper, digit = 2)
   
   summaryTable$addRows(list(NumCrosses = options[["k"]], NumObservations = options[["n"]],
                            lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
   jaspResults[["summaryTable"]] <- summaryTable
 }
-     
 
 .buffonsNeedleManipulationPropDistPlot <- function(jaspResults, options){
   if(!is.null(jaspResults[["propDistPlot"]])) return()
@@ -77,15 +72,13 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     #propDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     # values
-    
     xValue <- seq(0,1,0.005)
     propPost <- dbeta(xValue, options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     propPrior <-dbeta(xValue, options[["a"]], options[["b"]])
-    dataProp = data.frame(values = c(xValue, xValue),
+    dataProp <- data.frame(values = c(xValue, xValue),
                           density = c(propPost, propPrior),
-                          group = c(rep(gettext("Posterior"),201), rep(gettext("Prior"),201))
+                          group = c(rep("Posterior",201), rep("Prior",201))
     )
-    
     
     labels <- c(gettext("Posterior"), gettext("Prior"), "\u03c0")
     
@@ -109,8 +102,6 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   }
 }
      
-
-
 .buffonsNeedleManipulationPiDistPlot <- function(jaspResults, options){
   if(!is.null(jaspResults[["piDistPlot"]])) return()
   d <- 5
@@ -125,16 +116,15 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
                         options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
     
     #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
-    
     # values
     x <- seq(2,4,0.01)
     yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
     yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
     
-    data = data.frame(values = c(x, x, rep(pi, 100)),
+    data <- data.frame(values = c(x, x, rep(pi, 100)),
                       density = c(yPost, yPrior, yPi),
-                      group = c(rep(gettext("Implied Posterior"),201), rep(gettext("Implied Prior"),201), rep(gettext("\u03c0"), 100))
+                      group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("\u03c0", 100))
     )
     
     #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
@@ -166,14 +156,13 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     if (options[["CIArrow"]]){
       CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-      CI95lower = round(CI95lower, digit = 2)
+      CI95lower <- round(CI95lower, digit = 2)
       
       med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-      med = round(med, digit = 2)
+      med <- round(med, digit = 2)
       
       CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-      CI95upper = round(CI95upper, digit = 2)
-      
+      CI95upper <- round(CI95upper, digit = 2)
       
       piDistPlot$plotObject <- piDistPlot$plotObject +
         ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
@@ -185,13 +174,8 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
                           y = 1.45*max(yPost), yend = 1.45*max(yPost),
                           arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
                           size = 1)
-      
+
     }
     jaspResults[["piDistPlot"]] <- piDistPlot
   }
 }
-  
-  
-  
-
-

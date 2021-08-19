@@ -1,8 +1,6 @@
 context("Learn Bayes - Buffon's Needle Manipulation")
 
 ## default settings
-
-  
 options <- analysisOptions("LSBuffonsneedlemanipulation")
 options$k <- 50
 options$n <- 100
@@ -39,12 +37,3 @@ test_that("Summary Table results match", {
   jaspTools::expect_equal_tables(table,
                                  list(3.2, 50, 100, 2.68, 3.97))
 })
-
-
-
-
-
-
-
-
-
