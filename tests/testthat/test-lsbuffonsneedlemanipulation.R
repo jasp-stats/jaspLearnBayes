@@ -22,6 +22,7 @@ results <- runAnalysis("LSBuffonsneedlemanipulation", dataset, options)#, makeTe
 
 
 test_that("Implied Prior and Posterior for pi plot matches", {
+  skip_on_os("windows")
   plotName <- results[["results"]][["piDistPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-pi")
