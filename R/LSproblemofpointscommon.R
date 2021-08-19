@@ -1,32 +1,30 @@
-## This is a function calculating the probability mass function 
+## This is a function calculating the probability mass function
 # of Dirichlet negative multinomial distribution
 
 ## Input:
 # y: a vector containing the number of trials each player needs to win
 # a: a vector containing all the parameters for the Dirichlet multinomial distribution, indicating the competence of each player
 
-
-
 dDirichletNegMultinom <- function(y, a, log = FALSE) {
-  
+
   ySum <- sum(y)
   aSum <- sum(a)
-  
+
   lp1 <- lgamma(ySum) - (lgamma(y[1]) + sum(lgamma(y+1)) - lgamma(y[1]+1))
   lp2 <- lgamma(aSum) - sum(lgamma(a))
   lp3 <- sum(lgamma(y + a)) - lgamma(ySum + aSum)
-  
+
   logDensity <- lp1 + lp2 + lp3
   if (log)
     return(logDensity)
   else
     return(exp(logDensity))
-  
+
 }
 
 pDirichletNegMultinom <- function(y, a){
 
-  
+
   #calculate the prob
   pCalculated <- 0
   for (l in 1:(prod(y)/y[1])){         #generate all the situations that player 1 wins
@@ -37,16 +35,13 @@ pDirichletNegMultinom <- function(y, a){
 
 
 
-
-
-
-# This is a recursive function returning all situations (combinations of points obtained 
+# This is a recursive function returning all situations (combinations of points obtained
 # by each player) in which player 1 wins the game.
 # Input k: a vector of containing the number of trials that each player needs to win the game.
 
 combinations <- function(k){
   n <- length(k)
-  
+
   if (n == 3){ # the number of players
     num <- prod(k)/k[1] #total number of sets
     sets <- matrix(nrow = num, ncol = n)
@@ -65,7 +60,7 @@ combinations <- function(k){
         sets[(i-1)*(k[n])+j, ] <- c(x1[i, ],j-1)
       }
     }
-    
+
     return(sets)
   }
 }
@@ -173,12 +168,11 @@ compareSkillTwoPlayers <- function(m, n, t, alpha = 1, beta = 1, simulation){
       }
 
     }
-    # if mCopy == t, record 1,player 1 wins the single trial; 
+
+    # if mCopy == t, record 1,player 1 wins the single trial;
     # if nCopy == t, record 0, player 2 win the trial
     #recordGame[i] <- (t-nCopy)^(t-mCopy)
     recordGame[i] <- if (nCopy == t) 0 else 1.
-    
-    
   }
   pSimulated <- sum(recordGame)/simulation    # estimated probability that player 1 wins
 

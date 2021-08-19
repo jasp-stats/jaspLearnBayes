@@ -27,16 +27,16 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   # normalizing the probability of wining:
   probWin   <- probWin / sum(probWin) # normalit
 
-  
+
   ## check errors
   if(nPlayers < 2)
     .quitAnalysis(gettext("Warning: The number of players must be at least 2. Adjust the inputs!"))
-  
+
   if(winPoints < 1)
     .quitAnalysis(gettext(
       "Warning: The number of point(s) required to win should be at least 1!"
     ))
-  
+
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
       "Warning: Player %1$i has already won the game. Adjust the inputs!",
@@ -45,7 +45,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
 
   if(sum(c(xPoints, probWin) > 0) != length(c(xPoints, probWin)))
     .quitAnalysis(gettext("Warning: No negative input values! Adjust the inputs!"))
-  
+
   #if(nSims<100)
   #  .quitAnalysis(gettext(
   #    "Warning: The number of simulated games should not be smaller than 100!"
@@ -114,7 +114,6 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
     CIPlot$plotObject <- jaspGraphs::themeJasp(CIPlot0) +
       ggplot2::geom_line(color = "darkred", ggplot2::aes(x = c(1:nSims), y = rep(result[[2]], nSims))) +  # analytical prob
       ggplot2::geom_line(data= NULL, ggplot2::aes(x = c(1:nSims), y = result[[4]])) # simulated prob
-
 
   }else if (nPlayers >= 3&&max(xPoints) < winPoints){
     # output of compareChanceNPlayers, when there are three or more players

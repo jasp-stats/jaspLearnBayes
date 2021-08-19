@@ -87,4 +87,25 @@ Description
 		func:	"LSgameofskill"
 	}
 
+	GroupTitle
+	{
+		title:	qsTr("Buffon's Needle")
+		icon:	"learning-stats-Buttons-needle.svg"
+	}
+
+	Analysis
+	{
+		title:	qsTr("Simulating Buffon's Needle")
+		qml:	"LSBuffonsneedlesimulation.qml"
+		func:	"LSBuffonsneedlesimulation"
+	}
+
+	Analysis
+	{
+		title:	qsTr("Manipulating Buffon's Needle")
+		qml:	"LSBuffonsneedlemanipulation.qml"
+		func:	"LSBuffonsneedlemanipulation"
+	}
+
+
 }
