@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-08-07 02:51\n"
+"POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2021-08-14 10:48+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -20,6 +20,69 @@ msgstr ""
 "X-Virgin-Header: remove this line if you change anything in the header.\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
+
+msgid "Summary Table"
+msgstr "Táboa Resumo"
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr "Observacións"
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "Mediana"
+
+msgid "Lower"
+msgstr "Inferior"
+
+msgid "%s%% Credible Interval"
+msgstr "Intervalo co %s%% de Credibilidade"
+
+msgid "Upper"
+msgstr "Superior"
+
+#, fuzzy
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Gráficas Previa e Posterior"
+
+msgid "Posterior"
+msgstr "Posterior"
+
+msgid "Prior"
+msgstr "Previo"
+
+#, fuzzy
+msgid "Proportion of Crosses"
+msgstr "Proporción de Acertos"
+
+msgid "Density"
+msgstr "Densidade"
+
+#, fuzzy
+msgid "Implied Prior and Posterior for %s"
+msgstr "Gráficas Previa e Posterior"
+
+#, fuzzy
+msgid "Implied Posterior"
+msgstr "Posterior"
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr ""
+
+msgid "Needle Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Gráficas Previa e Posterior"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -185,15 +248,6 @@ msgstr "Estatísticos"
 msgid "Estimate"
 msgstr "Estimar"
 
-msgid "%s%% Credible Interval"
-msgstr "Intervalo co %s%% de Credibilidade"
-
-msgid "Lower"
-msgstr "Inferior"
-
-msgid "Upper"
-msgstr "Superior"
-
 msgid "Notation"
 msgstr "Notación"
 
@@ -250,12 +304,6 @@ msgstr "Previos e Posteriores"
 
 msgid "Parameter"
 msgstr "Parámetro"
-
-msgid "Prior"
-msgstr "Previo"
-
-msgid "Posterior"
-msgstr "Posterior"
 
 msgid "Sensitivity"
 msgstr "Sensibilidade"
@@ -346,9 +394,6 @@ msgstr "Detección de Sinal"
 
 msgid "Marker"
 msgstr "Marcador"
-
-msgid "Density"
-msgstr "Densidade"
 
 msgid "Count"
 msgstr "Cantidade"
@@ -668,9 +713,6 @@ msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 "Non é posible facer a gráfica: Un dos factores de Bayes é igual a infinito."
 
-msgid "Observations"
-msgstr "Observacións"
-
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Cando menos, é necesario indicar 2 hipóteses."
 
@@ -814,12 +856,12 @@ msgstr ""
 "nun punto (%2$s). Isto representa a crenza previa de que a proporción na "
 "poboación é %2$s con certeza. Este convencemento é tan forte que ningún dato "
 "pode modificar esta crenza previa. Por iso, a posterior é tamén un pico en "
-"%2$s. A %5$s previa e posterior corresponde entón á posición do "
-"pico.</li><li>'Beta(%3$s, %4$s)' - Para asignar a densidade de probabilidade "
-"entre tódolos valores do parámetro %1$s de acordo cunha distribución Beta "
-"con parámetros %3$s e %4$s. %6$s Despois de observar 'S' acertos e 'F' "
-"fracasos, a distribución posterior actualízase a Beta(%3$s + S, %4$s + F) "
-"cunha %5$s calculada consecuentemente.</li></ul>"
+"%2$s. A %5$s previa e posterior corresponde entón á posición do pico.</"
+"li><li>'Beta(%3$s, %4$s)' - Para asignar a densidade de probabilidade entre "
+"tódolos valores do parámetro %1$s de acordo cunha distribución Beta con "
+"parámetros %3$s e %4$s. %6$s Despois de observar 'S' acertos e 'F' fracasos, "
+"a distribución posterior actualízase a Beta(%3$s + S, %4$s + F) cunha %5$s "
+"calculada consecuentemente.</li></ul>"
 
 msgid ""
 "The 'Gaussian Estimation' analysis offers two types of prior distributions "
@@ -1541,9 +1583,6 @@ msgstr "Aviso: O xogador %1$i xa gañou o xogo. Axusta as achegas!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr "Aviso: Valores de entrada non negativos. Axusta as achegas!"
-
-msgid "Summary Table"
-msgstr "Táboa Resumo"
 
 msgid "Players"
 msgstr "Xogadores"

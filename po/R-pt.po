@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-08-07 02:51\n"
+"POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2021-07-10 23:34+0000\n"
 "Last-Translator: Luanna dos Santos Silva <luannasilva91@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -16,6 +16,71 @@ msgstr ""
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
+
+msgid "Summary Table"
+msgstr ""
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr "Observações"
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "Mediana"
+
+msgid "Lower"
+msgstr "Inferior"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% Intervalo de credibilidade"
+
+msgid "Upper"
+msgstr "Superior"
+
+#, fuzzy
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Amostras posteriores"
+
+#, fuzzy
+msgid "Posterior"
+msgstr "Amostras posteriores"
+
+#, fuzzy
+msgid "Prior"
+msgstr "Anterior"
+
+#, fuzzy
+msgid "Proportion of Crosses"
+msgstr "Coeficiente de Correlação População"
+
+msgid "Density"
+msgstr "Densidade"
+
+#, fuzzy
+msgid "Implied Prior and Posterior for %s"
+msgstr "Amostras posteriores"
+
+#, fuzzy
+msgid "Implied Posterior"
+msgstr "Amostras posteriores"
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr ""
+
+msgid "Needle Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Amostras posteriores"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -112,15 +177,6 @@ msgstr ""
 msgid "Estimate"
 msgstr "Estimativa"
 
-msgid "%s%% Credible Interval"
-msgstr "%s%% Intervalo de credibilidade"
-
-msgid "Lower"
-msgstr "Inferior"
-
-msgid "Upper"
-msgstr "Superior"
-
 msgid "Notation"
 msgstr ""
 
@@ -180,14 +236,6 @@ msgstr "Amostras posteriores"
 
 msgid "Parameter"
 msgstr ""
-
-#, fuzzy
-msgid "Prior"
-msgstr "Anterior"
-
-#, fuzzy
-msgid "Posterior"
-msgstr "Amostras posteriores"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -282,9 +330,6 @@ msgstr ""
 
 msgid "Marker"
 msgstr ""
-
-msgid "Density"
-msgstr "Densidade"
 
 msgid "Count"
 msgstr ""
@@ -585,9 +630,6 @@ msgstr "Amostras posteriores"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
-
-msgid "Observations"
-msgstr "Observações"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr ""
@@ -1144,9 +1186,6 @@ msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
 msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
-
-msgid "Summary Table"
 msgstr ""
 
 msgid "Players"

@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-08-14 10:48+0000\n"
-"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/jasp/"
-"jasplearnbayes-qml/de/>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: de\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1090,3 +1084,123 @@ msgstr "Prior- und Posterior-Verteilung"
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
 msgstr "~ Beta(α = "
+
+msgctxt "Description|"
+msgid "Buffon's Needle"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Simulating Buffon's Needle"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Manipulating Buffon's Needle"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Proportion of needle length to interline distance:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "%"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of throws:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of crosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter a: "
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter b:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Credible interval on π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Plot"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior and posterior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Legend"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Implied prior and posterior for π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Credible interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Proportion of needle length to interline distance:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "%"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of throws:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Prior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Beta prior: parameter a"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Beta prior: parameter b"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Credible interval on π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Plot"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Needle plot"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Color crossing needles"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Prior and posterior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Legend"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Implied prior and posterior for π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Credible interval"
+msgstr ""

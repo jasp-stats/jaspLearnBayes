@@ -1080,3 +1080,123 @@ msgstr ""
 msgctxt "LStestingsequential|"
 msgid "Updating table"
 msgstr ""
+
+msgctxt "Description|"
+msgid "Buffon's Needle"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Simulating Buffon's Needle"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Manipulating Buffon's Needle"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Proportion of needle length to interline distance:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "%"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of throws:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of crosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter a: "
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter b:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Credible interval on π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Plot"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior and posterior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Legend"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Implied prior and posterior for π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Credible interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Proportion of needle length to interline distance:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "%"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of throws:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Prior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Beta prior: parameter a"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Beta prior: parameter b"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Credible interval on π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Plot"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Needle plot"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Color crossing needles"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Prior and posterior for the proportion of crosses"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Legend"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Implied prior and posterior for π"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Credible interval"
+msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2021-08-07 02:51\n"
+"POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2021-08-09 00:36+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
@@ -12,6 +12,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.8-dev\n"
+
+msgid "Summary Table"
+msgstr ""
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr ""
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "Mediana"
+
+msgid "Lower"
+msgstr "Inferior"
+
+msgid "%s%% Credible Interval"
+msgstr "Intervalo de Credibilidad del %s%%"
+
+msgid "Upper"
+msgstr "Superior"
+
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr ""
+
+msgid "Posterior"
+msgstr "Posterior"
+
+msgid "Prior"
+msgstr ""
+
+#, fuzzy
+msgid "Proportion of Crosses"
+msgstr "Prporción de la Población"
+
+msgid "Density"
+msgstr "Densidad"
+
+#, fuzzy
+msgid "Implied Prior and Posterior for %s"
+msgstr "Posterior"
+
+#, fuzzy
+msgid "Implied Posterior"
+msgstr "Posterior"
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr ""
+
+msgid "Needle Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Posterior"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -108,15 +170,6 @@ msgstr "Estadísticas"
 msgid "Estimate"
 msgstr "Estimar"
 
-msgid "%s%% Credible Interval"
-msgstr "Intervalo de Credibilidad del %s%%"
-
-msgid "Lower"
-msgstr "Inferior"
-
-msgid "Upper"
-msgstr "Superior"
-
 msgid "Notation"
 msgstr ""
 
@@ -174,12 +227,6 @@ msgstr ""
 
 msgid "Parameter"
 msgstr "Parámetro"
-
-msgid "Prior"
-msgstr ""
-
-msgid "Posterior"
-msgstr "Posterior"
 
 msgid "Sensitivity"
 msgstr "Sensibilidad"
@@ -270,9 +317,6 @@ msgstr ""
 
 msgid "Marker"
 msgstr ""
-
-msgid "Density"
-msgstr "Densidad"
 
 #, fuzzy
 msgid "Count"
@@ -564,9 +608,6 @@ msgid "Posterior probability"
 msgstr ""
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
-msgstr ""
-
-msgid "Observations"
 msgstr ""
 
 msgid "At least 2 hypotheses need to be specified."
@@ -1123,9 +1164,6 @@ msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
 msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
-
-msgid "Summary Table"
 msgstr ""
 
 msgid "Players"

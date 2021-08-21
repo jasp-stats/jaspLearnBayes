@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-08-07 02:51\n"
+"POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2021-08-10 15:34+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -13,6 +13,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
 "X-Generator: Weblate 4.8-dev\n"
+
+msgid "Summary Table"
+msgstr "Übersichtstabelle"
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr "Beobachtungen"
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "Median"
+
+msgid "Lower"
+msgstr "Untere"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% Glaubwürdigkeitsintervall"
+
+msgid "Upper"
+msgstr "Obere"
+
+#, fuzzy
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Prior- und Posterior-Abbildungen"
+
+msgid "Posterior"
+msgstr "Posterior"
+
+msgid "Prior"
+msgstr "Prior"
+
+#, fuzzy
+msgid "Proportion of Crosses"
+msgstr "Anteil der Erfolge"
+
+msgid "Density"
+msgstr "Dichte"
+
+#, fuzzy
+msgid "Implied Prior and Posterior for %s"
+msgstr "Prior- und Posterior-Abbildungen"
+
+#, fuzzy
+msgid "Implied Posterior"
+msgstr "Posterior"
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr ""
+
+msgid "Needle Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Prior- und Posterior-Abbildungen"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -180,15 +243,6 @@ msgstr "Statistiken"
 msgid "Estimate"
 msgstr "Schätzung"
 
-msgid "%s%% Credible Interval"
-msgstr "%s%% Glaubwürdigkeitsintervall"
-
-msgid "Lower"
-msgstr "Untere"
-
-msgid "Upper"
-msgstr "Obere"
-
 msgid "Notation"
 msgstr "Notation"
 
@@ -245,12 +299,6 @@ msgstr "Priors und Posteriors"
 
 msgid "Parameter"
 msgstr "Parameter"
-
-msgid "Prior"
-msgstr "Prior"
-
-msgid "Posterior"
-msgstr "Posterior"
 
 msgid "Sensitivity"
 msgstr "Sensitivität"
@@ -341,9 +389,6 @@ msgstr "Signal-Erkennung"
 
 msgid "Marker"
 msgstr "Marker"
-
-msgid "Density"
-msgstr "Dichte"
 
 msgid "Count"
 msgstr "Anzahl"
@@ -667,9 +712,6 @@ msgstr "Posterior Wahrscheinlichkeit"
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr "Abbilden nicht möglich: Einer der Bayesfaktoren ist unendlich."
 
-msgid "Observations"
-msgstr "Beobachtungen"
-
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Es müssen mindestens 2 Hypothesen spezifiziert werden."
 
@@ -814,8 +856,8 @@ msgstr ""
 "Grundgesamtheit darstellt:\n"
 "        <ul><li>'Punktmasse(%2$s)' - für die Konzentration der gesamten "
 "Wahrscheinlichkeitsmasse auf einen Punkt (%2$s). Dies repräsentiert die a-"
-"priori Überzeugung, dass der Anteil in der Grundgesamtheit mit Sicherheit %2$"
-"s ist. Diese Überzeugung ist so stark, dass keine Daten diese a-priori "
+"priori Überzeugung, dass der Anteil in der Grundgesamtheit mit Sicherheit "
+"%2$s ist. Diese Überzeugung ist so stark, dass keine Daten diese a-priori "
 "Überzeugung bewegen können. Daher ist der Posterior auch eine Punktmasse bei "
 "%2$s. Der Prior und der Posterior %5$s entsprechen dann dem Ort der "
 "Punktmasse.</li><li>'Beta(%3$s, %4$s)' - zur Verteilung der "
@@ -1569,9 +1611,6 @@ msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr "Warnung: Keine negativen Eingangswerte! Passe die Eingaben an!"
-
-msgid "Summary Table"
-msgstr "Übersichtstabelle"
 
 msgid "Players"
 msgstr "Spieler"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-08-07 02:51\n"
+"POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2020-12-02 21:29+0000\n"
 "Last-Translator: JASP Stats <F.A.M.Meerhoff@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/jasp-engine/"
@@ -13,6 +13,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
 "X-Generator: Weblate 4.4-dev\n"
+
+#, fuzzy
+msgid "Summary Table"
+msgstr "Samenvatting"
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr "Observaties"
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "Mediaan"
+
+msgid "Lower"
+msgstr ""
+
+msgid "%s%% Credible Interval"
+msgstr ""
+
+msgid "Upper"
+msgstr ""
+
+#, fuzzy
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Prior en Posteriors Grafieken"
+
+#, fuzzy
+msgid "Posterior"
+msgstr "Posterior %s"
+
+#, fuzzy
+msgid "Prior"
+msgstr "Prior %s"
+
+#, fuzzy
+msgid "Proportion of Crosses"
+msgstr "Proportie successen"
+
+msgid "Density"
+msgstr "Dichtheid"
+
+#, fuzzy
+msgid "Implied Prior and Posterior for %s"
+msgstr "Prior en Posteriors Grafieken"
+
+#, fuzzy
+msgid "Implied Posterior"
+msgstr "Posterior %s"
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr ""
+
+msgid "Needle Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Prior en Posteriors Grafieken"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -109,15 +175,6 @@ msgstr ""
 msgid "Estimate"
 msgstr ""
 
-msgid "%s%% Credible Interval"
-msgstr ""
-
-msgid "Lower"
-msgstr ""
-
-msgid "Upper"
-msgstr ""
-
 msgid "Notation"
 msgstr ""
 
@@ -178,14 +235,6 @@ msgstr "Prior en Posteriors Grafieken"
 
 msgid "Parameter"
 msgstr ""
-
-#, fuzzy
-msgid "Prior"
-msgstr "Prior %s"
-
-#, fuzzy
-msgid "Posterior"
-msgstr "Posterior %s"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -283,9 +332,6 @@ msgstr ""
 
 msgid "Marker"
 msgstr ""
-
-msgid "Density"
-msgstr "Dichtheid"
 
 #, fuzzy
 msgid "Count"
@@ -588,9 +634,6 @@ msgstr "Posterior kans"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
-
-msgid "Observations"
-msgstr "Observaties"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Er moeten ten minste 2 hypothesen worden gespecificeerd."
@@ -1499,10 +1542,6 @@ msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr ""
-
-#, fuzzy
-msgid "Summary Table"
-msgstr "Samenvatting"
 
 msgid "Players"
 msgstr ""

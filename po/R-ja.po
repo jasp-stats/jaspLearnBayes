@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2021-08-07 02:51\n"
+"POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2021-02-07 06:50+0000\n"
 "Last-Translator: Yoshihiko Kunisato <ykunisato@psy.senshu-u.ac.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -12,6 +12,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.5-dev\n"
+
+msgid "Summary Table"
+msgstr ""
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr ""
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "中央値"
+
+msgid "Lower"
+msgstr ""
+
+msgid "%s%% Credible Interval"
+msgstr ""
+
+msgid "Upper"
+msgstr ""
+
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr ""
+
+msgid "Posterior"
+msgstr ""
+
+msgid "Prior"
+msgstr ""
+
+msgid "Proportion of Crosses"
+msgstr ""
+
+msgid "Density"
+msgstr "密度"
+
+msgid "Implied Prior and Posterior for %s"
+msgstr ""
+
+msgid "Implied Posterior"
+msgstr ""
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr ""
+
+msgid "Needle Plot"
+msgstr ""
+
+msgid "Implied Prior and Posterior for  %s"
+msgstr ""
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -108,15 +166,6 @@ msgstr ""
 msgid "Estimate"
 msgstr ""
 
-msgid "%s%% Credible Interval"
-msgstr ""
-
-msgid "Lower"
-msgstr ""
-
-msgid "Upper"
-msgstr ""
-
 msgid "Notation"
 msgstr ""
 
@@ -173,12 +222,6 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
-
-msgid "Prior"
-msgstr ""
-
-msgid "Posterior"
 msgstr ""
 
 #, fuzzy
@@ -271,9 +314,6 @@ msgstr ""
 
 msgid "Marker"
 msgstr ""
-
-msgid "Density"
-msgstr "密度"
 
 #, fuzzy
 msgid "Count"
@@ -564,9 +604,6 @@ msgid "Posterior probability"
 msgstr ""
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
-msgstr ""
-
-msgid "Observations"
 msgstr ""
 
 msgid "At least 2 hypotheses need to be specified."
@@ -1123,9 +1160,6 @@ msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
 msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
-
-msgid "Summary Table"
 msgstr ""
 
 msgid "Players"
