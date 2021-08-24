@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-08-24 13:32+0000\n"
+"PO-Revision-Date: 2021-08-26 22:32+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/ja/>\n"
@@ -39,7 +39,7 @@ msgid "Prior and Posterior for Proportion of Crosses"
 msgstr ""
 
 msgid "Posterior"
-msgstr ""
+msgstr "事後分布"
 
 msgid "Prior"
 msgstr ""
@@ -175,7 +175,6 @@ msgstr ""
 msgid "Confusion Matrix"
 msgstr ""
 
-#, fuzzy
 msgid "%s%% CI"
 msgstr "%s%% CI"
 
@@ -183,7 +182,7 @@ msgid "Positive test"
 msgstr ""
 
 msgid "Outcome"
-msgstr ""
+msgstr "結果変数"
 
 msgid "Lower %s"
 msgstr ""
@@ -223,7 +222,7 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
+msgstr "パラメータ"
 
 #, fuzzy
 msgid "Sensitivity"
