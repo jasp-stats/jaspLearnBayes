@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-08-14 10:48+0000\n"
+"PO-Revision-Date: 2021-08-26 22:32+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Virgin-Header: remove this line if you change anything in the header.\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
@@ -25,14 +25,13 @@ msgid "Summary Table"
 msgstr "Táboa Resumo"
 
 msgid "Crosses"
-msgstr ""
+msgstr "Cruces"
 
 msgid "Observations"
 msgstr "Observacións"
 
-#, fuzzy
 msgid "Median for %s"
-msgstr "Mediana"
+msgstr "Mediana para %s"
 
 msgid "Lower"
 msgstr "Inferior"
@@ -43,9 +42,8 @@ msgstr "Intervalo co %s%% de Credibilidade"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgid "Prior and Posterior for Proportion of Crosses"
-msgstr "Gráficas Previa e Posterior"
+msgstr "Previa e Posterior para a Proporción de Cruces"
 
 msgid "Posterior"
 msgstr "Posterior"
@@ -53,36 +51,32 @@ msgstr "Posterior"
 msgid "Prior"
 msgstr "Previo"
 
-#, fuzzy
 msgid "Proportion of Crosses"
-msgstr "Proporción de Acertos"
+msgstr "Proporción de Cruces"
 
 msgid "Density"
 msgstr "Densidade"
 
-#, fuzzy
 msgid "Implied Prior and Posterior for %s"
-msgstr "Gráficas Previa e Posterior"
+msgstr "Previa e Posterior Implícitas para %s"
 
-#, fuzzy
 msgid "Implied Posterior"
-msgstr "Posterior"
+msgstr "Posterior Implícita"
 
 msgid "Implied Prior"
-msgstr ""
+msgstr "Previa Implícita"
 
 msgid "π"
-msgstr ""
+msgstr "π"
 
 msgid "%s%% CI: [%s, %s]"
-msgstr ""
+msgstr "IC do %s%% : [%s, %s]"
 
 msgid "Needle Plot"
-msgstr ""
+msgstr "Gráfica de Agullas"
 
-#, fuzzy
 msgid "Implied Prior and Posterior for  %s"
-msgstr "Gráficas Previa e Posterior"
+msgstr "Previa e Posterior Implícitas para %s"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -300,7 +294,7 @@ msgid "Rareness"
 msgstr "Rareza"
 
 msgid "Priors and Posteriors"
-msgstr "Previos e Posteriores"
+msgstr "Previas e Posteriores"
 
 msgid "Parameter"
 msgstr "Parámetro"
@@ -602,7 +596,7 @@ msgid "Population proportion"
 msgstr "Proporción de poboación"
 
 msgid "Prior = Posterior"
-msgstr "Previo = Posterior"
+msgstr "Previa = Posterior"
 
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
