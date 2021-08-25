@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
 "PO-Revision-Date: 2021-08-26 22:32+0000\n"
-"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
+"Last-Translator: Matheus Macena <macenamt21@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
 "Language: pt\n"
@@ -43,9 +43,8 @@ msgstr "Superior"
 msgid "Prior and Posterior for Proportion of Crosses"
 msgstr "Amostras posteriores"
 
-#, fuzzy
 msgid "Posterior"
-msgstr "Amostras posteriores"
+msgstr "Posterior"
 
 #, fuzzy
 msgid "Prior"
@@ -563,7 +562,7 @@ msgid "Predicted number of successes"
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "Probabilidade"
 
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
@@ -1245,9 +1244,8 @@ msgstr "Anterior"
 msgid "Posterior (μ)"
 msgstr "RÂ² Posterior"
 
-#, fuzzy
 msgid "Posterior Mean"
-msgstr "Amostras posteriores"
+msgstr "Media posterior"
 
 msgid "Population mean"
 msgstr ""
