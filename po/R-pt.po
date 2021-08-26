@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-08-26 22:32+0000\n"
-"Last-Translator: Matheus Macena <macenamt21@gmail.com>\n"
+"PO-Revision-Date: 2021-08-27 20:21+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
 "Language: pt\n"
@@ -234,7 +234,7 @@ msgid "Priors and Posteriors"
 msgstr "Amostras posteriores"
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parâmetro"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -247,7 +247,7 @@ msgid "beta(%s,%s)"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "Gráficos"
 
 msgid "Probability Positive"
 msgstr ""
@@ -331,7 +331,7 @@ msgid "Marker"
 msgstr ""
 
 msgid "Count"
-msgstr ""
+msgstr "Contagem"
 
 msgid "Estimates"
 msgstr ""
@@ -465,11 +465,10 @@ msgid "Data Summary"
 msgstr "Resumo dos Dados"
 
 msgid "Counts"
-msgstr ""
+msgstr "Contagem"
 
-#, fuzzy
 msgid "Proportion"
-msgstr "Opções de Diagramas"
+msgstr "Proporção"
 
 msgid "Successes"
 msgstr ""
@@ -521,9 +520,8 @@ msgstr ""
 msgid "Observation"
 msgstr ""
 
-#, fuzzy
 msgid "Population proportion"
-msgstr "Coeficiente de Correlação População"
+msgstr "Proporção da população"
 
 #, fuzzy
 msgid "Prior = Posterior"
@@ -1171,7 +1169,6 @@ msgstr "Média"
 msgid "Median"
 msgstr "Mediana"
 
-#, fuzzy
 msgid "Mode"
 msgstr "Moda"
 
