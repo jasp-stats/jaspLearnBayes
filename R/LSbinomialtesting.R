@@ -234,7 +234,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     containerPlots[[paste0("plots",type)]] <- plotsSimple
 
-    if (!all(ready))return()
+    if ((type == "Posterior" && !ready["data"]) || !ready["priors"])
+      return()
+
+    if (type == "Prior")
+      data <- list(
+        nSuccesses = 0,
+        nFailures  = 0
+      )
 
     allLines    <- c()
     allArrows   <- c()
@@ -399,12 +406,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     containerPlots[[paste0("plots",type)]] <- plotsIndividual
 
 
-    if (all(!ready) || (ready["data"] && !ready["priors"])) {
+    if ((type == "Posterior" && !ready["data"]) || !ready["priors"]) {
 
       plotsIndividual[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["priors"]) {
+    } else if ((type == "Posterior" && !ready["data"]) || (type == "Posterior" && !ready["priors"])) {
 
       for (i in 1:length(options[["priors"]])) {
         plotsIndividual[[options[["priors"]][[i]]$name]] <- createJaspPlot(title = options[["priors"]][[i]]$name,
@@ -422,11 +429,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       } else
         tempData <- data
 
-      tempResults <- .testBinomialLS(data, options[["priors"]])
+      tempResults <- .testBinomialLS(tempData, options[["priors"]])
 
       if (type == "Posterior" && options[["plotsPosteriorObserved"]]) {
         dfPoints <- data.frame(
-          x = data[["nSuccesses"]]/(data[["nSuccesses"]] + data[["nFailures"]]),
+          x = tempData[["nSuccesses"]]/(tempData[["nSuccesses"]] + tempData[["nFailures"]]),
           y = 0,
           g = "Observed"
         )
@@ -464,7 +471,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           dfArrowPP  <- .dataArrowBinomialLS(options[["priors"]][[i]])
         else if (options[["priors"]][[i]]$type == "beta") {
 
-          dfLinesPP   <- .dataLinesBinomialLS(data, options[["priors"]][[i]])
+          dfLinesPP   <- .dataLinesBinomialLS(tempData, options[["priors"]][[i]])
           dfLinesPP   <- dfLinesPP[dfLinesPP$g == type,]
           dfLinesPP$y <- dfLinesPP$y
 
