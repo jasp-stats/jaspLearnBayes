@@ -48,9 +48,9 @@
   }
 
   if (anyDuplicated(sapply(priors, function(p)p$name)) != 0) {
-    quitAnalysis(gettextf(
+    .quitAnalysis(gettextf(
       "Please remove duplicates from the %s names.",
-      ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypotheses", "Models")
+      ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model")
     ))
   }
 
