@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-07-10 23:34+0000\n"
-"Last-Translator: Luanna dos Santos Silva <luannasilva91@gmail.com>\n"
+"PO-Revision-Date: 2021-08-27 20:21+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
 "Language: pt\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -43,9 +43,8 @@ msgstr "Superior"
 msgid "Prior and Posterior for Proportion of Crosses"
 msgstr "Amostras posteriores"
 
-#, fuzzy
 msgid "Posterior"
-msgstr "Amostras posteriores"
+msgstr "Posterior"
 
 #, fuzzy
 msgid "Prior"
@@ -73,7 +72,7 @@ msgid "π"
 msgstr ""
 
 msgid "%s%% CI: [%s, %s]"
-msgstr ""
+msgstr "%s%% CI: [%s, %s]"
 
 msgid "Needle Plot"
 msgstr ""
@@ -235,7 +234,7 @@ msgid "Priors and Posteriors"
 msgstr "Amostras posteriores"
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parâmetro"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -248,7 +247,7 @@ msgid "beta(%s,%s)"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "Gráficos"
 
 msgid "Probability Positive"
 msgstr ""
@@ -332,13 +331,13 @@ msgid "Marker"
 msgstr ""
 
 msgid "Count"
-msgstr ""
+msgstr "Contagem"
 
 msgid "Estimates"
 msgstr ""
 
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Valor preditivo positivo"
 
 msgid "Negative predictive value"
 msgstr ""
@@ -350,7 +349,7 @@ msgid "False omission rate"
 msgstr ""
 
 msgid "False positive rate"
-msgstr ""
+msgstr "Taxa de falsos positivos"
 
 msgid "False negative rate"
 msgstr ""
@@ -466,11 +465,10 @@ msgid "Data Summary"
 msgstr "Resumo dos Dados"
 
 msgid "Counts"
-msgstr ""
+msgstr "Contagem"
 
-#, fuzzy
 msgid "Proportion"
-msgstr "Opções de Diagramas"
+msgstr "Proporção"
 
 msgid "Successes"
 msgstr ""
@@ -522,9 +520,8 @@ msgstr ""
 msgid "Observation"
 msgstr ""
 
-#, fuzzy
 msgid "Population proportion"
-msgstr "Coeficiente de Correlação População"
+msgstr "Proporção da população"
 
 #, fuzzy
 msgid "Prior = Posterior"
@@ -563,7 +560,7 @@ msgid "Predicted number of successes"
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "Probabilidade"
 
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
@@ -1172,7 +1169,6 @@ msgstr "Média"
 msgid "Median"
 msgstr "Mediana"
 
-#, fuzzy
 msgid "Mode"
 msgstr "Moda"
 
@@ -1245,9 +1241,8 @@ msgstr "Anterior"
 msgid "Posterior (μ)"
 msgstr "RÂ² Posterior"
 
-#, fuzzy
 msgid "Posterior Mean"
-msgstr "Amostras posteriores"
+msgstr "Media posterior"
 
 msgid "Population mean"
 msgstr ""
