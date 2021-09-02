@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-08-27 20:21+0000\n"
+"PO-Revision-Date: 2021-09-04 02:46+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
@@ -318,7 +318,7 @@ msgid "Condition"
 msgstr "Correção"
 
 msgid "Test"
-msgstr ""
+msgstr "Teste"
 
 #, fuzzy
 msgid "Proportion of Population"
