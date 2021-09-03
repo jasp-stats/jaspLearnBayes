@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-08-24 13:32+0000\n"
-"Last-Translator: D.J. Dekker <dj_dekker@hotmail.com>\n"
+"PO-Revision-Date: 2021-09-04 02:46+0000\n"
+"Last-Translator: Jill de Ron <jillderon93@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/nl/>\n"
 "Language: nl\n"
@@ -35,7 +35,7 @@ msgid "%s%% Credible Interval"
 msgstr "%s%% Geloofwaardigheidsinterval"
 
 msgid "Upper"
-msgstr ""
+msgstr "Boven"
 
 #, fuzzy
 msgid "Prior and Posterior for Proportion of Crosses"
@@ -189,7 +189,6 @@ msgstr "%i %% BI"
 msgid "Positive test"
 msgstr ""
 
-#, fuzzy
 msgid "Outcome"
 msgstr "Uitkomst"
 
