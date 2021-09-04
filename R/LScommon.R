@@ -1196,7 +1196,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     ))
   } else {
     return(ggplot2::scale_y_continuous(
-      if (!is.null(yName)) yName else ifelse (is.null(allLines), gettext("Probability"), gettext("Density")),
+      if (!is.null(yName)) yName else if (is.null(allLines)) gettext("Probability") else gettext("Density"),
       breaks = yBreaks,
       limits = yRange
     ))
