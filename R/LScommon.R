@@ -363,7 +363,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   # axes
   g <- g + .plotXAxis(xName, xRange, discrete)
-  g <- g + .plotYAxis(allLines, allArrows, if (!is.null(CI) || !is.null(pointEstimate)) "notNull" else NULL)
+  g <- g + .plotYAxis(allLines, allArrows, if (!is.null(CI) || !is.null(pointEstimate)) "notNull" else NULL, yName)
 
   # legend
   if (!is.null(allLines)) {
@@ -1162,7 +1162,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   return(ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks))
 }
-.plotYAxis             <- function(allLines, allArrows, CI) {
+.plotYAxis             <- function(allLines, allArrows, CI, yName = NULL) {
 
   yMax <- .getYMax(allLines, allArrows)
 
@@ -1196,7 +1196,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     ))
   } else {
     return(ggplot2::scale_y_continuous(
-      ifelse (is.null(allLines), gettext("Probability"), gettext("Density")),
+      if (!is.null(yName)) yName else ifelse (is.null(allLines), gettext("Probability"), gettext("Density")),
       breaks = yBreaks,
       limits = yRange
     ))

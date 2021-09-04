@@ -1289,7 +1289,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       if (options[["predictionPlotProp"]]) {
         xName  <- gettext("Predicted sample proportions")
-        yName  <- gettext("Density")
+        yName  <- gettext("Probability")
         xRange <- c(-.5/options[["predictionN"]],1+.5/options[["predictionN"]])
       } else {
         xName  <- gettext("Predicted number of successes")
