@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-09-03 14:34+0000\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@uu.nl>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -26,15 +32,15 @@ msgstr "Binomiaal Toets"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
-msgstr ""
+msgstr "Het Probleem van Punten"
 
 msgctxt "Description|"
 msgid "Game of Chance"
-msgstr ""
+msgstr "Kansspel"
 
 msgctxt "Description|"
 msgid "Game of Skill"
-msgstr ""
+msgstr "Vaardigheidsspel"
 
 msgctxt "LSbinomialestimation|"
 msgid "Color palette"
@@ -166,117 +172,99 @@ msgstr "θ₀"
 
 msgctxt "LSgameofchance|"
 msgid "Points needed to win the game"
-msgstr ""
+msgstr "Benodigde punten om het spel te winnen"
 
-#, fuzzy
 msgctxt "LSgameofchance|"
 msgid "Number of simulated games"
-msgstr "Steekproefgrootte: "
+msgstr "Steekproefgrootte"
 
 msgctxt "LSgameofchance|"
 msgid "95% HPD"
-msgstr ""
+msgstr "95% HPD"
 
 msgctxt "LSgameofskill|"
 msgid "Points needed to win the game"
-msgstr ""
+msgstr "Benodigde punten om het spel te winnen"
 
-#, fuzzy
 msgctxt "LSgameofskill|"
 msgid "Number of simulated games"
-msgstr "Steekproefgrootte: "
+msgstr "Steekproefgrootte"
 
 msgctxt "LSgameofskill|"
 msgid "95% HPD"
-msgstr ""
+msgstr "95% HPD"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Model"
 msgstr "Model"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Distribution"
 msgstr "Verdeling"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Parameter (μ)"
-msgstr "Parameter (θ)"
+msgstr "Parameter (μ)"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Spike"
 msgstr "Puntmassa"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Normal"
 msgstr "Normaal"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "μ₀"
-msgstr "θ₀"
+msgstr "μ₀"
 
 msgctxt "LSgaussianestimation|"
 msgid "σ₀"
-msgstr ""
+msgstr "σ₀"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Observed data"
-msgstr "Waargenomen"
+msgstr "Geobserveerde data"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
-msgstr "Toon gemiddelden"
+msgstr "Toon steekproefgemiddelden"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Hypothesis"
 msgstr "Hypothese"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Distribution"
 msgstr "Verdeling"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Parameter (μ)"
-msgstr "Parameter (θ)"
+msgstr "Parameter (μ)"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Spike"
 msgstr "Puntmassa"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Normal"
 msgstr "Normaal"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "μ₀"
-msgstr "θ₀"
+msgstr "μ₀"
 
 msgctxt "LSgaussiantesting|"
 msgid "σ₀"
-msgstr ""
+msgstr "σ₀"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Observed data"
-msgstr "Waargenomen"
+msgstr "Geobserveerde data"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Sample means"
-msgstr "Steekproeven"
+msgstr "Steekproefgemiddelden"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
@@ -438,61 +426,50 @@ msgctxt "LSestimationsequential|"
 msgid "Posterior updating table"
 msgstr "Posterior bijwerkingstabel"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
 msgstr "Data"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
 msgstr "Invoer Type"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Select variable"
 msgstr "Selecteer variabele"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Specify data summary"
-msgstr "Gegevensoverzicht"
+msgstr "Specificeer gegevensoverzicht"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Enter sequence"
 msgstr "Voer volgorde in"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data summary"
 msgstr "Gegevensoverzicht"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Mean"
 msgstr "Gemiddelde"
 
 msgctxt "LSgaussiandatainput|"
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Observations"
-msgstr "Iteraties"
+msgstr "Observaties"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Comma-separated sequence of observations"
 msgstr "Door komma's gescheiden reeks waarnemingen"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Available"
 msgstr "Beschikbaar"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Selected"
 msgstr "Geselecteerd"
@@ -636,43 +613,43 @@ msgstr "Bijwerken tabel"
 msgctxt "Description|"
 msgid "Learn Bayesian statistics with simple examples and supporting text"
 msgstr ""
+"Leer Bayesiaanse statistiek met simpele voorbeelden en begeleidende tekst"
 
 msgctxt "Description|"
 msgid "Binary Classification"
-msgstr ""
+msgstr "Binaire Classificatie"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Input type"
 msgstr "Invoer Type"
 
 msgctxt "LSbinaryclassification|"
 msgid "Point estimates"
-msgstr ""
+msgstr "Puntschattingen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Uncertain estimates"
-msgstr ""
+msgstr "Onzekere schattingen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Load data and specify threshold"
-msgstr ""
+msgstr "Laad gegevens in en specificeer drempelwaarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "Estimates"
-msgstr ""
+msgstr "Schattingen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Prevalence"
-msgstr ""
+msgstr "Prevalentie"
 
 msgctxt "LSbinaryclassification|"
 msgid "Sensitivity"
-msgstr ""
+msgstr "Sensitiviteit"
 
 msgctxt "LSbinaryclassification|"
 msgid "Specificity"
-msgstr ""
+msgstr "Specificiteit"
 
 msgctxt "LSbinaryclassification|"
 msgid "Marker"
@@ -680,48 +657,47 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive condition (binary)"
-msgstr ""
+msgstr "Positieve conditie (binair)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test threshold"
-msgstr ""
+msgstr "Test drempelwaarde"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Data"
-msgstr "Data"
+msgstr "Gegevens"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive"
-msgstr ""
+msgstr "Terecht positief"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive"
-msgstr ""
+msgstr "Onterecht positief"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative"
-msgstr ""
+msgstr "Onterecht negatief"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative"
-msgstr ""
+msgstr "Terecht negatief"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
-msgstr ""
+msgstr "Priors"
 
 msgctxt "LSbinaryclassification|"
 msgid ")"
-msgstr ""
+msgstr ")"
 
 msgctxt "LSbinaryclassification|"
 msgid "Tables"
-msgstr ""
+msgstr "Tabellen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Statistics"
-msgstr ""
+msgstr "Statistieken"
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
@@ -729,52 +705,51 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 msgctxt "LSbinaryclassification|"
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 msgctxt "LSbinaryclassification|"
 msgid "Additional info"
-msgstr ""
+msgstr "Extra informatie"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
-msgstr ""
+msgstr "Priors en posteriors"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Plots"
 msgstr "Grafieken"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
-msgstr ""
+msgstr "Kans positief"
 
 msgctxt "LSbinaryclassification|"
 msgid "Show entire distribution"
-msgstr ""
+msgstr "Toon volledige verdeling"
 
 msgctxt "LSbinaryclassification|"
 msgid "Icon plot"
-msgstr ""
+msgstr "Icoon plot"
 
 msgctxt "LSbinaryclassification|"
 msgid "ROC"
-msgstr ""
+msgstr "ROC"
 
 msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
-msgstr ""
+msgstr "Voeg realisaties van de posterior toe"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
-msgstr ""
+msgstr "Test karakteristieken aan de hand van de drempelwaarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
@@ -782,27 +757,31 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
-msgstr ""
+msgstr "Alluviaal grafiek"
 
 msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
-msgstr ""
+msgstr "Signaal detectie"
 
+#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr ""
+msgstr "Terecht positief verhouding"
 
+#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
-msgstr ""
+msgstr "Onterecht positief verhouding"
 
+#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr ""
+msgstr "Terecht negatief verhouding"
 
+#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
-msgstr ""
+msgstr "Onterecht negatief verhouding"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
@@ -822,13 +801,12 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
-msgstr ""
+msgstr "Accuraatheid"
 
 msgctxt "LSbinaryclassification|"
 msgid "Plot type"
-msgstr ""
+msgstr "Grafiek type"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Interval"
 msgstr "Interval"
