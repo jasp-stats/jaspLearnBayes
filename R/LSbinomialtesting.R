@@ -556,7 +556,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
       if (type == "Posterior" && options[["predictionPostPlotProp"]]) {
         xName  <- gettext("Predicted sample proportions")
-        yName  <- gettext("Density")
+        yName  <- gettext("Probability")
         xRange <- c(-.5/predictionN, 1 + .5/predictionN)
         proportions <- options[["predictionPostPlotProp"]]
         nRound <- 3
