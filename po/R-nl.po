@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-08-21 02:48\n"
-"PO-Revision-Date: 2021-09-05 13:32+0000\n"
+"PO-Revision-Date: 2021-09-07 11:34+0000\n"
 "Last-Translator: DanaJohanna <dana__@live.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/nl/>\n"
@@ -245,7 +245,7 @@ msgid "beta(%s,%s)"
 msgstr "beta (%s, %s)"
 
 msgid "Plots"
-msgstr ""
+msgstr "Grafieken"
 
 #, fuzzy
 msgid "Probability Positive"
