@@ -192,14 +192,14 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                      group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("\u03c0", 100))
    )
 
-   #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
+   #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),"\u03c0"))
    labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
 
    
    # axis specification
    piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
      ggplot2::ggtitle("") + # for , pi
-     ggplot2::xlab(gettext("\u03c0")) +
+     ggplot2::xlab("\u03c0") +
      ggplot2::ylab(gettext("Density")) +
      ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost))) +
     ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
