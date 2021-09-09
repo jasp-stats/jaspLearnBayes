@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-09-08 12:11+0000\n"
+"PO-Revision-Date: 2021-09-10 12:32+0000\n"
 "Last-Translator: Sophie Berkhout <s.w.berkhout@uu.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/nl/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -653,7 +653,7 @@ msgstr "Specificiteit"
 
 msgctxt "LSbinaryclassification|"
 msgid "Marker"
-msgstr ""
+msgstr "Marker"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive condition (binary)"
@@ -701,7 +701,7 @@ msgstr "Statistieken"
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "Confusion matrix"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
@@ -753,7 +753,7 @@ msgstr "Test karakteristieken aan de hand van de drempelwaarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
-msgstr ""
+msgstr "PPV en NPV naar Prevalentie"
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
@@ -763,28 +763,25 @@ msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
 msgstr "Signaal detectie"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr "Terecht positief verhouding"
+msgstr "Terecht positieven"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
 msgstr "Fout positieven"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr "Terecht negatief verhouding"
+msgstr "Terecht negatieven"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
 msgstr "Fout negatieven"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
-msgstr "Positief voorspellende waarde"
+msgstr "Positieve voorspellende waarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative predictive value"
@@ -810,7 +807,6 @@ msgctxt "LSbinaryclassification|"
 msgid "Interval"
 msgstr "Interval"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Half-eye"
 msgstr "Half-oog"
@@ -821,7 +817,7 @@ msgstr "Opties"
 
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Geloofwaardigheidsintervallen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
@@ -839,7 +835,6 @@ msgctxt "LSgaussianestimation|"
 msgid "Colorblind Alt."
 msgstr "Kleurenblind Alt."
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Viridis"
 msgstr "Viridis"
@@ -892,7 +887,6 @@ msgctxt "LSestimationpriorandposterior|"
 msgid "Prior distribution"
 msgstr "Prior verdeling"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "All"
 msgstr "Alle"
@@ -939,7 +933,7 @@ msgstr "Gestapelde verdelingen"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive Performance"
-msgstr ""
+msgstr "Voorspellingsvermogen"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Prior predictive distribution"
@@ -993,7 +987,6 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Predictions table"
 msgstr "Voorspellingen tabel"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive accuracy"
 msgstr "Voorspellende nauwkeurigheid"
@@ -1066,7 +1059,6 @@ msgctxt "LStestingpriorandposterior|"
 msgid "Joint"
 msgstr "Gezamenlijke"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Overlying"
 msgstr "Overlappend"
@@ -1097,7 +1089,7 @@ msgstr "Prior en posterior verdeling"
 
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
-msgstr ""
+msgstr "~ Beta(α = "
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
@@ -1137,11 +1129,11 @@ msgstr "Prior parameter a: "
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
-msgstr ""
+msgstr "Prior parameter b:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval on π"
-msgstr ""
+msgstr "Geloofwaardigsheidsinterval op π"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
@@ -1161,7 +1153,7 @@ msgstr "Geïmpliceerde prior en posterior voor π"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Geloofwaardigheidsinterval"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
@@ -1181,15 +1173,15 @@ msgstr "Prior voor de proportie van kruizen"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter a"
-msgstr ""
+msgstr "Beta prior: parameter a"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
-msgstr ""
+msgstr "Beta prior: parameter b"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval on π"
-msgstr ""
+msgstr "Geloofwaardigsheidsinterval op π"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
@@ -1217,4 +1209,4 @@ msgstr "Geïmpliceerde prior en posterior voor π"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Geloofwaardigheidsinterval"
