@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-09-10 12:32+0000\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@uu.nl>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -218,7 +224,7 @@ msgstr "σ₀"
 
 msgctxt "LSgaussianestimation|"
 msgid "Observed data"
-msgstr "Geobserveerde data"
+msgstr "Geobserveerde gegevens"
 
 msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
@@ -254,7 +260,7 @@ msgstr "σ₀"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed data"
-msgstr "Geobserveerde data"
+msgstr "Geobserveerde gegevens"
 
 msgctxt "LSgaussiantesting|"
 msgid "Sample means"
@@ -262,7 +268,7 @@ msgstr "Steekproefgemiddelden"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
-msgstr "Data"
+msgstr "Gegevens"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Input Type"
@@ -422,7 +428,7 @@ msgstr "Posterior bijwerkingstabel"
 
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
-msgstr "Data"
+msgstr "Gegevens"
 
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
@@ -647,7 +653,7 @@ msgstr "Specificiteit"
 
 msgctxt "LSbinaryclassification|"
 msgid "Marker"
-msgstr ""
+msgstr "Marker"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive condition (binary)"
@@ -667,11 +673,11 @@ msgstr "Terecht positief"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive"
-msgstr "Onterecht positief"
+msgstr "Fout positief"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative"
-msgstr "Onterecht negatief"
+msgstr "Fout negatief"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative"
@@ -695,7 +701,7 @@ msgstr "Statistieken"
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "Confusion matrix"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
@@ -747,7 +753,7 @@ msgstr "Test karakteristieken aan de hand van de drempelwaarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
-msgstr ""
+msgstr "PPV en NPV naar Prevalentie"
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
@@ -757,41 +763,37 @@ msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
 msgstr "Signaal detectie"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr "Terecht positief verhouding"
+msgstr "Terecht positieven"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
-msgstr "Onterecht positief verhouding"
+msgstr "Fout positieven"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr "Terecht negatief verhouding"
+msgstr "Terecht negatieven"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
-msgstr "Onterecht negatief verhouding"
+msgstr "Fout negatieven"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Positieve voorspellende waarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative predictive value"
-msgstr ""
+msgstr "Negatief voorspellende waarde"
 
 msgctxt "LSbinaryclassification|"
 msgid "False discovery rate"
-msgstr ""
+msgstr "Fout ontdekkingspercentage"
 
 msgctxt "LSbinaryclassification|"
 msgid "False omission rate"
-msgstr ""
+msgstr "Fout omissiepercentage"
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
@@ -807,463 +809,404 @@ msgstr "Interval"
 
 msgctxt "LSbinaryclassification|"
 msgid "Half-eye"
-msgstr ""
+msgstr "Half-oog"
 
 msgctxt "LSbinaryclassification|"
 msgid "Options"
-msgstr ""
+msgstr "Opties"
 
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Geloofwaardigheidsintervallen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
-msgstr ""
+msgstr "Aantal posterior steekproeven"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Color palette"
 msgstr "Kleurenpalet"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind"
 msgstr "Kleurenblind"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind Alt."
 msgstr "Kleurenblind Alt."
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Viridis"
 msgstr "Viridis"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "ggplot2"
 msgstr "ggplot2"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Gray"
 msgstr "Grijs"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Color palette"
 msgstr "Kleurenpalet"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind"
 msgstr "Kleurenblind"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind Alt."
 msgstr "Kleurenblind Alt."
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Viridis"
 msgstr "Viridis"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "ggplot2"
 msgstr "ggplot2"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Gray"
 msgstr "Grijs"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"
-msgstr ""
+msgstr "Geobserveerd gemiddelde"
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Prior and Posterior Distributions"
-msgstr ""
+msgstr "Prior en Posterior Verdelingen"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Point estimate"
 msgstr "Puntschatting"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Prior distribution"
 msgstr "Prior verdeling"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "All"
 msgstr "Alle"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Stacked"
 msgstr "Gestapeld"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Individual"
 msgstr "Individueel"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "CI"
 msgstr "BI"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Mass"
 msgstr "Massa"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Lower"
 msgstr "Onder"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Upper"
 msgstr "Boven"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Posterior distribution"
 msgstr "Posterior verdeling"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "BF"
 msgstr "BF"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Observed proportion"
 msgstr "Waargenomen proportie"
 
 msgctxt "LSestimationsequential|"
 msgid "Stacked distributions"
-msgstr ""
+msgstr "Gestapelde verdelingen"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive Performance"
-msgstr ""
+msgstr "Voorspellingsvermogen"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Prior predictive distribution"
 msgstr "Prior voorspellende verdeling"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Conditional"
 msgstr "Conditioneel"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Point estimate"
 msgstr "Puntschatting"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "CI"
 msgstr "BI"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Mass"
 msgstr "Massa"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Lower"
 msgstr "Onder"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Upper"
 msgstr "Boven"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Joint"
 msgstr "Gezamenlijke"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Overlying"
 msgstr "Overlappend"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Stacked"
 msgstr "Gestapeld"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Marginal"
 msgstr "Marginaal"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Observed number of successes"
-msgstr ""
+msgstr "Waargenomen aantal successen"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictions table"
-msgstr "Voorspellingstabel"
+msgstr "Voorspellingen tabel"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive accuracy"
 msgstr "Voorspellende nauwkeurigheid"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Normalized"
 msgstr "Genormaliseerd"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Bayes Factor"
 msgstr "Bayes Factor"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs."
 msgstr "vs."
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. rest"
 msgstr "vs. rest"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. best"
 msgstr "vs. beste"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "BF₁₀"
 msgstr "BF₁₀"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "BF₀₁"
 msgstr "BF₀₁"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "log(BF₁₀)"
 msgstr "log(BF₁₀)"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and Posterior Distributions"
-msgstr ""
+msgstr "Prior en Posterior Verdelingen"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
 msgstr "Prior verdeling"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Conditional"
 msgstr "Conditioneel"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Point estimate"
 msgstr "Puntschatting"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "CI"
 msgstr "BI"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Mass"
 msgstr "Massa"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Lower"
 msgstr "Onder"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Upper"
 msgstr "Boven"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Joint"
 msgstr "Gezamenlijke"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Overlying"
 msgstr "Overlappend"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Stacked"
 msgstr "Gestapeld"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Marginal"
 msgstr "Marginaal"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Posterior distribution"
 msgstr "Posterior verdeling"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "BF"
 msgstr "BF"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Observed proportion"
 msgstr "Waargenomen proportie"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and posterior distribution"
-msgstr ""
+msgstr "Prior en posterior verdeling"
 
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
-msgstr ""
+msgstr "~ Beta(α = "
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
-msgstr ""
+msgstr "Naald van Buffon"
 
 msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
-msgstr ""
+msgstr "Simuleer Naald van Buffon"
 
 msgctxt "Description|"
 msgid "Manipulating Buffon's Needle"
-msgstr ""
+msgstr "Manipuleer Naald van Buffon"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "Proportie van lengte naald tot afstand tussen lijnen:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "%"
-msgstr ""
+msgstr "%"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of throws:"
-msgstr ""
+msgstr "Aantal gooien:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
-msgstr ""
+msgstr "Aantal kruizen:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
+msgstr "Prior voor de proportie van kruizen"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter a: "
-msgstr ""
+msgstr "Prior parameter a: "
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
-msgstr ""
+msgstr "Prior parameter b:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval on π"
-msgstr ""
+msgstr "Geloofwaardigsheidsinterval op π"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
-msgstr ""
+msgstr "Grafiek"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "Prior en posterior voor de proportie van kruizen"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Legend"
-msgstr ""
+msgstr "Legenda"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Implied prior and posterior for π"
-msgstr ""
+msgstr "Geïmpliceerde prior en posterior voor π"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Geloofwaardigheidsinterval"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "Proportie van lengte naald tot afstand tussen lijnen:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "%"
-msgstr ""
+msgstr "%"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Number of throws:"
-msgstr ""
+msgstr "Aantal gooien:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
+msgstr "Prior voor de proportie van kruizen"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter a"
-msgstr ""
+msgstr "Beta prior: parameter a"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
-msgstr ""
+msgstr "Beta prior: parameter b"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval on π"
-msgstr ""
+msgstr "Geloofwaardigsheidsinterval op π"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
-msgstr ""
+msgstr "Grafiek"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Needle plot"
-msgstr ""
+msgstr "Naald grafiek"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Color crossing needles"
-msgstr ""
+msgstr "Kleur kruizende naalden"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "Prior en posterior voor de proportie van kruizen"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Legend"
-msgstr ""
+msgstr "Legenda"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Implied prior and posterior for π"
-msgstr ""
+msgstr "Geïmpliceerde prior en posterior voor π"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Geloofwaardigheidsinterval"
