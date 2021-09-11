@@ -1086,10 +1086,6 @@ msgid "~ Beta(α = "
 msgstr "~ Beta(α = "
 
 msgctxt "Description|"
-msgid "Buffon's Needle"
-msgstr "Buffons Nadel"
-
-msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
 msgstr "Simulieren von Buffons Nadel"
 
@@ -1204,3 +1200,7 @@ msgstr "Implizierter Prior und Posterior für π"
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
 msgstr "Glaubwürdigkeitsintervall"
+
+msgctxt "Description|"
+msgid "Buffon's Needle (Beta)"
+msgstr ""

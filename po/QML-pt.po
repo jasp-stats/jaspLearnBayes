@@ -1098,10 +1098,6 @@ msgid "~ Beta(α = "
 msgstr ""
 
 msgctxt "Description|"
-msgid "Buffon's Needle"
-msgstr ""
-
-msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
 msgstr ""
 
@@ -1215,4 +1211,8 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
+msgstr ""
+
+msgctxt "Description|"
+msgid "Buffon's Needle (Beta)"
 msgstr ""

@@ -1085,10 +1085,6 @@ msgid "BF₀₁"
 msgstr "FB₀₁"
 
 msgctxt "Description|"
-msgid "Buffon's Needle"
-msgstr "Agulla de Buffon"
-
-msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
 msgstr "Simular a agulla de Buffon"
 
@@ -1203,3 +1199,7 @@ msgstr "Previa e posterior implícitos para π"
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
 msgstr "Intervalo de credibilidade"
+
+msgctxt "Description|"
+msgid "Buffon's Needle (Beta)"
+msgstr ""

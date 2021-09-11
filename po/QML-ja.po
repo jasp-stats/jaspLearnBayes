@@ -1084,10 +1084,6 @@ msgid "Prior and posterior distribution"
 msgstr "事前分布と事後分布"
 
 msgctxt "Description|"
-msgid "Buffon's Needle"
-msgstr "ビュフォンの針"
-
-msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
 msgstr "ビュフォンの針のシミュレーション"
 
@@ -1202,3 +1198,7 @@ msgstr ""
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
 msgstr "信用区間"
+
+msgctxt "Description|"
+msgid "Buffon's Needle (Beta)"
+msgstr ""
