@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-09-15 16:34+0000\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
 
@@ -101,7 +107,7 @@ msgstr "カラーパレット"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind"
-msgstr "色覚異常"
+msgstr "カラーブラインド"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind Alt."
@@ -165,7 +171,7 @@ msgstr "θ₀"
 
 msgctxt "LSgameofchance|"
 msgid "Points needed to win the game"
-msgstr "ゲームで勝つためにポイントが必要です"
+msgstr "ゲームに勝つために必要なポイント"
 
 msgctxt "LSgameofchance|"
 msgid "Number of simulated games"
@@ -177,7 +183,7 @@ msgstr "95% HPD"
 
 msgctxt "LSgameofskill|"
 msgid "Points needed to win the game"
-msgstr "ゲームで勝つためにポイントが必要です"
+msgstr "ゲームに勝つために必要なポイント"
 
 msgctxt "LSgameofskill|"
 msgid "Number of simulated games"
