@@ -171,7 +171,8 @@ Form {
 
 	LS.LStestingpriorandposterior{}
 
-	LS.LStestingpredictiveperformance{
+	LS.LStestingpredictiveperformance
+	{
 		bfTypevsName:				"priors.name"
 	}
 
@@ -179,6 +180,13 @@ Form {
 	{
 		enabled:					binomialDataInput.dataType.value !== "dataCounts"
 		bfTypevsNameSequential:		"priors.name"
+		onEnabledChanged: 
+		{
+			if (!enabled) {
+				expanded = false
+				plotsIterative.checked = false
+			}
+		}
 	}
 
 	LS.LStestingpredictions{}
