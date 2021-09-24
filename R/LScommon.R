@@ -1392,7 +1392,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 .containerSequentialStackedLS  <- function(jaspResults, options, analysis) {
 
   if (is.null(jaspResults[["containerIterativeStacked"]])) {
-    containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Staked"))
+    containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Stacked"))
     containerIterativeStacked$position <- 7.5
     containerIterativeStacked$dependOn("plotsIterativeStacked")
 

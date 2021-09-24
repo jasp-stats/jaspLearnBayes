@@ -27,12 +27,16 @@ Section
 	title:		qsTr("Sequential Analysis")
 
 	property string analysisType:	"binomial"
+	property alias plotsIterativeOverlying:		plotsIterativeOverlying
+	property alias plotsIterativeInterval:		plotsIterativeInterval
+	property alias plotsIterativeStacked:		plotsIterativeStacked
+	property alias doIterative:					doIterative
 
 	CheckBox
 	{
 		name:		"plotsIterativeOverlying"
+		id:			plotsIterativeOverlying
 		label:		qsTr("Point estimate")
-		checked:	false
 
 		DropDown
 		{
@@ -154,6 +158,7 @@ Section
 	CheckBox
 	{
 		name:	"plotsIterativeStacked"
+		id:		plotsIterativeStacked
 		label:	qsTr("Stacked distributions")
 	}
 	
@@ -161,6 +166,7 @@ Section
 	{
 		Layout.columnSpan: 2
 		name:		"doIterative"
+		id:			doIterative
 		label:		qsTr("Posterior updating table")
 		checked:	false
 	}
