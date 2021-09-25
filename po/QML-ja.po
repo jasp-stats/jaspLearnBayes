@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-09-24 00:44+0000\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
 
@@ -621,7 +627,7 @@ msgstr "点推定値"
 
 msgctxt "LSbinaryclassification|"
 msgid "Uncertain estimates"
-msgstr ""
+msgstr "不確実性の推定"
 
 msgctxt "LSbinaryclassification|"
 msgid "Load data and specify threshold"
@@ -725,7 +731,7 @@ msgstr "プロット"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
-msgstr ""
+msgstr "陽性確率"
 
 msgctxt "LSbinaryclassification|"
 msgid "Show entire distribution"
@@ -741,7 +747,7 @@ msgstr "ROC"
 
 msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
-msgstr ""
+msgstr "事後分布から実現値を追加"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
@@ -753,7 +759,7 @@ msgstr "有病率によるPPVとNPV"
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
-msgstr ""
+msgstr "沖積図"
 
 msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
@@ -761,31 +767,31 @@ msgstr "信号検出"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr "真陽性率"
+msgstr "真陽性率(True positive rate)"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
-msgstr "偽陽性率"
+msgstr "偽陽性率(False positive rate)"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr "真陰性率"
+msgstr "真陰性率(True negative rate)"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
-msgstr "偽陰性率"
+msgstr "偽陰性率(False negative rate)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
-msgstr "正の予測値"
+msgstr "陽性適中率(Positive predictive value)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative predictive value"
-msgstr "負の予測値"
+msgstr "陰性適中率(Negative predictive value)"
 
 msgctxt "LSbinaryclassification|"
 msgid "False discovery rate"
-msgstr "誤検知率"
+msgstr "偽発見率(False discovery rate)"
 
 msgctxt "LSbinaryclassification|"
 msgid "False omission rate"
@@ -813,7 +819,7 @@ msgstr "オプション"
 
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
-msgstr "確信区間"
+msgstr "信用区間"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
