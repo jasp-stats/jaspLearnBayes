@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-09-25 02:48\n"
-"PO-Revision-Date: 2021-09-11 22:44+0000\n"
+"PO-Revision-Date: 2021-09-26 06:38+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
@@ -742,7 +742,6 @@ msgstr "Sequenzielle Analyse: Punktschätzung"
 msgid "%s Sequential Analysis: Interval"
 msgstr "%s Sequenzielle Analyse: Intervall"
 
-#, fuzzy
 msgid "Sequential Analysis: Stacked"
 msgstr "Sequenzielle Analyse: Gestapelt"
 
