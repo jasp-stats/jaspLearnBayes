@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.15\n"
-"POT-Creation-Date: 2021-08-21 02:48\n"
+"POT-Creation-Date: 2021-09-25 02:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -538,7 +538,7 @@ msgstr ""
 msgid "%s Sequential Analysis: Interval"
 msgstr ""
 
-msgid "Sequential Analysis: Staked"
+msgid "Sequential Analysis: Stacked"
 msgstr ""
 
 msgid "Sequential Posterior Updating"

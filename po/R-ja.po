@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2021-08-21 02:48\n"
+"POT-Creation-Date: 2021-09-25 02:48\n"
 "PO-Revision-Date: 2021-09-22 00:43+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -640,7 +640,7 @@ msgstr ""
 msgid "%s Sequential Analysis: Interval"
 msgstr ""
 
-msgid "Sequential Analysis: Staked"
+msgid "Sequential Analysis: Stacked"
 msgstr ""
 
 msgid "Sequential Posterior Updating"
