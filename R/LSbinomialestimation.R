@@ -263,7 +263,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     containerPlots[[paste0("plots",type)]] <- plotsSimple
 
-    if (!all(ready))return()
+    if ((type == "Posterior" && !ready["data"]) || !ready["priors"])
+      return()
+
+    if (type == "Prior")
+      data <- list(
+        nSuccesses = 0,
+        nFailures  = 0
+      )
 
     allLines  <- c()
     allArrows <- c()
@@ -324,13 +331,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     containerPlots[[paste0("plots",type)]] <- plotsIndividual
 
-
-    if (all(!ready) || (ready["data"] && !ready["priors"])) {
+    if ((type == "Posterior" && !ready["data"]) || !ready["priors"]) {
 
       plotsIndividual[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["priors"]) {
+    } else if ((type == "Posterior" && !ready["data"]) || (type == "Posterior" && !ready["priors"])) {
 
       for (i in 1:length(options[["priors"]])) {
         plotsIndividual[[options[["priors"]][[i]]$name]] <- createJaspPlot(title = options[["priors"]][[i]]$name,
@@ -412,7 +418,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
             dfArrowPP$g <- type
         } else if (options[["priors"]][[i]]$type == "beta") {
 
-          dfLinesPP  <- .dataLinesBinomialLS(data, options[["priors"]][[i]])
+          dfLinesPP  <- .dataLinesBinomialLS(tempData, options[["priors"]][[i]])
 
           if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]) {
             if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
@@ -445,7 +451,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           dfPointEstimate <- NULL
 
         if (type == "Posterior" && options[["plotsPosteriorIndividualProportion"]]) {
-          dfPointsPP <- .dataProportionBinomialLS(data)
+          dfPointsPP <- .dataProportionBinomialLS(tempData)
           if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
@@ -1283,7 +1289,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       if (options[["predictionPlotProp"]]) {
         xName  <- gettext("Predicted sample proportions")
-        yName  <- gettext("Density")
+        yName  <- gettext("Probability")
         xRange <- c(-.5/options[["predictionN"]],1+.5/options[["predictionN"]])
       } else {
         xName  <- gettext("Predicted number of successes")

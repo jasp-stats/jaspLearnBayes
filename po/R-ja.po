@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-02-07 06:50+0000\n"
-"Last-Translator: Yoshihiko Kunisato <ykunisato@psy.senshu-u.ac.jp>\n"
+"POT-Creation-Date: 2021-09-25 02:48\n"
+"PO-Revision-Date: 2021-09-22 00:43+0000\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/ja/>\n"
 "Language: ja\n"
@@ -11,7 +11,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
+
+msgid "Summary Table"
+msgstr ""
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr "観測値"
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "中央値"
+
+msgid "Lower"
+msgstr "下"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% 信用区間"
+
+msgid "Upper"
+msgstr "上"
+
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr ""
+
+msgid "Posterior"
+msgstr "事後分布"
+
+msgid "Prior"
+msgstr "事前分布"
+
+msgid "Proportion of Crosses"
+msgstr ""
+
+msgid "Density"
+msgstr "密度"
+
+msgid "Implied Prior and Posterior for %s"
+msgstr ""
+
+msgid "Implied Posterior"
+msgstr ""
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr "%s%% CI: [%s, %s]"
+
+msgid "Needle Plot"
+msgstr ""
+
+msgid "Implied Prior and Posterior for  %s"
+msgstr ""
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -106,16 +164,7 @@ msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
-
-msgid "%s%% Credible Interval"
-msgstr ""
-
-msgid "Lower"
-msgstr ""
-
-msgid "Upper"
-msgstr ""
+msgstr "推定"
 
 msgid "Notation"
 msgstr ""
@@ -127,13 +176,13 @@ msgid "Confusion Matrix"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "Positive test"
 msgstr ""
 
 msgid "Outcome"
-msgstr ""
+msgstr "結果変数"
 
 msgid "Lower %s"
 msgstr ""
@@ -173,13 +222,7 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
-
-msgid "Prior"
-msgstr ""
-
-msgid "Posterior"
-msgstr ""
+msgstr "パラメータ"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -192,7 +235,7 @@ msgid "beta(%s,%s)"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "プロット"
 
 msgid "Probability Positive"
 msgstr ""
@@ -261,7 +304,7 @@ msgid "Condition"
 msgstr ""
 
 msgid "Test"
-msgstr ""
+msgstr "検定"
 
 msgid "Proportion of Population"
 msgstr ""
@@ -272,9 +315,6 @@ msgstr ""
 msgid "Marker"
 msgstr ""
 
-msgid "Density"
-msgstr "密度"
-
 #, fuzzy
 msgid "Count"
 msgstr "カウント"
@@ -283,7 +323,7 @@ msgid "Estimates"
 msgstr ""
 
 msgid "Positive predictive value"
-msgstr ""
+msgstr "正の予測値"
 
 msgid "Negative predictive value"
 msgstr ""
@@ -295,7 +335,7 @@ msgid "False omission rate"
 msgstr ""
 
 msgid "False positive rate"
-msgstr ""
+msgstr "偽陰性率"
 
 msgid "False negative rate"
 msgstr ""
@@ -323,16 +363,16 @@ msgstr ""
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
-"tested negative."
-msgstr ""
-
-msgid ""
-"Proportion of a population affected by a condition and incorrectly tested "
-"negative."
+"tested positive."
 msgstr ""
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
+"negative."
+msgstr ""
+
+msgid ""
+"Proportion of a population affected by a condition and incorrectly tested "
 "negative."
 msgstr ""
 
@@ -414,13 +454,13 @@ msgid "Counts"
 msgstr "カウント"
 
 msgid "Proportion"
-msgstr ""
+msgstr "比率"
 
 msgid "Successes"
-msgstr ""
+msgstr "成功数"
 
 msgid "Failures"
-msgstr ""
+msgstr "失敗数"
 
 msgid "spike at %s"
 msgstr ""
@@ -438,7 +478,7 @@ msgid "Estimation Summary"
 msgstr ""
 
 msgid "Model"
-msgstr ""
+msgstr "モデル"
 
 msgid "Prior (%s)"
 msgstr ""
@@ -462,7 +502,7 @@ msgid "Observation"
 msgstr ""
 
 msgid "Population proportion"
-msgstr ""
+msgstr "母比率"
 
 msgid "Prior = Posterior"
 msgstr ""
@@ -499,7 +539,7 @@ msgid "Predicted number of successes"
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "確率"
 
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
@@ -523,10 +563,10 @@ msgid "Testing Summary"
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "Hypothesis"
 msgstr ""
@@ -566,9 +606,6 @@ msgstr ""
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 
-msgid "Observations"
-msgstr ""
-
 msgid "At least 2 hypotheses need to be specified."
 msgstr ""
 
@@ -603,7 +640,7 @@ msgstr ""
 msgid "%s Sequential Analysis: Interval"
 msgstr ""
 
-msgid "Sequential Analysis: Staked"
+msgid "Sequential Analysis: Stacked"
 msgstr ""
 
 msgid "Sequential Posterior Updating"
@@ -681,8 +718,8 @@ msgid ""
 "The prior and the posterior %5$s then corresponds to the location of the "
 "spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density "
 "across all values of parameter %1$s according to a beta distribution with "
-"parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and "
-"'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) "
+"parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' "
+"failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) "
 "with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
 
@@ -1125,9 +1162,6 @@ msgstr ""
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr ""
 
-msgid "Summary Table"
-msgstr ""
-
 msgid "Players"
 msgstr ""
 
@@ -1182,7 +1216,7 @@ msgid "Posterior (μ)"
 msgstr ""
 
 msgid "Posterior Mean"
-msgstr ""
+msgstr "事後平均"
 
 msgid "Population mean"
 msgstr ""

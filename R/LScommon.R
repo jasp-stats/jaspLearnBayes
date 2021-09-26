@@ -48,9 +48,9 @@
   }
 
   if (anyDuplicated(sapply(priors, function(p)p$name)) != 0) {
-    quitAnalysis(gettextf(
+    .quitAnalysis(gettextf(
       "Please remove duplicates from the %s names.",
-      ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypotheses", "Models")
+      ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model")
     ))
   }
 
@@ -363,7 +363,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   # axes
   g <- g + .plotXAxis(xName, xRange, discrete)
-  g <- g + .plotYAxis(allLines, allArrows, if (!is.null(CI) || !is.null(pointEstimate)) "notNull" else NULL)
+  g <- g + .plotYAxis(allLines, allArrows, if (!is.null(CI) || !is.null(pointEstimate)) "notNull" else NULL, yName)
 
   # legend
   if (!is.null(allLines)) {
@@ -588,11 +588,6 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
   obsXmax    <- max(allLines$x)
   newXmax    <- obsXmax
-  if (obsXmax > 10) {
-    xBreaks <- round(seq(xStart, obsXmax, length.out = 7))
-  } else {
-    xBreaks <- xStart:obsXmax
-  }
 
   if (is.null(yRange)) {
     if (is.null(BFlog)) {
@@ -884,11 +879,11 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     xBreaks[length(xBreaks)] <- 1
   } else {
     xBreaks  <- round(jaspGraphs::getPrettyAxisBreaks(xRange))
-    xBreaks[length(xBreaks)] <- predictionN
+    xBreaks  <- unique(xBreaks[xBreaks >= xRange[1] &  xBreaks <= predictionN])
+    if (xBreaks[length(xBreaks)] < predictionN)
+      xBreaks <- c(xBreaks[-length(xBreaks)], predictionN)
   }
 
-
-  if (xBreaks[length(xBreaks)] > xRange[2])xBreaks[length(xBreaks)] <- xRange[2]
 
   obsYmax    <- max(dfHist$y)
   if (all(round(dfHist$y[1], 5) == round(dfHist$y, 5)))
@@ -1159,15 +1154,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     xBreaks <- round(xBreaks)
     xBreaks <- unique(xBreaks[xBreaks >= xRange[1] &  xBreaks <= xRange[2]])
     if (xBreaks[1] > ceiling(xRange[1]))
-      xBreaks <- c(ceiling(xRange[1]), xBreaks)
+      xBreaks <- c(ceiling(xRange[1])[-1], xBreaks)
     if (xBreaks[length(xBreaks)] < floor(xRange[2]))
-      xBreaks <- c(xBreaks, floor(xRange[2]))
+      xBreaks <- c(xBreaks[-length(xBreaks)], floor(xRange[2]))
   }
   xRange <- range(c(xRange, xBreaks))
 
   return(ggplot2::scale_x_continuous(xName, limits = xRange, breaks = xBreaks))
 }
-.plotYAxis             <- function(allLines, allArrows, CI) {
+.plotYAxis             <- function(allLines, allArrows, CI, yName = NULL) {
 
   yMax <- .getYMax(allLines, allArrows)
 
@@ -1201,7 +1196,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     ))
   } else {
     return(ggplot2::scale_y_continuous(
-      ifelse (is.null(allLines), gettext("Probability"), gettext("Density")),
+      if (!is.null(yName)) yName else if (is.null(allLines)) gettext("Probability") else gettext("Density"),
       breaks = yBreaks,
       limits = yRange
     ))
@@ -1397,7 +1392,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 .containerSequentialStackedLS  <- function(jaspResults, options, analysis) {
 
   if (is.null(jaspResults[["containerIterativeStacked"]])) {
-    containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Staked"))
+    containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Stacked"))
     containerIterativeStacked$position <- 7.5
     containerIterativeStacked$dependOn("plotsIterativeStacked")
 
@@ -1767,14 +1762,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       analysis,
       "binEst"   = gettextf(
         "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
-        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
+        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         options[["pointEstimate"]],
         switch(
           options[["pointEstimate"]],
-          "mean"   = gettextf("mean can be computed as %1$s / (%1$s + %2$s)", "\u03B1", "\u03B2"),
-          "median" = gettextf("median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if%1$s, %2$s > 1", "\u03B1", "\u03B2"),
-          "mode"   = gettextf("mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if%1$s, %2$s > 1", "\u03B1", "\u03B2")
+          "mean"   = gettextf("The prior mean can be computed as %1$s / (%1$s + %2$s).", "\u03B1", "\u03B2"),
+          "median" = gettextf("The prior median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if %1$s, %2$s > 1.", "\u03B1", "\u03B2"),
+          "mode"   = gettextf("The prior mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if %1$s, %2$s > 1.", "\u03B1", "\u03B2")
         )),
       "gaussEst" = gettextf(
         "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:

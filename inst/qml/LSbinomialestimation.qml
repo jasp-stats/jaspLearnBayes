@@ -154,7 +154,16 @@ Form {
 	LS.LSestimationsequential
 	{
 		enabled: binomialDataInput.dataType.value !== "dataCounts"
-		onEnabledChanged: if(!enabled) expanded = false
+		onEnabledChanged: 
+		{
+			if (!enabled) {
+				expanded = false
+				plotsIterativeOverlying.checked = false
+				plotsIterativeInterval.checked = false
+				plotsIterativeStacked.checked = false
+				doIterative.checked = false
+			}
+		}
 	}
 
 	LS.LSestimationpredictions{}

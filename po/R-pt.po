@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-06-29 17:36\n"
-"PO-Revision-Date: 2021-05-15 20:51+0000\n"
-"Last-Translator: Alex França <alex.tonante@gmail.com>\n"
+"POT-Creation-Date: 2021-09-25 02:48\n"
+"PO-Revision-Date: 2021-09-04 02:46+0000\n"
+"Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pt/>\n"
 "Language: pt\n"
@@ -12,10 +12,74 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Language: en_US\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
+
+msgid "Summary Table"
+msgstr ""
+
+msgid "Crosses"
+msgstr ""
+
+msgid "Observations"
+msgstr "Observações"
+
+#, fuzzy
+msgid "Median for %s"
+msgstr "Mediana"
+
+msgid "Lower"
+msgstr "Inferior"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% Intervalo de credibilidade"
+
+msgid "Upper"
+msgstr "Superior"
+
+#, fuzzy
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Amostras posteriores"
+
+msgid "Posterior"
+msgstr "Posterior"
+
+#, fuzzy
+msgid "Prior"
+msgstr "Anterior"
+
+#, fuzzy
+msgid "Proportion of Crosses"
+msgstr "Coeficiente de Correlação População"
+
+msgid "Density"
+msgstr "Densidade"
+
+#, fuzzy
+msgid "Implied Prior and Posterior for %s"
+msgstr "Amostras posteriores"
+
+#, fuzzy
+msgid "Implied Posterior"
+msgstr "Amostras posteriores"
+
+msgid "Implied Prior"
+msgstr ""
+
+msgid "π"
+msgstr ""
+
+msgid "%s%% CI: [%s, %s]"
+msgstr "%s%% CI: [%s, %s]"
+
+msgid "Needle Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Amostras posteriores"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -110,16 +174,7 @@ msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
-msgstr "Estimativas"
-
-msgid "%s%% Credible Interval"
-msgstr "%s%% Intervalo de credibilidade"
-
-msgid "Lower"
-msgstr "Inferior"
-
-msgid "Upper"
-msgstr "Superior"
+msgstr "Estimativa"
 
 msgid "Notation"
 msgstr ""
@@ -131,7 +186,7 @@ msgid "Confusion Matrix"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% IC"
 
 msgid "Positive test"
 msgstr ""
@@ -179,15 +234,7 @@ msgid "Priors and Posteriors"
 msgstr "Amostras posteriores"
 
 msgid "Parameter"
-msgstr ""
-
-#, fuzzy
-msgid "Prior"
-msgstr "Anterior"
-
-#, fuzzy
-msgid "Posterior"
-msgstr "Amostras posteriores"
+msgstr "Parâmetro"
 
 #, fuzzy
 msgid "Sensitivity"
@@ -200,7 +247,7 @@ msgid "beta(%s,%s)"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "Gráficos"
 
 msgid "Probability Positive"
 msgstr ""
@@ -271,7 +318,7 @@ msgid "Condition"
 msgstr "Correção"
 
 msgid "Test"
-msgstr ""
+msgstr "Teste"
 
 #, fuzzy
 msgid "Proportion of Population"
@@ -283,17 +330,14 @@ msgstr ""
 msgid "Marker"
 msgstr ""
 
-msgid "Density"
-msgstr "Densidade"
-
 msgid "Count"
-msgstr ""
+msgstr "Contagem"
 
 msgid "Estimates"
 msgstr ""
 
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Valor preditivo positivo"
 
 msgid "Negative predictive value"
 msgstr ""
@@ -305,7 +349,7 @@ msgid "False omission rate"
 msgstr ""
 
 msgid "False positive rate"
-msgstr ""
+msgstr "Taxa de falsos positivos"
 
 msgid "False negative rate"
 msgstr ""
@@ -333,16 +377,16 @@ msgstr ""
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
-"tested negative."
-msgstr ""
-
-msgid ""
-"Proportion of a population affected by a condition and incorrectly tested "
-"negative."
+"tested positive."
 msgstr ""
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
+"negative."
+msgstr ""
+
+msgid ""
+"Proportion of a population affected by a condition and incorrectly tested "
 "negative."
 msgstr ""
 
@@ -421,11 +465,10 @@ msgid "Data Summary"
 msgstr "Resumo dos Dados"
 
 msgid "Counts"
-msgstr ""
+msgstr "Contagem"
 
-#, fuzzy
 msgid "Proportion"
-msgstr "Opções de Diagramas"
+msgstr "Proporção"
 
 msgid "Successes"
 msgstr ""
@@ -477,9 +520,8 @@ msgstr ""
 msgid "Observation"
 msgstr ""
 
-#, fuzzy
 msgid "Population proportion"
-msgstr "Coeficiente de Correlação População"
+msgstr "Proporção da população"
 
 #, fuzzy
 msgid "Prior = Posterior"
@@ -518,7 +560,7 @@ msgid "Predicted number of successes"
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "Probabilidade"
 
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
@@ -586,10 +628,6 @@ msgstr "Amostras posteriores"
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 
-#, fuzzy
-msgid "Observations"
-msgstr "Opções"
-
 msgid "At least 2 hypotheses need to be specified."
 msgstr ""
 
@@ -624,7 +662,7 @@ msgstr ""
 msgid "%s Sequential Analysis: Interval"
 msgstr ""
 
-msgid "Sequential Analysis: Staked"
+msgid "Sequential Analysis: Stacked"
 msgstr ""
 
 msgid "Sequential Posterior Updating"
@@ -702,8 +740,8 @@ msgid ""
 "The prior and the posterior %5$s then corresponds to the location of the "
 "spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density "
 "across all values of parameter %1$s according to a beta distribution with "
-"parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and "
-"'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) "
+"parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' "
+"failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) "
 "with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
 
@@ -1131,7 +1169,6 @@ msgstr "Média"
 msgid "Median"
 msgstr "Mediana"
 
-#, fuzzy
 msgid "Mode"
 msgstr "Moda"
 
@@ -1145,9 +1182,6 @@ msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
 msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
-
-msgid "Summary Table"
 msgstr ""
 
 msgid "Players"
@@ -1207,9 +1241,8 @@ msgstr "Anterior"
 msgid "Posterior (μ)"
 msgstr "RÂ² Posterior"
 
-#, fuzzy
 msgid "Posterior Mean"
-msgstr "Amostras posteriores"
+msgstr "Media posterior"
 
 msgid "Population mean"
 msgstr ""

@@ -25,13 +25,14 @@ Section
 {
 	expanded:	false
 	title:		qsTr("Sequential Analysis")
-	enabled:	dataTypeB.checked || dataTypeC.checked
 
 	property alias bfTypevsNameSequential: 	bfTypevsNameSequential.source
+	property alias plotsIterative: 			plotsIterative
 
 	CheckBox
 	{
 		name:		"plotsIterative"
+		id:			plotsIterative
 		label:		qsTr("Test results")
 		checked:	false
 

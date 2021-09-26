@@ -55,7 +55,7 @@
 <text x='191.76' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='394.24' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='293.00' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='237.23px' lengthAdjust='spacingAndGlyphs'>Predicted number of successes</text>
-<text transform='translate(17.68,266.92) rotate(-90)' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='56.70px' lengthAdjust='spacingAndGlyphs'>Density</text>
+<text transform='translate(17.68,266.92) rotate(-90)' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='79.38px' lengthAdjust='spacingAndGlyphs'>Probability</text>
 <rect x='526.68' y='23.70' width='193.32' height='76.12' style='stroke-width: 0.75; stroke: none;' />
 <rect x='526.68' y='23.70' width='193.32' height='76.12' style='stroke-width: 10.67; stroke: none;' />
 <rect x='532.16' y='37.64' width='42.52' height='28.35' style='stroke-width: 10.67; stroke: none;' />

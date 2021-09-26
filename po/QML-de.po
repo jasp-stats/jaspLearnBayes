@@ -679,7 +679,7 @@ msgstr "Richtig negativ"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
-msgstr "Priors"
+msgstr "Prior"
 
 msgctxt "LSbinaryclassification|"
 msgid ")"
@@ -703,7 +703,7 @@ msgstr "Text"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number"
-msgstr ""
+msgstr "Werte"
 
 msgctxt "LSbinaryclassification|"
 msgid "Both"
@@ -731,11 +731,11 @@ msgstr "Gesamte Verteilung anzeigen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Icon plot"
-msgstr ""
+msgstr "Icon-Plot"
 
 msgctxt "LSbinaryclassification|"
 msgid "ROC"
-msgstr ""
+msgstr "ROC"
 
 msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
@@ -743,7 +743,7 @@ msgstr "Realisierungen vom Posterior hinzufügen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
-msgstr ""
+msgstr "Test-Charakteristika nach Schwellwert"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
@@ -803,7 +803,7 @@ msgstr "Intervall"
 
 msgctxt "LSbinaryclassification|"
 msgid "Half-eye"
-msgstr ""
+msgstr "Halb-Auge"
 
 msgctxt "LSbinaryclassification|"
 msgid "Options"
@@ -927,7 +927,7 @@ msgstr "Gestapelte Verteilungen"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive Performance"
-msgstr ""
+msgstr "Vorhersageleistung"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Prior predictive distribution"
@@ -957,7 +957,6 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Upper"
 msgstr "Obere"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Joint"
 msgstr "Gemeinsam"
@@ -1050,7 +1049,6 @@ msgctxt "LStestingpriorandposterior|"
 msgid "Upper"
 msgstr "Obere"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Joint"
 msgstr "Gemeinsam"
@@ -1085,4 +1083,124 @@ msgstr "Prior- und Posterior-Verteilung"
 
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
-msgstr ""
+msgstr "~ Beta(α = "
+
+msgctxt "Description|"
+msgid "Simulating Buffon's Needle"
+msgstr "Simulieren von Buffons Nadel"
+
+msgctxt "Description|"
+msgid "Manipulating Buffon's Needle"
+msgstr "Manipulieren von Buffons Nadel"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Proportion of needle length to interline distance:"
+msgstr "Verhältnis der Nadellänge zum Linienabstand:"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "%"
+msgstr "%"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of throws:"
+msgstr "Anzahl von Würfen:"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of crosses:"
+msgstr "Anzahl der Schnittpunkte:"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior for the proportion of crosses"
+msgstr "Prior für den Anteil der Schnittpunkte"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter a: "
+msgstr "Prior-Parameter a: "
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter b:"
+msgstr "Prior-Parameter b:"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Credible interval on π"
+msgstr "Glaubwürdigkeitsintervall auf π"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Plot"
+msgstr "Diagramm"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior and posterior for the proportion of crosses"
+msgstr "Prior und Posterior für den Anteil der Schnittpunkte"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Legend"
+msgstr "Legende"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Implied prior and posterior for π"
+msgstr "Implizierter Prior und Posterior für π"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Credible interval"
+msgstr "Glaubwürdigkeitsintervall"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Proportion of needle length to interline distance:"
+msgstr "Verhältnis von Nadellänge zu Linienabstand:"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "%"
+msgstr "%"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of throws:"
+msgstr "Anzahl von Würfen:"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Prior for the proportion of crosses"
+msgstr "Vorher für den Anteil der Schnittpunkte"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Beta prior: parameter a"
+msgstr "Beta-Prior: Parameter a"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Beta prior: parameter b"
+msgstr "Beta-Prior: Parameter b"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Credible interval on π"
+msgstr "Glaubwürdigkeitsintervall für π"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Plot"
+msgstr "Diagramm"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Needle plot"
+msgstr "Nadeldiagramm"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Color crossing needles"
+msgstr "Farbe der Nadelschnittpunkte"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Prior and posterior for the proportion of crosses"
+msgstr "Prior und Posterior für den Anteil der Schnittpunkte"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Legend"
+msgstr "Legende"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Implied prior and posterior for π"
+msgstr "Implizierter Prior und Posterior für π"
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Credible interval"
+msgstr "Glaubwürdigkeitsintervall"
+
+msgctxt "Description|"
+msgid "Buffon's Needle (Beta)"
+msgstr "Buffonsche Nadel (Beta)"

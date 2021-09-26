@@ -34,6 +34,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   if(nPlayers > 9)
     .quitAnalysis(gettext("Warning: The number of players must be at most 9. Adjust the inputs!"))
 
+
   if(winPoints < 1)
     .quitAnalysis(gettext(
       "Warning: The number of point(s) required to win should be at least 1!"
