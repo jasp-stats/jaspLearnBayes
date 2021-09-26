@@ -28,8 +28,11 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
   ## check errors
   if(nPlayers < 2)
-    .quitAnalysis(gettextf("Warning: The number of players must be at least 2. Adjust the inputs!"))
-
+    .quitAnalysis(gettext("Warning: The number of players must be at least 2. Adjust the inputs!"))
+  
+  if(nPlayers > 9)
+    .quitAnalysis(gettext("Warning: The number of players must be at most 9. Adjust the inputs!"))
+  
   if(nPlayers != length(xPoints))
     .quitAnalysis(gettextf(
       "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings.",
@@ -44,11 +47,11 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
-      "Warning: Player %1$i has already won the game. Adjust the inputs!",
-      which(xPoints == max(xPoints))[1]
+      "Warning: Player %1$s has already won the game. Adjust the inputs!",
+      chartr("123456789", "ABCDEFGHI",which(xPoints == max(xPoints))[1])
     ))
 
-  if(sum(c(xPoints,priorSkill) > 0) != length(c(xPoints,priorSkill)))
+  if(sum(c(xPoints,priorSkill)) != sum(abs(c(xPoints,priorSkill))))
     .quitAnalysis(gettextf(
       "Warning: No negative input values! Adjust the inputs!"
     ))
@@ -75,7 +78,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
 
   ## Credible Interval Plot
-  CIPlot <- createJaspPlot(title = "Probability of Player 1 Winning",  width = 480, height = 320)
+  CIPlot <- createJaspPlot(title = "Probability of Player A Winning",  width = 480, height = 320)
   CIPlot$dependOn(c("players", "nSims", "winPoints", "CI"))
   CIPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
 
@@ -83,7 +86,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
   CIPlot0 <- ggplot2::ggplot(data= NULL) +
     #ggtitle("Probability of Player 1 Winning") +
     ggplot2::xlab("Number of Simulated Games") +
-    ggplot2::ylab("p(Winning the Game)") +
+    ggplot2::ylab("p(A Wins the Game)") +
     ggplot2::coord_cartesian(xlim = c(0, nSims), ylim = c(0, 1))
 
   ## fill in the table and the plot
