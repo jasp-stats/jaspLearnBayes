@@ -1,7 +1,7 @@
 context("Learn Bayes - Buffon's Needle Simulation")
 
 ## default settings
-options <- analysisOptions("LSBuffonsneedlesimulation")
+options <- jaspTools::analysisOptions("LSBuffonsneedlesimulation")
 options$n <- 100
 options$a <- 1
 options$b <- 1
@@ -17,7 +17,7 @@ options$legendPiDistPlot <- TRUE
 
 set.seed(1)
 dataset <- NULL
-results <- runAnalysis("LSBuffonsneedlesimulation", dataset, options)#, makeTests = TRUE)
+results <- jaspTools::runAnalysis("LSBuffonsneedlesimulation", dataset, options)#, makeTests = TRUE)
 
 test_that("Needle Plot matches", {
   plotName <- results[["results"]][["needlePlot"]][["data"]]

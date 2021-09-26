@@ -1,7 +1,7 @@
 context("Learn Bayes - Buffon's Needle Manipulation")
 
 ## default settings
-options <- analysisOptions("LSBuffonsneedlemanipulation")
+options <- jaspTools::analysisOptions("LSBuffonsneedlemanipulation")
 options$k <- 50
 options$n <- 100
 options$a <- 1
@@ -16,7 +16,7 @@ options$legendPiDistPlot <- TRUE
 
 set.seed(1)
 dataset <- NULL
-results <- runAnalysis("LSBuffonsneedlemanipulation", dataset, options)#, makeTests = TRUE)
+results <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, options)#, makeTests = TRUE)
 
 
 test_that("Implied Prior and Posterior for pi plot matches", {

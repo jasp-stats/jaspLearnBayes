@@ -60,7 +60,7 @@
 <text x='574.95' y='534.27' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='28.37px' lengthAdjust='spacingAndGlyphs'>400</text>
 <text x='690.99' y='534.27' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='28.37px' lengthAdjust='spacingAndGlyphs'>500</text>
 <text x='400.89' y='566.78' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='263.09px' lengthAdjust='spacingAndGlyphs'>Number of Simulated Games</text>
-<text transform='translate(19.02,263.90) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='193.89px' lengthAdjust='spacingAndGlyphs'>p(Winning the Game)</text>
-<text x='400.89' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='331.67px' lengthAdjust='spacingAndGlyphs'>probability-of-player-1-winning-three players</text>
+<text transform='translate(19.02,263.90) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='184.81px' lengthAdjust='spacingAndGlyphs'>p(A Wins the Game)</text>
+<text x='400.89' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='227.73px' lengthAdjust='spacingAndGlyphs'>probability-of-player-a-winning</text>
 </g>
 </svg>
