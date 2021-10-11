@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-09-25 02:48\n"
-"PO-Revision-Date: 2021-08-09 00:36+0000\n"
+"PO-Revision-Date: 2021-10-11 20:05+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 msgid "Summary Table"
 msgstr ""
@@ -42,11 +42,10 @@ msgid "Posterior"
 msgstr "Posterior"
 
 msgid "Prior"
-msgstr ""
+msgstr "Previo"
 
-#, fuzzy
 msgid "Proportion of Crosses"
-msgstr "Prporción de la Población"
+msgstr "Proporción de Cruces"
 
 msgid "Density"
 msgstr "Densidad"
@@ -265,58 +264,58 @@ msgid "Icon Plot"
 msgstr ""
 
 msgid "True positive"
-msgstr ""
+msgstr "Verdadero positivo"
 
 msgid "False positive"
-msgstr ""
+msgstr "Falso positivo"
 
 msgid "False negative"
-msgstr ""
+msgstr "Falso negativo"
 
 msgid "True negative"
-msgstr ""
+msgstr "Verdadero negativo"
 
 msgid "Receiving Operating Characteristic Curve"
-msgstr ""
+msgstr "Curva Característica Operativa de la Recepción"
 
 msgid "False Positive Rate (1-Specificity)"
-msgstr ""
+msgstr "Ratio de Falsos Positivos (Especificidad 1)"
 
 msgid "True Positive Rate (Sensitivity)"
-msgstr ""
+msgstr "Ratio de Verdaderos Positivos (Sensibilidad)"
 
 msgid "Test Characteristics"
-msgstr ""
+msgstr "Características del Contraste"
 
 msgid "Test Threshold"
-msgstr ""
+msgstr "Umbral del Contraste"
 
 msgid "Characteristic"
-msgstr ""
+msgstr "Característica"
 
 msgid "PPV and NPV by Prevalence"
-msgstr ""
+msgstr "VPP e VPN por Prevalencia"
 
 msgid "Predictive Value"
-msgstr ""
+msgstr "Valor Predictivo"
 
 msgid "Alluvial Plot"
-msgstr ""
+msgstr "Gráfico Aluvial"
 
 msgid "Condition"
-msgstr ""
+msgstr "Condición"
 
 msgid "Test"
 msgstr "Contraste"
 
 msgid "Proportion of Population"
-msgstr "Prporción de la Población"
+msgstr "Proporción de la Población"
 
 msgid "Signal Detection"
-msgstr ""
+msgstr "Detección de Señal"
 
 msgid "Marker"
-msgstr ""
+msgstr "Marcador"
 
 #, fuzzy
 msgid "Count"
