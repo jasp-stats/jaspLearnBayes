@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-09-25 02:48\n"
-"PO-Revision-Date: 2021-10-11 20:05+0000\n"
+"PO-Revision-Date: 2021-10-14 20:07+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -20,11 +20,10 @@ msgid "Crosses"
 msgstr ""
 
 msgid "Observations"
-msgstr ""
+msgstr "Observaciones"
 
-#, fuzzy
 msgid "Median for %s"
-msgstr "Mediana"
+msgstr "Mediana para %s"
 
 msgid "Lower"
 msgstr "Inferior"
@@ -50,13 +49,11 @@ msgstr "Proporción de Cruces"
 msgid "Density"
 msgstr "Densidad"
 
-#, fuzzy
 msgid "Implied Prior and Posterior for %s"
-msgstr "Posterior"
+msgstr "Previa y Posterior Implícitas para %s"
 
-#, fuzzy
 msgid "Implied Posterior"
-msgstr "Posterior"
+msgstr "Posterior Implícita"
 
 msgid "Implied Prior"
 msgstr ""
@@ -65,14 +62,13 @@ msgid "π"
 msgstr ""
 
 msgid "%s%% CI: [%s, %s]"
-msgstr ""
+msgstr "IC del %s%% : [%s, %s]"
 
 msgid "Needle Plot"
 msgstr ""
 
-#, fuzzy
 msgid "Implied Prior and Posterior for  %s"
-msgstr "Posterior"
+msgstr "Previa e Posterior Implícitas para %s"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -179,13 +175,13 @@ msgid "Confusion Matrix"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "IC del %s%%"
 
 msgid "Positive test"
 msgstr ""
 
 msgid "Outcome"
-msgstr ""
+msgstr "Resultado"
 
 msgid "Lower %s"
 msgstr ""
@@ -211,9 +207,8 @@ msgstr ""
 msgid "Negative condition"
 msgstr ""
 
-#, fuzzy
 msgid "True/Total"
-msgstr "Total"
+msgstr "Verdaderos/Total"
 
 msgid "Prevalence"
 msgstr "Prevalencia"
@@ -306,7 +301,7 @@ msgid "Condition"
 msgstr "Condición"
 
 msgid "Test"
-msgstr "Contraste"
+msgstr "Contrastar"
 
 msgid "Proportion of Population"
 msgstr "Proporción de la Población"
@@ -317,9 +312,8 @@ msgstr "Detección de Señal"
 msgid "Marker"
 msgstr "Marcador"
 
-#, fuzzy
 msgid "Count"
-msgstr "Recuentos"
+msgstr "Contar"
 
 msgid "Estimates"
 msgstr "Estimaciones"
@@ -456,13 +450,13 @@ msgid "Counts"
 msgstr "Recuentos"
 
 msgid "Proportion"
-msgstr ""
+msgstr "Proporción"
 
 msgid "Successes"
-msgstr ""
+msgstr "Aciertos"
 
 msgid "Failures"
-msgstr ""
+msgstr "Fracasos"
 
 msgid "spike at %s"
 msgstr ""
@@ -504,11 +498,10 @@ msgid "Observation"
 msgstr ""
 
 msgid "Population proportion"
-msgstr ""
+msgstr "Proporción de población"
 
-#, fuzzy
 msgid "Prior = Posterior"
-msgstr "Posterior"
+msgstr "Previa = Posterior"
 
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
@@ -542,7 +535,7 @@ msgid "Predicted number of successes"
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "Probabilidad"
 
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
@@ -566,10 +559,10 @@ msgid "Testing Summary"
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "FB%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(FB%s)"
 
 msgid "Hypothesis"
 msgstr ""
@@ -604,7 +597,7 @@ msgid "Joint probability"
 msgstr ""
 
 msgid "Posterior probability"
-msgstr ""
+msgstr "Probabilidad posterior"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
@@ -643,9 +636,8 @@ msgstr "Análisis Secuencial: Estimación por Punto"
 msgid "%s Sequential Analysis: Interval"
 msgstr ""
 
-#, fuzzy
 msgid "Sequential Analysis: Stacked"
-msgstr "Análisis Secuencial: Estimación por Punto"
+msgstr "Análisis Secuencial: Apilado"
 
 msgid "Sequential Posterior Updating"
 msgstr ""
@@ -1220,7 +1212,7 @@ msgid "Posterior (μ)"
 msgstr ""
 
 msgid "Posterior Mean"
-msgstr ""
+msgstr "Media posterior"
 
 msgid "Population mean"
 msgstr ""
