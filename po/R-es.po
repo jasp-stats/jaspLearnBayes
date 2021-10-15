@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-09-25 02:48\n"
-"PO-Revision-Date: 2021-10-14 20:07+0000\n"
+"PO-Revision-Date: 2021-10-15 19:45+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -160,16 +160,16 @@ msgid "Tables"
 msgstr "Tablas"
 
 msgid "Statistics"
-msgstr "Estadísticas"
+msgstr "Estadísticos"
 
 msgid "Estimate"
 msgstr "Estimar"
 
 msgid "Notation"
-msgstr ""
+msgstr "Notación"
 
 msgid "Interpretation"
-msgstr ""
+msgstr "Interpretación"
 
 msgid "Confusion Matrix"
 msgstr ""
@@ -565,16 +565,16 @@ msgid "log(BF%s)"
 msgstr "log(FB%s)"
 
 msgid "Hypothesis"
-msgstr ""
+msgstr "Hipótesis"
 
 msgid "P(H)"
-msgstr ""
+msgstr "P(H)"
 
 msgid "log(likelihood)"
-msgstr ""
+msgstr "log(verosimilitud)"
 
 msgid "P(H|data)"
-msgstr ""
+msgstr "P(H|datos)"
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
@@ -1188,52 +1188,52 @@ msgid "Only numeric values are allowed in the input."
 msgstr ""
 
 msgid "SD"
-msgstr "SD"
+msgstr "DT"
 
 msgid "normal (%s, %s)"
-msgstr ""
+msgstr "Normal (%s, %s)"
 
 msgid "normal (%.2f, %.2f)"
-msgstr ""
+msgstr "Normal (%.2f, %.2f)"
 
 msgid "normal (%s, %.2f)"
-msgstr ""
+msgstr "Normal (%s, %.2f)"
 
 msgid "USE '.dataArrowGaussianLS()'"
-msgstr ""
+msgstr "UTILIZAR '.dataArrowGaussianLS()'"
 
 msgid "Prior (μ)"
-msgstr ""
+msgstr "Previo (μ)"
 
 msgid "Prior Mean"
-msgstr ""
+msgstr "Media Previa"
 
 msgid "Posterior (μ)"
-msgstr ""
+msgstr "Posterior (μ)"
 
 msgid "Posterior Mean"
-msgstr "Media posterior"
+msgstr "Media Posterior"
 
 msgid "Population mean"
-msgstr ""
+msgstr "Media de la población"
 
 msgid "Prediction"
-msgstr ""
+msgstr "Predicción"
 
 msgid "Prediction Mean"
-msgstr ""
+msgstr "Media de la Predicción"
 
 msgid "Please, specify the standard deviation of the data."
-msgstr ""
+msgstr "Por favor, indica la desviación típica de los datos."
 
 msgid "The prediction for %s future %s is based on %s."
-msgstr ""
+msgstr "La predición para %s futuro %s se basa en %s."
 
 msgid "Sample means"
-msgstr ""
+msgstr "Medias muestrales"
 
 msgid "Future data"
-msgstr ""
+msgstr "Datos futuros"
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "Inclusión FB"
