@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2021-10-15 19:45+0000\n"
+"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -39,162 +45,130 @@ msgctxt "Description|"
 msgid "Game of Skill"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Color palette"
-msgstr "Paleta de color"
+msgstr "Paleta de colores"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind"
-msgstr "Daltónico"
+msgstr "Daltónica"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind Alt."
-msgstr "Daltonismo Alt."
+msgstr "Daltónica Alternativa"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Violeta"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Gray"
-msgstr "gris"
+msgstr "Gris"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Distribution"
 msgstr "Distribución"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
 msgstr "Parámetro (θ)"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Model "
-msgstr "Modelo"
+msgstr "Modelo "
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Spike"
-msgstr "Espiga"
+msgstr "Pico"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Beta"
 msgstr "Beta"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "α"
 msgstr "α"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "β"
 msgstr "β"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
 msgstr "θ₀"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Color palette"
-msgstr "Paleta de color"
+msgstr "Paleta de colores"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind"
-msgstr "Daltónico"
+msgstr "Daltónica"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind Alt."
-msgstr "Daltonismo Alt."
+msgstr "Daltónica Alternativa"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Violeta"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Gray"
-msgstr "gris"
+msgstr "Gris"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
 msgstr "Hipótesis"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Prior probability"
 msgstr "Probabilidad previa"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Distribution"
 msgstr "Distribución"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Parameter (θ)"
 msgstr "Parámetro (θ)"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis "
-msgstr "Hipótesis"
+msgstr "Hipótesis "
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "P(H)"
-msgstr "P (H)"
+msgstr "P(H)"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Spike"
-msgstr "Espiga"
+msgstr "Pico"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Beta"
 msgstr "Beta"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "α"
 msgstr "α"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "β"
 msgstr "β"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "θ₀"
 msgstr "θ₀"
@@ -203,10 +177,9 @@ msgctxt "LSgameofchance|"
 msgid "Points needed to win the game"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgameofchance|"
 msgid "Number of simulated games"
-msgstr "Número de muestras: "
+msgstr "Número de juegos simulados"
 
 msgctxt "LSgameofchance|"
 msgid "95% HPD"
@@ -216,10 +189,9 @@ msgctxt "LSgameofskill|"
 msgid "Points needed to win the game"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgameofskill|"
 msgid "Number of simulated games"
-msgstr "Número de muestras: "
+msgstr "Número de juegos simulados"
 
 msgctxt "LSgameofskill|"
 msgid "95% HPD"
@@ -230,100 +202,82 @@ msgctxt "LSgaussianestimation|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Distribution"
 msgstr "Distribución"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Parameter (μ)"
-msgstr "Parámetro (θ)"
+msgstr "Parámetro (μ)"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Spike"
-msgstr "Espiga"
+msgstr "Pico"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "μ₀"
-msgstr "θ₀"
+msgstr "μ₀"
 
 msgctxt "LSgaussianestimation|"
 msgid "σ₀"
-msgstr ""
+msgstr "σ₀"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Observed data"
-msgstr "Observado"
+msgstr "Datos observados"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
-msgstr "Mostrar medias"
+msgstr "Mostrar medias muestrales"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Hypothesis"
 msgstr "Hipótesis"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Distribution"
 msgstr "Distribución"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Parameter (μ)"
-msgstr "Parámetro (θ)"
+msgstr "Parámetro (μ)"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Spike"
-msgstr "Espiga"
+msgstr "Pico"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "μ₀"
-msgstr "θ₀"
+msgstr "μ₀"
 
 msgctxt "LSgaussiantesting|"
 msgid "σ₀"
-msgstr ""
+msgstr "σ₀"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Observed data"
-msgstr "Observado"
+msgstr "Datos observados"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Sample means"
-msgstr "Muestras"
+msgstr "Medias muestrales"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
 msgstr "Datos"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Input Type"
-msgstr "Tipo de entrada"
+msgstr "Tipo de Entrada"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Select variable"
 msgstr "Seleccionar variable"
@@ -343,67 +297,54 @@ msgctxt "LSbinomialdatainput|"
 msgid "Count Data"
 msgstr "Contar datos"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Successes"
-msgstr "Éxitos"
+msgstr "Aciertos"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Failures"
 msgstr "Fracasos"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Comma-separated Sequence of Observations"
 msgstr "Secuencia de observaciones separadas por comas"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Levels"
 msgstr "Niveles"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Available"
 msgstr "Disponible"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Selected"
 msgstr "Seleccionado"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data summary"
 msgstr "Resumen de datos"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Posterior Prediction"
-msgstr "Predicción posterior"
+msgstr "Predicción Posterior"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Number of future trials"
-msgstr "Número de intentos"
+msgstr "Número de intentos futuros"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Summary"
 msgstr "Resumen"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Point estimate"
-msgstr "Punto estimado"
+msgstr "Estimación por punto"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Plots"
-msgstr "Parcelas"
+msgstr "Gráficos"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Posterior predictive distribution"
 msgstr "Distribución predictiva posterior"
@@ -413,132 +354,107 @@ msgctxt "LSestimationpredictions|"
 msgid "All"
 msgstr "Todas"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Stacked"
 msgstr "Apilado"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Individual"
 msgstr "Individual"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "CI"
-msgstr "CI"
+msgstr "IC"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Mass"
 msgstr "Masa"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Lower"
-msgstr "inferior"
+msgstr "Inferior"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Show sample proportions"
 msgstr "Mostrar proporciones de muestra"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Predictions table"
 msgstr "Tabla de predicciones"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Sequential Analysis"
-msgstr "Análisis secuencial"
+msgstr "Análisis Secuencial"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Point estimate"
-msgstr "Punto estimado"
+msgstr "Estimación por punto"
 
 #, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "All"
 msgstr "Todas"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "CI"
-msgstr "CI"
+msgstr "IC"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Mass"
 msgstr "Masa"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "BF"
-msgstr "BF"
+msgstr "FB"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Stacked"
 msgstr "Apilado"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Updating table"
 msgstr "Tabla de actualización"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Interval"
 msgstr "Intervalo"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Lower"
-msgstr "inferior"
+msgstr "Inferior"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Posterior updating table"
-msgstr "Mesa de actualización posterior"
+msgstr "Tabla de actualización posterior"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
 msgstr "Datos"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
 msgstr "Tipo de entrada"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Select variable"
 msgstr "Seleccionar variable"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Specify data summary"
-msgstr "Resumen de datos"
+msgstr "Indicar el resumen de datos"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Enter sequence"
-msgstr "Ingresar secuencia"
+msgstr "Introducir la secuencia"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data summary"
 msgstr "Resumen de datos"
@@ -549,194 +465,156 @@ msgstr "Media"
 
 msgctxt "LSgaussiandatainput|"
 msgid "SD"
-msgstr ""
+msgstr "DT"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Observations"
-msgstr "Iteraciones"
+msgstr "Observaciones"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Comma-separated sequence of observations"
 msgstr "Secuencia de observaciones separadas por comas"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Available"
 msgstr "Disponible"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Selected"
 msgstr "Seleccionado"
 
-#, fuzzy
 msgctxt "LSintrotext|"
 msgid "Introductory texts"
-msgstr "Textos introductorios"
+msgstr "Textos de introducción"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Posterior Prediction"
-msgstr "Predicción posterior"
+msgstr "Predicción Posterior"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Number of future trials"
-msgstr "Número de intentos"
+msgstr "Número de intentos futuros"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Summary"
 msgstr "Resumen"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Point estimate"
-msgstr "Punto estimado"
+msgstr "Estimación por punto"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Plots"
-msgstr "Parcelas"
+msgstr "Gráficos"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Posterior predictive distribution"
 msgstr "Distribución predictiva posterior"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Conditional"
-msgstr "Condicional"
+msgstr "Condicionado"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "CI"
-msgstr "CI"
+msgstr "IC"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "mass"
 msgstr "masa"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "lower"
 msgstr "inferior"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "upper"
-msgstr "Superior"
+msgstr "superior"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Joint"
-msgstr "Articulación"
+msgstr "Conjunto"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Overlying"
 msgstr "Superpuesto"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Stacked"
 msgstr "Apilado"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Marginal"
 msgstr "Marginal"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Mass"
 msgstr "Masa"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Lower"
-msgstr "inferior"
+msgstr "Inferior"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Show sample proportions"
 msgstr "Mostrar proporciones de muestra"
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Predictions table"
 msgstr "Tabla de predicciones"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Sequential Analysis"
-msgstr "Análisis secuencial"
+msgstr "Análisis Secuencial"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Test results"
-msgstr "Resultados de la prueba"
+msgstr "Resultados del contraste"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Conditional"
-msgstr "Condicional"
+msgstr "Condicionado"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Joint"
-msgstr "Articulación"
+msgstr "Conjunto"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Normalized"
 msgstr "Normalizado"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Bayes factor"
 msgstr "Factor de Bayes"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "vs. all"
-msgstr "contra todos"
+msgstr "vs. Todo"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "vs. best"
-msgstr "vs. mejor"
+msgstr "vs. Mejor"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "vs."
 msgstr "vs."
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "BF₁₀"
-msgstr "BF₁₀"
+msgstr "FB₁₀"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "BF₀₁"
-msgstr "BF₀₁"
+msgstr "FB₀₁"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "log(BF₁₀)"
-msgstr "registro (BF₁₀)"
+msgstr "log(FB₁₀)"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Updating table"
 msgstr "Tabla de actualización"
@@ -756,7 +634,7 @@ msgstr "Tipo de entrada"
 
 msgctxt "LSbinaryclassification|"
 msgid "Point estimates"
-msgstr ""
+msgstr "Estimaciones por punto"
 
 msgctxt "LSbinaryclassification|"
 msgid "Uncertain estimates"
@@ -768,68 +646,67 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Estimates"
-msgstr ""
+msgstr "Estimaciones"
 
 msgctxt "LSbinaryclassification|"
 msgid "Prevalence"
-msgstr ""
+msgstr "Prevalencia"
 
 msgctxt "LSbinaryclassification|"
 msgid "Sensitivity"
-msgstr ""
+msgstr "Sensibilidad"
 
 msgctxt "LSbinaryclassification|"
 msgid "Specificity"
-msgstr ""
+msgstr "Especificidad"
 
 msgctxt "LSbinaryclassification|"
 msgid "Marker"
-msgstr ""
+msgstr "Marcador"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive condition (binary)"
-msgstr ""
+msgstr "Condición positiva (binaria)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test threshold"
-msgstr ""
+msgstr "Umbral del contraste"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Data"
 msgstr "Datos"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive"
-msgstr ""
+msgstr "Verdadero positivo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive"
-msgstr ""
+msgstr "Falso positivo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative"
-msgstr ""
+msgstr "Falso negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative"
-msgstr ""
+msgstr "Verdadero negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
-msgstr ""
+msgstr "Previos"
 
 msgctxt "LSbinaryclassification|"
 msgid ")"
-msgstr ""
+msgstr ")"
 
 msgctxt "LSbinaryclassification|"
 msgid "Tables"
-msgstr ""
+msgstr "Tablas"
 
 msgctxt "LSbinaryclassification|"
 msgid "Statistics"
-msgstr ""
+msgstr "Estadísticos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
@@ -845,20 +722,19 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Additional info"
-msgstr ""
+msgstr "Información adicional"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Plots"
-msgstr "Parcelas"
+msgstr "Gráficos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
@@ -914,11 +790,11 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
-msgstr ""
+msgstr "Valor predictivo positivo"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative predictive value"
-msgstr ""
+msgstr "Valor predictivo negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False discovery rate"
@@ -934,9 +810,8 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Plot type"
-msgstr ""
+msgstr "Tipo de gráfico"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Interval"
 msgstr "Intervalo"
@@ -951,86 +826,72 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Intervalos de credibilidad"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
-msgstr ""
+msgstr "Número de muestras posteriores"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Color palette"
-msgstr "Paleta de color"
+msgstr "Paleta de colores"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind"
-msgstr "Daltónico"
+msgstr "Daltónica"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind Alt."
-msgstr "Daltonismo Alt."
+msgstr "Daltónica Alternativa"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Violeta"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Gray"
-msgstr "gris"
+msgstr "Gris"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Color palette"
-msgstr "Paleta de color"
+msgstr "Paleta de colores"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind"
-msgstr "Daltónico"
+msgstr "Daltónica"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind Alt."
-msgstr "Daltonismo Alt."
+msgstr "Daltónica Alternativa"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Viridis"
-msgstr "Viridis"
+msgstr "Violeta"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "ggplot2"
-msgstr "ggplot2"
+msgstr "GGplot2"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Gray"
-msgstr "gris"
+msgstr "Gris"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"
-msgstr ""
+msgstr "Media observada"
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Prior and Posterior Distributions"
-msgstr ""
+msgstr "Distribuciones Previa y Posterior"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Point estimate"
-msgstr "Punto estimado"
+msgstr "Estimación por punto"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Prior distribution"
 msgstr "Distribución previa"
@@ -1040,110 +901,90 @@ msgctxt "LSestimationpriorandposterior|"
 msgid "All"
 msgstr "Todas"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Stacked"
 msgstr "Apilado"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Individual"
 msgstr "Individual"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "CI"
-msgstr "CI"
+msgstr "IC"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Mass"
 msgstr "Masa"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Lower"
-msgstr "inferior"
+msgstr "Inferior"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Posterior distribution"
 msgstr "Distribución posterior"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "BF"
-msgstr "BF"
+msgstr "FB"
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Observed proportion"
 msgstr "Proporción observada"
 
 msgctxt "LSestimationsequential|"
 msgid "Stacked distributions"
-msgstr ""
+msgstr "Distribuciones apiladas"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive Performance"
-msgstr ""
+msgstr "Comportamiento Predictivo"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Prior predictive distribution"
 msgstr "Distribución predictiva previa"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Conditional"
-msgstr "Condicional"
+msgstr "Condicionado"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Point estimate"
-msgstr "Punto estimado"
+msgstr "Estimación por punto"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "CI"
-msgstr "CI"
+msgstr "IC"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Mass"
 msgstr "Masa"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Lower"
-msgstr "inferior"
+msgstr "Inferior"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Joint"
-msgstr "Articulación"
+msgstr "Conjunto"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Overlying"
 msgstr "Superpuesto"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Stacked"
 msgstr "Apilado"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Marginal"
 msgstr "Marginal"
@@ -1152,131 +993,106 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Observed number of successes"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictions table"
 msgstr "Tabla de predicciones"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive accuracy"
-msgstr "Precisión predictiva"
+msgstr "Precisión de predicciones"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Normalized"
 msgstr "Normalizado"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Bayes Factor"
 msgstr "Factor de Bayes"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs."
 msgstr "vs."
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. rest"
-msgstr "vs. mejor"
+msgstr "vs. Resto"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. best"
-msgstr "vs. mejor"
+msgstr "vs. Mejor"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "BF₁₀"
-msgstr "BF₁₀"
+msgstr "FB₁₀"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "BF₀₁"
-msgstr "BF₀₁"
+msgstr "FB₀₁"
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "log(BF₁₀)"
-msgstr "registro (BF₁₀)"
+msgstr "log(FB₁₀)"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and Posterior Distributions"
-msgstr ""
+msgstr "Distribuciones Previa y Posterior"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
 msgstr "Distribución previa"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Conditional"
-msgstr "Condicional"
+msgstr "Condicionado"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Point estimate"
-msgstr "Punto estimado"
+msgstr "Estimación por punto"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "CI"
-msgstr "CI"
+msgstr "IC"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Mass"
 msgstr "Masa"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Lower"
-msgstr "inferior"
+msgstr "Inferior"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Upper"
 msgstr "Superior"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Joint"
-msgstr "Articulación"
+msgstr "Conjunto"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Overlying"
 msgstr "Superpuesto"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Stacked"
 msgstr "Apilado"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Marginal"
 msgstr "Marginal"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Posterior distribution"
 msgstr "Distribución posterior"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "BF"
-msgstr "BF"
+msgstr "FB"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Observed proportion"
 msgstr "Proporción observada"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and posterior distribution"
 msgstr "Distribución previa y posterior"
@@ -1327,7 +1143,7 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
-msgstr ""
+msgstr "Gráfico"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior and posterior for the proportion of crosses"
@@ -1343,7 +1159,7 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Intervalo de credibilidad"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
@@ -1375,15 +1191,15 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
-msgstr ""
+msgstr "Gráfico"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Needle plot"
-msgstr ""
+msgstr "Gráfico de agujas"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Color crossing needles"
-msgstr ""
+msgstr "Colorear las agujas cruzadas"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
@@ -1399,8 +1215,8 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Intervalo de credibilidad"
 
 msgctxt "Description|"
 msgid "Buffon's Needle (Beta)"
-msgstr ""
+msgstr "Aguja de Buffon (Beta)"
