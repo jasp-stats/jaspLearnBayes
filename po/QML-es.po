@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-21 11:48+0000\n"
+"PO-Revision-Date: 2021-10-21 17:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/es/>\n"
@@ -712,11 +712,11 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 msgctxt "LSbinaryclassification|"
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
 msgctxt "LSbinaryclassification|"
 msgid "Both"
