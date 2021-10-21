@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-09-25 02:48\n"
-"PO-Revision-Date: 2021-10-15 19:45+0000\n"
+"PO-Revision-Date: 2021-10-21 17:02+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -244,31 +244,31 @@ msgid "Tested"
 msgstr ""
 
 msgid "Negative"
-msgstr ""
+msgstr "Negativo"
 
 msgid "Positive"
-msgstr ""
+msgstr "Positivo"
 
 msgid "Test Result"
-msgstr ""
+msgstr "Resultado del Contraste"
 
 msgid "P(Condition = positive)"
-msgstr ""
+msgstr "P(Condición = positiva)"
 
 msgid "Icon Plot"
-msgstr ""
+msgstr "Gráfico de Iconos"
 
 msgid "True positive"
-msgstr "Verdadero positivo"
+msgstr "Verdaderos positivos"
 
 msgid "False positive"
-msgstr "Falso positivo"
+msgstr "Falsos positivos"
 
 msgid "False negative"
-msgstr "Falso negativo"
+msgstr "Falsos negativos"
 
 msgid "True negative"
-msgstr "Verdadero negativo"
+msgstr "Verdaderos negativos"
 
 msgid "Receiving Operating Characteristic Curve"
 msgstr "Curva Característica Operativa de la Recepción"
