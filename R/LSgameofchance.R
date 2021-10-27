@@ -31,7 +31,9 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   ## check errors
   if(nPlayers < 2)
     .quitAnalysis(gettext("Warning: The number of players must be at least 2. Adjust the inputs!"))
-
+  if(nPlayers > 9)
+    .quitAnalysis(gettext("Warning: The number of players must be at most 9. Adjust the inputs!"))
+  
   if(winPoints < 1)
     .quitAnalysis(gettext(
       "Warning: The number of point(s) required to win should be at least 1!"
@@ -39,11 +41,11 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
 
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
-      "Warning: Player %1$i has already won the game. Adjust the inputs!",
-      which(xPoints == max(xPoints))[1]
+      "Warning: Player %1$s has already won the game. Adjust the inputs!",
+      chartr("123456789", "ABCDEFGHI", which(xPoints == max(xPoints))[1])
     ))
 
-  if(sum(c(xPoints, probWin) > 0) != length(c(xPoints, probWin)))
+  if(sum(c(xPoints, probWin)) != sum(abs(c(xPoints, probWin))))
     .quitAnalysis(gettext("Warning: No negative input values! Adjust the inputs!"))
 
   #if(nSims<100)
@@ -72,7 +74,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   # }
 
   ## Credible Interval Plot
-  CIPlot <- createJaspPlot(title = "Probability of Player 1 Winning",  width = 480, height = 320)
+  CIPlot <- createJaspPlot(title = "Probability of Player A Winning",  width = 480, height = 320)
   CIPlot$dependOn(c("players", "winPoints", "nSims", "CI"))
   CIPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
 
@@ -80,7 +82,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   CIPlot0 <- ggplot2::ggplot(data= NULL) +
     #ggplot2::ggtitle("Probability of Player 1 Winning") +
     ggplot2::xlab("Number of Simulated Games") +
-    ggplot2::ylab("p(Winning the Game)") +
+    ggplot2::ylab("p(A Wins the Game)") +
     ggplot2::coord_cartesian(xlim = c(0, nSims), ylim = c(0, 1))
 
   ## fill in the table and the plot
