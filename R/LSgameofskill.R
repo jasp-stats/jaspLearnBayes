@@ -48,7 +48,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
       "Warning: Player %1$s has already won the game. Adjust the inputs!",
-      chartr("123456789", "ABCDEFGHI",which(xPoints == max(xPoints))[1])
+      LETTERS[xPoints == max(xPoints)[1]]
     ))
 
   if(sum(c(xPoints,priorSkill)) != sum(abs(c(xPoints,priorSkill))))
@@ -96,9 +96,9 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
     result <- compareSkillTwoPlayers(xPoints[1],xPoints[2],winPoints,priorSkill[1],priorSkill[2],nSims)
 
     # fill in the table
-    summaryTable$addRows(list(players = 1, prior = priorSkill[1], points = xPoints[1], #
+    summaryTable$addRows(list(players = "A", prior = priorSkill[1], points = xPoints[1], #
                               pA = result[[2]], pS = result[[1]]))
-    summaryTable$addRows(list(players = 2, prior = priorSkill[2], points = xPoints[2],#
+    summaryTable$addRows(list(players = "B", prior = priorSkill[2], points = xPoints[2],#
                               pA = 1-result[[2]], pS = 1-result[[1]]))
 
     # fill in the plot
@@ -137,7 +137,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
     # fill in the table
     for (i in 1:nPlayers){
-      summaryTable$addRows(list(players = i, prior = priorSkill[i], points = xPoints[i],
+      summaryTable$addRows(list(players = LETTERS[i], prior = priorSkill[i], points = xPoints[i],
                                 pA = Analytical_Prob[i], pS = result[[1]][i]))
     }
 

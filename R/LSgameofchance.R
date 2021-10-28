@@ -42,7 +42,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
       "Warning: Player %1$s has already won the game. Adjust the inputs!",
-      chartr("123456789", "ABCDEFGHI", which(xPoints == max(xPoints))[1])
+      LETTERS[xPoints == max(xPoints)[1]]
     ))
 
   if(sum(c(xPoints, probWin)) != sum(abs(c(xPoints, probWin))))
@@ -92,8 +92,8 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
     result <- compareChanceTwoPlayers(probWin[1], xPoints[1], xPoints[2], winPoints, nSims)
 
     # fill in the table
-    summaryTable$addRows(list(players = 1, pPoint = probWin[1],   pointsGained = xPoints[1], pA = result[[2]],   pS = result[[1]]))
-    summaryTable$addRows(list(players = 2, pPoint = 1-probWin[1], pointsGained = xPoints[2], pA = 1-result[[2]], pS = 1-result[[1]]))
+    summaryTable$addRows(list(players = "A", pPoint = probWin[1],   pointsGained = xPoints[1], pA = result[[2]],   pS = result[[1]]))
+    summaryTable$addRows(list(players = "B", pPoint = 1-probWin[1], pointsGained = xPoints[2], pA = 1-result[[2]], pS = 1-result[[1]]))
 
     # fill in the plot
     if (options[["CI"]]){ # whether plot CI or not
@@ -132,7 +132,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
     # fill in the table
     for (i in 1:nPlayers){
       summaryTable$addRows(list(
-        players = i,
+        players = LETTERS[i],
         pPoint = probWin[i],
         pointsGained = xPoints[i],
         pA = Analytical_Prob[i],

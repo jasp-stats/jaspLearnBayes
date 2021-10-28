@@ -10,7 +10,7 @@ context("Learn Bayes - Game of Chance")
   options$CI <- TRUE
   
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSgameofchance", dataset=NULL, options=options) #, makeTests = TRUE)
+  results <- jaspTools::runAnalysis("LSgameofchance", dataset=NULL, options=options)#, makeTests = TRUE)
   #jaspTools::makeTestTable(table)
   
   test_that("Game of Chance two-player plot matches", {
@@ -23,9 +23,9 @@ context("Learn Bayes - Game of Chance")
   test_that("Game of Chance summaryTable two-player results match", {
     table <- results[["results"]][["summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0.037037037037037, 0.333333333333333, 0.032, 1, 1, 
-                                        0.962962962962963, 0.666666666666667, 0.968, 2, 3))
-  })
+                                   list(0.037037037037037, 0.333333333333333, 0.032, "A", 1, 0.962962962962963,
+                                        0.666666666666667, 0.968, "B", 3))  
+    })
 }
 
 
@@ -48,8 +48,8 @@ context("Learn Bayes - Game of Chance")
   test_that("Summary Table results match", {
     table <- results[["results"]][["summaryTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(0.02734375, 0.25, 0.024, 1, 1, 0.10546875, 0.25, 0.118, 2, 2,
-                                        0.8671875, 0.5, 0.858, 3, 3))
+                                   list(0.02734375, 0.25, 0.024, "A", 1, 0.10546875, 0.25, 0.118, "B",
+                                        2, 0.8671875, 0.5, 0.858, "C", 3))
   })
 }
 
