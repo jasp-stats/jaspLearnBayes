@@ -31,7 +31,9 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   ## check errors
   if(nPlayers < 2)
     .quitAnalysis(gettext("Warning: The number of players must be at least 2. Adjust the inputs!"))
-
+  if(nPlayers > 9)
+    .quitAnalysis(gettext("Warning: The number of players must be at most 9. Adjust the inputs!"))
+  
   if(winPoints < 1)
     .quitAnalysis(gettext(
       "Warning: The number of point(s) required to win should be at least 1!"
@@ -39,11 +41,11 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
 
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
-      "Warning: Player %1$i has already won the game. Adjust the inputs!",
-      which(xPoints == max(xPoints))[1]
+      "Warning: Player %1$s has already won the game. Adjust the inputs!",
+      LETTERS[xPoints == max(xPoints)[1]]
     ))
 
-  if(sum(c(xPoints, probWin) > 0) != length(c(xPoints, probWin)))
+  if(sum(c(xPoints, probWin)) != sum(abs(c(xPoints, probWin))))
     .quitAnalysis(gettext("Warning: No negative input values! Adjust the inputs!"))
 
   #if(nSims<100)
@@ -72,7 +74,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   # }
 
   ## Credible Interval Plot
-  CIPlot <- createJaspPlot(title = "Probability of Player 1 Winning",  width = 480, height = 320)
+  CIPlot <- createJaspPlot(title = "Probability of Player A Winning",  width = 480, height = 320)
   CIPlot$dependOn(c("players", "winPoints", "nSims", "CI"))
   CIPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
 
@@ -80,7 +82,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
   CIPlot0 <- ggplot2::ggplot(data= NULL) +
     #ggplot2::ggtitle("Probability of Player 1 Winning") +
     ggplot2::xlab("Number of Simulated Games") +
-    ggplot2::ylab("p(Winning the Game)") +
+    ggplot2::ylab("p(A Wins the Game)") +
     ggplot2::coord_cartesian(xlim = c(0, nSims), ylim = c(0, 1))
 
   ## fill in the table and the plot
@@ -90,8 +92,8 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
     result <- compareChanceTwoPlayers(probWin[1], xPoints[1], xPoints[2], winPoints, nSims)
 
     # fill in the table
-    summaryTable$addRows(list(players = 1, pPoint = probWin[1],   pointsGained = xPoints[1], pA = result[[2]],   pS = result[[1]]))
-    summaryTable$addRows(list(players = 2, pPoint = 1-probWin[1], pointsGained = xPoints[2], pA = 1-result[[2]], pS = 1-result[[1]]))
+    summaryTable$addRows(list(players = "A", pPoint = probWin[1],   pointsGained = xPoints[1], pA = result[[2]],   pS = result[[1]]))
+    summaryTable$addRows(list(players = "B", pPoint = 1-probWin[1], pointsGained = xPoints[2], pA = 1-result[[2]], pS = 1-result[[1]]))
 
     # fill in the plot
     if (options[["CI"]]){ # whether plot CI or not
@@ -130,7 +132,7 @@ LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
     # fill in the table
     for (i in 1:nPlayers){
       summaryTable$addRows(list(
-        players = i,
+        players = LETTERS[i],
         pPoint = probWin[i],
         pointsGained = xPoints[i],
         pA = Analytical_Prob[i],

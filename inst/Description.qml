@@ -89,7 +89,7 @@ Description
 
 	GroupTitle
 	{
-		title:	qsTr("Buffon's Needle (Beta)")
+		title:	qsTr("Buffon's Needle")
 		icon:	"learning-stats-Buttons-needle.svg"
 	}
 

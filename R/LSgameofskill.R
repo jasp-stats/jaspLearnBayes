@@ -28,8 +28,11 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
   ## check errors
   if(nPlayers < 2)
-    .quitAnalysis(gettextf("Warning: The number of players must be at least 2. Adjust the inputs!"))
-
+    .quitAnalysis(gettext("Warning: The number of players must be at least 2. Adjust the inputs!"))
+  
+  if(nPlayers > 9)
+    .quitAnalysis(gettext("Warning: The number of players must be at most 9. Adjust the inputs!"))
+  
   if(nPlayers != length(xPoints))
     .quitAnalysis(gettextf(
       "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings.",
@@ -44,11 +47,11 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
   if(max(xPoints) >= winPoints)
     .quitAnalysis(gettextf(
-      "Warning: Player %1$i has already won the game. Adjust the inputs!",
-      which(xPoints == max(xPoints))[1]
+      "Warning: Player %1$s has already won the game. Adjust the inputs!",
+      LETTERS[xPoints == max(xPoints)[1]]
     ))
 
-  if(sum(c(xPoints,priorSkill) > 0) != length(c(xPoints,priorSkill)))
+  if(sum(c(xPoints,priorSkill)) != sum(abs(c(xPoints,priorSkill))))
     .quitAnalysis(gettextf(
       "Warning: No negative input values! Adjust the inputs!"
     ))
@@ -75,7 +78,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
 
   ## Credible Interval Plot
-  CIPlot <- createJaspPlot(title = "Probability of Player 1 Winning",  width = 480, height = 320)
+  CIPlot <- createJaspPlot(title = "Probability of Player A Winning",  width = 480, height = 320)
   CIPlot$dependOn(c("players", "nSims", "winPoints", "CI"))
   CIPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
 
@@ -83,7 +86,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
   CIPlot0 <- ggplot2::ggplot(data= NULL) +
     #ggtitle("Probability of Player 1 Winning") +
     ggplot2::xlab("Number of Simulated Games") +
-    ggplot2::ylab("p(Winning the Game)") +
+    ggplot2::ylab("p(A Wins the Game)") +
     ggplot2::coord_cartesian(xlim = c(0, nSims), ylim = c(0, 1))
 
   ## fill in the table and the plot
@@ -93,9 +96,9 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
     result <- compareSkillTwoPlayers(xPoints[1],xPoints[2],winPoints,priorSkill[1],priorSkill[2],nSims)
 
     # fill in the table
-    summaryTable$addRows(list(players = 1, prior = priorSkill[1], points = xPoints[1], #
+    summaryTable$addRows(list(players = "A", prior = priorSkill[1], points = xPoints[1], #
                               pA = result[[2]], pS = result[[1]]))
-    summaryTable$addRows(list(players = 2, prior = priorSkill[2], points = xPoints[2],#
+    summaryTable$addRows(list(players = "B", prior = priorSkill[2], points = xPoints[2],#
                               pA = 1-result[[2]], pS = 1-result[[1]]))
 
     # fill in the plot
@@ -134,7 +137,7 @@ LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
 
     # fill in the table
     for (i in 1:nPlayers){
-      summaryTable$addRows(list(players = i, prior = priorSkill[i], points = xPoints[i],
+      summaryTable$addRows(list(players = LETTERS[i], prior = priorSkill[i], points = xPoints[i],
                                 pA = Analytical_Prob[i], pS = result[[1]][i]))
     }
 
