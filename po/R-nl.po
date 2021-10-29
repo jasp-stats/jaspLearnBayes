@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-09-25 02:48\n"
 "PO-Revision-Date: 2021-10-29 10:56+0000\n"
-"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
+"Last-Translator: Sophie Berkhout <s.w.berkhout@uu.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/nl/>\n"
 "Language: nl\n"
@@ -742,7 +742,6 @@ msgstr "Sequentiële Analyse: Puntschatting"
 msgid "%s Sequential Analysis: Interval"
 msgstr "%s Sequentiële Analyse: Interval"
 
-#, fuzzy
 msgid "Sequential Analysis: Stacked"
 msgstr "Sequentiële Analyse: Gestapeld"
 
