@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-10-30 02:48\n"
-"PO-Revision-Date: 2021-10-19 12:48+0000\n"
+"PO-Revision-Date: 2021-10-30 19:47+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -1568,18 +1568,16 @@ msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
 "Aviso: O número de xogadores debe ser cando menos de 2. Axusta as achegas!"
 
-#, fuzzy
 msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
 msgstr ""
-"Aviso: O número de xogadores debe ser cando menos de 2. Axusta as achegas!"
+"Aviso: O número de xogadores debe ser cando menos de 9. Axusta as achegas!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
 "Aviso: O número de puntos requiridos para gañar debe ser cando menos de 1!"
 
-#, fuzzy
 msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
-msgstr "Aviso: O xogador %1$i xa gañou o xogo. Axusta as achegas!"
+msgstr "Aviso: O xogador %1$s xa gañou o xogo. Axusta as achegas!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr "Aviso: Valores de entrada non negativos. Axusta as achegas!"
