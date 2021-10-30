@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-09-25 02:48\n"
+"POT-Creation-Date: 2021-10-30 02:48\n"
 "PO-Revision-Date: 2021-09-04 02:46+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -1175,10 +1175,13 @@ msgstr "Moda"
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
 
+msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
+msgstr ""
+
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
 
-msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
+msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
 msgstr ""
 
 msgid "Warning: No negative input values! Adjust the inputs!"

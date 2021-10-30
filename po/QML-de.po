@@ -1202,5 +1202,5 @@ msgid "Credible interval"
 msgstr "Glaubwürdigkeitsintervall"
 
 msgctxt "Description|"
-msgid "Buffon's Needle (Beta)"
-msgstr "Buffonsche Nadel (Beta)"
+msgid "Buffon's Needle"
+msgstr ""

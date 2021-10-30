@@ -1200,5 +1200,5 @@ msgid "Credible interval"
 msgstr "信用区間"
 
 msgctxt "Description|"
-msgid "Buffon's Needle (Beta)"
+msgid "Buffon's Needle"
 msgstr ""

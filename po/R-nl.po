@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-09-25 02:48\n"
+"POT-Creation-Date: 2021-10-30 02:48\n"
 "PO-Revision-Date: 2021-10-29 10:56+0000\n"
 "Last-Translator: Sophie Berkhout <s.w.berkhout@uu.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -893,8 +893,8 @@ msgstr ""
 "%4$s. De vorige %8$s komt overeen met de gemiddelde parameter van de normale "
 "verdeling %3$s. Na het zien van 'N'-waarnemingen met gemiddelde %5$s, wordt "
 "de posterior verdeling geupdate naar normaal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) "
-"+ %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s +"
-" N/%2$s%6$s) ) waarbij %8$s overeenkomt met het gemiddelde van de posterior "
+"+ %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s "
+"+ N/%2$s%6$s) ) waarbij %8$s overeenkomt met het gemiddelde van de posterior "
 "verdeling.</li></ul>"
 
 msgid ""
@@ -1588,11 +1588,17 @@ msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
 "Waarschuwing: Het aantal spelers moet minstens 2 zijn. Pas de invoer aan!"
 
+#, fuzzy
+msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
+msgstr ""
+"Waarschuwing: Het aantal spelers moet minstens 2 zijn. Pas de invoer aan!"
+
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
 "Waarschuwing: Het aantal~benodigde punten om te winnen moet minstens 1 zijn!"
 
-msgid "Warning: Player %1$i has already won the game. Adjust the inputs!"
+#, fuzzy
+msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
 msgstr ""
 "Waarschuwing: Speler %1$i heeft het spel al gewonnen. Pas de invoer aan!"
 
