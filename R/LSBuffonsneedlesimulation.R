@@ -36,7 +36,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 }  
  
 .buffonsNeedleSimulationSummaryTable <- function(jaspResults, options){
-  if(!is.null(jaspResults[["summaryTable"]])) return()
+  #if(!is.null(jaspResults[["summaryTable"]])) return()
   crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
   
   # example d for computation
@@ -56,13 +56,13 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   
   # fill in the table
-  CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
+  CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, crosses + options[["a"]], options[["n"]] - crosses + options[["b"]], lower.tail = FALSE) * d)
   CI95lower <- round(CI95lower, digit = 2)
   
-  med <- 2 * l / (qbeta(.5, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
+  med <- 2 * l / (qbeta(.5, crosses + options[["a"]], options[["n"]] - crosses + options[["b"]], lower.tail = FALSE) * d)
   med <- round(med, digit = 2)
   
-  CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
+  CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses + options[["a"]], options[["n"]] - crosses + options[["b"]], lower.tail = FALSE) * d)
   CI95upper <- round(CI95upper, digit = 2)
   
   summaryTable$addRows(list(NumCrosses = crosses, NumObservations = options[["n"]],
@@ -71,7 +71,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 }
 
 .buffonsNeedleSimulationNeedlePlot <- function(jaspResults, options) {
-  if(!is.null(jaspResults[["needlePlot"]])) return()
+  #if(!is.null(jaspResults[["needlePlot"]])) return()
   crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
   xs <- jaspResults[["simulateResults"]][["object"]][["xs"]] 
   xe <- jaspResults[["simulateResults"]][["object"]][["xe"]] 
@@ -114,7 +114,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 }
 
 .buffonsNeedleSimulationPropDistPlot <- function(jaspResults, options) {
-  if(!is.null(jaspResults[["propDistPlot"]])) return()
+  #if(!is.null(jaspResults[["propDistPlot"]])) return()
   # example d for computation
   crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
   
@@ -162,7 +162,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 
 
 .buffonsNeedleSimulationPiDistPlot <- function(jaspResults, options) {
-  if(!is.null(jaspResults[["piDistPlot"]])) return()
+  #if(!is.null(jaspResults[["piDistPlot"]])) return()
   crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
   
   # example d for computation
@@ -174,8 +174,10 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
                                 width = 480, height = 320)
    piDistPlot$position <- 4
    #piDistPlot$dependOn(c("n", "a", "b", "length", "CI", "showPiDistPlot"))
-   piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                       options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
+   
+   piDistPlot$dependOn(c("n", "length", "a", "b", "CI", "showPiDistPlot", "legendPiDistPlot", "CIArrow")
+   #piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
+   #                    options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
 
    #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
    

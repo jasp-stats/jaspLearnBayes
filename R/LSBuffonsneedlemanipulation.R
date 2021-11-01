@@ -42,13 +42,13 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100)) 
 
   # fill in the table
-  CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
+  CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]] + options[["a"]], options[["n"]] - options[["k"]] + options[["b"]], lower.tail = FALSE) * d)
   CI95lower <- round(CI95lower, digit = 2)
   
-  med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
+  med <- 2 * l / (qbeta(.5, options[["k"]] + options[["a"]], options[["n"]] - options[["k"]] + options[["b"]], lower.tail = FALSE) * d)
   med <- round(med, digit = 2)
   
-  CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
+  CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]] + options[["a"]], options[["n"]] - options[["k"]] + options[["b"]], lower.tail = FALSE) * d)
   CI95upper <- round(CI95upper, digit = 2)
   
   summaryTable$addRows(list(NumCrosses = options[["k"]], NumObservations = options[["n"]],
