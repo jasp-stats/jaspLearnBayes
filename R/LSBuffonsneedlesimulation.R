@@ -17,16 +17,14 @@
 
 LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL){
   
-  # check whether the state is empty
-  .buffonsNeedleSimulationCheckErrors(jaspResults, options)
-      ## if not, retrieve the values
+  .buffonsNeedleSimulationCheckState(jaspResults, options)
   .buffonsNeedleSimulationSummaryTable(jaspResults, options)
   .buffonsNeedleSimulationNeedlePlot(jaspResults, options)
   .buffonsNeedleSimulationPropDistPlot(jaspResults, options)
   .buffonsNeedleSimulationPiDistPlot(jaspResults, options)
 }
   
-.buffonsNeedleSimulationCheckErrors <- function(jaspResults, options){
+.buffonsNeedleSimulationCheckState <- function(jaspResults, options){
   if(is.null(jaspResults[["simulateResults"]])){ #test whether the state is empty
     # if empty, create a new state
     simulateResults <- createJaspState()
