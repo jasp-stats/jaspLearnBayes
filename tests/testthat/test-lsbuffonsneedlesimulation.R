@@ -41,5 +41,30 @@ test_that("Prior and Posterior for Proportion of Crosses plot matches", {
 test_that("Summary Table results match", {
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(3.33, 48, 100, 2.77, 4.18))
+                                 list(3.33, 48, 100, 2.77, 4.16))
 })
+
+options <- analysisOptions("LSBuffonsneedlesimulation")
+options$n <- 100
+options$a <- 10
+options$b <- 10
+options$length <- 80
+options$CI <- 0.95
+options$showNeedlePlot <- FALSE
+options$showPropDistPlot <- FALSE
+options$showPiDistPlot <- FALSE
+options$color <- FALSE
+options$CIArrow <- FALSE
+options$legendPropDistPlot <- FALSE
+options$legendPiDistPlot <- FALSE
+
+set.seed(1)
+dataset <- NULL
+results <- runAnalysis("LSBuffonsneedlesimulation", dataset, options) #, makeTests = TRUE)
+
+test_that("Summary Table results match", {
+  table <- results[["results"]][["summaryTable"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+                                 list(3.31, 48, 100, 2.79, 4.05))
+})
+

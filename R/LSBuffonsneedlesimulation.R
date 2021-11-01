@@ -175,9 +175,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    piDistPlot$position <- 4
    #piDistPlot$dependOn(c("n", "a", "b", "length", "CI", "showPiDistPlot"))
    
-   piDistPlot$dependOn(c("n", "length", "a", "b", "CI", "showPiDistPlot", "legendPiDistPlot", "CIArrow"))
-   #piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-   #                    options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
+   #piDistPlot$dependOn(c("n", "length", "a", "b", "CI", "showPiDistPlot", "legendPiDistPlot", "CIArrow"))
+   piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
+                       options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
 
    #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
    
