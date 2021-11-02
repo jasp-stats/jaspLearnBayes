@@ -72,35 +72,36 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 
 .buffonsNeedleSimulationNeedlePlot <- function(jaspResults, options) {
   if(!is.null(jaspResults[["needlePlot"]])) return()
-  crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
-  xs <- jaspResults[["simulateResults"]][["object"]][["xs"]] 
-  xe <- jaspResults[["simulateResults"]][["object"]][["xe"]] 
-  ys <- jaspResults[["simulateResults"]][["object"]][["ys"]] 
-  ye <- jaspResults[["simulateResults"]][["object"]][["ye"]]
-  xsCrosses <- jaspResults[["simulateResults"]][["object"]][["xsCrosses"]] 
-  xeCrosses <- jaspResults[["simulateResults"]][["object"]][["xeCrosses"]] 
-  ysCrosses <- jaspResults[["simulateResults"]][["object"]][["ysCrosses"]] 
-  yeCrosses <- jaspResults[["simulateResults"]][["object"]][["yeCrosses"]]  
-  # example d for computation
-  d <- 5
-  l <- options[["length"]]*d/100
+
   ## 1. Needle Plot 
   if (options[["showNeedlePlot"]]){
-   needlePlot <- createJaspPlot(title = gettext("Needle Plot"),  width = 400, height = 400)
-   needlePlot$position <- 2
-   #needlePlot$dependOn(c("n", "a", "b", "length", "CI", "showNeedlePlot"))
-   needlePlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                       options = c("showNeedlePlot", "color"))
-   #needlePlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
-   
-   needlePlot0 <- ggplot2::ggplot(data= NULL) +
-     ggplot2::coord_cartesian(xlim = c(-15, 15), ylim = c(-15, 15)) +
-     ggplot2::xlab("") +
-     ggplot2::ylab("") +
-     ggplot2::geom_segment(ggplot2::aes(x = rep(-13,5), y = c(-10,-5,0,5,10), 
-                                        xend = rep(13,5), yend = c(-10,-5,0,5,10))) +
-     ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye), color = "blue")
-   
+     crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
+     xs <- jaspResults[["simulateResults"]][["object"]][["xs"]] 
+     xe <- jaspResults[["simulateResults"]][["object"]][["xe"]] 
+     ys <- jaspResults[["simulateResults"]][["object"]][["ys"]] 
+     ye <- jaspResults[["simulateResults"]][["object"]][["ye"]]
+     xsCrosses <- jaspResults[["simulateResults"]][["object"]][["xsCrosses"]] 
+     xeCrosses <- jaspResults[["simulateResults"]][["object"]][["xeCrosses"]] 
+     ysCrosses <- jaspResults[["simulateResults"]][["object"]][["ysCrosses"]] 
+     yeCrosses <- jaspResults[["simulateResults"]][["object"]][["yeCrosses"]]  
+     # example d for computation
+     d <- 5
+     l <- options[["length"]]*d/100
+     needlePlot <- createJaspPlot(title = gettext("Needle Plot"),  width = 400, height = 400)
+     needlePlot$position <- 2
+     #needlePlot$dependOn(c("n", "a", "b", "length", "CI", "showNeedlePlot"))
+     needlePlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
+                         options = c("showNeedlePlot", "color"))
+     #needlePlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
+     
+     needlePlot0 <- ggplot2::ggplot(data= NULL) +
+       ggplot2::coord_cartesian(xlim = c(-15, 15), ylim = c(-15, 15)) +
+       ggplot2::xlab("") +
+       ggplot2::ylab("") +
+       ggplot2::geom_segment(ggplot2::aes(x = rep(-13,5), y = c(-10,-5,0,5,10), 
+                                          xend = rep(13,5), yend = c(-10,-5,0,5,10))) +
+       ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye), color = "blue")
+     
    # fill in the plot
    if (options[["color"]]){
      needlePlot$plotObject <- jaspGraphs::themeJasp(needlePlot0) +
@@ -116,13 +117,13 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 .buffonsNeedleSimulationPropDistPlot <- function(jaspResults, options) {
   if(!is.null(jaspResults[["propDistPlot"]])) return()
   # example d for computation
-  crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
-  
-  d <- 5
-  l <- options[["length"]]*d/100
+
   ## 2. prior and posterior plot for proportion of crosses
   if (options[["showPropDistPlot"]]){
-   
+   crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
+    
+   d <- 5
+   l <- options[["length"]]*d/100
    propDistPlot <- createJaspPlot(title = gettext("Prior and Posterior for Proportion of Crosses"),
                                   width = 480, height = 320)
    propDistPlot$position <- 3
