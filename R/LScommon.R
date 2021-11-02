@@ -16,6 +16,13 @@
 #
 
 # general functions
+
+# This is a temporary fix
+# TODO: remove it when R will solve this problem!
+gettextf <- function(fmt, ..., domain = NULL)  {
+  return(sprintf(gettext(fmt, domain = domain), ...))
+}
+
 .evaluatePriors       <- function(priors, type) {
   for (p in 1:length(priors)) {
     for (i in 1:length(priors[[p]])) {
