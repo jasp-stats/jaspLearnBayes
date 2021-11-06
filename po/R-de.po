@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2021-10-30 02:48\n"
-"PO-Revision-Date: 2021-10-01 10:35+0000\n"
+"PO-Revision-Date: 2021-10-30 19:47+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
@@ -1594,20 +1594,20 @@ msgstr "Modus"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
-"Warnung: Die Spieleranzahl muss mindestens 2 sein. Passe die Eingaben an!"
+"Warnung: Die Spieleranzahl muss mindestens 2 sein. Passen Sie die Eingaben "
+"an!"
 
-#, fuzzy
 msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
 msgstr ""
-"Warnung: Die Spieleranzahl muss mindestens 2 sein. Passe die Eingaben an!"
+"Warnung: Die Spieleranzahl darf maximal 9 sein. Passen Sie die Eingaben an!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr "Warnung: Die zum Sieg benötigte Punktzahl sollte mindestens 1 sein!"
 
-#, fuzzy
 msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
 msgstr ""
-"Warnung: Spieler %1$i hat das Spiel bereits gewonnen. Passe die Eingaben an!"
+"Warnung: Spieler %1$i hat das Spiel bereits gewonnen. Passen Sie die "
+"Eingaben an!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr "Warnung: Keine negativen Eingangswerte! Passe die Eingaben an!"
