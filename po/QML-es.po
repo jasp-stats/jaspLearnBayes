@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-11-07 21:22+0000\n"
+"PO-Revision-Date: 2021-11-07 21:48+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/es/>\n"
@@ -771,19 +771,19 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr ""
+msgstr "Proporción de verdaderos positivos"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
-msgstr ""
+msgstr "Proporción de falsos positivos"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr ""
+msgstr "Proporción de verdaderos negativos"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
-msgstr ""
+msgstr "Proporción de falsos negativos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
@@ -803,7 +803,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
-msgstr ""
+msgstr "Precisión"
 
 msgctxt "LSbinaryclassification|"
 msgid "Plot type"
