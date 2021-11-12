@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-11-10 04:47+0000\n"
+"PO-Revision-Date: 2021-11-12 17:07+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/es/>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 "X-Language: es\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -18,32 +18,29 @@ msgctxt "Description|"
 msgid "Learn Bayes"
 msgstr "Aprende Bayes"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Counts"
 msgstr "Recuentos"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Binomial Estimation"
-msgstr "Estimación binomial"
+msgstr "Estimación Binomial"
 
-#, fuzzy
 msgctxt "Description|"
 msgid "Binomial Testing"
-msgstr "Prueba binomial"
+msgstr "Prueba Binomial"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
-msgstr ""
+msgstr "El Problema de los Puntos"
 
 msgctxt "Description|"
 msgid "Game of Chance"
-msgstr ""
+msgstr "Juego de Azar"
 
 msgctxt "Description|"
 msgid "Game of Skill"
-msgstr ""
+msgstr "Juego de Habilidad"
 
 msgctxt "LSbinomialestimation|"
 msgid "Color palette"
@@ -175,7 +172,7 @@ msgstr "θ₀"
 
 msgctxt "LSgameofchance|"
 msgid "Points needed to win the game"
-msgstr ""
+msgstr "Puntos necesarios para ganar el juego"
 
 msgctxt "LSgameofchance|"
 msgid "Number of simulated games"
@@ -183,11 +180,11 @@ msgstr "Número de juegos simulados"
 
 msgctxt "LSgameofchance|"
 msgid "95% HPD"
-msgstr ""
+msgstr "HPD del 95%"
 
 msgctxt "LSgameofskill|"
 msgid "Points needed to win the game"
-msgstr ""
+msgstr "Puntos necesarios para ganar el juego"
 
 msgctxt "LSgameofskill|"
 msgid "Number of simulated games"
@@ -195,7 +192,7 @@ msgstr "Número de juegos simulados"
 
 msgctxt "LSgameofskill|"
 msgid "95% HPD"
-msgstr ""
+msgstr "HPD del 95%"
 
 msgctxt "LSgaussianestimation|"
 msgid "Model"
@@ -285,10 +282,9 @@ msgctxt "LSbinomialdatainput|"
 msgid "Specify counts"
 msgstr "Especificar recuentos"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Enter sequence"
-msgstr "Ingresar secuencia"
+msgstr "Introducir la secuencia"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Count Data"
@@ -616,13 +612,12 @@ msgstr "Tabla de actualización"
 
 msgctxt "Description|"
 msgid "Learn Bayesian statistics with simple examples and supporting text"
-msgstr ""
+msgstr "Aprender Estadística Bayesiana con ejemplos sencillos y texto de ayuda"
 
 msgctxt "Description|"
 msgid "Binary Classification"
-msgstr ""
+msgstr "Clasificación Binaria"
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Input type"
 msgstr "Tipo de entrada"
@@ -633,11 +628,11 @@ msgstr "Estimaciones por punto"
 
 msgctxt "LSbinaryclassification|"
 msgid "Uncertain estimates"
-msgstr ""
+msgstr "Estimaciones inciertas"
 
 msgctxt "LSbinaryclassification|"
 msgid "Load data and specify threshold"
-msgstr ""
+msgstr "Cargar los datos e indicar el umbral"
 
 msgctxt "LSbinaryclassification|"
 msgid "Estimates"
@@ -705,7 +700,7 @@ msgstr "Estadísticos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "Matriz de desorden"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
@@ -725,7 +720,7 @@ msgstr "Información adicional"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
-msgstr ""
+msgstr "Previas y posteriores"
 
 msgctxt "LSbinaryclassification|"
 msgid "Plots"
@@ -733,39 +728,39 @@ msgstr "Gráficos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
-msgstr ""
+msgstr "Probabilidad positiva"
 
 msgctxt "LSbinaryclassification|"
 msgid "Show entire distribution"
-msgstr ""
+msgstr "Mostrar la distribución completa"
 
 msgctxt "LSbinaryclassification|"
 msgid "Icon plot"
-msgstr ""
+msgstr "Gráfico de iconos"
 
 msgctxt "LSbinaryclassification|"
 msgid "ROC"
-msgstr ""
+msgstr "ROC"
 
 msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
-msgstr ""
+msgstr "Añadir las realizaciones del posterior"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
-msgstr ""
+msgstr "Contrastar las características por umbral"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
-msgstr ""
+msgstr "VPP y VPN por prevalencia"
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
-msgstr ""
+msgstr "Gráfica aluvial"
 
 msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
-msgstr ""
+msgstr "Detección de señal"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
@@ -793,11 +788,11 @@ msgstr "Valor predictivo negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False discovery rate"
-msgstr ""
+msgstr "Ratio de falsa detección"
 
 msgctxt "LSbinaryclassification|"
 msgid "False omission rate"
-msgstr ""
+msgstr "Ratio de falsa omisión"
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
@@ -813,7 +808,7 @@ msgstr "Intervalo"
 
 msgctxt "LSbinaryclassification|"
 msgid "Half-eye"
-msgstr ""
+msgstr "Medio ojo"
 
 msgctxt "LSbinaryclassification|"
 msgid "Options"
@@ -985,7 +980,7 @@ msgstr "Marginal"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Observed number of successes"
-msgstr ""
+msgstr "Número observado de aciertos"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictions table"
@@ -1093,47 +1088,47 @@ msgstr "Distribución previa y posterior"
 
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
-msgstr ""
+msgstr "~ Beta(α = "
 
 msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
-msgstr ""
+msgstr "Simular la Aguja de Buffon"
 
 msgctxt "Description|"
 msgid "Manipulating Buffon's Needle"
-msgstr ""
+msgstr "Manipular la Aguja de Buffon"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "Proporción del largo de la aguja con la distancia entre líneas:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "%"
-msgstr ""
+msgstr "%"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of throws:"
-msgstr ""
+msgstr "Número de lanzamientos:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
-msgstr ""
+msgstr "Número de cruces:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
+msgstr "Previa de la proporción de cruces"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter a: "
-msgstr ""
+msgstr "Parámetro previo a: "
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
-msgstr ""
+msgstr "Parámetro previo b:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval on π"
-msgstr ""
+msgstr "Intervalo de credibilidad sobre π"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
@@ -1141,7 +1136,7 @@ msgstr "Gráfico"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "Previa y posterior de la proporción de cruces"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Legend"
@@ -1157,31 +1152,31 @@ msgstr "Intervalo de credibilidad"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "Proporción del largo de la aguja con la distancia entre líneas:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "%"
-msgstr ""
+msgstr "%"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Number of throws:"
-msgstr ""
+msgstr "Número de lanzamientos:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
+msgstr "Previa de la proporción de cruces"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter a"
-msgstr ""
+msgstr "Beta previa: parámetro a"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
-msgstr ""
+msgstr "Beta previa: parámetro b"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval on π"
-msgstr ""
+msgstr "Intervalo de credibilidad sobre π"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
@@ -1197,7 +1192,7 @@ msgstr "Colorear las agujas cruzadas"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "Previa y posterior de la proporción de cruces"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Legend"
@@ -1213,4 +1208,4 @@ msgstr "Intervalo de credibilidad"
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
-msgstr ""
+msgstr "Aguja de Buffon"
