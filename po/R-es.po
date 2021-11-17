@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-10-30 02:48\n"
-"PO-Revision-Date: 2021-11-12 16:52+0000\n"
+"PO-Revision-Date: 2021-11-17 16:37+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -14,10 +14,10 @@ msgstr ""
 "X-Generator: Weblate 4.9.1-dev\n"
 
 msgid "Summary Table"
-msgstr ""
+msgstr "Tabla Resumen"
 
 msgid "Crosses"
-msgstr ""
+msgstr "Cruces"
 
 msgid "Observations"
 msgstr "Observaciones"
@@ -35,7 +35,7 @@ msgid "Upper"
 msgstr "Superior"
 
 msgid "Prior and Posterior for Proportion of Crosses"
-msgstr ""
+msgstr "Previa y Posterior para la Proporción de Cruces"
 
 msgid "Posterior"
 msgstr "Posterior"
@@ -56,19 +56,19 @@ msgid "Implied Posterior"
 msgstr "Posterior Implícita"
 
 msgid "Implied Prior"
-msgstr ""
+msgstr "Previa Implícita"
 
 msgid "π"
-msgstr ""
+msgstr "π"
 
 msgid "%s%% CI: [%s, %s]"
 msgstr "IC del %s%% : [%s, %s]"
 
 msgid "Needle Plot"
-msgstr ""
+msgstr "Gráfico de Agujas"
 
 msgid "Implied Prior and Posterior for  %s"
-msgstr "Previa e Posterior Implícitas para %s"
+msgstr "Previa y Posterior Implícitas para %s"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -138,23 +138,95 @@ msgid ""
 "                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem"
 "\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
+"Este análisis muestra la <b>Clasificación Binaria</b>, que es un "
+"procedimiento estadístico habitual cuando los elementos se clasifican en dos "
+"grupos en base a una regla de clasificación.\n"
+"\n"
+"                   La Clasificación Binaria es un procedimiento en el que "
+"los datos sobre un elemento se hacen dicotómicos para alcanzar una decisión "
+"binaria (p.e. si/no, verdadero/falso).\n"
+"\n"
+"                   Las aplicaciones habituales de la Clasificación Binaria "
+"son:\n"
+"                   <ul>\n"
+"                     <li><b>Pruebas y diagnósticos médicos</b> donde la "
+"clasificación determina si un paciente sufre alguna enfermedad o no.</li>\n"
+"                     <li><b>Detección de spam</b> donde la clasificación "
+"determina si un mensaje (p.e. un email) es spam o no.</li>\n"
+"                     <li><b>Control de calidad</b> donde la clasificación "
+"determina si un estándar industrial se consiguió o no.</li>\n"
+"                   </ul>\n"
+"\n"
+"                   Debido al hecho de que la clasificación binaria se "
+"utiliza frecuentemente en los ensayos médicos, la terminología de los "
+"problemas de clasificación binaria se toma prestada del diccionario médico ("
+"p.e. prevalencia, condición, marcador).\n"
+"\n"
+"                   En la practica, existe una importante diferencia entre el "
+"<i>verdadero</i> estado de un sujeto y la <i>etiqueta que se le asigna</i>, "
+"dada una regla de clasificación. En JASP, el estado verdadero se denomina "
+"<b>condición</b> (positiva/negativa) y la etiqueta que se asigna se denomina "
+"<b>prueba</b> (positiva/negativa). En muchas aplicaciones, las condiciones o "
+"la prueba pueden no ser simétricas, por eso son interesantes distintos tipos "
+"de errores además de una medida global de precisión. Estos tipos de errores "
+"distinguen, por ejemplo, si un paciente sufre de una condición pero la "
+"prueba resulta negativa (falsamente negativa), o si un paciente no sufre de "
+"una condición pero la prueba resulta positiva (falsamente positiva).\n"
+"\n"
+"                   Las propiedades de la prueba se describen habitualmente "
+"en términos de su <b>Sensibilidad</b> y <b>Especificidad</b>. La "
+"Sensibilidad es la probabilidad de un resultado positivo de la prueba, si la "
+"condición es positiva. La Especificidad es la probabilidad de un resultado "
+"negativo de la prueba, si la condición es negativa. Una propiedad de la "
+"condición es la <b>prevalencia</b>, que es la proporción de sujetos que "
+"tienen la condición positiva en la población.\n"
+"                   Las características asimétricas de la prueba o la "
+"prevalencia pueden llevar a situaciones que pueden parecer paradójicas a un "
+"observador no entrenado. Por ejemplo, en algunos casos es más probable que "
+"un paciente no tenga una enfermedad que la tenga, incluso después de dar un "
+"resultado positivo con una prueba para esa enfermedad.\n"
+"\n"
+"                   Formalmente, la probabilidad de que un sujeto tenga una "
+"condición positiva, después de que el resultado de una prueba sea positivo ("
+"i.e. valor predictivo positivo) se obtiene aplicando el <b>teorema de "
+"Bayes</b>:\n"
+"\n"
+"                   <img src = \"file://%s\", width=\"500\">\n"
+"\n"
+"                   <h5>References</h5>\n"
+"                   Pepe, M. S. (2003). <i>The statistical evaluation of "
+"medical tests for classification and prediction</i>. Oxford University Press."
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>"
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
+"Evaluation_of_binary_classifiers</a>\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\""
+">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "¡Bienvenido a la clasificación binaria con JASP!"
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "¡La variable de 'Condición positiva (binaria)' debe tener dos niveles!"
 
 msgid "Each condition needs at least one observation."
-msgstr ""
+msgstr "Cada condición necesita una observación, al menos."
 
 msgid ""
 "Mean of marker in positive condition (%s) needs to be larger than the mean "
 "of marker in negative condition (%s)."
 msgstr ""
+"Es necesario que la media del marcador en la condición positiva (%s) sea "
+"mayor que la media del marcador en la condición negativa (%s)."
 
 msgid "Drawing samples"
-msgstr ""
+msgstr "Extrayendo muestras"
 
 msgid "Tables"
 msgstr "Tablas"
@@ -172,40 +244,40 @@ msgid "Interpretation"
 msgstr "Interpretación"
 
 msgid "Confusion Matrix"
-msgstr ""
+msgstr "Matriz de Desorden"
 
 msgid "%s%% CI"
 msgstr "IC del %s%%"
 
 msgid "Positive test"
-msgstr ""
+msgstr "Prueba positiva"
 
 msgid "Outcome"
 msgstr "Resultado"
 
 msgid "Lower %s"
-msgstr ""
+msgstr "Inferior %s"
 
 msgid "Upper %s"
-msgstr ""
+msgstr "Superior %s"
 
 msgid "Negative test"
-msgstr ""
+msgstr "Prueba negativa"
 
 msgid "Positive/Total"
-msgstr ""
+msgstr "Positivos/Total"
 
 msgid "Negative/Total"
-msgstr ""
+msgstr "Negativos/Total"
 
 msgid "Total"
 msgstr "Total"
 
 msgid "Positive condition"
-msgstr ""
+msgstr "Condición positiva"
 
 msgid "Negative condition"
-msgstr ""
+msgstr "Condición negativa"
 
 msgid "True/Total"
 msgstr "Verdaderos/Total"
@@ -214,10 +286,10 @@ msgid "Prevalence"
 msgstr "Prevalencia"
 
 msgid "Rareness"
-msgstr ""
+msgstr "Rareza"
 
 msgid "Priors and Posteriors"
-msgstr ""
+msgstr "Previas y Posteriores"
 
 msgid "Parameter"
 msgstr "Parámetro"
@@ -229,19 +301,19 @@ msgid "Specificity"
 msgstr "Especificidad"
 
 msgid "beta(%s,%s)"
-msgstr ""
+msgstr "Beta(%s,%s)"
 
 msgid "Plots"
 msgstr "Gráficos"
 
 msgid "Probability Positive"
-msgstr ""
+msgstr "Probabilidad Positiva"
 
 msgid "Not tested"
-msgstr ""
+msgstr "No probado"
 
 msgid "Tested"
-msgstr ""
+msgstr "Probado"
 
 msgid "Negative"
 msgstr "Negativo"
@@ -346,102 +418,124 @@ msgid ""
 "(True positive rate) Proportion of those who are affected by the condition "
 "and are correctly tested positive."
 msgstr ""
+"(Ratio de verdaderos positivos) Proporción de los que están afectados por la "
+"condición y se prueba correctamente que son positivos."
 
 msgid ""
 "(True negative rate) Proportion of those who are not affected by the "
 "condition and are correctly tested negative."
 msgstr ""
+"(Ratio de verdaderos negativos) Proporción de los que non están afectados "
+"por la condición y se prueba correctamente que son negativos."
 
 msgid ""
 "Proportion of a population affected by a condition and correctly tested "
 "positive."
 msgstr ""
+"Proporción de la población, afectada por la condición y probada "
+"correctamente que es positiva."
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
 "tested positive."
 msgstr ""
+"Proporción de la población, no afectada por la condición y probada "
+"incorrectamente que es positiva."
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
 "negative."
 msgstr ""
+"Proporción da población, no afectada por la condición y probada "
+"correctamente que es negativa."
 
 msgid ""
 "Proportion of a population affected by a condition and incorrectly tested "
 "negative."
 msgstr ""
+"Proporción de la población, afectada por la condición y probada "
+"incorrectamente que es negativa."
 
 msgid ""
 "Proportion of those who tested positive and are affected by the condition."
 msgstr ""
+"Proporción de los que resultan positivos y están afectados por la condición."
 
 msgid ""
 "Proportion of those who tested negative and are not affected by the "
 "condition."
 msgstr ""
+"Proporción de los que resultan negativos y no están afectados por la "
+"condición."
 
 msgid "Proportion of false positives in the pool of those that test positive."
 msgstr ""
+"Proporción de los falsos positivos en el grupo de los que resultan positivos."
 
 msgid "Proportion of false negatives in the pool of those that test negative."
 msgstr ""
+"Proporción de los falsos negativos en el grupo de los que resultan negativos."
 
 msgid "Complement proportion to specificity."
-msgstr ""
+msgstr "Proporción complementaria a la especificidad."
 
 msgid "Complement proportion to sensitivity."
-msgstr ""
+msgstr "Proporción complementaria a la sensibilidad."
 
 msgid "Proportion of the population that is true positive or true negative."
 msgstr ""
+"Proporción de la población, que es verdadera positiva o verdadera negativa."
 
 msgid "P(Test = positive | Condition = positive)"
-msgstr ""
+msgstr "P(Prueba = positiva | Condición = positiva)"
 
 msgid "P(Test = negative | Condition = negative)"
-msgstr ""
+msgstr "P(Prueba = negativa | Condición = negativa)"
 
 msgid "P(Condition = positive %s Test = positive)"
-msgstr ""
+msgstr "P(Condición = positiva %s Prueba = positiva)"
 
 msgid "P(Condition = negative %s Test = positive)"
-msgstr ""
+msgstr "P(Condición = negativa %s Prueba = positiva)"
 
 msgid "P(Condition = negative %s Test = negative)"
-msgstr ""
+msgstr "P(Condición = negativa %s Prueba = negativa)"
 
 msgid "P(Condition = positive %s Test = negative)"
-msgstr ""
+msgstr "P(Condición = positiva %s Prueba = negativa)"
 
 msgid "P(Condition = positive | Test = positive)"
-msgstr ""
+msgstr "P(Condición = positiva | Prueba = positiva)"
 
 msgid "P(Condition = negative | Test = negative)"
-msgstr ""
+msgstr "P(Condición = negativa | Prueba = negativa)"
 
 msgid "P(Condition = negative | Test = positive)"
-msgstr ""
+msgstr "P(Condición = negativa | Prueba = positiva)"
 
 msgid "P(Condition = positive | Test = negative)"
-msgstr ""
+msgstr "P(Condición = positiva | Prueba = negativa)"
 
 msgid "P(Test = positive | Condition = negative)"
-msgstr ""
+msgstr "P(Prueba = positiva | Condición = negativa)"
 
 msgid "P(Test = negative | Condition = positive)"
-msgstr ""
+msgstr "P(Prueba = negativa | Condición = positiva)"
 
 msgid ""
 "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s "
 "Test = negative)"
 msgstr ""
+"P(Condición = positiva %1$s Prueba = positiva %2$s Condición = negativa %1$s "
+"Prueba = negativa)"
 
 msgid "Central credible intervals are based on %i samples."
 msgstr "Los intervalos de credibilidad central se basan en %i muestras."
 
 msgid "Parameter estimates are posterior means based on %i samples."
 msgstr ""
+"Las estimaciones de los parámetros son medias posteriores, basadas en %i "
+"muestras."
 
 msgid "Data Summary"
 msgstr "Resumen de datos"
@@ -459,43 +553,43 @@ msgid "Failures"
 msgstr "Fracasos"
 
 msgid "spike at %s"
-msgstr ""
+msgstr "pico en %s"
 
 msgid "beta (%s, %s)"
-msgstr ""
+msgstr "Beta (%s, %s)"
 
 msgid "binomial (%i, %s)"
-msgstr ""
+msgstr "Binomial (%i, %s)"
 
 msgid "beta-binomial (%i, %s, %s)"
-msgstr ""
+msgstr "Beta-Binomial (%i, %s, %s)"
 
 msgid "Estimation Summary"
-msgstr ""
+msgstr "Resumen de la Estimación"
 
 msgid "Model"
 msgstr "Modelo"
 
 msgid "Prior (%s)"
-msgstr ""
+msgstr "Previo (%s)"
 
 msgid "Prior %s"
-msgstr ""
+msgstr "Previo %s"
 
 msgid "Posterior (%s)"
-msgstr ""
+msgstr "Posterior (%s)"
 
 msgid "Posterior %s"
-msgstr ""
+msgstr "Posterior %s"
 
 msgid "Please specify successes and failures."
-msgstr ""
+msgstr "Por favor, indica los aciertos y los fracasos."
 
 msgid "These results are based on %i %s and %i %s."
-msgstr ""
+msgstr "Estos resultados se basan en %i %s y %i %s."
 
 msgid "Observation"
-msgstr ""
+msgstr "Observación"
 
 msgid "Population proportion"
 msgstr "Proporción de población"
@@ -506,33 +600,34 @@ msgstr "Previa = Posterior"
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr ""
+"En el gráfico de análisis Secuencial no se implementan más que ICs bimodales."
 
 msgid "%i %% CI"
-msgstr ""
+msgstr "IC del %i %%"
 
 msgid "%i %% HPD"
-msgstr ""
+msgstr "HPD del %i %%"
 
 msgid "SI (BF=%s)"
-msgstr ""
+msgstr "IS (FB=%s)"
 
 msgid "Prediction (Successes)"
-msgstr ""
+msgstr "Predicción (Aciertos)"
 
 msgid "Prediction %s"
-msgstr ""
+msgstr "Predicción %s"
 
 msgid "Prediction std. deviation"
-msgstr ""
+msgstr "Desviación típica de la predicción"
 
 msgid "The prediction for %s %s is based on %s %s and %s %s."
-msgstr ""
+msgstr "La predicción para %s %s se basa en %s %s y %s %s."
 
 msgid "Predicted sample proportions"
-msgstr ""
+msgstr "Proporciones predichas de la muestra"
 
 msgid "Predicted number of successes"
-msgstr ""
+msgstr "Número predicho de aciertos"
 
 msgid "Probability"
 msgstr "Probabilidad"
@@ -553,10 +648,10 @@ msgid ""
 msgstr ""
 
 msgid "Proportion of Successes"
-msgstr ""
+msgstr "Proporción de Aciertos"
 
 msgid "Testing Summary"
-msgstr ""
+msgstr "Resumen de Pruebas"
 
 msgid "BF%s"
 msgstr "FB%s"
@@ -580,79 +675,86 @@ msgid ""
 "The plot could not be created because the posterior model probabilities are "
 "not defined."
 msgstr ""
+"El gráfico no se puede generar porque las probabilidades posteriores del "
+"modelo no están definidas."
 
 msgid "P(Successes|%s)"
-msgstr ""
+msgstr "P(Aciertos|%s)"
 
 msgid "P(Successes)"
-msgstr ""
+msgstr "P(Aciertos)"
 
 msgid "Please specify a hypothesis for comparison."
-msgstr ""
+msgstr "Por favor, indica una hipótesis para comparar."
 
 msgid "Conditional probability"
-msgstr ""
+msgstr "Probabilidad condicionada"
 
 msgid "Joint probability"
-msgstr ""
+msgstr "Probabilidad conjunta"
 
 msgid "Posterior probability"
 msgstr "Probabilidad posterior"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
+"No es posible hacer el gráfico: Uno de los factores de Bayes es igual a "
+"infinito."
 
 msgid "At least 2 hypotheses need to be specified."
-msgstr ""
+msgstr "Es necesario indicar 2 hipótesis, al menos."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
 msgstr ""
+"El parámetro '%1$s' para el modelo/la hipótesis '%2$s' debe ser positivo."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
 msgstr ""
+"El parámetro '%1$s' para el modelo/la hipótesis '%2$s' debe estar entre 0 e "
+"1."
 
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 msgid "Please remove duplicates from the %s names."
-msgstr ""
+msgstr "Por favor, quita los duplicados de los nombres de %s."
 
 msgid "Incorrect arguments for the inverse cumulative density function"
-msgstr ""
+msgstr "Argumentos incorrectos para la función de densidad acumulada inversa"
 
 msgid "'Successes'"
-msgstr ""
+msgstr "'Aciertos'"
 
 msgid "%1$s %2$s Plots"
-msgstr ""
+msgstr "Gráficos %1$s %2$s"
 
 msgid "Prior and Posterior Plots"
-msgstr ""
+msgstr "Gráficos Previo y Posterior"
 
 msgid "Sequential Analysis: Point Estimate"
 msgstr "Análisis Secuencial: Estimación por Punto"
 
 msgid "%s Sequential Analysis: Interval"
-msgstr ""
+msgstr "%s Análisis Secuencial: Intervalo"
 
 msgid "Sequential Analysis: Stacked"
 msgstr "Análisis Secuencial: Apilado"
 
 msgid "Sequential Posterior Updating"
-msgstr ""
+msgstr "Actualización Posterior Secuencial"
 
 msgid "Prediction Summary"
-msgstr ""
+msgstr "Resumen de Predicciones"
 
 msgid "%s Prediction Plots"
-msgstr ""
+msgstr "%s Gráficos de Predicción"
 
 msgid "%1$s %2$s Prediction Plots"
-msgstr ""
+msgstr "%1$s %2$s Gráficos de Predicción"
 
 msgid "%s Prior and Posterior Plots"
-msgstr ""
+msgstr "%s Gráficos Previo y Posterior"
 
 msgid "%s Predictive Accuracy Plot"
 msgstr ""
