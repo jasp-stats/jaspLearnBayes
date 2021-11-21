@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
 "POT-Creation-Date: 2021-10-30 02:48\n"
-"PO-Revision-Date: 2021-11-16 04:41+0000\n"
+"PO-Revision-Date: 2021-11-22 21:51+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/ja/>\n"
@@ -11,20 +11,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 msgid "Summary Table"
-msgstr ""
+msgstr "要約表"
 
 msgid "Crosses"
-msgstr ""
+msgstr "交差"
 
 msgid "Observations"
 msgstr "観測値"
 
-#, fuzzy
 msgid "Median for %s"
-msgstr "中央値"
+msgstr "%sの中央値"
 
 msgid "Lower"
 msgstr "下"
@@ -36,7 +35,7 @@ msgid "Upper"
 msgstr "上"
 
 msgid "Prior and Posterior for Proportion of Crosses"
-msgstr ""
+msgstr "交差の割合の事前・事後分布"
 
 msgid "Posterior"
 msgstr "事後分布"
@@ -45,31 +44,31 @@ msgid "Prior"
 msgstr "事前分布"
 
 msgid "Proportion of Crosses"
-msgstr ""
+msgstr "交差の割合"
 
 msgid "Density"
 msgstr "密度"
 
 msgid "Implied Prior and Posterior for %s"
-msgstr ""
+msgstr "%sにおける暗黙の事前確率と事後確率"
 
 msgid "Implied Posterior"
-msgstr ""
+msgstr "暗黙の事後確率"
 
 msgid "Implied Prior"
-msgstr ""
+msgstr "暗黙の事前分布"
 
 msgid "π"
-msgstr ""
+msgstr "π"
 
 msgid "%s%% CI: [%s, %s]"
 msgstr "%s%% CI: [%s, %s]"
 
 msgid "Needle Plot"
-msgstr ""
+msgstr "ニードルプロット"
 
 msgid "Implied Prior and Posterior for  %s"
-msgstr ""
+msgstr "%sにおける暗黙の事前分布と事後分布"
 
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
@@ -139,183 +138,227 @@ msgid ""
 "                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem"
 "\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
+"この分析は、分類ルールに基づいて被験者を2つのグループに分類する一般的な統計手順である<b>二項分類</b>を示しています。\n"
+"\n"
+"                   二値分類とは、対象者に関するデータを二分して、二値の決定（例：Yes/No、true/"
+"false）に到達させる手順です。\n"
+"\n"
+"                   一般的なバイナリ分類のアプリケーションは以下の通りです。\n"
+"                   <ul> \n"
+"                     <li><b>医学検査・診断</b> 患者が特定の病気にかかっているかどうかを判断するための分類</li>\n"
+"                     <li><b>スパム検出</b> メッセージ（例：電子メール）がスパムかどうかを分類する場合</li>\n"
+"                     <li><b>品質管理</b> 業界標準が満たされているかどうかを分類する場合</li>\n"
+"                   </ul> \n"
+"\n"
+"                   二値分類は医学的なテストでよく使われるため、二値分類問題の用語は医学辞書を参考にしています (例: "
+"prevalence, condition, marker)。\n"
+"\n"
+"                   実際には、対象者の<i>真の</i>状態と、分類ルールによって与えられた<i>割り当てられたラベル</i>との間には"
+"、重要な区別があります。JASPでは、真の状態を<b>条件</b>（ポジティブ/ネガティブ）と呼び、割り当てられたラベルを<b>テスト</b>（ポジティブ"
+"/ネガティブ）と呼びます。多くの応用例では、条件やテストが対称的ではない場合があり、そのため、全体的な精度の測定に加えて、さまざまなタイプの誤差が注目され"
+"ます。これらのタイプのエラーは、例えば、患者がある状態に苦しんでいるのに、テストが陰性になった（偽陰性）のか、あるいは、患者がある状態に苦しんでいないのに"
+"、テストが陽性になった（偽陽性）のかを区別します。\n"
+"\n"
+"                   テストの特性は、通常、<b>感度</b>と<b>特異度</b>という言葉で表現されます。感度とは、状態が陽性である場"
+"合に陽性と判定される確率のことです。特異度とは、条件が陰性の場合に陰性と判定される確率のことです。条件の特性とは、<b>有病率</b>のことで、これは母集"
+"団の中で条件が陽性である被験者の割合を意味します。\n"
+"                   テストや有病率の特性に偏りがあると、素人目には逆説的に見えるような状況になることがあります。例えば、ある状況では、あ"
+"る病気の検査で陽性であっても、患者がその病気に罹患していない可能性の方が高い場合があります。\n"
+"\n"
+"                   "
+"形式的には、検査で陽性になった後、被験者が陽性である確率（すなわち、陽性予測値）は、<b>ベイズの定理</b>を適用することで得られます。\n"
+"\n"
+"                   <img src = \"file://%s\", width=\"500\">。\n"
+"\n"
+"                   <h5>参考文献</h5> </h5\n"
+"                   Pepe, M. S. (2003).<i>The statistical evaluation of "
+"medical tests for classification and prediction</i>.Oxford University Press."
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>"
+"\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/"
+"Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
+"Evaluation_of_binary_classifiers</a>\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\""
+">https://wikipedia.org/wiki/Bayes%%27_theorem</a"
 
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "JASPによる二項分類へようこそ!"
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "'陽性条件 (二値)' 変数は、2 つの水準を持っている必要があります!"
 
 msgid "Each condition needs at least one observation."
-msgstr ""
+msgstr "各条件には、少なくとも 1 つの観測値が必要です."
 
 msgid ""
 "Mean of marker in positive condition (%s) needs to be larger than the mean "
 "of marker in negative condition (%s)."
-msgstr ""
+msgstr "陽性状態のマーカーの平均（%s）は、陰性状態のマーカーの平均（%s）よりも大きくする必要があります."
 
 msgid "Drawing samples"
-msgstr ""
+msgstr "サンプルの描画"
 
 msgid "Tables"
-msgstr ""
+msgstr "表"
 
 msgid "Statistics"
-msgstr ""
+msgstr "統計量"
 
 msgid "Estimate"
 msgstr "推定"
 
 msgid "Notation"
-msgstr ""
+msgstr "ノーテーション"
 
 msgid "Interpretation"
-msgstr ""
+msgstr "解釈"
 
 msgid "Confusion Matrix"
-msgstr ""
+msgstr "混同行列"
 
 msgid "%s%% CI"
 msgstr "%s%% CI"
 
 msgid "Positive test"
-msgstr ""
+msgstr "陽性テスト"
 
 msgid "Outcome"
 msgstr "結果変数"
 
 msgid "Lower %s"
-msgstr ""
+msgstr "下位 %s"
 
 msgid "Upper %s"
-msgstr ""
+msgstr "上位 %s"
 
 msgid "Negative test"
-msgstr ""
+msgstr "陰性テスト"
 
 msgid "Positive/Total"
-msgstr ""
+msgstr "陽性/合計"
 
 msgid "Negative/Total"
-msgstr ""
+msgstr "陰性/合計"
 
 msgid "Total"
 msgstr "合計"
 
 msgid "Positive condition"
-msgstr ""
+msgstr "陽性条件"
 
 msgid "Negative condition"
-msgstr ""
+msgstr "陰性条件"
 
-#, fuzzy
 msgid "True/Total"
-msgstr "合計"
+msgstr "真/合計"
 
 msgid "Prevalence"
-msgstr ""
+msgstr "有病率"
 
 msgid "Rareness"
-msgstr ""
+msgstr "希少性"
 
 msgid "Priors and Posteriors"
-msgstr ""
+msgstr "事前確率と事後確率"
 
 msgid "Parameter"
 msgstr "パラメータ"
 
-#, fuzzy
 msgid "Sensitivity"
-msgstr "密度"
+msgstr "感度"
 
 msgid "Specificity"
-msgstr ""
+msgstr "特異度"
 
 msgid "beta(%s,%s)"
-msgstr ""
+msgstr "beta(%s,%s)"
 
 msgid "Plots"
 msgstr "プロット"
 
 msgid "Probability Positive"
-msgstr ""
+msgstr "陽性確率"
 
 msgid "Not tested"
-msgstr ""
+msgstr "未検証"
 
 msgid "Tested"
-msgstr ""
+msgstr "テスト済み"
 
 msgid "Negative"
-msgstr ""
+msgstr "陰性"
 
 msgid "Positive"
-msgstr ""
+msgstr "陽性"
 
 msgid "Test Result"
-msgstr ""
+msgstr "テスト結果"
 
 msgid "P(Condition = positive)"
-msgstr ""
+msgstr "P(条件＝陽性)"
 
 msgid "Icon Plot"
-msgstr ""
+msgstr "アイコンプロット"
 
 msgid "True positive"
-msgstr ""
+msgstr "真陽性"
 
 msgid "False positive"
-msgstr ""
+msgstr "偽陽性"
 
 msgid "False negative"
-msgstr ""
+msgstr "偽陰性"
 
 msgid "True negative"
-msgstr ""
+msgstr "真陰性"
 
 msgid "Receiving Operating Characteristic Curve"
-msgstr ""
+msgstr "受信者操作特性曲線"
 
 msgid "False Positive Rate (1-Specificity)"
-msgstr ""
+msgstr "偽陽性率(1-特異度)"
 
 msgid "True Positive Rate (Sensitivity)"
-msgstr ""
+msgstr "真陽性率(感度)"
 
 msgid "Test Characteristics"
-msgstr ""
+msgstr "テスト特性"
 
 msgid "Test Threshold"
-msgstr ""
+msgstr "検査閾値"
 
 msgid "Characteristic"
-msgstr ""
+msgstr "特性"
 
 msgid "PPV and NPV by Prevalence"
-msgstr ""
+msgstr "有病率によるPPVとNPV"
 
 msgid "Predictive Value"
-msgstr ""
+msgstr "予測値"
 
 msgid "Alluvial Plot"
-msgstr ""
+msgstr "沖積プロット"
 
 msgid "Condition"
-msgstr ""
+msgstr "条件"
 
 msgid "Test"
 msgstr "検定"
 
 msgid "Proportion of Population"
-msgstr ""
+msgstr "母集団の割合"
 
 msgid "Signal Detection"
-msgstr ""
+msgstr "信号検出"
 
 msgid "Marker"
-msgstr ""
+msgstr "マーカー"
 
-#, fuzzy
 msgid "Count"
 msgstr "カウント"
 
@@ -326,129 +369,129 @@ msgid "Positive predictive value"
 msgstr "正の予測値"
 
 msgid "Negative predictive value"
-msgstr ""
+msgstr "陰性予測値"
 
 msgid "False discovery rate"
-msgstr ""
+msgstr "偽発見率(False discovery rate)"
 
 msgid "False omission rate"
-msgstr ""
+msgstr "False omission rate"
 
 msgid "False positive rate"
 msgstr "偽陰性率"
 
 msgid "False negative rate"
-msgstr ""
+msgstr "偽陰性率(False negative rate)"
 
 msgid "Accuracy"
-msgstr ""
+msgstr "精度"
 
 msgid "Proportion of a population affected by the condition."
-msgstr ""
+msgstr "条件に影響される母集団の割合."
 
 msgid ""
 "(True positive rate) Proportion of those who are affected by the condition "
 "and are correctly tested positive."
-msgstr ""
+msgstr "(真陽性率）罹患している人のうち、正しく陽性と判定された人の割合."
 
 msgid ""
 "(True negative rate) Proportion of those who are not affected by the "
 "condition and are correctly tested negative."
-msgstr ""
+msgstr "(真陰性率）発症しておらず、正しく陰性と判定された方の割合."
 
 msgid ""
 "Proportion of a population affected by a condition and correctly tested "
 "positive."
-msgstr ""
+msgstr "条件の影響を受け、正しく陽性と判定された母集団の割合."
 
 msgid ""
 "Proportion of a population not affected by a condition and incorrectly "
 "tested positive."
-msgstr ""
+msgstr "条件の影響を受けず、誤って陽性と判定された母集団の割合."
 
 msgid ""
 "Proportion of a population not affected by a condition and correctly tested "
 "negative."
-msgstr ""
+msgstr "条件の影響を受けず、正しく陽性と判定された母集団の割合."
 
 msgid ""
 "Proportion of a population affected by a condition and incorrectly tested "
 "negative."
-msgstr ""
+msgstr "条件の影響を受け、誤って陰性と判定された母集団の割合."
 
 msgid ""
 "Proportion of those who tested positive and are affected by the condition."
-msgstr ""
+msgstr "陽性と判定された人のうち、罹患している人の割合."
 
 msgid ""
 "Proportion of those who tested negative and are not affected by the "
 "condition."
-msgstr ""
+msgstr "検査結果が陰性で、影響を受けていない人の割合."
 
 msgid "Proportion of false positives in the pool of those that test positive."
-msgstr ""
+msgstr "陽性者の中での偽陽性者の割合."
 
 msgid "Proportion of false negatives in the pool of those that test negative."
-msgstr ""
+msgstr "陰性者の中に含まれる偽陰性者の割合."
 
 msgid "Complement proportion to specificity."
-msgstr ""
+msgstr "特異度に対する補数比率."
 
 msgid "Complement proportion to sensitivity."
-msgstr ""
+msgstr "感度に対する補数比率."
 
 msgid "Proportion of the population that is true positive or true negative."
-msgstr ""
+msgstr "真陽性または真陰性である母集団の割合."
 
 msgid "P(Test = positive | Condition = positive)"
-msgstr ""
+msgstr "P(テスト＝陽性｜条件＝陽性)"
 
 msgid "P(Test = negative | Condition = negative)"
-msgstr ""
+msgstr "P(テスト＝陰性｜条件＝陰性)"
 
 msgid "P(Condition = positive %s Test = positive)"
-msgstr ""
+msgstr "P(条件= 陽性 %s テスト = 陽性)"
 
 msgid "P(Condition = negative %s Test = positive)"
-msgstr ""
+msgstr "P(条件= 陰性 %s テスト = 陽性)"
 
 msgid "P(Condition = negative %s Test = negative)"
-msgstr ""
+msgstr "P(条件= 陰性 %s テスト = 陽性)"
 
 msgid "P(Condition = positive %s Test = negative)"
-msgstr ""
+msgstr "P(条件= 陽性 %s テスト = 陰性)"
 
 msgid "P(Condition = positive | Test = positive)"
-msgstr ""
+msgstr "P(条件＝陽性｜テスト＝陽性)"
 
 msgid "P(Condition = negative | Test = negative)"
-msgstr ""
+msgstr "P(条件＝陰性｜テスト＝陰性)"
 
 msgid "P(Condition = negative | Test = positive)"
-msgstr ""
+msgstr "P(条件 = 陰性 | テスト = 陽性)"
 
 msgid "P(Condition = positive | Test = negative)"
-msgstr ""
+msgstr "P(条件＝陽性｜テスト＝陰性)"
 
 msgid "P(Test = positive | Condition = negative)"
-msgstr ""
+msgstr "P( テスト = 陽性 | 条件 = 陰性)"
 
 msgid "P(Test = negative | Condition = positive)"
-msgstr ""
+msgstr "P(テスト＝陰性｜条件＝陽性)"
 
 msgid ""
 "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s "
 "Test = negative)"
-msgstr ""
+msgstr "P(条件＝陽性 %1$s テスト＝陽性 %2$s 条件＝陰性 %1$s テスト＝陰性)"
 
 msgid "Central credible intervals are based on %i samples."
-msgstr ""
+msgstr "中央信頼区間は、%iサンプルに基づいています."
 
 msgid "Parameter estimates are posterior means based on %i samples."
-msgstr ""
+msgstr "パラメータの推定値は，%i個のサンプルに基づく事後平均である."
 
 msgid "Data Summary"
-msgstr ""
+msgstr "データ要約"
 
 msgid "Counts"
 msgstr "カウント"
@@ -463,80 +506,80 @@ msgid "Failures"
 msgstr "失敗数"
 
 msgid "spike at %s"
-msgstr ""
+msgstr "%s でスパイク"
 
 msgid "beta (%s, %s)"
-msgstr ""
+msgstr "beta (%s, %s)"
 
 msgid "binomial (%i, %s)"
-msgstr ""
+msgstr "binomial (%i, %s)"
 
 msgid "beta-binomial (%i, %s, %s)"
-msgstr ""
+msgstr "beta-binomial (%i, %s, %s)"
 
 msgid "Estimation Summary"
-msgstr ""
+msgstr "推定値要約"
 
 msgid "Model"
 msgstr "モデル"
 
 msgid "Prior (%s)"
-msgstr ""
+msgstr "事前(%s)"
 
 msgid "Prior %s"
-msgstr ""
+msgstr "事前 %s"
 
 msgid "Posterior (%s)"
-msgstr ""
+msgstr "事後(%s)"
 
 msgid "Posterior %s"
-msgstr ""
+msgstr "事後%s"
 
 msgid "Please specify successes and failures."
-msgstr ""
+msgstr "成功と失敗を指定してください。"
 
 msgid "These results are based on %i %s and %i %s."
-msgstr ""
+msgstr "この結果は、%i %sと%i %sに基づいています."
 
 msgid "Observation"
-msgstr ""
+msgstr "観測値"
 
 msgid "Population proportion"
 msgstr "母比率"
 
 msgid "Prior = Posterior"
-msgstr ""
+msgstr "事前＝事後"
 
 msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
-msgstr ""
+msgstr "二峰性以上のCIは、逐次分析プロットには実装されていません."
 
 msgid "%i %% CI"
-msgstr ""
+msgstr "%i %% CI"
 
 msgid "%i %% HPD"
-msgstr ""
+msgstr "％i %% HPD"
 
 msgid "SI (BF=%s)"
-msgstr ""
+msgstr "SI (BF=%s)"
 
 msgid "Prediction (Successes)"
-msgstr ""
+msgstr "予測 (成功数)"
 
 msgid "Prediction %s"
-msgstr ""
+msgstr "予測 %s"
 
 msgid "Prediction std. deviation"
-msgstr ""
+msgstr "予測標準偏差"
 
 msgid "The prediction for %s %s is based on %s %s and %s %s."
-msgstr ""
+msgstr "%s %sの予測は、%s %sと%s %sに基づいています."
 
 msgid "Predicted sample proportions"
-msgstr ""
+msgstr "予測される標本の比率"
 
 msgid "Predicted number of successes"
-msgstr ""
+msgstr "予想される成功数"
 
 msgid "Probability"
 msgstr "確率"
@@ -544,23 +587,23 @@ msgstr "確率"
 msgid ""
 "The upper CI limit is higher than the number of future observations. Please, "
 "change the value of the upper CI limit in the settings panel."
-msgstr ""
+msgstr "CI上限値が将来の観測数よりも大きくなってしまいました。設定パネルで、上限CI値を変更してください。"
 
 msgid ""
 "The lower CI limit is higher than the number of future observations. Please, "
 "change the value of the lower CI limit in the settings panel."
-msgstr ""
+msgstr "CI下限値が将来の観測数よりも大きくなっています。設定パネルで下限CIの値を変更してください."
 
 msgid ""
 "The lower CI limit is higher than the upper CI limit. Please, change the "
 "value of the CI limits in the settings panel."
-msgstr ""
+msgstr "下限のCIリミットが上限のCIリミットよりも高い。設定パネルでCIリミットの値を変更してください."
 
 msgid "Proportion of Successes"
-msgstr ""
+msgstr "成功の割合"
 
 msgid "Testing Summary"
-msgstr ""
+msgstr "テストの要約"
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -572,108 +615,108 @@ msgid "Hypothesis"
 msgstr "仮説"
 
 msgid "P(H)"
-msgstr ""
+msgstr "P(H)"
 
 msgid "log(likelihood)"
-msgstr ""
+msgstr "log(likelihood)"
 
 msgid "P(H|data)"
-msgstr ""
+msgstr "P(H|data)"
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
 "not defined."
-msgstr ""
+msgstr "事後モデル確率が定義されていないため、プロットを作成できませんでした."
 
 msgid "P(Successes|%s)"
-msgstr ""
+msgstr "P(成功数|%s)"
 
 msgid "P(Successes)"
-msgstr ""
+msgstr "P(成功数)"
 
 msgid "Please specify a hypothesis for comparison."
-msgstr ""
+msgstr "比較の仮説を指定してください."
 
 msgid "Conditional probability"
-msgstr ""
+msgstr "条件付き確率"
 
 msgid "Joint probability"
-msgstr ""
+msgstr "同時確率"
 
 msgid "Posterior probability"
 msgstr "事後確率"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
-msgstr ""
+msgstr "プロットできない: ベイズファクターの 1 つが無限大になっている."
 
 msgid "At least 2 hypotheses need to be specified."
-msgstr ""
+msgstr "少なくとも2つの仮説を指定する必要があります."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
-msgstr ""
+msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければなりません."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
-msgstr ""
+msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は 0 から 1 の間でなければなりません."
 
 msgid "%s %i"
-msgstr ""
+msgstr "％s ％i"
 
 msgid "Please remove duplicates from the %s names."
-msgstr ""
+msgstr "%s 名から重複を削除してください."
 
 msgid "Incorrect arguments for the inverse cumulative density function"
-msgstr ""
+msgstr "逆累積密度関数の引数が正しくありません"
 
 msgid "'Successes'"
-msgstr ""
+msgstr "'成功数'"
 
 msgid "%1$s %2$s Plots"
-msgstr ""
+msgstr "%1$s %2$s プロット"
 
 msgid "Prior and Posterior Plots"
-msgstr ""
+msgstr "事前と事後プロット"
 
 msgid "Sequential Analysis: Point Estimate"
-msgstr ""
+msgstr "逐次分析: 点推定"
 
 msgid "%s Sequential Analysis: Interval"
-msgstr ""
+msgstr "%s 逐次分析: 区間"
 
 msgid "Sequential Analysis: Stacked"
-msgstr ""
+msgstr "逐次分析: 積み上げ"
 
 msgid "Sequential Posterior Updating"
-msgstr ""
+msgstr "逐次事後更新"
 
 msgid "Prediction Summary"
-msgstr ""
+msgstr "予測の要約"
 
 msgid "%s Prediction Plots"
-msgstr ""
+msgstr "%s 予測プロット"
 
 msgid "%1$s %2$s Prediction Plots"
-msgstr ""
+msgstr "%1$s %2$s 予測プロット"
 
 msgid "%s Prior and Posterior Plots"
-msgstr ""
+msgstr "%s 事前と事後プロット"
 
 msgid "%s Predictive Accuracy Plot"
-msgstr ""
+msgstr "%s 予測精度プロット"
 
 msgid "%s Sequential Analysis"
-msgstr ""
+msgstr "%s 逐次解析"
 
 msgid ""
 "Welcome to the %s analysis from the Learn Bayes module. This analysis "
 "illustrates Bayesian %s using %s examples."
-msgstr ""
+msgstr "Learn Bayes モジュールの %s 分析へようこそ。この分析は、ベイズ %s を %s の例を使って説明しています."
 
 msgid "%s (the population proportion of successes)"
-msgstr ""
+msgstr "%s (成功数の母集団比率)"
 
 msgid "%s (the population mean, variance is assumed to be known)"
-msgstr ""
+msgstr "%s (母平均、分散は既知であると仮定)"
 
 msgid ""
 "The analysis is split into 5 sections:\n"
@@ -686,14 +729,21 @@ msgid ""
 "           <li> %s </li>\n"
 "           <li> %s </li> </ol>"
 msgstr ""
+"分析は5つのセクションに分かれています。\n"
+"      <ol> <li> データ - 計算のためのデータ入力を指定します。JASPに読み込まれているデータセットの変数を使用するか、データの集約され"
+"た概要を指定するか、観測値を1つずつ入力する（分析中に更新する）ことができます。</li> \n"
+"           <li> %s </li>.\n"
+"           <li> %s </li>.\n"
+"           <li> %s </li> \n"
+"           <li> %s </li> </ol>"
 
 msgid "The 'Data' section allows you to specify data input for the analysis."
-msgstr ""
+msgstr "'データ'セクションでは、分析のデータ入力を指定できます。"
 
 msgid ""
 "The 'Select variable' option allows the selection of a variable ('Selected') "
 "from a dataset loaded into JASP. %s"
-msgstr ""
+msgstr "'変数を選択' オプションを使用すると、JASP に読み込まれたデータセットから変数 ('選択済み') を選択できます。%s"
 
 msgid ""
 "The 'Specify counts' option allows the use of aggregated data. %1$s This "
@@ -701,11 +751,13 @@ msgid ""
 "of information about the order of observations precludes the use of "
 "sequential analysis."
 msgstr ""
+"'カウントの指定'オプションを使用すると、集約データを使用できます。 %1$s これは、%2$s "
+"が完全なデータで1回だけ更新されることを意味します。観測の順序に関する情報が不足しているため、逐次分析を使用できません."
 
 msgid ""
 "The 'Enter sequence' option allows manual input of a specific order of "
 "observations. %s"
-msgstr ""
+msgstr "'シーケンスの入力'オプションを使用すると、観測値を特定の順序関係を手動で入力できます。 %s"
 
 msgid ""
 "The 'Binomial Estimation' analysis offers two types of prior distributions "
@@ -1151,10 +1203,10 @@ msgid "Mode"
 msgstr "最頻値"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
-msgstr ""
+msgstr "警告: プレイヤーの数は少なくとも 2 でなければなりません。入力を調整してください!"
 
 msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
-msgstr ""
+msgstr "警告: プレイヤーの数は最大でも9人でなければなりません。入力を調整してください!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
