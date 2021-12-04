@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
 "POT-Creation-Date: 2021-10-30 02:48\n"
-"PO-Revision-Date: 2021-11-21 19:40+0000\n"
+"PO-Revision-Date: 2021-12-02 10:53+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/es/>\n"
@@ -1384,6 +1384,8 @@ msgid ""
 "The 'Updating table' option generates a numerical summary of the displayed "
 "figure."
 msgstr ""
+"La opción 'Tabla de actualización' genera un resumen numérico de la figura "
+"presentada."
 
 msgid ""
 "<ul><li>'central' - a central interval (or quantile) that covers the central "
@@ -1405,36 +1407,43 @@ msgstr "Moda"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
+"Advertencia: El número de jugadores debe ser al menos de 2. ¡Ajusta las "
+"entradas!"
 
 msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
 msgstr ""
+"Advertencia: El número de jugadores debe ser al menos de 9. ¡Ajusta las "
+"entradas!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
+"Advertencia: ¡El número de puntos requeridos para ganar debe ser al menos de "
+"1!"
 
 msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
 msgstr ""
+"Advertencia: El jugador %1$s ya ha ganado el juego. ¡Ajusta las entradas!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
+msgstr "Advertencia: Valores de entrada no negativos. ¡Ajusta las entradas!"
 
 msgid "Players"
-msgstr ""
+msgstr "Jugadores"
 
 msgid "p(win 1 point)"
-msgstr ""
+msgstr "p(ganar 1 punto)"
 
 msgid "Points Gained"
-msgstr ""
+msgstr "Puntos Ganados"
 
 msgid "Analytical"
-msgstr ""
+msgstr "Analítico"
 
 msgid "p(win the game)"
-msgstr ""
+msgstr "p(ganar el juego)"
 
 msgid "Simulated"
-msgstr ""
+msgstr "Simulado"
 
 msgid ""
 "The number of players (%1$i) does not equal the numbers of points for each "
@@ -1442,10 +1451,10 @@ msgid ""
 msgstr ""
 
 msgid "Prior Skill"
-msgstr ""
+msgstr "Habilidad Previa"
 
 msgid "Only numeric values are allowed in the input."
-msgstr ""
+msgstr "Solo se admiten valores numéricos en la entrada."
 
 msgid "SD"
 msgstr "DT"
@@ -1487,7 +1496,7 @@ msgid "Please, specify the standard deviation of the data."
 msgstr "Por favor, indica la desviación típica de los datos."
 
 msgid "The prediction for %s future %s is based on %s."
-msgstr "La predición para %s futuro %s se basa en %s."
+msgstr "La predicción para %s futuro %s se basa en %s."
 
 msgid "Sample means"
 msgstr "Medias muestrales"
@@ -1496,4 +1505,4 @@ msgid "Future data"
 msgstr "Datos futuros"
 
 msgid "Inclusion BF"
-msgstr "Inclusión FB"
+msgstr "FB de la Inclusión"
