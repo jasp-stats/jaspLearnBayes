@@ -95,8 +95,16 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0)
     
     if (options[["legendPropDistPlot"]]){
-      propDistPlot$plotObject <-  propDistPlot$plotObject + 
-        ggplot2::theme(legend.position = c(.17, .9))
+      if (xValue[which.max(propPost)] < 0.5){
+        propDistPlot$plotObject <-  propDistPlot$plotObject + 
+          ggplot2::theme(legend.position = c(.75, 1))
+      }
+      
+      if (xValue[which.max(propPost)] >= 0.5){
+        propDistPlot$plotObject <-  propDistPlot$plotObject + 
+          ggplot2::theme(legend.position = c(.25, 1))
+      }
+
     }
     jaspResults[["propDistPlot"]] <- propDistPlot
   }
@@ -120,7 +128,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     x <- seq(2,4,0.01)
     yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
-    yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
+    yPi <- seq(0, 1.8*max(yPost), 1.8*max(yPost)/99)
     
     data <- data.frame(values = c(x, x, rep(pi, 100)),
                       density = c(yPost, yPrior, yPi),
@@ -135,7 +143,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       ggplot2::ggtitle("") + # for , pi
       ggplot2::xlab(gettext("\u03c0")) +
       ggplot2::ylab(gettext("Density")) +
-      ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost))) +
+      ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.8*max(yPost))) +
       ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
       ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
                                                  "Implied Prior" = "black",
@@ -150,8 +158,16 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
     
     if (options[["legendPiDistPlot"]]){
-      piDistPlot$plotObject <-  piDistPlot$plotObject + 
-        ggplot2::theme(legend.position = c(.24, .9))
+      if(x[which.max(yPost)] < 3){
+        piDistPlot$plotObject <-  piDistPlot$plotObject + 
+          ggplot2::theme(legend.position = c(.75, 1)) #c(.24, .9)
+      }
+      
+      if(x[which.max(yPost)] >= 3){
+        piDistPlot$plotObject <-  piDistPlot$plotObject + 
+          ggplot2::theme(legend.position = c(.25, 1))
+      }
+      
     }
     
     if (options[["CIArrow"]]){
@@ -165,13 +181,13 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       CI95upper <- round(CI95upper, digit = 2)
       
       piDistPlot$plotObject <- piDistPlot$plotObject +
-        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
+        ggplot2::annotate("text", x = 3.7, y = 1.8*max(yPost), 
                           label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, CI95lower, CI95upper),
 
                           size = 6
         ) + 
         ggplot2::annotate("segment", x = CI95lower, xend = CI95upper, 
-                          y = 1.45*max(yPost), yend = 1.45*max(yPost),
+                          y = 1.65*max(yPost), yend = 1.65*max(yPost),
                           arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
                           size = 1)
 
