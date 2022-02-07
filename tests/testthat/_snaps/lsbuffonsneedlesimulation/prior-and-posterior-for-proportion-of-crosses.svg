@@ -58,14 +58,14 @@
 <text x='689.92' y='534.27' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <text x='389.08' y='566.78' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='197.32px' lengthAdjust='spacingAndGlyphs'>Proportion of Crosses</text>
 <text transform='translate(19.02,263.90) rotate(-90)' text-anchor='middle' style='font-size: 20.40px; font-family: sans;' textLength='68.04px' lengthAdjust='spacingAndGlyphs'>Density</text>
-<rect x='112.76' y='69.35' width='115.81' height='91.35' style='stroke-width: 0.75; stroke: none;' />
-<rect x='112.76' y='69.35' width='115.81' height='91.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='118.24' y='98.52' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='121.08' y1='112.70' x2='143.75' y2='112.70' style='stroke-width: 2.13; stroke-linecap: butt;' />
-<rect x='118.24' y='126.87' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='121.08' y1='141.04' x2='143.75' y2='141.04' style='stroke-width: 2.13; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
-<text x='155.06' y='118.55' style='font-size: 17.00px; font-family: sans;' textLength='68.03px' lengthAdjust='spacingAndGlyphs'>Posterior</text>
-<text x='155.06' y='146.89' style='font-size: 17.00px; font-family: sans;' textLength='35.89px' lengthAdjust='spacingAndGlyphs'>Prior</text>
+<rect x='496.63' y='20.71' width='115.81' height='91.35' style='stroke-width: 0.75; stroke: none;' />
+<rect x='496.63' y='20.71' width='115.81' height='91.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='502.11' y='49.88' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='504.95' y1='64.06' x2='527.63' y2='64.06' style='stroke-width: 2.13; stroke-linecap: butt;' />
+<rect x='502.11' y='78.23' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='504.95' y1='92.40' x2='527.63' y2='92.40' style='stroke-width: 2.13; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<text x='538.93' y='69.91' style='font-size: 17.00px; font-family: sans;' textLength='68.03px' lengthAdjust='spacingAndGlyphs'>Posterior</text>
+<text x='538.93' y='98.25' style='font-size: 17.00px; font-family: sans;' textLength='35.89px' lengthAdjust='spacingAndGlyphs'>Prior</text>
 <text x='389.08' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='331.65px' lengthAdjust='spacingAndGlyphs'>prior-and-posterior-for-proportion-of-crosses</text>
 </g>
 </svg>
