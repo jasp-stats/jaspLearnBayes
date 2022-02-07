@@ -1203,4 +1203,4 @@ msgstr "Geloofwaardigheidsinterval"
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
-msgstr ""
+msgstr "Naald van Buffon"

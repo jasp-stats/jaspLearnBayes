@@ -25,15 +25,15 @@ msgstr "二項検定"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
-msgstr ""
+msgstr "点の問題"
 
 msgctxt "Description|"
 msgid "Game of Chance"
-msgstr ""
+msgstr "チャンスのゲーム"
 
 msgctxt "Description|"
 msgid "Game of Skill"
-msgstr ""
+msgstr "スキルのゲーム"
 
 msgctxt "LSbinomialestimation|"
 msgid "Color palette"
@@ -521,7 +521,7 @@ msgstr "同時"
 
 msgctxt "LStestingpredictions|"
 msgid "Overlying"
-msgstr ""
+msgstr "覆う"
 
 msgctxt "LStestingpredictions|"
 msgid "Stacked"
@@ -745,7 +745,7 @@ msgstr "事後分布から実現値を追加"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
-msgstr ""
+msgstr "閾値によるテスト特性"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
@@ -789,7 +789,7 @@ msgstr "偽発見率(False discovery rate)"
 
 msgctxt "LSbinaryclassification|"
 msgid "False omission rate"
-msgstr ""
+msgstr "False omission rate"
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
@@ -805,7 +805,7 @@ msgstr "区間"
 
 msgctxt "LSbinaryclassification|"
 msgid "Half-eye"
-msgstr ""
+msgstr "Half-eye"
 
 msgctxt "LSbinaryclassification|"
 msgid "Options"
@@ -965,7 +965,7 @@ msgstr "同時"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Overlying"
-msgstr ""
+msgstr "覆う"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Stacked"
@@ -1057,7 +1057,7 @@ msgstr "同時"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Overlying"
-msgstr ""
+msgstr "覆う"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Stacked"
@@ -1093,7 +1093,7 @@ msgstr "ビュフォンの針の操作"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "線間距離に対する針の長さの割合:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "%"
@@ -1105,11 +1105,11 @@ msgstr "スロー回数:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
-msgstr ""
+msgstr "交差の数:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
+msgstr "交差の割合における事前分布"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter a: "
@@ -1129,7 +1129,7 @@ msgstr "プロット"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "交差の割合における事前分布と事後分布"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Legend"
@@ -1137,7 +1137,7 @@ msgstr "凡例"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Implied prior and posterior for π"
-msgstr ""
+msgstr "πにおいて暗黙に仮定している事前および事後分布"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval"
@@ -1145,7 +1145,7 @@ msgstr "信用区間"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "線間距離に対する針の長さの割合:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "%"
@@ -1157,7 +1157,7 @@ msgstr "スロー回数:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
+msgstr "交差の割合における事前分布"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter a"
@@ -1181,11 +1181,11 @@ msgstr "ニードルプロット"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Color crossing needles"
-msgstr ""
+msgstr "交差した針の色"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "交差の割合における事前分布と事後分布"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Legend"
@@ -1193,7 +1193,7 @@ msgstr "凡例"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Implied prior and posterior for π"
-msgstr ""
+msgstr "πにおいて暗黙に仮定している事前および事後分布"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
@@ -1201,4 +1201,4 @@ msgstr "信用区間"
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
-msgstr ""
+msgstr "ビュフォンの針"

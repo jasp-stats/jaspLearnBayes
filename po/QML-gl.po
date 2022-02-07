@@ -194,7 +194,7 @@ msgstr "Niveis"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Count Data"
-msgstr "Datos de reconto"
+msgstr "Datos de Reconto"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Available"
@@ -238,7 +238,7 @@ msgstr "O Problema dos Puntos"
 
 msgctxt "Description|"
 msgid "Game of Chance"
-msgstr "Xogo de Casualidade"
+msgstr "Xogo de Azar"
 
 msgctxt "Description|"
 msgid "Game of Skill"
@@ -394,19 +394,19 @@ msgstr "Detección de sinal"
 
 msgctxt "LSbinaryclassification|"
 msgid "True positive rate"
-msgstr "Cociente de verdadeiros positivos"
+msgstr "Proporción de verdadeiros positivos"
 
 msgctxt "LSbinaryclassification|"
 msgid "False positive rate"
-msgstr "Cociente de falsos positivos"
+msgstr "Proporción de falsos positivos"
 
 msgctxt "LSbinaryclassification|"
 msgid "True negative rate"
-msgstr "Cociente de verdadeiros negativos"
+msgstr "Proporción de verdadeiros negativos"
 
 msgctxt "LSbinaryclassification|"
 msgid "False negative rate"
-msgstr "Cociente de falsos negativos"
+msgstr "Proporción de falsos negativos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive predictive value"
@@ -418,11 +418,11 @@ msgstr "Valor preditivo negativo"
 
 msgctxt "LSbinaryclassification|"
 msgid "False discovery rate"
-msgstr "Cociente de falso achado"
+msgstr "Proporción de falsos achados"
 
 msgctxt "LSbinaryclassification|"
 msgid "False omission rate"
-msgstr "Cociente de falsa omisión"
+msgstr "Proporción de falsas omisións"
 
 msgctxt "LSbinaryclassification|"
 msgid "Accuracy"
@@ -1086,11 +1086,11 @@ msgstr "FB₀₁"
 
 msgctxt "Description|"
 msgid "Simulating Buffon's Needle"
-msgstr "Simular a agulla de Buffon"
+msgstr "Simular a Agulla de Buffon"
 
 msgctxt "Description|"
 msgid "Manipulating Buffon's Needle"
-msgstr "Manipular a agulla de Buffon"
+msgstr "Manipular a Agulla de Buffon"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
@@ -1202,4 +1202,4 @@ msgstr "Intervalo de credibilidade"
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
-msgstr ""
+msgstr "Agulla de Buffon"
