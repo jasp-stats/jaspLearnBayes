@@ -154,15 +154,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    propDistPlot$plotObject <- jaspGraphs::themeJasp(propDistPlot0)
 
    if (options[["legendPropDistPlot"]]){
-     if (xValue[which.max(propPost)] < 0.5){
-       propDistPlot$plotObject <-  propDistPlot$plotObject + 
-         ggplot2::theme(legend.position = c(.75, 1))
-     }
-     
-     if (xValue[which.max(propPost)] >= 0.5){
-       propDistPlot$plotObject <-  propDistPlot$plotObject + 
-         ggplot2::theme(legend.position = c(.25, 1))
-     }
+     propDistPlot$plotObject <-  propDistPlot$plotObject + 
+       ggplot2::theme(legend.position = "right")
    }
    
    jaspResults[["propDistPlot"]] <- propDistPlot
@@ -224,15 +217,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
 
    if (options[["legendPiDistPlot"]]){
-     if(x[which.max(yPost)] < 3){
-       piDistPlot$plotObject <-  piDistPlot$plotObject + 
-         ggplot2::theme(legend.position = c(.75, 1)) #c(.24, .9)
-     }
-     
-     if(x[which.max(yPost)] >= 3){
-       piDistPlot$plotObject <-  piDistPlot$plotObject + 
-         ggplot2::theme(legend.position = c(.25, 1))
-     }
+     piDistPlot$plotObject <-  piDistPlot$plotObject + 
+       ggplot2::theme(legend.position = "right")
    }
    
    if (options[["CIArrow"]]){
