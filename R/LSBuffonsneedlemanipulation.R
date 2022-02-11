@@ -96,7 +96,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     if (options[["legendPropDistPlot"]]){
       propDistPlot$plotObject <-  propDistPlot$plotObject + 
-        ggplot2::theme(legend.position = c(.17, .9))
+        ggplot2::theme(legend.position = "right")
     }
     jaspResults[["propDistPlot"]] <- propDistPlot
   }
@@ -151,7 +151,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     if (options[["legendPiDistPlot"]]){
       piDistPlot$plotObject <-  piDistPlot$plotObject + 
-        ggplot2::theme(legend.position = c(.24, .9))
+        ggplot2::theme(legend.position = "right")
     }
     
     if (options[["CIArrow"]]){
