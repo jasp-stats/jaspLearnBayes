@@ -151,7 +151,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     if (options[["legendPiDistPlot"]]){
       piDistPlot$plotObject <-  piDistPlot$plotObject + 
-        ggplot2::theme(legend.position = "right")
+        ggplot2::theme(legend.position = c(.24, .9))
     }
     
     if (options[["CIArrow"]]){
