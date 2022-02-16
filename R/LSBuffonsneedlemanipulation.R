@@ -110,7 +110,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       propCI95upper <- round(propCI95upper, digit = 2)
       
       propDistPlot$plotObject <- propDistPlot$plotObject +
-        ggplot2::annotate("text", x = 0.85, y = 1.6*max(propPost), 
+        ggplot2::annotate("text", x = 0.75, y = 1.6*max(propPost), 
                           label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, propCI95lower, propCI95upper),
                           
                           size = 6
@@ -140,7 +140,21 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     # values
-    x <- seq(2,4,0.01)
+
+    
+    CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
+    CI95lower <- round(CI95lower, digit = 2)
+    
+    med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
+    med <- round(med, digit = 2)
+    
+    CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
+    CI95upper <- round(CI95upper, digit = 2)
+    
+    xlimLower <- min(2,CI95lower)
+    xlimUpperer <- max(4,CI95upper)
+    
+    x <- seq(xlimLower,xlimUpperer,0.01)
     yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
     yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
@@ -158,7 +172,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       ggplot2::ggtitle("") + # for , pi
       ggplot2::xlab(gettext("\u03c0")) +
       ggplot2::ylab(gettext("Density")) +
-      ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost))) +
+      ggplot2::coord_cartesian(xlim = c(xlimLower, xlimUpperer), ylim = c(0, 1.6*max(yPost))) +
       ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
       ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
                                                  "Implied Prior" = "black",
@@ -178,17 +192,9 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     }
     
     if (options[["CIPiDistPlot"]]){
-      CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-      CI95lower <- round(CI95lower, digit = 2)
-      
-      med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-      med <- round(med, digit = 2)
-      
-      CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-      CI95upper <- round(CI95upper, digit = 2)
       
       piDistPlot$plotObject <- piDistPlot$plotObject +
-        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
+        ggplot2::annotate("text", x = xlimUpperer-0.7, y = 1.6*max(yPost), 
                           label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, CI95lower, CI95upper),
 
                           size = 6
