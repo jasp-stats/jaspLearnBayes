@@ -10,7 +10,8 @@ options$length <- 80
 options$CI <- 0.95
 options$showPropDistPlot <- TRUE
 options$showPiDistPlot <- TRUE
-options$CIArrow <- TRUE
+options$CIPiDistPlot <- TRUE
+options$CIPropDistPlot <- TRUE
 options$legendPropDistPlot <- TRUE
 options$legendPiDistPlot <- TRUE
 

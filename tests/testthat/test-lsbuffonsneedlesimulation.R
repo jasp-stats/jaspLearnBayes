@@ -11,7 +11,8 @@ options$showNeedlePlot <- TRUE
 options$showPropDistPlot <- TRUE
 options$showPiDistPlot <- TRUE
 options$color <- TRUE
-options$CIArrow <- TRUE
+options$CIPiDistPlot <- TRUE
+options$CIPropDistPlot <- TRUE
 options$legendPropDistPlot <- TRUE
 options$legendPiDistPlot <- TRUE
 
