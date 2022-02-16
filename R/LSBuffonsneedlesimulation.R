@@ -216,8 +216,8 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
    CI95upper <- round(CI95upper, digit = 2)
    
-   xlimLower <- min(2,CI95lower)
-   xlimUpperer <- max(4,CI95upper)
+   xlimLower <- min(2,CI95lower-0.5)
+   xlimUpperer <- max(4,CI95upper+0.5)
    
    x <- seq(xlimLower,xlimUpperer,length.out = 201)
    yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + crosses, options[["b"]] + options[["n"]] - crosses)
