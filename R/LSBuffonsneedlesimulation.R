@@ -117,9 +117,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 
 .buffonsNeedleSimulationPropDistPlot <- function(jaspResults, options) {
   if(!is.null(jaspResults[["propDistPlot"]])) return()
-  # example d for computation
-  crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
   
+  #crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
+  # example d for computation
   d <- 5
   l <- options[["length"]]*d/100
   ## 2. prior and posterior plot for proportion of crosses
@@ -130,12 +130,12 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    propDistPlot$position <- 3
    #propDistPlot$dependOn(c("n", "a", "b", "length", "CI", "showPropDistPlot"))
    propDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                         options = c("showPropDistPlot", "legendPropDistPlot"))
+                         options = c("showPropDistPlot", "CIPropDistPlot","legendPropDistPlot"))
    #propDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
    
    # values
    xValue <- seq(0,1,0.005)
-   propPost <- dbeta(xValue, options[["a"]] + crosses, options[["b"]] + options[["n"]] - crosses)
+   propPost <- dbeta(xValue, options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
    propPrior <-dbeta(xValue, options[["a"]], options[["b"]])
    dataProp <- data.frame(values = c(xValue, xValue),
                          density = c(propPost, propPrior),
@@ -158,6 +158,29 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
      propDistPlot$plotObject <-  propDistPlot$plotObject + 
        ggplot2::theme(legend.position = "right")
    }
+   
+   if (options[["CIPropDistPlot"]]){
+     propCI95lower <- qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) 
+     propCI95lower <- round(propCI95lower, digit = 2)
+     
+     propmed <- qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE)
+     propmed <- round(propmed, digit = 2)
+     
+     propCI95upper <- qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE)
+     propCI95upper <- round(propCI95upper, digit = 2)
+     
+     propDistPlot$plotObject <- propDistPlot$plotObject +
+       ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
+                         label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, propCI95lower, propCI95upper),
+                         
+                         size = 6
+       ) + 
+       ggplot2::annotate("segment", x = propCI95lower, xend = propCI95upper, 
+                         y = 1.45*max(yPost), yend = 1.45*max(yPost),
+                         arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
+                         size = 1)
+     
+   }
    jaspResults[["propDistPlot"]] <- propDistPlot
   }
 }
@@ -165,7 +188,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
 
 .buffonsNeedleSimulationPiDistPlot <- function(jaspResults, options) {
   if(!is.null(jaspResults[["piDistPlot"]])) return()
-  crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
+  #crosses <- jaspResults[["simulateResults"]][["object"]][["k"]]
   
   # example d for computation
   d <- 5
@@ -177,13 +200,13 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    piDistPlot$position <- 4
    #piDistPlot$dependOn(c("n", "a", "b", "length", "CI", "showPiDistPlot"))
    piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                       options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
+                       options = c("showPiDistPlot", "legendPiDistPlot", "CIPiDistPlot"))
 
    #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
    
    # values
    x <- seq(2,4,0.01)
-   yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + crosses, options[["b"]] + options[["n"]] - crosses)
+   yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
    yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
    yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
    
@@ -219,14 +242,14 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
        ggplot2::theme(legend.position = "right")
    }
    
-   if (options[["CIArrow"]]){
-     CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
+   if (options[["CIPiDistPlot"]]){
+     CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
      CI95lower <- round(CI95lower, digit = 2)
      
-     med <- 2 * l / (qbeta(.5, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
+     med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
      med <- round(med, digit = 2)
      
-     CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
+     CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
      CI95upper <- round(CI95upper, digit = 2)
      
      piDistPlot$plotObject <- piDistPlot$plotObject +

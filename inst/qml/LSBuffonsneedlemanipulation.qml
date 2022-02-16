@@ -97,7 +97,13 @@ Form
 		{ 
 			name: "showPropDistPlot";
 			label: qsTr("Prior and posterior for the proportion of crosses");
-
+			
+			CheckBox 
+			{ 
+				name: "CIPropDistPlot"; 
+				label: qsTr("Credible interval")
+				checked: false
+			}
 			CheckBox 
 			{ 
 				name: "legendPropDistPlot"; 
@@ -115,7 +121,7 @@ Form
 
 			CheckBox 
 			{ 
-				name: "CIArrow"; 
+				name: "CIPiDistPlot"; 
 				label: qsTr("Credible interval")
 				checked: false
 			}

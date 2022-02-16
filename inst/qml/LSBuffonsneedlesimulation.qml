@@ -109,6 +109,12 @@ Form
 
 			CheckBox 
 			{ 
+				name: "CIPropDistPlot"; 
+				label: qsTr("Credible interval")
+				checked: false
+			}
+			CheckBox 
+			{ 
 				name: "legendPropDistPlot"; 
 				label: qsTr("Legend")
 				checked: false
@@ -124,7 +130,7 @@ Form
  
 			CheckBox 
 			{ 
-				name: "CIArrow"; 
+				name: "CIPiDistPlot"; 
 				label: qsTr("Credible interval")
 				checked: false
 			}

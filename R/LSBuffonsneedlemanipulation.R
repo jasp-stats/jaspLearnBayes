@@ -68,7 +68,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     #propDistPlot$dependOn(c("k", "n", "a", "b", "length", "CI", "showPropDistPlot"))
     
     propDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                          options = c("showPropDistPlot", "legendPropDistPlot"))
+                          options = c("showPropDistPlot","CIPropDistPlot", "legendPropDistPlot"))
     #propDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     
     # values
@@ -98,6 +98,29 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       propDistPlot$plotObject <-  propDistPlot$plotObject + 
         ggplot2::theme(legend.position = "right")
     }
+    
+    if (options[["CIPropDistPlot"]]){
+      propCI95lower <- qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) 
+      propCI95lower <- round(propCI95lower, digit = 2)
+      
+      propmed <- qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE)
+      propmed <- round(propmed, digit = 2)
+      
+      propCI95upper <- qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE)
+      propCI95upper <- round(propCI95upper, digit = 2)
+      
+      propDistPlot$plotObject <- propDistPlot$plotObject +
+        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
+                          label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, propCI95lower, propCI95upper),
+                          
+                          size = 6
+        ) + 
+        ggplot2::annotate("segment", x = propCI95lower, xend = propCI95upper, 
+                          y = 1.45*max(yPost), yend = 1.45*max(yPost),
+                          arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
+                          size = 1)
+      
+    }
     jaspResults[["propDistPlot"]] <- propDistPlot
   }
 }
@@ -113,7 +136,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     #piDistPlot$dependOn(c("k", "n", "a", "b", "length", "CI", "showPiDistPlot", "CIArrow"))
     
     piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                        options = c("showPiDistPlot", "legendPiDistPlot", "CIArrow"))
+                        options = c("showPiDistPlot", "legendPiDistPlot", "CIPiDistPlot"))
     
     #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     # values
@@ -154,7 +177,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
         ggplot2::theme(legend.position = "right")
     }
     
-    if (options[["CIArrow"]]){
+    if (options[["CIPiDistPlot"]]){
       CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
       CI95lower <- round(CI95lower, digit = 2)
       
