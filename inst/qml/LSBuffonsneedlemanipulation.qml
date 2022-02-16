@@ -85,7 +85,7 @@ Form
 	CIField 
 	{ 
 		name: "CI"; 
-		label: qsTr("Credible interval on " + "\u03c0")
+		label: qsTr("Credible interval")
 		defaultValue: 95 
 	}
 	
