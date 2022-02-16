@@ -110,13 +110,13 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       propCI95upper <- round(propCI95upper, digit = 2)
       
       propDistPlot$plotObject <- propDistPlot$plotObject +
-        ggplot2::annotate("text", x = 3.7, y = 1.6*max(yPost), 
+        ggplot2::annotate("text", x = 3.7, y = 1.6*max(propPost), 
                           label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, propCI95lower, propCI95upper),
                           
                           size = 6
         ) + 
         ggplot2::annotate("segment", x = propCI95lower, xend = propCI95upper, 
-                          y = 1.45*max(yPost), yend = 1.45*max(yPost),
+                          y = 1.45*max(propPost), yend = 1.45*max(propPost),
                           arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
                           size = 1)
       
