@@ -161,7 +161,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     
     data <- data.frame(values = c(x, x, rep(pi, 100)),
                       density = c(yPost, yPrior, yPi),
-                      group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("\u03c0", 100))
+                      group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("pi", 100))
     )
     
     #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
@@ -176,11 +176,11 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
       ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
                                                  "Implied Prior" = "black",
-                                                 "\u03c0" = "red"),
+                                                 "pi" = "red"),
                                   labels = labels) +
       ggplot2::scale_linetype_manual("", values = c("Implied Posterior" = "solid",
                                                     "Implied Prior" = "dashed",
-                                                    "\u03c0" = "solid"),
+                                                    "pi" = "solid"),
                                      labels = labels)
     
     # fill in the plot
