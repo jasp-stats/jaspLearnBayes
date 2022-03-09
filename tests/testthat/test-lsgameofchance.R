@@ -31,13 +31,13 @@ context("Learn Bayes - Game of Chance")
 
 ## three players
 {
-  options <- analysisOptions("LSgameofchance")
+  options <- jaspTools::analysisOptions("LSgameofchance")
   options$winPoints <- 4
   options$players <- list(list(values =  c(1,1)), list(values = c(1, 2)), list(values = c(2, 3)))
   
   set.seed(1)
   dataset <- NULL
-  results <- runAnalysis("LSgameofchance", dataset, options)#, makeTests = TRUE)
+  results <- jaspTools::runAnalysis("LSgameofchance", dataset, options)#, makeTests = TRUE)
 
   test_that("Probability of Player 1 Winning plot matches", {
     plotName <- results[["results"]][["CIPlot"]][["data"]]
