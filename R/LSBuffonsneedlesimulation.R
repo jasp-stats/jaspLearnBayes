@@ -49,9 +49,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   summaryTable$position <- 1
   summaryTable$dependOn(c("n", "length", "a", "b", "CI"))
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
+  summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Throws"), type = "integer")
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
-  summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Observations"), type = "integer")
-  summaryTable$addColumnInfo(name = "Median", title = gettextf("Median for %s", "\u03c0"), type = "number")
+  summaryTable$addColumnInfo(name = "Median", title = "\u03C0\u0302", type = "number")
   summaryTable$addColumnInfo(name = "lowerCI", title = gettext("Lower"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
@@ -59,14 +59,9 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   
   # fill in the table
   CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-  CI95lower <- round(CI95lower, digit = 2)
-  
   med <- 2 * l / (qbeta(.5, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-  med <- round(med, digit = 2)
-  
   CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
-  CI95upper <- round(CI95upper, digit = 2)
-  
+
   summaryTable$addRows(list(NumCrosses = crosses, NumObservations = options[["n"]],
                            lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
   jaspResults[["summaryTable"]] <- summaryTable
