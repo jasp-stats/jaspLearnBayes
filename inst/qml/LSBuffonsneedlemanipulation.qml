@@ -1,4 +1,4 @@
-	//
+﻿	//
 // Copyright (C) 2013-2018 University of Amsterdam
 //
 // This program is free software: you can redistribute it and/or modify
@@ -136,38 +136,40 @@ Form
 	}
 	Group
 	{
-		title: qsTr("Highlight")
+		id: options
+		property bool negativeValues	: false
+		property double	min		: negativeValues ? -Infinity : 0
+		property double	max		: Infinity
+
+
+		title: qsTr("Highlight Probability")
 		Group
 		{
 			columns: 2
-			CheckBox{ name: "highlightDensity"		; label: qsTr("Density")	; id: highlightDensity }
-			CheckBox{ name: "highlightProbability"	; label: qsTr("Probability"); id: highlightProbability }
-		}
-
-		RadioButtonGroup
-		{
-			name: "highlightType"
 			title: qsTr("Interval")
-			enabled: highlightDensity.checked || highlightProbability.checked
-			GridLayout
-			{
-				columns: 3
-				rowSpacing: jaspTheme.rowGroupSpacing
-				columnSpacing: 0
-
-				RadioButton { value: "minmax"; checked: true; id: minmax }
-				DoubleField { name: "min"; label: qsTr("from")	; min: options.min; max: parseFloat(minmaxMax.value); defaultValue: options.intervalMinmaxMin; id: minmaxMin; enabled: minmax.checked }
-				DoubleField { name: "max"; label: qsTr("to")	; min: parseFloat(minmaxMin.value); max: options.max; defaultValue: options.intervalMinmaxMax; id: minmaxMax; enabled: minmax.checked; Layout.leftMargin: jaspTheme.columnGroupSpacing }
-
-				RadioButton { value: "lower"; id: lower }
-				Label		{ text: qsTr("from %1").arg(options.min === -Infinity ? " -∞" : (" " + options.min)); enabled: lower.checked }
-				DoubleField { name: "lower_max"; label: qsTr("to"); min: options.min; max: options.max; defaultValue: options.intervalLowerMax; enabled: lower.checked; Layout.leftMargin: jaspTheme.columnGroupSpacing }
-
-				RadioButton { value: "upper"; id: upper }
-				DoubleField { name: "upper_min"; label: qsTr("from"); defaultValue: options.intervalUpperMin; min: options.min; max: options.max; enabled: upper.checked }
-				Label		{ text: qsTr("to %1").arg(options.max === Infinity ? " ∞" : (" "  + options.max)); Layout.leftMargin: jaspTheme.columnGroupSpacing; enabled: upper.checked }
+			DoubleField 
+			{ 
+				name: "min"; 
+				label: qsTr("from"); 
+				min: options.min; 
+				max: parseFloat(minmaxMax.value); 
+				defaultValue: 3; 
+				id: minmaxMin; 
+				enabled: minmax.checked 
 			}
-		}
+
+			DoubleField 
+			{ 
+				name: "max"; 
+				label: qsTr("to")	; 
+				min: parseFloat(minmaxMin.value); 
+				max: options.max; 
+				defaultValue: 3.2; 
+				id: minmaxMax; 
+				enabled: minmax.checked}
+			}
+
+		
 	}
 }
 

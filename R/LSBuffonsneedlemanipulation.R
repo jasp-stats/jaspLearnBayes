@@ -31,10 +31,11 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
   summaryTable$position <- 1
-  summaryTable$dependOn(c("k", "n", "a", "b", "length", "CI"))
+  summaryTable$dependOn(c("k", "n", "a", "b", "length", "CI", "min", "max"))
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Throws"), type = "integer")
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
+  summaryTable$addColumnInfo(name = "Mass", title = gettext("Interval Mass"),   type = "number")
   summaryTable$addColumnInfo(name = "Median", title = gettextf("MLE for %s", "\u03c0"),   type = "number")
   summaryTable$addColumnInfo(name = "lowerCI", title = gettext("Lower"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
@@ -45,8 +46,9 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   CI95lower <- 2 * l / (qbeta((1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
   med <- 2 * l / (qbeta(.5, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
   CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, options[["k"]], options[["n"]] - options[["k"]], lower.tail = FALSE) * d)
-
-  summaryTable$addRows(list(NumCrosses = options[["k"]], NumObservations = options[["n"]],
+  mass <- pbeta(2*l/(options[["min"]]*d), options[["k"]], options[["n"]] - options[["k"]]) - pbeta(2*l/(options[["max"]]*d), options[["k"]], options[["n"]] - options[["k"]])
+  
+  summaryTable$addRows(list(NumCrosses = options[["k"]], NumObservations = options[["n"]], Mass = mass,
                            lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
   jaspResults[["summaryTable"]] <- summaryTable
 }
@@ -131,7 +133,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     #piDistPlot$dependOn(c("k", "n", "a", "b", "length", "CI", "showPiDistPlot", "CIArrow"))
     
     piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                        options = c("showPiDistPlot", "legendPiDistPlot", "CIPiDistPlot"))
+                        options = c("showPiDistPlot", "legendPiDistPlot", "CIPiDistPlot", "min", "max"))
     
     #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     # values
@@ -153,6 +155,11 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
     yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
+    
+    xMin <- 2*l/(options[["min"]]*d)
+    xMax <- 2*l/(options[["max"]]*d)
+    interval <- seq(xMin, xMax, length.out = 100)
+    y <- 2 * l / (interval^2 * d) * dbeta((2 * l / (interval * d)), options[["a"]] + crosses, options[["b"]] + options[["n"]] - crosses)
     
     data <- data.frame(values = c(x, x, rep(pi, 100)),
                       density = c(yPost, yPrior, yPi),
@@ -197,7 +204,9 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
         ggplot2::annotate("segment", x = CI95lower, xend = CI95upper, 
                           y = 1.45*max(yPost), yend = 1.45*max(yPost),
                           arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
-                          size = 1)
+                          size = 1) + 
+        ggplot2::geom_polygon(ggplot2::aes(x = c(xMin:xMax,xMax:xMin), y = c(y, rev(y))),
+                              fill = "lightsteelblue")
 
     }
     jaspResults[["piDistPlot"]] <- piDistPlot
