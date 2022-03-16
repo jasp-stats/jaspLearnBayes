@@ -20,11 +20,11 @@ dataset <- NULL
 results <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, options)#, makeTests = TRUE)
 
 
-test_that("Implied Prior and Posterior for π plot matches", {
+test_that("Implied Prior and Posterior for pi plot matches", {
   #skip_on_os("windows")
   plotName <- results[["results"]][["piDistPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-π")
+  jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-pi")
 })
 
 test_that("Prior and Posterior for Proportion of Crosses plot matches", {
