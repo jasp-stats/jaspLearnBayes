@@ -35,7 +35,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Throws"), type = "integer")
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
-  summaryTable$addColumnInfo(name = "Median", title = "\u0302\u03C0",   type = "number")
+  summaryTable$addColumnInfo(name = "Median", title = gettextf("MLE for %s", "\u03c0"),   type = "number")
   summaryTable$addColumnInfo(name = "lowerCI", title = gettext("Lower"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
