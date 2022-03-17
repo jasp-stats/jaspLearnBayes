@@ -153,8 +153,8 @@ Form
 	{
 		id: options
 		property bool negativeValues	: false
-		property double	min		: negativeValues ? -Infinity : 0
-		property double	max		: Infinity
+		property double	min		: negativeValues ? -Infinity : 2
+		property double	max		: 4
 
 		CheckBox 
 		{ 
@@ -176,18 +176,23 @@ Form
 				max: parseFloat(minmaxMax.value); 
 				defaultValue: 3; 
 				id: minmaxMin; 
-				enabled: minmax.checked 
+				enabled: minmax.checked
+				Layout.leftMargin: jaspTheme.columnGroupSpacing 
 			}
 
 			DoubleField 
 			{ 
 				name: "max"; 
-				label: qsTr("to")	; 
+				label: qsTr("to"); 
 				min: parseFloat(minmaxMin.value); 
 				max: options.max; 
 				defaultValue: 3.2; 
 				id: minmaxMax; 
-				enabled: minmax.checked}
+				enabled: minmax.checked;
+				Layout.leftMargin: jaspTheme.columnGroupSpacing 
+
+			}
+
 			}
 
 		
