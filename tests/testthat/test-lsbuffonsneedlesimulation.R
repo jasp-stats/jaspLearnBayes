@@ -9,7 +9,7 @@ options$length <- 80
 options$CI <- 0.95
 options$min <- 3
 options$max <- 3.2
-options$highlight <- FALSE
+options$highlight <- TRUE
 options$showNeedlePlot <- TRUE
 options$showPropDistPlot <- TRUE
 options$showPiDistPlot <- TRUE
@@ -45,5 +45,6 @@ test_that("Prior and Posterior for Proportion of Crosses plot matches", {
 test_that("Summary Table results match", {
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(3.33, 48, 100, 2.77, 4.18))
+                                 list(0.201076042285508, 3.33426320785458, 48, 100, 2.77007004360189,
+                                      4.17585162520342))
 })

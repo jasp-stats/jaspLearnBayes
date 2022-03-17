@@ -145,14 +145,13 @@ Form
 		CheckBox 
 		{ 
 			name: "highlight"; 
-			label: qsTr("Highlight Probability")
+			label: qsTr("Highlight Interval")
 			checked: false
 		}
 
 		Group
 		{
 			columns: 2
-			title: qsTr("Interval")
 			DoubleField 
 			{ 
 				name: "min"; 
