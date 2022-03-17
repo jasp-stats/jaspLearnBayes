@@ -133,55 +133,56 @@ Form
 			}
 		}
 
-	}
-	Group
-	{
-		id: options
-		property bool negativeValues	: false
-		property double	min		: negativeValues ? -Infinity : 2
-		property double	max		: 4
-
-
-		CheckBox 
-		{ 
-			name: "highlight"; 
-			label: qsTr("Highlight Interval")
-			checked: false
-		}
-
 		Group
 		{
-			columns: 2
-			DoubleField 
+			id: options
+			property bool negativeValues	: false
+			property double	min		: negativeValues ? -Infinity : 2
+			property double	max		: 4
+
+
+			CheckBox 
 			{ 
-				name: "min"; 
-				label: qsTr("from"); 
-				min: options.min; 
-				max: parseFloat(minmaxMax.value); 
-				defaultValue: 3; 
-				id: minmaxMin; 
-				enabled: minmax.checked
-				Layout.leftMargin: jaspTheme.columnGroupSpacing 
+				name: "highlight"; 
+				label: qsTr("Highlight Interval")
+				checked: false
+			}
+
+			Group
+			{
+				columns: 2
+				DoubleField 
+				{ 
+					name: "min"; 
+					label: qsTr("from"); 
+					min: options.min; 
+					max: parseFloat(minmaxMax.value); 
+					defaultValue: 3; 
+					id: minmaxMin; 
+					enabled: minmax.checked
+					Layout.leftMargin: jaspTheme.columnGroupSpacing 
  
-			}
+				}
 
-			DoubleField 
-			{ 
-				name: "max"; 
-				label: qsTr("to")	; 
-				min: parseFloat(minmaxMin.value); 
-				max: options.max; 
-				defaultValue: 3.2; 
-				id: minmaxMax; 
-				enabled: minmax.checked
-				Layout.leftMargin: jaspTheme.columnGroupSpacing 
+				DoubleField 
+				{ 
+					name: "max"; 
+					label: qsTr("to")	; 
+					min: parseFloat(minmaxMin.value); 
+					max: options.max; 
+					defaultValue: 3.2; 
+					id: minmaxMax; 
+					enabled: minmax.checked
+					Layout.leftMargin: jaspTheme.columnGroupSpacing 
 
-			}
+				}
 
 			}
 
 		
+		}
 	}
+	
 }
 
 
