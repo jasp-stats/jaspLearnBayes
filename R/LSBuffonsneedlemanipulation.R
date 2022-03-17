@@ -133,7 +133,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     #piDistPlot$dependOn(c("k", "n", "a", "b", "length", "CI", "showPiDistPlot", "CIArrow"))
     
     piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]], 
-                        options = c("showPiDistPlot", "legendPiDistPlot", "CIPiDistPlot", "min", "max"))
+                        options = c("showPiDistPlot", "legendPiDistPlot", "CIPiDistPlot", "min", "max", "highlight"))
     
     #piDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
     # values
@@ -156,10 +156,9 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
     yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
     
-    xMin <- 2*l/(options[["min"]]*d)
-    xMax <- 2*l/(options[["max"]]*d)
-    interval <- seq(xMin, xMax, length.out = 100)
-    y <- 2 * l / (interval^2 * d) * dbeta((2 * l / (interval * d)), options[["a"]] + crosses, options[["b"]] + options[["n"]] - crosses)
+    xInterval <- seq(options[["min"]], options[["max"]], length.out = 100)
+    pInterval <- 2*l/(xInterval*d)
+    y <- 2 * l / (xInterval^2 * d) * dbeta(pInterval, options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     
     data <- data.frame(values = c(x, x, rep(pi, 100)),
                       density = c(yPost, yPrior, yPi),
@@ -169,12 +168,20 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
     labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), gettext("\u03c0"))
     
-    # axis specification
+    # plot
+    
     piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
       ggplot2::ggtitle("") + # for , pi
       ggplot2::xlab(gettext("\u03c0")) +
       ggplot2::ylab(gettext("Density")) +
-      ggplot2::coord_cartesian(xlim = c(xlimLower, xlimUpperer), ylim = c(0, 1.6*max(yPost))) +
+      ggplot2::coord_cartesian(xlim = c(xlimLower, xlimUpperer), ylim = c(0, 1.6*max(yPost)))
+    if (options[["highlight"]]){  
+    piDistPlot0 <- piDistPlot0 + 
+      ggplot2::geom_polygon(data = data.frame(x = c(xInterval,rev(xInterval)), y = c(y, rep(0,100))), 
+                            ggplot2::aes(x = x, y = y),
+                            fill = "steelblue") 
+    }
+    piDistPlot0 <- piDistPlot0 +  
       ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
       ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
                                                  "Implied Prior" = "black",
@@ -204,9 +211,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
         ggplot2::annotate("segment", x = CI95lower, xend = CI95upper, 
                           y = 1.45*max(yPost), yend = 1.45*max(yPost),
                           arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
-                          size = 1) + 
-        ggplot2::geom_polygon(ggplot2::aes(x = c(xMin:xMax,xMax:xMin), y = c(y, rev(y))),
-                              fill = "lightsteelblue")
+                          size = 1)
 
     }
     jaspResults[["piDistPlot"]] <- piDistPlot

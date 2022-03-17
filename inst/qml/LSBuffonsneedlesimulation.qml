@@ -1,4 +1,4 @@
-﻿	//
+	//
 // Copyright (C) 2013-2018 University of Amsterdam
 //
 // This program is free software: you can redistribute it and/or modify
@@ -156,8 +156,14 @@ Form
 		property double	min		: negativeValues ? -Infinity : 0
 		property double	max		: Infinity
 
+		CheckBox 
+		{ 
+			name: "highlight"; 
+			label: qsTr("Highlight Probability")
+			checked: false
+		}
 
-		title: qsTr("Highlight Probability")
+
 		Group
 		{
 			columns: 2

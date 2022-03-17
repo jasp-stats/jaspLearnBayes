@@ -8,6 +8,9 @@ options$a <- 1
 options$b <- 1
 options$length <- 80
 options$CI <- 0.95
+options$min <- 3
+options$max <- 3.2
+options$highlight <- FALSE
 options$showPropDistPlot <- TRUE
 options$showPiDistPlot <- TRUE
 options$CIPiDistPlot <- TRUE
