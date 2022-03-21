@@ -21,7 +21,7 @@ options$legendPiDistPlot <- TRUE
 
 set.seed(1)
 dataset <- NULL
-results <- jaspTools::runAnalysis("LSBuffonsneedlesimulation", dataset, options)#, makeTests = TRUE)
+results <- jaspTools::runAnalysis("LSBuffonsneedlesimulation", dataset, options) #, makeTests = TRUE)
 
 test_that("Needle Plot matches", {
   plotName <- results[["results"]][["needlePlot"]][["data"]]
@@ -45,6 +45,6 @@ test_that("Prior and Posterior for Proportion of Crosses plot matches", {
 test_that("Summary Table results match", {
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(0.201076042285508, 3.33426320785458, 48, 100, 2.77007004360189,
-                                      4.17585162520342))
+                                 list(3.33333333333333, 0.201076042285508, 3.33426320785458, 48, 100,
+                                      2.77007004360189, 4.17585162520342))
 })

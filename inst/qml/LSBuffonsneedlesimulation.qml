@@ -40,7 +40,7 @@ Form
 	{ 
 		name:			"n"
 		id: n
-		label:			qsTr("Number of throws:")
+		label:			qsTr("Number of tosses:")
 		fieldWidth:		50
 		defaultValue:	100
 		min: 0  
@@ -155,7 +155,7 @@ Form
 			CheckBox 
 			{ 
 				name: "highlight"; 
-				label: qsTr("Highlight Interval")
+				label: qsTr("Highlight interval")
 				checked: false
 			}
 

@@ -2,7 +2,7 @@ context("Learn Bayes - Buffon's Needle Manipulation")
 
 ## default settings
 options <- jaspTools::analysisOptions("LSBuffonsneedlemanipulation")
-options$k <- 50
+options$k <- 10
 options$n <- 100
 options$a <- 1
 options$b <- 1
@@ -20,7 +20,7 @@ options$legendPiDistPlot <- TRUE
 
 set.seed(1)
 dataset <- NULL
-results <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, options)#, makeTests = TRUE)
+results <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, options) #, makeTests = TRUE)
 
 
 test_that("Implied Prior and Posterior for pi plot matches", {
@@ -39,6 +39,6 @@ test_that("Prior and Posterior for Proportion of Crosses plot matches", {
 test_that("Summary Table results match", {
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(0.247212437789245, 3.2, 50, 100, 2.67871156729564, 3.97320158382837
+                                 list(3.2, 0.247212437789245, 3.2, 50, 100, 2.67871156729564, 3.97320158382837
                                  ))
 })

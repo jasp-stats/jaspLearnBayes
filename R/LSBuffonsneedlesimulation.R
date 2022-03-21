@@ -49,10 +49,11 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   summaryTable$position <- 1
   summaryTable$dependOn(c("n", "length", "a", "b", "CI", "min", "max"))
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
-  summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Throws"), type = "integer")
+  summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Tosses"), type = "integer")
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
+  summaryTable$addColumnInfo(name = "MLE", title = gettextf("MLE for %s", "\u03c0"), type = "number")
   summaryTable$addColumnInfo(name = "Mass", title = gettext("Interval Mass"),   type = "number")
-  summaryTable$addColumnInfo(name = "Median", title = gettextf("MLE for %s", "\u03c0"), type = "number")
+  summaryTable$addColumnInfo(name = "Median", title = gettextf("Median for %s", "\u03c0"), type = "number")
   summaryTable$addColumnInfo(name = "lowerCI", title = gettext("Lower"), type = "number", 
                             overtitle = gettextf("%s%% Credible Interval", options[["CI"]]*100))
   summaryTable$addColumnInfo(name = "upperCI", title = gettext("Upper"), type = "number", 
@@ -63,9 +64,10 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   med <- 2 * l / (qbeta(.5, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
   CI95upper <- 2 * l / (qbeta(1-(1-options[["CI"]])/2, crosses, options[["n"]] - crosses, lower.tail = FALSE) * d)
   mass <- pbeta(2*l/(options[["min"]]*d), crosses, options[["n"]] - crosses) - pbeta(2*l/(options[["max"]]*d), crosses, options[["n"]] - crosses)
+  MLE <- 2*l/(crosses/options[["n"]]*d)
   
   summaryTable$addRows(list(NumCrosses = crosses, NumObservations = options[["n"]], Mass = mass,
-                           lowerCI = CI95lower, Median = med,   upperCI = CI95upper))
+                           lowerCI = CI95lower, Median = med, upperCI = CI95upper, MLE = MLE))
   jaspResults[["summaryTable"]] <- summaryTable
 }
 
@@ -231,13 +233,13 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    )
 
    #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),"\u03c0"))
-   labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), gettext("\u03c0"))
+   labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
 
    
    # plot
    piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
      ggplot2::ggtitle("") + # for , pi
-     ggplot2::xlab(gettext("\u03c0")) +
+     ggplot2::xlab("\u03c0") +
      ggplot2::ylab(gettext("Density")) +
      ggplot2::coord_cartesian(xlim = c(xlimLower, xlimUpperer), ylim = c(0, 1.6*max(yPost)))
    
