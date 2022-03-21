@@ -20,14 +20,13 @@ options$legendPiDistPlot <- TRUE
 
 set.seed(1)
 dataset <- NULL
-results <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, options) #, makeTests = TRUE)
+results <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, options)#, makeTests = TRUE)
 
 
-test_that("Implied Prior and Posterior for pi plot matches", {
-  skip_on_os("windows")
+test_that("Implied Prior and Posterior for π plot matches", {
   plotName <- results[["results"]][["piDistPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-  jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-pi")
+  jaspTools::expect_equal_plots(testPlot, "implied-prior-and-posterior-for-π")
 })
 
 test_that("Prior and Posterior for Proportion of Crosses plot matches", {
@@ -39,6 +38,6 @@ test_that("Prior and Posterior for Proportion of Crosses plot matches", {
 test_that("Summary Table results match", {
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(3.2, 0.247212437789245, 3.2, 50, 100, 2.67871156729564, 3.97320158382837
+                                 list(16, 0, 16.4381357547624, 10, 100, 9.66364618026701, 32.3161343887626
                                  ))
 })
