@@ -156,7 +156,13 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     x <- seq(xlimLower,xlimUpperer,length.out = 201)
     yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]] + options[["k"]], options[["b"]] + options[["n"]] - options[["k"]])
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["a"]], options[["b"]])
-    yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
+    
+    # to avoid crash
+    if(max(yPost) == 0){
+      yPi <- seq(0, 1.6*max(yPrior), 1.6*max(yPost)/99)
+    }else{
+      yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
+    }
     
     xInterval <- seq(options[["min"]], options[["max"]], length.out = 100)
     pInterval <- 2*l/(xInterval*d)
