@@ -133,7 +133,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     # axis specification
     piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
       ggplot2::ggtitle("") + # for , pi
-      ggplot2::xlab(gettext("\u03c0")) +
+      ggplot2::xlab("\u03c0") +
       ggplot2::ylab(gettext("Density")) +
       ggplot2::coord_cartesian(xlim = c(2, 4), ylim = c(0, 1.6*max(yPost))) +
       ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
