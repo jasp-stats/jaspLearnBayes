@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-30 02:48\n"
+"POT-Creation-Date: 2022-06-28 12:43\n"
 "PO-Revision-Date: 2022-02-05 02:42+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -58,9 +58,6 @@ msgstr "Implizierter Posterior"
 
 msgid "Implied Prior"
 msgstr "Implizierter Prior"
-
-msgid "π"
-msgstr "π"
 
 msgid "%s%% CI: [%s, %s]"
 msgstr "%s%% GI: [%s, %s]"
@@ -1694,6 +1691,9 @@ msgstr "Zukünftige Daten"
 
 msgid "Inclusion BF"
 msgstr "Inklusion BF"
+
+#~ msgid "π"
+#~ msgstr "π"
 
 #~ msgid ""
 #~ "Proportion of a population not affected by a condition and incorrectly "

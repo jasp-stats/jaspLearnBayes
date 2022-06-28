@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-30 02:48\n"
+"POT-Creation-Date: 2022-06-28 12:43\n"
 "PO-Revision-Date: 2022-06-09 15:20+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -58,9 +58,6 @@ msgstr "Geïmpliceerde Posterior"
 
 msgid "Implied Prior"
 msgstr "Geïmpliceerde Prior"
-
-msgid "π"
-msgstr "π"
 
 msgid "%s%% CI: [%s, %s]"
 msgstr "%s%% CI: [%s, %s]"
@@ -1685,6 +1682,9 @@ msgstr "Toekomstige gegevens"
 
 msgid "Inclusion BF"
 msgstr "Inclusie BF"
+
+#~ msgid "π"
+#~ msgstr "π"
 
 #~ msgid ""
 #~ "The 'All' option shows either the mean ('Mean') or the median ('Median') "
