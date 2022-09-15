@@ -95,7 +95,7 @@ Section
 						inclusive:		JASP.MaxOnly
 					}
 
-					IntegerField
+					DoubleField
 					{
 						visible:		plotsPredictionTypeCI.currentText == "custom"
 						enabled:		plotsPredictionCI.checked
@@ -108,7 +108,7 @@ Section
 						max:			plotsPredictionUpper.value; inclusive: JASP.MinMax
 					}
 
-					IntegerField
+					DoubleField
 					{
 						visible:		plotsPredictionTypeCI.currentText == "custom"
 						enabled:		plotsPredictionCI.checked
