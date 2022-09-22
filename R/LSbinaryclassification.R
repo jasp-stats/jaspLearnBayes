@@ -78,7 +78,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                                             "threshold")
                                           )
 
-  if(options[["inputType"]] == "pointEstimates") options[["credibleInterval"]] <- FALSE
+  if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
 
   return(options)
 }
@@ -130,7 +130,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   jaspResults[["results"]] <-
     createJaspState(object       = results,
-                    dependencies = c("inputType", "marker", "labels", "threshold", "numberOfSamples",
+                    dependencies = c("inputType", "marker", "labels", "threshold", "samples",
                                      "truePositive", "falsePositive", "falseNegative", "trueNegative",
                                      levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = ""))
                                      )
@@ -247,13 +247,13 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
     tp <- fp <- fn <- tn <- 0
   }
   results <- list(
-    prevalenceAlpha  = options[["prevalenceAlpha"]]  + tp + fn,
-    prevalenceBeta   = options[["prevalenceBeta"]]   + fp + tn,
-    sensitivityAlpha = options[["sensitivityAlpha"]] + tp,
-    sensitivityBeta  = options[["sensitivityBeta"]]  + fn,
-    specificityAlpha = options[["specificityAlpha"]] + tn,
-    specificityBeta  = options[["specificityBeta"]]  + fp,
-    numberOfSamples  = options[["numberOfSamples"]]
+    priorPrevalenceAlpha  = options[["priorPrevalenceAlpha"]]  + tp + fn,
+    priorPrevalenceBeta   = options[["priorPrevalenceBeta"]]   + fp + tn,
+    priorSensitivityAlpha = options[["priorSensitivityAlpha"]] + tp,
+    priorSensitivityBeta  = options[["priorSensitivityBeta"]]  + fn,
+    priorSpecificityAlpha = options[["priorSpecificityAlpha"]] + tn,
+    priorSpecificityBeta  = options[["priorSpecificityBeta"]]  + fp,
+    samples  = options[["samples"]]
   )
 
   class(results) <- "bcPosteriorParams"
@@ -262,24 +262,24 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 
 coef.bcPosteriorParams <- function(results) {
   .bcStatistics(
-    prevalence  = results[["prevalenceAlpha"]]  / (results[["prevalenceAlpha"]]  + results[["prevalenceBeta"]] ),
-    sensitivity = results[["sensitivityAlpha"]] / (results[["sensitivityAlpha"]] + results[["sensitivityBeta"]]),
-    specificity = results[["specificityAlpha"]] / (results[["specificityAlpha"]] + results[["specificityBeta"]])
+    prevalence  = results[["priorPrevalenceAlpha"]]  / (results[["priorPrevalenceAlpha"]]  + results[["priorPrevalenceBeta"]] ),
+    sensitivity = results[["priorSensitivityAlpha"]] / (results[["priorSensitivityAlpha"]] + results[["priorSensitivityBeta"]]),
+    specificity = results[["priorSpecificityAlpha"]] / (results[["priorSpecificityAlpha"]] + results[["priorSpecificityBeta"]])
   )
 }
 
 .bcDrawPosteriorSamples <- function(options, progress = TRUE) {
-  prevalence <- sensitivity <- specificity <- numeric(options[["numberOfSamples"]])
+  prevalence <- sensitivity <- specificity <- numeric(options[["samples"]])
 
   if(progress)
-    startProgressbar(expectedTicks = options[["numberOfSamples"]], label = gettext("Drawing samples"))
+    startProgressbar(expectedTicks = options[["samples"]], label = gettext("Drawing samples"))
 
-  for(i in seq_len(options[["numberOfSamples"]])) {
-    prevalence[i]  <- rbeta(n=1L, options[["prevalenceAlpha"]],  options[["prevalenceBeta"]])
+  for(i in seq_len(options[["samples"]])) {
+    prevalence[i]  <- rbeta(n=1L, options[["priorPrevalenceAlpha"]],  options[["priorPrevalenceBeta"]])
     invalid <- TRUE
     while(invalid) {
-      sensitivity[i] <- rbeta(n=1L, options[["sensitivityAlpha"]], options[["sensitivityBeta"]])
-      specificity[i] <- rbeta(n=1L, options[["specificityAlpha"]], options[["specificityBeta"]])
+      sensitivity[i] <- rbeta(n=1L, options[["priorSensitivityAlpha"]], options[["priorSensitivityBeta"]])
+      specificity[i] <- rbeta(n=1L, options[["priorSpecificityAlpha"]], options[["priorSpecificityBeta"]])
       invalid <- (1-specificity[i]) > sensitivity[i]
     }
 
@@ -296,7 +296,7 @@ coef.bcPosteriorParams <- function(results) {
 
   if(is.null(jaspResults[["tables"]])) {
     tablesContainer <- createJaspContainer(title = gettext("Tables"))
-    tablesContainer$dependOn(optionsFromObject = jaspResults[["results"]], options = c("credibleInterval", "ciLevel"))
+    tablesContainer$dependOn(optionsFromObject = jaspResults[["results"]], options = c("ci", "ciLevel"))
     tablesContainer$position <- 2
     jaspResults[["tables"]] <- tablesContainer
   } else {
@@ -322,8 +322,8 @@ coef.bcPosteriorParams <- function(results) {
   if(options[["inputType"]] != "pointEstimates")
     table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
 
-  if(options[["credibleInterval"]]) {
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
+  if(options[["ci"]]) {
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
     ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
     table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
     table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
@@ -342,7 +342,7 @@ coef.bcPosteriorParams <- function(results) {
   if(!is.null(tablesContainer[["confusionMatrix"]]) ) return()
 
   table <- createJaspTable(title = gettext("Confusion Matrix"), position = 2)
-  table$dependOn(options = c("confusionMatrix", "confusionMatrixType", "confusionMatrixAddInfo"))
+  table$dependOn(options = c("confusionMatrix", "confusionMatrixType", "confusionMatrixAdditionalInfo"))
   table$showSpecifiedColumnsOnly <- TRUE
   table$transpose <- TRUE
 
@@ -359,8 +359,8 @@ coef.bcPosteriorParams <- function(results) {
     table$addColumnInfo(name = "pos_value", title = gettext("Estimate"), overtitle = gettext("Positive test"), type = "number")
   }
 
-  if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
+  if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
     table$addColumnInfo(name = "pos_lower", title = gettextf("Lower %s", ciText), type = "number")
     table$addColumnInfo(name = "pos_upper", title = gettextf("Upper %s", ciText), type = "number")
   }
@@ -374,12 +374,12 @@ coef.bcPosteriorParams <- function(results) {
     table$addColumnInfo(name = "neg_value", title = gettext("Estimate"), overtitle = gettext("Negative test"), type = "number")
   }
 
-  if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+  if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
     table$addColumnInfo(name = "neg_lower", title = gettextf("Lower %s", ciText), type = "number")
     table$addColumnInfo(name = "neg_upper", title = gettextf("Upper %s", ciText), type = "number")
   }
 
-  if(isTRUE(options[["confusionMatrixAddInfo"]])) {
+  if(isTRUE(options[["confusionMatrixAdditionalInfo"]])) {
     if(options[["confusionMatrixType"]] == "text") {
       table$addColumnInfo(name = "add1", title = gettext("Positive/Total"))
     } else if(options[["confusionMatrixType"]] == "number") {
@@ -389,7 +389,7 @@ coef.bcPosteriorParams <- function(results) {
       table$addColumnInfo(name = "add1_value", title = gettext("Estimate"), overtitle = gettext("Positive/Total"), type = "number")
     }
 
-    if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+    if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
       table$addColumnInfo(name = "add1_lower", title = gettextf("Lower %s", ciText), type = "number")
       table$addColumnInfo(name = "add1_upper", title = gettextf("Upper %s", ciText), type = "number")
     }
@@ -404,7 +404,7 @@ coef.bcPosteriorParams <- function(results) {
       table$addColumnInfo(name = "add2_value", title = gettext("Estimate"), overtitle = gettext("Negative/Total"), type = "number")
     }
 
-    if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+    if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
       table$addColumnInfo(name = "add2_lower", title = gettextf("Lower %s", ciText), type = "number")
       table$addColumnInfo(name = "add2_upper", title = gettextf("Upper %s", ciText), type = "number")
     }
@@ -418,7 +418,7 @@ coef.bcPosteriorParams <- function(results) {
       table$addColumnInfo(name = "tot_value", title = gettext("Estimate"), overtitle = gettext("Total"), type = "number")
     }
 
-    if(options[["credibleInterval"]] && options[["confusionMatrixType"]] != "text") {
+    if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
       table$addColumnInfo(name = "tot_lower", title = gettextf("Lower %s", ciText), type = "number")
       table$addColumnInfo(name = "tot_upper", title = gettextf("Upper %s", ciText), type = "number")
     }
@@ -430,8 +430,8 @@ coef.bcPosteriorParams <- function(results) {
   if(options[["inputType"]] != "pointEstimates")
     table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
 
-  if(options[["credibleInterval"]])
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["credibleInterval"]])
+  if(options[["ci"]])
+    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
 
   tablesContainer[["confusionMatrix"]] <- table
 }
@@ -468,7 +468,7 @@ coef.bcPosteriorParams <- function(results) {
     tot_upper  = c(tab["prevalence", "upperCI",  drop=TRUE], 1-tab["prevalence", "upperCI",  drop=TRUE], NA)
   )
 
-  if(isFALSE(options[["confusionMatrixAddInfo"]]))
+  if(isFALSE(options[["confusionMatrixAdditionalInfo"]]))
     df <- df[1:2,]
 
   table$setData(df)
@@ -493,11 +493,11 @@ coef.bcPosteriorParams <- function(results) {
   data <- data.frame(
     parameter = gettext(c("Prevalence", "Sensitivity", "Specificity")),
     prior     = gettextf("beta(%s,%s)",
-                         options[c("prevalenceAlpha", "sensitivityAlpha", "specificityAlpha")],
-                         options[c("prevalenceBeta",  "sensitivityBeta",  "specificityBeta")]),
+                         options[c("priorPrevalenceAlpha", "priorSensitivityAlpha", "priorSpecificityAlpha")],
+                         options[c("priorPrevalenceBeta",  "priorSensitivityBeta",  "priorSpecificityBeta")]),
     posterior = gettextf("beta(%s,%s)",
-                         post[c("prevalenceAlpha", "sensitivityAlpha", "specificityAlpha")],
-                         post[c("prevalenceBeta",  "sensitivityBeta",  "specificityBeta")])
+                         post[c("priorPrevalenceAlpha", "priorSensitivityAlpha", "priorSpecificityAlpha")],
+                         post[c("priorPrevalenceBeta",  "priorSensitivityBeta",  "priorSpecificityBeta")])
   )
 
   table$setData(data)
@@ -527,18 +527,18 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Prior posterior plot ----
 .bcPlotPriorPosteriorPositive <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotPriorPosteriorPositive"]])     ) return()
-  if(!is.null(plotsContainer[["plotPriorPosteriorPositive"]]) ) return()
+  if( isFALSE(options[["probabilityPositivePlot"]])     ) return()
+  if(!is.null(plotsContainer[["probabilityPositivePlot"]]) ) return()
 
-  plotsContainer[["plotPriorPosteriorPositive"]] <-
+  plotsContainer[["probabilityPositivePlot"]] <-
     createJaspPlot(title        = gettext("Probability Positive"),
-                   dependencies = c("plotPriorPosteriorPositive", "credibleInterval", "ciLevel", "plotPriorPosteriorPositiveDistribution"),
+                   dependencies = c("probabilityPositivePlot", "ci", "ciLevel", "probabilityPositivePlotEntireDistribution"),
                    position     = position,
                    width        = 500,
                    height       = 500,
     )
 
-  if(ready) plotsContainer[["plotPriorPosteriorPositive"]]$plotObject <-
+  if(ready) plotsContainer[["probabilityPositivePlot"]]$plotObject <-
     .bcFillPlotPriorPosteriorPositive(results, dataset, options)
 }
 
@@ -578,10 +578,10 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 .bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, dataset, options) {
-  if(options[["plotPriorPosteriorPositiveDistribution"]]) {
+  if(options[["probabilityPositivePlotEntireDistribution"]]) {
     data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
                         result = gettext(c("Negative", "Positive")),
-                        iter   = seq_len(options[["numberOfSamples"]]))
+                        iter   = seq_len(options[["samples"]]))
     data$value <- NA
     for(i in 1:nrow(data)) {
       if(data$test[i] == gettext("Not tested")) {
@@ -630,7 +630,7 @@ coef.bcPosteriorParams <- function(results) {
       ggplot2::ylab(gettext("P(Condition = positive)")) +
       ggplot2::scale_fill_discrete(name = NULL)
 
-    if(options[["credibleInterval"]]) {
+    if(options[["ci"]]) {
       plot <- plot +
         ggplot2::geom_errorbar(position = ggplot2::position_dodge(width=0.7), size = 1, width = 0.5) +
         ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$upper)),
@@ -650,18 +650,18 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Icon plot ----
 .bcPlotIconPlot <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotIconPlot"]])     ) return()
-  if(!is.null(plotsContainer[["plotIconPlot"]]) ) return()
+  if( isFALSE(options[["iconPlot"]])     ) return()
+  if(!is.null(plotsContainer[["iconPlot"]]) ) return()
 
-  plotsContainer[["plotIconPlot"]] <-
+  plotsContainer[["iconPlot"]] <-
     createJaspPlot(title        = gettext("Icon Plot"),
-                   dependencies = "plotIconPlot",
+                   dependencies = "iconPlot",
                    position     = position,
                    width        = 500,
                    height       = 500
     )
 
-  if(ready) plotsContainer[["plotIconPlot"]]$plotObject <-
+  if(ready) plotsContainer[["iconPlot"]]$plotObject <-
     .bcFillPlotIconPlot(results, dataset, options)
 
 }
@@ -729,19 +729,19 @@ coef.bcPosteriorParams <- function(results) {
 
 ## ROC curve plot ----
 .bcPlotROC <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotROC"]])     ) return()
-  if(!is.null(plotsContainer[["plotROC"]]) ) return()
+  if( isFALSE(options[["rocPlot"]])     ) return()
+  if(!is.null(plotsContainer[["rocPlot"]]) ) return()
 
-  plotsContainer[["plotROC"]] <-
+  plotsContainer[["rocPlot"]] <-
     createJaspPlot(
       title        = gettext("Receiving Operating Characteristic Curve"),
-      dependencies = c("plotROC", "credibleInterval", "ciLevel", "plotRocLines", "plotRocLinesNr"),
+      dependencies = c("rocPlot", "ci", "ciLevel", "rocPlotPosteriorRealizations", "rocPlotPosteriorRealizationsNumber"),
       position     = position,
       width        = 500,
       height       = 500,
       )
 
-  if(ready) plotsContainer[["plotROC"]]$plotObject <-
+  if(ready) plotsContainer[["rocPlot"]]$plotObject <-
     .bcFillPlotROC(results, dataset, options) +
       ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
 }
@@ -770,7 +770,7 @@ coef.bcPosteriorParams <- function(results) {
                                                  y    = tpr)
                           )
 
-  if(options[["credibleInterval"]]) {
+  if(options[["ci"]]) {
     densityData <- data.frame(
       fpr = results[["falsePositiveRate"]],
       tpr = results[["sensitivity"]]
@@ -786,8 +786,8 @@ coef.bcPosteriorParams <- function(results) {
                               size = 1, col = "black", linetype = 2)
   }
 
-  if(options[["inputType"]] == "uncertainEstimates" && options[["plotRocLines"]]) {
-    for(i in seq_len(options[["plotRocLinesNr"]])) {
+  if(options[["inputType"]] == "uncertainEstimates" && options[["rocPlotPosteriorRealizations"]]) {
+    for(i in seq_len(options[["rocPlotPosteriorRealizationsNumber"]])) {
       threshold    <- qnorm(results[["specificity"]][i])
       meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
 
@@ -838,7 +838,7 @@ coef.bcPosteriorParams <- function(results) {
                           mapping = ggplot2::aes(x = fpr, y = tpr)
                           )
 
-  if(options[["credibleInterval"]]) {
+  if(options[["ci"]]) {
     densityData <- data.frame(
       fpr = results[["falsePositiveRate"]],
       tpr = results[["sensitivity"]]
@@ -855,8 +855,8 @@ coef.bcPosteriorParams <- function(results) {
 
   }
 
-  if(options[["plotRocLines"]]) {
-    for(i in seq_len(options[["plotRocLinesNr"]])) {
+  if(options[["rocPlotPosteriorRealizations"]]) {
+    for(i in seq_len(options[["rocPlotPosteriorRealizationsNumber"]])) {
       threshold    <- qnorm(results[["specificity"]][i])
       meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
 
@@ -886,18 +886,18 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Test characteristics ----
 .bcPlotTestCharacteristics <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotTestCharacteristics"]])     ) return()
-  if(!is.null(plotsContainer[["plotTestCharacteristics"]]) ) return()
+  if( isFALSE(options[["testCharacteristicsPlot"]])     ) return()
+  if(!is.null(plotsContainer[["testCharacteristicsPlot"]]) ) return()
 
-  plotsContainer[["plotTestCharacteristics"]] <-
+  plotsContainer[["testCharacteristicsPlot"]] <-
     createJaspPlot(title        = gettext("Test Characteristics"),
-                   dependencies = c("plotTestCharacteristics", "credibleInterval", "ciLevel"),
+                   dependencies = c("testCharacteristicsPlot", "ci", "ciLevel"),
                    position     = position,
                    width        = 500,
                    height       = 500,
     )
 
-  if(ready) plotsContainer[["plotTestCharacteristics"]]$plotObject <-
+  if(ready) plotsContainer[["testCharacteristicsPlot"]]$plotObject <-
     .bcFillPlotTestCharacteristics(results, dataset, options)
 }
 
@@ -961,8 +961,8 @@ coef.bcPosteriorParams <- function(results) {
   thresholdPosterior    <- qnorm(results[["specificity"]])
   meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
 
-  varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["numberOfSamples"]])
-  for(i in seq_len(options[["numberOfSamples"]]))
+  varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["samples"]])
+  for(i in seq_len(options[["samples"]]))
     varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
 
   for(i in seq_len(nPoints)) {
@@ -988,7 +988,7 @@ coef.bcPosteriorParams <- function(results) {
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
     ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1)
 
-  if(options[["credibleInterval"]]) {
+  if(options[["ci"]]) {
     plot <- plot +
       ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tprLower,ymax=tprUpper, fill = gettext("Sensitivity")), alpha = 0.5) +
       ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tnrLower,ymax=tnrUpper, fill = gettext("Specificity")), alpha = 0.5)
@@ -1057,7 +1057,7 @@ coef.bcPosteriorParams <- function(results) {
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
     ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1)
 
-  if(options[["credibleInterval"]]) {
+  if(options[["ci"]]) {
     plot <- plot +
       ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tprLower,ymax=tprUpper, fill = gettext("Sensitivity")), alpha = 0.5) +
       ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tnrLower,ymax=tnrUpper, fill = gettext("Specificity")), alpha = 0.5)
@@ -1088,18 +1088,18 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Varying prevalence plot ----
 .bcPlotVaryingPrevalence <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotVaryingPrevalence"]])     ) return()
-  if(!is.null(plotsContainer[["plotVaryingPrevalence"]]) ) return()
+  if( isFALSE(options[["predictiveValuesByPrevalence"]])     ) return()
+  if(!is.null(plotsContainer[["predictiveValuesByPrevalence"]]) ) return()
 
-  plotsContainer[["plotVaryingPrevalence"]] <-
+  plotsContainer[["predictiveValuesByPrevalence"]] <-
     createJaspPlot(title        = gettext("PPV and NPV by Prevalence"),
-                   dependencies = c("plotVaryingPrevalence", "credibleInterval", "ciLevel"),
+                   dependencies = c("predictiveValuesByPrevalence", "ci", "ciLevel"),
                    position     = position,
                    width        = 500,
                    height       = 500,
     )
 
-  if(ready) plotsContainer[["plotVaryingPrevalence"]]$plotObject <-
+  if(ready) plotsContainer[["predictiveValuesByPrevalence"]]$plotObject <-
     .bcFillPlotVaryingPrevalence(results, dataset, options)
 }
 
@@ -1166,7 +1166,7 @@ coef.bcPosteriorParams <- function(results) {
 
   plot <- ggplot2::ggplot(data = data)
 
-  if(options[["credibleInterval"]]) {
+  if(options[["ci"]]) {
     plot <- plot +
       ggplot2::geom_ribbon(mapping = ggplot2::aes(x = prevalence, ymin = lowerPPV, ymax = upperPPV, fill = gettext("Positive")), alpha = 0.5) +
       ggplot2::geom_ribbon(mapping = ggplot2::aes(x = prevalence, ymin = lowerNPV, ymax = upperNPV, fill = gettext("Negative")), alpha = 0.5)
@@ -1194,18 +1194,18 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Alluvial plot ----
 .bcPlotAlluvial <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotAlluvial"]])     ) return()
-  if(!is.null(plotsContainer[["plotAlluvial"]]) ) return()
+  if( isFALSE(options[["alluvialPlot"]])     ) return()
+  if(!is.null(plotsContainer[["alluvialPlot"]]) ) return()
 
-  plotsContainer[["plotAlluvial"]] <-
+  plotsContainer[["alluvialPlot"]] <-
     createJaspPlot(title        = gettext("Alluvial Plot"),
-                   dependencies = "plotAlluvial",
+                   dependencies = "alluvialPlot",
                    position     = position,
                    width        = 500,
                    height       = 500
     )
 
-  if(ready) plotsContainer[["plotAlluvial"]]$plotObject <-
+  if(ready) plotsContainer[["alluvialPlot"]]$plotObject <-
     .bcFillPlotAlluvial(results, dataset, options)
 }
 
@@ -1242,18 +1242,18 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Signal detection plot ----
 .bcPlotSignal <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotSignal"]])     ) return()
-  if(!is.null(plotsContainer[["plotSignal"]]) ) return()
+  if( isFALSE(options[["signalDetectionPlot"]])     ) return()
+  if(!is.null(plotsContainer[["signalDetectionPlot"]]) ) return()
 
-  plotsContainer[["plotSignal"]] <-
+  plotsContainer[["signalDetectionPlot"]] <-
     createJaspPlot(title        = gettext("Signal Detection"),
-                   dependencies = "plotSignal",
+                   dependencies = "signalDetectionPlot",
                    position     = position,
                    width        = 500,
                    height       = 500
     )
 
-  if(ready) plotsContainer[["plotSignal"]]$plotObject <-
+  if(ready) plotsContainer[["signalDetectionPlot"]]$plotObject <-
     .bcFillPlotSignal(results, dataset, options)
 
 }
@@ -1324,28 +1324,28 @@ coef.bcPosteriorParams <- function(results) {
 
 ## Estimates plot ----
 .bcPlotEstimates <- function(results, plotsContainer, dataset, options, ready, position) {
-  if( isFALSE(options[["plotEstimates"]]) ) return()
-  if(!is.null(plotsContainer[["plotEstimates"]]) ) return()
+  if( isFALSE(options[["estimatesPlot"]]) ) return()
+  if(!is.null(plotsContainer[["estimatesPlot"]]) ) return()
 
-  plots <- c("plotPrevalence",
-             "plotSensitivity",  "plotSpecificity",
-             "plotTruePositive", "plotFalsePositive",
-             "plotTrueNegative", "plotFalseNegative",
-             "plotPPV",          "plotNPV",
-             "plotFDR",          "plotFOR",
-             "plotFPF",          "plotFNF",
-             "plotAccuracy")
+  plots <- c("estimatesPlotPrevalence",
+             "estimatesPlotSensitivity",             "estimatesPlotSpecificity",
+             "estimatesPlotTruePositiveRate",        "estimatesPlotFalsePositiveRate",
+             "estimatesPlotTrueNegativeRate",        "estimatesPlotFalseNegativeRate",
+             "estimatesPlotPositivePredictiveValue", "estimatesPlotNegativePredictiveValue",
+             "estimatesPlotFalseDiscoveryRate",      "estimatesPlotFalseOmissionRate",
+             "estimatesPlotFalsePositiveRate",       "estimatesPlotFalseNegativeRate",
+             "estimatesPlotAccuracy")
   selectedPlots <- unlist(options[plots])
 
-  plotsContainer[["plotEstimates"]] <-
+  plotsContainer[["estimatesPlot"]] <-
     createJaspPlot(title        = gettext("Estimates"),
-                   dependencies = c("plotEstimates", plots, "plotEstimatesType"),
+                   dependencies = c("estimatesPlot", plots, "plotEstimatesType"),
                    position     = position,
                    width        = 500,
                    height       = 50 + 50 * sum(selectedPlots)
     )
 
-  if(ready && any(selectedPlots)) plotsContainer[["plotEstimates"]]$plotObject <-
+  if(ready && any(selectedPlots)) plotsContainer[["estimatesPlot"]]$plotObject <-
     .bcFillPlotEstimates(results, dataset, options, selectedPlots)
 
 }
@@ -1371,7 +1371,7 @@ coef.bcPosteriorParams <- function(results) {
 
     plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic))
 
-    if(options[["credibleInterval"]])
+    if(options[["ci"]])
       plot <- plot + ggplot2::geom_errorbarh(mapping = ggplot2::aes(xmin=lowerCI,xmax=upperCI),
                                              height = 0.25, size = 1)
 
@@ -1484,8 +1484,8 @@ coef.bcPosteriorParams <- function(results) {
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(
-     credibleInterval  = gettextf("Central credible intervals are based on %i samples.", options[["numberOfSamples"]]),
-     posteriorEstimate = gettextf("Parameter estimates are posterior means based on %i samples.", options[["numberOfSamples"]])
+     ci  = gettextf("Central credible intervals are based on %i samples.", options[["samples"]]),
+     posteriorEstimate = gettextf("Parameter estimates are posterior means based on %i samples.", options[["samples"]])
    )
   )
 

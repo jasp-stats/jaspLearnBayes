@@ -72,16 +72,16 @@ Form {
 		columns: 3
 		title: qsTr("Priors")
 		Text{ text: qsTr("Prevalence") }
-		FormulaField { name: "prevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 55}
-		FormulaField { name: "prevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 55	}
+		FormulaField { name: "priorPrevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 55}
+		FormulaField { name: "priorPrevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 55	}
 
 		Text{ text: qsTr("Sensitivity") }
-		FormulaField { name: "sensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
-		FormulaField { name: "sensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+		FormulaField { name: "priorSensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
+		FormulaField { name: "priorSensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
 
 		Text{ text: qsTr("Specificity") }
-		FormulaField { name: "specificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
-		FormulaField { name: "specificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+		FormulaField { name: "priorSpecificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
+		FormulaField { name: "priorSpecificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
 	}
 
 	Group
@@ -98,7 +98,7 @@ Form {
 				RadioButton { name: "number";	label: qsTr("Number")					}
 				RadioButton { name: "both";		label: qsTr("Both")						}
 			}
-			CheckBox { name: "confusionMatrixAddInfo"; label: qsTr("Additional info"); checked: true }
+			CheckBox { name: "confusionMatrixAdditionalInfo"; label: qsTr("Additional info"); checked: true }
 		}
 		CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
 	}
@@ -111,40 +111,40 @@ Form {
 		{
 			CheckBox
 			{
-				name: "plotPriorPosteriorPositive";	label: qsTr("Probability positive")
-				CheckBox { name: "plotPriorPosteriorPositiveDistribution"; label: qsTr("Show entire distribution"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"}
+				name: "probabilityPositivePlot";	label: qsTr("Probability positive")
+				CheckBox { name: "probabilityPositivePlotEntireDistribution"; label: qsTr("Show entire distribution"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"}
 			}
-			CheckBox { name: "plotIconPlot";						label: qsTr("Icon plot")							}
+			CheckBox { name: "iconPlot";						label: qsTr("Icon plot")							}
 			CheckBox
 			{
-				name: "plotROC"; label: qsTr("ROC")
+				name: "rocPlot"; label: qsTr("ROC")
 				CheckBox
 				{
-					name: "plotRocLines"; label: qsTr("Add realizations from the posterior"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"; childrenOnSameRow: true;
+					name: "rocPlotPosteriorRealizations"; label: qsTr("Add realizations from the posterior"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"; childrenOnSameRow: true;
 					IntegerField{ name: "plotRocLinesNr"; min: 0; defaultValue: 100; max: 1000 }
 				}
 			}
-			CheckBox { name: "plotTestCharacteristics";				label: qsTr("Test characteristics by threshold")	}
-			CheckBox { name: "plotVaryingPrevalence";				label: qsTr("PPV and NPV by prevalence")			}
-			CheckBox { name: "plotAlluvial";						label: qsTr("Alluvial plot")						}
-			CheckBox { name: "plotSignal";							label: qsTr("Signal detection"); 					}
+			CheckBox { name: "testCharacteristicsPlot";				label: qsTr("Test characteristics by threshold")	}
+			CheckBox { name: "predictiveValuesByPrevalence";		label: qsTr("PPV and NPV by prevalence")			}
+			CheckBox { name: "alluvialPlot";						label: qsTr("Alluvial plot")						}
+			CheckBox { name: "signalDetectionPlot";					label: qsTr("Signal detection"); 					}
 			CheckBox
 			{
-				name: "plotEstimates"; label: qsTr("Estimates"); columns: 2
-				CheckBox { name: "plotPrevalence";  label: qsTr("Prevalence");  checked: true; Layout.columnSpan: 2 }
-				CheckBox { name: "plotSensitivity"; label: qsTr("Sensitivity"); checked: true }
-				CheckBox { name: "plotSpecificity"; label: qsTr("Specificity"); checked: true }
-				CheckBox { name: "plotTruePositive"; label: qsTr("True positive rate") }
-				CheckBox { name: "plotFalsePositive"; label: qsTr("False positive rate") }
-				CheckBox { name: "plotTrueNegative"; label: qsTr("True negative rate") }
-				CheckBox { name: "plotFalseNegative"; label: qsTr("False negative rate") }
-				CheckBox { name: "plotPPV"; label: qsTr("Positive predictive value") }
-				CheckBox { name: "plotNPV"; label: qsTr("Negative predictive value") }
-				CheckBox { name: "plotFDR"; label: qsTr("False discovery rate") }
-				CheckBox { name: "plotFOR"; label: qsTr("False omission rate") }
-				CheckBox { name: "plotFPF"; label: qsTr("False positive rate") }
-				CheckBox { name: "plotFNF"; label: qsTr("False negative rate") }
-				CheckBox { name: "plotAccuracy"; label: qsTr("Accuracy"); Layout.columnSpan: 2 }
+				name: "estimatesPlot"; label: qsTr("Estimates"); columns: 2
+				CheckBox { name: "estimatesPlotPrevalence";					label: qsTr("Prevalence");					checked: true; Layout.columnSpan: 2	}
+				CheckBox { name: "estimatesPlotSensitivity";				label: qsTr("Sensitivity");					checked: true						}
+				CheckBox { name: "estimatesPlotSpecificity";				label: qsTr("Specificity");					checked: true						}
+				CheckBox { name: "estimatesPlotTruePositiveRate";			label: qsTr("True positive rate")												}
+				CheckBox { name: "estimatesPlotFalsePositiveRate";			label: qsTr("False positive rate")												}
+				CheckBox { name: "estimatesPlotTrueNegativeRate";			label: qsTr("True negative rate")												}
+				CheckBox { name: "estimatesPlotFalseNegativeRate";			label: qsTr("False negative rate")												}
+				CheckBox { name: "estimatesPlotPositivePredictiveValue";	label: qsTr("Positive predictive value")										}
+				CheckBox { name: "estimatesPlotNegativePredictiveValue";	label: qsTr("Negative predictive value")										}
+				CheckBox { name: "estimatesPlotFalseDiscoveryRate";			label: qsTr("False discovery rate")												}
+				CheckBox { name: "estimatesPlotFalseOmissionRate";			label: qsTr("False omission rate")												}
+				CheckBox { name: "estimatesPlotFalsePositiveRate";			label: qsTr("False positive rate")												}
+				CheckBox { name: "estimatesPlotFalseNegativeRate";			label: qsTr("False negative rate")												}
+				CheckBox { name: "estimatesPlotAccuracy";					label: qsTr("Accuracy"); Layout.columnSpan: 2 }
 				RadioButtonGroup
 				{
 					name: "plotEstimatesType"; title: qsTr("Plot type")
@@ -168,7 +168,7 @@ Form {
 			columns: 1
 			CheckBox
 			{
-				name:					"credibleInterval"
+				name:					"ci"
 				label:					qsTr("Credible intervals")
 				childrenOnSameRow:		true
 				checked:				true
@@ -177,7 +177,7 @@ Form {
 
 			IntegerField
 			{
-				name: "numberOfSamples"
+				name: "samples"
 				label: qsTr("Number of posterior samples")
 				defaultValue: 10000
 				min: 1000

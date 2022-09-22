@@ -10,6 +10,48 @@ Upgrades
 		fromVersion:	"0.16.4"
 		toVersion:		"0.17.0"
 
+		ChangeRename {	from: "prevalenceAlpha";	to: "priorPrevalenceAlpha"	}
+		ChangeRename {	from: "prevalenceBeta";		to: "priorPrevalenceBeta"	}
+		ChangeRename {	from: "sensitivityAlpha";	to: "priorSensitivityAlpha"	}
+		ChangeRename {	from: "sensitivityBeta";	to: "priorSensitivityBeta"	}
+		ChangeRename {	from: "specificityAlpha";	to: "priorSpecificityAlpha"	}
+		ChangeRename {	from: "specificityBeta";	to: "priorSpecificityBeta"	}
+
+		ChangeRename {	from: "confusionMatrixAddInfo";	to: "confusionMatrixAdditionalInfo"	}
+
+		ChangeRename {	from: "plotPriorPosteriorPositive";				to: "probabilityPositivePlot" }
+		ChangeRename {	from: "plotPriorPosteriorPositiveDistribution";	to: "probabilityPositivePlotEntireDistribution" }
+
+		ChangeRename {	from: "plotIconPlot";	to: "iconPlot"	}
+
+		ChangeRename {	from: "plotROC";		to: "rocPlot"								}
+		ChangeRename {	from: "plotRocLines";	to: "rocPlotPosteriorRealizations"			}
+		ChangeRename {	from: "plotRocLinesNr"; to: "rocPlotPosteriorRealizationsNumber"	}
+
+		ChangeRename {	from: "plotTestCharacteristics";	to: "testCharacteristicsPlot"		}
+		ChangeRename {	from: "plotVaryingPrevalence";		to: "predictiveValuesByPrevalence"	}
+		ChangeRename {	from: "plotAlluvial";				to: "alluvialPlot"					}
+		ChangeRename {	from: "plotSignal";					to: "signalDetectionPlot"			}
+
+		ChangeRename {	from: "plotEstimates";				to: "estimatesPlot"					}
+		ChangeRename {	from: "plotPrevalence";				to: "estimatesPlotPrevalence"					}
+		ChangeRename {	from: "plotSensitivity";			to: "estimatesPlotSensitivity"					}
+		ChangeRename {	from: "plotSpecificity";			to: "estimatesPlotSpecificity"					}
+		ChangeRename {	from: "plotTruePositive";			to: "estimatesPlotTruePositiveRate"				}
+		ChangeRename {	from: "plotFalsePositive";			to: "estimatesPlotFalsePositiveRate"			}
+		ChangeRename {	from: "plotTrueNegative";			to: "estimatesPlotTrueNegativeRate"				}
+		ChangeRename {	from: "plotFalseNegative";			to: "estimatesPlotFalseNegativeRate"			}
+		ChangeRename {	from: "plotPPV";					to: "estimatesPlotPositivePredictiveValue"		}
+		ChangeRename {	from: "plotNPV";					to: "estimatesPlotNegativePredictiveValue"		}
+		ChangeRename {	from: "plotFDR";					to: "estimatesPlotFalseDiscoveryRate"			}
+		ChangeRename {	from: "plotFOR";					to: "estimatesPlotFalseOmissionRate"			}
+		ChangeRename {	from: "plotFPF";					to: "estimatesPlotFalsePositiveRate"			}
+		ChangeRename {	from: "plotFNF";					to: "estimatesPlotFalseNegativeRate"			}
+		ChangeRename {	from: "plotAccuracy";				to: "estimatesPlotAccuracy"						}
+
+		ChangeRename {	from: "credibleInterval";	to: "ci"		}
+		ChangeRename {	from: "numberOfSamples";	to: "samples"	}
+
 		// qml_components/LSintrotext.qml
 		ChangeRename { from: "introText";	to: "introductoryText" }
 	}
@@ -179,7 +221,7 @@ Upgrades
 					newModel["betaPriorBeta"] 	= model["parBeta"];
 					newModel["spikePoint"] 		= model["parPoint"];
 					newModel["value"]           = model["value"];
-					
+
 					return newModel;
 				})
 				return newModels;
@@ -285,6 +327,5 @@ Upgrades
 		ChangeRename { from: "bfTypevsNameSequential";					to: "sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"}
 		ChangeRename { from: "bayesFactorTypeSequential";				to: "sequentialAnalysisPredictivePerformancePlotBfType"}
 		ChangeRename { from: "plotsIterativeUpdatingTable";				to: "sequentialAnalysisPredictivePerformancePlotUpdatingTable"}
-
 	}
 }
