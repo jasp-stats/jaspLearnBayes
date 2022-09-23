@@ -172,7 +172,7 @@ Upgrades
 
 	}
 
-		Upgrade
+	Upgrade
 	{
 		functionName: 	"LSbinomialtesting"
 		fromVersion:	"0.16.4"
@@ -327,5 +327,27 @@ Upgrades
 		ChangeRename { from: "bfTypevsNameSequential";					to: "sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"}
 		ChangeRename { from: "bayesFactorTypeSequential";				to: "sequentialAnalysisPredictivePerformancePlotBfType"}
 		ChangeRename { from: "plotsIterativeUpdatingTable";				to: "sequentialAnalysisPredictivePerformancePlotUpdatingTable"}
+	}
+
+
+	Upgrade
+	{
+		functionName:		"LSBuffonsneedlemanipulation"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "length";		to: "lengthToDistanceProportion"	}
+		ChangeRename {	from: "n";			to: "numberOfThrows"				}
+		ChangeRename {	from: "k";			to: "numberOfCrosses"				}
+		ChangeRename {	from: "a";			to: "priorAlpha"					}
+		ChangeRename {	from: "b";			to: "priorBeta"						}
+		ChangeRename {	from: "CI";			to: "ciLevel"						}
+
+		ChangeRename {	from: "showPropDistPlot";		to: "priorPosteriorProportion"			}
+		ChangeRename {	from: "legendPropDistPlot";		to: "priorPosteriorProportionLegend"	}
+
+		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}
+		ChangeRename {	from: "CIArrow";				to: "priorPosteriorPiCi"		}
+		ChangeRename {	from: "legendPiDistPlot";		to: "priorPosteriorPiLegend"	}
 	}
 }

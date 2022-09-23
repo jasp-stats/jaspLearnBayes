@@ -26,9 +26,9 @@ Form
 	columns: 1
 
 
-	IntegerField 
-	{ 
-		name: "length"; 
+	IntegerField
+	{
+		name: "lengthToDistanceProportion";
 		label: qsTr("Proportion of needle length to interline distance:")
 		defaultValue: 80
 		afterLabel: qsTr("%")
@@ -38,96 +38,96 @@ Form
 
 
 
-	IntegerField   
-	{ 
-		name:			"n"
+	IntegerField
+	{
+		name:			"numberOfThrows"
 		id: n
 		label:			qsTr("Number of tosses:")
 		fieldWidth:		50
 		defaultValue:	100
-		min: 0  
+		min: 0
 	}
 
-	IntegerField   
-	{ 
-		name:			"k"
+	IntegerField
+	{
+		name:			"numberOfCrosses"
 		label:			qsTr("Number of crosses:")
 		fieldWidth:		50
 		defaultValue:	50
 		min: 0
-		max: n.value  
+		max: n.value
 	}
 
 	Group
 	{
   		title: qsTr("Prior for the proportion of crosses")
 
-		IntegerField   
-		{ 
-			name:			"a"
-			label:			qsTr("Prior parameter a: ")
+		IntegerField
+		{
+			name:			"priorAlpha"
+			label:			qsTr("Prior parameter α: ")
 			fieldWidth:		50
 			defaultValue:	1
-			min: 0  
+			min: 0
 		}
 
-		IntegerField   
-		{ 
-			name:			"b"
-			label:			qsTr("Prior parameter b:")
+		IntegerField
+		{
+			name:			"priorBeta"
+			label:			qsTr("Prior parameter β:")
 			fieldWidth:		50
 			defaultValue:	1
-			min: 0  
+			min: 0
 		}
 
 	}
 
-	CIField 
-	{ 
-		name: "CI"; 
+	CIField
+	{
+		name: "ciLevel";
 		label: qsTr("Credible interval")
-		defaultValue: 95 
+		defaultValue: 95
 	}
-	
+
 	Group
 	{
   		title: qsTr("Plot")
 
-		CheckBox 
-		{ 
-			name: "showPropDistPlot";
+		CheckBox
+		{
+			name: "priorPosteriorProportion";
 			label: qsTr("Prior and posterior for the proportion of crosses");
-			
-			CheckBox 
-			{ 
-				name: "CIPropDistPlot"; 
+
+			CheckBox
+			{
+				name: "CIPropDistPlot";
 				label: qsTr("Credible interval")
 				checked: false
 			}
-			CheckBox 
-			{ 
-				name: "legendPropDistPlot"; 
+			CheckBox
+			{
+				name: "priorPosteriorProportionLegend";
 				label: qsTr("Legend")
 				checked: false
 			}
- 
+
 		}
 
-		CheckBox 
-		{ 
-			name: "showPiDistPlot";
-			label: qsTr("Implied prior and posterior for " + "\u03c0"); 
-			checked: true 
+		CheckBox
+		{
+			name: "priorPosteriorPi";
+			label: qsTr("Implied prior and posterior for " + "\u03c0");
+			checked: true
 
-			CheckBox 
-			{ 
-				name: "CIPiDistPlot"; 
+			CheckBox
+			{
+				name: "priorPosteriorPiCi";
 				label: qsTr("Credible interval")
 				checked: false
 			}
-			CheckBox 
-			{ 
-				name: "legendPiDistPlot"; 
+			CheckBox
+			{
+				name: "priorPosteriorPiLegend";
 				label: qsTr("Legend")
 				checked: false
 			}
@@ -183,7 +183,7 @@ Form
 
 
 	}
-	
+
 }
 
 
