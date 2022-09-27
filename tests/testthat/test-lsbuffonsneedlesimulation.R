@@ -1,23 +1,22 @@
 context("Learn Bayes - Buffon's Needle Simulation")
 
 ## default settings
-options <- jaspTools::analysisOptions("LSBuffonsneedlesimulation")
-options$n <- 100
-options$a <- 1
-options$b <- 1
-options$length <- 80
-options$CI <- 0.95
-options$min <- 3
-options$max <- 3.2
-options$highlight <- TRUE
-options$showNeedlePlot <- TRUE
-options$showPropDistPlot <- TRUE
-options$showPiDistPlot <- TRUE
-options$color <- TRUE
-options$CIPiDistPlot <- TRUE
-options$CIPropDistPlot <- TRUE
-options$legendPropDistPlot <- TRUE
-options$legendPiDistPlot <- TRUE
+options <- analysisOptions("LSBuffonsneedlesimulation")
+options$numberOfThrows                   <- 100
+options$priorAlpha                       <- 1
+options$priorBeta                        <- 1
+options$lengthToDistanceProportion       <- 80
+options$ciLevel                          <- 0.95
+options$min                              <- 3
+options$max                              <- 3.2
+options$highlight                        <- TRUE
+options$showNeedlePlot                   <- TRUE
+options$priorPosteriorProportion         <- TRUE
+options$priorPosteriorPi                 <- TRUE
+options$needlePlotCrossingNeedlesColored <- TRUE
+options$priorPosteriorPiCi               <- TRUE
+options$priorPosteriorProportionLegend   <- TRUE
+options$priorPosteriorPiLegend           <- TRUE
 
 set.seed(1)
 dataset <- NULL

@@ -350,4 +350,27 @@ Upgrades
 		ChangeRename {	from: "CIArrow";				to: "priorPosteriorPiCi"		}
 		ChangeRename {	from: "legendPiDistPlot";		to: "priorPosteriorPiLegend"	}
 	}
+
+	Upgrade
+	{
+		functionName:		"LSBuffonsneedlesimulation"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17"
+
+		ChangeRename {	from: "length";		to: "lengthToDistanceProportion"	}
+		ChangeRename {	from: "n";			to: "numberOfThrows"				}
+		ChangeRename {	from: "a";			to: "priorAlpha"					}
+		ChangeRename {	from: "b";			to: "priorBeta"						}
+		ChangeRename {	from: "CI";			to: "ciLevel"						}
+
+		ChangeRename {	from: "showNeedlePlot";		to: "needlePlot"			}
+		ChangeRename {	from: "color";				to: "needlePlotCrossingNeedlesColored"			}
+
+		ChangeRename {	from: "showPropDistPlot";		to: "priorPosteriorProportion"			}
+		ChangeRename {	from: "legendPropDistPlot";		to: "priorPosteriorProportionLegend"	}
+
+		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}
+		ChangeRename {	from: "CIArrow";				to: "priorPosteriorPiCi"		}
+		ChangeRename {	from: "legendPiDistPlot";		to: "priorPosteriorPiLegend"	}
+	}
 }
