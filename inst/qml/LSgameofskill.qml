@@ -33,10 +33,10 @@ Form {
 		buttonDeleteText:	"Delete player"
 		values:				["Prior skill parameter", "Points gained"]
 		columnName:			""
-        	initialColumnCount: 2
-        	buttonsInRow:       true
-		minimum: 1
-        	function getColHeaderText(defaultName, colIndex) { return String.fromCharCode(65 + colIndex); }
+        initialColumnCount: 2
+        buttonsInRow:       true
+        function getColHeaderText(defaultName, colIndex) { return String.fromCharCode(65 + colIndex); }
+		function getDefaultValue(columnIndex, rowIndex)	{ return rowIndex === 0 ? 1 : 0; }
 	}
 
 	IntegerField  

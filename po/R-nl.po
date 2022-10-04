@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2021-10-30 02:48\n"
-"PO-Revision-Date: 2022-02-05 02:42+0000\n"
-"Last-Translator: Sophie Berkhout <s.w.berkhout@gmail.com>\n"
+"POT-Creation-Date: 2022-06-28 12:43\n"
+"PO-Revision-Date: 2022-06-09 15:20+0000\n"
+"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/nl/>\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 msgid "Summary Table"
 msgstr "Overzichtstabel"
@@ -58,9 +58,6 @@ msgstr "Geïmpliceerde Posterior"
 
 msgid "Implied Prior"
 msgstr "Geïmpliceerde Prior"
-
-msgid "π"
-msgstr "π"
 
 msgid "%s%% CI: [%s, %s]"
 msgstr "%s%% CI: [%s, %s]"
@@ -247,7 +244,7 @@ msgid "Confusion Matrix"
 msgstr "Verwarringsmatrix"
 
 msgid "%s%% CI"
-msgstr "%s%% BI"
+msgstr "%s%% CI"
 
 msgid "Positive test"
 msgstr "Positieve test"
@@ -373,7 +370,7 @@ msgid "Condition"
 msgstr "Conditie"
 
 msgid "Test"
-msgstr "Toets"
+msgstr "Test"
 
 msgid "Proportion of Population"
 msgstr "Proportie van de Populatie"
@@ -1598,7 +1595,7 @@ msgstr ""
 
 msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
 msgstr ""
-"Waarschuwing: Speler %1$i heeft het spel al gewonnen. Pas de invoer aan!"
+"Waarschuwing: Speler %1$s heeft het spel al gewonnen. Pas de invoer aan!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
 msgstr ""
@@ -1685,6 +1682,9 @@ msgstr "Toekomstige gegevens"
 
 msgid "Inclusion BF"
 msgstr "Inclusie BF"
+
+#~ msgid "π"
+#~ msgstr "π"
 
 #~ msgid ""
 #~ "The 'All' option shows either the mean ('Mean') or the median ('Median') "

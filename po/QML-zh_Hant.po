@@ -3,13 +3,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
 msgid "Learn Bayes"
-msgstr "Pelajari Bayes"
+msgstr ""
 
 msgctxt "Description|"
 msgid "Learn Bayesian statistics with simple examples and supporting text"
@@ -399,10 +397,9 @@ msgctxt "LSBuffonsneedlemanipulation|"
 msgid "%"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of throws:"
-msgstr "Jumlah lemparan:"
+msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
@@ -454,7 +451,7 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Number of throws:"
-msgstr "Jumlah lemparan:"
+msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"

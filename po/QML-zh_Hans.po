@@ -9,7 +9,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Learn Bayes"
-msgstr ""
+msgstr "学习贝叶斯"
 
 msgctxt "Description|"
 msgid "Learn Bayesian statistics with simple examples and supporting text"

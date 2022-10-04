@@ -36,6 +36,7 @@ Form
         initialColumnCount: 2
         buttonsInRow:       true
         function getColHeaderText(defaultName, colIndex) { return String.fromCharCode(65 + colIndex); }
+		function getDefaultValue(columnIndex, rowIndex)	{ return rowIndex === 0 ? 1 : 0; }
 	}
 
 
