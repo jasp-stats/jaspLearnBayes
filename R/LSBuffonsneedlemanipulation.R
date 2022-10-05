@@ -110,7 +110,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       
       propDistPlot$plotObject <- propDistPlot$plotObject +
         ggplot2::annotate("text", x = 0.75, y = 1.6*max(propPost), 
-                          label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, propCI95lower, propCI95upper),
+                          label = gettextf("%1$s%% CI: [%2$s, %2$s]", options[["CI"]]*100, propCI95lower, propCI95upper),
                           
                           size = 6
         ) + 
