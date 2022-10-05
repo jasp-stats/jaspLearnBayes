@@ -212,7 +212,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
       
       piDistPlot$plotObject <- piDistPlot$plotObject +
         ggplot2::annotate("text", x = xlimUpperer*0.8, y = 1.6*max(yPost), 
-                          label = gettextf("%s%% CI: [%s, %s]", options[["CI"]]*100, CI95lower, CI95upper),
+                          label = gettextf("%1$s%% CI: [%2$s, %2$s]", options[["CI"]]*100, CI95lower, CI95upper),
 
                           size = 6
         ) + 
