@@ -1,23 +1,27 @@
 context("Learn Bayes - Buffon's Needle Simulation")
 
 ## default settings
-options <- analysisOptions("LSBuffonsneedlesimulation")
+options <- jaspTools::analysisOptions("LSBuffonsneedlesimulation")
 options$n <- 100
 options$a <- 1
 options$b <- 1
 options$length <- 80
 options$CI <- 0.95
+options$min <- 3
+options$max <- 3.2
+options$highlight <- TRUE
 options$showNeedlePlot <- TRUE
 options$showPropDistPlot <- TRUE
 options$showPiDistPlot <- TRUE
 options$color <- TRUE
-options$CIArrow <- TRUE
+options$CIPiDistPlot <- TRUE
+options$CIPropDistPlot <- TRUE
 options$legendPropDistPlot <- TRUE
 options$legendPiDistPlot <- TRUE
 
 set.seed(1)
 dataset <- NULL
-results <- runAnalysis("LSBuffonsneedlesimulation", dataset, options)#, makeTests = TRUE)
+results <- jaspTools::runAnalysis("LSBuffonsneedlesimulation", dataset, options) #, makeTests = TRUE)
 
 test_that("Needle Plot matches", {
   plotName <- results[["results"]][["needlePlot"]][["data"]]
@@ -41,5 +45,6 @@ test_that("Prior and Posterior for Proportion of Crosses plot matches", {
 test_that("Summary Table results match", {
   table <- results[["results"]][["summaryTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(3.33, 48, 100, 2.77, 4.18))
+                                 list(3.33333333333333, 0.201076042285508, 3.33426320785458, 48, 100,
+                                      2.77007004360189, 4.17585162520342))
 })

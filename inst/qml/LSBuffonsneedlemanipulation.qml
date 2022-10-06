@@ -42,7 +42,7 @@ Form
 	{ 
 		name:			"n"
 		id: n
-		label:			qsTr("Number of throws:")
+		label:			qsTr("Number of tosses:")
 		fieldWidth:		50
 		defaultValue:	100
 		min: 0  
@@ -85,7 +85,7 @@ Form
 	CIField 
 	{ 
 		name: "CI"; 
-		label: qsTr("Credible interval on " + "\u03c0")
+		label: qsTr("Credible interval")
 		defaultValue: 95 
 	}
 	
@@ -97,7 +97,13 @@ Form
 		{ 
 			name: "showPropDistPlot";
 			label: qsTr("Prior and posterior for the proportion of crosses");
-
+			
+			CheckBox 
+			{ 
+				name: "CIPropDistPlot"; 
+				label: qsTr("Credible interval")
+				checked: false
+			}
 			CheckBox 
 			{ 
 				name: "legendPropDistPlot"; 
@@ -115,7 +121,7 @@ Form
 
 			CheckBox 
 			{ 
-				name: "CIArrow"; 
+				name: "CIPiDistPlot"; 
 				label: qsTr("Credible interval")
 				checked: false
 			}
@@ -125,9 +131,59 @@ Form
 				label: qsTr("Legend")
 				checked: false
 			}
+            Group
+            {
+                id: options
+                property bool negativeValues	: false
+                property double	min		: negativeValues ? -Infinity : 2
+                property double	max		: 4
+
+
+                CheckBox
+                {
+                    name: "highlight";
+                    label: qsTr("Highlight interval")
+                    checked: false
+                }
+
+                Group
+                {
+                    columns: 2
+                    DoubleField
+                    {
+                        name: "min";
+                        label: qsTr("from");
+                        min: options.min;
+                        max: parseFloat(minmaxMax.value);
+                        defaultValue: 3;
+                        id: minmaxMin;
+                        enabled: minmax.checked
+                        Layout.leftMargin: jaspTheme.columnGroupSpacing
+
+                    }
+
+                    DoubleField
+                    {
+                        name: "max";
+                        label: qsTr("to")	;
+                        min: parseFloat(minmaxMin.value);
+                        max: options.max;
+                        defaultValue: 3.2;
+                        id: minmaxMax;
+                        enabled: minmax.checked
+                        Layout.leftMargin: jaspTheme.columnGroupSpacing
+
+                    }
+
+                }
+
+
+            }
 		}
 
+
 	}
+	
 }
 
 
