@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2022-06-28 12:43\n"
+"POT-Creation-Date: 2022-10-08 03:19\n"
 "PO-Revision-Date: 2022-06-09 15:20+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -16,11 +16,19 @@ msgstr ""
 msgid "Summary Table"
 msgstr "要約表"
 
+#, fuzzy
+msgid "Tosses"
+msgstr "交差"
+
 msgid "Crosses"
 msgstr "交差"
 
-msgid "Observations"
-msgstr "観測値"
+#, fuzzy
+msgid "MLE for %s"
+msgstr "%sの中央値"
+
+msgid "Interval Mass"
+msgstr ""
 
 msgid "Median for %s"
 msgstr "%sの中央値"
@@ -49,6 +57,10 @@ msgstr "交差の割合"
 msgid "Density"
 msgstr "密度"
 
+#, fuzzy
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "%s%% CI: [%s, %s]"
+
 msgid "Implied Prior and Posterior for %s"
 msgstr "%sにおける暗黙の事前確率と事後確率"
 
@@ -57,9 +69,6 @@ msgstr "暗黙の事後確率"
 
 msgid "Implied Prior"
 msgstr "暗黙の事前分布"
-
-msgid "%s%% CI: [%s, %s]"
-msgstr "%s%% CI: [%s, %s]"
 
 msgid "Needle Plot"
 msgstr "ニードルプロット"
@@ -663,6 +672,9 @@ msgstr "事後確率"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr "プロットできない: ベイズファクターの 1 つが無限大になっている."
+
+msgid "Observations"
+msgstr "観測値"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "少なくとも2つの仮説を指定する必要があります."

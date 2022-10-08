@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspLearnBayes 0.16.4\n"
-"POT-Creation-Date: 2022-09-17 03:33\n"
+"Project-Id-Version: jaspLearnBayes 0.17.0\n"
+"POT-Creation-Date: 2022-10-08 03:19\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,10 +13,16 @@ msgstr ""
 msgid "Summary Table"
 msgstr ""
 
+msgid "Tosses"
+msgstr ""
+
 msgid "Crosses"
 msgstr ""
 
-msgid "Observations"
+msgid "MLE for %s"
+msgstr ""
+
+msgid "Interval Mass"
 msgstr ""
 
 msgid "Median for %s"
@@ -46,6 +52,9 @@ msgstr ""
 msgid "Density"
 msgstr ""
 
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr ""
+
 msgid "Implied Prior and Posterior for %s"
 msgstr ""
 
@@ -53,9 +62,6 @@ msgid "Implied Posterior"
 msgstr ""
 
 msgid "Implied Prior"
-msgstr ""
-
-msgid "%s%% CI: [%s, %s]"
 msgstr ""
 
 msgid "Needle Plot"
@@ -500,6 +506,9 @@ msgid "Posterior probability"
 msgstr ""
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
+msgstr ""
+
+msgid "Observations"
 msgstr ""
 
 msgid "At least 2 hypotheses need to be specified."

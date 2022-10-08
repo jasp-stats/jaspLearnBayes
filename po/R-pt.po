@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-06-28 12:43\n"
+"POT-Creation-Date: 2022-10-08 03:19\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -20,11 +20,18 @@ msgstr ""
 msgid "Summary Table"
 msgstr ""
 
+msgid "Tosses"
+msgstr ""
+
 msgid "Crosses"
 msgstr ""
 
-msgid "Observations"
-msgstr "Observações"
+#, fuzzy
+msgid "MLE for %s"
+msgstr "Mediana"
+
+msgid "Interval Mass"
+msgstr ""
 
 #, fuzzy
 msgid "Median for %s"
@@ -58,6 +65,10 @@ msgid "Density"
 msgstr "Densidade"
 
 #, fuzzy
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "%s%% CI: [%s, %s]"
+
+#, fuzzy
 msgid "Implied Prior and Posterior for %s"
 msgstr "Amostras posteriores"
 
@@ -67,9 +78,6 @@ msgstr "Amostras posteriores"
 
 msgid "Implied Prior"
 msgstr ""
-
-msgid "%s%% CI: [%s, %s]"
-msgstr "%s%% CI: [%s, %s]"
 
 msgid "Needle Plot"
 msgstr ""
@@ -624,6 +632,9 @@ msgstr "Amostras posteriores"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
+
+msgid "Observations"
+msgstr "Observações"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr ""

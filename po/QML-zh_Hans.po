@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-10-07 06:06+0000\n"
-"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"jasp/jasplearnbayes-qml/zh_Hans/>\n"
-"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.1\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -533,9 +527,10 @@ msgctxt "LSgaussiantesting|"
 msgid "Sample means"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Input Type"
@@ -601,9 +596,10 @@ msgctxt "LSestimationpredictions|"
 msgid "Point estimate"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "LSestimationpredictions|"
 msgid "Posterior predictive distribution"
@@ -749,13 +745,15 @@ msgctxt "LSestimationsequential|"
 msgid "Posterior updating table"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
+#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
-msgstr ""
+msgstr "输入类型"
 
 msgctxt "LSgaussiandatainput|"
 msgid "Select variable"
@@ -817,9 +815,10 @@ msgctxt "LStestingpredictions|"
 msgid "Point estimate"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Plots"
-msgstr ""
+msgstr "绘图"
 
 msgctxt "LStestingpredictions|"
 msgid "Posterior predictive distribution"
@@ -1106,10 +1105,6 @@ msgid "%"
 msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Number of throws:"
-msgstr ""
-
-msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
 msgstr ""
 
@@ -1123,10 +1118,6 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
-msgstr ""
-
-msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Credible interval on π"
 msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
@@ -1158,10 +1149,6 @@ msgid "%"
 msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
-msgid "Number of throws:"
-msgstr ""
-
-msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
 msgstr ""
 
@@ -1171,10 +1158,6 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
-msgstr ""
-
-msgctxt "LSBuffonsneedlesimulation|"
-msgid "Credible interval on π"
 msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
@@ -1207,4 +1190,36 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "to"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "to"
 msgstr ""

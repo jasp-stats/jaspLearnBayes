@@ -1102,10 +1102,6 @@ msgid "%"
 msgstr "%"
 
 msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Number of throws:"
-msgstr "Aantal gooien:"
-
-msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
 msgstr "Aantal kruizen:"
 
@@ -1120,10 +1116,6 @@ msgstr "Prior parameter a: "
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
 msgstr "Prior parameter b:"
-
-msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Credible interval on π"
-msgstr "Geloofwaardigsheidsinterval op π"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
@@ -1154,10 +1146,6 @@ msgid "%"
 msgstr "%"
 
 msgctxt "LSBuffonsneedlesimulation|"
-msgid "Number of throws:"
-msgstr "Aantal gooien:"
-
-msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
 msgstr "Prior voor de proportie van kruizen"
 
@@ -1168,10 +1156,6 @@ msgstr "Beta prior: parameter a"
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
 msgstr "Beta prior: parameter b"
-
-msgctxt "LSBuffonsneedlesimulation|"
-msgid "Credible interval on π"
-msgstr "Geloofwaardigsheidsinterval op π"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
@@ -1204,3 +1188,35 @@ msgstr "Geloofwaardigheidsinterval"
 msgctxt "Description|"
 msgid "Buffon's Needle"
 msgstr "Naald van Buffon"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "to"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "to"
+msgstr ""

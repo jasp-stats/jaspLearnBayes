@@ -398,10 +398,6 @@ msgid "%"
 msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Number of throws:"
-msgstr ""
-
-msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
 msgstr ""
 
@@ -415,10 +411,6 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
-msgstr ""
-
-msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Credible interval on π"
 msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
@@ -450,10 +442,6 @@ msgid "%"
 msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
-msgid "Number of throws:"
-msgstr ""
-
-msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
 msgstr ""
 
@@ -463,10 +451,6 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
-msgstr ""
-
-msgctxt "LSBuffonsneedlesimulation|"
-msgid "Credible interval on π"
 msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
@@ -1199,4 +1183,36 @@ msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Updating table"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "to"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "to"
 msgstr ""

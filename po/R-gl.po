@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-06-28 12:43\n"
+"POT-Creation-Date: 2022-10-08 03:19\n"
 "PO-Revision-Date: 2022-09-25 11:23+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -24,11 +24,19 @@ msgstr ""
 msgid "Summary Table"
 msgstr "Táboa Resumo"
 
+#, fuzzy
+msgid "Tosses"
+msgstr "Cruces"
+
 msgid "Crosses"
 msgstr "Cruces"
 
-msgid "Observations"
-msgstr "Observacións"
+#, fuzzy
+msgid "MLE for %s"
+msgstr "Mediana para %s"
+
+msgid "Interval Mass"
+msgstr ""
 
 msgid "Median for %s"
 msgstr "Mediana para %s"
@@ -57,6 +65,10 @@ msgstr "Proporción de Cruces"
 msgid "Density"
 msgstr "Densidade"
 
+#, fuzzy
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "IC do %s%% : [%s, %s]"
+
 msgid "Implied Prior and Posterior for %s"
 msgstr "Previa e Posterior Implícitas para %s"
 
@@ -65,9 +77,6 @@ msgstr "Posterior Implícita"
 
 msgid "Implied Prior"
 msgstr "Previa Implícita"
-
-msgid "%s%% CI: [%s, %s]"
-msgstr "IC do %s%% : [%s, %s]"
 
 msgid "Needle Plot"
 msgstr "Gráfica de Agullas"
@@ -703,6 +712,9 @@ msgstr "Probabilidade posterior"
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 "Non é posible facer a gráfica: Un dos factores de Bayes é igual a infinito."
+
+msgid "Observations"
+msgstr "Observacións"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Cando menos, é necesario indicar 2 hipóteses."

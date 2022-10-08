@@ -1100,10 +1100,6 @@ msgid "%"
 msgstr "%"
 
 msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Number of throws:"
-msgstr "スロー回数:"
-
-msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of crosses:"
 msgstr "交差の数:"
 
@@ -1118,10 +1114,6 @@ msgstr "事前分布のパラメータa: "
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter b:"
 msgstr "事前分布のパラメータb:"
-
-msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Credible interval on π"
-msgstr "πの信用区間"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
@@ -1152,10 +1144,6 @@ msgid "%"
 msgstr "%"
 
 msgctxt "LSBuffonsneedlesimulation|"
-msgid "Number of throws:"
-msgstr "スロー回数:"
-
-msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior for the proportion of crosses"
 msgstr "交差の割合における事前分布"
 
@@ -1166,10 +1154,6 @@ msgstr "ベータ事前分布: パラメータ a"
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
 msgstr "ベータ事前分布: パラメータb"
-
-msgctxt "LSBuffonsneedlesimulation|"
-msgid "Credible interval on π"
-msgstr "πの信用区間"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
@@ -1202,3 +1186,35 @@ msgstr "信用区間"
 msgctxt "Description|"
 msgid "Buffon's Needle"
 msgstr "ビュフォンの針"
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "to"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Number of tosses:"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "Highlight interval"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "from"
+msgstr ""
+
+msgctxt "LSBuffonsneedlesimulation|"
+msgid "to"
+msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2022-06-28 12:43\n"
+"POT-Creation-Date: 2022-10-08 03:19\n"
 "PO-Revision-Date: 2022-06-09 15:20+0000\n"
 "Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -17,11 +17,19 @@ msgstr ""
 msgid "Summary Table"
 msgstr "Overzichtstabel"
 
+#, fuzzy
+msgid "Tosses"
+msgstr "Kruizen"
+
 msgid "Crosses"
 msgstr "Kruizen"
 
-msgid "Observations"
-msgstr "Observaties"
+#, fuzzy
+msgid "MLE for %s"
+msgstr "Mediaan voor %s"
+
+msgid "Interval Mass"
+msgstr ""
 
 msgid "Median for %s"
 msgstr "Mediaan voor %s"
@@ -50,6 +58,10 @@ msgstr "Proportie van Kruizen"
 msgid "Density"
 msgstr "Dichtheid"
 
+#, fuzzy
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "%s%% CI: [%s, %s]"
+
 msgid "Implied Prior and Posterior for %s"
 msgstr "Geïmpliceerde Prior en Posterior voor %s"
 
@@ -58,9 +70,6 @@ msgstr "Geïmpliceerde Posterior"
 
 msgid "Implied Prior"
 msgstr "Geïmpliceerde Prior"
-
-msgid "%s%% CI: [%s, %s]"
-msgstr "%s%% CI: [%s, %s]"
 
 msgid "Needle Plot"
 msgstr "Naald Grafiek"
@@ -703,6 +712,9 @@ msgstr "Posterior kans"
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 "Plotten niet mogelijk: Een van de Bayes factors is gelijk aan oneindig."
+
+msgid "Observations"
+msgstr "Observaties"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Er moeten ten minste 2 hypothesen worden gespecificeerd."
