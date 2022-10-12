@@ -1893,7 +1893,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           "The 'Marginal' option collapses across all individual %1$s, weighting them by their %2$s probability.%3$s It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%4$s",
           ifelse (type == "Prior", gettext("prior distributions"), gettext("posterior distributions")),
           ifelse (type == "Prior", gettext("prior"), gettext("posterior")),
-          ifelse (type == "Prior", gettext(""), gettext("The result represents the best estimate given all hypotheses and our prior beliefs about them together.")),
+          ifelse (type == "Prior", "", gettext("The result represents the best estimate given all hypotheses and our prior beliefs about them together.")),
           .CIsTextLS(type == "Posterior"))
       )
 
@@ -2115,7 +2115,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
           "The 'Marginal' option collapses across all individual %1$s, weighting them by their %2$s probability.%3$s It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%4$s",
           ifelse (type == "Prior", gettext("prior predictive distributions"), gettext("posterior predictive distributions")),
           ifelse (type == "Prior", gettext("prior"), gettext("posterior")),
-          ifelse (type == "Prior", gettext(""), gettext("The result represents the best estimate given all hypotheses and our prior beliefs about them together.")),
+          ifelse (type == "Prior", "", gettext("The result represents the best estimate given all hypotheses and our prior beliefs about them together.")),
           .CIsTextLS(FALSE))
       )
 
