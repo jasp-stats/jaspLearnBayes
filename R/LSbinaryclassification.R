@@ -348,7 +348,7 @@ coef.bcPosteriorParams <- function(results) {
 
   ciText <- gettextf("%s%% CI", 100*options[["ciLevel"]])
 
-  table$addColumnInfo(name = "head", title = gettext(""))
+  table$addColumnInfo(name = "head", title = "")
 
   if(options[["confusionMatrixType"]] == "text") {
     table$addColumnInfo(name = "pos",  title = gettext("Positive test"))
