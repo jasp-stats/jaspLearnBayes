@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2022-10-08 03:19\n"
-"PO-Revision-Date: 2022-02-05 02:42+0000\n"
-"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
+"PO-Revision-Date: 2022-10-10 18:03+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
 "Language: de\n"
@@ -12,24 +12,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 msgid "Summary Table"
 msgstr "Übersichtstabelle"
 
-#, fuzzy
 msgid "Tosses"
-msgstr "Schnittpunkte"
+msgstr "Würfe"
 
 msgid "Crosses"
 msgstr "Schnittpunkte"
 
-#, fuzzy
 msgid "MLE for %s"
-msgstr "Median für %s"
+msgstr "MLE für %s"
 
 msgid "Interval Mass"
-msgstr ""
+msgstr "Intervallmasse"
 
 msgid "Median for %s"
 msgstr "Median für %s"
@@ -58,9 +56,8 @@ msgstr "Anteil der Schnittpunkte"
 msgid "Density"
 msgstr "Dichte"
 
-#, fuzzy
 msgid "%1$s%% CI: [%2$s, %3$s]"
-msgstr "%s%% GI: [%s, %s]"
+msgstr "%1$s%% GI: [%2$s, %3$s]"
 
 msgid "Implied Prior and Posterior for %s"
 msgstr "Implizierter Prior and Posterior für %s"
