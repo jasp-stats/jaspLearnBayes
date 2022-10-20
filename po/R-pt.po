@@ -536,10 +536,10 @@ msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr ""
 
-msgid "%i %% CI"
+msgid "%i%% CI"
 msgstr ""
 
-msgid "%i %% HPD"
+msgid "%i%% HPD"
 msgstr ""
 
 msgid "SI (BF=%s)"

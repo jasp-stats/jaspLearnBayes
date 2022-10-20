@@ -572,11 +572,11 @@ msgid ""
 "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr "二峰性以上のCIは、逐次分析プロットには実装されていません."
 
-msgid "%i %% CI"
-msgstr "%i %% CI"
+msgid "%i%% CI"
+msgstr "%i%% CI"
 
-msgid "%i %% HPD"
-msgstr "%i %% HPD"
+msgid "%i%% HPD"
+msgstr "%i%% HPD"
 
 msgid "SI (BF=%s)"
 msgstr "SI (BF=%s)"

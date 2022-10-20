@@ -609,11 +609,11 @@ msgstr ""
 "Meer dan bimodale BI's zijn niet geïmplementeerd in de sequentiële "
 "analyseplot."
 
-msgid "%i %% CI"
-msgstr "%i %% BI"
+msgid "%i%% CI"
+msgstr "%i%% BI"
 
-msgid "%i %% HPD"
-msgstr "%i %% HGI"
+msgid "%i%% HPD"
+msgstr "%i%% HGI"
 
 msgid "SI (BF=%s)"
 msgstr "SI (BF=%s)"

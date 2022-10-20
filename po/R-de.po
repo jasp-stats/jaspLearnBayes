@@ -604,11 +604,11 @@ msgstr ""
 "Mehr als bimodale GIs sind im Sequenziellen Analysediagramm nicht "
 "implementiert."
 
-msgid "%i %% CI"
-msgstr "%i %% KI"
+msgid "%i%% CI"
+msgstr "%i%% KI"
 
-msgid "%i %% HPD"
-msgstr "%i %% HPD"
+msgid "%i%% HPD"
+msgstr "%i%% HPD"
 
 msgid "SI (BF=%s)"
 msgstr "SI (BF=%s)"

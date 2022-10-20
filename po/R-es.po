@@ -604,11 +604,11 @@ msgid ""
 msgstr ""
 "En el gráfico de análisis Secuencial no se implementan más que ICs bimodales."
 
-msgid "%i %% CI"
-msgstr "IC del %i %%"
+msgid "%i%% CI"
+msgstr "IC del %i%%"
 
-msgid "%i %% HPD"
-msgstr "HPD del %i %%"
+msgid "%i%% HPD"
+msgstr "HPD del %i%%"
 
 msgid "SI (BF=%s)"
 msgstr "IS (FB=%s)"

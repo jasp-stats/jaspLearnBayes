@@ -947,9 +947,9 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     if (ready["priors"]) {
       if (options[["plotsIterativeOverlyingCI"]]) {
         if (options[["plotsIterativeOverlyingType"]] == "central")
-          CItitle <- gettextf("%i %% CI", options[["plotsIterativeCoverage"]]*100)
+          CItitle <- gettextf("%i%% CI", options[["plotsIterativeCoverage"]]*100)
         else if (options[["plotsIterativeOverlyingType"]] == "HPD")
-          CItitle <- gettextf("%i %% HPD", options[["plotsIterativeCoverage"]]*100)
+          CItitle <- gettextf("%i%% HPD", options[["plotsIterativeCoverage"]]*100)
         else if (options[["plotsIterativeOverlyingType"]] == "support")
           CItitle <- gettextf("SI (BF=%s)", options[["plotsIterativeBF"]])
 
