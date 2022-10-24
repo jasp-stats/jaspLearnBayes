@@ -46,7 +46,7 @@ Description
 		qml:	"LSbinomialtesting.qml"
 		func:	"LSbinomialtesting"
 	}
-/*
+
 	GroupTitle
 	{
 		title: 	qsTr("Continuous")
@@ -66,7 +66,7 @@ Description
 		qml:	"LSgaussiantesting.qml"
 		func:	"LSgaussiantesting"
 	}
-*/
+
 	GroupTitle
 	{
 		title:	qsTr("The Problem of Points")
