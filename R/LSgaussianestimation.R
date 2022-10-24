@@ -965,9 +965,9 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     if (ready["priors"]) {
       if (options[["plotsIterativeOverlyingCI"]]) {
         if (options[["plotsIterativeOverlyingType"]] == "central") {
-          CI_title <- gettextf("%i %% CI", options[["plotsIterativeCoverage"]]*100)
+          CI_title <- gettextf("%i%% CI", options[["plotsIterativeCoverage"]]*100)
         } else if (options[["plotsIterativeOverlyingType"]] == "HPD") {
-          CI_title <- gettextf("%i %% HPD", options[["plotsIterativeCoverage"]]*100)
+          CI_title <- gettextf("%i%% HPD", options[["plotsIterativeCoverage"]]*100)
         } else if (options[["plotsIterativeOverlyingType"]] == "support") {
           CI_title <- gettextf("SI (BF=%s)", options[["plotsIterativeBF"]])
         }

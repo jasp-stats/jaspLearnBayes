@@ -113,7 +113,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   }
 
   if(mean(subset(dataset, condition)$marker) < mean(subset(dataset, !condition)$marker))
-    .quitAnalysis(gettextf("Mean of marker in positive condition (%s) needs to be larger than the mean of marker in negative condition (%s).", levels[2], levels[1]))
+    .quitAnalysis(gettextf("Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s).", levels[2], levels[1]))
 
   return(dataset)
 }
