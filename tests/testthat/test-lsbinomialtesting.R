@@ -119,13 +119,13 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Hypothesis Beta"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_Hypothesis Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-default-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Hypothesis Spike"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_Hypothesis Spike"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-default-2", dir="LSbinomialtesting")
   })
@@ -137,19 +137,19 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-default-4", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior_Hypothesis Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior_Hypothesis Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-default-5", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior_Hypothesis Spike"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior_Hypothesis Spike"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-default-6", dir="LSbinomialtesting")
   })
@@ -173,7 +173,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "titleless-plot-9-default-10", dir="LSbinomialtesting")
   })
@@ -310,13 +310,13 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-vol1-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_2"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-vol1-2", dir="LSbinomialtesting")
   })
@@ -328,13 +328,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-vol1-4", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-4-vol1-5", dir="LSbinomialtesting")
   })
@@ -352,7 +352,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-7-vol1-8", dir="LSbinomialtesting")
   })
@@ -489,13 +489,13 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-vol2-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_2"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-vol2-2", dir="LSbinomialtesting")
   })
@@ -507,13 +507,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-vol2-4", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-4-vol2-5", dir="LSbinomialtesting")
   })
@@ -531,7 +531,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-7-vol2-7", dir="LSbinomialtesting")
   })
@@ -668,13 +668,13 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-vol3-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_2"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-vol3-2", dir="LSbinomialtesting")
   })
@@ -686,13 +686,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-vol3-4", dir="LSbinomialtesting")
   })
 
   test_that("Prior-Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-4-vol3-5", dir="LSbinomialtesting")
   })
@@ -710,7 +710,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-7-vol3-8", dir="LSbinomialtesting")
   })
@@ -847,7 +847,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Prior and Posterior plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBothPlot"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBothPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-and-posterior-plot-0-vol4-1", dir="LSbinomialtesting")
   })
@@ -859,13 +859,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-vol4-3", dir="LSbinomialtesting")
   })
 
   test_that("Prior prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-3-vol4-4", dir="LSbinomialtesting")
   })
@@ -883,7 +883,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-6-vol4-7", dir="LSbinomialtesting")
   })
@@ -1020,7 +1020,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Prior and Posterio matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBothPlot"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBothPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-and-posterior-plot-0-vol5-1", dir="LSbinomialtesting")
   })
@@ -1032,7 +1032,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-vol5-3", dir="LSbinomialtesting")
   })
@@ -1054,7 +1054,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-5-vol5-5", dir="LSbinomialtesting")
   })
@@ -1215,7 +1215,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Prediction Posterior plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "titleless-plot-0-vol6-1", dir="LSbinomialtesting")
   })
@@ -1239,7 +1239,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-3-vol6-2", dir="LSbinomialtesting")
   })
@@ -1376,7 +1376,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-0-vol7-1", dir="LSbinomialtesting")
   })
@@ -1511,7 +1511,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Hypothesis 1 plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-1-spike-1", dir="LSbinomialtesting")
   })
@@ -1523,13 +1523,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-spike-3", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-3-spike-4", dir="LSbinomialtesting")
   })
@@ -1547,7 +1547,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-6-spike-7", dir="LSbinomialtesting")
   })
@@ -1679,7 +1679,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Prior and Posterior matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBothPlot"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBothPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-and-posterior-plot-0-beta-1", dir="LSbinomialtesting")
   })
@@ -1691,13 +1691,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-beta-3", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-3-beta-4", dir="LSbinomialtesting")
   })
@@ -1715,7 +1715,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-6-beta-7", dir="LSbinomialtesting")
   })
@@ -1849,7 +1849,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-0-hard-1", dir="LSbinomialtesting")
   })
@@ -1994,7 +1994,7 @@ context("Learn Bayes - Binomial Testing")
 
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-0-hard-3", dir="LSbinomialtesting")
   })

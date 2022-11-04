@@ -91,7 +91,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
 
   ### posterior predictive
-  if (options[["posteriorPredictionSummaryTablePointEstimate"]])
+  if (options[["posteriorPredictionSummaryTable"]])
     .tablePredictionsBinomialLS2(jaspResults, data, ready, options)
   if (options[["posteriorPredictionDistributionPlot"]]) {
     if (options[["posteriorPredictionDistributionPlotType"]] != "conditional")
@@ -222,12 +222,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     plotsSimple$position <- 2
     if (type == "Prior") {
       dependencies <- c("priorDistributionPlotJointType", "priorDistributionPlotMarginalCi", "priorDistributionPlotMarginalCiType",
-        "plotsPriorMarginalCoverage", "plotsPriorMarginalLower", "priorDistributionPlotMarginalCiUpper", "priorDistributionPlotMarginalPointEstimate",
+        "priorDistributionPlotMarginalCiMass", "priorDistributionPlotMarginalCiLower", "priorDistributionPlotMarginalCiUpper", "priorDistributionPlotMarginalPointEstimate",
         "priorDistributionPlotMarginalPointEstimateType")
     } else if (type == "Posterior") {
       dependencies <- c("posteriorDistributionPlotJointType", "posteriorDistributionPlotMarginalPointEstimateType", "posteriorDistributionPlotMarginalCiType",
         "posteriorDistributionPlotMarginalCiMass", "posteriorDistributionPlotMarginalCiLower", "posteriorDistributionPlotMarginalCiUpper",
-        "posteriorDistributionPlotMarginalPointEstimate", "plotsPosteriorMarginalEstimateType", "posteriorDistributionPlotObservedProportion",
+        "posteriorDistributionPlotMarginalPointEstimate", "posteriorDistributionPlotMarginalPointEstimateType", "posteriorDistributionPlotObservedProportion",
         "posteriorDistributionPlotMarginalCiBf")
     }
     plotsSimple$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette", "scaleSpikes"))
@@ -340,22 +340,22 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
       }
 
-      if (options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCi", "posteriorDistributionPlotMarginalPointEstimateType")]]) {
+      if (options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCi", "posteriorDistributionPlotMarginalCi")]]) {
 
         if (options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiType", "posteriorDistributionPlotMarginalCiType")]] == "central") {
 
           dfCI <- .marginalCentralBinomialLS(allLinesNew[[1]], allSpikes,
-                                             options[[ifelse (type == "Prior", "plotsPriorMarginalCoverage", "posteriorDistributionPlotMarginalCiMass")]])
+                                             options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiMass", "posteriorDistributionPlotMarginalCiMass")]])
 
         } else if (options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiType", "posteriorDistributionPlotMarginalCiType")]] == "HPD") {
 
           dfCI <- .marginalHPDBinomialLS(allLinesNew[[1]], allSpikes,
-                                         options[[ifelse (type == "Prior", "plotsPriorMarginalCoverage", "posteriorDistributionPlotMarginalCiMass")]])
+                                         options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiMass", "posteriorDistributionPlotMarginalCiMass")]])
 
         } else if (options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiType", "posteriorDistributionPlotMarginalCiType")]] == "custom") {
 
           dfCI <- .marginalCustomBinomialLS(allLinesNew[[1]], allSpikes,
-                                            lCI = options[[ifelse (type == "Prior", "plotsPriorMarginalLower", "posteriorDistributionPlotMarginalCiLower")]],
+                                            lCI = options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiLower", "posteriorDistributionPlotMarginalCiLower")]],
                                             uCI = options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiUpper", "posteriorDistributionPlotMarginalCiUpper")]])
 
         } else if (options[[ifelse (type == "Prior", "priorDistributionPlotMarginalCiType", "posteriorDistributionPlotMarginalCiType")]] == "support") {
@@ -371,7 +371,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         dfPointEstimate <- .dataPointMarginalBinomial(if (type == "Prior") NULL else data, options, allLinesNew[[1]], allSpikes, N = NULL,
                                                       type = "parameter", type2 = type,
-                                                      estimate = options[[ifelse (type == "Prior", "priorDistributionPlotMarginalPointEstimateType", "plotsPosteriorMarginalEstimateType")]])
+                                                      estimate = options[[ifelse (type == "Prior", "priorDistributionPlotMarginalPointEstimateType", "posteriorDistributionPlotMarginalPointEstimateType")]])
       } else
         dfPointEstimate <- NULL
 

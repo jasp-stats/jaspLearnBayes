@@ -40,7 +40,7 @@ Section
 
 		RadioButtonGroup
 		{
-			name:	"plotsPredictionType"
+			name:	"posteriorPredictionDistributionPlotIndividualCiType"
 
 			RadioButton
 			{

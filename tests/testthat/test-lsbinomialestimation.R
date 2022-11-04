@@ -82,7 +82,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval Updating Plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequantial-interval-plot-3-default-4", dir="LSbinomialestimation")
   })
@@ -371,13 +371,13 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol1-3", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol1-4", dir="LSbinomialestimation")
   })
@@ -562,7 +562,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-interval-plot-2-vol2-3", dir="LSbinomialestimation")
   })
@@ -1202,7 +1202,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval Updating  matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequantial-interval-plot-2-spike-2", dir="LSbinomialestimation")
   })
@@ -1326,7 +1326,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval Updating plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-interval-plot-2-beta-3", dir="LSbinomialestimation")
   })

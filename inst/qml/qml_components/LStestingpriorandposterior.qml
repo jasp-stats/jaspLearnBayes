@@ -193,7 +193,7 @@ Section
 					CIField{
 						visible:		plotsPriorMarginalType.currentText == "central" | plotsPriorMarginalType.currentText == "HPD"
 						enabled:		plotsPriorMarginalCI.checked
-						name:			"plotsPriorMarginalCoverage"
+						name:			"priorDistributionPlotMarginalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -206,7 +206,7 @@ Section
 					{
 						visible:		plotsPriorMarginalType.currentText == "custom"
 						enabled:		plotsPriorMarginalCI.checked
-						name:			"plotsPriorMarginalLower"
+						name:			"priorDistributionPlotMarginalCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPriorMarginalLower
 						fieldWidth:		50
@@ -381,7 +381,7 @@ Section
 
 					DropDown
 					{
-						name:		"plotsPosteriorMarginalEstimateType"
+						name:		"posteriorDistributionPlotMarginalPointEstimateType"
 						label:		""
 						values:		["mean", "median", "mode"]
 					}
