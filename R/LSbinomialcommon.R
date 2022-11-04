@@ -277,18 +277,18 @@
 }
 .predictBinomialLS          <- function(data, prior, options, prop = FALSE) {
 
-  if (prop) d <- options[["predictionN"]] else d <- 1
+  if (prop) d <- options[["posteriorPredictionNumberOfFutureTrials"]] else d <- 1
 
   if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("binomial (%i, %s)", options[["predictionN"]], prior[["parPointInp"]]),
-      mean         = prior[["parPoint"]] * options[["predictionN"]] / d,
-      median       = qbinom(.5, options[["predictionN"]], prior[["parPoint"]]) / d,
-      mode         = .modeBinomialLS(options[["predictionN"]], prior[["parPoint"]], prop = prop),
-      lCI          = qbinom(0.025, options[["predictionN"]], prior[["parPoint"]]) / d,
-      uCI          = qbinom(0.975, options[["predictionN"]], prior[["parPoint"]]) / d,
-      SD           = .computeSdBinomLS(options[["predictionN"]], prior[["parPoint"]]) / d
+      distribution = gettextf("binomial (%i, %s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parPointInp"]]),
+      mean         = prior[["parPoint"]] * options[["posteriorPredictionNumberOfFutureTrials"]] / d,
+      median       = qbinom(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parPoint"]]) / d,
+      mode         = .modeBinomialLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parPoint"]], prop = prop),
+      lCI          = qbinom(0.025, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parPoint"]]) / d,
+      uCI          = qbinom(0.975, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parPoint"]]) / d,
+      SD           = .computeSdBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parPoint"]]) / d
     )
 
     return(output)
@@ -308,13 +308,13 @@
     }
 
     output <- list(
-      distribution = gettextf("beta-binomial (%i, %s, %s)", options[["predictionN"]], textAlpha, textBeta),
-      mean         = (prior[["parAlpha"]] + data$nSuccesses) * options[["predictionN"]] / (prior[["parAlpha"]] + data$nSuccesses + prior[["parBeta"]] + data$nFailures) / d,
-      median       = .qbetabinomLS(.5, options[["predictionN"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d,
-      mode         = .modeBetaBinomLS(options[["predictionN"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures, prop = prop),
-      lCI          = .qbetabinomLS(0.025, options[["predictionN"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d,
-      uCI          = .qbetabinomLS(0.975, options[["predictionN"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d,
-      SD           = .computeSdBetaBinomLS(options[["predictionN"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d
+      distribution = gettextf("beta-binomial (%i, %s, %s)", options[["posteriorPredictionNumberOfFutureTrials"]], textAlpha, textBeta),
+      mean         = (prior[["parAlpha"]] + data$nSuccesses) * options[["posteriorPredictionNumberOfFutureTrials"]] / (prior[["parAlpha"]] + data$nSuccesses + prior[["parBeta"]] + data$nFailures) / d,
+      median       = .qbetabinomLS(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d,
+      mode         = .modeBetaBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures, prop = prop),
+      lCI          = .qbetabinomLS(0.025, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d,
+      uCI          = .qbetabinomLS(0.975, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d,
+      SD           = .computeSdBetaBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["parAlpha"]] + data$nSuccesses, prior[["parBeta"]] + data$nFailures) / d
     )
 
     return(output)
@@ -872,7 +872,7 @@
     }
 
   } else if (type == "prediction") {
-    options <- list(predictionN = N)
+    options <- list(posteriorPredictionNumberOfFutureTrials = N)
     l <- .predictBinomialLS(data, prior, options, prop)[[estimate]]
     if (prop) d <- N else d <- 1
 
@@ -983,7 +983,7 @@
 
     } else if (type == "prediction") {
 
-      options[["predictionN"]] <- N
+      options[["posteriorPredictionNumberOfFutureTrials"]] <- N
       tempPredictions <- sapply(options[["priors"]],function(prior).predictBinomialLS(data, prior, options, prop), simplify = F)
       tempPredictions <- do.call(rbind.data.frame, tempPredictions)
 

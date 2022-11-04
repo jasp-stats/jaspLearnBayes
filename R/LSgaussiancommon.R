@@ -686,7 +686,7 @@
 
   } else if (type == "prediction") {
 
-    options  <- list(predictionN = N)
+    options  <- list(posteriorPredictionNumberOfFutureTrials = N)
     tempPred <- .predictGaussianLS(data, prior, options, prop)
     l <- tempPred[[estimate]]
 

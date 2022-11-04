@@ -10,6 +10,7 @@ Upgrades
 		fromVersion:	"0.17.0"
 		toVersion:		"0.18.0"
 		
+		# qml_components/LSbinomialdatainput.qml
 		ChangeRename { from: "dataType";	to: "dataInputType"}
 		ChangeJS
 		{
@@ -24,7 +25,6 @@ Upgrades
 				}
 			}
 		}
-		
 		ChangeRename { from: "selectedVariable";		to: "dataVariableSelected"}
 		ChangeRename { from: "allVariables";			to: "dataVariableAvailable"}
 		ChangeRename { from: "dataVariableSD";			to: "dataVariableSd"}
@@ -42,6 +42,23 @@ Upgrades
 		ChangeRename { from: "levelsSeq";				to: "dataSequenceLevels"}
 		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
 		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
+
+		# qml_components/LSestimationpredictions.qml
+		ChangeRename { from: "predictionN";					to: "posteriorPredictionNumberOfFutureTrials"}
+		ChangeRename { from: "predictionTable";				to: "posteriorPredictionSummaryTable"}
+		ChangeRename { from: "predictionTableEstimate";		to: "posteriorPredictionSummaryTablePointEstimate"}
+		ChangeRename { from: "plotsPredictions";			to: "posteriorPredictionDistributionPlot"}
+		ChangeRename { from: "predictionPlotType";			to: "posteriorPredictionDistributionPlotType"}
+		ChangeRename { from: "plotsPredictionEstimate";		to: "posteriorPredictionDistributionPlotIndividualPointEstimate"}
+		ChangeRename { from: "plotsPredictionEstimateType";	to: "posteriorPredictionDistributionPlotIndividualPointEstimateType"}
+		ChangeRename { from: "plotsPredictionCI";			to: "posteriorPredictionDistributionPlotIndividualCi"}
+		ChangeRename { from: "plotsPredictionType";			to: "posteriorPredictionDistributionPlotIndividualCiType"}
+		ChangeRename { from: "plotsPredictionCoverage";		to: "posteriorPredictionDistributionPlotIndividualCiMass"}
+		ChangeRename { from: "plotsPredictionLower";		to: "posteriorPredictionDistributionPlotIndividualCiLower"}
+		ChangeRename { from: "plotsPredictionUpper";		to: "posteriorPredictionDistributionPlotIndividualCiUpper"}
+		ChangeRename { from: "predictionPlotProp";			to: "posteriorPredictionDistributionPlotSampleProportions"}
+		ChangeRename { from: "predictionPlotTable";			to: "posteriorPredictionDistributionPlotPredictionsTable"}
+
 
 	}
 

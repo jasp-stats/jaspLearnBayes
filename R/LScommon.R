@@ -1453,7 +1453,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerPredictions"]])) {
     containerPredictions <- createJaspContainer(title = gettext("Prediction Summary"))
     containerPredictions$position <- 9
-    containerPredictions$dependOn(c("predictionTable", "predictionTableEstimate"))
+    containerPredictions$dependOn(c("posteriorPredictionSummaryTable", "posteriorPredictionSummaryTablePointEstimate"))
 
     jaspResults[["containerPredictions"]] <- containerPredictions
   } else {
@@ -1480,13 +1480,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPredictionPlots <- createJaspContainer(title = gettextf(
       "%s Prediction Plots",
       switch(
-        options[["predictionPlotType"]],
+        options[["posteriorPredictionDistributionPlotType"]],
         "overlying" = gettext("All"),
         "stacked"   = gettext("Stacked"),
         "individual"= gettext("Individual")
       )))
     containerPredictionPlots$position <- 10
-    containerPredictionPlots$dependOn(c("plotsPredictions", "predictionPlotType"))
+    containerPredictionPlots$dependOn(c("posteriorPredictionDistributionPlot", "posteriorPredictionDistributionPlotType"))
 
     jaspResults[["containerPredictionPlots"]] <- containerPredictionPlots
   } else {
@@ -1558,7 +1558,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots$dependOn(c(
       ifelse (type == "Prior", "plotsPredictions",       "plotsPredictionsPost"),
       ifelse (type == "Prior", "plotsPredictionType",    "plotsPredictionPostType"),
-      if (type == "Posterior") "predictionN"
+      if (type == "Posterior") "posteriorPredictionNumberOfFutureTrials"
     ))
     containerPlots$position <- ifelse (type == "Prior", 4, 10)
     jaspResults[[paste0("containerPlotsPrediction", type)]] <- containerPlots
@@ -2015,13 +2015,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         switch(
-          options[["predictionTableEstimate"]],
+          options[["posteriorPredictionDistributionPlotIndividualCiType"]],
           "mean"   = gettextf("The mean prediction can be computed as N*%s", "\u03B8\u2080"),
           "median" = "", # there is no simple solution
           "mode"   = gettextf("The mode prediction can be usually computed as (N + 1)*%1$s rounded down to the closest integer if0 < %1$s < 1", "\u03B8\u2080")
         ),
         switch(
-          options[["predictionTableEstimate"]],
+          options[["posteriorPredictionDistributionPlotIndividualCiType"]],
           "mean"   = gettextf("The mean of the predictions can be computed as N*%1$s/( %1$s + %2$s ).", "\u03B1", "\u03B2"),
           "median" = "", # there is no simple solution
           "mode"   = ""  # and I couldn't find analytical solution for this at all
@@ -2032,7 +2032,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
       predictionsFormulas <- gettextf(
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions.",
-        "\u03BC", "\u03C3", "\u03C3\u209A", "\u221A", "\u00B2", options[["predictionTableEstimate"]]
+        "\u03BC", "\u03C3", "\u03C3\u209A", "\u221A", "\u00B2", options[["posteriorPredictionDistributionPlotIndividualCiType"]]
       )
 
     }
@@ -2044,13 +2044,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse (estimation, "", "<li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li>"),
       ifelse (binomial, gettext(" (Successes)"), ""),
       switch(
-        options$predictionTableEstimate,
+        options[["posteriorPredictionSummaryTablePointEstimate"]],
         "mean"   = gettext("Mean"),
         "median" = gettext("Median"),
         "mode"   = gettext("Mode")
       ),
       switch(
-        options$predictionTableEstimate,
+        options[["posteriorPredictionSummaryTablePointEstimate"]],
         "mean"   = gettext("mean"),
         "median" = gettext("median"),
         "mode"   = gettext("mode")
@@ -2072,7 +2072,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
 
       specificText <- switch(
-        options[["plotsPredictionType"]],
+        options[["posteriorPredictionDistributionPlotIndividualCiType"]],
         "overlying"    = gettext("The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."),
         "stacked"      = gettext("The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."),
         "individual"   = gettextf("The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s",.CIsTextLS())

@@ -42,14 +42,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "stacked"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- TRUE
   options$plotsPriorCoverage <- 0.95
   options$plotsPriorIndividualCI <- FALSE
@@ -60,12 +60,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "overlying"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mean"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
                                                                                   parAlpha = "1", parBeta = "1", parPoint = "0.5", type = "beta",
@@ -156,7 +156,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions Plots matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-7-default-7", dir="LSbinomialestimation")
   })
@@ -225,14 +225,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- TRUE
   options$plotsPriorCoverage <- 0.95
   options$plotsPriorIndividualCI <- FALSE
@@ -243,12 +243,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "stacked"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "stacked"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -446,7 +446,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-11-vol1-9", dir="LSbinomialestimation")
   })
@@ -516,14 +516,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- TRUE
   options$plotsPriorCoverage <- 0.8
   options$plotsPriorIndividualCI <- TRUE
@@ -534,12 +534,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -592,13 +592,13 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-8", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-9", dir="LSbinomialestimation")
   })
@@ -660,14 +660,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.8
   options$plotsPriorIndividualCI <- TRUE
@@ -678,12 +678,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -700,13 +700,13 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol3-2", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol3-3", dir="LSbinomialestimation")
   })
@@ -768,14 +768,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "median"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "median"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.8
   options$plotsPriorIndividualCI <- TRUE
@@ -786,12 +786,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -802,13 +802,13 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol4-1", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol4-2", dir="LSbinomialestimation")
   })
@@ -870,14 +870,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "median"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "median"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.8
   options$plotsPriorIndividualCI <- TRUE
@@ -888,12 +888,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -904,13 +904,13 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol5-1", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol5-2", dir="LSbinomialestimation")
   })
@@ -972,14 +972,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "mode"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.8
   options$plotsPriorIndividualCI <- TRUE
@@ -990,12 +990,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- TRUE
-  options$predictionPlotType <- "stacked"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- TRUE
+  options$posteriorPredictionDistributionPlotType <- "stacked"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -1006,7 +1006,7 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Prediction plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-0-vol6-1", dir="LSbinomialestimation")
   })
@@ -1068,14 +1068,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "individual"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "mode"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.8
   options$plotsPriorIndividualCI <- TRUE
@@ -1086,12 +1086,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "individual"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- TRUE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotSampleProportions <- TRUE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
@@ -1102,7 +1102,7 @@ context("Learn Bayes - Binomial Estimation")
 
 
   test_that("Prediction plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-0-vol7-1", dir="LSbinomialestimation")
   })
@@ -1164,14 +1164,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "stacked"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- TRUE
   options$plotsPriorCoverage <- 0.95
   options$plotsPriorIndividualCI <- FALSE
@@ -1182,12 +1182,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "overlying"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "median"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "spike", value = ""))
   options$dataVariableSelected <- "contBinom"
@@ -1220,7 +1220,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-5-spike-5", dir="LSbinomialestimation")
   })
@@ -1287,14 +1287,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "stacked"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
   options$plotsPrior <- TRUE
   options$plotsPriorCoverage <- 0.95
   options$plotsPriorIndividualCI <- FALSE
@@ -1305,12 +1305,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "overlying"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mode"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "median"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "median"
   options$priors <- list(list(name = "Models Beta", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""))
   options$dataVariableSelected <- "contBinom"
@@ -1344,7 +1344,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-5-beta-6", dir="LSbinomialestimation")
   })
@@ -1412,14 +1412,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "overlying"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- FALSE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.95
   options$plotsPriorIndividualCI <- FALSE
@@ -1430,12 +1430,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "overlying"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mean"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
                               type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
                                                                 parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
@@ -1490,14 +1490,14 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPosteriorLower <- 0.25
   options$plotsPosteriorType <- "overlying"
   options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- FALSE
   options$plotsPrior <- FALSE
   options$plotsPriorCoverage <- 0.95
   options$plotsPriorIndividualCI <- FALSE
@@ -1508,12 +1508,12 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsPriorType <- "overlying"
   options$plotsPriorUpper <- 0.75
   options$pointEstimate <- "mean"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
                               type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
                                                                 parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
