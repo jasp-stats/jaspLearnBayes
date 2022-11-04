@@ -1652,14 +1652,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerSequentialTests <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis",
       switch(
-        options[["plotsIterativeType"]],
+        options[["sequentialAnalysisPredictivePerformancePlotType"]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Normalized"),
         "BF"          = gettext("Bayes Factor")
       )))
     containerSequentialTests$position <- 8
-    containerSequentialTests$dependOn(c("plotsIterative", "plotsIterativeType"))
+    containerSequentialTests$dependOn(c("sequentialAnalysisPredictivePerformancePlot", "sequentialAnalysisPredictivePerformancePlotType"))
 
     jaspResults[["containerSequentialTests"]] <- containerSequentialTests
   } else {
@@ -2141,7 +2141,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     generalText <- gettext("The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis).")
 
     specificText <- switch(
-      options[["plotsIterativeType"]],
+      options[["sequentialAnalysisPredictivePerformancePlotType"]],
       "conditional" = gettext("The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."),
       "joint"       = gettext("The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."),
       "marginal"    = gettext("The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."),

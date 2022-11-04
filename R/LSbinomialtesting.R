@@ -84,9 +84,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
 
   ### sequential analysis
-  if (options[["plotsIterative"]])
+  if (options[["sequentialAnalysisPredictivePerformancePlot"]])
     .plotsIterativeOverlyingBinomial2LS(jaspResults, data, ready, options)
-  if (options[["plotsIterative"]] && options[["plotsIterativeUpdatingTable"]])
+  if (options[["sequentialAnalysisPredictivePerformancePlot"]] && options[["sequentialAnalysisPredictivePerformancePlotUpdatingTable"]])
     .tableIterativeBinomial2LS(jaspResults, data, ready, options)
 
 
@@ -1006,22 +1006,22 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
   containerSequentialTests <- .containerSequentialTestsLS(jaspResults, options, "binTest")
 
-  if (is.null(containerSequentialTests[["plotsIterative"]])) {
+  if (is.null(containerSequentialTests[["sequentialAnalysisPredictivePerformancePlot"]])) {
 
     plotsIterative <- createJaspPlot(width = 700, height = 400)
 
     plotsIterative$position <- 2
     plotsIterative$dependOn(c(.dataDependenciesBinomialLS, "colorPalette",
-                              "bfTypeSequential", "bayesFactorTypeSequential", "bfTypevsNameSequential"))
-    containerSequentialTests[["plotsIterative"]] <- plotsIterative
+                              "sequentialAnalysisPredictivePerformancePlotBfComparison", "sequentialAnalysisPredictivePerformancePlotBfType", "sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"))
+    containerSequentialTests[["sequentialAnalysisPredictivePerformancePlot"]] <- plotsIterative
 
     if (length(data[["y"]]) == 0)
       return()
     if (!all(ready))
       return()
 
-    if (options[["plotsIterativeType"]] == "BF") {
-      if (options[["bfTypeSequential"]] == "vs" &&  options[["bfTypevsNameSequential"]] == "") {
+    if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF") {
+      if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "vs" &&  options[["sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"]] == "") {
         plotsIterative$setError(gettext("Please specify a hypothesis for comparison."))
         return()
       }
@@ -1029,7 +1029,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         plotsIterative$setError("At least 2 hypotheses need to be specified.")
         return()
       }
-      if (options[["bfTypeSequential"]] == "best")
+      if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "best")
         theBest <- which.max(.testBinomialLS(data, options[["priors"]])$logLik)
     }
 
@@ -1045,40 +1045,40 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
       tempResults <- .testBinomialLS(tempData, options[["priors"]])
 
-      if (options[["plotsIterativeType"]] == "conditional") {
+      if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "conditional") {
         yName  <- gettext("Conditional probability")
         tempY  <- exp(tempResults[,"logLik"])
-      } else if (options[["plotsIterativeType"]] == "joint") {
+      } else if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "joint") {
         yName  <- gettext("Joint probability")
         tempY  <- exp(tempResults[,"logLik"])*tempResults[,"prior"]
-      } else if (options[["plotsIterativeType"]] == "marginal") {
+      } else if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "marginal") {
         yName  <- gettext("Posterior probability")
         tempY  <- tempResults[,"posterior"]
-      } else if (options[["plotsIterativeType"]] == "BF") {
+      } else if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF") {
 
-        if (options[["bfTypeSequential"]] == "inclusion") {
+        if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "inclusion") {
           tempBF <- sapply(1:nrow(tempResults), function(h)
             (tempResults$posterior[h] / (1-tempResults$posterior[h])) / (tempResults$prior[h] / (1-tempResults$prior[h]))
           )
-        } else if (options[["bfTypeSequential"]] == "best") {
+        } else if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "best") {
           tempBF <- sapply(1:nrow(tempResults), function(h)
             exp(tempResults$logLik[h]) / exp(tempResults$logLik[theBest])
           )
-        } else if (options[["bfTypeSequential"]] == "vs") {
+        } else if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "vs") {
           tempBF <- sapply(1:nrow(tempResults), function(h)
-            exp(tempResults$logLik[h]) / exp(tempResults$logLik[sapply(options[["priors"]], function(p)p$name) == options[["bfTypevsNameSequential"]]])
+            exp(tempResults$logLik[h]) / exp(tempResults$logLik[sapply(options[["priors"]], function(p)p$name) == options[["sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"]]])
           )
         }
 
-        if (options[["bayesFactorTypeSequential"]] == "BF10")
+        if (options[["sequentialAnalysisPredictivePerformancePlotBfType"]] == "BF10")
           tempY <- tempBF
-        else if (options[["bayesFactorTypeSequential"]] == "BF01")
+        else if (options[["sequentialAnalysisPredictivePerformancePlotBfType"]] == "BF01")
           tempY <- 1/tempBF
-        else if (options[["bayesFactorTypeSequential"]] == "LogBF10")
+        else if (options[["sequentialAnalysisPredictivePerformancePlotBfType"]] == "LogBF10")
           tempY <- log(tempBF)
 
         yName <- switch(
-          options[["bayesFactorTypeSequential"]],
+          options[["sequentialAnalysisPredictivePerformancePlotBfType"]],
           "BF10"    = bquote("BF"["10"]),
           "BF01"    = bquote("BF"["01"]),
           "LogBF10" = bquote(italic("log")*"(BF)"["10"])
@@ -1096,8 +1096,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     plotDataLines <- list()
     for (h in 1:length(options[["priors"]])) {
-      if (options[["plotsIterativeType"]] == "BF" && options[["bfTypeSequential"]] == "vs") {
-        if (options[["bfTypevsNameSequential"]] == options[["priors"]][[h]]$name)next
+      if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF" && options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "vs") {
+        if (options[["sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"]] == options[["priors"]][[h]]$name)next
       }
 
       tempLines   <- NULL
@@ -1112,8 +1112,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     xName  <- gettext("Observation")
 
-    if (options[["plotsIterativeType"]] == "BF")
-      BFlog <- options[["bayesFactorTypeSequential"]] == "LogBF10"
+    if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF")
+      BFlog <- options[["sequentialAnalysisPredictivePerformancePlotBfType"]] == "LogBF10"
     else
       BFlog <- NULL
 
@@ -1133,7 +1133,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     tableIterative <- createJaspTable()
 
     tableIterative$position <- 3
-    tableIterative$dependOn(c(.dataDependenciesBinomialLS, "plotsIterativeUpdatingTable"))
+    tableIterative$dependOn(c(.dataDependenciesBinomialLS, "sequentialAnalysisPredictivePerformancePlotUpdatingTable"))
     containerSequentialTests[["tableIterative"]] <- tableIterative
 
     tableIterative$addColumnInfo(name = "iteration", title = gettext("Observations"), type = "integer")
@@ -1150,8 +1150,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     if (!all(ready))
       return()
 
-    if (options[["plotsIterativeType"]] == "BF") {
-      if (options[["bfTypeSequential"]] == "vs" &&  options[["bfTypevsNameSequential"]] == "") {
+    if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF") {
+      if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "vs" &&  options[["sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"]] == "") {
         tableIterative$setError(gettext("Please specify a hypothesis for comparison."))
         return()
       }
@@ -1159,7 +1159,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tableIterative$setError(gettext("At least 2 hypotheses need to be specified."))
         return()
       }
-      if (options[["bfTypeSequential"]] == "best")
+      if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "best")
         theBest <- which.max(.testBinomialLS(data, options[["priors"]])$logLik)
     }
 
@@ -1182,30 +1182,30 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       )
       tempResults <- .testBinomialLS(tempData, options[["priors"]])
 
-      if (options[["plotsIterativeType"]] == "conditional")
+      if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "conditional")
         tempY <- exp(tempResults[,"logLik"])
-      else if (options[["plotsIterativeType"]] == "joint")
+      else if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "joint")
         tempY <- exp(tempResults[,"logLik"])*tempResults[,"prior"]
-      else if (options[["plotsIterativeType"]] == "marginal")
+      else if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "marginal")
         tempY <- tempResults[,"posterior"]
-      else if (options[["plotsIterativeType"]] == "BF") {
+      else if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF") {
 
-        if (options[["bfTypeSequential"]] == "inclusion") {
+        if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "inclusion") {
           tempBF <- sapply(1:nrow(tempResults), function(h)
             (tempResults$posterior[h] / (1-tempResults$posterior[h])) / (tempResults$prior[h] / (1-tempResults$prior[h]))
           )
-        } else if (options[["bfTypeSequential"]] == "best") {
+        } else if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "best") {
           tempBF <- sapply(1:nrow(tempResults), function(h)
             exp(tempResults$logLik[h]) / exp(tempResults$logLik[theBest])
           )
-        } else if (options[["bfTypeSequential"]] == "vs") {
+        } else if (options[["sequentialAnalysisPredictivePerformancePlotBfComparison"]] == "vs") {
           tempBF <- sapply(1:nrow(tempResults), function(h)
-            exp(tempResults$logLik[h]) / exp(tempResults$logLik[sapply(options[["priors"]], function(p)p$name) == options[["bfTypevsNameSequential"]]])
+            exp(tempResults$logLik[h]) / exp(tempResults$logLik[sapply(options[["priors"]], function(p)p$name) == options[["sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"]]])
           )
         }
 
         tempY <- switch(
-          options[["bayesFactorTypeSequential"]],
+          options[["sequentialAnalysisPredictivePerformancePlotBfType"]],
           "BF10"    = tempBF,
           "BF01"    = 1/tempBF,
           "LogBF10" = log(tempBF)

@@ -26,9 +26,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "conditional"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "conditional"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "conditional"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -217,9 +217,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -396,9 +396,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -575,9 +575,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -754,9 +754,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -927,9 +927,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "BF"
-  options$plotsIterativeUpdatingTable <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "BF"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- TRUE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -1122,9 +1122,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- FALSE
   options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "BF"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "BF"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -1283,9 +1283,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- FALSE
   options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- FALSE
-  options$plotsIterativeType <- "BF"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "BF"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -1420,9 +1420,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -1588,9 +1588,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- TRUE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -1756,9 +1756,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- FALSE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- FALSE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE
@@ -1896,9 +1896,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorAndPosteriorDistributionPlot <- FALSE
   options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
   options$priorAndPosteriorDistributionPlotType <- "marginal"
-  options$plotsIterative <- FALSE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotConditionalCiBf <- 1
   options$posteriorDistributionPlotConditionalCi <- FALSE

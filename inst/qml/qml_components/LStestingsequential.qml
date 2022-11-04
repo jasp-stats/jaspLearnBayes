@@ -31,14 +31,14 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsIterative"
+		name:		"sequentialAnalysisPredictivePerformancePlot"
 		id:			plotsIterative
-		label:		qsTr("Test results")
+		label:		qsTr("Predictive performance")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name: "plotsIterativeType"
+			name: "sequentialAnalysisPredictivePerformancePlotType"
 			RadioButton { value: "conditional";		label: qsTr("Conditional"); checked: true}
 			RadioButton { value: "joint";			label: qsTr("Joint")}
 			RadioButton { value: "marginal";		label: qsTr("Normalized")}
@@ -52,7 +52,7 @@ Section
 					columns: 2
 					RadioButtonGroup
 					{
-						name:	"bfTypeSequential"
+						name:	"sequentialAnalysisPredictivePerformancePlotBfComparison"
 						RadioButton
 						{
 							value:	"inclusion"
@@ -74,7 +74,7 @@ Section
 
 							DropDown
 							{
-								name:				"bfTypevsNameSequential"
+								name:				"sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"
 								id:					bfTypevsNameSequential
 								indexDefaultValue:	0
 							}
@@ -83,7 +83,7 @@ Section
 
 					RadioButtonGroup
 					{
-						name: "bayesFactorTypeSequential"
+						name: "sequentialAnalysisPredictivePerformancePlotBfType"
 
 						RadioButton { label: qsTr("BF\u2081\u2080")			; name: "BF10"; checked: true}
 						RadioButton { label: qsTr("BF\u2080\u2081")			; name: "BF01"}
@@ -96,7 +96,7 @@ Section
 
 		CheckBox
 		{
-			name:	"plotsIterativeUpdatingTable"
+			name:	"sequentialAnalysisPredictivePerformancePlotUpdatingTable"
 			label:	qsTr("Updating table")
 		}
 
