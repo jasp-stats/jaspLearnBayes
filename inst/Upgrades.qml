@@ -41,7 +41,7 @@ Upgrades
 		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
 		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
 
-		# qml_components/LSbinomialdatainput.qml
+		# qml_components/LSgaussiandatainput.qml
 		ChangeRename { from: "dataCountsMean";			to: "dataCountsMean"}
 		ChangeRename { from: "dataCountsSD";			to: "dataCountsSD"}
 		ChangeRename { from: "dataCountsN";				to: "dataCountsN"}
@@ -103,6 +103,36 @@ Upgrades
 		ChangeRename { from: "plotsIterativeIntervalUpdatingTable";		to: "sequentialAnalysisIntervalEstimatePlotUpdatingTable"}
 		ChangeRename { from: "plotsIterativeStacked";					to: "sequentialAnalysisStackedDistributionsPlot"}
 		ChangeRename { from: "doIterative";								to: "sequentialAnalysisPosteriorUpdatingTable"}
+
+		# qml_components/LStestingpredictions.qml
+		ChangeRename { from: "predictionN";								to: "posteriorPredictionNumberOfFutureTrials"}
+
+		ChangeRename { from: "predictionTable";							to: "posteriorPredictionSummaryTable"}
+		ChangeRename { from: "predictionTableEstimate";					to: "posteriorPredictionSummaryTablePointEstimate"}
+
+		ChangeRename { from: "plotsPredictionsPost";					to: "posteriorPredictionDistributionPlot"}
+		ChangeRename { from: "plotsPredictionPostType";					to: "posteriorPredictionDistributionPlotType"}
+
+		ChangeRename { from: "plotsPredictionPostEstimate";				to: "posteriorPredictionDistributionPlotConditionalPointEstimate"}
+		ChangeRename { from: "plotsPredictionPostEstimateType";			to: "posteriorPredictionDistributionPlotConditionalPointEstimateType"}
+		ChangeRename { from: "plotsPredictionPostCI";					to: "posteriorPredictionDistributionPlotConditionalCi"}
+		ChangeRename { from: "plotsPredictionPostTypeCI";				to: "posteriorPredictionDistributionPlotConditionalCiType"}
+		ChangeRename { from: "plotsPredictionPostCoverage";				to: "posteriorPredictionDistributionPlotConditionalCiMass"}
+		ChangeRename { from: "plotsPredictionPostLower";				to: "posteriorPredictionDistributionPlotConditionalCiLower"}
+		ChangeRename { from: "plotsPredictionPostUpper";				to: "posteriorPredictionDistributionPlotConditionalCiUpper"}
+
+		ChangeRename { from: "plotsPredictionPostJointType";			to: "posteriorPredictionDistributionPlotJoinType"}
+
+		ChangeRename { from: "plotsPredictionPostMarginalEstimate";		to: "posteriorPredictionDistributionPlotMarginalPointEstimate"}
+		ChangeRename { from: "plotsPredictionPostMarginalEstimateType";	to: "posteriorPredictionDistributionPlotMarginalPointEstimateType"}
+		ChangeRename { from: "plotsPredictionPostMarginalCI";			to: "posteriorPredictionDistributionPlotMarginalCi"}
+		ChangeRename { from: "plotsPredictionPostMarginalTypeCI";		to: "posteriorPredictionDistributionPlotMarginalCiType"}
+		ChangeRename { from: "plotsPredictionPostMarginalCoverage";		to: "posteriorPredictionDistributionPlotMarginalCiMass"}
+		ChangeRename { from: "plotsPredictionPostMarginalLower";		to: "posteriorPredictionDistributionPlotMarginalCiLower"}
+		ChangeRename { from: "plotsPredictionPostMarginalUpper";		to: "posteriorPredictionDistributionPlotMarginalCiUpper"}
+
+		ChangeRename { from: "predictionPostPlotProp";					to: "posteriorPredictionDistributionPlotSampleProportion"}
+		ChangeRename { from: "predictionPostPlotTable";					to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
 
 	}

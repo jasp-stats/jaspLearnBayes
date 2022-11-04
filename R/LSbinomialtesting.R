@@ -91,14 +91,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
 
   ### posterior predictive
-  if (options[["predictionTable"]])
+  if (options[["posteriorPredictionSummaryTablePointEstimate"]])
     .tablePredictionsBinomialLS2(jaspResults, data, ready, options)
-  if (options[["plotsPredictionsPost"]]) {
-    if (options[["plotsPredictionPostType"]] != "conditional")
+  if (options[["posteriorPredictionDistributionPlot"]]) {
+    if (options[["posteriorPredictionDistributionPlotType"]] != "conditional")
       .plotsPredictionsBinomial2LS(jaspResults, data, ready, options, type = "Posterior")
-    if (options[["plotsPredictionPostType"]] == "conditional")
+    if (options[["posteriorPredictionDistributionPlotType"]] == "conditional")
       .plotsPredictionsIndividualBinomial2LS(jaspResults, data, ready, options, type = "Posterior")
-    if (options[["predictionPostPlotTable"]])
+    if (options[["posteriorPredictionDistributionPlotPredictionsTable"]])
       .tablePredictions2LS(jaspResults, data, ready, options, type = "Posterior")
   }
 
@@ -512,8 +512,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
   if (is.null(containerPlots[[paste0("plotsPredictions",type)]])) {
 
     plotsPredictions <- createJaspPlot(
-      width  = if (options[[ifelse (type == "Prior", "plotsPredictionType",  "plotsPredictionPostType")]] == "joint" &&
-                   options[[ifelse (type == "Prior", "plotsPredictionJointType", "plotsPredictionPostJointType")]] != "stacked")
+      width  = if (options[[ifelse (type == "Prior", "plotsPredictionType",  "posteriorPredictionDistributionPlotType")]] == "joint" &&
+                   options[[ifelse (type == "Prior", "plotsPredictionJointType", "posteriorPredictionDistributionPlotJoinType")]] != "stacked")
         700 else 530,
       height = 400)
 
@@ -523,9 +523,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           "plotsPredictionMarginalTypeCI", "plotsPredictionMarginalCoverage", "plotsPredictionMarginalLower",
           "plotsPredictionMarginalUpper", "plotsPredictionJointType", "plotsPredictionsObserved")
       } else if (type == "Posterior") {
-        dependencies <- c("plotsPredictionPostMarginalEstimate", "plotsPredictionPostMarginalEstimateType", "plotsPredictionPostMarginalCI",
-          "plotsPredictionPostMarginalTypeCI", "plotsPredictionPostMarginalCoverage", "plotsPredictionPostMarginalLower",
-          "plotsPredictionPostMarginalUpper", "plotsPredictionPostJointType", "predictionPostPlotProp")
+        dependencies <- c("posteriorPredictionDistributionPlotMarginalPointEstimate", "posteriorPredictionDistributionPlotMarginalPointEstimateType", "posteriorPredictionDistributionPlotMarginalCi",
+          "posteriorPredictionDistributionPlotMarginalCiType", "posteriorPredictionDistributionPlotMarginalCiMass", "posteriorPredictionDistributionPlotMarginalCiLower",
+          "posteriorPredictionDistributionPlotMarginalCiUpper", "posteriorPredictionDistributionPlotJoinType", "posteriorPredictionDistributionPlotSampleProportion")
       }
     plotsPredictions$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette"))
 
@@ -544,7 +544,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           nFailures  = 0
         )
       } else if (type == "Posterior") {
-        predictionN  <- options[["predictionN"]]
+        predictionN  <- options[["posteriorPredictionNumberOfFutureTrials"]]
         tempResults <- .testBinomialLS(data, options[["priors"]])
         tempData    <- data
 
@@ -554,11 +554,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         }
       }
 
-      if (type == "Posterior" && options[["predictionPostPlotProp"]]) {
+      if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
         xName  <- gettext("Predicted sample proportions")
         yName  <- gettext("Probability")
         xRange <- c(-.5/predictionN, 1 + .5/predictionN)
-        proportions <- options[["predictionPostPlotProp"]]
+        proportions <- options[["posteriorPredictionDistributionPlotSampleProportion"]]
         nRound <- 3
       } else {
         xName  <- gettext("Predicted number of successes")
@@ -578,7 +578,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         dfHist$g <- options[["priors"]][[i]]$name
         dfHist$y <- dfHist$y*tempResults[i,ifelse (type == "Prior","prior","posterior")]
 
-        if (type == "Posterior" && options[["predictionPostPlotProp"]])
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]])
           dfHist$x <- dfHist$x/predictionN
 
         # it's not beta, but I'm lazzy to rewrite a function I wanna use
@@ -594,20 +594,20 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       } else
         dfPoint <- NULL
 
-      if (options[[ifelse (type == "Prior","plotsPredictionType", "plotsPredictionPostType")]] == "joint") {
+      if (options[[ifelse (type == "Prior","plotsPredictionType", "posteriorPredictionDistributionPlotType")]] == "joint") {
 
-        if (options[[ifelse (type == "Prior", "plotsPredictionJointType", "plotsPredictionPostJointType")]] == "overlying") {
+        if (options[[ifelse (type == "Prior", "plotsPredictionJointType", "posteriorPredictionDistributionPlotJoinType")]] == "overlying") {
           p <- .plotOverlyingLS(allLines, NULL, dfPoints = dfPoint, xName = xName, yName = yName, xRange = xRange,
                                 palette = options[["colorPalette"]], nRound = nRound,
                                 discrete = TRUE, proportions = proportions)
-        } else if (options[[ifelse (type == "Prior", "plotsPredictionJointType", "plotsPredictionPostJointType")]] == "stacked") {
+        } else if (options[[ifelse (type == "Prior", "plotsPredictionJointType", "posteriorPredictionDistributionPlotJoinType")]] == "stacked") {
           p <- .plotStackedLS(allLines, NULL, legend, dfPoints = dfPoint, xName = xName, xRange = xRange,
                               proportions = proportions, discrete = TRUE)
         }
 
 
 
-      } else if (options[[ifelse (type == "Prior","plotsPredictionType", "plotsPredictionPostType")]] == "marginal") {
+      } else if (options[[ifelse (type == "Prior","plotsPredictionType", "posteriorPredictionDistributionPlotType")]] == "marginal") {
 
         if (length(allLines) > 0) {
 
@@ -623,7 +623,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         }
 
         allLinesNew   <- allLinesNew[seq(1,nrow(allLinesNew),2),]
-        if (type == "Posterior" && options[["predictionPostPlotProp"]])
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]])
           allLinesNew$x <- allLinesNew$x + .5/predictionN
         else
           allLinesNew$x <- allLinesNew$x + .5
@@ -636,26 +636,26 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         } else
           xBlacked <- NULL
 
-        if (options[[ifelse (type == "Prior", "plotsPredictionMarginalCI", "plotsPredictionPostMarginalCI")]]) {
+        if (options[[ifelse (type == "Prior", "plotsPredictionMarginalCI", "posteriorPredictionDistributionPlotMarginalCi")]]) {
 
-          if (options[[ifelse (type == "Prior", "plotsPredictionMarginalTypeCI", "plotsPredictionPostMarginalTypeCI")]] == "central") {
+          if (options[[ifelse (type == "Prior", "plotsPredictionMarginalTypeCI", "posteriorPredictionDistributionPlotMarginalCiType")]] == "central") {
 
             dfCI <- .marginalCentralBinomialLS(allLinesNew, NULL, options[["plotsPredictionMarginalCoverage"]], 0, predictionN, TRUE)
 
-          } else if (options[[ifelse (type == "Prior", "plotsPredictionMarginalTypeCI", "plotsPredictionPostMarginalTypeCI")]] == "HPD") {
+          } else if (options[[ifelse (type == "Prior", "plotsPredictionMarginalTypeCI", "posteriorPredictionDistributionPlotMarginalCiType")]] == "HPD") {
 
             dfCI <- .marginalHPDBinomialLS(allLinesNew, list(),
-                                           options[[ifelse (type == "Prior", "plotsPredictionMarginalCoverage", "plotsPredictionPostMarginalCoverage")]],
+                                           options[[ifelse (type == "Prior", "plotsPredictionMarginalCoverage", "posteriorPredictionDistributionPlotMarginalCiMass")]],
                                            0, predictionN, TRUE)
 
-          } else if (options[[ifelse (type == "Prior", "plotsPredictionMarginalTypeCI", "plotsPredictionPostMarginalTypeCI")]] == "custom") {
+          } else if (options[[ifelse (type == "Prior", "plotsPredictionMarginalTypeCI", "posteriorPredictionDistributionPlotMarginalCiType")]] == "custom") {
 
             dfCI <- .marginalCustomBinomialLS(allLinesNew, list(),
-                                              lCI = options[[ifelse (type == "Prior", "plotsPredictionMarginalLower", "plotsPredictionPostMarginalLower")]],
-                                              uCI = options[[ifelse (type == "Prior", "plotsPredictionMarginalUpper", "plotsPredictionPostMarginalUpper")]],
+                                              lCI = options[[ifelse (type == "Prior", "plotsPredictionMarginalLower", "posteriorPredictionDistributionPlotMarginalCiLower")]],
+                                              uCI = options[[ifelse (type == "Prior", "plotsPredictionMarginalUpper", "posteriorPredictionDistributionPlotMarginalCiUpper")]],
                                               TRUE)
 
-            if (options[[ifelse (type == "Prior", "plotsPredictionMarginalUpper", "plotsPredictionPostMarginalUpper")]]
+            if (options[[ifelse (type == "Prior", "plotsPredictionMarginalUpper", "posteriorPredictionDistributionPlotMarginalCiUpper")]]
                 > predictionN) {
 
               plotsPredictions$setError("The upper CI limit is higher than the number of future
@@ -664,7 +664,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
               return()
             }
-            if (options[[ifelse (type == "Prior", "plotsPredictionMarginalLower", "plotsPredictionPostMarginalLower")]]
+            if (options[[ifelse (type == "Prior", "plotsPredictionMarginalLower", "posteriorPredictionDistributionPlotMarginalCiLower")]]
                 > predictionN) {
 
               plotsPredictions$setError("The lower CI limit is higher than the number of future
@@ -673,8 +673,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
               return()
             }
-            if (options[[ifelse (type == "Prior", "plotsPredictionMarginalLower", "plotsPredictionPostMarginalLower")]] >
-                options[[ifelse (type == "Prior", "plotsPredictionMarginalUpper", "plotsPredictionPostMarginalUpper")]]) {
+            if (options[[ifelse (type == "Prior", "plotsPredictionMarginalLower", "posteriorPredictionDistributionPlotMarginalCiLower")]] >
+                options[[ifelse (type == "Prior", "plotsPredictionMarginalUpper", "posteriorPredictionDistributionPlotMarginalCiUpper")]]) {
 
               plotsPredictions$setError("The lower CI limit is higher than the upper CI limit.
                                        Please change the value of the CI limits
@@ -687,17 +687,17 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         } else
           dfCI <- NULL
 
-        if (type == "Posterior" && options[["predictionPostPlotProp"]])
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]])
           xRange <- c(-.5/predictionN, 1 + .5/predictionN)
         else
           xRange <- c(0, predictionN)
 
-        if (options[[ifelse (type == "Prior", "plotsPredictionMarginalEstimate", "plotsPredictionPostMarginalEstimate")]]) {
+        if (options[[ifelse (type == "Prior", "plotsPredictionMarginalEstimate", "posteriorPredictionDistributionPlotMarginalPointEstimate")]]) {
 
           dfPointEstimate <- .dataPointMarginalBinomial(if (type == "Prior") NULL else data, options, allLinesNew, NULL, N = predictionN,
                                                         type = "prediction", type2 = type,
-                                                        estimate = options[[ifelse (type == "Prior", "plotsPredictionMarginalEstimateType", "plotsPredictionPostMarginalEstimateType")]],
-                                                        prop = if (type == "Posterior") options[["predictionPostPlotProp"]] else FALSE)
+                                                        estimate = options[[ifelse (type == "Prior", "plotsPredictionMarginalEstimateType", "posteriorPredictionDistributionPlotMarginalPointEstimateType")]],
+                                                        prop = if (type == "Posterior") options[["posteriorPredictionDistributionPlotSampleProportion"]] else FALSE)
         } else
           dfPointEstimate <- NULL
 
@@ -727,9 +727,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           "plotsPredictionTypeCI", "plotsPredictionCoverage", "plotsPredictionLower",
           "plotsPredictionUpper", "plotsPredictionsObserved")
       } else if (type == "Posterior") {
-        dependencies <- c("plotsPredictionPostEstimate", "plotsPredictionPostEstimateType", "plotsPredictionPostCI",
-          "plotsPredictionPostTypeCI", "plotsPredictionPostCoverage", "plotsPredictionPostLower",
-          "plotsPredictionPostUpper", "predictionPostPlotProp")
+        dependencies <- c("posteriorPredictionDistributionPlotConditionalPointEstimate", "posteriorPredictionDistributionPlotConditionalPointEstimateType", "posteriorPredictionDistributionPlotConditionalCi",
+          "posteriorPredictionDistributionPlotConditionalCiType", "posteriorPredictionDistributionPlotConditionalCiMass", "posteriorPredictionDistributionPlotConditionalCiLower",
+          "posteriorPredictionDistributionPlotConditionalCiUpper", "posteriorPredictionDistributionPlotSampleProportion")
       }
     plotsPredictionsIndividual$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette"))
 
@@ -760,7 +760,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           nFailures  = 0
         )
       } else if (type == "Posterior") {
-        predictionN  <- options[["predictionN"]]
+        predictionN  <- options[["posteriorPredictionNumberOfFutureTrials"]]
         tempResults  <- .testBinomialLS(data, options[["priors"]])
         tempData    <- data
       }
@@ -771,11 +771,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         plotsPredictionsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
 
-        if (type == "Posterior" && options[["predictionPostPlotProp"]]) {
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
           xName  <- gettext("Predicted sample proportions")
           yName  <- gettext("Density")
           xRange <- c(-.5/predictionN, 1 + .5/predictionN)
-          proportions <- options[["predictionPostPlotProp"]]
+          proportions <- options[["posteriorPredictionDistributionPlotSampleProportion"]]
         } else {
           xName  <- gettext("Predicted number of successes")
           yName  <- gettext("Probability")
@@ -787,43 +787,43 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         dfCI   <- NULL
         dfHist <- NULL
 
-        if (options[[ifelse (type == "Prior","plotsPredictionCI","plotsPredictionPostCI")]]) {
+        if (options[[ifelse (type == "Prior","plotsPredictionCI","posteriorPredictionDistributionPlotConditionalCi")]]) {
 
-          if (options[[ifelse (type == "Prior","plotsPredictionTypeCI","plotsPredictionPostTypeCI")]] == "central") {
+          if (options[[ifelse (type == "Prior","plotsPredictionTypeCI","posteriorPredictionDistributionPlotConditionalCiType")]] == "central") {
 
             dfCI <- .dataCentralBinomialLS(data, options[["priors"]][[i]],
-                                           options[[ifelse (type == "Prior","plotsPredictionCoverage","plotsPredictionPostCoverage")]],
+                                           options[[ifelse (type == "Prior","plotsPredictionCoverage","posteriorPredictionDistributionPlotConditionalCiMass")]],
                                            n = predictionN,type = "prediction")
 
-          } else if (options[[ifelse (type == "Prior","plotsPredictionTypeCI","plotsPredictionPostTypeCI")]] == "HPD") {
+          } else if (options[[ifelse (type == "Prior","plotsPredictionTypeCI","posteriorPredictionDistributionPlotConditionalCiType")]] == "HPD") {
 
             dfCI <- .dataHPDBinomialLS(data, options[["priors"]][[i]],
-                                       options[[ifelse (type == "Prior","plotsPredictionCoverage","plotsPredictionPostCoverage")]],
+                                       options[[ifelse (type == "Prior","plotsPredictionCoverage","posteriorPredictionDistributionPlotConditionalCiMass")]],
                                        n = predictionN, type = "prediction")
 
-          } else if (options[[ifelse (type == "Prior","plotsPredictionTypeCI","plotsPredictionPostTypeCI")]] == "custom") {
+          } else if (options[[ifelse (type == "Prior","plotsPredictionTypeCI","posteriorPredictionDistributionPlotConditionalCiType")]] == "custom") {
 
             dfCI <- .dataCustomBinomialLS(data, options[["priors"]][[i]],
-                                          options[[ifelse (type == "Prior","plotsPredictionLower","plotsPredictionPostLower")]],
-                                          options[[ifelse (type == "Prior","plotsPredictionUpper","plotsPredictionPostUpper")]],
+                                          options[[ifelse (type == "Prior","plotsPredictionLower","posteriorPredictionDistributionPlotConditionalCiLower")]],
+                                          options[[ifelse (type == "Prior","plotsPredictionUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]],
                                           n = predictionN, type = "prediction")
 
-            if (options[[ifelse (type == "Prior","plotsPredictionUpper","plotsPredictionPostUpper")]] > predictionN) {
+            if (options[[ifelse (type == "Prior","plotsPredictionUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]] > predictionN) {
 
               plotsPredictionsIndividual[[options[["priors"]][[i]]$name]]$setError(gettext(
                 "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."))
 
               return()
             }
-            if (options[[ifelse (type == "Prior","plotsPredictionLower","plotsPredictionPostLower")]]  > predictionN) {
+            if (options[[ifelse (type == "Prior","plotsPredictionLower","posteriorPredictionDistributionPlotConditionalCiLower")]]  > predictionN) {
 
               plotsPredictionsIndividual[[options[["priors"]][[i]]$name]]$setError(gettext(
                 "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."))
 
               return()
             }
-            if (options[[ifelse (type == "Prior","plotsPredictionLower","plotsPredictionPostLower")]]
-                > options[[ifelse (type == "Prior","plotsPredictionUpper","plotsPredictionPostUpper")]]) {
+            if (options[[ifelse (type == "Prior","plotsPredictionLower","posteriorPredictionDistributionPlotConditionalCiLower")]]
+                > options[[ifelse (type == "Prior","plotsPredictionUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]]) {
 
               plotsPredictionsIndividual[[options[["priors"]][[i]]$name]]$setError(gettext(
                 "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."))
@@ -844,9 +844,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         } else
           xBlacked <- NULL
 
-        if (type == "Posterior" && options[["predictionPostPlotProp"]]) {
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
           dfHist$x <- dfHist$x/predictionN
-          if (options[["plotsPredictionPostCI"]]) {
+          if (options[["posteriorPredictionDistributionPlotConditionalCi"]]) {
             dfCI$xStart <- dfCI$xStart/predictionN
             dfCI$xEnd   <- dfCI$xEnd  /predictionN
           }
@@ -854,10 +854,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         } else
           nRound <- 0
 
-        if (options[[ifelse (type == "Prior", "plotsPredictionEstimate", "plotsPredictionPostEstimate")]]) {
+        if (options[[ifelse (type == "Prior", "plotsPredictionEstimate", "posteriorPredictionDistributionPlotConditionalPointEstimate")]]) {
           dfPointEstimate <- .estimateDataPointBinomial(tempData, options[["priors"]][[i]], N = predictionN, type = "prediction",
-                                                        estimate = options[[ifelse (type == "Prior", "plotsPredictionEstimateType", "plotsPredictionPostEstimateType")]],
-                                                        prop = ifelse (type == "Prior", FALSE, options[["predictionPostPlotProp"]])
+                                                        estimate = options[[ifelse (type == "Prior", "plotsPredictionEstimateType", "posteriorPredictionDistributionPlotConditionalPointEstimateType")]],
+                                                        prop = ifelse (type == "Prior", FALSE, options[["posteriorPredictionDistributionPlotSampleProportion"]])
           )
         } else
           dfPointEstimate <- NULL
@@ -882,7 +882,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     tablePredictions$position <- 3
     tablePredictions$dependOn(c(
       .dataDependenciesBinomialLS,
-      ifelse (type == "Prior", "predictionPlotTable", "predictionPostPlotTable")
+      ifelse (type == "Prior", "predictionPlotTable", "posteriorPredictionDistributionPlotPredictionsTable")
     ))
     containerPlots[["tablePredictions"]] <- tablePredictions
 
@@ -895,11 +895,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       tempN <- data$nSuccesses + data$nFailures
     } else if (type == "Posterior") {
       tempData <- data
-      tempN <- options[["predictionN"]]
+      tempN <- options[["posteriorPredictionNumberOfFutureTrials"]]
     }
 
 
-    if (type == "Posterior" && options[["predictionPostPlotProp"]]) {
+    if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
       tablePredictions$addColumnInfo(name = "successes", title = gettext("Proportion of Successes"), type = "number")
       tablePredictions$addColumns(c(0:tempN)/tempN)
     } else {
@@ -909,11 +909,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
 
     if (ready["priors"]) {
-      if (options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]] %in% c("joint", "conditional")) {
+      if (options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]] %in% c("joint", "conditional")) {
         for (i in seq_along(options[["priors"]])) {
           tablePredictions$addColumnInfo(name = paste0("hyp_", i), title = gettextf("P(Successes|%s)", options[["priors"]][[i]]$name), type = "number")
         }
-      } else if (options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]] == "marginal")
+      } else if (options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]] == "marginal")
         tablePredictions$addColumnInfo(name = "marginal", title = gettextf("P(Successes)"), type = "number")
     } else
       return()
@@ -936,15 +936,15 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       tempProb <- cbind(tempProb, .predictBinomialValuesLS(tempData, options[["priors"]][[i]], tempN))
     }
 
-    if (options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]] == "conditional") {
+    if (options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]] == "conditional") {
       for (i in 1:length(options[["priors"]])) {
         tablePredictions$addColumns(tempProb[,i])
       }
-    } else if (options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]] == "joint") {
+    } else if (options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]] == "joint") {
       for (i in 1:length(options[["priors"]])) {
         tablePredictions$addColumns(tempProb[,i]*tempResults[i,"posterior"])
       }
-    } else if (options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]] == "marginal") {
+    } else if (options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]] == "marginal") {
       tablePredictions$addColumns(apply(tempProb*matrix(tempResults[,"posterior"], byrow = T, ncol = length(options[["priors"]]), nrow = tempN + 1), 1, sum))
     }
 
@@ -1407,9 +1407,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     predictionsTable <- createJaspTable()
 
     predictionsTable$position <- 2
-    predictionsTable$dependOn(c(.dataDependenciesBinomialLS, "predictionN", "predictionTableEstimate"))
+    predictionsTable$dependOn(c(.dataDependenciesBinomialLS, "posteriorPredictionNumberOfFutureTrials", "posteriorPredictionSummaryTablePointEstimate"))
 
-    estimateText <- .estimateTextLS(options[["predictionTableEstimate"]])
+    estimateText <- .estimateTextLS(options[["posteriorPredictionSummaryTablePointEstimate"]])
 
     predictionsTable$addColumnInfo(name = "hypothesis",    title = gettext("Model"),                         type = "string")
     predictionsTable$addColumnInfo(name = "posterior",     title = gettextf("Posterior (%s)", "\u03B8"),     type = "string")
@@ -1436,7 +1436,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
       tempTests <- .testBinomialLS(data, options[["priors"]])
       tempMeans <- NULL
-      margEst   <- .predictionTableEstimate(data, options, options[["predictionTableEstimate"]])
+      margEst   <- .predictionTableEstimate(data, options, options[["posteriorPredictionSummaryTablePointEstimate"]])
       # add rows for each hypothesis
       for (i in 1:length(options[["priors"]])) {
 
@@ -1447,9 +1447,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           hypothesis      = options[["priors"]][[i]][["name"]],
           posterior       = tempResults[["distribution"]],
           prob            = tempTests[i, "posterior"],
-          posteriorEst    = tempResults[[options[["predictionTableEstimate"]]]],
+          posteriorEst    = tempResults[[options[["posteriorPredictionSummaryTablePointEstimate"]]]],
           predictive      = tempPrediction[["distribution"]],
-          predictiveEst   = tempPrediction[[options[["predictionTableEstimate"]]]]
+          predictiveEst   = tempPrediction[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]
         )
 
         predictionsTable$addRows(tempRow)
@@ -1464,7 +1464,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       # add footnote clarifying what dataset was used
       predictionsTable$addFootnote(gettextf(
         "The prediction for %s %s is based on %s %s and %s %s.",
-        options[["predictionN"]], ifelse (options[["predictionN"]] == 1, gettext("observation"), gettext("observations")),
+        options[["posteriorPredictionNumberOfFutureTrials"]], ifelse (options[["posteriorPredictionNumberOfFutureTrials"]] == 1, gettext("observation"), gettext("observations")),
         data[["nSuccesses"]], ifelse (data[["nSuccesses"]] == 1, gettext("success"), gettext("successes")),
         data[["nFailures"]], ifelse (data[["nFailures"]] == 1, gettext("failure"), gettext("failures"))
       ))
@@ -1537,7 +1537,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     }
   }
 
-  posteriorEst <- .dataPointMarginalBinomial(data, options, allLinesNew[[1]], allSpikes, N = options[["predictionN"]],
+  posteriorEst <- .dataPointMarginalBinomial(data, options, allLinesNew[[1]], allSpikes, N = options[["posteriorPredictionNumberOfFutureTrials"]],
                                              type = "parameter", type2 = "Posterior",
                                              estimate = estimate)$x
 
@@ -1548,7 +1548,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
   for (i in 1:length(options[["priors"]])) {
 
-    dfHist   <- .dataHistBinomialLS2(data, options[["priors"]][[i]], options[["predictionN"]])
+    dfHist   <- .dataHistBinomialLS2(data, options[["priors"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]])
     dfHist$g <- options[["priors"]][[i]]$name
     dfHist$y <- dfHist$y*tempResults[i,"posterior"]
 
@@ -1575,7 +1575,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
   allLinesNew   <- allLinesNew[seq(1,nrow(allLinesNew),2),]
   allLinesNew$x <- allLinesNew$x + .5
 
-  predictionEst <- .dataPointMarginalBinomial(data, options, allLinesNew, NULL, N = options[["predictionN"]],
+  predictionEst <- .dataPointMarginalBinomial(data, options, allLinesNew, NULL, N = options[["posteriorPredictionNumberOfFutureTrials"]],
                                               type = "prediction", type2 = "Posterior",
                                               estimate = estimate)$x
 

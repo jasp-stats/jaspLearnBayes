@@ -1549,15 +1549,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Prediction Plots",
       switch(
-        options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]],
+        options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPredictions",       "plotsPredictionsPost"),
-      ifelse (type == "Prior", "plotsPredictionType",    "plotsPredictionPostType"),
+      ifelse (type == "Prior", "plotsPredictions",       "posteriorPredictionDistributionPlot"),
+      ifelse (type == "Prior", "plotsPredictionType",    "posteriorPredictionDistributionPlotType"),
       if (type == "Posterior") "posteriorPredictionNumberOfFutureTrials"
     ))
     containerPlots$position <- ifelse (type == "Prior", 4, 10)
@@ -1570,7 +1570,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn(c("introductoryText", ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")))
+    introText$dependOn(c("introductoryText", ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")))
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis, type)
@@ -2100,7 +2100,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
 
       specificText <- switch(
-        options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]],
+        options[[ifelse (type == "Prior", "plotsPredictionType", "posteriorPredictionDistributionPlotType")]],
         "conditional" = gettextf(
           "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s",
           ifelse (type == "Prior", gettext("prior predictive distributions"), gettext("posterior predictive distributions")),
