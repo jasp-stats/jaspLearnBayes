@@ -1556,7 +1556,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPredictions",       "posteriorPredictionDistributionPlot"),
+      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlot",       "posteriorPredictionDistributionPlot"),
       ifelse (type == "Prior", "plotsPredictionType",    "posteriorPredictionDistributionPlotType"),
       if (type == "Posterior") "posteriorPredictionNumberOfFutureTrials"
     ))
@@ -1619,13 +1619,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPredictiveAccuracy <- createJaspContainer(title = gettextf(
       "%s Predictive Accuracy Plot",
       switch(
-        options[["plotsPredictiveAccuracyType"]],
+        options[["priorPredictivePerformanceAccuracyPlotType"]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Normalized")
       )))
     containerPredictiveAccuracy$position <- 5
-    containerPredictiveAccuracy$dependOn(c("plotsPredictiveAccuracy", "plotsPredictiveAccuracyType"))
+    containerPredictiveAccuracy$dependOn(c("priorPredictivePerformanceAccuracyPlot", "priorPredictivePerformanceAccuracyPlotType"))
 
     jaspResults[["containerPredictiveAccuracy"]] <- containerPredictiveAccuracy
   } else {
@@ -1824,10 +1824,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     tableDescription <- gettextf(
       "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:
     <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>",
-      ifelse (options[["bfType"]] == "inclusion",
+      ifelse (options[["priorPredictivePerformanceBfType"]] == "inclusion",
              gettext("'Inclusion BF' - the inclusion Bayes factor for the hypothesis (change from prior to posterior odds for including the hypothesis)"),
              gettextf("'BF' - the Bayes factor comparing the predictive performance of the current hypothesis to the %s",
-                      ifelse (options[["bfType"]] == "best",
+                      ifelse (options[["priorPredictivePerformanceBfType"]] == "best",
                              "best performing hypothesis",
                              "to the hypothesis specified in 'vs.' Dropdown menu"))
       )
@@ -2128,7 +2128,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     generalText <- gettext("The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses.")
 
     specificText <- switch(
-      options[["plotsPredictiveAccuracyType"]],
+      options[["priorPredictivePerformanceAccuracyPlotType"]],
       "conditional" = gettext("The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."),
       "joint"       = gettext("The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."),
       "marginal"    = gettext("The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses).")

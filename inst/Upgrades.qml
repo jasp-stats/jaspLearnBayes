@@ -9,7 +9,7 @@ Upgrades
 		functionName: 	"MixedModelsCommon"
 		fromVersion:	"0.17.0"
 		toVersion:		"0.18.0"
-		
+
 		# qml_components/LSintrotext.qml
 		ChangeRename { from: "introText";	to: "introductoryText"}
 
@@ -106,13 +106,10 @@ Upgrades
 
 		# qml_components/LStestingpredictions.qml
 		ChangeRename { from: "predictionN";								to: "posteriorPredictionNumberOfFutureTrials"}
-
 		ChangeRename { from: "predictionTable";							to: "posteriorPredictionSummaryTable"}
 		ChangeRename { from: "predictionTableEstimate";					to: "posteriorPredictionSummaryTablePointEstimate"}
-
 		ChangeRename { from: "plotsPredictionsPost";					to: "posteriorPredictionDistributionPlot"}
 		ChangeRename { from: "plotsPredictionPostType";					to: "posteriorPredictionDistributionPlotType"}
-
 		ChangeRename { from: "plotsPredictionPostEstimate";				to: "posteriorPredictionDistributionPlotConditionalPointEstimate"}
 		ChangeRename { from: "plotsPredictionPostEstimateType";			to: "posteriorPredictionDistributionPlotConditionalPointEstimateType"}
 		ChangeRename { from: "plotsPredictionPostCI";					to: "posteriorPredictionDistributionPlotConditionalCi"}
@@ -120,9 +117,7 @@ Upgrades
 		ChangeRename { from: "plotsPredictionPostCoverage";				to: "posteriorPredictionDistributionPlotConditionalCiMass"}
 		ChangeRename { from: "plotsPredictionPostLower";				to: "posteriorPredictionDistributionPlotConditionalCiLower"}
 		ChangeRename { from: "plotsPredictionPostUpper";				to: "posteriorPredictionDistributionPlotConditionalCiUpper"}
-
 		ChangeRename { from: "plotsPredictionPostJointType";			to: "posteriorPredictionDistributionPlotJoinType"}
-
 		ChangeRename { from: "plotsPredictionPostMarginalEstimate";		to: "posteriorPredictionDistributionPlotMarginalPointEstimate"}
 		ChangeRename { from: "plotsPredictionPostMarginalEstimateType";	to: "posteriorPredictionDistributionPlotMarginalPointEstimateType"}
 		ChangeRename { from: "plotsPredictionPostMarginalCI";			to: "posteriorPredictionDistributionPlotMarginalCi"}
@@ -130,10 +125,40 @@ Upgrades
 		ChangeRename { from: "plotsPredictionPostMarginalCoverage";		to: "posteriorPredictionDistributionPlotMarginalCiMass"}
 		ChangeRename { from: "plotsPredictionPostMarginalLower";		to: "posteriorPredictionDistributionPlotMarginalCiLower"}
 		ChangeRename { from: "plotsPredictionPostMarginalUpper";		to: "posteriorPredictionDistributionPlotMarginalCiUpper"}
-
 		ChangeRename { from: "predictionPostPlotProp";					to: "posteriorPredictionDistributionPlotSampleProportion"}
 		ChangeRename { from: "predictionPostPlotTable";					to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
+		# qml_components/LStestingpredictions.qml
+		ChangeRename { from: "plotsPredictions";					to: "priorPredictivePerformanceDistributionPlot"}
+		ChangeRename { from: "plotsPredictionType";					to: "priorPredictivePerformanceDistributionPlotType"}
+
+		ChangeRename { from: "plotsPredictionEstimate";				to: "priorPredictivePerformanceDistributionPlotConditionalPointEstimate"}
+		ChangeRename { from: "plotsPredictionEstimateType";			to: "priorPredictivePerformanceDistributionPlotConditionalPointEstimateType"}
+		ChangeRename { from: "plotsPredictionCI";					to: "priorPredictivePerformanceDistributionPlotConditionalCi"}
+		ChangeRename { from: "plotsPredictionTypeCI";				to: "priorPredictivePerformanceDistributionPlotConditionalCiType"}
+		ChangeRename { from: "plotsPredictionCoverage";				to: "priorPredictivePerformanceDistributionPlotConditionalCiMass"}
+		ChangeRename { from: "plotsPredictionLower";				to: "priorPredictivePerformanceDistributionPlotConditionalCiLower"}
+		ChangeRename { from: "plotsPredictionUpper";				to: "priorPredictivePerformanceDistributionPlotConditionalCiUpper"}
+
+		ChangeRename { from: "plotsPredictionJointType";			to: "priorPredictivePerformanceDistributionPlotJoinType"}
+
+		ChangeRename { from: "plotsPredictionMarginalEstimate";		to: "priorPredictivePerformanceDistributionPlotMarginalPointEstimate"}
+		ChangeRename { from: "plotsPredictionMarginalEstimateType";	to: "priorPredictivePerformanceDistributionPlotMarginalPointEstimateType"}
+		ChangeRename { from: "plotsPredictionMarginalCI";			to: "priorPredictivePerformanceDistributionPlotMarginalCi"}
+		ChangeRename { from: "plotsPredictionMarginalTypeCI";		to: "priorPredictivePerformanceDistributionPlotMarginalCiType"}
+		ChangeRename { from: "plotsPredictionMarginalCoverage";		to: "priorPredictivePerformanceDistributionPlotMarginalCiMass"}
+		ChangeRename { from: "plotsPredictionMarginalLower";		to: "priorPredictivePerformanceDistributionPlotMarginalCiLower"}
+		ChangeRename { from: "plotsPredictionMarginalUpper";		to: "priorPredictivePerformanceDistributionPlotMarginalCiUpper"}
+
+		ChangeRename { from: "plotsPredictionsObserved";			to: "priorPredictivePerformanceDistributionPlotObservedNumberOfSuccess"}
+		ChangeRename { from: "predictionPlotTable";					to: "priorPredictivePerformanceDistributionPlotPredictionsTable"}
+
+		ChangeRename { from: "plotsPredictiveAccuracy";				to: "priorPredictivePerformanceAccuracyPlot"}
+		ChangeRename { from: "plotsPredictiveAccuracyType";			to: "priorPredictivePerformanceAccuracyPlotType"}
+		ChangeRename { from: "bfType";								to: "priorPredictivePerformanceBfType"}
+		ChangeRename { from: "bfTypevsName";						to: "priorPredictivePerformanceBfVsHypothesis"}
+		ChangeRename { from: "bayesFactorType";						to: "priorPredictivePerformanceBfType"}
+		
 
 	}
 

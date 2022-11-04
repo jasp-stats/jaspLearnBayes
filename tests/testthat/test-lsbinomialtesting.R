@@ -5,12 +5,12 @@ context("Learn Bayes - Binomial Testing")
 ### output for all default settings (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "inclusion"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -49,19 +49,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- FALSE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -78,14 +78,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "joint"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "conditional"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "conditional"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "conditional"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -107,7 +107,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -196,12 +196,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 1 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF01"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "best"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF01"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "best"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -240,19 +240,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "marginal"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- FALSE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -269,14 +269,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "joint"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "joint"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -298,7 +298,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -375,12 +375,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 2 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Spike"
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "vs"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -419,19 +419,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "marginal"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -448,14 +448,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "joint"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "joint"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -477,7 +477,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -554,12 +554,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 3 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Spike"
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "vs"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -598,19 +598,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "marginal"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -627,14 +627,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "joint"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "joint"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -656,7 +656,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -733,12 +733,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 4 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Spike"
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "vs"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -777,19 +777,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "marginal"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -806,14 +806,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -835,7 +835,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -906,12 +906,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 5 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF01"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "vs"
-  options$bfTypevsName <- "Hypothesis Beta"
-  options$bfTypevsNameSequential <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF01"
+  options$priorPredictivePerformanceBfType <- "vs"
+  options$priorPredictivePerformanceBfTypeSequential <- "vs"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -950,19 +950,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -979,14 +979,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- FALSE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1008,7 +1008,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- TRUE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -1101,12 +1101,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 6 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF01"
-  options$bayesFactorTypeSequential <- "LogBF10"
-  options$bfType <- "best"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Beta"
-  options$bfTypevsNameSequential <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfType <- "BF01"
+  options$priorPredictivePerformanceBfTypeSequential <- "LogBF10"
+  options$priorPredictivePerformanceBfType <- "best"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1145,19 +1145,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -1174,14 +1174,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- FALSE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- FALSE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1203,7 +1203,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- TRUE
   options$posteriorPredictionSummaryTable <- TRUE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -1262,12 +1262,12 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 7 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF01"
-  options$bayesFactorTypeSequential <- "LogBF10"
-  options$bfType <- "best"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Beta"
-  options$bfTypevsNameSequential <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfType <- "BF01"
+  options$priorPredictivePerformanceBfTypeSequential <- "LogBF10"
+  options$priorPredictivePerformanceBfType <- "best"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1306,19 +1306,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -1335,14 +1335,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- FALSE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- FALSE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1364,7 +1364,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
@@ -1399,12 +1399,12 @@ context("Learn Bayes - Binomial Testing")
 ### output for all default settings (spike only)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "inclusion"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1443,19 +1443,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "marginal"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- FALSE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -1472,14 +1472,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "conditional"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1501,7 +1501,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "spike", value = ""))
@@ -1567,12 +1567,12 @@ context("Learn Bayes - Binomial Testing")
 ### output for all default settings (beta only)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "inclusion"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1611,19 +1611,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -1640,14 +1640,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "joint"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1669,7 +1669,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""))
@@ -1735,12 +1735,12 @@ context("Learn Bayes - Binomial Testing")
 ### some challenging plots
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "inclusion"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1779,19 +1779,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -1808,14 +1808,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "joint"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- FALSE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1837,7 +1837,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = ".1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
@@ -1875,12 +1875,12 @@ context("Learn Bayes - Binomial Testing")
 }
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
+  options$priorPredictivePerformanceBfType <- "inclusion"
+  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1919,19 +1919,19 @@ context("Learn Bayes - Binomial Testing")
   options$plotsPosteriorType <- "joint"
   options$plotsPosteriorTypeCI <- "central"
   options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
   options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
   options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
   options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
@@ -1948,14 +1948,14 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "joint"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
   options$posteriorPredictionDistributionPlot <- FALSE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
   options$plotsPrior <- TRUE
   options$plotsPriorCI <- FALSE
   options$plotsPriorCoverage <- 0.95
@@ -1977,7 +1977,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
-  options$predictionPlotTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = ".1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
