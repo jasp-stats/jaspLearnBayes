@@ -178,7 +178,7 @@ Form {
 
 	LS.LStestingsequential
 	{
-		enabled:					binomialDataInput.dataType.value !== "dataCounts"
+		enabled:					binomialDataInput.dataInputType.value !== "counts"
 		bfTypevsNameSequential:		"priors.name"
 		onEnabledChanged: 
 		{

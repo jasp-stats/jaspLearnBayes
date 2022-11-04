@@ -155,8 +155,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       return()
     else if (!ready["data"]) {
 
-      if ((options[["dataType"]] == "dataVariable" && options[["selectedVariable"]]  != "") ||
-          (options[["dataType"]] == "dataSequence" && options[["dataSequenceInput"]] != ""))
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]]  != "") ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != ""))
         testsTable$addFootnote(gettext("Please specify successes and failures."))
 
       return()
@@ -921,8 +921,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     if (!ready["data"] && type != "Prior") {
 
-      if ((options[["dataType"]] == "dataVariable" && options[["selectedVariable"]] != "") ||
-          (options[["dataType"]] == "dataSequence" && options[["dataSequenceInput"]]    != ""))
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "") ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
         tablePredictions$addFootnote(gettext("Please specify successes and failures."))
 
       return()
@@ -1426,8 +1426,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       return()
     else if (!ready["data"]) {
 
-      if ((options[["dataType"]] == "dataVariable" && options[["selectedVariable"]] != "") ||
-          (options[["dataType"]] == "dataSequence" && options[["dataSequenceInput"]]    != ""))
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "") ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
         predictionsTable$addFootnote(gettext("Please specify successes and failures."))
 
       return()

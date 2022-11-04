@@ -18,11 +18,11 @@
 # data load and summary
 .readyGaussianLS       <- function(options) {
   # are data ready
-  if (options[["dataType"]] == "dataCounts")
+  if (options[["dataInputType"]] == "counts")
     readyData <- TRUE
-  else if (options[["dataType"]] == "dataSequence")
-    readyData <- nchar(options[["dataSequenceInput"]]) != 0
-  else if (options[["dataType"]] == "dataVariable")
+  else if (options[["dataInputType"]] == "sequence")
+    readyData <- nchar(options[["dataSequenceSequenceOfObservations"]]) != 0
+  else if (options[["dataInputType"]] == "variable")
     readyData <- options[["dataVariableSelected"]] != ""
 
   # are priors ready
@@ -34,30 +34,30 @@
 
   data <- list()
 
-  if (options[["dataType"]] == "dataCounts") {
+  if (options[["dataInputType"]] == "counts") {
 
     data$y    <- NULL
     data$mean <- options[["dataCountsMean"]]
-    data$SD   <- options[["dataCountsSD"]]
+    data$SD   <- options[["dataCountsSd"]]
     data$N    <- options[["dataCountsN"]]
 
   } else{
 
-    if (options[["dataType"]] == "dataSequence") {
+    if (options[["dataInputType"]] == "sequence") {
 
-      tempY   <- .cleanSequence(options[["dataSequenceInput"]])
-      data$SD <- options[["dataSequenceSD"]]
+      tempY   <- .cleanSequence(options[["dataSequenceSequenceOfObservations"]])
+      data$SD <- options[["dataSequenceSequenceSd"]]
 
-    } else if (options[["dataType"]] == "dataVariable") {
+    } else if (options[["dataInputType"]] == "variable") {
 
       # this is stupidly written #rework
       if (!is.null(dataset)) {
         tempY <- dataset
       } else{
-        tempY <- .readDataSetToEnd(columns = options[["selectedVariable"]])[,1]
+        tempY <- .readDataSetToEnd(columns = options[["dataVariableSelected"]])[,1]
       }
 
-      data$SD <- options[["dataVariableSD"]]
+      data$SD <- options[["dataVariableSd"]]
 
     }
 
@@ -106,7 +106,7 @@
   }
 
 
-  if (options[["dataSummary"]] && options[["dataType"]] != "dataCounts" && is.null(summaryContainer[['summaryTable']])) {
+  if (options[["dataSummary"]] && options[["dataInputType"]] != "counts" && is.null(summaryContainer[['summaryTable']])) {
 
     summaryTable <- createJaspTable(title = gettext("Data Summary"))
 
@@ -713,4 +713,4 @@
 }
 
 # all settings dependent on data input
-.dataDependenciesGaussianLS <- c("dataType", "dataCountsMean", "dataCountsSD", "dataCountsN", "dataSequenceInput", "dataSequenceSD", "dataVariableSelected", "dataVariableSD", "priors")
+.dataDependenciesGaussianLS <- c("dataInputType", "dataCountsMean", "dataCountsSd", "dataCountsN", "dataSequenceSequenceOfObservations", "dataSequenceSequenceSd", "dataVariableSelected", "dataVariableSd", "priors")

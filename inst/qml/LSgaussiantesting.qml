@@ -162,7 +162,7 @@ Form {
 
 	LS.LStestingsequential
 	{
-		enabled:					 gaussianDataInput.dataType.value !== "dataCounts"
+		enabled:					 gaussianDataInput.dataInputType.value !== "counts"
 		bfTypevsNameSequential:		"priors.name"
 	}
 

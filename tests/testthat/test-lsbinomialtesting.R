@@ -14,15 +14,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "conditional"
@@ -113,7 +113,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -205,15 +205,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "joint"
@@ -304,7 +304,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -384,15 +384,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "joint"
@@ -483,7 +483,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -563,15 +563,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "joint"
@@ -662,7 +662,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -742,15 +742,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "marginal"
@@ -841,7 +841,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -915,15 +915,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- TRUE
   options$plotsBothType <- "marginal"
@@ -1014,7 +1014,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -1110,15 +1110,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- FALSE
   options$plotsBothSampleProportion <- TRUE
   options$plotsBothType <- "marginal"
@@ -1209,7 +1209,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -1271,15 +1271,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- FALSE
   options$plotsBothSampleProportion <- TRUE
   options$plotsBothType <- "marginal"
@@ -1370,7 +1370,7 @@ context("Learn Bayes - Binomial Testing")
                               parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
                          list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
                               parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -1408,15 +1408,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "joint"
@@ -1505,7 +1505,7 @@ context("Learn Bayes - Binomial Testing")
   options$predictionTableEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "spike", value = ""))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -1576,15 +1576,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- TRUE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "marginal"
@@ -1673,7 +1673,7 @@ context("Learn Bayes - Binomial Testing")
   options$predictionTableEstimate <- "mean"
   options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -1744,15 +1744,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- FALSE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "marginal"
@@ -1843,7 +1843,7 @@ context("Learn Bayes - Binomial Testing")
                               parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
                                                                                  name = "Hypothesis 2", parAlpha = "1", parBeta = ".1", parPoint = "0.5",
                                                                                  type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
@@ -1884,15 +1884,15 @@ context("Learn Bayes - Binomial Testing")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsBoth <- FALSE
   options$plotsBothSampleProportion <- FALSE
   options$plotsBothType <- "marginal"
@@ -1988,7 +1988,7 @@ context("Learn Bayes - Binomial Testing")
                                                                                                                                       parBeta = "1", parPoint = "0.5", type = "spike", value = "4"),
                          list(PH = "1", name = "Hypothesis 5", parAlpha = "1", parBeta = "1",
                               parPoint = "0.6", type = "spike", value = "5"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 

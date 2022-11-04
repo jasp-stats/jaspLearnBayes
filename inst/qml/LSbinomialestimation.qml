@@ -153,7 +153,7 @@ Form {
 
 	LS.LSestimationsequential
 	{
-		enabled: binomialDataInput.dataType.value !== "dataCounts"
+		enabled: binomialDataInput.dataInputType.value !== "counts"
 		onEnabledChanged: 
 		{
 			if (!enabled) {

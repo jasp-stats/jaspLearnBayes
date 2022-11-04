@@ -77,7 +77,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   if (options[["plotsIterativeInterval"]] && options[["plotsIterativeIntervalUpdatingTable"]]).tableIterativeIntervalGaussianLS(jaspResults, data, ready, options)
 
   # posterior updating table
-  if (options[["doIterative"]] && options[["dataType"]] != "dataCounts").estimatesSequentialGaussianLS(jaspResults, data, ready, options)
+  if (options[["doIterative"]] && options[["dataInputType"]] != "counts").estimatesSequentialGaussianLS(jaspResults, data, ready, options)
 
 
   ### prediction

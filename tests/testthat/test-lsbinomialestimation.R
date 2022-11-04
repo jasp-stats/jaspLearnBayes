@@ -6,16 +6,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- TRUE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- TRUE
   options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- TRUE
@@ -70,7 +70,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
                                                                                   parAlpha = "1", parBeta = "1", parPoint = "0.5", type = "beta",
                                                                                   value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -189,16 +189,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- TRUE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- TRUE
@@ -253,7 +253,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -480,16 +480,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- TRUE
@@ -544,7 +544,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -624,16 +624,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- TRUE
@@ -688,7 +688,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -732,16 +732,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
@@ -796,7 +796,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -834,16 +834,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
@@ -898,7 +898,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -936,16 +936,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
@@ -1000,7 +1000,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -1032,16 +1032,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- TRUE
   options$plotsIterative <- FALSE
@@ -1096,7 +1096,7 @@ context("Learn Bayes - Binomial Estimation")
                               parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -1128,16 +1128,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- TRUE
   options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- TRUE
@@ -1190,7 +1190,7 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTableEstimate <- "mean"
   options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "spike", value = ""))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -1251,16 +1251,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
   options$plotsPosteriorIndividualPrior <- TRUE
   options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- TRUE
@@ -1313,7 +1313,7 @@ context("Learn Bayes - Binomial Estimation")
   options$predictionTableEstimate <- "median"
   options$priors <- list(list(name = "Models Beta", parAlpha = "1", parBeta = "1",
                               parPoint = "0.5", type = "beta", value = ""))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -1376,16 +1376,16 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataCounts"
-  options$dataSequenceInput <- ""
+  options$dataInputType <- "counts"
+  options$dataSequenceSequenceOfObservations <- ""
   options$doIterative <- FALSE
   options$introText <- FALSE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- list()
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- list()
-  options$nFailures <- 6
-  options$nSuccesses <- 3
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 6
+  options$dataCountsSuccesses <- 3
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- FALSE
@@ -1439,7 +1439,7 @@ context("Learn Bayes - Binomial Estimation")
   options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
                               type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
                                                                 parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- ""
+  options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
   table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
@@ -1452,18 +1452,18 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataSequence"
-  options$dataSequenceInput <- "1;0;0,10,1,1,0 ,1 ,
+  options$dataInputType <- "sequence"
+  options$dataSequenceSequenceOfObservations <- "1;0;0,10,1,1,0 ,1 ,
 1
 "
   options$doIterative <- FALSE
   options$introText <- FALSE
-  options$keyFailureSeq <- "0"
-  options$keyFailureVar <- list()
-  options$keySuccessSeq <- "1"
-  options$keySuccessVar <- list()
-  options$nFailures <- 6
-  options$nSuccesses <- 3
+  options$dataSequenceFailures <- "0"
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- "1"
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 6
+  options$dataCountsSuccesses <- 3
   options$plotsPosteriorIndividualPrior <- FALSE
   options$plotsPosteriorIndividualProportion <- FALSE
   options$plotsIterative <- FALSE
@@ -1517,7 +1517,7 @@ context("Learn Bayes - Binomial Estimation")
   options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
                               type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
                                                                 parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- ""
+  options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 

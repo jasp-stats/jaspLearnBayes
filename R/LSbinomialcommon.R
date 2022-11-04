@@ -18,12 +18,12 @@
 # data load and summary
 .readyBinomialLS       <- function(options) {
   # are data ready
-  if (options[["dataType"]] == "dataCounts")
+  if (options[["dataInputType"]] == "counts")
     readyData <- TRUE
-  else if (options[["dataType"]] == "dataSequence")
-    readyData <- length(options[["keySuccessSeq"]]) > 0 || length(options[["keyFailureSeq"]]) > 0
-  else if (options[["dataType"]] == "dataVariable")
-    readyData <- length(options[["keySuccessVar"]]) > 0 || length(options[["keyFailureVar"]]) > 0
+  else if (options[["dataInputType"]] == "sequence")
+    readyData <- length(options[["dataSequenceSuccesses"]]) > 0 || length(options[["dataSequenceFailures"]]) > 0
+  else if (options[["dataInputType"]] == "variable")
+    readyData <- length(options[["dataVariableSuccesses"]]) > 0 || length(options[["dataVariableFailures"]]) > 0
 
   # are priors ready
   readyPriors <- length(options[["priors"]]) > 0
@@ -36,32 +36,32 @@
 
   data <- list()
 
-  if (options[["dataType"]] == "dataCounts") {
+  if (options[["dataInputType"]] == "counts") {
 
     data$y <- NULL
-    data$nSuccesses <- options[["nSuccesses"]]
-    data$nFailures  <- options[["nFailures"]]
+    data$nSuccesses <- options[["dataCountsSuccesses"]]
+    data$nFailures  <- options[["dataCountsFailures"]]
 
   } else {
 
-    if ((options[["dataType"]]== "dataVariable" && options[["selectedVariable"]]  == "") |
-        (options[["dataType"]]== "dataSequence" && options[["dataSequenceInput"]] == "")) {
+    if ((options[["dataInputType"]]== "variable" && options[["dataVariableSelected"]]  == "") |
+        (options[["dataInputType"]]== "sequence" && options[["dataSequenceSequenceOfObservations"]] == "")) {
 
       data$y <- NULL
 
     } else {
 
-      if (options[["dataType"]]== "dataSequence") {
+      if (options[["dataInputType"]]== "sequence") {
 
-        tempY <- .cleanSequence(options[["dataSequenceInput"]])
+        tempY <- .cleanSequence(options[["dataSequenceSequenceOfObservations"]])
 
-      } else if (options[["dataType"]] == "dataVariable") {
+      } else if (options[["dataInputType"]] == "variable") {
 
         # this is stupidly written #rework
         if (!is.null(dataset)) {
           tempY <- dataset
         } else {
-          tempY <- .readDataSetToEnd(columns = options[["selectedVariable"]])[,1]
+          tempY <- .readDataSetToEnd(columns = options[["dataVariableSelected"]])[,1]
         }
 
       }
@@ -81,12 +81,12 @@
 .cleanDataBinomialLS   <- function(x, options) {
 
   # doubling the menu allows to store the keys while user switches between different input methods
-  if (options[["dataType"]] == "dataSequence") {
-    keySuccess <- options[["keySuccessSeq"]]
-    keyFailure <- options[["keyFailureSeq"]]
+  if (options[["dataInputType"]] == "sequence") {
+    keySuccess <- options[["dataSequenceSuccesses"]]
+    keyFailure <- options[["dataSequenceFailures"]]
   } else {
-    keySuccess <- options[["keySuccessVar"]]
-    keyFailure <- options[["keyFailureVar"]]
+    keySuccess <- options[["dataVariableSuccesses"]]
+    keyFailure <- options[["dataVariableFailures"]]
   }
 
   x <- na.omit(x)
@@ -136,7 +136,7 @@
   if (options[["introText"]] && is.null(summaryContainer[['summaryText']])) {
 
     summaryText <- createJaspHtml()
-    summaryText$dependOn(c("introText", "dataType"))
+    summaryText$dependOn(c("introText", "dataInputType"))
     summaryText$position <- 1
 
     summaryText[['text']] <- .explanatoryTextLS("data", options, analysis)
@@ -145,7 +145,7 @@
   }
 
 
-  if (options[["dataSummary"]] && options[["dataType"]] != "dataCounts" && is.null(summaryContainer[['summaryTable']])) {
+  if (options[["dataSummary"]] && options[["dataInputType"]] != "counts" && is.null(summaryContainer[['summaryTable']])) {
 
     summaryTable <- createJaspTable(title = gettext("Data Summary"))
 
@@ -1043,9 +1043,9 @@
 }
 
 # all settings dependent on data input
-.dataDependenciesBinomialLS <- c("dataType",
+.dataDependenciesBinomialLS <- c("dataInputType",
                                    "nSuccesses", "nFailures",                                 # for Counts
-                                   "dataSequenceInput",    "keySuccessSeq", "keyFailureSeq",  # for Sequence
-                                   "selectedVariable", "keySuccessVar", "keyFailureVar",  # for Variable
+                                   "dataSequenceSequenceOfObservations",    "dataSequenceSuccesses", "dataSequenceFailures",  # for Sequence
+                                   "dataVariableSelected", "dataVariableSuccesses", "dataVariableFailures",  # for Variable
                                    "priors")
 

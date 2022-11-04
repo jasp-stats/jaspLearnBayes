@@ -87,7 +87,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     .tableIterativeIntervalBinomialLS(jaspResults, data, ready, options)
 
   # posterior updating table
-  if (options[["doIterative"]] && options[["dataType"]] != "dataCounts")
+  if (options[["doIterative"]] && options[["dataInputType"]] != "counts")
     .estimatesSequentialBinomialLS(jaspResults, data, ready, options)
 
 
@@ -134,8 +134,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       return()
     else if (!ready["data"]) {
 
-      if ((options[["dataType"]] == "dataVariable" && options[["selectedVariable"]]  != "") ||
-          (options[["dataType"]] == "dataSequence" && options[["dataSequenceInput"]] != ""))
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]]  != "") ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != ""))
         estimatesTable$addFootnote(gettext("Please specify successes and failures."))
 
       return()
@@ -1110,8 +1110,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       return()
     else if (!ready["data"]) {
 
-      if ((options[["dataType"]] == "dataVariable" && options[["selectedVariable"]] != "") ||
-          (options[["dataType"]] == "dataSequence" && options[["dataSequenceInput"]]    != ""))
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "") ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
         predictionsTable$addFootnote(gettext("Please specify successes and failures."))
 
       return()
@@ -1360,8 +1360,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     if (!ready["data"]) {
 
-      if ((options[["dataType"]] == "dataVariable" && options[["selectedVariable"]]     != "") ||
-          (options[["dataType"]] == "dataSequence" && options[["dataSequenceInput"]]    != ""))
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]]     != "") ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
         tablePredictions$addFootnote(gettext("Please specify successes and failures."))
 
       return()

@@ -1736,15 +1736,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
     mainText   <- gettext("The 'Data' section allows you to specify data input for the analysis.")
     optionText <- switch(
-      options[["dataType"]],
-      "dataVariable"  = gettextf(
+      options[["dataInputType"]],
+      "variable"  = gettextf(
         "The 'Select variable' option allows the selection of a variable ('Selected') from a dataset loaded into JASP. %s",
         ifelse (binomial,
                gettext("In addition, the variable levels need to be classified into successes ('Successes') and failures ('Failures')."),
                gettext("In addition, the standard deviation of the normal distribution of the population ('SD') needs to be specified.")
         )
       ),
-      "dataCounts"    = gettextf(
+      "counts"    = gettextf(
         "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis.",
         ifelse (binomial,
                gettext("The necessary information is the number of successes ('Successes') and the number of failures ('Failures')."),
@@ -1752,7 +1752,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         ),
         ifelse (estimation, gettext("models"), gettext("hypotheses"))
       ),
-      "dataSequence"  = gettextf(
+      "sequence"  = gettextf(
         "The 'Enter sequence' option allows manual input of a specific order of observations. %s",
         ifelse (binomial,
                gettext("The necessary information are the individual observed outcomes written into 'Comma-separated sequence of observations', and classification of the observation types into the ones that represent success ('Successes') and failures ('Failures')."),
