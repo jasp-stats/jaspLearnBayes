@@ -68,13 +68,13 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   if (options[["plotsIterative"]] && options[["sequentialAnalysisPointEstimatePlotUpdatingTable"]]).tableIterativeGaussianLS(jaspResults, data, ready, options)
 
   # interval
-  if (options[["plotsIterativeInterval"]]) {
-    if (options[["plotsIterativeIntervalType"]] == "overlying").plotsIterativeIntervalOverlyingGaussianLS(jaspResults, data, ready, options)
-    if (options[["plotsIterativeIntervalType"]] == "stacked").plotsIterativeIntervalStackedGaussianLS(jaspResults, data, ready, options)
+  if (options[["sequentialAnalysisIntervalEstimatePlot"]]) {
+    if (options[["sequentialAnalysisIntervalEstimatePlotType"]] == "overlying").plotsIterativeIntervalOverlyingGaussianLS(jaspResults, data, ready, options)
+    if (options[["sequentialAnalysisIntervalEstimatePlotType"]] == "stacked").plotsIterativeIntervalStackedGaussianLS(jaspResults, data, ready, options)
   }
 
   # interval estimate table
-  if (options[["plotsIterativeInterval"]] && options[["plotsIterativeIntervalUpdatingTable"]]).tableIterativeIntervalGaussianLS(jaspResults, data, ready, options)
+  if (options[["sequentialAnalysisIntervalEstimatePlot"]] && options[["sequentialAnalysisIntervalEstimatePlotUpdatingTable"]]).tableIterativeIntervalGaussianLS(jaspResults, data, ready, options)
 
   # posterior updating table
   if (options[["sequentialAnalysisPosteriorUpdatingTable"]] && options[["dataInputType"]] != "counts").estimatesSequentialGaussianLS(jaspResults, data, ready, options)
@@ -771,14 +771,14 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   containerIterativeInterval <- .containerSequentialIntervalLS(jaspResults, options, "gaussEst")
 
-  if (is.null(containerIterativeInterval[["plotsIterativeInterval"]])) {
+  if (is.null(containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]])) {
 
     plotsIterativeInterval <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
 
     plotsIterativeInterval$position <- 2
     plotsIterativeInterval$dependOn(c(.dataDependenciesGaussianLS,
-                                      "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "colorPalette"))
-    containerIterativeInterval[["plotsIterativeInterval"]] <- plotsIterativeInterval
+                                      "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "colorPalette"))
+    containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
     if (!all(ready)) {
       return()
@@ -813,8 +813,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         tempResults <- .dataCustomGaussianLS(
           tempData,
           options[["priors"]][[h]],
-          lCI = options[["plotsIterativeIntervalLower"]],
-          uCI = options[["plotsIterativeIntervalUpper"]],
+          lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]],
+          uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]],
           NULL,
           "parameter"
         )
@@ -831,7 +831,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     }
 
-    yName  <- bquote("P("~{.(options[["plotsIterativeIntervalLower"]])<=mu}<=.(options[["plotsIterativeIntervalUpper"]])~")")
+    yName  <- bquote("P("~{.(options[["sequentialAnalysisIntervalEstimatePlotLower"]])<=mu}<=.(options[["sequentialAnalysisIntervalEstimatePlotUpper"]])~")")
     xName  <- gettext("Observation")
 
     p <- .plotIterativeLS(plotDataLines, allCI = NULL, xName = xName, yName = yName, palette = options[["colorPalette"]])
@@ -846,14 +846,14 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   containerIterativeInterval <- .containerSequentialIntervalLS(jaspResults, options, "gaussEst")
 
-  if (is.null(containerIterativeInterval[["plotsIterativeInterval"]])) {
+  if (is.null(containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]])) {
 
     plotsIterativeInterval <- createJaspContainer()
 
     plotsIterativeInterval$position <- 2
     plotsIterativeInterval$dependOn(c(.dataDependenciesGaussianLS,
-                                      "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "colorPalette"))
-    containerIterativeInterval[["plotsIterativeInterval"]] <- plotsIterativeInterval
+                                      "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "colorPalette"))
+    containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
 
     if (all(!ready) || (ready["data"] && !ready["priors"])) {
@@ -940,8 +940,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         xName  <- bquote(.(gettext("Population mean"))~mu)
 
         tempPlot$plotObject <- .plotStackedLS(allLines, allArrows, legend, xName = xName, xRange = range,
-                                              lCI = options[["plotsIterativeIntervalLower"]],
-                                              uCI = options[["plotsIterativeIntervalUpper"]])
+                                              lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]],
+                                              uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]])
       }
     }
   }
@@ -1078,7 +1078,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     tableIterativeInterval$position <- 3
     tableIterativeInterval$dependOn(c(.dataDependenciesGaussianLS,
-                                      "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "plotsIterativeIntervalUpdatingTable"))
+                                      "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "sequentialAnalysisIntervalEstimatePlotUpdatingTable"))
     containerIterativeInterval[["tableIterativeInterval"]] <- tableIterativeInterval
 
     tableIterativeInterval$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
@@ -1120,8 +1120,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         tempResults <- .dataCustomGaussianLS(
           tempData,
           options[["priors"]][[h]],
-          lCI = options[["plotsIterativeIntervalLower"]],
-          uCI = options[["plotsIterativeIntervalUpper"]],
+          lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]],
+          uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]],
           NULL,
           type = "parameter"
         )

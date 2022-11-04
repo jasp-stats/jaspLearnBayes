@@ -75,15 +75,15 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     .tableIterativeBinomialLS(jaspResults, data, ready, options)
 
   # interval
-  if (options[["plotsIterativeInterval"]]) {
-    if (options[["plotsIterativeIntervalType"]] == "overlying")
+  if (options[["sequentialAnalysisIntervalEstimatePlot"]]) {
+    if (options[["sequentialAnalysisIntervalEstimatePlotType"]] == "overlying")
       .plotsIterativeIntervalOverlyingBinomialLS(jaspResults, data, ready, options)
-    if (options[["plotsIterativeIntervalType"]] == "stacked")
+    if (options[["sequentialAnalysisIntervalEstimatePlotType"]] == "stacked")
       .plotsIterativeIntervalStackedBinomialLS(jaspResults, data, ready, options)
   }
 
   # interval estimate table
-  if (options[["plotsIterativeInterval"]] && options[["plotsIterativeIntervalUpdatingTable"]])
+  if (options[["sequentialAnalysisIntervalEstimatePlot"]] && options[["sequentialAnalysisIntervalEstimatePlotUpdatingTable"]])
     .tableIterativeIntervalBinomialLS(jaspResults, data, ready, options)
 
   # posterior updating table
@@ -780,14 +780,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   containerIterativeInterval <- .containerSequentialIntervalLS(jaspResults, options, "binEst")
 
-  if (is.null(containerIterativeInterval[["plotsIterativeInterval"]])) {
+  if (is.null(containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]])) {
 
     plotsIterativeInterval <- createJaspPlot(width = 700, height = 400)
 
     plotsIterativeInterval$position <- 2
     plotsIterativeInterval$dependOn(c(.dataDependenciesBinomialLS,
-                                      "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "colorPalette"))
-    containerIterativeInterval[["plotsIterativeInterval"]] <- plotsIterativeInterval
+                                      "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "colorPalette"))
+    containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
     if (!all(ready))
       return()
@@ -815,8 +815,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         )
 
         tempResults    <- .dataCustomBinomialLS(tempData, options[["priors"]][[h]],
-                                                 lCI = options[["plotsIterativeIntervalLower"]],
-                                                 uCI = options[["plotsIterativeIntervalUpper"]],
+                                                 lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]],
+                                                 uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]],
                                                  type = c("parameter"))
 
         tempLines      <- rbind(tempLines, data.frame(
@@ -831,7 +831,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     }
 
-    yName  <- bquote("P("~{.(options[["plotsIterativeIntervalLower"]])<=theta}<=.(options[["plotsIterativeIntervalUpper"]])~")")
+    yName  <- bquote("P("~{.(options[["sequentialAnalysisIntervalEstimatePlotLower"]])<=theta}<=.(options[["sequentialAnalysisIntervalEstimatePlotUpper"]])~")")
     xName  <- gettext("Observation")
 
     p <- .plotIterativeLS(plotDataLines, allCI = NULL, xName = xName, yName = yName, palette = options[["colorPalette"]])
@@ -845,16 +845,16 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   containerIterativeInterval <- .containerSequentialIntervalLS(jaspResults, options, "binEst")
 
-  if (is.null(containerIterativeInterval[["plotsIterativeInterval"]])) {
+  if (is.null(containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]])) {
 
     plotsIterativeInterval <- createJaspContainer()
 
     plotsIterativeInterval$position <- 2
     plotsIterativeInterval$dependOn(c(.dataDependenciesBinomialLS,
-                                      "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "colorPalette"))
+                                      "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "colorPalette"))
 
 
-    containerIterativeInterval[["plotsIterativeInterval"]] <- plotsIterativeInterval
+    containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
 
     if (all(!ready) || (ready["data"] && !ready["priors"])) {
@@ -923,7 +923,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         xName  <- bquote(.(gettext("Population proportion"))~theta)
 
         tempPlot$plotObject <- .plotStackedLS(allLines, allArrows, legend, xName = xName,
-                                               lCI = options[["plotsIterativeIntervalLower"]], uCI = options[["plotsIterativeIntervalUpper"]])
+                                               lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]], uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]])
       }
     }
   }
@@ -1040,7 +1040,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     tableIterativeInterval$position <- 3
     tableIterativeInterval$dependOn(c(.dataDependenciesBinomialLS,
-                                      "plotsIterativeIntervalLower", "plotsIterativeIntervalUpper", "plotsIterativeIntervalUpdatingTable"))
+                                      "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "sequentialAnalysisIntervalEstimatePlotUpdatingTable"))
     containerIterativeInterval[["tableIterativeInterval"]] <- tableIterativeInterval
 
     tableIterativeInterval$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
@@ -1071,7 +1071,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       for (h in 1:length(options[["priors"]])) {
 
         tempResults    <- .dataCustomBinomialLS(tempData, options[["priors"]][[h]],
-                                                 lCI = options[["plotsIterativeIntervalLower"]], uCI = options[["plotsIterativeIntervalUpper"]],
+                                                 lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]], uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]],
                                                  type = c("parameter"))
         tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults$coverage
       }

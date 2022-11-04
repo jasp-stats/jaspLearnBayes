@@ -196,7 +196,7 @@ Upgrades
 		ChangeRename { from: "plotsBothType";						to: "priorAndPosteriorDistributionPlotType"}
 		ChangeRename { from: "plotsBothSampleProportion";			to: "priorAndPosteriorDistributionPlotObservedProportion"}
 
-		# qml_components/LStestingpriorandposterior.qml
+		# qml_components/LStestingsequential.qml
 		ChangeRename { from: "plotsIterative";							to: "sequentialAnalysisPredictivePerformancePlot"}
 		ChangeRename { from: "plotsIterativeType";						to: "sequentialAnalysisPredictivePerformancePlotType"}
 		ChangeRename { from: "bfTypeSequential";						to: "sequentialAnalysisPredictivePerformancePlotBfComparison"}

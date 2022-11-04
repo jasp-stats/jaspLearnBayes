@@ -270,7 +270,7 @@ Section
 				{
 					name:				"posteriorDistributionPlotConditionalCi"
 					label:				qsTr("CI")
-					id:					"posteriorDistributionPlotConditionalCi"
+					id:					posteriorDistributionPlotConditionalCi
 					childrenOnSameRow:	true
 
 					DropDown
@@ -278,7 +278,7 @@ Section
 						name:	"posteriorDistributionPlotConditionalCiType"
 						label:	""
 						values:	["central", "HPD", "custom","support"]
-						id:		"posteriorDistributionPlotConditionalCiType"
+						id:		posteriorDistributionPlotConditionalCiType
 					}
 				}
 
@@ -288,8 +288,8 @@ Section
 
 					CIField
 					{
-						visible:		"posteriorDistributionPlotConditionalCiType".currentText == "central" | "posteriorDistributionPlotConditionalCiType".currentText == "HPD"
-						enabled:		"posteriorDistributionPlotConditionalCi".checked
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "central" | posteriorDistributionPlotConditionalCiType.currentText == "HPD"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
 						name:			"posteriorDistributionPlotConditionalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
@@ -301,11 +301,11 @@ Section
 
 					DoubleField
 					{
-						visible:		"posteriorDistributionPlotConditionalCiType".currentText == "custom"
-						enabled:		"posteriorDistributionPlotConditionalCi".checked
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "custom"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
 						name:			"posteriorDistributionPlotConditionalCiLower"
 						label:			qsTr("Lower")
-						id:				"posteriorDistributionPlotConditionalCiLower"
+						id:				posteriorDistributionPlotConditionalCiLower
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 : -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
@@ -315,22 +315,22 @@ Section
 
 					DoubleField
 					{
-						visible:		"posteriorDistributionPlotConditionalCiType".currentText == "custom"
-						enabled:		"posteriorDistributionPlotConditionalCi".checked
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "custom"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
 						name:			"posteriorDistributionPlotConditionalCiUpper"
 						label:			qsTr("Upper")
-						id:				"posteriorDistributionPlotConditionalCiUpper"
+						id:				posteriorDistributionPlotConditionalCiUpper
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.75 : 1
-						min:			"posteriorDistributionPlotConditionalCiLower".value
+						min:			posteriorDistributionPlotConditionalCiLower.value
 						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
 
 					FormulaField
 					{
-						visible:		"posteriorDistributionPlotConditionalCiType".currentText == "support"
-						enabled:		"posteriorDistributionPlotConditionalCi".checked
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "support"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
 						name:			"posteriorDistributionPlotConditionalCiBf"
 						label:			qsTr("BF")
 						fieldWidth:		50

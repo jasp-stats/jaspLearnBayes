@@ -1369,13 +1369,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerIterativeInterval <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis: Interval",
       switch(
-        options[["plotsIterativeIntervalType"]],
+        options[["sequentialAnalysisIntervalEstimatePlotType"]],
         "overlying" = gettext("All"),
         "stacked"   = gettext("Stacked"),
         "individual"= gettext("Individual")
       )))
     containerIterativeInterval$position <- 7
-    containerIterativeInterval$dependOn(c("plotsIterativeInterval", "plotsIterativeIntervalType"))
+    containerIterativeInterval$dependOn(c("sequentialAnalysisIntervalEstimatePlot", "sequentialAnalysisIntervalEstimatePlotType"))
 
     jaspResults[["containerIterativeInterval"]] <- containerIterativeInterval
   } else {
@@ -1386,7 +1386,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (options[["introductoryText"]] && is.null(containerIterativeInterval[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn(c("introductoryText", "plotsIterativeIntervalType"))
+    introText$dependOn(c("introductoryText", "sequentialAnalysisIntervalEstimatePlotType"))
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_interval", options, analysis)
@@ -1961,7 +1961,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     )
 
     specificText <- switch(
-      options[["plotsIterativeIntervalType"]],
+      options[["sequentialAnalysisIntervalEstimatePlotType"]],
       "overlying"    = gettextf(
         "The 'All' option shows the probability of parameter %s lying inside of the specified range for all models in one figure, allowing for easier comparison.",
         ifelse (binomial, "\u03B8", "\u03BC")

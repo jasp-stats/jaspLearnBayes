@@ -96,7 +96,7 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsIterativeInterval"
+		name:		"sequentialAnalysisIntervalEstimatePlot"
 		id:			plotsIterativeInterval
 		label:		qsTr("Interval estimate plot")
 		checked:	false
@@ -104,7 +104,7 @@ Section
 		RadioButtonGroup
 		{
 			label:		qsTr("Type")
-			name:		"plotsIterativeIntervalType"
+			name:		"sequentialAnalysisIntervalEstimatePlotType"
 			id:			plotsIterativeIntervalType
 
 			Group
@@ -113,7 +113,7 @@ Section
 				DoubleField
 				{
 					enabled:			plotsIterativeInterval.checked
-					name:				"plotsIterativeIntervalLower"
+					name:				"sequentialAnalysisIntervalEstimatePlotLower"
 					label:				qsTr("Lower")
 					id:					plotsIterativeIntervalLower
 					fieldWidth:			50
@@ -151,7 +151,7 @@ Section
 
 			CheckBox
 			{
-				name: 	"plotsIterativeIntervalUpdatingTable"
+				name: 	"sequentialAnalysisIntervalEstimatePlotUpdatingTable"
 				label:	qsTr("Updating table")
 			}
 		}
