@@ -19,7 +19,7 @@
 
 LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) {
 
-  options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "plotsIterativeBF"))
+  options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "sequentialAnalysisPointEstimatePlotCiBf"))
 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyBinomialLS(options)
@@ -63,15 +63,15 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   ### sequential analysis
   # point estimate
-  if (options[["plotsIterativeOverlying"]])
+  if (options[["sequentialAnalysisPointEstimatePlot"]])
     .plotsIterativeOverlyingBinomialLS(jaspResults, data, ready, options)
 
-  if (options[["plotsIterativeStacked"]])
+  if (options[["sequentialAnalysisStackedDistributionsPlot"]])
     .plotsIterativeStackedBinomialLS(jaspResults, data, ready, options)
 
 
   # point estimate table
-  if (options[["plotsIterativeOverlying"]] && options[["plotsIterativeUpdatingTable"]])
+  if (options[["sequentialAnalysisPointEstimatePlot"]] && options[["sequentialAnalysisPointEstimatePlotUpdatingTable"]])
     .tableIterativeBinomialLS(jaspResults, data, ready, options)
 
   # interval
@@ -87,7 +87,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     .tableIterativeIntervalBinomialLS(jaspResults, data, ready, options)
 
   # posterior updating table
-  if (options[["doIterative"]] && options[["dataInputType"]] != "counts")
+  if (options[["sequentialAnalysisPosteriorUpdatingTable"]] && options[["dataInputType"]] != "counts")
     .estimatesSequentialBinomialLS(jaspResults, data, ready, options)
 
 
@@ -544,8 +544,8 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     plotsIterative <- createJaspPlot(width = 700, height = 400)
 
     plotsIterative$position <- 2
-    plotsIterative$dependOn(c(.dataDependenciesBinomialLS, "plotsIterativeEstimateType",
-                              "plotsIterativeOverlyingCI", "plotsIterativeCoverage", "plotsIterativeOverlyingType", "plotsIterativeBF",
+    plotsIterative$dependOn(c(.dataDependenciesBinomialLS, "sequentialAnalysisPointEstimatePlotType",
+                              "sequentialAnalysisPointEstimatePlotCi", "sequentialAnalysisPointEstimatePlotCiMass", "sequentialAnalysisPointEstimatePlotCiType", "sequentialAnalysisPointEstimatePlotCiBf",
                               "colorPalette"))
     containerIterative[["plotsIterative"]] <- plotsIterative
 
@@ -580,26 +580,26 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         tempResults    <- .estimateBinomialLS(tempData, options[["priors"]][[h]])
         tempLines      <- rbind(tempLines, data.frame(
-          y    = as.numeric(tempResults[[options[["plotsIterativeEstimateType"]]]]),
+          y    = as.numeric(tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]]),
           x    = i,
           name = options[["priors"]][[h]]$name
         ))
 
-        if (options[["plotsIterativeOverlyingCI"]]) {
+        if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
 
-          if (options[["plotsIterativeOverlyingType"]] == "central") {
+          if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "central") {
             tempCIPP <- .dataCentralBinomialLS(tempData, options[["priors"]][[h]],
-                                                options[["plotsIterativeCoverage"]], type = "parameter")
-          } else if (options[["plotsIterativeOverlyingType"]] == "HPD") {
+                                                options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter")
+          } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD") {
 
             tempCIPP <- .dataHPDBinomialLS(tempData, options[["priors"]][[h]],
-                                            options[["plotsIterativeCoverage"]], type = "parameter")
+                                            options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter")
             if (nrow(tempCIPP) == 2)CIunimodal <- FALSE
 
-          } else if (options[["plotsIterativeOverlyingType"]] == "support") {
+          } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
 
             tempCIPP <- .dataSupportBinomialLS(tempData, options[["priors"]][[h]],
-                                               options[["plotsIterativeBF"]])
+                                               options[["sequentialAnalysisPointEstimatePlotCiBf"]])
             if (nrow(tempCIPP) == 0)tempCIPP <- NULL
 
           }
@@ -667,7 +667,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       plotDataLines <- c(plotDataLines, list(tempLines))
 
       # deal with a possibility of two disjoined CIs
-      if (options[["plotsIterativeOverlyingCI"]]) {
+      if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
         if (CIunimodal) {
           # deal with possible non-existing support intervals
           if (all(is.na(tempCI[,c("y1", "y2")])))
@@ -938,25 +938,25 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     tableIterative <- createJaspTable()
 
     tableIterative$position <- 3
-    tableIterative$dependOn(c(.dataDependenciesBinomialLS, "plotsIterativeEstimateType",
-                              "plotsIterativeOverlyingCI", "plotsIterativeCoverage", "plotsIterativeOverlyingType", "plotsIterativeBF",
-                              "colorPalette", "plotsIterativeUpdatingTable"))
+    tableIterative$dependOn(c(.dataDependenciesBinomialLS, "sequentialAnalysisPointEstimatePlotType",
+                              "sequentialAnalysisPointEstimatePlotCi", "sequentialAnalysisPointEstimatePlotCiMass", "sequentialAnalysisPointEstimatePlotCiType", "sequentialAnalysisPointEstimatePlotCiBf",
+                              "colorPalette", "sequentialAnalysisPointEstimatePlotUpdatingTable"))
     containerIterative[["tableIterative"]] <- tableIterative
 
     tableIterative$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
     if (ready["priors"]) {
-      if (options[["plotsIterativeOverlyingCI"]]) {
-        if (options[["plotsIterativeOverlyingType"]] == "central")
-          CItitle <- gettextf("%i%% CI", options[["plotsIterativeCoverage"]]*100)
-        else if (options[["plotsIterativeOverlyingType"]] == "HPD")
-          CItitle <- gettextf("%i%% HPD", options[["plotsIterativeCoverage"]]*100)
-        else if (options[["plotsIterativeOverlyingType"]] == "support")
-          CItitle <- gettextf("SI (BF=%s)", options[["plotsIterativeBF"]])
+      if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
+        if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "central")
+          CItitle <- gettextf("%i%% CI", options[["sequentialAnalysisPointEstimatePlotCiMass"]]*100)
+        else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD")
+          CItitle <- gettextf("%i%% HPD", options[["sequentialAnalysisPointEstimatePlotCiMass"]]*100)
+        else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support")
+          CItitle <- gettextf("SI (BF=%s)", options[["sequentialAnalysisPointEstimatePlotCiBf"]])
 
         for (i in 1:length(options[["priors"]])) {
           tableIterative$addColumnInfo(
             name      = paste(options[["priors"]][[i]]$name,"center", sep = "_"),
-            title     = .estimateTextLS(options[["plotsIterativeEstimateType"]]),
+            title     = .estimateTextLS(options[["sequentialAnalysisPointEstimatePlotType"]]),
             overtitle = options[["priors"]][[i]]$name,
             type      = "number")
           tableIterative$addColumnInfo(
@@ -993,19 +993,19 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       for (h in 1:length(options[["priors"]])) {
 
         tempResults <- .estimateBinomialLS(tempData, options[["priors"]][[h]])
-        tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["plotsIterativeEstimateType"]]]]
+        tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]]
 
-        if (options[["plotsIterativeOverlyingCI"]]) {
+        if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
 
-          if (options[["plotsIterativeOverlyingType"]] == "central") {
+          if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "central") {
             tempCIPP <- .dataCentralBinomialLS(tempData, options[["priors"]][[h]],
-                                                options[["plotsIterativeCoverage"]], type = "parameter")
-          } else if (options[["plotsIterativeOverlyingType"]] == "HPD") {
+                                                options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter")
+          } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD") {
             tempCIPP <- .dataHPDBinomialLS(tempData, options[["priors"]][[h]],
-                                            options[["plotsIterativeCoverage"]], type = "parameter")
-          } else if (options[["plotsIterativeOverlyingType"]] == "support") {
+                                            options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter")
+          } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
             tempCIPP <- .dataSupportBinomialLS(tempData, options[["priors"]][[h]],
-                                               options[["plotsIterativeBF"]])
+                                               options[["sequentialAnalysisPointEstimatePlotCiBf"]])
           }
 
           if (all(is.na(tempCIPP[1:2]))) {

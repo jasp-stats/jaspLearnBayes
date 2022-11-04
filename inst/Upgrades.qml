@@ -83,6 +83,21 @@ Upgrades
 		ChangeRename { from: "plotsPosteriorIndividualPrior";			to: "posteriorDistributionPlotAddPriorDistribution"}
 		ChangeRename { from: "plotsPosteriorIndividualProportion";		to: "posteriorDistributionPlotAddObservedProportion"}
 
+		# qml_components/LSestimationsequential.qml
+		ChangeRename { from: "plotsIterativeOverlying";					to: "sequentialAnalysisPointEstimatePlot"}
+		ChangeRename { from: "plotsIterativeEstimateType";				to: "sequentialAnalysisPointEstimatePlotType"}
+		ChangeRename { from: "plotsIterativeOverlyingCI";				to: "sequentialAnalysisPointEstimatePlotCi"}
+		ChangeRename { from: "plotsIterativeOverlyingType";				to: "sequentialAnalysisPointEstimatePlotCiType"}
+		ChangeRename { from: "plotsIterativeCoverage";					to: "sequentialAnalysisPointEstimatePlotCiMass"}
+		ChangeRename { from: "plotsIterativeBF";						to: "sequentialAnalysisPointEstimatePlotCiBf"}
+		ChangeRename { from: "plotsIterativeUpdatingTable";				to: "sequentialAnalysisPointEstimatePlotUpdatingTable"}
+		ChangeRename { from: "plotsIterativeInterval";					to: "sequentialAnalysisIntervalEstimatePlot"}
+		ChangeRename { from: "plotsIterativeIntervalType";				to: "sequentialAnalysisIntervalEstimatePlotType"}
+		ChangeRename { from: "plotsIterativeIntervalLower";				to: "sequentialAnalysisIntervalEstimatePlotLower"}
+		ChangeRename { from: "plotsIterativeIntervalUpper";				to: "sequentialAnalysisIntervalEstimatePlotUpper"}
+		ChangeRename { from: "plotsIterativeIntervalUpdatingTable";		to: "sequentialAnalysisIntervalEstimatePlotUpdatingTable"}
+		ChangeRename { from: "plotsIterativeStacked";					to: "sequentialAnalysisStackedDistributionsPlot"}
+		ChangeRename { from: "doIterative";								to: "sequentialAnalysisPosteriorUpdatingTable"}
 	}
 
 }

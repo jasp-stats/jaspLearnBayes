@@ -8,7 +8,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- TRUE
+  options$sequentialAnalysisPosteriorUpdatingTable <- TRUE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -19,19 +19,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- TRUE
   options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- FALSE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -191,7 +191,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -202,19 +202,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- TRUE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "HPD"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "stacked"
-  options$plotsIterativeIntervalUpdatingTable <- TRUE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "median"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "HPD"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "stacked"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- TRUE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -482,7 +482,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -493,19 +493,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "HPD"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- TRUE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "median"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "HPD"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- TRUE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -626,7 +626,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -637,19 +637,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -734,7 +734,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -745,19 +745,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -836,7 +836,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -847,19 +847,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -938,7 +938,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -949,19 +949,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -1034,7 +1034,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -1045,19 +1045,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -1130,7 +1130,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -1141,19 +1141,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- TRUE
   options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -1253,7 +1253,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
@@ -1264,19 +1264,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- TRUE
   options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- TRUE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -1378,7 +1378,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSummary <- TRUE
   options$dataInputType <- "counts"
   options$dataSequenceSequenceOfObservations <- ""
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- FALSE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- list()
@@ -1389,19 +1389,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- FALSE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95
@@ -1456,7 +1456,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataSequenceSequenceOfObservations <- "1;0;0,10,1,1,0 ,1 ,
 1
 "
-  options$doIterative <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
   options$introText <- FALSE
   options$dataSequenceFailures <- "0"
   options$dataVariableFailures <- list()
@@ -1467,19 +1467,19 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorDistributionPlotAddPriorDistribution <- FALSE
   options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- FALSE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
   options$posteriorDistributionPlot <- FALSE
   options$posteriorDistributionPlotIndividualCiBf <- 1
   options$posteriorDistributionPlotIndividualCiMass <- 0.95

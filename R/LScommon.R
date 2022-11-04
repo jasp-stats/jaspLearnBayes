@@ -1342,7 +1342,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerIterativeOverlying"]])) {
     containerIterativeOverlying <- createJaspContainer(title = gettext("Sequential Analysis: Point Estimate"))
     containerIterativeOverlying$position <- 6
-    containerIterativeOverlying$dependOn(c("plotsIterativeOverlying", "plotsIterativeEstimateType"))
+    containerIterativeOverlying$dependOn(c("sequentialAnalysisPointEstimatePlot", "sequentialAnalysisPointEstimatePlotType"))
 
     jaspResults[["containerIterativeOverlying"]] <- containerIterativeOverlying
   } else {
@@ -1401,7 +1401,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerIterativeStacked"]])) {
     containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Stacked"))
     containerIterativeStacked$position <- 7.5
-    containerIterativeStacked$dependOn("plotsIterativeStacked")
+    containerIterativeStacked$dependOn("sequentialAnalysisStackedDistributionsPlot")
 
     jaspResults[["containerIterativeStacked"]] <- containerIterativeStacked
   } else {
@@ -1427,7 +1427,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerIterativeUpdating"]])) {
     containerIterativeUpdating <- createJaspContainer(title = gettext("Sequential Posterior Updating"))
     containerIterativeUpdating$position <- 8
-    containerIterativeUpdating$dependOn("doIterative")
+    containerIterativeUpdating$dependOn("sequentialAnalysisPosteriorUpdatingTable")
 
     jaspResults[["containerIterativeUpdating"]] <- containerIterativeUpdating
   } else {

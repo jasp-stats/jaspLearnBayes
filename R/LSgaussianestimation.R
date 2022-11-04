@@ -17,7 +17,7 @@
 
 LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) {
 
-  options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "plotsIterativeBF"))
+  options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "sequentialAnalysisPointEstimatePlotCiBf"))
 
   # introductory text
   if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussEst")
@@ -65,7 +65,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   }
 
   # point estimate table
-  if (options[["plotsIterative"]] && options[["plotsIterativeUpdatingTable"]]).tableIterativeGaussianLS(jaspResults, data, ready, options)
+  if (options[["plotsIterative"]] && options[["sequentialAnalysisPointEstimatePlotUpdatingTable"]]).tableIterativeGaussianLS(jaspResults, data, ready, options)
 
   # interval
   if (options[["plotsIterativeInterval"]]) {
@@ -77,7 +77,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   if (options[["plotsIterativeInterval"]] && options[["plotsIterativeIntervalUpdatingTable"]]).tableIterativeIntervalGaussianLS(jaspResults, data, ready, options)
 
   # posterior updating table
-  if (options[["doIterative"]] && options[["dataInputType"]] != "counts").estimatesSequentialGaussianLS(jaspResults, data, ready, options)
+  if (options[["sequentialAnalysisPosteriorUpdatingTable"]] && options[["dataInputType"]] != "counts").estimatesSequentialGaussianLS(jaspResults, data, ready, options)
 
 
   ### prediction
@@ -529,8 +529,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     plotsIterative <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
 
     plotsIterative$position <- 2
-    plotsIterative$dependOn(c(.dataDependenciesGaussianLS, "plotsIterativeEstimateType",
-                              "plotsIterativeOverlyingCI", "plotsIterativeCoverage", "plotsIterativeOverlyingType", "plotsIterativeBF",
+    plotsIterative$dependOn(c(.dataDependenciesGaussianLS, "sequentialAnalysisPointEstimatePlotType",
+                              "sequentialAnalysisPointEstimatePlotCi", "sequentialAnalysisPointEstimatePlotCiMass", "sequentialAnalysisPointEstimatePlotCiType", "sequentialAnalysisPointEstimatePlotCiBf",
                               "colorPalette"))
     containerIterative[["plotsIterative"]] <- plotsIterative
 
@@ -554,8 +554,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     for (i in iterSeq) {
       if (i < 1) {
 
-        if (options[["plotsIterativeOverlyingCI"]] && options[["plotsIterativeOverlyingType"]] == "support") {
-          range <- rbind(range, .rangeGaussiansSupportLS(NULL, options[["priors"]], options[["plotsIterativeBF"]]))
+        if (options[["sequentialAnalysisPointEstimatePlotCi"]] && options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
+          range <- rbind(range, .rangeGaussiansSupportLS(NULL, options[["priors"]], options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
         } else{
           range <- rbind(range, .rangeGaussiansLS(NULL, options[["priors"]]))
         }
@@ -567,8 +567,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
           SD   = data$SD
         )
 
-        if (options[["plotsIterativeOverlyingCI"]] && options[["plotsIterativeOverlyingType"]] == "support") {
-          range <- rbind(range, .rangeGaussiansSupportLS(tempData, options[["priors"]], options[["plotsIterativeBF"]]))
+        if (options[["sequentialAnalysisPointEstimatePlotCi"]] && options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
+          range <- rbind(range, .rangeGaussiansSupportLS(tempData, options[["priors"]], options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
         } else{
           range <- rbind(range, .rangeGaussiansLS(tempData, options[["priors"]]))
         }
@@ -596,32 +596,32 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         tempResults    <- .estimateGaussianLS(tempData, options[["priors"]][[h]])
         tempLines      <- rbind(tempLines, data.frame(
-          y    = tempResults[[options[["plotsIterativeEstimateType"]]]],
+          y    = tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]],
           x    = i,
           name = options[["priors"]][[h]]$name
         ))
 
-        if (options[["plotsIterativeOverlyingCI"]]) {
+        if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
 
-          if (options[["plotsIterativeOverlyingType"]] %in% c("central", "HPD")) {
+          if (options[["sequentialAnalysisPointEstimatePlotCiType"]] %in% c("central", "HPD")) {
 
             tempCIPP <- .dataCentralGaussianLS(
               tempData,
               options[["priors"]][[h]],
-              options[["plotsIterativeCoverage"]],
+              options[["sequentialAnalysisPointEstimatePlotCiMass"]],
               type = "parameter"
             )
 
-            if (options[["plotsIterativeOverlyingType"]] == "HPD") {
+            if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD") {
               tempCIPP$g <- "HPD"
             }
 
-          } else if (options[["plotsIterativeOverlyingType"]] == "support") {
+          } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
 
             tempCIPP <- .dataSupportGaussianLS(
               tempData,
               options[["priors"]][[h]],
-              options[["plotsIterativeBF"]],
+              options[["sequentialAnalysisPointEstimatePlotCiBf"]],
               range
             )
 
@@ -957,24 +957,24 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     tableIterative <- createJaspTable()
 
     tableIterative$position <- 3
-    tableIterative$dependOn(c(.dataDependenciesGaussianLS, "plotsIterativeEstimateType",
-                              "plotsIterativeOverlyingCI", "plotsIterativeCoverage", "colorPalette", "plotsIterativeUpdatingTable"))
+    tableIterative$dependOn(c(.dataDependenciesGaussianLS, "sequentialAnalysisPointEstimatePlotType",
+                              "sequentialAnalysisPointEstimatePlotCi", "sequentialAnalysisPointEstimatePlotCiMass", "colorPalette", "sequentialAnalysisPointEstimatePlotUpdatingTable"))
     containerIterative[["tableIterative"]] <- tableIterative
 
     tableIterative$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
     if (ready["priors"]) {
-      if (options[["plotsIterativeOverlyingCI"]]) {
-        if (options[["plotsIterativeOverlyingType"]] == "central") {
-          CI_title <- gettextf("%i%% CI", options[["plotsIterativeCoverage"]]*100)
-        } else if (options[["plotsIterativeOverlyingType"]] == "HPD") {
-          CI_title <- gettextf("%i%% HPD", options[["plotsIterativeCoverage"]]*100)
-        } else if (options[["plotsIterativeOverlyingType"]] == "support") {
-          CI_title <- gettextf("SI (BF=%s)", options[["plotsIterativeBF"]])
+      if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
+        if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "central") {
+          CI_title <- gettextf("%i%% CI", options[["sequentialAnalysisPointEstimatePlotCiMass"]]*100)
+        } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD") {
+          CI_title <- gettextf("%i%% HPD", options[["sequentialAnalysisPointEstimatePlotCiMass"]]*100)
+        } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
+          CI_title <- gettextf("SI (BF=%s)", options[["sequentialAnalysisPointEstimatePlotCiBf"]])
         }
         for (i in 1:length(options[["priors"]])) {
           tableIterative$addColumnInfo(
             name  = paste(options[["priors"]][[i]]$name,"center", sep = "_"),
-            title = ifelse (options[["plotsIterativeEstimateType"]] == "mean", gettext("Mean"), gettext("Median")),
+            title = ifelse (options[["sequentialAnalysisPointEstimatePlotType"]] == "mean", gettext("Mean"), gettext("Median")),
             overtitle = options[["priors"]][[i]]$name,
             type = "number")
           tableIterative$addColumnInfo(
@@ -1020,29 +1020,29 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
       for (h in 1:length(options[["priors"]])) {
 
         tempResults <- .estimateGaussianLS(tempData, options[["priors"]][[h]])
-        tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["plotsIterativeEstimateType"]]]]
+        tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]]
 
-        if (options[["plotsIterativeOverlyingCI"]]) {
+        if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
 
-          if (options[["plotsIterativeOverlyingType"]] %in% c("central", "HPD")) {
+          if (options[["sequentialAnalysisPointEstimatePlotCiType"]] %in% c("central", "HPD")) {
 
             tempCIPP <- .dataCentralGaussianLS(
               tempData,
               options[["priors"]][[h]],
-              options[["plotsIterativeCoverage"]],
+              options[["sequentialAnalysisPointEstimatePlotCiMass"]],
               type = "parameter"
             )
 
-            if (options[["plotsIterativeOverlyingType"]] == "HPD") {
+            if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD") {
               tempCIPP$g <- "HPD"
             }
 
-          } else if (options[["plotsIterativeOverlyingType"]] == "support") {
+          } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
 
             tempCIPP <- .dataSupportGaussianLS(
               tempData,
               options[["priors"]][[h]],
-              options[["plotsIterativeBF"]]
+              options[["sequentialAnalysisPointEstimatePlotCiBf"]]
             )
           }
 
