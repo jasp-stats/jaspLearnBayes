@@ -1255,7 +1255,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["estimatesContainer"]])) {
     estimatesContainer <- createJaspContainer("Model")
     estimatesContainer$position <- 2
-    estimatesContainer$dependOn("pointEstimate")
+    estimatesContainer$dependOn("priorAndPosteriorPointEstimate")
     jaspResults[["estimatesContainer"]] <- estimatesContainer
   } else {
     estimatesContainer <- jaspResults[["estimatesContainer"]]
@@ -1281,15 +1281,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Plots",
       switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "overlying" = gettext("All"),
         "stacked"   = gettext("Stacked"),
         "individual"= gettext("Individual")
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPrior", "plotsPosterior"),
-      ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")
+      ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
+      ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
     ))
     containerPlots$position <- ifelse (type == "Prior", 3, 4)
     jaspResults[[paste0("containerPlots", type)]] <- containerPlots
@@ -1513,15 +1513,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Plots",
       switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPrior", "plotsPosterior"),
-      ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")
+      ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
+      ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
     ))
     containerPlots$position <- ifelse (type == "Prior", 3, 6)
     jaspResults[[paste0("containerPlots", type)]] <- containerPlots
@@ -1771,9 +1771,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
-        options[["pointEstimate"]],
+        options[["priorAndPosteriorPointEstimate"]],
         switch(
-          options[["pointEstimate"]],
+          options[["priorAndPosteriorPointEstimate"]],
           "mean"   = gettextf("The prior mean can be computed as %1$s / (%1$s + %2$s).", "\u03B1", "\u03B2"),
           "median" = gettextf("The prior median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if %1$s, %2$s > 1.", "\u03B1", "\u03B2"),
           "mode"   = gettextf("The prior mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if %1$s, %2$s > 1.", "\u03B1", "\u03B2")
@@ -1781,15 +1781,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       "gaussEst" = gettextf(
         "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>",
-        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["pointEstimate"]]),
+        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["priorAndPosteriorPointEstimate"]]),
     )
 
     tableDescription <- gettextf(
       "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:
     <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>",
       ifelse (binomial, "\u03B8", "\u03BC"),
-      .estimateTextLS(options[["pointEstimate"]]),
-      options[["pointEstimate"]]
+      .estimateTextLS(options[["priorAndPosteriorPointEstimate"]]),
+      options[["priorAndPosteriorPointEstimate"]]
     )
 
     out <- paste0(estimationFormulas, "\n", tableDescription)
@@ -1848,7 +1848,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     if (estimation) {
 
       specificText <- switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "overlying"    = gettextf(
           "The 'All' option shows all %1$s for parameter %2$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis.",
           ifelse (type == "Prior", gettext("prior distributions"), gettext("posterior distributions")),
@@ -1878,7 +1878,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
 
       specificText <- switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "conditional" = gettextf(
           "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s",
           ifelse (type == "Prior", gettext("prior distributions"), gettext("posterior distributions")),
@@ -1986,9 +1986,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
-        options[["pointEstimate"]],
+        options[["priorAndPosteriorPointEstimate"]],
         switch(
-          options[["pointEstimate"]],
+          options[["priorAndPosteriorPointEstimate"]],
           "mean"   = gettextf("mean can be computed as %1$s / (%1$s + %2$s)", "\u03B1", "\u03B2"),
           "median" = gettextf("median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if%1$s, %2$s > 1", "\u03B1", "\u03B2"),
           "mode"   = gettextf("mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if%1$s, %2$s > 1", "\u03B1", "\u03B2")
@@ -1996,7 +1996,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       "gaussEst" = gettextf(
         "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>",
-        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["pointEstimate"]]),
+        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["priorAndPosteriorPointEstimate"]]),
     )
 
   } else if (text == "predictions") {

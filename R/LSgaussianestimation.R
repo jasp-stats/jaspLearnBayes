@@ -17,7 +17,7 @@
 
 LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) {
 
-  options <- .parseAndStoreFormulaOptions(jaspResults, options, c("plotsPosteriorBF", "plotsIterativeBF"))
+  options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "plotsIterativeBF"))
 
   # introductory text
   if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussEst")
@@ -45,15 +45,15 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   .estimatesGaussianLS(jaspResults, data, ready, options)
 
   # prior
-  if (options[["plotsPrior"]]) {
-    if (options[["plotsPriorType"]] != "individual").plotsSimpleGaussianLS(jaspResults, data, ready, options, type = "Prior")
-    if (options[["plotsPriorType"]] == "individual").plotsIndividualGaussianLS(jaspResults, data, ready, options, type = "Prior")
+  if (options[["priorDistributionPlot"]]) {
+    if (options[["priorDistributionPlotType"]] != "individual").plotsSimpleGaussianLS(jaspResults, data, ready, options, type = "Prior")
+    if (options[["priorDistributionPlotType"]] == "individual").plotsIndividualGaussianLS(jaspResults, data, ready, options, type = "Prior")
   }
 
   # posterior
-  if (options[["plotsPosterior"]]) {
-    if (options[["plotsPosteriorType"]] != "individual").plotsSimpleGaussianLS(jaspResults, data, ready, options, type = "Posterior")
-    if (options[["plotsPosteriorType"]] == "individual").plotsIndividualGaussianLS(jaspResults, data, ready, options, type = "Posterior")
+  if (options[["posteriorDistributionPlot"]]) {
+    if (options[["posteriorDistributionPlotType"]] != "individual").plotsSimpleGaussianLS(jaspResults, data, ready, options, type = "Posterior")
+    if (options[["posteriorDistributionPlotType"]] == "individual").plotsIndividualGaussianLS(jaspResults, data, ready, options, type = "Posterior")
   }
 
 
@@ -236,12 +236,12 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   if (is.null(containerPlots[[paste0("plots",type,"simple")]])) {
 
     plotsSimple <- createJaspPlot(
-      width  = if (options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "overlying") 700 else 530,
+      width  = if (options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]] == "overlying") 700 else 530,
       height = 400)
 
     plotsSimple$position <- 2
     plotsSimple$dependOn(c(.dataDependenciesGaussianLS,
-                           ifelse (options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "overlying",
+                           ifelse (options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]] == "overlying",
                                   "colorPalette", "")))
 
     containerPlots[[paste0("plots",type,"simple")]] <- plotsSimple
@@ -278,7 +278,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     xName  <- bquote(.(gettext("Population mean"))~mu)
 
-    if (options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]] == "overlying") {
+    if (options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]] == "overlying") {
       p <- .plotOverlyingLS(allLines, allArrows, xName = xName, palette = options[["colorPalette"]], xRange = range)
     } else{
       p <- .plotStackedLS(allLines, allArrows, legend, xName = xName, xRange = range)
@@ -299,12 +299,12 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     plotsIndividual$position <- 2
     if (type == "Prior") {
-      dependencies <- c("plotsPriorIndividualEstimate", "plotsPriorIndividualEstimateType", "plotsPriorIndividualCI",
-        "plotsPriorIndividualType", "plotsPriorCoverage", "plotsPriorLower", "plotsPriorUpper")
+      dependencies <- c("priorDistributionPlotIndividualPointEstimate", "priorDistributionPlotIndividualPointEstimateType", "priorDistributionPlotIndividualCi",
+        "priorDistributionPlotIndividualCiType", "priorDistributionPlotIndividualCiMass", "priorDistributionPlotIndividualCiLower", "priorDistributionPlotIndividualCiUpper")
     } else if (type == "Posterior") {
-      dependencies <- c("plotsPosteriorIndividualEstimate", "plotsPosteriorIndividualEstimateType", "plotsPosteriorIndividualCI",
-        "plotsPosteriorIndividualType", "plotsPosteriorCoverage", "plotsPosteriorLower", "plotsPosteriorUpper",
-        "plotsPosteriorBF", "plotsPosteriorIndividualPrior", "plotsPosteriorIndividualProportion")
+      dependencies <- c("posteriorDistributionPlotIndividualPointEstimate", "posteriorDistributionPlotIndividualPointEstimateType", "posteriorDistributionPlotIndividualCi",
+        "posteriorDistributionPlotIndividualCiType", "posteriorDistributionPlotIndividualCiMass", "posteriorDistributionPlotIndividualCiLower", "posteriorDistributionPlotIndividualCiUpper",
+        "posteriorDistributionPlotIndividualCiBf", "posteriorDistributionPlotAddPriorDistribution", "posteriorDistributionPlotAddObservedProportion")
     }
     plotsIndividual$dependOn(c(dependencies, .dataDependenciesGaussianLS))
 
@@ -335,7 +335,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       for (i in 1:length(options[["priors"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["plotsPosteriorIndividualPrior"]] || options[["plotsPosteriorIndividualProportion"]])) { 700 } else{ 530 }, height = 400)
+        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["posteriorDistributionPlotAddPriorDistribution"]] || options[["posteriorDistributionPlotAddObservedProportion"]])) { 700 } else{ 530 }, height = 400)
 
         plotsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
 
@@ -346,44 +346,44 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         dfCI        <- NULL
         dfCILinesPP <- NULL
 
-        if (type == "Posterior" && options[["plotsPosteriorIndividualCI"]] && options[["plotsPosteriorIndividualType"]] == "support") {
-          range <- .rangeGaussianSupportLS(tempData, options[["priors"]][[i]], options[["plotsPosteriorBF"]])
+        if (type == "Posterior" && options[["posteriorDistributionPlotIndividualCi"]] && options[["posteriorDistributionPlotIndividualCiType"]] == "support") {
+          range <- .rangeGaussianSupportLS(tempData, options[["priors"]][[i]], options[["posteriorDistributionPlotIndividualCiBf"]])
         } else{
           range <- .rangeGaussianLS(if (type == "Prior") NULL else tempData, options[["priors"]][[i]])
         }
 
-        if (options[[ifelse (type == "Prior", "plotsPriorIndividualCI", "plotsPosteriorIndividualCI")]]) {
+        if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCi", "posteriorDistributionPlotIndividualCi")]]) {
 
-          if (options[[ifelse (type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] %in% c("central", "HPD")) {
+          if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiType", "posteriorDistributionPlotIndividualCiType")]] %in% c("central", "HPD")) {
 
             dfCI <- .dataCentralGaussianLS(
               if (type == "Prior") NULL else tempData,
               options[["priors"]][[i]],
-              options[[ifelse (type == "Prior", "plotsPriorCoverage", "plotsPosteriorCoverage")]],
+              options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiMass", "posteriorDistributionPlotIndividualCiMass")]],
               type = "parameter"
             )
 
-            if (options[[ifelse (type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "HPD") {
+            if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiType", "posteriorDistributionPlotIndividualCiType")]] == "HPD") {
               dfCI$g <- "HPD"
             }
 
-          } else if (options[[ifelse (type == "Prior", "plotsPriorIndividualType", "plotsPosteriorIndividualType")]] == "custom") {
+          } else if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiType", "posteriorDistributionPlotIndividualCiType")]] == "custom") {
 
             dfCI <- .dataCustomGaussianLS(
               if (type == "Prior") NULL else tempData,
               options[["priors"]][[i]],
-              options[[ifelse (type == "Prior", "plotsPriorLower", "plotsPosteriorLower")]],
-              options[[ifelse (type == "Prior", "plotsPriorUpper", "plotsPosteriorUpper")]],
+              options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiLower", "posteriorDistributionPlotIndividualCiLower")]],
+              options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiUpper", "posteriorDistributionPlotIndividualCiUpper")]],
               NULL,
               type = "parameter"
             )
 
-          } else if (options[["plotsPosteriorIndividualType"]] == "support") {
+          } else if (options[["posteriorDistributionPlotIndividualCiType"]] == "support") {
 
             dfCI <- .dataSupportGaussianLS(
               tempData,
               options[["priors"]][[i]],
-              options[["plotsPosteriorBF"]]
+              options[["posteriorDistributionPlotIndividualCiBf"]]
             )
 
           }
@@ -394,7 +394,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         if (options[["priors"]][[i]]$type == "spike") {
           dfArrowPP  <- .dataArrowGaussianLS(options[["priors"]][[i]])
-          if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]) {
+          if (type == "Posterior" && options[["posteriorDistributionPlotAddPriorDistribution"]]) {
             dfArrowPP$g <- "Prior = Posterior"
           } else
             dfArrowPP$g <- type
@@ -416,7 +416,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
             }
           }
 
-          if (type == "Posterior" && options[["plotsPosteriorIndividualPrior"]]) {
+          if (type == "Posterior" && options[["posteriorDistributionPlotAddPriorDistribution"]]) {
             if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
               dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
               dfLinesPP$g <- "Prior = Posterior"
@@ -428,13 +428,13 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         }
 
-        if (options[[ifelse (type == "Prior", "plotsPriorIndividualEstimate", "plotsPosteriorIndividualEstimate")]]) {
+        if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualPointEstimate", "posteriorDistributionPlotIndividualPointEstimate")]]) {
           dfPointEstimate <- .estimateDataPointGaussian(tempData, options[["priors"]][[i]], N = NULL, type = "parameter",
-                                                        estimate = options[[ifelse (type == "Prior", "plotsPriorIndividualEstimateType", "plotsPosteriorIndividualEstimateType")]])
+                                                        estimate = options[[ifelse (type == "Prior", "priorDistributionPlotIndividualPointEstimateType", "posteriorDistributionPlotIndividualPointEstimateType")]])
         } else
           dfPointEstimate <- NULL
 
-        if (type == "Posterior" && options[["plotsPosteriorIndividualProportion"]]) {
+        if (type == "Posterior" && options[["posteriorDistributionPlotAddObservedProportion"]]) {
           dfPointsPP <- data.frame(x = data[["mean"]], y = 0, g = "Sample Mean")
           if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
         } else
@@ -444,7 +444,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
                                pointEstimate = dfPointEstimate, CI = dfCI, CIallLines = dfCILinesPP,
                                xRange = range, xName = xName,
                                dfPoints = dfPointsPP, nRound = 3,
-                               showLegend = (type == "Posterior" && (options[["plotsPosteriorIndividualProportion"]] || options[["plotsPosteriorIndividualPrior"]])))
+                               showLegend = (type == "Posterior" && (options[["posteriorDistributionPlotAddObservedProportion"]] || options[["posteriorDistributionPlotAddPriorDistribution"]])))
         tempPlot$plotObject <- p
       }
 

@@ -59,6 +59,29 @@ Upgrades
 		ChangeRename { from: "predictionPlotProp";			to: "posteriorPredictionDistributionPlotSampleProportions"}
 		ChangeRename { from: "predictionPlotTable";			to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
+		# qml_components/LSestimationpriorandposterior.qml
+		ChangeRename { from: "pointEstimate";						to: "priorAndPosteriorPointEstimate"}
+		ChangeRename { from: "plotsPrior";							to: "priorDistributionPlot"}
+		ChangeRename { from: "plotsPriorType";						to: "priorDistributionPlotType"}
+		ChangeRename { from: "plotsPriorIndividualEstimate";		to: "priorDistributionPlotIndividualPointEstimate"}
+		ChangeRename { from: "plotsPriorIndividualEstimateType";	to: "priorDistributionPlotIndividualPointEstimateType"}
+		ChangeRename { from: "plotsPriorIndividualCI";				to: "priorDistributionPlotIndividualCi"}
+		ChangeRename { from: "plotsPriorIndividualType";			to: "priorDistributionPlotIndividualCiType"}
+		ChangeRename { from: "plotsPriorCoverage";					to: "priorDistributionPlotIndividualCiMass"}
+		ChangeRename { from: "plotsPriorLower";						to: "priorDistributionPlotIndividualCiLower"}
+		ChangeRename { from: "plotsPriorUpper";						to: "priorDistributionPlotIndividualCiUpper"}
+		ChangeRename { from: "plotsPosterior";							to: "posteriorDistributionPlot"}
+		ChangeRename { from: "plotsPosteriorType";						to: "posteriorDistributionPlotType"}
+		ChangeRename { from: "plotsPosteriorIndividualEstimate";		to: "posteriorDistributionPlotIndividualPointEstimate"}
+		ChangeRename { from: "plotsPosteriorIndividualEstimateType";	to: "posteriorDistributionPlotIndividualPointEstimateType"}
+		ChangeRename { from: "plotsPosteriorIndividualCI";				to: "posteriorDistributionPlotIndividualCi"}
+		ChangeRename { from: "plotsPosteriorIndividualType";			to: "posteriorDistributionPlotIndividualCiType"}
+		ChangeRename { from: "plotsPosteriorCoverage";					to: "posteriorDistributionPlotIndividualCiMass"}
+		ChangeRename { from: "plotsPosteriorLower";						to: "posteriorDistributionPlotIndividualCiLower"}
+		ChangeRename { from: "plotsPosteriorUpper";						to: "posteriorDistributionPlotIndividualCiUpper"}
+		ChangeRename { from: "plotsPosteriorBF";						to: "posteriorDistributionPlotIndividualCiBf"}
+		ChangeRename { from: "plotsPosteriorIndividualPrior";			to: "posteriorDistributionPlotAddPriorDistribution"}
+		ChangeRename { from: "plotsPosteriorIndividualProportion";		to: "posteriorDistributionPlotAddObservedProportion"}
 
 	}
 

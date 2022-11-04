@@ -16,8 +16,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
+  options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -32,16 +32,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- TRUE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "stacked"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "stacked"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -50,16 +50,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mean"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "overlying"
@@ -199,8 +199,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -215,16 +215,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- TRUE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- TRUE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -233,16 +233,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "stacked"
@@ -490,8 +490,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -506,16 +506,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- FALSE
   options$plotsIterativeStacked <- TRUE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -524,16 +524,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "individual"
@@ -634,8 +634,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -650,16 +650,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- TRUE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
@@ -668,16 +668,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "individual"
@@ -742,8 +742,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -758,16 +758,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- FALSE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
@@ -776,16 +776,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "individual"
@@ -844,8 +844,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -860,16 +860,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- FALSE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
@@ -878,16 +878,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "individual"
@@ -946,8 +946,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -962,16 +962,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- FALSE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
@@ -980,16 +980,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- TRUE
   options$posteriorPredictionDistributionPlotType <- "stacked"
@@ -1042,8 +1042,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -1058,16 +1058,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- FALSE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
@@ -1076,16 +1076,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportions <- TRUE
   options$posteriorPredictionDistributionPlotType <- "overlying"
@@ -1138,8 +1138,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
+  options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -1154,16 +1154,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- TRUE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "stacked"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "stacked"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -1172,16 +1172,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "median"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "median"
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "overlying"
@@ -1261,8 +1261,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
+  options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- TRUE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -1277,16 +1277,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- TRUE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "stacked"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "stacked"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -1295,16 +1295,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "overlying"
@@ -1386,8 +1386,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- list()
   options$dataCountsFailures <- 6
   options$dataCountsSuccesses <- 3
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -1402,16 +1402,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- FALSE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "overlying"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "overlying"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -1420,16 +1420,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- FALSE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mean"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "overlying"
@@ -1464,8 +1464,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- list()
   options$dataCountsFailures <- 6
   options$dataCountsSuccesses <- 3
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
+  options$posteriorDistributionPlotAddObservedProportion <- FALSE
   options$plotsIterative <- FALSE
   options$plotsIterativeBF <- 1
   options$plotsIterativeCoverage <- 0.95
@@ -1480,16 +1480,16 @@ context("Learn Bayes - Binomial Estimation")
   options$plotsIterativeOverlying <- TRUE
   options$plotsIterativeStacked <- FALSE
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "overlying"
-  options$plotsPosteriorUpper <- 0.75
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "overlying"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
   options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
   options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
   options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
@@ -1498,16 +1498,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
   options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
   options$posteriorPredictionDistributionPlot <- FALSE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mean"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportions <- FALSE
   options$posteriorPredictionDistributionPlotType <- "overlying"

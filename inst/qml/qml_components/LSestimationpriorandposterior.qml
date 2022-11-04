@@ -34,7 +34,7 @@ Section
 	DropDown
 	{
 		Layout.columnSpan:	2
-		name:				"pointEstimate"
+		name:				"priorAndPosteriorPointEstimate"
 		label:				qsTr("Point estimate")
 		values:				["mean", "median", "mode"]
 	}
@@ -42,13 +42,13 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsPrior"
+		name:		"priorDistributionPlot"
 		label:		qsTr("Prior distribution")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name:	"plotsPriorType"
+			name:	"priorDistributionPlotType"
 
 			RadioButton
 			{
@@ -71,12 +71,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPriorIndividualEstimate"
+					name:				"priorDistributionPlotIndividualPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPriorIndividualEstimateType"
+						name:		"priorDistributionPlotIndividualPointEstimateType"
 						label:		""
 						values:		["mean", "median", "mode"]
 					}
@@ -84,14 +84,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPriorIndividualCI"
+					name:				"priorDistributionPlotIndividualCi"
 					label:				qsTr("CI")
 					id: 				plotsPriorIndividualCI
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPriorIndividualType"
+						name:		"priorDistributionPlotIndividualCiType"
 						label:		""
 						values:		["central", "HPD", "custom"]
 						id:			plotsPriorIndividualType
@@ -105,7 +105,7 @@ Section
 					{
 						visible:		plotsPriorIndividualType.currentText == "central" | plotsPriorIndividualType.currentText == "HPD"
 						enabled:		plotsPriorIndividualCI.checked
-						name:			"plotsPriorCoverage"
+						name:			"priorDistributionPlotIndividualCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -118,7 +118,7 @@ Section
 					{
 						visible:		plotsPriorIndividualType.currentText == "custom"
 						enabled:		plotsPriorIndividualCI.checked
-						name:			"plotsPriorLower"
+						name:			"priorDistributionPlotIndividualCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPriorLower
 						fieldWidth:		50
@@ -132,7 +132,7 @@ Section
 					{
 						visible:		plotsPriorIndividualType.currentText == "custom"
 						enabled:		plotsPriorIndividualCI.checked
-						name:			"plotsPriorUpper"
+						name:			"priorDistributionPlotIndividualCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPriorUpper
 						fieldWidth:		50
@@ -148,13 +148,13 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsPosterior"
+		name:		"posteriorDistributionPlot"
 		label:		qsTr("Posterior distribution")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name: 	"plotsPosteriorType"
+			name: 	"posteriorDistributionPlotType"
 
 			RadioButton
 			{
@@ -177,12 +177,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPosteriorIndividualEstimate"
+					name:				"posteriorDistributionPlotIndividualPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:	"plotsPosteriorIndividualEstimateType"
+						name:	"posteriorDistributionPlotIndividualPointEstimateType"
 						label:	""
 						values:	["mean", "median", "mode"]
 					}
@@ -190,14 +190,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPosteriorIndividualCI"
+					name:				"posteriorDistributionPlotIndividualCi"
 					label:				qsTr("CI")
 					id:					plotsPosteriorIndividualCI
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPosteriorIndividualType"
+						name:		"posteriorDistributionPlotIndividualCiType"
 						label:		""
 						values:		["central", "HPD", "custom", "support"]
 						id:			plotsPosteriorIndividualType
@@ -212,7 +212,7 @@ Section
 					{
 						visible:		plotsPosteriorIndividualType.currentText == "central" | plotsPosteriorIndividualType.currentText == "HPD"
 						enabled:		plotsPosteriorIndividualCI.checked
-						name:			"plotsPosteriorCoverage"
+						name:			"posteriorDistributionPlotIndividualCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue: 	95
@@ -225,7 +225,7 @@ Section
 					{
 						visible:		plotsPosteriorIndividualType.currentText == "custom"
 						enabled:		plotsPosteriorIndividualCI.checked
-						name:			"plotsPosteriorLower"
+						name:			"posteriorDistributionPlotIndividualCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPosteriorLower
 						fieldWidth:		50
@@ -239,7 +239,7 @@ Section
 					{
 						visible:		plotsPosteriorIndividualType.currentText == "custom"
 						enabled:		plotsPosteriorIndividualCI.checked
-						name:			"plotsPosteriorUpper"
+						name:			"posteriorDistributionPlotIndividualCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPosteriorUpper
 						fieldWidth:		50
@@ -253,7 +253,7 @@ Section
 					{
 						visible:		plotsPosteriorIndividualType.currentText == "support"
 						enabled:		plotsPosteriorIndividualCI.checked
-						name:			"plotsPosteriorBF"
+						name:			"posteriorDistributionPlotIndividualCiBf"
 						label:			qsTr("BF")
 						fieldWidth:		50
 						defaultValue:	"1"
@@ -264,15 +264,15 @@ Section
 
 				CheckBox
 				{
-					name:		"plotsPosteriorIndividualPrior"
-					label:		qsTr("Prior distribution")
+					name:		"posteriorDistributionPlotAddPriorDistribution"
+					label:		qsTr("Add prior distribution")
 					checked:	false
 				}
 
 				CheckBox
 				{
-					name:		"plotsPosteriorIndividualProportion"
-					label:		qsTr("Observed proportion")
+					name:		"posteriorDistributionPlotAddObservedProportion"
+					label:		qsTr("Add observed proportion")
 					id:			plotsPosteriorIndividualProportion
 					checked:	false
 				}
