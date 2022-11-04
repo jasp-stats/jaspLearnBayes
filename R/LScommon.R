@@ -1316,7 +1316,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerBoth"]])) {
     containerBoth <- createJaspContainer(title = gettext("Prior and Posterior Plots"))
     containerBoth$position <- 5
-    containerBoth$dependOn("plotsBoth")
+    containerBoth$dependOn("priorAndPosteriorDistributionPlot")
 
     jaspResults[["containerBoth"]] <- containerBoth
   } else {
@@ -1586,13 +1586,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerBoth <- createJaspContainer(title = gettextf(
       "%s Prior and Posterior Plots",
       switch(
-        options[["plotsBothType"]],
+        options[["priorAndPosteriorDistributionPlotType"]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       )))
     containerBoth$position <- 7
-    containerBoth$dependOn(c("plotsBoth", "plotsBothType"))
+    containerBoth$dependOn(c("priorAndPosteriorDistributionPlot", "priorAndPosteriorDistributionPlotType"))
 
     jaspResults[["containerBoth"]] <- containerBoth
   } else {
@@ -1918,7 +1918,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     } else {
 
       specificText <- switch(
-        options[["plotsBothType"]],
+        options[["priorAndPosteriorDistributionPlotType"]],
         "conditional" = gettextf(
           "The 'Conditional' option shows all prior and posterior distributions for parameter %1$s independently, as if they were considered as individual models (without the existence of other hypotheses).",
           ifelse (binomial, "\u03B8", "\u03BC")),

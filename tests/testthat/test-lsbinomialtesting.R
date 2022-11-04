@@ -23,32 +23,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "conditional"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "conditional"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "conditional"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -86,23 +86,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- FALSE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "conditional"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "conditional"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -214,32 +214,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "joint"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -277,23 +277,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "joint"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- FALSE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -393,32 +393,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "joint"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -456,23 +456,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "joint"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -572,32 +572,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "joint"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -635,23 +635,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "joint"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "custom"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "custom"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -751,32 +751,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "marginal"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -814,23 +814,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -924,32 +924,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- TRUE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "BF"
   options$plotsIterativeUpdatingTable <- TRUE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- TRUE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- TRUE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -987,23 +987,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "stacked"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "stacked"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -1119,32 +1119,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "BF"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- TRUE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- TRUE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -1182,23 +1182,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- FALSE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "stacked"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "stacked"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportion <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- TRUE
@@ -1280,32 +1280,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- FALSE
   options$plotsIterativeType <- "BF"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- TRUE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- TRUE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -1343,23 +1343,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- FALSE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "stacked"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "stacked"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportion <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -1417,32 +1417,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "joint"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -1480,23 +1480,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- FALSE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -1585,32 +1585,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- TRUE
   options$plotsIterativeType <- "marginal"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -1648,23 +1648,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlot <- TRUE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -1753,32 +1753,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- FALSE
   options$plotsIterativeType <- "marginal"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -1816,23 +1816,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
@@ -1893,32 +1893,32 @@ context("Learn Bayes - Binomial Testing")
   options$dataVariableSuccesses <- "1"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
   options$plotsIterative <- FALSE
   options$plotsIterativeType <- "marginal"
   options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
   options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
   options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
@@ -1956,23 +1956,23 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlot <- FALSE
   options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mode"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "HPD"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mode"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "HPD"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
   options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE

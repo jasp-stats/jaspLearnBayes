@@ -459,13 +459,13 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   containerBoth <- .containerPlotsBothLS(jaspResults, options, "gaussEst")
 
-  if (is.null(containerBoth[["plotsBoth"]])) {
+  if (is.null(containerBoth[["priorAndPosteriorDistributionPlot"]])) {
 
     plotsBoth <- createJaspContainer()
     plotsBoth$position <- 2
-    plotsBoth$dependOn(c(.dataDependenciesGaussianLS, "plotsBothSampleProportion"))
+    plotsBoth$dependOn(c(.dataDependenciesGaussianLS, "priorAndPosteriorDistributionPlotObservedProportion"))
 
-    containerBoth[["plotsBoth"]] <- plotsBoth
+    containerBoth[["priorAndPosteriorDistributionPlot"]] <- plotsBoth
 
     if (all(!ready) || (ready["data"] && !ready["priors"])) {
 
@@ -506,7 +506,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         }
 
-        if (options[["plotsBothSampleProportion"]]) {
+        if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataObservedGaussianLS(data)
         } else{
           dfPointsPP <- NULL

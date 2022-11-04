@@ -473,14 +473,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
   containerBoth <- .containerPlotsBothLS(jaspResults, options, "binEst")
 
-  if (is.null(containerBoth[["plotsBoth"]])) {
+  if (is.null(containerBoth[["priorAndPosteriorDistributionPlot"]])) {
 
     plotsBoth <- createJaspContainer()
 
     plotsBoth$position <- 2
-    plotsBoth$dependOn(c(.dataDependenciesBinomialLS, "plotsBothSampleProportion"))
+    plotsBoth$dependOn(c(.dataDependenciesBinomialLS, "priorAndPosteriorDistributionPlotObservedProportion"))
 
-    containerBoth[["plotsBoth"]] <- plotsBoth
+    containerBoth[["priorAndPosteriorDistributionPlot"]] <- plotsBoth
 
 
     if (all(!ready) || (ready["data"] && !ready["priors"])) {
@@ -521,7 +521,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         }
 
-        if (options[["plotsBothSampleProportion"]]) {
+        if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataProportionBinomialLS(data)
           if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
         } else
