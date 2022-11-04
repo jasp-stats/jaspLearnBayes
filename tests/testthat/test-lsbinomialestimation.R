@@ -9,7 +9,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- TRUE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -192,7 +192,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -483,7 +483,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -627,7 +627,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -735,7 +735,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -837,7 +837,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -939,7 +939,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -1035,7 +1035,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -1131,7 +1131,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -1254,7 +1254,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "1"
   options$dataSequenceSuccesses <- list()
@@ -1379,7 +1379,7 @@ context("Learn Bayes - Binomial Estimation")
   options$dataInputType <- "counts"
   options$dataSequenceSequenceOfObservations <- ""
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- FALSE
+  options$introductoryText <- FALSE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- list()
   options$dataSequenceSuccesses <- list()
@@ -1457,7 +1457,7 @@ context("Learn Bayes - Binomial Estimation")
 1
 "
   options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
-  options$introText <- FALSE
+  options$introductoryText <- FALSE
   options$dataSequenceFailures <- "0"
   options$dataVariableFailures <- list()
   options$dataSequenceSuccesses <- "1"

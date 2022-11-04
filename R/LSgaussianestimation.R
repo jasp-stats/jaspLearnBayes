@@ -20,7 +20,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "sequentialAnalysisPointEstimatePlotCiBf"))
 
   # introductory text
-  if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussEst")
+  if (options[["introductoryText"]]).introductoryTextLS(jaspResults, options, "gaussEst")
 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
@@ -104,10 +104,10 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   }
 
 
-  if (options[["introText"]] && is.null(estimatesContainer[['introText']])) {
+  if (options[["introductoryText"]] && is.null(estimatesContainer[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("estimates", options, "gaussEst")

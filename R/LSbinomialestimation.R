@@ -25,7 +25,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
   ready <- .readyBinomialLS(options)
 
   # introductory text
-  if (options[["introText"]])
+  if (options[["introductoryText"]])
     .introductoryTextLS(jaspResults, options, "binEst")
 
   # evaluate the expressions in priors

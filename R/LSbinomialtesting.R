@@ -23,7 +23,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
   ready <- .readyBinomialLS(options)
 
   # introductory text
-  if (options[["introText"]])
+  if (options[["introductoryText"]])
     .introductoryTextLS(jaspResults, options, "binTest")
 
   # evaluate the expressions in priors
@@ -115,10 +115,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     testsContainer <- jaspResults[["testsContainer"]]
 
 
-  if (options[["introText"]] && is.null(testsContainer[['introText']])) {
+  if (options[["introductoryText"]] && is.null(testsContainer[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("tests", options, "binTest")

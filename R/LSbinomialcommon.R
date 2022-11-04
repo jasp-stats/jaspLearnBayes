@@ -133,10 +133,10 @@
   }
 
 
-  if (options[["introText"]] && is.null(summaryContainer[['summaryText']])) {
+  if (options[["introductoryText"]] && is.null(summaryContainer[['summaryText']])) {
 
     summaryText <- createJaspHtml()
-    summaryText$dependOn(c("introText", "dataInputType"))
+    summaryText$dependOn(c("introductoryText", "dataInputType"))
     summaryText$position <- 1
 
     summaryText[['text']] <- .explanatoryTextLS("data", options, analysis)

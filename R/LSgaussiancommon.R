@@ -82,7 +82,7 @@
 }
 .summaryGaussianLS     <- function(jaspResults, data, options, analysis) {
 
-  if (!options[["dataSummary"]] && !options[["introText"]])
+  if (!options[["dataSummary"]] && !options[["introductoryText"]])
     return()
 
   if (is.null(jaspResults[["summaryContainer"]])) {
@@ -94,10 +94,10 @@
   }
 
 
-  if (options[["introText"]] && is.null(summaryContainer[['summaryText']])) {
+  if (options[["introductoryText"]] && is.null(summaryContainer[['summaryText']])) {
 
     summaryText <- createJaspHtml()
-    summaryText$dependOn(c("introText", "dataSummary"))
+    summaryText$dependOn(c("introductoryText", "dataSummary"))
     summaryText$position <- 1
 
     summaryText[['text']] <- .explanatoryTextLS("data", options, analysis)

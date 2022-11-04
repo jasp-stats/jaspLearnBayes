@@ -29,8 +29,8 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 }
 
 .bcIntro <- function(jaspResults, options) {
-  if(isFALSE(options[["introText"]])) return()
-  if(!is.null(jaspResults[["introText"]])) return()
+  if(isFALSE(options[["introductoryText"]])) return()
+  if(!is.null(jaspResults[["introductoryText"]])) return()
 
   bayes <- system.file("icons", "bayes.png", package = "jaspLearnBayes")
   #bayes <- "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/410.svg"
@@ -66,9 +66,9 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                    <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
                    ', bayes)
 
-  jaspResults[["introText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
+  jaspResults[["introductoryText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
                                                text         = text,
-                                               dependencies = "introText",
+                                               dependencies = "introductoryText",
                                                position     = 1)
 }
 

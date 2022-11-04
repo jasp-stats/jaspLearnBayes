@@ -18,7 +18,7 @@
 LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
 
   # introductory text
-  if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
+  if (options[["introductoryText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
@@ -51,10 +51,10 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
   }
 
 
-  if (options[["introText"]] && is.null(testsContainer[['introText']])) {
+  if (options[["introductoryText"]] && is.null(testsContainer[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("tests", options, "gaussTest")

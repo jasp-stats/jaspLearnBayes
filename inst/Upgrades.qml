@@ -10,6 +10,9 @@ Upgrades
 		fromVersion:	"0.17.0"
 		toVersion:		"0.18.0"
 		
+		# qml_components/LSintrotext.qml
+		ChangeRename { from: "introText";	to: "introductoryText"}
+
 		# qml_components/LSbinomialdatainput.qml
 		ChangeRename { from: "dataType";	to: "dataInputType"}
 		ChangeJS

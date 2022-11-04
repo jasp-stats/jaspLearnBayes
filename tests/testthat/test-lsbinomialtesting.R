@@ -16,7 +16,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -207,7 +207,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -386,7 +386,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -565,7 +565,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -744,7 +744,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -917,7 +917,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -1112,7 +1112,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -1273,7 +1273,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- c("2", "3")
   options$dataSequenceSuccesses <- list()
@@ -1410,7 +1410,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "4"
   options$dataSequenceSuccesses <- list()
@@ -1578,7 +1578,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "4"
   options$dataSequenceSuccesses <- list()
@@ -1746,7 +1746,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "4"
   options$dataSequenceSuccesses <- list()
@@ -1886,7 +1886,7 @@ context("Learn Bayes - Binomial Testing")
   options$dataSummary <- TRUE
   options$dataInputType <- "variable"
   options$dataSequenceSequenceOfObservations <- ""
-  options$introText <- TRUE
+  options$introductoryText <- TRUE
   options$dataSequenceFailures <- list()
   options$dataVariableFailures <- "4"
   options$dataSequenceSuccesses <- list()

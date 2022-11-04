@@ -1238,7 +1238,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (!is.null(jaspResults[['introText']])) return()
 
   intro <- createJaspHtml()
-  intro$dependOn(c("introText"))
+  intro$dependOn(c("introductoryText"))
   intro$position <- 0
 
   intro[['text']] <- .explanatoryTextLS("main", NULL, analysis)
@@ -1262,10 +1262,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(estimatesContainer[['introText']])) {
+  if (options[["introductoryText"]] && is.null(estimatesContainer[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("estimates", options, analysis)
@@ -1298,10 +1298,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("parameter_plots", options, analysis, type)
@@ -1324,10 +1324,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerBoth[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerBoth[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("both_plots", options, analysis)
@@ -1350,10 +1350,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeOverlying[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeOverlying[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_overlying", options, analysis)
@@ -1383,10 +1383,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeInterval[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeInterval[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn(c("introText", "plotsIterativeIntervalType"))
+    introText$dependOn(c("introductoryText", "plotsIterativeIntervalType"))
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_interval", options, analysis)
@@ -1409,10 +1409,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeStacked[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeStacked[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_stacked", options, analysis)
@@ -1435,10 +1435,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeUpdating[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeUpdating[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_updating", options, analysis)
@@ -1461,10 +1461,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPredictions[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPredictions[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("predictions", options, analysis)
@@ -1494,10 +1494,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPredictionPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPredictionPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis)
@@ -1530,10 +1530,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("parameter_plots", options, analysis, type)
@@ -1567,10 +1567,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn(c("introText", ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")))
+    introText$dependOn(c("introductoryText", ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")))
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis, type)
@@ -1600,10 +1600,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerBoth[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerBoth[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("both_plots", options, analysis)
@@ -1633,10 +1633,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPredictiveAccuracy[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPredictiveAccuracy[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("predictive_accuracy", options, analysis)
@@ -1667,10 +1667,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerSequentialTests[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerSequentialTests[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_tests", options, analysis)

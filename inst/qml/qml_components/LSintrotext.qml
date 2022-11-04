@@ -23,8 +23,7 @@ import JASP.Theme 1.0
 
 CheckBox
 {
-    name:		"introText"
-	label:		qsTr("Introductory texts")
-    checked:	false
-
+	name:		"introductoryText"
+	label:		qsTr("Introductory text")
+	checked:	false
 }
