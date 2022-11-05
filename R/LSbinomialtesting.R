@@ -132,7 +132,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     testsTable <- createJaspTable(title = gettext("Testing Summary"))
 
     testsTable$position <- 2
-    testsTable$dependOn(c(.dataDependenciesBinomialLS, "priorPredictivePerformanceBfType", "priorPredictivePerformanceBfVsHypothesis", "priorPredictivePerformanceBfType"))
+    testsTable$dependOn(c(.dataDependenciesBinomialLS, "priorPredictivePerformanceBfComparison", "priorPredictivePerformanceBfVsHypothesis", "priorPredictivePerformanceBfType"))
 
     bfTypeName <- switch(
       options[["priorPredictivePerformanceBfType"]],
@@ -172,11 +172,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           logLik      = tempResults$logLik[i],
           posterior   = tempResults$posterior[i])
 
-        if (options[["priorPredictivePerformanceBfType"]] == "inclusion")
+        if (options[["priorPredictivePerformanceBfComparison"]] == "inclusion")
           tempBF <- (tempResults$posterior[i] / (1-tempResults$posterior[i])) / (tempResults$prior[i] / (1-tempResults$prior[i]))
-        else if (options[["priorPredictivePerformanceBfType"]] == "best")
+        else if (options[["priorPredictivePerformanceBfComparison"]] == "best")
           tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[which.max(tempResults$logLik)])
-        else if (options[["priorPredictivePerformanceBfType"]] == "vs")
+        else if (options[["priorPredictivePerformanceBfComparison"]] == "vs")
           if (options[["priors"]][[i]][["name"]] == options[["priorPredictivePerformanceBfVsHypothesis"]])
             tempBF <- ""
           else

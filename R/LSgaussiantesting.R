@@ -68,7 +68,7 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
     testsTable <- createJaspTable(title = gettext("Testing Summary"))
 
     testsTable$position <- 2
-    testsTable$dependOn(c(.GaussianLS_data_dependencies, "priorPredictivePerformanceBfType", "priorPredictivePerformanceBfVsHypothesis"))
+    testsTable$dependOn(c(.GaussianLS_data_dependencies, "priorPredictivePerformanceBfComparison", "priorPredictivePerformanceBfVsHypothesis", "priorPredictivePerformanceBfType"))
 
     bfType_name <- switch(
       options[["priorPredictivePerformanceBfType"]],

@@ -1824,10 +1824,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     tableDescription <- gettextf(
       "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:
     <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>",
-      ifelse (options[["priorPredictivePerformanceBfType"]] == "inclusion",
+      ifelse (options[["priorPredictivePerformanceBfComparison"]] == "inclusion",
              gettext("'Inclusion BF' - the inclusion Bayes factor for the hypothesis (change from prior to posterior odds for including the hypothesis)"),
              gettextf("'BF' - the Bayes factor comparing the predictive performance of the current hypothesis to the %s",
-                      ifelse (options[["priorPredictivePerformanceBfType"]] == "best",
+                      ifelse (options[["priorPredictivePerformanceBfComparison"]] == "best",
                              "best performing hypothesis",
                              "to the hypothesis specified in 'vs.' Dropdown menu"))
       )

@@ -6,11 +6,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "inclusion"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- ""
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -197,11 +197,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF01"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "best"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "best"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- ""
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -376,11 +376,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "LogBF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "vs"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -555,11 +555,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "LogBF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "vs"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -734,11 +734,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "LogBF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "vs"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -907,11 +907,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "LogBF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF01"
-  options$priorPredictivePerformanceBfType <- "vs"
-  options$priorPredictivePerformanceBfTypeSequential <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF01"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "vs"
   options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- "Hypothesis Spike"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -979,6 +979,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "joint"
   options$priorPredictivePerformanceDistributionPlotType <- "joint"
   options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
   options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
@@ -1102,11 +1103,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF01"
-  options$priorPredictivePerformanceBfTypeSequential <- "LogBF10"
-  options$priorPredictivePerformanceBfType <- "best"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfComparison <- "best"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- "Hypothesis Spike"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1174,7 +1175,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "joint"
   options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
   options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlot <- FALSE
@@ -1263,11 +1264,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF01"
-  options$priorPredictivePerformanceBfTypeSequential <- "LogBF10"
-  options$priorPredictivePerformanceBfType <- "best"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfComparison <- "best"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- "Hypothesis Spike"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1335,7 +1336,7 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionDistributionPlotType <- "marginal"
   options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
   options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
-  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "joint"
   options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
   options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
   options$priorPredictivePerformanceDistributionPlot <- FALSE
@@ -1400,11 +1401,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "inclusion"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- ""
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1568,11 +1569,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "inclusion"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- ""
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1736,11 +1737,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "inclusion"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- ""
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
@@ -1876,11 +1877,11 @@ context("Learn Bayes - Binomial Testing")
 {
   options <- analysisOptions("LSbinomialtesting")
   options$priorPredictivePerformanceBfType <- "BF10"
-  options$priorPredictivePerformanceBfTypeSequential <- "BF10"
-  options$priorPredictivePerformanceBfType <- "inclusion"
-  options$priorPredictivePerformanceBfTypeSequential <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
   options$priorPredictivePerformanceBfVsHypothesis <- ""
-  options$priorPredictivePerformanceBfVsHypothesisSequential <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE

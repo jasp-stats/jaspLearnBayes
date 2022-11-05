@@ -176,7 +176,7 @@ Section
 					label:				qsTr("CI")
 					id:					plotsPredictionMarginalCI
 					childrenOnSameRow:	true
-				
+
 					DropDown
 					{
 						name:		"priorPredictivePerformanceDistributionPlotMarginalCiType"
@@ -278,7 +278,7 @@ Section
 
 			RadioButtonGroup
 			{
-				name:	"priorPredictivePerformanceBfType"
+				name:	"priorPredictivePerformanceBfComparison"
 
 				RadioButton
 				{
@@ -294,7 +294,7 @@ Section
 						indexDefaultValue:	0
 					}
 				}
-				
+
 				RadioButton
 				{
 					value:	"inclusion"

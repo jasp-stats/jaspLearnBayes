@@ -150,7 +150,7 @@ Upgrades
 		ChangeRename { from: "predictionPlotTable";					to: "priorPredictivePerformanceDistributionPlotPredictionsTable"}
 		ChangeRename { from: "plotsPredictiveAccuracy";				to: "priorPredictivePerformanceAccuracyPlot"}
 		ChangeRename { from: "plotsPredictiveAccuracyType";			to: "priorPredictivePerformanceAccuracyPlotType"}
-		ChangeRename { from: "bfType";								to: "priorPredictivePerformanceBfType"}
+		ChangeRename { from: "bfType";								to: "priorPredictivePerformanceBfComparison"}
 		ChangeRename { from: "bfTypevsName";						to: "priorPredictivePerformanceBfVsHypothesis"}
 		ChangeRename { from: "bayesFactorType";						to: "priorPredictivePerformanceBfType"}
 
