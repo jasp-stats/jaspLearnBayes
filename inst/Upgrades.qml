@@ -85,8 +85,8 @@ Upgrades
 		ChangeRename { from: "plotsPosteriorLower";						to: "posteriorDistributionPlotIndividualCiLower"}
 		ChangeRename { from: "plotsPosteriorUpper";						to: "posteriorDistributionPlotIndividualCiUpper"}
 		ChangeRename { from: "plotsPosteriorBF";						to: "posteriorDistributionPlotIndividualCiBf"}
-		ChangeRename { from: "plotsPosteriorIndividualPrior";			to: "posteriorDistributionPlotAddPriorDistribution"}
-		ChangeRename { from: "plotsPosteriorIndividualProportion";		to: "posteriorDistributionPlotAddObservedProportion"}
+		ChangeRename { from: "plotsPosteriorIndividualPrior";			to: "posteriorDistributionPloPriorDistribution"}
+		ChangeRename { from: "plotsPosteriorIndividualProportion";		to: "posteriorDistributionPlotObservedProportion"}
 
 		// qml_components/LSestimationsequential.qml
 		ChangeRename { from: "plotsIterativeOverlying";					to: "sequentialAnalysisPointEstimatePlot"}

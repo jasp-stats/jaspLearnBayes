@@ -38,6 +38,7 @@ Section
 
 		RadioButtonGroup
 		{
+		  title:		qsTr("Type")
 			name: "sequentialAnalysisPredictivePerformancePlotType"
 			RadioButton { value: "conditional";		label: qsTr("Conditional"); checked: true}
 			RadioButton { value: "joint";			label: qsTr("Joint")}
@@ -52,6 +53,7 @@ Section
 					columns: 2
 					RadioButtonGroup
 					{
+					  title:		qsTr("Comparison")
 						name:	"sequentialAnalysisPredictivePerformancePlotBfComparison"
 						RadioButton
 						{
@@ -83,6 +85,7 @@ Section
 
 					RadioButtonGroup
 					{
+					  title:		qsTr("Type")
 						name: "sequentialAnalysisPredictivePerformancePlotBfType"
 
 						RadioButton { label: qsTr("BF\u2081\u2080")			; name: "BF10"; checked: true}

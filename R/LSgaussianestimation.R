@@ -304,7 +304,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     } else if (type == "Posterior") {
       dependencies <- c("posteriorDistributionPlotIndividualPointEstimate", "posteriorDistributionPlotIndividualPointEstimateType", "posteriorDistributionPlotIndividualCi",
         "posteriorDistributionPlotIndividualCiType", "posteriorDistributionPlotIndividualCiMass", "posteriorDistributionPlotIndividualCiLower", "posteriorDistributionPlotIndividualCiUpper",
-        "posteriorDistributionPlotIndividualCiBf", "posteriorDistributionPlotAddPriorDistribution", "posteriorDistributionPlotAddObservedProportion")
+        "posteriorDistributionPlotIndividualCiBf", "posteriorDistributionPloPriorDistribution", "posteriorDistributionPlotObservedProportion")
     }
     plotsIndividual$dependOn(c(dependencies, .dataDependenciesGaussianLS))
 
@@ -335,7 +335,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       for (i in 1:length(options[["priors"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["posteriorDistributionPlotAddPriorDistribution"]] || options[["posteriorDistributionPlotAddObservedProportion"]])) { 700 } else{ 530 }, height = 400)
+        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["posteriorDistributionPloPriorDistribution"]] || options[["posteriorDistributionPlotObservedProportion"]])) { 700 } else{ 530 }, height = 400)
 
         plotsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
 
@@ -394,7 +394,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         if (options[["priors"]][[i]]$type == "spike") {
           dfArrowPP  <- .dataArrowGaussianLS(options[["priors"]][[i]])
-          if (type == "Posterior" && options[["posteriorDistributionPlotAddPriorDistribution"]]) {
+          if (type == "Posterior" && options[["posteriorDistributionPloPriorDistribution"]]) {
             dfArrowPP$g <- "Prior = Posterior"
           } else
             dfArrowPP$g <- type
@@ -416,7 +416,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
             }
           }
 
-          if (type == "Posterior" && options[["posteriorDistributionPlotAddPriorDistribution"]]) {
+          if (type == "Posterior" && options[["posteriorDistributionPloPriorDistribution"]]) {
             if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
               dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
               dfLinesPP$g <- "Prior = Posterior"
@@ -434,7 +434,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         } else
           dfPointEstimate <- NULL
 
-        if (type == "Posterior" && options[["posteriorDistributionPlotAddObservedProportion"]]) {
+        if (type == "Posterior" && options[["posteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- data.frame(x = data[["mean"]], y = 0, g = "Sample Mean")
           if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
         } else
@@ -444,7 +444,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
                                pointEstimate = dfPointEstimate, CI = dfCI, CIallLines = dfCILinesPP,
                                xRange = range, xName = xName,
                                dfPoints = dfPointsPP, nRound = 3,
-                               showLegend = (type == "Posterior" && (options[["posteriorDistributionPlotAddObservedProportion"]] || options[["posteriorDistributionPlotAddPriorDistribution"]])))
+                               showLegend = (type == "Posterior" && (options[["posteriorDistributionPlotObservedProportion"]] || options[["posteriorDistributionPloPriorDistribution"]])))
         tempPlot$plotObject <- p
       }
 

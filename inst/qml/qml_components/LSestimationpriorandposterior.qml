@@ -48,6 +48,7 @@ Section
 
 		RadioButtonGroup
 		{
+  		title:		qsTr("Type")
 			name:	"priorDistributionPlotType"
 
 			RadioButton
@@ -56,14 +57,14 @@ Section
 				label:		qsTr("All")
 				checked:	true
 			}
-			
+
 			RadioButton
 			{
 				value:		"stacked"
 				label:		qsTr("Stacked")
 			}
 
-			RadioButton 
+			RadioButton
 			{
 				value:		"individual"
 				label:		qsTr("Individual")
@@ -122,8 +123,8 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPriorLower
 						fieldWidth:		50
-						defaultValue:	analysisType === "binomial" ? 0.25 : -1 
-						min:			analysisType === "binomial" ? 0    : -9999999999 
+						defaultValue:	analysisType === "binomial" ? 0.25 : -1
+						min:			analysisType === "binomial" ? 0    : -9999999999
 						max:			plotsPriorUpper.value
 						inclusive:		JASP.MinMax
 					}
@@ -154,6 +155,7 @@ Section
 
 		RadioButtonGroup
 		{
+  		title:		qsTr("Type")
 			name: 	"posteriorDistributionPlotType"
 
 			RadioButton
@@ -264,15 +266,15 @@ Section
 
 				CheckBox
 				{
-					name:		"posteriorDistributionPlotAddPriorDistribution"
-					label:		qsTr("Add prior distribution")
+					name:		"posteriorDistributionPloPriorDistribution"
+					label:		qsTr("Prior distribution")
 					checked:	false
 				}
 
 				CheckBox
 				{
-					name:		"posteriorDistributionPlotAddObservedProportion"
-					label:		qsTr("Add observed proportion")
+					name:		"posteriorDistributionPlotObservedProportion"
+					label:		qsTr("Observed proportion")
 					id:			plotsPosteriorIndividualProportion
 					checked:	false
 				}

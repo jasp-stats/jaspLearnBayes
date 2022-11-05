@@ -40,6 +40,7 @@ Section
 
 		RadioButtonGroup
 		{
+		  title:		qsTr("Type")
 			name:	"posteriorPredictionDistributionPlotIndividualCiType"
 
 			RadioButton
@@ -132,6 +133,7 @@ Section
 
 				RadioButtonGroup
 				{
+				  title:		qsTr("Type")
 					name:	"priorPredictivePerformanceDistributionPlotJoinType"
 
 					RadioButton
@@ -262,6 +264,7 @@ Section
 
 			RadioButtonGroup
 			{
+			  title:		qsTr("Type")
 				name: "priorPredictivePerformanceAccuracyPlotType"
 				RadioButton { value: "conditional"; label: qsTr("Conditional"); checked: true}
 				RadioButton { value: "joint";		label: qsTr("Joint")}
@@ -278,6 +281,7 @@ Section
 
 			RadioButtonGroup
 			{
+			  title:		qsTr("Comparison")
 				name:	"priorPredictivePerformanceBfComparison"
 
 				RadioButton
@@ -312,6 +316,7 @@ Section
 
 			RadioButtonGroup
 			{
+			  title:		qsTr("Type")
 				name:	"priorPredictivePerformanceBfType"
 
 				RadioButton { label: qsTr("BF\u2081\u2080")			; name: "BF10"; checked: true}

@@ -103,7 +103,7 @@ Section
 
 		RadioButtonGroup
 		{
-			label:		qsTr("Type")
+			title:		qsTr("Type")
 			name:		"sequentialAnalysisIntervalEstimatePlotType"
 			id:			plotsIterativeIntervalType
 

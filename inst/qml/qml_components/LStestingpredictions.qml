@@ -65,6 +65,7 @@ Section
 
 				RadioButtonGroup
 				{
+				  title:		qsTr("Type")
 					name:	"posteriorPredictionDistributionPlotType"
 
 					RadioButton
@@ -86,7 +87,7 @@ Section
 								values:		["mean", "median", "mode"]
 							}
 						}
-						
+
 						CheckBox
 						{
 							name:				"posteriorPredictionDistributionPlotConditionalCi"
@@ -157,6 +158,7 @@ Section
 
 						RadioButtonGroup
 						{
+						  title:		qsTr("Type")
 							name:	"posteriorPredictionDistributionPlotJoinType"
 
 							RadioButton
@@ -194,7 +196,7 @@ Section
 								values:		["mean", "median", "mode"]
 							}
 						}
-				
+
 
 						CheckBox
 						{
@@ -251,7 +253,7 @@ Section
 								label:				qsTr("Upper")
 								id:					plotsPredictionPostMarginalUpper
 								fieldWidth:			50
-								defaultValue:		analysisType === "binomial" ? 1 : 1 
+								defaultValue:		analysisType === "binomial" ? 1 : 1
 								min:				plotsPredictionPostMarginalLower.value
 								inclusive:			JASP.MinOnly
 							}

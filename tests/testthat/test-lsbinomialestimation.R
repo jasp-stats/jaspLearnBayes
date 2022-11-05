@@ -16,8 +16,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
-  options$posteriorDistributionPlotAddObservedProportion <- FALSE
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- TRUE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -199,8 +199,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- TRUE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -490,8 +490,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- TRUE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -634,8 +634,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- TRUE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -742,8 +742,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -844,8 +844,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -946,8 +946,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -1042,8 +1042,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- TRUE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -1138,8 +1138,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
-  options$posteriorDistributionPlotAddObservedProportion <- FALSE
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- TRUE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -1261,8 +1261,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- "0"
   options$dataCountsFailures <- 0
   options$dataCountsSuccesses <- 0
-  options$posteriorDistributionPlotAddPriorDistribution <- TRUE
-  options$posteriorDistributionPlotAddObservedProportion <- FALSE
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- TRUE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -1386,8 +1386,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- list()
   options$dataCountsFailures <- 6
   options$dataCountsSuccesses <- 3
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- FALSE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- FALSE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
@@ -1464,8 +1464,8 @@ context("Learn Bayes - Binomial Estimation")
   options$dataVariableSuccesses <- list()
   options$dataCountsFailures <- 6
   options$dataCountsSuccesses <- 3
-  options$posteriorDistributionPlotAddPriorDistribution <- FALSE
-  options$posteriorDistributionPlotAddObservedProportion <- FALSE
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- FALSE
   options$sequentialAnalysisPointEstimatePlotCiBf <- 1
   options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95

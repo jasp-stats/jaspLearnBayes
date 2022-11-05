@@ -56,7 +56,7 @@ Section
 		Group
 		{
 			title:	qsTr("Plots")
-			
+
 			CheckBox
 			{
 				label:	qsTr("Distribution plot")
@@ -64,6 +64,7 @@ Section
 
 				RadioButtonGroup
 				{
+				  title:		qsTr("Type")
 					name:	"posteriorPredictionDistributionPlotType"
 
 					RadioButton
@@ -97,7 +98,7 @@ Section
 								values:		["mean", "median", "mode"]
 							}
 						}
-						
+
 						CheckBox
 						{
 							name:				"posteriorPredictionDistributionPlotIndividualCi"
@@ -112,7 +113,7 @@ Section
 								values:			["central", "HPD", "custom"]
 								id:				plotsPredictionType
 							}
-						}	
+						}
 
 						Group
 						{

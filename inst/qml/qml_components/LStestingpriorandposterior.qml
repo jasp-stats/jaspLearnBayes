@@ -40,6 +40,7 @@ Section
 
 		RadioButtonGroup
 		{
+  		title:		qsTr("Type")
 			name:	"priorDistributionPlotType"
 
 			RadioButton
@@ -132,6 +133,7 @@ Section
 
 				RadioButtonGroup
 				{
+				  title:		qsTr("Type")
 					name:	"priorDistributionPlotJointType"
 
 					RadioButton
@@ -244,6 +246,7 @@ Section
 
 		RadioButtonGroup
 		{
+		  title:		qsTr("Type")
 			name:	"posteriorDistributionPlotType"
 
 			RadioButton
@@ -349,6 +352,7 @@ Section
 
 				RadioButtonGroup
 				{
+				  title:		qsTr("Type")
 					name:	"posteriorDistributionPlotJointType"
 
 					RadioButton
@@ -483,6 +487,7 @@ Section
 
 		RadioButtonGroup
 		{
+		  title:		qsTr("Type")
 			name:	"priorAndPosteriorDistributionPlotType"
 
 			RadioButton
