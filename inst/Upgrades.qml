@@ -10,10 +10,10 @@ Upgrades
 		fromVersion:	"0.17.0"
 		toVersion:		"0.18.0"
 
-		# qml_components/LSintrotext.qml
+		// qml_components/LSintrotext.qml
 		ChangeRename { from: "introText";	to: "introductoryText"}
 
-		# qml_components/LSbinomialdatainput.qml
+		// qml_components/LSbinomialdatainput.qml
 		ChangeRename { from: "dataType";	to: "dataInputType"}
 		ChangeJS
 		{
@@ -41,14 +41,14 @@ Upgrades
 		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
 		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
 
-		# qml_components/LSgaussiandatainput.qml
+		// qml_components/LSgaussiandatainput.qml
 		ChangeRename { from: "dataCountsMean";			to: "dataCountsMean"}
 		ChangeRename { from: "dataCountsSD";			to: "dataCountsSD"}
 		ChangeRename { from: "dataCountsN";				to: "dataCountsN"}
 		ChangeRename { from: "dataVariableSD";			to: "dataVariableSd"}
 		ChangeRename { from: "dataSequenceSD";			to: "dataSequenceSequenceSd"}
 
-		# qml_components/LSestimationpredictions.qml
+		// qml_components/LSestimationpredictions.qml
 		ChangeRename { from: "predictionN";					to: "posteriorPredictionNumberOfFutureTrials"}
 		ChangeRename { from: "predictionTable";				to: "posteriorPredictionSummaryTable"}
 		ChangeRename { from: "predictionTableEstimate";		to: "posteriorPredictionSummaryTablePointEstimate"}
@@ -64,7 +64,7 @@ Upgrades
 		ChangeRename { from: "predictionPlotProp";			to: "posteriorPredictionDistributionPlotSampleProportions"}
 		ChangeRename { from: "predictionPlotTable";			to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
-		# qml_components/LSestimationpriorandposterior.qml
+		// qml_components/LSestimationpriorandposterior.qml
 		ChangeRename { from: "pointEstimate";						to: "priorAndPosteriorPointEstimate"}
 		ChangeRename { from: "plotsPrior";							to: "priorDistributionPlot"}
 		ChangeRename { from: "plotsPriorType";						to: "priorDistributionPlotType"}
@@ -88,7 +88,7 @@ Upgrades
 		ChangeRename { from: "plotsPosteriorIndividualPrior";			to: "posteriorDistributionPlotAddPriorDistribution"}
 		ChangeRename { from: "plotsPosteriorIndividualProportion";		to: "posteriorDistributionPlotAddObservedProportion"}
 
-		# qml_components/LSestimationsequential.qml
+		// qml_components/LSestimationsequential.qml
 		ChangeRename { from: "plotsIterativeOverlying";					to: "sequentialAnalysisPointEstimatePlot"}
 		ChangeRename { from: "plotsIterativeEstimateType";				to: "sequentialAnalysisPointEstimatePlotType"}
 		ChangeRename { from: "plotsIterativeOverlyingCI";				to: "sequentialAnalysisPointEstimatePlotCi"}
@@ -104,7 +104,7 @@ Upgrades
 		ChangeRename { from: "plotsIterativeStacked";					to: "sequentialAnalysisStackedDistributionsPlot"}
 		ChangeRename { from: "doIterative";								to: "sequentialAnalysisPosteriorUpdatingTable"}
 
-		# qml_components/LStestingpredictions.qml
+		// qml_components/LStestingpredictions.qml
 		ChangeRename { from: "predictionN";								to: "posteriorPredictionNumberOfFutureTrials"}
 		ChangeRename { from: "predictionTable";							to: "posteriorPredictionSummaryTable"}
 		ChangeRename { from: "predictionTableEstimate";					to: "posteriorPredictionSummaryTablePointEstimate"}
@@ -128,7 +128,7 @@ Upgrades
 		ChangeRename { from: "predictionPostPlotProp";					to: "posteriorPredictionDistributionPlotSampleProportion"}
 		ChangeRename { from: "predictionPostPlotTable";					to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
-		# qml_components/LStestingpredictiveperformance.qml
+		// qml_components/LStestingpredictiveperformance.qml
 		ChangeRename { from: "plotsPredictions";					to: "priorPredictivePerformanceDistributionPlot"}
 		ChangeRename { from: "plotsPredictionType";					to: "priorPredictivePerformanceDistributionPlotType"}
 		ChangeRename { from: "plotsPredictionEstimate";				to: "priorPredictivePerformanceDistributionPlotConditionalPointEstimate"}
@@ -154,7 +154,7 @@ Upgrades
 		ChangeRename { from: "bfTypevsName";						to: "priorPredictivePerformanceBfVsHypothesis"}
 		ChangeRename { from: "bayesFactorType";						to: "priorPredictivePerformanceBfType"}
 
-		# qml_components/LStestingpriorandposterior.qml
+		// qml_components/LStestingpriorandposterior.qml
 		ChangeRename { from: "plotsPrior";							to: "priorDistributionPlot"}
 		ChangeRename { from: "plotsPriorType";						to: "priorDistributionPlotType"}
 		ChangeRename { from: "plotsPriorEstimate";					to: "priorDistributionPlotConditionalPointEstimate"}
@@ -196,7 +196,7 @@ Upgrades
 		ChangeRename { from: "plotsBothType";						to: "priorAndPosteriorDistributionPlotType"}
 		ChangeRename { from: "plotsBothSampleProportion";			to: "priorAndPosteriorDistributionPlotObservedProportion"}
 
-		# qml_components/LStestingsequential.qml
+		// qml_components/LStestingsequential.qml
 		ChangeRename { from: "plotsIterative";							to: "sequentialAnalysisPredictivePerformancePlot"}
 		ChangeRename { from: "plotsIterativeType";						to: "sequentialAnalysisPredictivePerformancePlotType"}
 		ChangeRename { from: "bfTypeSequential";						to: "sequentialAnalysisPredictivePerformancePlotBfComparison"}
