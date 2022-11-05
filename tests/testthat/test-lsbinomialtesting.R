@@ -104,7 +104,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -295,7 +295,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -474,7 +474,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -653,7 +653,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -832,7 +832,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1006,7 +1006,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- TRUE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1201,7 +1201,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
-  options$posteriorPredictionDistributionPlotSampleProportion <- TRUE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- TRUE
   options$posteriorPredictionSummaryTable <- TRUE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1362,7 +1362,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
-  options$posteriorPredictionDistributionPlotSampleProportion <- TRUE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1499,7 +1499,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 1
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1667,7 +1667,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1835,7 +1835,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
@@ -1975,7 +1975,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorDistributionPlotConditionalCiType <- "central"
   options$priorDistributionPlotConditionalCiUpper <- 0.75
   options$posteriorPredictionNumberOfFutureTrials <- 10
-  options$posteriorPredictionDistributionPlotSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE

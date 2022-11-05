@@ -164,9 +164,9 @@ Section
 
 					CheckBox
 					{
-						name:	"posteriorPredictionDistributionPlotSampleProportion"
+						name:	"posteriorPredictionDistributionPlotAsSampleProportion"
 						id:		predictionPlotProp
-						label:	qsTr("Sample proportion")
+						label:	qsTr("As sample proportion")
 					}
 
 					CheckBox

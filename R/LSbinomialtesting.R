@@ -525,7 +525,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       } else if (type == "Posterior") {
         dependencies <- c("posteriorPredictionDistributionPlotMarginalPointEstimate", "posteriorPredictionDistributionPlotMarginalPointEstimateType", "posteriorPredictionDistributionPlotMarginalCi",
           "posteriorPredictionDistributionPlotMarginalCiType", "posteriorPredictionDistributionPlotMarginalCiMass", "posteriorPredictionDistributionPlotMarginalCiLower",
-          "posteriorPredictionDistributionPlotMarginalCiUpper", "posteriorPredictionDistributionPlotJoinType", "posteriorPredictionDistributionPlotSampleProportion")
+          "posteriorPredictionDistributionPlotMarginalCiUpper", "posteriorPredictionDistributionPlotJoinType", "posteriorPredictionDistributionPlotAsSampleProportion")
       }
     plotsPredictions$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette"))
 
@@ -554,11 +554,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         }
       }
 
-      if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
+      if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
         xName  <- gettext("Predicted sample proportions")
         yName  <- gettext("Probability")
         xRange <- c(-.5/predictionN, 1 + .5/predictionN)
-        proportions <- options[["posteriorPredictionDistributionPlotSampleProportion"]]
+        proportions <- options[["posteriorPredictionDistributionPlotAsSampleProportion"]]
         nRound <- 3
       } else {
         xName  <- gettext("Predicted number of successes")
@@ -578,7 +578,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         dfHist$g <- options[["priors"]][[i]]$name
         dfHist$y <- dfHist$y*tempResults[i,ifelse (type == "Prior","prior","posterior")]
 
-        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]])
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
           dfHist$x <- dfHist$x/predictionN
 
         # it's not beta, but I'm lazzy to rewrite a function I wanna use
@@ -623,7 +623,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         }
 
         allLinesNew   <- allLinesNew[seq(1,nrow(allLinesNew),2),]
-        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]])
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
           allLinesNew$x <- allLinesNew$x + .5/predictionN
         else
           allLinesNew$x <- allLinesNew$x + .5
@@ -687,7 +687,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         } else
           dfCI <- NULL
 
-        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]])
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
           xRange <- c(-.5/predictionN, 1 + .5/predictionN)
         else
           xRange <- c(0, predictionN)
@@ -697,7 +697,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           dfPointEstimate <- .dataPointMarginalBinomial(if (type == "Prior") NULL else data, options, allLinesNew, NULL, N = predictionN,
                                                         type = "prediction", type2 = type,
                                                         estimate = options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotMarginalPointEstimateType", "posteriorPredictionDistributionPlotMarginalPointEstimateType")]],
-                                                        prop = if (type == "Posterior") options[["posteriorPredictionDistributionPlotSampleProportion"]] else FALSE)
+                                                        prop = if (type == "Posterior") options[["posteriorPredictionDistributionPlotAsSampleProportion"]] else FALSE)
         } else
           dfPointEstimate <- NULL
 
@@ -729,7 +729,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       } else if (type == "Posterior") {
         dependencies <- c("posteriorPredictionDistributionPlotConditionalPointEstimate", "posteriorPredictionDistributionPlotConditionalPointEstimateType", "posteriorPredictionDistributionPlotConditionalCi",
           "posteriorPredictionDistributionPlotConditionalCiType", "posteriorPredictionDistributionPlotConditionalCiMass", "posteriorPredictionDistributionPlotConditionalCiLower",
-          "posteriorPredictionDistributionPlotConditionalCiUpper", "posteriorPredictionDistributionPlotSampleProportion")
+          "posteriorPredictionDistributionPlotConditionalCiUpper", "posteriorPredictionDistributionPlotAsSampleProportion")
       }
     plotsPredictionsIndividual$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette"))
 
@@ -771,11 +771,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         plotsPredictionsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
 
-        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
           xName  <- gettext("Predicted sample proportions")
           yName  <- gettext("Density")
           xRange <- c(-.5/predictionN, 1 + .5/predictionN)
-          proportions <- options[["posteriorPredictionDistributionPlotSampleProportion"]]
+          proportions <- options[["posteriorPredictionDistributionPlotAsSampleProportion"]]
         } else {
           xName  <- gettext("Predicted number of successes")
           yName  <- gettext("Probability")
@@ -844,7 +844,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         } else
           xBlacked <- NULL
 
-        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
+        if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
           dfHist$x <- dfHist$x/predictionN
           if (options[["posteriorPredictionDistributionPlotConditionalCi"]]) {
             dfCI$xStart <- dfCI$xStart/predictionN
@@ -857,7 +857,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotConditionalPointEstimate", "posteriorPredictionDistributionPlotConditionalPointEstimate")]]) {
           dfPointEstimate <- .estimateDataPointBinomial(tempData, options[["priors"]][[i]], N = predictionN, type = "prediction",
                                                         estimate = options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotConditionalPointEstimateType", "posteriorPredictionDistributionPlotConditionalPointEstimateType")]],
-                                                        prop = ifelse (type == "Prior", FALSE, options[["posteriorPredictionDistributionPlotSampleProportion"]])
+                                                        prop = ifelse (type == "Prior", FALSE, options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
           )
         } else
           dfPointEstimate <- NULL
@@ -899,7 +899,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     }
 
 
-    if (type == "Posterior" && options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
+    if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
       tablePredictions$addColumnInfo(name = "successes", title = gettext("Proportion of Successes"), type = "number")
       tablePredictions$addColumns(c(0:tempN)/tempN)
     } else {

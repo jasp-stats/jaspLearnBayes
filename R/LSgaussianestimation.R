@@ -1218,7 +1218,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
                                 "posteriorPredictionDistributionPlotIndividualCi", "posteriorPredictionDistributionPlotIndividualCiType",
                                 "posteriorPredictionDistributionPlotIndividualPointEstimate", "posteriorPredictionDistributionPlotIndividualPointEstimateType",
                                 "posteriorPredictionDistributionPlotIndividualCiMass", "posteriorPredictionDistributionPlotIndividualCiLower", "posteriorPredictionDistributionPlotIndividualCiUpper",
-                                "posteriorPredictionDistributionPlotSampleProportion"))
+                                "posteriorPredictionDistributionPlotAsSampleProportion"))
 
     containerPredictionPlots[["posteriorPredictionDistributionPlot"]] <- plotsPredictions
 
@@ -1244,7 +1244,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         plotsPredictions[[options[["priors"]][[i]]$name]] <- tempPlot
 
         yName  <- gettext("Density")
-        if (options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
+        if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
           xName  <- gettext("Sample means")
         } else{
           xName  <- gettext("Future data")
@@ -1269,7 +1269,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
               data,
               options[["priors"]][[i]],
               options[["posteriorPredictionDistributionPlotIndividualCiMass"]],
-              N = if (options[["posteriorPredictionDistributionPlotSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1},
+              N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1},
               "prediction"
             )
 
@@ -1283,7 +1283,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
               options[["priors"]][[i]],
               options[["posteriorPredictionDistributionPlotIndividualCiLower"]],
               options[["posteriorPredictionDistributionPlotIndividualCiUpper"]],
-              N = if (options[["posteriorPredictionDistributionPlotSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1},
+              N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1},
               "prediction"
             )
 
@@ -1292,13 +1292,13 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
           dfCI$parameter <- "mu"
         }
 
-        dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], "prediction", N = if (options[["posteriorPredictionDistributionPlotSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
+        dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], "prediction", N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
         dfLinesPP  <- dfLinesPP[dfLinesPP$g == "Posterior",]
 
         if (options[["posteriorPredictionDistributionPlotIndividualPointEstimate"]]) {
           dfPointEstimate <- .estimateDataPointGaussian(data, options[["priors"]][[i]], N = options[["posteriorPredictionNumberOfFutureTrials"]],
                                                         type = "prediction", estimate = options[["posteriorPredictionDistributionPlotIndividualPointEstimateType"]],
-                                                        prop = options[["posteriorPredictionDistributionPlotSampleProportion"]])
+                                                        prop = options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
         } else
           dfPointEstimate <- NULL
 
@@ -1322,7 +1322,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     plotsPredictions$position <- 2
     plotsPredictions$dependOn(c(.dataDependenciesGaussianLS, "posteriorPredictionNumberOfFutureTrials",
-                                "colorPalettePrediction", "posteriorPredictionDistributionPlotSampleProportion"))
+                                "colorPalettePrediction", "posteriorPredictionDistributionPlotAsSampleProportion"))
 
     containerPredictionPlots[["posteriorPredictionDistributionPlot"]] <- plotsPredictions
 
@@ -1344,7 +1344,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         options[["posteriorPredictionNumberOfFutureTrials"]]
       )
 
-      if (options[["posteriorPredictionDistributionPlotSampleProportion"]]) {
+      if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
         xName  <- gettext("Sample means")
       } else{
         xName  <- gettext("Future data")
@@ -1355,7 +1355,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       for (i in 1:length(options[["priors"]])) {
 
-        dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], "prediction",  N = if (options[["posteriorPredictionDistributionPlotSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
+        dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], "prediction",  N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
         dfLinesPP  <- dfLinesPP[dfLinesPP$g == "Posterior",]
 
         dfLinesPP$g <- options[["priors"]][[i]]$name
@@ -1368,10 +1368,10 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       if (options[["posteriorPredictionDistributionPlotType"]] == "overlying") {
         p <- .plotOverlyingLS(allLines, NULL, xName = xName, yName = yName, xRange = range, discrete = FALSE,
-                              palette = options[["colorPalette"]], proportions = options[["posteriorPredictionDistributionPlotSampleProportion"]])
+                              palette = options[["colorPalette"]], proportions = options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
       } else{
         p <- .plotStackedLS(allLines, NULL, legend, xName = xName, xRange = range,
-                            discrete = FALSE, proportions = options[["posteriorPredictionDistributionPlotSampleProportion"]])
+                            discrete = FALSE, proportions = options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
       }
 
       plotsPredictions$plotObject <- p

@@ -61,7 +61,7 @@ Upgrades
 		ChangeRename { from: "plotsPredictionCoverage";		to: "posteriorPredictionDistributionPlotIndividualCiMass"}
 		ChangeRename { from: "plotsPredictionLower";		to: "posteriorPredictionDistributionPlotIndividualCiLower"}
 		ChangeRename { from: "plotsPredictionUpper";		to: "posteriorPredictionDistributionPlotIndividualCiUpper"}
-		ChangeRename { from: "predictionPlotProp";			to: "posteriorPredictionDistributionPlotSampleProportions"}
+		ChangeRename { from: "predictionPlotProp";			to: "posteriorPredictionDistributionPlotAsSampleProportion"}
 		ChangeRename { from: "predictionPlotTable";			to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
 		// qml_components/LSestimationpriorandposterior.qml
@@ -125,7 +125,7 @@ Upgrades
 		ChangeRename { from: "plotsPredictionPostMarginalCoverage";		to: "posteriorPredictionDistributionPlotMarginalCiMass"}
 		ChangeRename { from: "plotsPredictionPostMarginalLower";		to: "posteriorPredictionDistributionPlotMarginalCiLower"}
 		ChangeRename { from: "plotsPredictionPostMarginalUpper";		to: "posteriorPredictionDistributionPlotMarginalCiUpper"}
-		ChangeRename { from: "predictionPostPlotProp";					to: "posteriorPredictionDistributionPlotSampleProportion"}
+		ChangeRename { from: "predictionPostPlotProp";					to: "posteriorPredictionDistributionPlotAsSampleProportion"}
 		ChangeRename { from: "predictionPostPlotTable";					to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
 		// qml_components/LStestingpredictiveperformance.qml

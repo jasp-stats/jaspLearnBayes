@@ -126,7 +126,7 @@ Section
 				DoubleField
 				{
 					enabled:			plotsIterativeInterval.checked
-					name:				"plotsIterativeIntervalUpper"
+					name:				"sequentialAnalysisIntervalEstimatePlotUpper"
 					label:				qsTr("Upper")
 					id:					plotsIterativeIntervalUpper
 					fieldWidth:			50
