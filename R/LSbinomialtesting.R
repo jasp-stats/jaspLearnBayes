@@ -221,14 +221,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     plotsSimple$position <- 2
     if (type == "Prior") {
-      dependencies <- c("priorDistributionPlotJointType", "priorDistributionPlotMarginalCi", "priorDistributionPlotMarginalCiType",
-        "priorDistributionPlotMarginalCiMass", "priorDistributionPlotMarginalCiLower", "priorDistributionPlotMarginalCiUpper", "priorDistributionPlotMarginalPointEstimate",
-        "priorDistributionPlotMarginalPointEstimateType")
+      dependencies <- c("priorDistributionPlotJointType", "priorDistributionPlotMarginalPointEstimate", "priorDistributionPlotMarginalPointEstimateType",
+                        "priorDistributionPlotMarginalCi", "priorDistributionPlotMarginalCiType",
+                        "priorDistributionPlotMarginalCiMass", "priorDistributionPlotMarginalCiLower", "priorDistributionPlotMarginalCiUpper")
     } else if (type == "Posterior") {
-      dependencies <- c("posteriorDistributionPlotJointType", "posteriorDistributionPlotMarginalPointEstimateType", "posteriorDistributionPlotMarginalCiType",
-        "posteriorDistributionPlotMarginalCiMass", "posteriorDistributionPlotMarginalCiLower", "posteriorDistributionPlotMarginalCiUpper",
-        "posteriorDistributionPlotMarginalPointEstimate", "posteriorDistributionPlotMarginalPointEstimateType", "posteriorDistributionPlotObservedProportion",
-        "posteriorDistributionPlotMarginalCiBf")
+      dependencies <- c("posteriorDistributionPlotJointType", "posteriorDistributionPlotMarginalPointEstimate", "posteriorDistributionPlotMarginalPointEstimateType",
+                        "posteriorDistributionPlotMarginalCi", "posteriorDistributionPlotMarginalCiType",
+                        "posteriorDistributionPlotMarginalCiMass", "posteriorDistributionPlotMarginalCiLower", "posteriorDistributionPlotMarginalCiUpper",
+                        "posteriorDistributionPlotObservedProportion", "posteriorDistributionPlotMarginalCiBf")
     }
     plotsSimple$dependOn(c(dependencies, .dataDependenciesBinomialLS, "colorPalette", "scaleSpikes"))
 
@@ -394,12 +394,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     plotsIndividual$position <- 2
     if (type == "Prior") {
-        dependencies <- c("priorDistributionPlotConditionalPointEstimate", "priorDistributionPlotConditionalPointEstimateType", "priorDistributionPlotConditionalCi", "priorDistributionPlotConditionalCiType",
-          "priorDistributionPlotConditionalCiMass", "priorDistributionPlotConditionalCiLower", "priorDistributionPlotConditionalCiUpper")
+        dependencies <- c("priorDistributionPlotConditionalPointEstimate", "priorDistributionPlotConditionalPointEstimateType",
+                          "priorDistributionPlotConditionalCi", "priorDistributionPlotConditionalCiType", "priorDistributionPlotConditionalCiMass", "priorDistributionPlotConditionalCiLower", "priorDistributionPlotConditionalCiUpper")
       } else if (type == "Posterior") {
-        dependencies <- c("posteriorDistributionPlotConditionalPointEstimate", "posteriorDistributionPlotConditionalPointEstimateType", "posteriorDistributionPlotConditionalCi",
-          "posteriorDistributionPlotConditionalCiType", "posteriorDistributionPlotConditionalCiMass", "posteriorDistributionPlotConditionalCiLower", "posteriorDistributionPlotConditionalCiUpper",
-          "posteriorDistributionPlotObservedProportion", "posteriorDistributionPlotConditionalCiBf")
+        dependencies <- c("posteriorDistributionPlotConditionalPointEstimate", "posteriorDistributionPlotConditionalPointEstimateType",
+                          "posteriorDistributionPlotConditionalCi", "posteriorDistributionPlotConditionalCiType", "posteriorDistributionPlotConditionalCiMass", "posteriorDistributionPlotConditionalCiLower", "posteriorDistributionPlotConditionalCiUpper",
+                          "posteriorDistributionPlotObservedProportion", "posteriorDistributionPlotConditionalCiBf")
       }
     plotsIndividual$dependOn(c(dependencies, .dataDependenciesBinomialLS, "scaleSpikes"))
 
