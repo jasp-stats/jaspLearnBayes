@@ -40,8 +40,8 @@ Section
 
 		RadioButtonGroup
 		{
-		  title:		qsTr("Type")
-			name:	"posteriorPredictionDistributionPlotIndividualCiType"
+			title:		qsTr("Type")
+			name:		"priorPredictivePerformanceDistributionPlotType"
 
 			RadioButton
 			{
