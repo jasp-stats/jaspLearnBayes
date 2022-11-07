@@ -264,7 +264,7 @@ Section
 					{
 						name:	"posteriorPredictionDistributionPlotAsSampleProportion"
 						id:		predictionPlotProp
-						label:	qsTr("As ample proportion")
+						label:	qsTr("As sample proportion")
 					}
 
 					CheckBox

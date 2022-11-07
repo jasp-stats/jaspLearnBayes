@@ -2015,16 +2015,16 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         switch(
-          options[["posteriorPredictionDistributionPlotIndividualCiType"]],
+          options[["posteriorPredictionSummaryTablePointEstimate"]],
           "mean"   = gettextf("The mean prediction can be computed as N*%s", "\u03B8\u2080"),
           "median" = "", # there is no simple solution
           "mode"   = gettextf("The mode prediction can be usually computed as (N + 1)*%1$s rounded down to the closest integer if0 < %1$s < 1", "\u03B8\u2080")
         ),
         switch(
-          options[["posteriorPredictionDistributionPlotIndividualCiType"]],
+          options[["posteriorPredictionSummaryTablePointEstimate"]],
           "mean"   = gettextf("The mean of the predictions can be computed as N*%1$s/( %1$s + %2$s ).", "\u03B1", "\u03B2"),
           "median" = "", # there is no simple solution
-          "mode"   = ""  # and I couldn't find analytical solution for this at all
+          "mode"   = ""  # and I couldn't find analytic solution for this at all
         )
       )
 
