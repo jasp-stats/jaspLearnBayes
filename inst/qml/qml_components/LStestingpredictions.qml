@@ -42,7 +42,7 @@ Section
 
 		CheckBox
 		{
-			name:		"posteriorPredictionSummaryTablePointEstimate"
+			name:		"posteriorPredictionSummaryTable"
 			label:		qsTr("Summary table")
 
 			DropDown

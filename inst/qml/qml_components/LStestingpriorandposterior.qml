@@ -308,11 +308,11 @@ Section
 						enabled:		posteriorDistributionPlotConditionalCi.checked
 						name:			"posteriorDistributionPlotConditionalCiLower"
 						label:			qsTr("Lower")
-						id:				posteriorDistributionPlotConditionalCiLower
+						id:				posteriorDistributionLower
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 : -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
-						max:			"posteriorDistributionPlotConditionalCiUpper".value
+						max:			posteriorDistributionUpper.value
 						inclusive:		JASP.MinMax
 					}
 
@@ -322,10 +322,10 @@ Section
 						enabled:		posteriorDistributionPlotConditionalCi.checked
 						name:			"posteriorDistributionPlotConditionalCiUpper"
 						label:			qsTr("Upper")
-						id:				posteriorDistributionPlotConditionalCiUpper
+						id:				posteriorDistributionUpper
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.75 : 1
-						min:			posteriorDistributionPlotConditionalCiLower.value
+						min:			posteriorDistributionLower.value
 						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
@@ -393,7 +393,7 @@ Section
 
 				CheckBox
 				{
-					name:				"posteriorDistributionPlotMarginalPointEstimateType"
+					name:				"posteriorDistributionPlotMarginalCi"
 					label:				qsTr("CI")
 					id:					plotsPosteriorMarginalCI
 					childrenOnSameRow:	true
@@ -434,7 +434,8 @@ Section
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 : -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
-						max:			plotsPosteriorMarginalUpper.value; inclusive: JASP.MinMax
+						max:			plotsPosteriorMarginalUpper.value
+						inclusive:		JASP.MinMax
 					}
 
 					DoubleField

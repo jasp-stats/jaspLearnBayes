@@ -215,7 +215,8 @@ Section
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 :  -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
-						max:			plotsPredictionMarginalUpper.value; inclusive: JASP.MinMax
+						max:			plotsPredictionMarginalUpper.value;
+						inclusive:		JASP.MinMax
 					}
 
 					DoubleField
