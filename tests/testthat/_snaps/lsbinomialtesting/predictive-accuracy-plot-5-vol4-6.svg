@@ -27,8 +27,8 @@
 </defs>
 <g clip-path='url(#cpNjkuMjh8NzIwLjAwfDIwLjcxfDUyMC4xNg==)'>
 <rect x='69.28' y='20.71' width='650.72' height='499.45' style='stroke-width: 10.67; stroke: none;' />
-<rect x='113.65' y='415.04' width='266.20' height='82.42' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #E5E5E5;' />
-<rect x='409.43' y='125.83' width='266.20' height='371.63' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #E5E5E5;' />
+<rect x='113.65' y='415.04' width='266.20' height='82.42' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #E5E5E5;' />
+<rect x='409.43' y='125.83' width='266.20' height='371.63' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #E5E5E5;' />
 <line x1='246.43' y1='520.16' x2='542.85' y2='520.16' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <line x1='69.28' y1='497.78' x2='69.28' y2='43.09' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <rect x='69.28' y='20.71' width='650.72' height='499.45' style='stroke-width: 0.00; stroke: none;' />
