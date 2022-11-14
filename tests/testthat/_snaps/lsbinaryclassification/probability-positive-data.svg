@@ -27,10 +27,10 @@
 </defs>
 <g clip-path='url(#cpODEuNzh8NzIwLjAwfDIwLjcxfDQ1Ni44Mw==)'>
 <rect x='81.78' y='20.71' width='638.22' height='436.12' style='stroke-width: 10.67; stroke: none;' />
-<rect x='154.31' y='245.54' width='101.53' height='191.46' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='255.84' y='399.79' width='101.53' height='37.22' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
-<rect x='444.41' y='245.54' width='101.53' height='191.46' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='545.94' y='108.37' width='101.53' height='328.64' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='154.31' y='245.54' width='101.53' height='191.46' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='255.84' y='399.79' width='101.53' height='37.22' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='444.41' y='245.54' width='101.53' height='191.46' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='545.94' y='108.37' width='101.53' height='328.64' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
 <polyline points='168.81,212.23 241.34,212.23 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
 <polyline points='205.08,212.23 205.08,276.84 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
 <polyline points='168.81,276.84 241.34,276.84 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
@@ -71,9 +71,9 @@
 <rect x='285.39' y='536.69' width='231.00' height='39.31' style='stroke-width: 0.75; stroke: none;' />
 <rect x='285.39' y='536.69' width='231.00' height='39.31' style='stroke-width: 10.67; stroke: none;' />
 <rect x='299.34' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='300.05' y='542.88' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='300.05' y='542.88' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
 <rect x='422.12' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='422.83' y='542.88' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='422.83' y='542.88' width='26.93' height='26.93' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
 <text x='336.15' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='77.50px' lengthAdjust='spacingAndGlyphs'>Not tested</text>
 <text x='458.94' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='51.98px' lengthAdjust='spacingAndGlyphs'>Tested</text>
 <text x='400.89' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='179.55px' lengthAdjust='spacingAndGlyphs'>probability-positive-data</text>

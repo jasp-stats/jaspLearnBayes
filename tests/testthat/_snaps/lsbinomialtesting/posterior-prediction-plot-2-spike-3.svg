@@ -27,8 +27,8 @@
 </defs>
 <g clip-path='url(#cpNjkuMjh8NzIwLjAwfDIwLjcxfDUxMC4xNA==)'>
 <rect x='69.28' y='20.71' width='650.72' height='489.43' style='stroke-width: 10.67; stroke: none;' />
-<rect x='113.65' y='178.91' width='266.20' height='308.98' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #7F7F7F;' />
-<rect x='409.43' y='178.91' width='266.20' height='308.98' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #7F7F7F;' />
+<rect x='113.65' y='178.91' width='266.20' height='308.98' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #7F7F7F;' />
+<rect x='409.43' y='178.91' width='266.20' height='308.98' style='stroke-width: 1.07; stroke-linecap: butt; stroke-linejoin: miter; fill: #7F7F7F;' />
 <line x1='98.86' y1='80.03' x2='690.42' y2='80.03' style='stroke-width: 2.13; stroke-linecap: butt;' />
 <polyline points='690.42,87.12 690.42,80.03 690.42,72.95 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
 <line x1='690.42' y1='80.03' x2='98.86' y2='80.03' style='stroke-width: 2.13; stroke-linecap: butt;' />
