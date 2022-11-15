@@ -6,9 +6,20 @@ Upgrades
 
 	Upgrade
 	{
-		functionName: 	"MixedModelsCommon"
-		fromVersion:	"0.17.0"
-		toVersion:		"0.18.0"
+		functionName:	"LSbinaryclassification"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17.0"
+
+		// qml_components/LSintrotext.qml
+		ChangeRename { from: "introText";	to: "introductoryText" }
+	}
+
+
+	Upgrade
+	{
+		functionName: 	"LSbinomialestimation"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17.0"
 
 		// qml_components/LSintrotext.qml
 		ChangeRename { from: "introText";	to: "introductoryText"}
@@ -17,10 +28,10 @@ Upgrades
 		ChangeRename { from: "dataType";	to: "dataInputType"}
 		ChangeJS
 		{
-			name:		"dataType"
+			name:		"dataInputType"
 			jsFunction:	function(options)
 			{
-				switch(options["dataType"])
+				switch(options["dataInputType"])
 				{
 					case "dataVariable":	return "variable";
 					case "dataCounts":		return "counts";
@@ -29,24 +40,14 @@ Upgrades
 			}
 		}
 		ChangeRename { from: "selectedVariable";		to: "dataVariableSelected"}
-		ChangeRename { from: "allVariables";			to: "dataVariableAvailable"}
-		ChangeRename { from: "selectedVariable";		to: "dataVariableSelected"}
-		ChangeRename { from: "levelsVar";				to: "dataVariableLevels"}
 		ChangeRename { from: "keySuccessVar";			to: "dataVariableSuccesses"}
 		ChangeRename { from: "keyFailureVar";			to: "dataVariableFailures"}
 		ChangeRename { from: "nSuccesses";				to: "dataCountsSuccesses"}
 		ChangeRename { from: "nFailures";				to: "dataCountsFailures"}
 		ChangeRename { from: "dataSequenceInput";		to: "dataSequenceSequenceOfObservations"}
-		ChangeRename { from: "levelsSeq";				to: "dataSequenceLevels"}
 		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
 		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
 
-		// qml_components/LSgaussiandatainput.qml
-		ChangeRename { from: "dataCountsMean";			to: "dataCountsMean"}
-		ChangeRename { from: "dataCountsSD";			to: "dataCountsSD"}
-		ChangeRename { from: "dataCountsN";				to: "dataCountsN"}
-		ChangeRename { from: "dataVariableSD";			to: "dataVariableSd"}
-		ChangeRename { from: "dataSequenceSD";			to: "dataSequenceSequenceSd"}
 
 		// qml_components/LSestimationpredictions.qml
 		ChangeRename { from: "predictionN";					to: "posteriorPredictionNumberOfFutureTrials"}
@@ -65,16 +66,16 @@ Upgrades
 		ChangeRename { from: "predictionPlotTable";			to: "posteriorPredictionDistributionPlotPredictionsTable"}
 
 		// qml_components/LSestimationpriorandposterior.qml
-		ChangeRename { from: "pointEstimate";						to: "priorAndPosteriorPointEstimate"}
-		ChangeRename { from: "plotsPrior";							to: "priorDistributionPlot"}
-		ChangeRename { from: "plotsPriorType";						to: "priorDistributionPlotType"}
-		ChangeRename { from: "plotsPriorIndividualEstimate";		to: "priorDistributionPlotIndividualPointEstimate"}
-		ChangeRename { from: "plotsPriorIndividualEstimateType";	to: "priorDistributionPlotIndividualPointEstimateType"}
-		ChangeRename { from: "plotsPriorIndividualCI";				to: "priorDistributionPlotIndividualCi"}
-		ChangeRename { from: "plotsPriorIndividualType";			to: "priorDistributionPlotIndividualCiType"}
-		ChangeRename { from: "plotsPriorCoverage";					to: "priorDistributionPlotIndividualCiMass"}
-		ChangeRename { from: "plotsPriorLower";						to: "priorDistributionPlotIndividualCiLower"}
-		ChangeRename { from: "plotsPriorUpper";						to: "priorDistributionPlotIndividualCiUpper"}
+		ChangeRename { from: "pointEstimate";							to: "priorAndPosteriorPointEstimate"}
+		ChangeRename { from: "plotsPrior";								to: "priorDistributionPlot"}
+		ChangeRename { from: "plotsPriorType";							to: "priorDistributionPlotType"}
+		ChangeRename { from: "plotsPriorIndividualEstimate";			to: "priorDistributionPlotIndividualPointEstimate"}
+		ChangeRename { from: "plotsPriorIndividualEstimateType";		to: "priorDistributionPlotIndividualPointEstimateType"}
+		ChangeRename { from: "plotsPriorIndividualCI";					to: "priorDistributionPlotIndividualCi"}
+		ChangeRename { from: "plotsPriorIndividualType";				to: "priorDistributionPlotIndividualCiType"}
+		ChangeRename { from: "plotsPriorCoverage";						to: "priorDistributionPlotIndividualCiMass"}
+		ChangeRename { from: "plotsPriorLower";							to: "priorDistributionPlotIndividualCiLower"}
+		ChangeRename { from: "plotsPriorUpper";							to: "priorDistributionPlotIndividualCiUpper"}
 		ChangeRename { from: "plotsPosterior";							to: "posteriorDistributionPlot"}
 		ChangeRename { from: "plotsPosteriorType";						to: "posteriorDistributionPlotType"}
 		ChangeRename { from: "plotsPosteriorIndividualEstimate";		to: "posteriorDistributionPlotIndividualPointEstimate"}
@@ -103,6 +104,42 @@ Upgrades
 		ChangeRename { from: "plotsIterativeIntervalUpdatingTable";		to: "sequentialAnalysisIntervalEstimatePlotUpdatingTable"}
 		ChangeRename { from: "plotsIterativeStacked";					to: "sequentialAnalysisStackedDistributionsPlot"}
 		ChangeRename { from: "doIterative";								to: "sequentialAnalysisPosteriorUpdatingTable"}
+
+	}
+
+		Upgrade
+	{
+		functionName: 	"LSbinomialtesting"
+		fromVersion:	"0.16.4"
+		toVersion:		"0.17.0"
+
+		// qml_components/LSintrotext.qml
+		ChangeRename { from: "introText";	to: "introductoryText"}
+
+		// qml_components/LSbinomialdatainput.qml
+		ChangeRename { from: "dataType";	to: "dataInputType"}
+		ChangeJS
+		{
+			name:		"dataInputType"
+			jsFunction:	function(options)
+			{
+				switch(options["dataInputType"])
+				{
+					case "dataVariable":	return "variable";
+					case "dataCounts":		return "counts";
+					case "dataSequence":	return "sequence"
+				}
+			}
+		}
+		ChangeRename { from: "selectedVariable";		to: "dataVariableSelected"}
+		ChangeRename { from: "keySuccessVar";			to: "dataVariableSuccesses"}
+		ChangeRename { from: "keyFailureVar";			to: "dataVariableFailures"}
+		ChangeRename { from: "nSuccesses";				to: "dataCountsSuccesses"}
+		ChangeRename { from: "nFailures";				to: "dataCountsFailures"}
+		ChangeRename { from: "dataSequenceInput";		to: "dataSequenceSequenceOfObservations"}
+		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
+		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
+
 
 		// qml_components/LStestingpredictions.qml
 		ChangeRename { from: "predictionN";								to: "posteriorPredictionNumberOfFutureTrials"}
@@ -146,7 +183,7 @@ Upgrades
 		ChangeRename { from: "plotsPredictionMarginalCoverage";		to: "priorPredictivePerformanceDistributionPlotMarginalCiMass"}
 		ChangeRename { from: "plotsPredictionMarginalLower";		to: "priorPredictivePerformanceDistributionPlotMarginalCiLower"}
 		ChangeRename { from: "plotsPredictionMarginalUpper";		to: "priorPredictivePerformanceDistributionPlotMarginalCiUpper"}
-		ChangeRename { from: "plotsPredictionsObserved";			to: "priorPredictivePerformanceDistributionPlotObservedNumberOfSuccess"}
+		ChangeRename { from: "plotsPredictionsObserved";			to: "priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess"}
 		ChangeRename { from: "predictionPlotTable";					to: "priorPredictivePerformanceDistributionPlotPredictionsTable"}
 		ChangeRename { from: "plotsPredictiveAccuracy";				to: "priorPredictivePerformanceAccuracyPlot"}
 		ChangeRename { from: "plotsPredictiveAccuracyType";			to: "priorPredictivePerformanceAccuracyPlotType"}
@@ -172,25 +209,25 @@ Upgrades
 		ChangeRename { from: "plotsPriorMarginalCoverage";			to: "priorDistributionPlotMarginalCiMass"}
 		ChangeRename { from: "plotsPriorMarginalLower";				to: "priorDistributionPlotMarginalCiLower"}
 		ChangeRename { from: "plotsPriorMarginalUpper";				to: "priorDistributionPlotMarginalCiUpper"}
-		ChangeRename { from: "plotsPosterior";							to: "posteriorDistributionPlot"}
-		ChangeRename { from: "plotsPosteriorType";						to: "posteriorDistributionPlotType"}
-		ChangeRename { from: "plotsPosteriorEstimate";					to: "posteriorDistributionPlotConditionalPointEstimate"}
-		ChangeRename { from: "plotsPosteriorEstimateType";				to: "posteriorDistributionPlotConditionalPointEstimateType"}
-		ChangeRename { from: "plotsPosteriorCI";						to: "posteriorDistributionPlotConditionalCi"}
-		ChangeRename { from: "plotsPosteriorTypeCI";					to: "posteriorDistributionPlotConditionalCiType"}
-		ChangeRename { from: "plotsPosteriorCoverage";					to: "posteriorDistributionPlotConditionalCiMass"}
-		ChangeRename { from: "plotsPosteriorLower";						to: "posteriorDistributionPlotConditionalCiLower"}
-		ChangeRename { from: "plotsPosteriorUpper";						to: "posteriorDistributionPlotConditionalCiUpper"}
-		ChangeRename { from: "plotsPosteriorBF";						to: "posteriorDistributionPlotConditionalCiBf"}
-		ChangeRename { from: "plotsPosteriorJointType";					to: "posteriorDistributionPlotJointType"}
-		ChangeRename { from: "plotsPosteriorMarginalEstimate";			to: "posteriorDistributionPlotMarginalPointEstimate"}
-		ChangeRename { from: "plotsPosteriorMarginalEstimateType";		to: "posteriorDistributionPlotMarginalPointEstimateType"}
-		ChangeRename { from: "plotsPosteriorMarginalCI";				to: "posteriorDistributionPlotMarginalCi"}
-		ChangeRename { from: "plotsPosteriorMarginalType";				to: "posteriorDistributionPlotMarginalCiType"}
-		ChangeRename { from: "plotsPosteriorMarginalCoverage";			to: "posteriorDistributionPlotMarginalCiMass"}
-		ChangeRename { from: "plotsPosteriorMarginalLower";				to: "posteriorDistributionPlotMarginalCiLower"}
-		ChangeRename { from: "plotsPosteriorMarginalUpper";				to: "posteriorDistributionPlotMarginalCiUpper"}
-		ChangeRename { from: "plotsPosteriorMarginalBF";				to: "posteriorDistributionPlotMarginalCiBf"}
+		ChangeRename { from: "plotsPosterior";						to: "posteriorDistributionPlot"}
+		ChangeRename { from: "plotsPosteriorType";					to: "posteriorDistributionPlotType"}
+		ChangeRename { from: "plotsPosteriorEstimate";				to: "posteriorDistributionPlotConditionalPointEstimate"}
+		ChangeRename { from: "plotsPosteriorEstimateType";			to: "posteriorDistributionPlotConditionalPointEstimateType"}
+		ChangeRename { from: "plotsPosteriorCI";					to: "posteriorDistributionPlotConditionalCi"}
+		ChangeRename { from: "plotsPosteriorTypeCI";				to: "posteriorDistributionPlotConditionalCiType"}
+		ChangeRename { from: "plotsPosteriorCoverage";				to: "posteriorDistributionPlotConditionalCiMass"}
+		ChangeRename { from: "plotsPosteriorLower";					to: "posteriorDistributionPlotConditionalCiLower"}
+		ChangeRename { from: "plotsPosteriorUpper";					to: "posteriorDistributionPlotConditionalCiUpper"}
+		ChangeRename { from: "plotsPosteriorBF";					to: "posteriorDistributionPlotConditionalCiBf"}
+		ChangeRename { from: "plotsPosteriorJointType";				to: "posteriorDistributionPlotJointType"}
+		ChangeRename { from: "plotsPosteriorMarginalEstimate";		to: "posteriorDistributionPlotMarginalPointEstimate"}
+		ChangeRename { from: "plotsPosteriorMarginalEstimateType";	to: "posteriorDistributionPlotMarginalPointEstimateType"}
+		ChangeRename { from: "plotsPosteriorMarginalCI";			to: "posteriorDistributionPlotMarginalCi"}
+		ChangeRename { from: "plotsPosteriorMarginalType";			to: "posteriorDistributionPlotMarginalCiType"}
+		ChangeRename { from: "plotsPosteriorMarginalCoverage";		to: "posteriorDistributionPlotMarginalCiMass"}
+		ChangeRename { from: "plotsPosteriorMarginalLower";			to: "posteriorDistributionPlotMarginalCiLower"}
+		ChangeRename { from: "plotsPosteriorMarginalUpper";			to: "posteriorDistributionPlotMarginalCiUpper"}
+		ChangeRename { from: "plotsPosteriorMarginalBF";			to: "posteriorDistributionPlotMarginalCiBf"}
 		ChangeRename { from: "plotsPosteriorObserved";				to: "posteriorDistributionPlotObservedProportion"}
 		ChangeRename { from: "plotsBoth";							to: "priorAndPosteriorDistributionPlot"}
 		ChangeRename { from: "plotsBothType";						to: "priorAndPosteriorDistributionPlotType"}
