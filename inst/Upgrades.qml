@@ -48,6 +48,29 @@ Upgrades
 		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
 		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
 
+		// models
+		ChangeRename {	from: "priors";					to: "models"	}
+		ChangeJS
+		{
+			name:		"models"
+			jsFunction:	function(options)
+			{
+				let newModels = options["models"].map(model => {
+					let newModel 			= {};
+ 					newModel["name"] 			= model["name"];
+					newModel["type"] 			= model["type"];
+					newModel["betaPriorAlpha"] 	= model["parAlpha"];
+					newModel["betaPriorBeta"] 	= model["parBeta"];
+					newModel["spikePoint"] 		= model["parPoint"];
+					newModel["value"]           = model["value"];
+
+					return newModel;
+				})
+
+				return newModels;
+			}
+		}
+
 
 		// qml_components/LSestimationpredictions.qml
 		ChangeRename { from: "predictionN";					to: "posteriorPredictionNumberOfFutureTrials"}
@@ -140,6 +163,28 @@ Upgrades
 		ChangeRename { from: "keySuccessSeq";			to: "dataSequenceSuccesses"}
 		ChangeRename { from: "keyFailureSeq";			to: "dataSequenceFailures"}
 
+		// models
+		ChangeRename {	from: "priors";					to: "models"	}
+		ChangeJS
+		{
+			name:		"models"
+			jsFunction:	function(options)
+			{
+				let newModels = options["models"].map(model => {
+					let newModel 				= {};
+					newModel["name"] 			= model["name"];
+					newModel["priorWeight"]		= model["PH"];
+					newModel["type"] 			= model["type"];
+					newModel["betaPriorAlpha"] 	= model["parAlpha"];
+					newModel["betaPriorBeta"] 	= model["parBeta"];
+					newModel["spikePoint"] 		= model["parPoint"];
+					newModel["value"]           = model["value"];
+					
+					return newModel;
+				})
+				return newModels;
+			}
+		}
 
 		// qml_components/LStestingpredictions.qml
 		ChangeRename { from: "predictionN";								to: "posteriorPredictionNumberOfFutureTrials"}
