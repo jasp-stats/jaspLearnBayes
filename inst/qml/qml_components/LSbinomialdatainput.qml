@@ -28,37 +28,37 @@ Section
 	title:		qsTr("Data")
 	columns:	1
 
-	property alias dataType: dataType
+	property alias dataInputType: dataInputType
 
 	RadioButtonGroup
 	{
 		columns:	3
-		name:		"dataType"
+		name:		"dataInputType"
 		title:		qsTr("Input Type")
-		id:			dataType
+		id:			dataInputType
 
 		RadioButton
 		{
-			value:		"dataVariable"
+			value:		"variable"
 			label:		qsTr("Select variable")
-			id:			dataTypeC
+			id:			dataInputTypeC
 			checked: 	mainWindow.dataAvailable
 			enabled:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			value:		"dataCounts"
+			value:		"counts"
 			label:		qsTr("Specify counts")
-			id:			dataTypeA
+			id:			dataInputTypeA
 			checked:	!mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			value:		"dataSequence"
+			value:		"sequence"
 			label:		qsTr("Enter sequence")
-			id:			dataTypeB
+			id:			dataInputTypeB
 		}
 
 	}
@@ -66,11 +66,11 @@ Section
 	Group
 	{
 		title: qsTr("Count Data")
-		visible: dataTypeA.checked
+		visible: dataInputTypeA.checked
 
 		IntegerField
 		{
-			name:			"nSuccesses"
+			name:			"dataCountsSuccesses"
 			label:			qsTr("Successes")
 			defaultValue: 	0
 			id: 			nSuccesses
@@ -78,7 +78,7 @@ Section
 
 		IntegerField
 		{
-			name:			"nFailures"
+			name:			"dataCountsFailures"
 			label:			qsTr("Failures")
 			defaultValue:	0
 			id:				nFailures
@@ -88,16 +88,16 @@ Section
 	TextArea
 	{
 		title:		qsTr("Comma-separated Sequence of Observations")
-		visible:	dataTypeB.checked
+		visible:	dataInputTypeB.checked
 		height:		100
-		name:     "dataSequenceInput"
+		name:		"dataSequenceSequenceOfObservations"
 		textType:	JASP.TextTypeSource
 		separators:	[",",";","\n"]
 	}
 
 	Group
 	{
-		visible:	dataTypeB.checked
+		visible:	dataInputTypeB.checked
 
 		VariablesForm
 		{
@@ -105,20 +105,20 @@ Section
 
 			AvailableVariablesList
 			{
-				name:	"levelsSeq"
+				name:	"dataSequenceLevels"
 				title:	qsTr("Levels")
-				source:	"dataSequenceInput"
+				source:	"dataSequenceSequenceOfObservations"
 			}
 
 			AssignedVariablesList
 			{
-				name:	"keySuccessSeq"
+				name:	"dataSequenceSuccesses"
 				title:	qsTr("Successes")
 			}
 
 			AssignedVariablesList
 			{
-				name:	"keyFailureSeq"
+				name:	"dataSequenceFailures"
 				title:	qsTr("Failures")
 			}
 		}
@@ -126,7 +126,7 @@ Section
 
 	Group
 	{
-		visible: dataTypeC.checked
+		visible: dataInputTypeC.checked
 
 		VariablesForm
 		{
@@ -134,23 +134,23 @@ Section
 
 			AvailableVariablesList
 			{
-				name:	"allVariables"
+				name:	"dataVariableAvailable"
 				title:	qsTr("Available")
 			}
 
 			AssignedVariablesList
 			{
-				name:				"selectedVariable"
+				name:				"dataVariableSelected"
 				title:				qsTr("Selected")
 				singleVariable:		true
 				allowedColumns:		["ordinal", "nominal","nominalText"]
 
 				onCountChanged:
 				{
-					while (keySuccessVar.count > 0)
-						keySuccessVar.itemDoubleClicked(0)
-					while (keyFailureVar.count > 0)
-						keyFailureVar.itemDoubleClicked(0)
+					while (dataVariableSuccesses.count > 0)
+						dataVariableSuccesses.itemDoubleClicked(0)
+					while (dataVariableFailures.count > 0)
+						dataVariableFailures.itemDoubleClicked(0)
 				}
 			}
 		}
@@ -161,22 +161,22 @@ Section
 
 			AvailableVariablesList
 			{
-				name:	"levelsVar"
+				name:	"dataVariableLevels"
 				title:	qsTr("Levels")
-				source:	[{name: "selectedVariable", use: "levels"}]
+				source:	[{name: "dataVariableSelected", use: "levels"}]
 			}
 
 			AssignedVariablesList
 			{
-				id:		keySuccessVar
-				name:	"keySuccessVar"
+				id:		dataVariableSuccesses
+				name:	"dataVariableSuccesses"
 				title:	qsTr("Successes")
 			}
 
 			AssignedVariablesList
 			{
-				id:		keyFailureVar
-				name:	"keyFailureVar"
+				id:		dataVariableFailures
+				name:	"dataVariableFailures"
 				title:	qsTr("Failures")
 			}
 		}
@@ -184,7 +184,7 @@ Section
 
 	CheckBox
 	{
-		visible:	dataTypeB.checked || dataTypeC.checked
+		visible:	dataInputTypeB.checked || dataInputTypeC.checked
 		name:		"dataSummary"
 		label:		qsTr("Data summary")
 		checked:	true

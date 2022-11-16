@@ -18,13 +18,13 @@
 LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
 
   # introductory text
-  if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
+  if (options[["introductoryText"]]).introductoryTextLS(jaspResults, options, "gaussTest")
 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
 
-  # evaluate the expressions in priors
-  if (ready[2])options[["priors"]] <- .evaluatePriors(options[["priors"]])
+  # evaluate the expressions in models
+  if (ready[2])options[["models"]] <- .evaluatePriors(options[["models"]])
 
   # load, check, transform and process data
   if (ready[1])data <- .readDataGaussianLS(dataset, options)
@@ -51,10 +51,10 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
   }
 
 
-  if (options[["introText"]] && is.null(testsContainer[['introText']])) {
+  if (options[["introductoryText"]] && is.null(testsContainer[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("tests", options, "gaussTest")
@@ -68,10 +68,10 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
     testsTable <- createJaspTable(title = gettext("Testing Summary"))
 
     testsTable$position <- 2
-    testsTable$dependOn(c(.GaussianLS_data_dependencies, "bfType", "bfTypevsName"))
+    testsTable$dependOn(c(.GaussianLS_data_dependencies, "priorPredictivePerformanceBfComparison", "priorPredictivePerformanceBfVsHypothesis", "priorPredictivePerformanceBfType"))
 
     bfType_name <- switch(
-      options[["bfType"]],
+      options[["priorPredictivePerformanceBfType"]],
       "inclusion" = gettext("Inclusion BF"),
       "best"      = gettextf("BF%s","\u2081\u2080"),
       "vs"        = gettextf("BF%s","\u2081\u2080")
@@ -83,7 +83,7 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
     testsTable$addColumnInfo(name = "posterior",    title = gettext("P(H|data)"),           type = "number")
     testsTable$addColumnInfo(name = "bf",           title = bfType_name,                    type = "number")
 
-    testsTable$setExpectedSize(length(options[["priors"]]))
+    testsTable$setExpectedSize(length(options[["models"]]))
 
     testsContainer[["testsTable"]] <- testsTable
 

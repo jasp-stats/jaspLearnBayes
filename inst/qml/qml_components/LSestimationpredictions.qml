@@ -33,7 +33,7 @@ Section
 	{
 		IntegerField
 		{
-			name:			"predictionN"
+			name:			"posteriorPredictionNumberOfFutureTrials"
 			label:			qsTr("Number of future trials")
 			id:				predictionN
 			min:			1
@@ -42,13 +42,13 @@ Section
 
 		CheckBox
 		{
-			name:		"predictionTable"
-			label:		qsTr("Summary")
+			name:		"posteriorPredictionSummaryTable"
+			label:		qsTr("Summary table")
 
 			DropDown
 			{
 				label:		qsTr("Point estimate")
-				name:		"predictionTableEstimate"
+				name:		"posteriorPredictionSummaryTablePointEstimate"
 				values:		["mean", "median", "mode"]
 			}
 		}
@@ -56,15 +56,16 @@ Section
 		Group
 		{
 			title:	qsTr("Plots")
-			
+
 			CheckBox
 			{
-				label:	qsTr("Posterior predictive distribution")
-				name:	"plotsPredictions"
+				label:	qsTr("Distribution plot")
+				name:	"posteriorPredictionDistributionPlot"
 
 				RadioButtonGroup
 				{
-					name:	"predictionPlotType"
+				  title:		qsTr("Type")
+					name:	"posteriorPredictionDistributionPlotType"
 
 					RadioButton
 					{
@@ -87,32 +88,32 @@ Section
 						CheckBox
 						{
 							label:				qsTr("Point estimate")
-							name:				"plotsPredictionEstimate"
+							name:				"posteriorPredictionDistributionPlotIndividualPointEstimate"
 							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name:		"plotsPredictionEstimateType"
+								name:		"posteriorPredictionDistributionPlotIndividualPointEstimateType"
 								label:		""
 								values:		["mean", "median", "mode"]
 							}
 						}
-						
+
 						CheckBox
 						{
-							name:				"plotsPredictionCI"
+							name:				"posteriorPredictionDistributionPlotIndividualCi"
 							label:				qsTr("CI")
 							id:					plotsPredictionCI
 							childrenOnSameRow:	true
 
 							DropDown
 							{
-								name:			"plotsPredictionType"
+								name:			"posteriorPredictionDistributionPlotIndividualCiType"
 								label:			""
 								values:			["central", "HPD", "custom"]
 								id:				plotsPredictionType
 							}
-						}	
+						}
 
 						Group
 						{
@@ -122,7 +123,7 @@ Section
 							{
 								visible:		plotsPredictionType.currentText == "central" | plotsPredictionType.currentText == "HPD"
 								enabled:		plotsPredictionCI.checked
-								name:			"plotsPredictionCoverage"
+								name:			"posteriorPredictionDistributionPlotIndividualCiMass"
 								label:			qsTr("Mass")
 								fieldWidth:		50
 								defaultValue:	95
@@ -135,7 +136,7 @@ Section
 							{
 								visible:		plotsPredictionType.currentText == "custom"
 								enabled:		plotsPredictionCI.checked
-								name:			"plotsPredictionLower"
+								name:			"posteriorPredictionDistributionPlotIndividualCiLower"
 								label:			qsTr("Lower")
 								id:				plotsPredictionLower
 								fieldWidth:		50
@@ -149,7 +150,7 @@ Section
 							{
 								visible:		plotsPredictionType.currentText == "custom"
 								enabled:		plotsPredictionCI.checked
-								name:			"plotsPredictionUpper"
+								name:			"posteriorPredictionDistributionPlotIndividualCiUpper"
 								label:			qsTr("Upper")
 								id:				plotsPredictionUpper
 								fieldWidth:		50
@@ -163,14 +164,14 @@ Section
 
 					CheckBox
 					{
-						name:	"predictionPlotProp"
+						name:	"posteriorPredictionDistributionPlotAsSampleProportion"
 						id:		predictionPlotProp
-						label:	qsTr("Show sample proportions")
+						label:	qsTr("As sample proportion")
 					}
 
 					CheckBox
 					{
-						name:	"predictionPlotTable"
+						name:	"posteriorPredictionDistributionPlotPredictionsTable"
 						label:	qsTr("Predictions table")
 					}
 

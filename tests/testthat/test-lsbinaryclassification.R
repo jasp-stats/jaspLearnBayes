@@ -2,7 +2,7 @@ context("Learn Bayes - Binary Classification")
 
 # Point estimates ----
 options <- jaspTools::analysisOptions("LSbinaryclassification")
-options$introText   <- FALSE
+options$introductoryText   <- FALSE
 options$inputType   <- "pointEstimates"
 options$prevalence  <- "0.1"
 options$sensitivity <- "0.8"
@@ -105,7 +105,7 @@ test_that("Confusion matrix table results match", {
 
 # Using data ----
 options <- jaspTools::analysisOptions("LSbinaryclassification")
-options$introText <- FALSE
+options$introductoryText <- FALSE
 options$inputType <- "data"
 options$marker <- "marker"
 options$labels <- "condition"

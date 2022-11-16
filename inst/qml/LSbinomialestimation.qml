@@ -68,7 +68,7 @@ Form {
 
 			ComponentsList
 			{
-				name:					"priors"
+				name:					"models"
 				defaultValues: 			[]
 				rowComponent: 			RowLayout
 				{
@@ -108,7 +108,7 @@ Form {
 						FormulaField
 						{
 							label:				qsTr("α")
-							name:				"parAlpha"
+							name:				"betaPriorAlpha"
 							visible:			typeItem.currentValue === "beta"
 							value:				"1"
 							min:				0
@@ -121,7 +121,7 @@ Form {
 						FormulaField
 						{
 							label:				qsTr("β")
-							name:				"parBeta"
+							name:				"betaPriorBeta"
 							visible:			typeItem.currentValue === "beta"
 							value:				"1"
 							min:				0
@@ -133,7 +133,7 @@ Form {
 						FormulaField
 						{
 							label:				qsTr("θ₀")
-							name:				"parPoint"
+							name:				"spikePoint"
 							visible:			typeItem.currentValue === "spike"
 							value:				"0.5"
 							min:				0
@@ -153,7 +153,7 @@ Form {
 
 	LS.LSestimationsequential
 	{
-		enabled: binomialDataInput.dataType.value !== "dataCounts"
+		enabled: binomialDataInput.dataInputType.value !== "counts"
 		onEnabledChanged: 
 		{
 			if (!enabled) {

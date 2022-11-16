@@ -6,71 +6,71 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- TRUE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- TRUE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- FALSE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "stacked"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mean"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
-                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.5", type = "beta",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "stacked"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
+                                                                                  betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5", type = "beta",
                                                                                   value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -82,7 +82,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval Updating Plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequantial-interval-plot-3-default-4", dir="LSbinomialestimation")
   })
@@ -156,7 +156,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions Plots matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-7-default-7", dir="LSbinomialestimation")
   })
@@ -189,71 +189,71 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "HPD"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "stacked"
-  options$plotsIterativeIntervalUpdatingTable <- TRUE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- TRUE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "stacked"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "median"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "HPD"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "stacked"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- TRUE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "stacked"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -371,13 +371,13 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol1-3", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol1-4", dir="LSbinomialestimation")
   })
@@ -446,7 +446,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-11-vol1-9", dir="LSbinomialestimation")
   })
@@ -480,71 +480,71 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "median"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "HPD"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- TRUE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "median"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "HPD"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- TRUE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -562,7 +562,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-interval-plot-2-vol2-3", dir="LSbinomialestimation")
   })
@@ -592,13 +592,13 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol2-8", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol2-9", dir="LSbinomialestimation")
   })
@@ -624,71 +624,71 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -700,13 +700,13 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol3-2", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol3-3", dir="LSbinomialestimation")
   })
@@ -732,83 +732,83 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "median"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "median"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol4-1", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol4-2", dir="LSbinomialestimation")
   })
@@ -834,83 +834,83 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "median"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "individual"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "median"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "individual"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
 
   test_that("Models Beta plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-beta-vol5-1", dir="LSbinomialestimation")
   })
 
   test_that("Models Point plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["collection"]][["containerPredictionPlots_plotsPredictions_Models Point"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot_Models Point"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "models-point-vol5-2", dir="LSbinomialestimation")
   })
@@ -936,77 +936,77 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "mode"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- TRUE
-  options$predictionPlotType <- "stacked"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- TRUE
+  options$posteriorPredictionDistributionPlotType <- "stacked"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
 
   test_that("Prediction plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-0-vol6-1", dir="LSbinomialestimation")
   })
@@ -1032,77 +1032,77 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- TRUE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- TRUE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mode"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "support"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.25
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- TRUE
-  options$plotsPosteriorIndividualEstimate <- TRUE
-  options$plotsPosteriorIndividualEstimateType <- "mode"
-  options$plotsPosteriorIndividualType <- "support"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "individual"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- TRUE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- TRUE
-  options$plotsPredictionEstimateType <- "mode"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "HPD"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.8
-  options$plotsPriorIndividualCI <- TRUE
-  options$plotsPriorIndividualEstimate <- TRUE
-  options$plotsPriorIndividualEstimateType <- "median"
-  options$plotsPriorIndividualType <- "HPD"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "individual"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 10
-  options$predictionPlotProp <- TRUE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mode"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "support"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.25
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorDistributionPlotIndividualCiType <- "support"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.8
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- TRUE
+  options$priorDistributionPlotIndividualPointEstimateType <- "median"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- TRUE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mode"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
-  options$selectedVariable <- "contBinom"
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
 
   test_that("Prediction plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-0-vol7-1", dir="LSbinomialestimation")
   })
@@ -1128,69 +1128,69 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "stacked"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "median"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "spike", value = ""))
-  options$selectedVariable <- "contBinom"
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "stacked"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "median"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = ""))
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -1202,7 +1202,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval Updating  matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequantial-interval-plot-2-spike-2", dir="LSbinomialestimation")
   })
@@ -1220,7 +1220,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prediction-plot-5-spike-5", dir="LSbinomialestimation")
   })
@@ -1251,69 +1251,69 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "1"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "0"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsPosteriorIndividualPrior <- TRUE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "1"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "0"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$posteriorDistributionPloPriorDistribution <- TRUE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- TRUE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- TRUE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- TRUE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "stacked"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPrior <- TRUE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mode"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "median"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""))
-  options$selectedVariable <- "contBinom"
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- TRUE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- TRUE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "stacked"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mode"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "median"
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""))
+  options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 
@@ -1326,7 +1326,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Sequential Interval Updating plot matches", {
-    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_plotsIterativeInterval"]][["data"]]
+    plotName <- results[["results"]][["containerIterativeInterval"]][["collection"]][["containerIterativeInterval_sequentialAnalysisIntervalEstimatePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-interval-plot-2-beta-3", dir="LSbinomialestimation")
   })
@@ -1344,7 +1344,7 @@ context("Learn Bayes - Binomial Estimation")
   })
 
   test_that("Predictions plot matches", {
-    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_plotsPredictions"]][["data"]]
+    plotName <- results[["results"]][["containerPredictionPlots"]][["collection"]][["containerPredictionPlots_posteriorPredictionDistributionPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "predictions-plot-5-beta-6", dir="LSbinomialestimation")
   })
@@ -1376,70 +1376,70 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataCounts"
-  options$dataSequenceInput <- ""
-  options$doIterative <- FALSE
-  options$introText <- FALSE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- list()
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- list()
-  options$nFailures <- 6
-  options$nSuccesses <- 3
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$dataInputType <- "counts"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- FALSE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 6
+  options$dataCountsSuccesses <- 3
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- FALSE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- FALSE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "overlying"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mean"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
-                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
-                                                                parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- ""
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "overlying"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
+                              type = "spike", value = ""), list(name = "Models 2", betaPriorAlpha = "1",
+                                                                betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
   table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
@@ -1452,72 +1452,72 @@ context("Learn Bayes - Binomial Estimation")
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataSequence"
-  options$dataSequenceInput <- "1;0;0,10,1,1,0 ,1 ,
+  options$dataInputType <- "sequence"
+  options$dataSequenceSequenceOfObservations <- "1;0;0,10,1,1,0 ,1 ,
 1
 "
-  options$doIterative <- FALSE
-  options$introText <- FALSE
-  options$keyFailureSeq <- "0"
-  options$keyFailureVar <- list()
-  options$keySuccessSeq <- "1"
-  options$keySuccessVar <- list()
-  options$nFailures <- 6
-  options$nSuccesses <- 3
-  options$plotsPosteriorIndividualPrior <- FALSE
-  options$plotsPosteriorIndividualProportion <- FALSE
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- FALSE
+  options$dataSequenceFailures <- "0"
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- "1"
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 6
+  options$dataCountsSuccesses <- 3
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
   options$plotsIterative <- FALSE
-  options$plotsIterativeBF <- 1
-  options$plotsIterativeCoverage <- 0.95
-  options$plotsIterativeEstimateType <- "mean"
-  options$plotsIterativeOverlyingCI <- FALSE
-  options$plotsIterativeOverlyingType <- "central"
-  options$plotsIterativeInterval <- FALSE
-  options$plotsIterativeIntervalLower <- 0.25
-  options$plotsIterativeIntervalType <- "overlying"
-  options$plotsIterativeIntervalUpdatingTable <- FALSE
-  options$plotsIterativeIntervalUpper <- 0.75
-  options$plotsIterativeOverlying <- TRUE
-  options$plotsIterativeStacked <- FALSE
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorIndividualCI <- FALSE
-  options$plotsPosteriorIndividualEstimate <- FALSE
-  options$plotsPosteriorIndividualEstimateType <- "mean"
-  options$plotsPosteriorIndividualType <- "central"
-  options$plotsPosteriorLower <- 0.25
-  options$plotsPosteriorType <- "overlying"
-  options$plotsPosteriorUpper <- 0.75
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionType <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
-  options$plotsPrior <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorIndividualCI <- FALSE
-  options$plotsPriorIndividualEstimate <- FALSE
-  options$plotsPriorIndividualEstimateType <- "mean"
-  options$plotsPriorIndividualType <- "central"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorType <- "overlying"
-  options$plotsPriorUpper <- 0.75
-  options$pointEstimate <- "mean"
-  options$predictionN <- 1
-  options$predictionPlotProp <- FALSE
-  options$predictionPlotType <- "overlying"
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
-                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
-                                                                parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- ""
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- TRUE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "overlying"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- FALSE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "overlying"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
+                              type = "spike", value = ""), list(name = "Models 2", betaPriorAlpha = "1",
+                                                                betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
 

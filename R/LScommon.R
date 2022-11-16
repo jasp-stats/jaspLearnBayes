@@ -23,53 +23,53 @@ gettextf <- function(fmt, ..., domain = NULL)  {
   return(sprintf(gettext(fmt, domain = domain), ...))
 }
 
-.evaluatePriors       <- function(priors, type) {
-  for (p in 1:length(priors)) {
-    for (i in 1:length(priors[[p]])) {
-      if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "parMu", "parSigma", "PH")) {
-        priors[[p]][[paste0(names(priors[[p]])[i],"Inp")]] <- priors[[p]][[i]]
-        priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
+.evaluatePriors       <- function(models, type) {
+  for (p in 1:length(models)) {
+    for (i in 1:length(models[[p]])) {
+      if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight")) {
+        models[[p]][[paste0(names(models[[p]])[i],"Inp")]] <- models[[p]][[i]]
+        models[[p]][[i]] <- eval(parse(text = models[[p]][[i]]))
 
-        if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parSigma", "PH") && priors[[p]][[i]] <= 0) {
+        if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "parSigma", "priorWeight") && models[[p]][[i]] <= 0) {
           .quitAnalysis(
             gettextf(
               "The parameter '%1$s' for model/hypothesis '%2$s' must be positive.",
-              gsub("par", "", names(priors[[p]])[i]),
-              priors[[p]][["name"]]))
-        } else if (names(priors[[p]])[i] =="parPoint" && (priors[[p]][[i]] < 0 || priors[[p]][[i]] > 1) && type %in% c("binEst", "binTest")) {
+              gsub("par", "", names(models[[p]])[i]),
+              models[[p]][["name"]]))
+        } else if (names(models[[p]])[i] =="spikePoint" && (models[[p]][[i]] < 0 || models[[p]][[i]] > 1) && type %in% c("binEst", "binTest")) {
           .quitAnalysis(
             gettextf(
               "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1.",
-              gsub("par", "", names(priors[[p]])[i]),
-              priors[[p]][["name"]]))
+              gsub("par", "", names(models[[p]])[i]),
+              models[[p]][["name"]]))
         }
       }
     }
-    if (priors[[p]][["name"]] == "") {
-      priors[[p]][["name"]] <- gettextf(
+    if (models[[p]][["name"]] == "") {
+      models[[p]][["name"]] <- gettextf(
         "%s %i",
-        ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model"),
+        ifelse (any(names(models[[p]]) %in% c("priorWeight")), "Hypothesis", "Model"),
         p
       )
     }
   }
 
-  if (anyDuplicated(sapply(priors, function(p)p$name)) != 0) {
+  if (anyDuplicated(sapply(models, function(p)p$name)) != 0) {
     .quitAnalysis(gettextf(
       "Please remove duplicates from the %s names.",
-      ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model")
+      ifelse (any(names(models[[p]]) %in% c("priorWeight")), "Hypothesis", "Model")
     ))
   }
 
-  return(priors)
+  return(models)
 }
-.scalePriors          <- function(priors) {
-  unscaled <- sapply(priors, function(x)x$PH)
+.scalePriors          <- function(models) {
+  unscaled <- sapply(models, function(x)x$priorWeight)
   scaled   <- unscaled/sum(unscaled)
-  for (i in 1:length(priors)) {
-    priors[[i]]$PH <- scaled[i]
+  for (i in 1:length(models)) {
+    models[[i]]$priorWeight <- scaled[i]
   }
-  return(priors)
+  return(models)
 }
 .aproximateSupportLS  <- function(xSeq, seqTF) {
   xStart <- NULL
@@ -1238,7 +1238,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (!is.null(jaspResults[['introText']])) return()
 
   intro <- createJaspHtml()
-  intro$dependOn(c("introText"))
+  intro$dependOn(c("introductoryText"))
   intro$position <- 0
 
   intro[['text']] <- .explanatoryTextLS("main", NULL, analysis)
@@ -1255,17 +1255,17 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["estimatesContainer"]])) {
     estimatesContainer <- createJaspContainer("Model")
     estimatesContainer$position <- 2
-    estimatesContainer$dependOn("pointEstimate")
+    estimatesContainer$dependOn("priorAndPosteriorPointEstimate")
     jaspResults[["estimatesContainer"]] <- estimatesContainer
   } else {
     estimatesContainer <- jaspResults[["estimatesContainer"]]
   }
 
 
-  if (options[["introText"]] && is.null(estimatesContainer[['introText']])) {
+  if (options[["introductoryText"]] && is.null(estimatesContainer[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("estimates", options, analysis)
@@ -1281,15 +1281,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Plots",
       switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "overlying" = gettext("All"),
         "stacked"   = gettext("Stacked"),
         "individual"= gettext("Individual")
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPrior", "plotsPosterior"),
-      ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")
+      ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
+      ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
     ))
     containerPlots$position <- ifelse (type == "Prior", 3, 4)
     jaspResults[[paste0("containerPlots", type)]] <- containerPlots
@@ -1298,10 +1298,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("parameter_plots", options, analysis, type)
@@ -1316,7 +1316,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerBoth"]])) {
     containerBoth <- createJaspContainer(title = gettext("Prior and Posterior Plots"))
     containerBoth$position <- 5
-    containerBoth$dependOn("plotsBoth")
+    containerBoth$dependOn("priorAndPosteriorDistributionPlot")
 
     jaspResults[["containerBoth"]] <- containerBoth
   } else {
@@ -1324,10 +1324,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerBoth[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerBoth[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("both_plots", options, analysis)
@@ -1342,7 +1342,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerIterativeOverlying"]])) {
     containerIterativeOverlying <- createJaspContainer(title = gettext("Sequential Analysis: Point Estimate"))
     containerIterativeOverlying$position <- 6
-    containerIterativeOverlying$dependOn(c("plotsIterativeOverlying", "plotsIterativeEstimateType"))
+    containerIterativeOverlying$dependOn(c("sequentialAnalysisPointEstimatePlot", "sequentialAnalysisPointEstimatePlotType"))
 
     jaspResults[["containerIterativeOverlying"]] <- containerIterativeOverlying
   } else {
@@ -1350,10 +1350,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeOverlying[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeOverlying[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_overlying", options, analysis)
@@ -1369,13 +1369,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerIterativeInterval <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis: Interval",
       switch(
-        options[["plotsIterativeIntervalType"]],
+        options[["sequentialAnalysisIntervalEstimatePlotType"]],
         "overlying" = gettext("All"),
         "stacked"   = gettext("Stacked"),
         "individual"= gettext("Individual")
       )))
     containerIterativeInterval$position <- 7
-    containerIterativeInterval$dependOn(c("plotsIterativeInterval", "plotsIterativeIntervalType"))
+    containerIterativeInterval$dependOn(c("sequentialAnalysisIntervalEstimatePlot", "sequentialAnalysisIntervalEstimatePlotType"))
 
     jaspResults[["containerIterativeInterval"]] <- containerIterativeInterval
   } else {
@@ -1383,10 +1383,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeInterval[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeInterval[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn(c("introText", "plotsIterativeIntervalType"))
+    introText$dependOn(c("introductoryText", "sequentialAnalysisIntervalEstimatePlotType"))
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_interval", options, analysis)
@@ -1401,7 +1401,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerIterativeStacked"]])) {
     containerIterativeStacked <- createJaspContainer(title = gettext("Sequential Analysis: Stacked"))
     containerIterativeStacked$position <- 7.5
-    containerIterativeStacked$dependOn("plotsIterativeStacked")
+    containerIterativeStacked$dependOn("sequentialAnalysisStackedDistributionsPlot")
 
     jaspResults[["containerIterativeStacked"]] <- containerIterativeStacked
   } else {
@@ -1409,10 +1409,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeStacked[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeStacked[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_stacked", options, analysis)
@@ -1427,7 +1427,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerIterativeUpdating"]])) {
     containerIterativeUpdating <- createJaspContainer(title = gettext("Sequential Posterior Updating"))
     containerIterativeUpdating$position <- 8
-    containerIterativeUpdating$dependOn("doIterative")
+    containerIterativeUpdating$dependOn("sequentialAnalysisPosteriorUpdatingTable")
 
     jaspResults[["containerIterativeUpdating"]] <- containerIterativeUpdating
   } else {
@@ -1435,10 +1435,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerIterativeUpdating[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerIterativeUpdating[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_updating", options, analysis)
@@ -1453,7 +1453,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (is.null(jaspResults[["containerPredictions"]])) {
     containerPredictions <- createJaspContainer(title = gettext("Prediction Summary"))
     containerPredictions$position <- 9
-    containerPredictions$dependOn(c("predictionTable", "predictionTableEstimate"))
+    containerPredictions$dependOn(c("posteriorPredictionSummaryTable", "posteriorPredictionSummaryTablePointEstimate"))
 
     jaspResults[["containerPredictions"]] <- containerPredictions
   } else {
@@ -1461,10 +1461,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPredictions[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPredictions[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("predictions", options, analysis)
@@ -1480,13 +1480,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPredictionPlots <- createJaspContainer(title = gettextf(
       "%s Prediction Plots",
       switch(
-        options[["predictionPlotType"]],
+        options[["posteriorPredictionDistributionPlotType"]],
         "overlying" = gettext("All"),
         "stacked"   = gettext("Stacked"),
         "individual"= gettext("Individual")
       )))
     containerPredictionPlots$position <- 10
-    containerPredictionPlots$dependOn(c("plotsPredictions", "predictionPlotType"))
+    containerPredictionPlots$dependOn(c("posteriorPredictionDistributionPlot", "posteriorPredictionDistributionPlotType"))
 
     jaspResults[["containerPredictionPlots"]] <- containerPredictionPlots
   } else {
@@ -1494,10 +1494,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPredictionPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPredictionPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis)
@@ -1513,15 +1513,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Plots",
       switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPrior", "plotsPosterior"),
-      ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")
+      ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
+      ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
     ))
     containerPlots$position <- ifelse (type == "Prior", 3, 6)
     jaspResults[[paste0("containerPlots", type)]] <- containerPlots
@@ -1530,10 +1530,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("parameter_plots", options, analysis, type)
@@ -1549,16 +1549,16 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPlots <- createJaspContainer(title = gettextf(
       "%1$s %2$s Prediction Plots",
       switch(
-        options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]],
+        options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       ),
       type))
     containerPlots$dependOn(c(
-      ifelse (type == "Prior", "plotsPredictions",       "plotsPredictionsPost"),
-      ifelse (type == "Prior", "plotsPredictionType",    "plotsPredictionPostType"),
-      if (type == "Posterior") "predictionN"
+      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlot",       "posteriorPredictionDistributionPlot"),
+      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType",    "posteriorPredictionDistributionPlotType"),
+      if (type == "Posterior") "posteriorPredictionNumberOfFutureTrials"
     ))
     containerPlots$position <- ifelse (type == "Prior", 4, 10)
     jaspResults[[paste0("containerPlotsPrediction", type)]] <- containerPlots
@@ -1567,10 +1567,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPlots[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPlots[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn(c("introText", ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")))
+    introText$dependOn(c("introductoryText", ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")))
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("prediction_plots", options, analysis, type)
@@ -1586,13 +1586,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerBoth <- createJaspContainer(title = gettextf(
       "%s Prior and Posterior Plots",
       switch(
-        options[["plotsBothType"]],
+        options[["priorAndPosteriorDistributionPlotType"]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       )))
     containerBoth$position <- 7
-    containerBoth$dependOn(c("plotsBoth", "plotsBothType"))
+    containerBoth$dependOn(c("priorAndPosteriorDistributionPlot", "priorAndPosteriorDistributionPlotType"))
 
     jaspResults[["containerBoth"]] <- containerBoth
   } else {
@@ -1600,10 +1600,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerBoth[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerBoth[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("both_plots", options, analysis)
@@ -1619,13 +1619,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerPredictiveAccuracy <- createJaspContainer(title = gettextf(
       "%s Predictive Accuracy Plot",
       switch(
-        options[["plotsPredictiveAccuracyType"]],
+        options[["priorPredictivePerformanceAccuracyPlotType"]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Normalized")
       )))
     containerPredictiveAccuracy$position <- 5
-    containerPredictiveAccuracy$dependOn(c("plotsPredictiveAccuracy", "plotsPredictiveAccuracyType"))
+    containerPredictiveAccuracy$dependOn(c("priorPredictivePerformanceAccuracyPlot", "priorPredictivePerformanceAccuracyPlotType"))
 
     jaspResults[["containerPredictiveAccuracy"]] <- containerPredictiveAccuracy
   } else {
@@ -1633,10 +1633,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerPredictiveAccuracy[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerPredictiveAccuracy[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("predictive_accuracy", options, analysis)
@@ -1652,14 +1652,14 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     containerSequentialTests <- createJaspContainer(title = gettextf(
       "%s Sequential Analysis",
       switch(
-        options[["plotsIterativeType"]],
+        options[["sequentialAnalysisPredictivePerformancePlotType"]],
         "conditional" = gettext("Conditional"),
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Normalized"),
         "BF"          = gettext("Bayes Factor")
       )))
     containerSequentialTests$position <- 8
-    containerSequentialTests$dependOn(c("plotsIterative", "plotsIterativeType"))
+    containerSequentialTests$dependOn(c("sequentialAnalysisPredictivePerformancePlot", "sequentialAnalysisPredictivePerformancePlotType"))
 
     jaspResults[["containerSequentialTests"]] <- containerSequentialTests
   } else {
@@ -1667,10 +1667,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   }
 
 
-  if (options[["introText"]] && is.null(containerSequentialTests[['introText']])) {
+  if (options[["introductoryText"]] && is.null(containerSequentialTests[['introText']])) {
 
     introText <- createJaspHtml()
-    introText$dependOn("introText")
+    introText$dependOn("introductoryText")
     introText$position <- 1
 
     introText[['text']] <- .explanatoryTextLS("sequential_tests", options, analysis)
@@ -1736,15 +1736,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
     mainText   <- gettext("The 'Data' section allows you to specify data input for the analysis.")
     optionText <- switch(
-      options[["dataType"]],
-      "dataVariable"  = gettextf(
+      options[["dataInputType"]],
+      "variable"  = gettextf(
         "The 'Select variable' option allows the selection of a variable ('Selected') from a dataset loaded into JASP. %s",
         ifelse (binomial,
                gettext("In addition, the variable levels need to be classified into successes ('Successes') and failures ('Failures')."),
                gettext("In addition, the standard deviation of the normal distribution of the population ('SD') needs to be specified.")
         )
       ),
-      "dataCounts"    = gettextf(
+      "counts"    = gettextf(
         "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis.",
         ifelse (binomial,
                gettext("The necessary information is the number of successes ('Successes') and the number of failures ('Failures')."),
@@ -1752,7 +1752,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         ),
         ifelse (estimation, gettext("models"), gettext("hypotheses"))
       ),
-      "dataSequence"  = gettextf(
+      "sequence"  = gettextf(
         "The 'Enter sequence' option allows manual input of a specific order of observations. %s",
         ifelse (binomial,
                gettext("The necessary information are the individual observed outcomes written into 'Comma-separated sequence of observations', and classification of the observation types into the ones that represent success ('Successes') and failures ('Failures')."),
@@ -1771,9 +1771,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
-        options[["pointEstimate"]],
+        options[["priorAndPosteriorPointEstimate"]],
         switch(
-          options[["pointEstimate"]],
+          options[["priorAndPosteriorPointEstimate"]],
           "mean"   = gettextf("The prior mean can be computed as %1$s / (%1$s + %2$s).", "\u03B1", "\u03B2"),
           "median" = gettextf("The prior median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if %1$s, %2$s > 1.", "\u03B1", "\u03B2"),
           "mode"   = gettextf("The prior mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if %1$s, %2$s > 1.", "\u03B1", "\u03B2")
@@ -1781,15 +1781,15 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       "gaussEst" = gettextf(
         "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>",
-        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["pointEstimate"]]),
+        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["priorAndPosteriorPointEstimate"]]),
     )
 
     tableDescription <- gettextf(
       "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:
     <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>",
       ifelse (binomial, "\u03B8", "\u03BC"),
-      .estimateTextLS(options[["pointEstimate"]]),
-      options[["pointEstimate"]]
+      .estimateTextLS(options[["priorAndPosteriorPointEstimate"]]),
+      options[["priorAndPosteriorPointEstimate"]]
     )
 
     out <- paste0(estimationFormulas, "\n", tableDescription)
@@ -1824,10 +1824,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     tableDescription <- gettextf(
       "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:
     <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>",
-      ifelse (options[["bfType"]] == "inclusion",
+      ifelse (options[["priorPredictivePerformanceBfComparison"]] == "inclusion",
              gettext("'Inclusion BF' - the inclusion Bayes factor for the hypothesis (change from prior to posterior odds for including the hypothesis)"),
              gettextf("'BF' - the Bayes factor comparing the predictive performance of the current hypothesis to the %s",
-                      ifelse (options[["bfType"]] == "best",
+                      ifelse (options[["priorPredictivePerformanceBfComparison"]] == "best",
                              "best performing hypothesis",
                              "to the hypothesis specified in 'vs.' Dropdown menu"))
       )
@@ -1848,7 +1848,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     if (estimation) {
 
       specificText <- switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "overlying"    = gettextf(
           "The 'All' option shows all %1$s for parameter %2$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis.",
           ifelse (type == "Prior", gettext("prior distributions"), gettext("posterior distributions")),
@@ -1878,7 +1878,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
 
       specificText <- switch(
-        options[[ifelse (type == "Prior", "plotsPriorType", "plotsPosteriorType")]],
+        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
         "conditional" = gettextf(
           "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s",
           ifelse (type == "Prior", gettext("prior distributions"), gettext("posterior distributions")),
@@ -1918,7 +1918,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     } else {
 
       specificText <- switch(
-        options[["plotsBothType"]],
+        options[["priorAndPosteriorDistributionPlotType"]],
         "conditional" = gettextf(
           "The 'Conditional' option shows all prior and posterior distributions for parameter %1$s independently, as if they were considered as individual models (without the existence of other hypotheses).",
           ifelse (binomial, "\u03B8", "\u03BC")),
@@ -1961,7 +1961,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     )
 
     specificText <- switch(
-      options[["plotsIterativeIntervalType"]],
+      options[["sequentialAnalysisIntervalEstimatePlotType"]],
       "overlying"    = gettextf(
         "The 'All' option shows the probability of parameter %s lying inside of the specified range for all models in one figure, allowing for easier comparison.",
         ifelse (binomial, "\u03B8", "\u03BC")
@@ -1986,9 +1986,9 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:
         <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
-        options[["pointEstimate"]],
+        options[["priorAndPosteriorPointEstimate"]],
         switch(
-          options[["pointEstimate"]],
+          options[["priorAndPosteriorPointEstimate"]],
           "mean"   = gettextf("mean can be computed as %1$s / (%1$s + %2$s)", "\u03B1", "\u03B2"),
           "median" = gettextf("median can be approximated as (%1$s - 1/3) / (%1$s + %2$s - 2/3) if%1$s, %2$s > 1", "\u03B1", "\u03B2"),
           "mode"   = gettextf("mode can be computed as (%1$s - 1) / (%1$s + %2$s - 2) if%1$s, %2$s > 1", "\u03B1", "\u03B2")
@@ -1996,7 +1996,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       "gaussEst" = gettextf(
         "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:
         <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>",
-        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["pointEstimate"]]),
+        "\u03BC", "\u03C3", "\u03BC\u2080", "\u03C3\u2080", "x&#772", "\u00B2", "\u221A", options[["priorAndPosteriorPointEstimate"]]),
     )
 
   } else if (text == "predictions") {
@@ -2015,16 +2015,16 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s",
         "\u03B8", "\u03B8\u2080", "\u03B1", "\u03B2",
         switch(
-          options[["predictionTableEstimate"]],
+          options[["posteriorPredictionSummaryTablePointEstimate"]],
           "mean"   = gettextf("The mean prediction can be computed as N*%s", "\u03B8\u2080"),
           "median" = "", # there is no simple solution
           "mode"   = gettextf("The mode prediction can be usually computed as (N + 1)*%1$s rounded down to the closest integer if0 < %1$s < 1", "\u03B8\u2080")
         ),
         switch(
-          options[["predictionTableEstimate"]],
+          options[["posteriorPredictionSummaryTablePointEstimate"]],
           "mean"   = gettextf("The mean of the predictions can be computed as N*%1$s/( %1$s + %2$s ).", "\u03B1", "\u03B2"),
           "median" = "", # there is no simple solution
-          "mode"   = ""  # and I couldn't find analytical solution for this at all
+          "mode"   = ""  # and I couldn't find analytic solution for this at all
         )
       )
 
@@ -2032,7 +2032,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 
       predictionsFormulas <- gettextf(
         "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions.",
-        "\u03BC", "\u03C3", "\u03C3\u209A", "\u221A", "\u00B2", options[["predictionTableEstimate"]]
+        "\u03BC", "\u03C3", "\u03C3\u209A", "\u221A", "\u00B2", options[["posteriorPredictionDistributionPlotIndividualCiType"]]
       )
 
     }
@@ -2044,13 +2044,13 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       ifelse (estimation, "", "<li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li>"),
       ifelse (binomial, gettext(" (Successes)"), ""),
       switch(
-        options$predictionTableEstimate,
+        options[["posteriorPredictionSummaryTablePointEstimate"]],
         "mean"   = gettext("Mean"),
         "median" = gettext("Median"),
         "mode"   = gettext("Mode")
       ),
       switch(
-        options$predictionTableEstimate,
+        options[["posteriorPredictionSummaryTablePointEstimate"]],
         "mean"   = gettext("mean"),
         "median" = gettext("median"),
         "mode"   = gettext("mode")
@@ -2072,7 +2072,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
 
       specificText <- switch(
-        options[["plotsPredictionType"]],
+        options[["posteriorPredictionDistributionPlotIndividualCiType"]],
         "overlying"    = gettext("The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."),
         "stacked"      = gettext("The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."),
         "individual"   = gettextf("The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s",.CIsTextLS())
@@ -2100,7 +2100,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
       )
 
       specificText <- switch(
-        options[[ifelse (type == "Prior", "plotsPredictionType", "plotsPredictionPostType")]],
+        options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]],
         "conditional" = gettextf(
           "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s",
           ifelse (type == "Prior", gettext("prior predictive distributions"), gettext("posterior predictive distributions")),
@@ -2128,7 +2128,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     generalText <- gettext("The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses.")
 
     specificText <- switch(
-      options[["plotsPredictiveAccuracyType"]],
+      options[["priorPredictivePerformanceAccuracyPlotType"]],
       "conditional" = gettext("The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."),
       "joint"       = gettext("The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."),
       "marginal"    = gettext("The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses).")
@@ -2141,7 +2141,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     generalText <- gettext("The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis).")
 
     specificText <- switch(
-      options[["plotsIterativeType"]],
+      options[["sequentialAnalysisPredictivePerformancePlotType"]],
       "conditional" = gettext("The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."),
       "joint"       = gettext("The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."),
       "marginal"    = gettext("The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."),

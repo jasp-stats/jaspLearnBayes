@@ -28,37 +28,37 @@ Section
 	title:		qsTr("Data")
 	columns:	1
 
-	property alias dataType: dataType
+	property alias dataInputType: dataInputType
 
 	RadioButtonGroup
 	{
 		columns:	3
-		name:		"dataType"
-		id:			dataType
+		name:		"dataInputType"
+		id:			dataInputType
 		title:		qsTr("Input type")
 
 		RadioButton
 		{
-			value:		"dataVariable"
+			value:		"variable"
 			label:		qsTr("Select variable")
-			id:			dataTypeC
+			id:			dataInputTypeC
 			checked: 	mainWindow.dataAvailable
 			enabled:	mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			value:		"dataCounts"
+			value:		"counts"
 			label:		qsTr("Specify data summary")
-			id:			dataTypeA
+			id:			dataInputTypeA
 			checked:	!mainWindow.dataAvailable
 		}
 
 		RadioButton
 		{
-			value:		"dataSequence"
+			value:		"sequence"
 			label:		qsTr("Enter sequence")
-			id:			dataTypeB
+			id:			dataInputTypeB
 		}
 
 	}
@@ -66,7 +66,7 @@ Section
 	Group
 	{
 		title: qsTr("Data summary")
-		visible: dataTypeA.checked
+		visible: dataInputTypeA.checked
 
 		DoubleField
 		{
@@ -77,7 +77,7 @@ Section
 
 		DoubleField
 		{
-			name:			"dataCountsSD"
+			name:			"dataCountsSd"
 			label:			qsTr("SD")
 			defaultValue:	1
 			min:			0
@@ -98,17 +98,17 @@ Section
 	TextArea
 	{
 		title:		qsTr("Comma-separated sequence of observations")
-		visible:	dataTypeB.checked
+		visible:	dataInputTypeB.checked
 		height:		100
-		name:		"dataSequenceInput"
+		name:		"dataSequenceSequenceOfObservations"
 		textType:	JASP.TextTypeSource
 		separators:	[",",";","\n"]
 	}
 
 	DoubleField
 	{
-		name:			"dataSequenceSD"
-		visible:		dataTypeB.checked
+		name:			"dataSequenceSequenceSd"
+		visible:		dataInputTypeB.checked
 		label:			qsTr("SD")
 		defaultValue:	1
 		min:			0
@@ -117,7 +117,7 @@ Section
 
 	Group
 	{
-		visible: dataTypeC.checked
+		visible: dataInputTypeC.checked
 
 		VariablesForm
 		{
@@ -125,7 +125,7 @@ Section
 
 			AvailableVariablesList
 			{
-				name:	"allVariables"
+				name:	"dataVariableAvailable"
 				title:	qsTr("Available")
 			}
 
@@ -139,7 +139,7 @@ Section
 
 			DoubleField
 			{
-				name:			"dataVariableSD"
+				name:			"dataVariableSd"
 				label:			qsTr("SD")
 				defaultValue:	1
 				min:			0
@@ -151,7 +151,7 @@ Section
 
 	CheckBox
 	{
-		visible:	dataTypeB.checked || dataTypeC.checked
+		visible:	dataInputTypeB.checked || dataInputTypeC.checked
 		name:		"dataSummary"
 		label:		qsTr("Data summary")
 		checked:	true

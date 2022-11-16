@@ -24,7 +24,7 @@ import JASP				1.0
 Section
 {
 	expanded: false
-	title: qsTr("Predictive Performance")
+	title: qsTr("Prior Predictive Performance")
 	columns: 2
 
 	property string analysisType:				"binomial"
@@ -34,13 +34,14 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsPredictions"
-		label:		qsTr("Prior predictive distribution")
+		name:		"priorPredictivePerformanceDistributionPlot"
+		label:		qsTr("Distribution plot")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name:	"plotsPredictionType"
+			title:		qsTr("Type")
+			name:		"priorPredictivePerformanceDistributionPlotType"
 
 			RadioButton
 			{
@@ -51,12 +52,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPredictionEstimate"
+					name:				"priorPredictivePerformanceDistributionPlotConditionalPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPredictionEstimateType"
+						name:		"priorPredictivePerformanceDistributionPlotConditionalPointEstimateType"
 						label:		""
 						values:		["mean", "median", "mode"]
 					}
@@ -64,14 +65,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPredictionCI"
+					name:				"priorPredictivePerformanceDistributionPlotConditionalCi"
 					label:				qsTr("CI")
 					id:					plotsPredictionCI
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPredictionTypeCI"
+						name:		"priorPredictivePerformanceDistributionPlotConditionalCiType"
 						label:		""
 						values:		["central", "HPD", "custom"]
 						id:			plotsPredictionTypeCI
@@ -86,7 +87,7 @@ Section
 					{
 						visible:		plotsPredictionTypeCI.currentText == "central" | plotsPredictionTypeCI.currentText == "HPD"
 						enabled:		plotsPredictionCI.checked
-						name:			"plotsPredictionCoverage"
+						name:			"priorPredictivePerformanceDistributionPlotConditionalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -99,7 +100,7 @@ Section
 					{
 						visible:		plotsPredictionTypeCI.currentText == "custom"
 						enabled:		plotsPredictionCI.checked
-						name:			"plotsPredictionLower"
+						name:			"priorPredictivePerformanceDistributionPlotConditionalCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPredictionLower
 						fieldWidth:		50
@@ -112,7 +113,7 @@ Section
 					{
 						visible:		plotsPredictionTypeCI.currentText == "custom"
 						enabled:		plotsPredictionCI.checked
-						name:			"plotsPredictionUpper"
+						name:			"priorPredictivePerformanceDistributionPlotConditionalCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPredictionUpper
 						fieldWidth:		50
@@ -132,7 +133,8 @@ Section
 
 				RadioButtonGroup
 				{
-					name:	"plotsPredictionJointType"
+				  title:		qsTr("Type")
+					name:	"priorPredictivePerformanceDistributionPlotJoinType"
 
 					RadioButton
 					{
@@ -159,12 +161,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPredictionMarginalEstimate"
+					name:				"priorPredictivePerformanceDistributionPlotMarginalPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPredictionMarginalEstimateType"
+						name:		"priorPredictivePerformanceDistributionPlotMarginalPointEstimateType"
 						label:		""
 						values:		["mean", "median", "mode"]
 					}
@@ -172,14 +174,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPredictionMarginalCI"
+					name:				"priorPredictivePerformanceDistributionPlotMarginalCi"
 					label:				qsTr("CI")
 					id:					plotsPredictionMarginalCI
 					childrenOnSameRow:	true
-				
+
 					DropDown
 					{
-						name:		"plotsPredictionMarginalTypeCI"
+						name:		"priorPredictivePerformanceDistributionPlotMarginalCiType"
 						label:		""
 						values:		["central", "HPD", "custom"]
 						id:			plotsPredictionMarginalTypeCI
@@ -194,7 +196,7 @@ Section
 					{
 						visible:		plotsPredictionMarginalTypeCI.currentText == "central" | plotsPredictionMarginalTypeCI.currentText == "HPD"
 						enabled:		plotsPredictionMarginalCI.checked
-						name:			"plotsPredictionMarginalCoverage"
+						name:			"priorPredictivePerformanceDistributionPlotMarginalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -207,20 +209,21 @@ Section
 					{
 						visible:		plotsPredictionMarginalTypeCI.currentText == "custom"
 						enabled:		plotsPredictionMarginalCI.checked
-						name:			"plotsPredictionMarginalLower"
+						name:			"priorPredictivePerformanceDistributionPlotMarginalCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPredictionMarginalLower
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 :  -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
-						max:			plotsPredictionMarginalUpper.value; inclusive: JASP.MinMax
+						max:			plotsPredictionMarginalUpper.value;
+						inclusive:		JASP.MinMax
 					}
 
 					DoubleField
 					{
 						visible:		plotsPredictionMarginalTypeCI.currentText == "custom"
 						enabled:		plotsPredictionMarginalCI.checked
-						name:			"plotsPredictionMarginalUpper"
+						name:			"priorPredictivePerformanceDistributionPlotMarginalCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPredictionMarginalUpper
 						fieldWidth:		50
@@ -236,7 +239,7 @@ Section
 
 		CheckBox
 		{
-			name:		"plotsPredictionsObserved"
+			name:		"priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess"
 			id:			plotsPredictionsObserved
 			label:		qsTr("Observed number of successes")
 			checked:	false
@@ -244,7 +247,7 @@ Section
 
 		CheckBox
 		{
-			name:	"predictionPlotTable"
+			name:	"priorPredictivePerformanceDistributionPlotPredictionsTable"
 			label:	qsTr("Predictions table")
 		}
 	}
@@ -256,13 +259,14 @@ Section
 
 		CheckBox
 		{
-			name:		"plotsPredictiveAccuracy"
-			label:		qsTr("Predictive accuracy")
+			name:		"priorPredictivePerformanceAccuracyPlot"
+			label:		qsTr("Predictive accuracy plot")
 			checked:	false
 
 			RadioButtonGroup
 			{
-				name: "plotsPredictiveAccuracyType"
+			  title:		qsTr("Type")
+				name: "priorPredictivePerformanceAccuracyPlotType"
 				RadioButton { value: "conditional"; label: qsTr("Conditional"); checked: true}
 				RadioButton { value: "joint";		label: qsTr("Joint")}
 				RadioButton { value: "marginal"; 	label: qsTr("Normalized")}
@@ -278,7 +282,8 @@ Section
 
 			RadioButtonGroup
 			{
-				name:	"bfType"
+			  title:		qsTr("Comparison")
+				name:	"priorPredictivePerformanceBfComparison"
 
 				RadioButton
 				{
@@ -289,12 +294,12 @@ Section
 
 					DropDown
 					{
-						name:				"bfTypevsName"
+						name:				"priorPredictivePerformanceBfVsHypothesis"
 						id:					bfTypevsName
 						indexDefaultValue:	0
 					}
 				}
-				
+
 				RadioButton
 				{
 					value:	"inclusion"
@@ -312,7 +317,8 @@ Section
 
 			RadioButtonGroup
 			{
-				name:	"bayesFactorType"
+			  title:		qsTr("Type")
+				name:	"priorPredictivePerformanceBfType"
 
 				RadioButton { label: qsTr("BF\u2081\u2080")			; name: "BF10"; checked: true}
 				RadioButton { label: qsTr("BF\u2080\u2081")			; name: "BF01"}

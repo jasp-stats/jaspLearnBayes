@@ -34,26 +34,27 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsIterativeOverlying"
+		name:		"sequentialAnalysisPointEstimatePlot"
 		id:			plotsIterativeOverlying
-		label:		qsTr("Point estimate")
+		label:		qsTr("Point estimate plot")
 
 		DropDown
 		{
-			name:		"plotsIterativeEstimateType"
+			label:		qsTr("Type")
+			name:		"sequentialAnalysisPointEstimatePlotType"
 			values:		["mean", "median", "mode"]
 		}
 
 		CheckBox
 		{
-			name:				"plotsIterativeOverlyingCI"
+			name:				"sequentialAnalysisPointEstimatePlotCi"
 			label:				qsTr("CI")
 			id:					plotsIterativeOverlyingCI
 			childrenOnSameRow:	true
 
 			DropDown
 			{
-				name:			"plotsIterativeOverlyingType"
+				name:			"sequentialAnalysisPointEstimatePlotCiType"
 				label:			""
 				values:			["central", "HPD", "support"]
 				id:				plotsIterativeOverlyingType
@@ -64,7 +65,7 @@ Section
 		{
 			visible:			plotsIterativeOverlyingType.currentText == "central" |	plotsIterativeOverlyingType.currentText == "HPD"
 			enabled:			plotsIterativeOverlyingCI.checked
-			name:				"plotsIterativeCoverage"
+			name:				"sequentialAnalysisPointEstimatePlotCiMass"
 			label:				qsTr("Mass")
 			fieldWidth:			50
 			defaultValue:		95
@@ -77,7 +78,7 @@ Section
 		{
 			visible:			plotsIterativeOverlyingType.currentText == "support"
 			enabled:			plotsIterativeOverlyingCI.checked
-			name:				"plotsIterativeBF"
+			name:				"sequentialAnalysisPointEstimatePlotCiBf"
 			label:				qsTr("BF")
 			fieldWidth:			50
 			defaultValue:		"1"
@@ -87,7 +88,7 @@ Section
 
 		CheckBox
 		{
-			name: 	"plotsIterativeUpdatingTable"
+			name: 	"sequentialAnalysisPointEstimatePlotUpdatingTable"
 			label:	qsTr("Updating table")
 		}
 
@@ -95,14 +96,15 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsIterativeInterval"
+		name:		"sequentialAnalysisIntervalEstimatePlot"
 		id:			plotsIterativeInterval
-		label:		qsTr("Interval")
+		label:		qsTr("Interval estimate plot")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name:		"plotsIterativeIntervalType"
+			title:		qsTr("Type")
+			name:		"sequentialAnalysisIntervalEstimatePlotType"
 			id:			plotsIterativeIntervalType
 
 			Group
@@ -111,7 +113,7 @@ Section
 				DoubleField
 				{
 					enabled:			plotsIterativeInterval.checked
-					name:				"plotsIterativeIntervalLower"
+					name:				"sequentialAnalysisIntervalEstimatePlotLower"
 					label:				qsTr("Lower")
 					id:					plotsIterativeIntervalLower
 					fieldWidth:			50
@@ -124,7 +126,7 @@ Section
 				DoubleField
 				{
 					enabled:			plotsIterativeInterval.checked
-					name:				"plotsIterativeIntervalUpper"
+					name:				"sequentialAnalysisIntervalEstimatePlotUpper"
 					label:				qsTr("Upper")
 					id:					plotsIterativeIntervalUpper
 					fieldWidth:			50
@@ -149,7 +151,7 @@ Section
 
 			CheckBox
 			{
-				name: 	"plotsIterativeIntervalUpdatingTable"
+				name: 	"sequentialAnalysisIntervalEstimatePlotUpdatingTable"
 				label:	qsTr("Updating table")
 			}
 		}
@@ -157,15 +159,15 @@ Section
 
 	CheckBox
 	{
-		name:	"plotsIterativeStacked"
+		name:	"sequentialAnalysisStackedDistributionsPlot"
 		id:		plotsIterativeStacked
-		label:	qsTr("Stacked distributions")
+		label:	qsTr("Stacked distributions plot")
 	}
 	
 	CheckBox
 	{
 		Layout.columnSpan: 2
-		name:		"doIterative"
+		name:		"sequentialAnalysisPosteriorUpdatingTable"
 		id:			doIterative
 		label:		qsTr("Posterior updating table")
 		checked:	false

@@ -154,7 +154,7 @@ Form {
 	LS.LSestimationsequential
 	{
 		analysisType:						"gaussian"
-		enabled: 							gaussianDataInput.dataType.value !== "dataCounts"
+		enabled: 							gaussianDataInput.dataInputType.value !== "counts"
 	}
 
 	LS.LSestimationpredictions

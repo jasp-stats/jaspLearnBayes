@@ -24,7 +24,7 @@ import JASP				1.0
 Section
 {
 	expanded: false
-	title: qsTr("Prior and Posterior Distributions")
+	title: qsTr("Prior and Posterior")
 	columns: 2
 
 	property string analysisType:				"binomial"
@@ -34,13 +34,14 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsPrior"
+		name:		"priorDistributionPlot"
 		label:		qsTr("Prior distribution")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name:	"plotsPriorType"
+  		title:		qsTr("Type")
+			name:	"priorDistributionPlotType"
 
 			RadioButton
 			{
@@ -51,12 +52,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPriorEstimate"
+					name:				"priorDistributionPlotConditionalPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:	"plotsPriorEstimateType"
+						name:	"priorDistributionPlotConditionalPointEstimateType"
 						label:	""
 						values:	["mean", "median", "mode"]
 					}
@@ -64,14 +65,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPriorCI"
+					name:				"priorDistributionPlotConditionalCi"
 					label:				qsTr("CI")
 					id:					plotsPriorCI
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:	"plotsPriorTypeCI"
+						name:	"priorDistributionPlotConditionalCiType"
 						label:	""
 						values:	["central", "HPD", "custom"]
 						id:		plotsPriorTypeCI
@@ -86,7 +87,7 @@ Section
 					{
 						visible:		plotsPriorTypeCI.currentText == "central" | plotsPriorTypeCI.currentText == "HPD"
 						enabled:		plotsPriorCI.checked
-						name:			"plotsPriorCoverage"
+						name:			"priorDistributionPlotConditionalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -99,7 +100,7 @@ Section
 					{
 						visible:		plotsPriorTypeCI.currentText == "custom"
 						enabled:		plotsPriorCI.checked
-						name:			"plotsPriorLower"
+						name:			"priorDistributionPlotConditionalCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPriorLower
 						fieldWidth:		50
@@ -113,7 +114,7 @@ Section
 					{
 						visible:		plotsPriorTypeCI.currentText == "custom"
 						enabled:		plotsPriorCI.checked
-						name:			"plotsPriorUpper"
+						name:			"priorDistributionPlotConditionalCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPriorUpper
 						fieldWidth:		50
@@ -132,7 +133,8 @@ Section
 
 				RadioButtonGroup
 				{
-					name:	"plotsPriorJointType"
+				  title:		qsTr("Type")
+					name:	"priorDistributionPlotJointType"
 
 					RadioButton
 					{
@@ -159,12 +161,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPriorMarginalEstimate"
+					name:				"priorDistributionPlotMarginalPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:	"plotsPriorMarginalEstimateType"
+						name:	"priorDistributionPlotMarginalPointEstimateType"
 						label:	""
 						values:	["mean", "median", "mode"]
 					}
@@ -172,14 +174,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPriorMarginalCI"
+					name:				"priorDistributionPlotMarginalCi"
 					label:				qsTr("CI")
 					id:					plotsPriorMarginalCI
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPriorMarginalType"
+						name:		"priorDistributionPlotMarginalCiType"
 						label:		""
 						values:		["central", "HPD", "custom"]
 						id:			plotsPriorMarginalType
@@ -193,7 +195,7 @@ Section
 					CIField{
 						visible:		plotsPriorMarginalType.currentText == "central" | plotsPriorMarginalType.currentText == "HPD"
 						enabled:		plotsPriorMarginalCI.checked
-						name:			"plotsPriorMarginalCoverage"
+						name:			"priorDistributionPlotMarginalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -206,7 +208,7 @@ Section
 					{
 						visible:		plotsPriorMarginalType.currentText == "custom"
 						enabled:		plotsPriorMarginalCI.checked
-						name:			"plotsPriorMarginalLower"
+						name:			"priorDistributionPlotMarginalCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPriorMarginalLower
 						fieldWidth:		50
@@ -220,7 +222,7 @@ Section
 					{
 						visible:		plotsPriorMarginalType.currentText == "custom"
 						enabled:		plotsPriorMarginalCI.checked
-						name:			"plotsPriorMarginalUpper"
+						name:			"priorDistributionPlotMarginalCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPriorMarginalUpper
 						fieldWidth:		50
@@ -238,13 +240,14 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsPosterior"
+		name:		"posteriorDistributionPlot"
 		label:		qsTr("Posterior distribution")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name:	"plotsPosteriorType"
+		  title:		qsTr("Type")
+			name:	"posteriorDistributionPlotType"
 
 			RadioButton
 			{
@@ -255,12 +258,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPosteriorEstimate"
+					name:				"posteriorDistributionPlotConditionalPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:	"plotsPosteriorEstimateType"
+						name:	"posteriorDistributionPlotConditionalPointEstimateType"
 						label:	""
 						values:	["mean", "median", "mode"]
 					}
@@ -268,17 +271,17 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPosteriorCI"
+					name:				"posteriorDistributionPlotConditionalCi"
 					label:				qsTr("CI")
-					id:					plotsPosteriorCI
+					id:					posteriorDistributionPlotConditionalCi
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:	"plotsPosteriorTypeCI"
+						name:	"posteriorDistributionPlotConditionalCiType"
 						label:	""
 						values:	["central", "HPD", "custom","support"]
-						id:		plotsPosteriorTypeCI
+						id:		posteriorDistributionPlotConditionalCiType
 					}
 				}
 
@@ -288,9 +291,9 @@ Section
 
 					CIField
 					{
-						visible:		plotsPosteriorTypeCI.currentText == "central" | plotsPosteriorTypeCI.currentText == "HPD"
-						enabled:		plotsPosteriorCI.checked
-						name:			"plotsPosteriorCoverage"
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "central" | posteriorDistributionPlotConditionalCiType.currentText == "HPD"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
+						name:			"posteriorDistributionPlotConditionalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -301,37 +304,37 @@ Section
 
 					DoubleField
 					{
-						visible:		plotsPosteriorTypeCI.currentText == "custom"
-						enabled:		plotsPosteriorCI.checked
-						name:			"plotsPosteriorLower"
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "custom"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
+						name:			"posteriorDistributionPlotConditionalCiLower"
 						label:			qsTr("Lower")
-						id:				plotsPosteriorLower
+						id:				posteriorDistributionLower
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 : -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
-						max:			plotsPosteriorUpper.value
+						max:			posteriorDistributionUpper.value
 						inclusive:		JASP.MinMax
 					}
 
 					DoubleField
 					{
-						visible:		plotsPosteriorTypeCI.currentText == "custom"
-						enabled:		plotsPosteriorCI.checked
-						name:			"plotsPosteriorUpper"
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "custom"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
+						name:			"posteriorDistributionPlotConditionalCiUpper"
 						label:			qsTr("Upper")
-						id:				plotsPosteriorUpper
+						id:				posteriorDistributionUpper
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.75 : 1
-						min:			plotsPosteriorLower.value
+						min:			posteriorDistributionLower.value
 						max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinMax
 					}
 
 					FormulaField
 					{
-						visible:		plotsPosteriorTypeCI.currentText == "support"
-						enabled:		plotsPosteriorCI.checked
-						name:			"plotsPosteriorBF"
+						visible:		posteriorDistributionPlotConditionalCiType.currentText == "support"
+						enabled:		posteriorDistributionPlotConditionalCi.checked
+						name:			"posteriorDistributionPlotConditionalCiBf"
 						label:			qsTr("BF")
 						fieldWidth:		50
 						defaultValue:	"1"
@@ -349,7 +352,8 @@ Section
 
 				RadioButtonGroup
 				{
-					name:	"plotsPosteriorJointType"
+				  title:		qsTr("Type")
+					name:	"posteriorDistributionPlotJointType"
 
 					RadioButton
 					{
@@ -376,12 +380,12 @@ Section
 				CheckBox
 				{
 					label:				qsTr("Point estimate")
-					name:				"plotsPosteriorMarginalEstimate"
+					name:				"posteriorDistributionPlotMarginalPointEstimate"
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPosteriorMarginalEstimateType"
+						name:		"posteriorDistributionPlotMarginalPointEstimateType"
 						label:		""
 						values:		["mean", "median", "mode"]
 					}
@@ -389,14 +393,14 @@ Section
 
 				CheckBox
 				{
-					name:				"plotsPosteriorMarginalCI"
+					name:				"posteriorDistributionPlotMarginalCi"
 					label:				qsTr("CI")
 					id:					plotsPosteriorMarginalCI
 					childrenOnSameRow:	true
 
 					DropDown
 					{
-						name:		"plotsPosteriorMarginalType"
+						name:		"posteriorDistributionPlotMarginalCiType"
 						label:		""
 						values:		["central", "HPD", "custom","support"]
 						id:			plotsPosteriorMarginalType
@@ -411,7 +415,7 @@ Section
 					{
 						visible:		plotsPosteriorMarginalType.currentText == "central" | plotsPosteriorMarginalType.currentText == "HPD"
 						enabled:		plotsPosteriorMarginalCI.checked
-						name:			"plotsPosteriorMarginalCoverage"
+						name:			"posteriorDistributionPlotMarginalCiMass"
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
@@ -424,20 +428,21 @@ Section
 					{
 						visible:		plotsPosteriorMarginalType.currentText == "custom"
 						enabled:		plotsPosteriorMarginalCI.checked
-						name:			"plotsPosteriorMarginalLower"
+						name:			"posteriorDistributionPlotMarginalCiLower"
 						label:			qsTr("Lower")
 						id:				plotsPosteriorMarginalLower
 						fieldWidth:		50
 						defaultValue:	analysisType === "binomial" ? 0.25 : -1
 						min:			analysisType === "binomial" ? 0    : -9999999999
-						max:			plotsPosteriorMarginalUpper.value; inclusive: JASP.MinMax
+						max:			plotsPosteriorMarginalUpper.value
+						inclusive:		JASP.MinMax
 					}
 
 					DoubleField
 					{
 						visible:		plotsPosteriorMarginalType.currentText == "custom"
 						enabled:		plotsPosteriorMarginalCI.checked
-						name:			"plotsPosteriorMarginalUpper"
+						name:			"posteriorDistributionPlotMarginalCiUpper"
 						label:			qsTr("Upper")
 						id:				plotsPosteriorMarginalUpper
 						fieldWidth:		50
@@ -451,7 +456,7 @@ Section
 					{
 						visible:		plotsPosteriorMarginalType.currentText == "support"
 						enabled:		plotsPosteriorMarginalCI.checked
-						name:			"plotsPosteriorMarginalBF"
+						name:			"posteriorDistributionPlotMarginalCiBf"
 						label:			qsTr("BF")
 						fieldWidth:		50
 						defaultValue:	"1"
@@ -467,7 +472,7 @@ Section
 
 		CheckBox
 		{
-			name:		"plotsPosteriorObserved"
+			name:		"posteriorDistributionPlotObservedProportion"
 			id:			plotsPosteriorObserved
 			label:		qsTr("Observed proportion")
 			checked:	false
@@ -477,13 +482,14 @@ Section
 
 	CheckBox
 	{
-		name:		"plotsBoth"
+		name:		"priorAndPosteriorDistributionPlot"
 		label:		qsTr("Prior and posterior distribution")
 		checked:	false
 
 		RadioButtonGroup
 		{
-			name:	"plotsBothType"
+		  title:		qsTr("Type")
+			name:	"priorAndPosteriorDistributionPlotType"
 
 			RadioButton
 			{
@@ -508,7 +514,7 @@ Section
 
 		CheckBox
 		{
-			name:		"plotsBothSampleProportion"
+			name:		"priorAndPosteriorDistributionPlotObservedProportion"
 			id:			plotsBothSampleProportion
 			label:		qsTr("Observed proportion")
 			checked:	false

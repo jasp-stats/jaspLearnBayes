@@ -5,127 +5,127 @@ context("Learn Bayes - Binomial Testing")
 ### output for all default settings (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "conditional"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "conditional"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- FALSE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- FALSE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- FALSE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "joint"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "conditional"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "conditional"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- FALSE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "conditional"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "conditional"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "conditional"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "conditional"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "conditional"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Hypothesis Beta"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_Hypothesis Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-default-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_Hypothesis Spike"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_Hypothesis Spike"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-default-2", dir="LSbinomialtesting")
   })
@@ -137,19 +137,19 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-default-4", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior_Hypothesis Beta"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior_Hypothesis Beta"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-default-5", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior_Hypothesis Spike"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior_Hypothesis Spike"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-default-6", dir="LSbinomialtesting")
   })
@@ -173,7 +173,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "titleless-plot-9-default-10", dir="LSbinomialtesting")
   })
@@ -196,127 +196,127 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 1 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF01"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "best"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF01"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "best"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- FALSE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- FALSE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "joint"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- FALSE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "joint"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-vol1-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_2"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-vol1-2", dir="LSbinomialtesting")
   })
@@ -328,13 +328,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-vol1-4", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-4-vol1-5", dir="LSbinomialtesting")
   })
@@ -352,7 +352,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-7-vol1-8", dir="LSbinomialtesting")
   })
@@ -375,127 +375,127 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 2 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Spike"
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- FALSE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "joint"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "joint"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-vol2-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_2"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-vol2-2", dir="LSbinomialtesting")
   })
@@ -507,13 +507,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-vol2-4", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-4-vol2-5", dir="LSbinomialtesting")
   })
@@ -531,7 +531,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-7-vol2-7", dir="LSbinomialtesting")
   })
@@ -554,127 +554,127 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 3 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Spike"
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- FALSE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "joint"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "custom"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "joint"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "custom"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Hypothesis Spike plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-spike-vol3-1", dir="LSbinomialtesting")
   })
 
   test_that("Hypothesis Beta plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_2"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_2"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-beta-vol3-2", dir="LSbinomialtesting")
   })
@@ -686,13 +686,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-3-vol3-4", dir="LSbinomialtesting")
   })
 
   test_that("Prior-Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-4-vol3-5", dir="LSbinomialtesting")
   })
@@ -710,7 +710,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-7-vol3-8", dir="LSbinomialtesting")
   })
@@ -733,121 +733,121 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 4 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Spike"
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Spike"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "overlying"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- FALSE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mode"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Prior and Posterior plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBothPlot"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBothPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-and-posterior-plot-0-vol4-1", dir="LSbinomialtesting")
   })
@@ -859,13 +859,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-vol4-3", dir="LSbinomialtesting")
   })
 
   test_that("Prior prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-3-vol4-4", dir="LSbinomialtesting")
   })
@@ -883,7 +883,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-6-vol4-7", dir="LSbinomialtesting")
   })
@@ -906,121 +906,122 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 5 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "LogBF10"
-  options$bayesFactorTypeSequential <- "BF01"
-  options$bfType <- "vs"
-  options$bfTypeSequential <- "vs"
-  options$bfTypevsName <- "Hypothesis Beta"
-  options$bfTypevsNameSequential <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfType <- "LogBF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF01"
+  options$priorPredictivePerformanceBfComparison <- "vs"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "vs"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- TRUE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "BF"
-  options$plotsIterativeUpdatingTable <- TRUE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- TRUE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- FALSE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mode"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- FALSE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "stacked"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "BF"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- TRUE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- TRUE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "stacked"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Prior and Posterio matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBothPlot"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBothPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-and-posterior-plot-0-vol5-1", dir="LSbinomialtesting")
   })
@@ -1032,7 +1033,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-vol5-3", dir="LSbinomialtesting")
   })
@@ -1054,7 +1055,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-5-vol5-5", dir="LSbinomialtesting")
   })
@@ -1101,121 +1102,121 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 6 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF01"
-  options$bayesFactorTypeSequential <- "LogBF10"
-  options$bfType <- "best"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Beta"
-  options$bfTypevsNameSequential <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfType <- "BF01"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfComparison <- "best"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "BF"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- TRUE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- TRUE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mode"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- FALSE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "stacked"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 10
-  options$predictionPostPlotProp <- TRUE
-  options$predictionPostPlotTable <- TRUE
-  options$predictionTable <- TRUE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "BF"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- TRUE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- FALSE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "stacked"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- TRUE
+  options$posteriorPredictionSummaryTable <- TRUE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Prediction Posterior plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "titleless-plot-0-vol6-1", dir="LSbinomialtesting")
   })
@@ -1239,7 +1240,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-3-vol6-2", dir="LSbinomialtesting")
   })
@@ -1262,121 +1263,121 @@ context("Learn Bayes - Binomial Testing")
 ### more options vol. 7 (spike + beta)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF01"
-  options$bayesFactorTypeSequential <- "LogBF10"
-  options$bfType <- "best"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- "Hypothesis Beta"
-  options$bfTypevsNameSequential <- "Hypothesis Spike"
+  options$priorPredictivePerformanceBfType <- "BF01"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "LogBF10"
+  options$priorPredictivePerformanceBfComparison <- "best"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- "Hypothesis Beta"
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- "Hypothesis Spike"
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- c("2", "3")
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- TRUE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- FALSE
-  options$plotsIterativeType <- "BF"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- TRUE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- TRUE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "support"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- TRUE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "custom"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- TRUE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- FALSE
-  options$plotsPredictionPostMarginalEstimateType <- "mode"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "HPD"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- FALSE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- FALSE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "stacked"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.01
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "median"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 10
-  options$predictionPostPlotProp <- TRUE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- c("2", "3")
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- TRUE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "BF"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- TRUE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "support"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- TRUE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "custom"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mode"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "HPD"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- FALSE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- FALSE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "stacked"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.01
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- TRUE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-0-vol7-1", dir="LSbinomialtesting")
   })
@@ -1399,119 +1400,119 @@ context("Learn Bayes - Binomial Testing")
 ### output for all default settings (spike only)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "joint"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "joint"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "overlying"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "marginal"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- FALSE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "central"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- TRUE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "marginal"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "joint"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "conditional"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- FALSE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "joint"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 1
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "spike", value = ""))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "joint"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "marginal"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "marginal"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "joint"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "joint"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = ""))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Hypothesis 1 plot matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBoth_1"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBoth_1"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "hypothesis-1-spike-1", dir="LSbinomialtesting")
   })
@@ -1523,13 +1524,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-spike-3", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-3-spike-4", dir="LSbinomialtesting")
   })
@@ -1547,7 +1548,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-6-spike-7", dir="LSbinomialtesting")
   })
@@ -1567,119 +1568,119 @@ context("Learn Bayes - Binomial Testing")
 ### output for all default settings (beta only)
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- TRUE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- TRUE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- TRUE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- FALSE
-  options$plotsPredictionMarginalEstimateType <- "mean"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- TRUE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "joint"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- TRUE
-  options$plotsPredictiveAccuracy <- TRUE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- FALSE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 10
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- TRUE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- TRUE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlot <- TRUE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Prior and Posterior matches", {
-    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_plotsBoth"]][["collection"]][["containerBoth_plotsBoth_plotsBothPlot"]][["data"]]
+    plotName <- results[["results"]][["containerBoth"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot"]][["collection"]][["containerBoth_priorAndPosteriorDistributionPlot_plotsBothPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-and-posterior-plot-0-beta-1", dir="LSbinomialtesting")
   })
@@ -1691,13 +1692,13 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Posterior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_plotsPredictionsPosterior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPosterior"]][["collection"]][["containerPlotsPredictionPosterior_priorPredictivePerformanceDistributionPlotPosterior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "posterior-prediction-plot-2-beta-3", dir="LSbinomialtesting")
   })
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-3-beta-4", dir="LSbinomialtesting")
   })
@@ -1715,7 +1716,7 @@ context("Learn Bayes - Binomial Testing")
   })
 
   test_that("Sequential plot matches", {
-    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_plotsIterative"]][["data"]]
+    plotName <- results[["results"]][["containerSequentialTests"]][["collection"]][["containerSequentialTests_sequentialAnalysisPredictivePerformancePlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "sequential-plot-6-beta-7", dir="LSbinomialtesting")
   })
@@ -1735,121 +1736,121 @@ context("Learn Bayes - Binomial Testing")
 ### some challenging plots
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- FALSE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- TRUE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "joint"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- FALSE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mean"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "central"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 10
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = ".1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
-                                                                                 name = "Hypothesis 2", parAlpha = "1", parBeta = ".1", parPoint = "0.5",
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = ".1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""), list(priorWeight = "1",
+                                                                                 name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1", spikePoint = "0.5",
                                                                                  type = "beta", value = "2"))
-  options$selectedVariable <- "facFive"
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-0-hard-1", dir="LSbinomialtesting")
   })
@@ -1875,126 +1876,126 @@ context("Learn Bayes - Binomial Testing")
 }
 {
   options <- analysisOptions("LSbinomialtesting")
-  options$bayesFactorType <- "BF10"
-  options$bayesFactorTypeSequential <- "BF10"
-  options$bfType <- "inclusion"
-  options$bfTypeSequential <- "inclusion"
-  options$bfTypevsName <- ""
-  options$bfTypevsNameSequential <- ""
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
   options$colorPalette <- "colorblind"
   options$colorPalettePrediction <- "colorblind"
   options$dataSummary <- TRUE
-  options$dataType <- "dataVariable"
-  options$dataSequenceInput <- ""
-  options$introText <- TRUE
-  options$keyFailureSeq <- list()
-  options$keyFailureVar <- "4"
-  options$keySuccessSeq <- list()
-  options$keySuccessVar <- "1"
-  options$nFailures <- 0
-  options$nSuccesses <- 0
-  options$plotsBoth <- FALSE
-  options$plotsBothSampleProportion <- FALSE
-  options$plotsBothType <- "marginal"
-  options$plotsIterative <- FALSE
-  options$plotsIterativeType <- "marginal"
-  options$plotsIterativeUpdatingTable <- FALSE
-  options$plotsPosterior <- FALSE
-  options$plotsPosteriorBF <- 1
-  options$plotsPosteriorCI <- FALSE
-  options$plotsPosteriorCoverage <- 0.95
-  options$plotsPosteriorEstimate <- FALSE
-  options$plotsPosteriorEstimateType <- "mean"
-  options$plotsPosteriorJointType <- "stacked"
-  options$plotsPosteriorLower <- 0
-  options$plotsPosteriorMarginalBF <- 1
-  options$plotsPosteriorMarginalCI <- FALSE
-  options$plotsPosteriorMarginalCoverage <- 0.95
-  options$plotsPosteriorMarginalEstimate <- FALSE
-  options$plotsPosteriorMarginalEstimateType <- "mean"
-  options$plotsPosteriorMarginalLower <- 0.25
-  options$plotsPosteriorMarginalType <- "central"
-  options$plotsPosteriorMarginalUpper <- 0.75
-  options$plotsPosteriorObserved <- FALSE
-  options$plotsPosteriorType <- "joint"
-  options$plotsPosteriorTypeCI <- "central"
-  options$plotsPosteriorUpper <- 1
-  options$plotsPredictionCI <- FALSE
-  options$plotsPredictionCoverage <- 0.95
-  options$plotsPredictionEstimate <- FALSE
-  options$plotsPredictionEstimateType <- "mean"
-  options$plotsPredictionJointType <- "stacked"
-  options$plotsPredictionLower <- 0
-  options$plotsPredictionMarginalCI <- TRUE
-  options$plotsPredictionMarginalCoverage <- 0.95
-  options$plotsPredictionMarginalEstimate <- TRUE
-  options$plotsPredictionMarginalEstimateType <- "median"
-  options$plotsPredictionMarginalLower <- 0
-  options$plotsPredictionMarginalTypeCI <- "HPD"
-  options$plotsPredictionMarginalUpper <- 1
-  options$plotsPredictionPostCI <- FALSE
-  options$plotsPredictionPostCoverage <- 0.95
-  options$plotsPredictionPostEstimate <- FALSE
-  options$plotsPredictionPostEstimateType <- "mean"
-  options$plotsPredictionPostJointType <- "overlying"
-  options$plotsPredictionPostLower <- 0
-  options$plotsPredictionPostMarginalCI <- TRUE
-  options$plotsPredictionPostMarginalCoverage <- 0.95
-  options$plotsPredictionPostMarginalEstimate <- TRUE
-  options$plotsPredictionPostMarginalEstimateType <- "mean"
-  options$plotsPredictionPostMarginalLower <- 0
-  options$plotsPredictionPostMarginalTypeCI <- "central"
-  options$plotsPredictionPostMarginalUpper <- 1
-  options$plotsPredictionPostType <- "joint"
-  options$plotsPredictionPostTypeCI <- "central"
-  options$plotsPredictionPostUpper <- 1
-  options$plotsPredictionType <- "marginal"
-  options$plotsPredictionTypeCI <- "central"
-  options$plotsPredictionUpper <- 1
-  options$plotsPredictions <- TRUE
-  options$plotsPredictionsObserved <- FALSE
-  options$plotsPredictionsPost <- FALSE
-  options$plotsPredictiveAccuracy <- FALSE
-  options$plotsPredictiveAccuracyType <- "marginal"
-  options$plotsPrior <- TRUE
-  options$plotsPriorCI <- FALSE
-  options$plotsPriorCoverage <- 0.95
-  options$plotsPriorEstimate <- FALSE
-  options$plotsPriorEstimateType <- "mean"
-  options$plotsPriorJointType <- "overlying"
-  options$plotsPriorLower <- 0.25
-  options$plotsPriorMarginalCI <- TRUE
-  options$plotsPriorMarginalCoverage <- 0.95
-  options$plotsPriorMarginalEstimate <- TRUE
-  options$plotsPriorMarginalEstimateType <- "mode"
-  options$plotsPriorMarginalLower <- 0.25
-  options$plotsPriorMarginalType <- "HPD"
-  options$plotsPriorMarginalUpper <- 0.75
-  options$plotsPriorType <- "marginal"
-  options$plotsPriorTypeCI <- "central"
-  options$plotsPriorUpper <- 0.75
-  options$predictionN <- 10
-  options$predictionPostPlotProp <- FALSE
-  options$predictionPostPlotTable <- FALSE
-  options$predictionTable <- FALSE
-  options$predictionPlotTable <- FALSE
-  options$predictionTableEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = ".1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
-                                                                                 name = "Hypothesis 2", parAlpha = "1", parBeta = ".1", parPoint = "0.5",
-                                                                                 type = "beta", value = "2"), list(PH = "1", name = "Hypothesis 3",
-                                                                                                                   parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
-                                                                                                                   value = "3"), list(PH = "1", name = "Hypothesis 4", parAlpha = "1",
-                                                                                                                                      parBeta = "1", parPoint = "0.5", type = "spike", value = "4"),
-                         list(PH = "1", name = "Hypothesis 5", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.6", type = "spike", value = "5"))
-  options$selectedVariable <- "facFive"
+  options$dataInputType <- "variable"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- TRUE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- "4"
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- "1"
+  options$dataCountsFailures <- 0
+  options$dataCountsSuccesses <- 0
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "marginal"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- FALSE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- FALSE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "stacked"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "joint"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "stacked"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "median"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "HPD"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- TRUE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "marginal"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- TRUE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "marginal"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- FALSE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- TRUE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- TRUE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mode"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "HPD"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "marginal"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 10
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = ".1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""), list(priorWeight = "1",
+                                                                                 name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1", spikePoint = "0.5",
+                                                                                 type = "beta", value = "2"), list(priorWeight = "1", name = "Hypothesis 3",
+                                                                                                                   betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
+                                                                                                                   value = "3"), list(priorWeight = "1", name = "Hypothesis 4", betaPriorAlpha = "1",
+                                                                                                                                      betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "4"),
+                         list(priorWeight = "1", name = "Hypothesis 5", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.6", type = "spike", value = "5"))
+  options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
 
 
   test_that("Prior Prediction plot matches", {
-    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_plotsPredictionsPrior"]][["data"]]
+    plotName <- results[["results"]][["containerPlotsPredictionPrior"]][["collection"]][["containerPlotsPredictionPrior_priorPredictivePerformanceDistributionPlotPrior"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "prior-prediction-plot-0-hard-3", dir="LSbinomialtesting")
   })
