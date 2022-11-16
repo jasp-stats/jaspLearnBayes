@@ -109,10 +109,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -300,10 +300,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -479,10 +479,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -658,10 +658,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -837,10 +837,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1011,10 +1011,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- TRUE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1206,10 +1206,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- TRUE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1367,10 +1367,10 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis Spike", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "spike", value = ""),
-                         list(PH = "1", name = "Hypothesis Beta", parAlpha = "1",
-                              parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                         list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1504,8 +1504,8 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "spike", value = ""))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = ""))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1672,8 +1672,8 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1840,9 +1840,9 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = ".1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
-                                                                                 name = "Hypothesis 2", parAlpha = "1", parBeta = ".1", parPoint = "0.5",
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = ".1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""), list(priorWeight = "1",
+                                                                                 name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1", spikePoint = "0.5",
                                                                                  type = "beta", value = "2"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
@@ -1980,15 +1980,15 @@ context("Learn Bayes - Binomial Testing")
   options$posteriorPredictionSummaryTable <- FALSE
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(PH = "1", name = "Hypothesis 1", parAlpha = ".1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""), list(PH = "1",
-                                                                                 name = "Hypothesis 2", parAlpha = "1", parBeta = ".1", parPoint = "0.5",
-                                                                                 type = "beta", value = "2"), list(PH = "1", name = "Hypothesis 3",
-                                                                                                                   parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
-                                                                                                                   value = "3"), list(PH = "1", name = "Hypothesis 4", parAlpha = "1",
-                                                                                                                                      parBeta = "1", parPoint = "0.5", type = "spike", value = "4"),
-                         list(PH = "1", name = "Hypothesis 5", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.6", type = "spike", value = "5"))
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = ".1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""), list(priorWeight = "1",
+                                                                                 name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1", spikePoint = "0.5",
+                                                                                 type = "beta", value = "2"), list(priorWeight = "1", name = "Hypothesis 3",
+                                                                                                                   betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
+                                                                                                                   value = "3"), list(priorWeight = "1", name = "Hypothesis 4", betaPriorAlpha = "1",
+                                                                                                                                      betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "4"),
+                         list(priorWeight = "1", name = "Hypothesis 5", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.6", type = "spike", value = "5"))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)

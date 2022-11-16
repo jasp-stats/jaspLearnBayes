@@ -23,53 +23,53 @@ gettextf <- function(fmt, ..., domain = NULL)  {
   return(sprintf(gettext(fmt, domain = domain), ...))
 }
 
-.evaluatePriors       <- function(priors, type) {
-  for (p in 1:length(priors)) {
-    for (i in 1:length(priors[[p]])) {
-      if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parPoint", "parMu", "parSigma", "PH")) {
-        priors[[p]][[paste0(names(priors[[p]])[i],"Inp")]] <- priors[[p]][[i]]
-        priors[[p]][[i]] <- eval(parse(text = priors[[p]][[i]]))
+.evaluatePriors       <- function(models, type) {
+  for (p in 1:length(models)) {
+    for (i in 1:length(models[[p]])) {
+      if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight")) {
+        models[[p]][[paste0(names(models[[p]])[i],"Inp")]] <- models[[p]][[i]]
+        models[[p]][[i]] <- eval(parse(text = models[[p]][[i]]))
 
-        if (names(priors[[p]])[i] %in% c("parAlpha", "parBeta", "parSigma", "PH") && priors[[p]][[i]] <= 0) {
+        if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "parSigma", "priorWeight") && models[[p]][[i]] <= 0) {
           .quitAnalysis(
             gettextf(
               "The parameter '%1$s' for model/hypothesis '%2$s' must be positive.",
-              gsub("par", "", names(priors[[p]])[i]),
-              priors[[p]][["name"]]))
-        } else if (names(priors[[p]])[i] =="parPoint" && (priors[[p]][[i]] < 0 || priors[[p]][[i]] > 1) && type %in% c("binEst", "binTest")) {
+              gsub("par", "", names(models[[p]])[i]),
+              models[[p]][["name"]]))
+        } else if (names(models[[p]])[i] =="spikePoint" && (models[[p]][[i]] < 0 || models[[p]][[i]] > 1) && type %in% c("binEst", "binTest")) {
           .quitAnalysis(
             gettextf(
               "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1.",
-              gsub("par", "", names(priors[[p]])[i]),
-              priors[[p]][["name"]]))
+              gsub("par", "", names(models[[p]])[i]),
+              models[[p]][["name"]]))
         }
       }
     }
-    if (priors[[p]][["name"]] == "") {
-      priors[[p]][["name"]] <- gettextf(
+    if (models[[p]][["name"]] == "") {
+      models[[p]][["name"]] <- gettextf(
         "%s %i",
-        ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model"),
+        ifelse (any(names(models[[p]]) %in% c("priorWeight")), "Hypothesis", "Model"),
         p
       )
     }
   }
 
-  if (anyDuplicated(sapply(priors, function(p)p$name)) != 0) {
+  if (anyDuplicated(sapply(models, function(p)p$name)) != 0) {
     .quitAnalysis(gettextf(
       "Please remove duplicates from the %s names.",
-      ifelse (any(names(priors[[p]]) %in% c("PH")), "Hypothesis", "Model")
+      ifelse (any(names(models[[p]]) %in% c("priorWeight")), "Hypothesis", "Model")
     ))
   }
 
-  return(priors)
+  return(models)
 }
-.scalePriors          <- function(priors) {
-  unscaled <- sapply(priors, function(x)x$PH)
+.scalePriors          <- function(models) {
+  unscaled <- sapply(models, function(x)x$priorWeight)
   scaled   <- unscaled/sum(unscaled)
-  for (i in 1:length(priors)) {
-    priors[[i]]$PH <- scaled[i]
+  for (i in 1:length(models)) {
+    models[[i]]$priorWeight <- scaled[i]
   }
-  return(priors)
+  return(models)
 }
 .aproximateSupportLS  <- function(xSeq, seqTF) {
   xStart <- NULL

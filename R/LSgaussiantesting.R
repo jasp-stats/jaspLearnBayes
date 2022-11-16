@@ -23,8 +23,8 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
 
-  # evaluate the expressions in priors
-  if (ready[2])options[["priors"]] <- .evaluatePriors(options[["priors"]])
+  # evaluate the expressions in models
+  if (ready[2])options[["models"]] <- .evaluatePriors(options[["models"]])
 
   # load, check, transform and process data
   if (ready[1])data <- .readDataGaussianLS(dataset, options)
@@ -83,7 +83,7 @@ LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
     testsTable$addColumnInfo(name = "posterior",    title = gettext("P(H|data)"),           type = "number")
     testsTable$addColumnInfo(name = "bf",           title = bfType_name,                    type = "number")
 
-    testsTable$setExpectedSize(length(options[["priors"]]))
+    testsTable$setExpectedSize(length(options[["models"]]))
 
     testsContainer[["testsTable"]] <- testsTable
 

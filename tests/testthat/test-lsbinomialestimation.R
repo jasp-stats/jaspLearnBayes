@@ -66,9 +66,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
-                                                                                  parAlpha = "1", parBeta = "1", parPoint = "0.5", type = "beta",
+  options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
+                                                                                  betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5", type = "beta",
                                                                                   value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -249,9 +249,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -540,9 +540,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -684,9 +684,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -792,9 +792,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -894,9 +894,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -996,9 +996,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -1092,9 +1092,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "2", parBeta = "2",
-                              parPoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 parAlpha = "1", parBeta = "1", parPoint = "0.3", type = "spike",
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
+                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
                                                                                  value = "2"))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
@@ -1188,8 +1188,8 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(name = "Models Spike", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "spike", value = ""))
+  options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = ""))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1311,8 +1311,8 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- TRUE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "median"
-  options$priors <- list(list(name = "Models Beta", parAlpha = "1", parBeta = "1",
-                              parPoint = "0.5", type = "beta", value = ""))
+  options$models <- list(list(name = "Models Beta", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = ""))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1436,9 +1436,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
-                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
-                                                                parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
+                              type = "spike", value = ""), list(name = "Models 2", betaPriorAlpha = "1",
+                                                                betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1514,9 +1514,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionSummaryTable <- FALSE
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
-  options$priors <- list(list(name = "Models 1", parAlpha = "1", parBeta = "1", parPoint = "0.5",
-                              type = "spike", value = ""), list(name = "Models 2", parAlpha = "1",
-                                                                parBeta = "1", parPoint = "0.5", type = "beta", value = "2"))
+  options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
+                              type = "spike", value = ""), list(name = "Models 2", betaPriorAlpha = "1",
+                                                                betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
   options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)

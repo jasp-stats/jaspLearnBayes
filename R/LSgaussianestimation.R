@@ -25,8 +25,8 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
   # a vector of two, first for data, second for hypotheses
   ready <- .readyGaussianLS(options)
 
-  # evaluate the expressions in priors
-  if (ready["priors"])options[["priors"]] <- .evaluatePriors(options[["priors"]])
+  # evaluate the expressions in models
+  if (ready["models"])options[["models"]] <- .evaluatePriors(options[["models"]])
 
   # load, check, transform and process data
   if (ready["data"]) {
@@ -129,32 +129,32 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     estimatesTable$addColumnInfo(name = "posterior",     title = gettext("Posterior (μ)"),   type = "string")
     estimatesTable$addColumnInfo(name = "posteriorMean", title = gettext("Posterior Mean"),  type = "number")
 
-    estimatesTable$setExpectedSize(length(options[["priors"]]))
+    estimatesTable$setExpectedSize(length(options[["models"]]))
 
     estimatesContainer[["estimatesTable"]] <- estimatesTable
 
-    if (!ready["priors"]) {
+    if (!ready["models"]) {
 
       return()
 
     } else{
 
       # add rows for each hypothesis
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempResults <- .estimateGaussianLS(NULL, options[["priors"]][[i]])
+        tempResults <- .estimateGaussianLS(NULL, options[["models"]][[i]])
 
         tempRow <- list(
           prior         = tempResults$distribution,
           priorMean     = tempResults$mean,
-          hypothesis    = options[["priors"]][[i]]$name,
+          hypothesis    = options[["models"]][[i]]$name,
           posterior     = "",
           posteriorMean = "")
 
 
         if (all(ready)) {
           # and when real data are supplied as well, add posterior information
-          tempResults <- .estimateGaussianLS(data, options[["priors"]][[i]])
+          tempResults <- .estimateGaussianLS(data, options[["models"]][[i]])
 
           tempRow["posterior"]     <- tempResults$distribution
           tempRow["posteriorMean"] <- tempResults$mean
@@ -185,11 +185,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
 
     estimatesSequentialTable$setExpectedSize(ifelse (ready["data"], length(data$y) + 1, 1))
-    if (ready["priors"]) {
-      for (i in 1:length(options[["priors"]])) {
+    if (ready["models"]) {
+      for (i in 1:length(options[["models"]])) {
         estimatesSequentialTable$addColumnInfo(
-          name  = options[["priors"]][[i]]$name,
-          title = options[["priors"]][[i]]$name,
+          name  = options[["models"]][[i]]$name,
+          title = options[["models"]][[i]]$name,
           type = "string")
       }
     }
@@ -198,12 +198,12 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     if (!all(ready)) {
       return()
     } else{
-      # add priors to the first row
+      # add models to the first row
       tempRow <- NULL
       tempRow[["iteration"]] <- 0
-      for (h in 1:length(options[["priors"]])) {
-        tempResults <- .estimateGaussianLS(NULL, options[["priors"]][[h]])
-        tempRow[[options[["priors"]][[h]]$name]] <- tempResults$distribution
+      for (h in 1:length(options[["models"]])) {
+        tempResults <- .estimateGaussianLS(NULL, options[["models"]][[h]])
+        tempRow[[options[["models"]][[h]]$name]] <- tempResults$distribution
       }
       estimatesSequentialTable$addRows(tempRow)
 
@@ -212,14 +212,14 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         for (i in 1:length(data$y)) {
           tempRow <- NULL
           tempRow[["iteration"]] <- i
-          for (h in 1:length(options[["priors"]])) {
+          for (h in 1:length(options[["models"]])) {
             tempData    <- list(
               mean = mean(data$y[1:i]),
               N    = length(data$y[1:i]),
               SD   = data$SD
             )
-            tempResults <- .estimateGaussianLS(tempData, options[["priors"]][[h]])
-            tempRow[[options[["priors"]][[h]]$name]] <- tempResults$distribution
+            tempResults <- .estimateGaussianLS(tempData, options[["models"]][[h]])
+            tempRow[[options[["models"]][[h]]$name]] <- tempResults$distribution
           }
           estimatesSequentialTable$addRows(tempRow)
         }
@@ -252,26 +252,26 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     allLines  <- c()
     allArrows <- c()
     legend     <- NULL
-    range      <- .rangeGaussiansLS(if (type == "Prior") NULL else data, options[["priors"]])
+    range      <- .rangeGaussiansLS(if (type == "Prior") NULL else data, options[["models"]])
 
-    for (i in 1:length(options[["priors"]])) {
+    for (i in 1:length(options[["models"]])) {
 
-      if (options[["priors"]][[i]]$type == "spike") {
+      if (options[["models"]][[i]]$type == "spike") {
 
-        dfArrowPP   <- .dataArrowGaussianLS(options[["priors"]][[i]])
-        dfArrowPP$g <- options[["priors"]][[i]]$name
+        dfArrowPP   <- .dataArrowGaussianLS(options[["models"]][[i]])
+        dfArrowPP$g <- options[["models"]][[i]]$name
 
         allArrows  <- c(allArrows, list(dfArrowPP))
-        legend      <- rbind(legend, c(options[["priors"]][[i]]$type, options[["priors"]][[i]]$name))
+        legend      <- rbind(legend, c(options[["models"]][[i]]$type, options[["models"]][[i]]$name))
 
-      } else if (options[["priors"]][[i]]$type == "normal") {
+      } else if (options[["models"]][[i]]$type == "normal") {
 
-        dfLinesPP   <- .dataLinesGaussianLS(data, options[["priors"]][[i]], range = range)
+        dfLinesPP   <- .dataLinesGaussianLS(data, options[["models"]][[i]], range = range)
         dfLinesPP   <- dfLinesPP[dfLinesPP$g == type,]
-        dfLinesPP$g <- options[["priors"]][[i]]$name
+        dfLinesPP$g <- options[["models"]][[i]]$name
 
         allLines   <- c(allLines, list(dfLinesPP))
-        legend      <- rbind(legend, c(options[["priors"]][[i]]$type, options[["priors"]][[i]]$name))
+        legend      <- rbind(legend, c(options[["models"]][[i]]$type, options[["models"]][[i]]$name))
 
       }
     }
@@ -311,15 +311,15 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerPlots[[paste0("plots",type,"individual")]] <- plotsIndividual
 
 
-    if (all(!ready) || (ready["data"] && !ready["priors"])) {
+    if (all(!ready) || (ready["data"] && !ready["models"])) {
 
       plotsIndividual[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["priors"]) {
+    } else if (!ready["data"] && ready["models"]) {
 
-      for (i in 1:length(options[["priors"]])) {
-        plotsIndividual[[options[["priors"]][[i]]$name]] <- createJaspPlot(title = options[["priors"]][[i]]$name,
+      for (i in 1:length(options[["models"]])) {
+        plotsIndividual[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
                                                                            width = 530, height = 400, aspectRatio = 0.7)
       }
       return()
@@ -333,11 +333,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         tempData        <- data
       }
 
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = if (type == "Posterior" && (options[["posteriorDistributionPloPriorDistribution"]] || options[["posteriorDistributionPlotObservedProportion"]])) { 700 } else{ 530 }, height = 400)
+        tempPlot <- createJaspPlot(title = options[["models"]][[i]]$name, width = if (type == "Posterior" && (options[["posteriorDistributionPloPriorDistribution"]] || options[["posteriorDistributionPlotObservedProportion"]])) { 700 } else{ 530 }, height = 400)
 
-        plotsIndividual[[options[["priors"]][[i]]$name]] <- tempPlot
+        plotsIndividual[[options[["models"]][[i]]$name]] <- tempPlot
 
         xName  <- bquote(.(gettext("Population mean"))~mu)
 
@@ -347,9 +347,9 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         dfCILinesPP <- NULL
 
         if (type == "Posterior" && options[["posteriorDistributionPlotIndividualCi"]] && options[["posteriorDistributionPlotIndividualCiType"]] == "support") {
-          range <- .rangeGaussianSupportLS(tempData, options[["priors"]][[i]], options[["posteriorDistributionPlotIndividualCiBf"]])
+          range <- .rangeGaussianSupportLS(tempData, options[["models"]][[i]], options[["posteriorDistributionPlotIndividualCiBf"]])
         } else{
-          range <- .rangeGaussianLS(if (type == "Prior") NULL else tempData, options[["priors"]][[i]])
+          range <- .rangeGaussianLS(if (type == "Prior") NULL else tempData, options[["models"]][[i]])
         }
 
         if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCi", "posteriorDistributionPlotIndividualCi")]]) {
@@ -358,7 +358,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             dfCI <- .dataCentralGaussianLS(
               if (type == "Prior") NULL else tempData,
-              options[["priors"]][[i]],
+              options[["models"]][[i]],
               options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiMass", "posteriorDistributionPlotIndividualCiMass")]],
               type = "parameter"
             )
@@ -371,7 +371,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             dfCI <- .dataCustomGaussianLS(
               if (type == "Prior") NULL else tempData,
-              options[["priors"]][[i]],
+              options[["models"]][[i]],
               options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiLower", "posteriorDistributionPlotIndividualCiLower")]],
               options[[ifelse (type == "Prior", "priorDistributionPlotIndividualCiUpper", "posteriorDistributionPlotIndividualCiUpper")]],
               NULL,
@@ -382,7 +382,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             dfCI <- .dataSupportGaussianLS(
               tempData,
-              options[["priors"]][[i]],
+              options[["models"]][[i]],
               options[["posteriorDistributionPlotIndividualCiBf"]]
             )
 
@@ -392,15 +392,15 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         }
 
 
-        if (options[["priors"]][[i]]$type == "spike") {
-          dfArrowPP  <- .dataArrowGaussianLS(options[["priors"]][[i]])
+        if (options[["models"]][[i]]$type == "spike") {
+          dfArrowPP  <- .dataArrowGaussianLS(options[["models"]][[i]])
           if (type == "Posterior" && options[["posteriorDistributionPloPriorDistribution"]]) {
             dfArrowPP$g <- "Prior = Posterior"
           } else
             dfArrowPP$g <- type
-        } else if (options[["priors"]][[i]]$type == "normal") {
+        } else if (options[["models"]][[i]]$type == "normal") {
 
-          dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], range = range)
+          dfLinesPP  <- .dataLinesGaussianLS(data, options[["models"]][[i]], range = range)
 
           if (!is.null(dfCI)) {
             for (r in 1:nrow(dfCI)) {
@@ -429,7 +429,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         }
 
         if (options[[ifelse (type == "Prior", "priorDistributionPlotIndividualPointEstimate", "posteriorDistributionPlotIndividualPointEstimate")]]) {
-          dfPointEstimate <- .estimateDataPointGaussian(tempData, options[["priors"]][[i]], N = NULL, type = "parameter",
+          dfPointEstimate <- .estimateDataPointGaussian(tempData, options[["models"]][[i]], N = NULL, type = "parameter",
                                                         estimate = options[[ifelse (type == "Prior", "priorDistributionPlotIndividualPointEstimateType", "posteriorDistributionPlotIndividualPointEstimateType")]])
         } else
           dfPointEstimate <- NULL
@@ -467,37 +467,37 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     containerBoth[["priorAndPosteriorDistributionPlot"]] <- plotsBoth
 
-    if (all(!ready) || (ready["data"] && !ready["priors"])) {
+    if (all(!ready) || (ready["data"] && !ready["models"])) {
 
       plotsBoth[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["priors"]) {
+    } else if (!ready["data"] && ready["models"]) {
 
-      for (i in 1:length(options[["priors"]])) {
-        plotsBoth[[options[["priors"]][[i]]$name]] <- createJaspPlot(title = options[["priors"]][[i]]$name,
+      for (i in 1:length(options[["models"]])) {
+        plotsBoth[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
                                                                      width = 530, height = 400, aspectRatio = 0.7)
       }
       return()
 
     } else{
 
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
+        tempPlot <- createJaspPlot(title = options[["models"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
 
-        plotsBoth[[options[["priors"]][[i]]$name]] <- tempPlot
+        plotsBoth[[options[["models"]][[i]]$name]] <- tempPlot
 
         dfArrowPP <- NULL
         dfLinesPP <- NULL
 
         xName  <- bquote(.(gettext("Population mean"))~mu)
-        range  <- .rangeGaussianLS(NULL, options[["priors"]][[i]])
+        range  <- .rangeGaussianLS(NULL, options[["models"]][[i]])
 
-        if (options[["priors"]][[i]]$type == "spike") {
-          dfArrowPP  <- .dataArrowGaussianLS(options[["priors"]][[i]])
-        } else if (options[["priors"]][[i]]$type == "normal") {
-          dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], range = range)
+        if (options[["models"]][[i]]$type == "spike") {
+          dfArrowPP  <- .dataArrowGaussianLS(options[["models"]][[i]])
+        } else if (options[["models"]][[i]]$type == "normal") {
+          dfLinesPP  <- .dataLinesGaussianLS(data, options[["models"]][[i]], range = range)
 
           if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
             dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
@@ -555,9 +555,9 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
       if (i < 1) {
 
         if (options[["sequentialAnalysisPointEstimatePlotCi"]] && options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
-          range <- rbind(range, .rangeGaussiansSupportLS(NULL, options[["priors"]], options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
+          range <- rbind(range, .rangeGaussiansSupportLS(NULL, options[["models"]], options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
         } else{
-          range <- rbind(range, .rangeGaussiansLS(NULL, options[["priors"]]))
+          range <- rbind(range, .rangeGaussiansLS(NULL, options[["models"]]))
         }
 
       } else{
@@ -568,16 +568,16 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         )
 
         if (options[["sequentialAnalysisPointEstimatePlotCi"]] && options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
-          range <- rbind(range, .rangeGaussiansSupportLS(tempData, options[["priors"]], options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
+          range <- rbind(range, .rangeGaussiansSupportLS(tempData, options[["models"]], options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
         } else{
-          range <- rbind(range, .rangeGaussiansLS(tempData, options[["priors"]]))
+          range <- rbind(range, .rangeGaussiansLS(tempData, options[["models"]]))
         }
       }
     }
     range <- c(min(range[,1]), max(range[,2]))
 
     # then update the posteriors as the data go in
-    for (h in 1:length(options[["priors"]])) {
+    for (h in 1:length(options[["models"]])) {
 
       tempLines   <- NULL
       tempCI      <- NULL
@@ -594,11 +594,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
           )
         }
 
-        tempResults    <- .estimateGaussianLS(tempData, options[["priors"]][[h]])
+        tempResults    <- .estimateGaussianLS(tempData, options[["models"]][[h]])
         tempLines      <- rbind(tempLines, data.frame(
           y    = tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]],
           x    = i,
-          name = options[["priors"]][[h]]$name
+          name = options[["models"]][[h]]$name
         ))
 
         if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
@@ -607,7 +607,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             tempCIPP <- .dataCentralGaussianLS(
               tempData,
-              options[["priors"]][[h]],
+              options[["models"]][[h]],
               options[["sequentialAnalysisPointEstimatePlotCiMass"]],
               type = "parameter"
             )
@@ -620,7 +620,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             tempCIPP <- .dataSupportGaussianLS(
               tempData,
-              options[["priors"]][[h]],
+              options[["models"]][[h]],
               options[["sequentialAnalysisPointEstimatePlotCiBf"]],
               range
             )
@@ -633,7 +633,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
             y1   = tempCIPP$xStart,
             y2   = tempCIPP$xEnd,
             x    = i,
-            name = options[["priors"]][[h]]$name
+            name = options[["models"]][[h]]$name
           ))
 
         }
@@ -675,15 +675,15 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerIterative[["plotsIterative"]] <- plotsIterative
 
 
-    if (all(!ready) || (ready["data"] && !ready["priors"])) {
+    if (all(!ready) || (ready["data"] && !ready["models"])) {
 
       plotsIterative[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["priors"]) {
+    } else if (!ready["data"] && ready["models"]) {
 
-      for (i in 1:length(options[["priors"]])) {
-        plotsIterative[[options[["priors"]][[i]]$name]] <- createJaspPlot(title = options[["priors"]][[i]]$name,
+      for (i in 1:length(options[["models"]])) {
+        plotsIterative[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
                                                                           width = 530, height = 400, aspectRatio = 0.7)
       }
       return()
@@ -699,11 +699,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
       iterSequence <- rev(iterSequence)
 
 
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
+        tempPlot <- createJaspPlot(title = options[["models"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
 
-        plotsIterative[[options[["priors"]][[i]]$name]] <- tempPlot
+        plotsIterative[[options[["models"]][[i]]$name]] <- tempPlot
 
         allLines  <- c()
         allArrows <- c()
@@ -712,14 +712,14 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         for (iteration in iterSequence) {
           if (iteration < 1) {
-            range <- rbind(range, .rangeGaussianLS(NULL, options[["priors"]][[i]]))
+            range <- rbind(range, .rangeGaussianLS(NULL, options[["models"]][[i]]))
           } else{
             tempData <- list(
               mean = mean(data$y[1:iteration]),
               N    = length(data$y[1:iteration]),
               SD   = data$SD
             )
-            range <- rbind(range, .rangeGaussianLS(tempData, options[["priors"]][[i]]))
+            range <- rbind(range, .rangeGaussianLS(tempData, options[["models"]][[i]]))
           }
         }
         range <- c(min(range[,1]), max(range[,2]))
@@ -737,22 +737,22 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
             )
           }
 
-          if (options[["priors"]][[i]]$type == "spike") {
+          if (options[["models"]][[i]]$type == "spike") {
 
-            dfArrowPP   <- .dataArrowGaussianLS(options[["priors"]][[i]])
+            dfArrowPP   <- .dataArrowGaussianLS(options[["models"]][[i]])
             dfArrowPP$g <- as.character(iteration)
 
             allArrows  <- c(allArrows, list(dfArrowPP))
-            legend      <- rbind(legend, c(options[["priors"]][[i]]$type, iteration))
+            legend      <- rbind(legend, c(options[["models"]][[i]]$type, iteration))
 
-          } else if (options[["priors"]][[i]]$type == "normal") {
+          } else if (options[["models"]][[i]]$type == "normal") {
 
-            dfLinesPP   <- .dataLinesGaussianLS(tempData, options[["priors"]][[i]], range = range)
+            dfLinesPP   <- .dataLinesGaussianLS(tempData, options[["models"]][[i]], range = range)
             dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
             dfLinesPP$g <- as.character(iteration)
 
             allLines   <- c(allLines, list(dfLinesPP))
-            legend      <- rbind(legend, c(options[["priors"]][[i]]$type, iteration))
+            legend      <- rbind(legend, c(options[["models"]][[i]]$type, iteration))
 
           }
 
@@ -794,7 +794,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     }
 
     # update the posteriors as the data go in
-    for (h in 1:length(options[["priors"]])) {
+    for (h in 1:length(options[["models"]])) {
 
       tempLines   <- NULL
 
@@ -812,7 +812,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         tempResults <- .dataCustomGaussianLS(
           tempData,
-          options[["priors"]][[h]],
+          options[["models"]][[h]],
           lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]],
           uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]],
           NULL,
@@ -822,7 +822,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         tempLines  <- rbind(tempLines, data.frame(
           y    = tempResults$coverage,
           x    = i,
-          name = options[["priors"]][[h]]$name
+          name = options[["models"]][[h]]$name
         ))
 
       }
@@ -856,26 +856,26 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
 
-    if (all(!ready) || (ready["data"] && !ready["priors"])) {
+    if (all(!ready) || (ready["data"] && !ready["models"])) {
 
       plotsIterativeInterval[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["priors"]) {
+    } else if (!ready["data"] && ready["models"]) {
 
-      for (i in 1:length(options[["priors"]])) {
-        plotsIterativeInterval[[options[["priors"]][[i]]$name]] <- createJaspPlot(title = options[["priors"]][[i]]$name,
+      for (i in 1:length(options[["models"]])) {
+        plotsIterativeInterval[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
                                                                                   width = 530, height = 400, aspectRatio = 0.7)
       }
       return()
 
     } else{
 
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
+        tempPlot <- createJaspPlot(title = options[["models"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
 
-        plotsIterativeInterval[[options[["priors"]][[i]]$name]] <- tempPlot
+        plotsIterativeInterval[[options[["models"]][[i]]$name]] <- tempPlot
 
         allLines  <- c()
         allArrows <- c()
@@ -892,29 +892,29 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         range <- NULL
         for (iteration in iterSequence) {
           if (iteration < 1) {
-            range <- rbind(range, .rangeGaussianLS(NULL, options[["priors"]][[i]]))
+            range <- rbind(range, .rangeGaussianLS(NULL, options[["models"]][[i]]))
           } else{
             tempData <- list(
               mean = mean(data$y[1:iteration]),
               N    = length(data$y[1:iteration]),
               SD   = data$SD
             )
-            range <- rbind(range, .rangeGaussianLS(tempData, options[["priors"]][[i]]))
+            range <- rbind(range, .rangeGaussianLS(tempData, options[["models"]][[i]]))
           }
         }
         range <- c(min(range[,1]), max(range[,2]))
 
         for (iteration in iterSequence) {
 
-          if (options[["priors"]][[i]]$type == "spike") {
+          if (options[["models"]][[i]]$type == "spike") {
 
-            dfArrowPP   <- .dataArrowGaussianLS(options[["priors"]][[i]])
+            dfArrowPP   <- .dataArrowGaussianLS(options[["models"]][[i]])
             dfArrowPP$g <- as.character(iteration)
 
             allArrows  <- c(allArrows, list(dfArrowPP))
-            legend      <- rbind(legend, c(options[["priors"]][[i]]$type, iteration))
+            legend      <- rbind(legend, c(options[["models"]][[i]]$type, iteration))
 
-          } else if (options[["priors"]][[i]]$type == "normal") {
+          } else if (options[["models"]][[i]]$type == "normal") {
 
             if (iteration < 1) {
               tempData <- NULL
@@ -926,12 +926,12 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
               )
             }
 
-            dfLinesPP   <- .dataLinesGaussianLS(tempData, options[["priors"]][[i]], "parameter", NULL, range)
+            dfLinesPP   <- .dataLinesGaussianLS(tempData, options[["models"]][[i]], "parameter", NULL, range)
             dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
             dfLinesPP$g <- as.character(iteration)
 
             allLines   <- c(allLines, list(dfLinesPP))
-            legend      <- rbind(legend, c(options[["priors"]][[i]]$type, iteration))
+            legend      <- rbind(legend, c(options[["models"]][[i]]$type, iteration))
 
           }
 
@@ -962,7 +962,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerIterative[["tableIterative"]] <- tableIterative
 
     tableIterative$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
-    if (ready["priors"]) {
+    if (ready["models"]) {
       if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
         if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "central") {
           CI_title <- gettextf("%i%% CI", options[["sequentialAnalysisPointEstimatePlotCiMass"]]*100)
@@ -971,23 +971,23 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
           CI_title <- gettextf("SI (BF=%s)", options[["sequentialAnalysisPointEstimatePlotCiBf"]])
         }
-        for (i in 1:length(options[["priors"]])) {
+        for (i in 1:length(options[["models"]])) {
           tableIterative$addColumnInfo(
-            name  = paste(options[["priors"]][[i]]$name,"center", sep = "_"),
+            name  = paste(options[["models"]][[i]]$name,"center", sep = "_"),
             title = ifelse (options[["sequentialAnalysisPointEstimatePlotType"]] == "mean", gettext("Mean"), gettext("Median")),
-            overtitle = options[["priors"]][[i]]$name,
+            overtitle = options[["models"]][[i]]$name,
             type = "number")
           tableIterative$addColumnInfo(
-            name  = paste(options[["priors"]][[i]]$name,"CI", sep = "_"),
+            name  = paste(options[["models"]][[i]]$name,"CI", sep = "_"),
             title = CI_title,
-            overtitle = options[["priors"]][[i]]$name,
+            overtitle = options[["models"]][[i]]$name,
             type = "string")
         }
       } else{
-        for (i in 1:length(options[["priors"]])) {
+        for (i in 1:length(options[["models"]])) {
           tableIterative$addColumnInfo(
-            name  = paste(options[["priors"]][[i]]$name,"center", sep = "_"),
-            title = options[["priors"]][[i]]$name,
+            name  = paste(options[["models"]][[i]]$name,"center", sep = "_"),
+            title = options[["models"]][[i]]$name,
             type = "number")
         }
       }
@@ -1017,10 +1017,10 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         )
       }
 
-      for (h in 1:length(options[["priors"]])) {
+      for (h in 1:length(options[["models"]])) {
 
-        tempResults <- .estimateGaussianLS(tempData, options[["priors"]][[h]])
-        tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]]
+        tempResults <- .estimateGaussianLS(tempData, options[["models"]][[h]])
+        tempRow[[paste(options[["models"]][[h]]$name,"center", sep = "_")]] <- tempResults[[options[["sequentialAnalysisPointEstimatePlotType"]]]]
 
         if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
 
@@ -1028,7 +1028,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             tempCIPP <- .dataCentralGaussianLS(
               tempData,
-              options[["priors"]][[h]],
+              options[["models"]][[h]],
               options[["sequentialAnalysisPointEstimatePlotCiMass"]],
               type = "parameter"
             )
@@ -1041,7 +1041,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             tempCIPP <- .dataSupportGaussianLS(
               tempData,
-              options[["priors"]][[h]],
+              options[["models"]][[h]],
               options[["sequentialAnalysisPointEstimatePlotCiBf"]]
             )
           }
@@ -1054,7 +1054,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
             ), collapse = ""))
             temp_int <- paste(temp_int, collapse = " and " )
 
-            tempRow[[paste(options[["priors"]][[h]]$name,"CI", sep = "_")]] <- temp_int
+            tempRow[[paste(options[["models"]][[h]]$name,"CI", sep = "_")]] <- temp_int
           }
 
         }
@@ -1082,11 +1082,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerIterativeInterval[["tableIterativeInterval"]] <- tableIterativeInterval
 
     tableIterativeInterval$addColumnInfo(name = "iteration", title = gettext("Observation"), type = "integer")
-    if (ready["priors"]) {
-      for (i in 1:length(options[["priors"]])) {
+    if (ready["models"]) {
+      for (i in 1:length(options[["models"]])) {
         tableIterativeInterval$addColumnInfo(
-          name  = paste(options[["priors"]][[i]]$name,"center", sep = "_"),
-          title = options[["priors"]][[i]]$name,
+          name  = paste(options[["models"]][[i]]$name,"center", sep = "_"),
+          title = options[["models"]][[i]]$name,
           type = "number")
       }
     }
@@ -1115,18 +1115,18 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
         )
       }
 
-      for (h in 1:length(options[["priors"]])) {
+      for (h in 1:length(options[["models"]])) {
 
         tempResults <- .dataCustomGaussianLS(
           tempData,
-          options[["priors"]][[h]],
+          options[["models"]][[h]],
           lCI = options[["sequentialAnalysisIntervalEstimatePlotLower"]],
           uCI = options[["sequentialAnalysisIntervalEstimatePlotUpper"]],
           NULL,
           type = "parameter"
         )
 
-        tempRow[[paste(options[["priors"]][[h]]$name,"center", sep = "_")]] <- tempResults$coverage
+        tempRow[[paste(options[["models"]][[h]]$name,"center", sep = "_")]] <- tempResults$coverage
 
       }
 
@@ -1154,11 +1154,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     predictionsTable$addColumnInfo(name = "posteriorMean",  title = gettext("Posterior Mean"),            type = "number")
     predictionsTable$addColumnInfo(name = "predictive",     title = gettext("Prediction"),                type = "string")
     predictionsTable$addColumnInfo(name = "predictiveMean", title = gettext("Prediction Mean"),           type = "number")
-    predictionsTable$setExpectedSize(length(options[["priors"]]))
+    predictionsTable$setExpectedSize(length(options[["models"]]))
 
     containerPredictions[["predictionsTable"]] <- predictionsTable
 
-    if (!ready["priors"] || is.null(data$SD) || data$SD == 0) {
+    if (!ready["models"] || is.null(data$SD) || data$SD == 0) {
 
       # TODO: check whether this works properly
       if (is.null(data$SD) || data$SD == 0) {
@@ -1170,13 +1170,13 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     } else{
 
       # add rows for each hypothesis
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempResults    <- .estimateGaussianLS(data, options[["priors"]][[i]])
-        temp_prediction <- .predictGaussianLS(data, options[["priors"]][[i]], options, options[["posteriorPredictionNumberOfFutureTrials"]])
+        tempResults    <- .estimateGaussianLS(data, options[["models"]][[i]])
+        temp_prediction <- .predictGaussianLS(data, options[["models"]][[i]], options, options[["posteriorPredictionNumberOfFutureTrials"]])
 
         tempRow <- list(
-          hypothesis      = options[["priors"]][[i]]$name,
+          hypothesis      = options[["models"]][[i]]$name,
 
           posterior       = tempResults$distribution,
           posteriorMean   = tempResults$mean,
@@ -1223,7 +1223,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerPredictionPlots[["posteriorPredictionDistributionPlot"]] <- plotsPredictions
 
 
-    if (!ready["priors"] || is.null(data$SD) || data$SD == 0) {
+    if (!ready["models"] || is.null(data$SD) || data$SD == 0) {
 
       temp_p <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
 
@@ -1237,11 +1237,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     } else{
 
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        tempPlot <- createJaspPlot(title = options[["priors"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
+        tempPlot <- createJaspPlot(title = options[["models"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
 
-        plotsPredictions[[options[["priors"]][[i]]$name]] <- tempPlot
+        plotsPredictions[[options[["models"]][[i]]$name]] <- tempPlot
 
         yName  <- gettext("Density")
         if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
@@ -1256,7 +1256,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         range <- .rangeGaussianLS(
           data,
-          options[["priors"]][[i]],
+          options[["models"]][[i]],
           "prediction",
           options[["posteriorPredictionNumberOfFutureTrials"]]
         )
@@ -1267,7 +1267,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             dfCI <- .dataCentralGaussianLS(
               data,
-              options[["priors"]][[i]],
+              options[["models"]][[i]],
               options[["posteriorPredictionDistributionPlotIndividualCiMass"]],
               N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1},
               "prediction"
@@ -1280,7 +1280,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
             dfCI <- .dataCustomGaussianLS(
               data,
-              options[["priors"]][[i]],
+              options[["models"]][[i]],
               options[["posteriorPredictionDistributionPlotIndividualCiLower"]],
               options[["posteriorPredictionDistributionPlotIndividualCiUpper"]],
               N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1},
@@ -1292,11 +1292,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
           dfCI$parameter <- "mu"
         }
 
-        dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], "prediction", N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
+        dfLinesPP  <- .dataLinesGaussianLS(data, options[["models"]][[i]], "prediction", N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
         dfLinesPP  <- dfLinesPP[dfLinesPP$g == "Posterior",]
 
         if (options[["posteriorPredictionDistributionPlotIndividualPointEstimate"]]) {
-          dfPointEstimate <- .estimateDataPointGaussian(data, options[["priors"]][[i]], N = options[["posteriorPredictionNumberOfFutureTrials"]],
+          dfPointEstimate <- .estimateDataPointGaussian(data, options[["models"]][[i]], N = options[["posteriorPredictionNumberOfFutureTrials"]],
                                                         type = "prediction", estimate = options[["posteriorPredictionDistributionPlotIndividualPointEstimateType"]],
                                                         prop = options[["posteriorPredictionDistributionPlotAsSampleProportion"]])
         } else
@@ -1327,7 +1327,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
     containerPredictionPlots[["posteriorPredictionDistributionPlot"]] <- plotsPredictions
 
 
-    if (!ready["priors"] || is.null(data$SD) || data$SD == 0) {
+    if (!ready["models"] || is.null(data$SD) || data$SD == 0) {
 
       if (is.null(data$SD) || data$SD == 0) {
         plotsPredictions$setError(gettext("Please, specify the standard deviation of the data."))
@@ -1339,7 +1339,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       range <- .rangeGaussiansLS(
         data,
-        options[["priors"]],
+        options[["models"]],
         "prediction",
         options[["posteriorPredictionNumberOfFutureTrials"]]
       )
@@ -1353,16 +1353,16 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
       allLines  <- c()
       legend     <- NULL
 
-      for (i in 1:length(options[["priors"]])) {
+      for (i in 1:length(options[["models"]])) {
 
-        dfLinesPP  <- .dataLinesGaussianLS(data, options[["priors"]][[i]], "prediction",  N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
+        dfLinesPP  <- .dataLinesGaussianLS(data, options[["models"]][[i]], "prediction",  N = if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {options[["posteriorPredictionNumberOfFutureTrials"]]} else{1}, range = range)
         dfLinesPP  <- dfLinesPP[dfLinesPP$g == "Posterior",]
 
-        dfLinesPP$g <- options[["priors"]][[i]]$name
+        dfLinesPP$g <- options[["models"]][[i]]$name
 
         # it's not beta, but I'm lazzy to rewrite a function I wanna use
         # lol, I was so lazy that I even coppied this comment from the binomial version :D
-        legend   <- rbind(legend, c("beta", options[["priors"]][[i]]$name))
+        legend   <- rbind(legend, c("beta", options[["models"]][[i]]$name))
         allLines<- c(allLines, list(dfLinesPP))
       }
 
