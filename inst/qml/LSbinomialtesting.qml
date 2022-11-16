@@ -173,13 +173,13 @@ Form {
 
 	LS.LStestingpredictiveperformance
 	{
-		bfTypevsName:				"priors.name"
+		bfTypevsName:				"models.name"
 	}
 
 	LS.LStestingsequential
 	{
 		enabled:					binomialDataInput.dataInputType.value !== "counts"
-		bfTypevsNameSequential:		"priors.name"
+		bfTypevsNameSequential:		"models.name"
 		onEnabledChanged: 
 		{
 			if (!enabled) {
