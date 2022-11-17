@@ -52,7 +52,7 @@ Form
 
 		IntegerField
 		{
-			name:			"a"
+			name:			"priorAlpha"
 			label:			qsTr("Beta prior: parameter a")
 			fieldWidth:		50
 			defaultValue:	1
@@ -61,7 +61,7 @@ Form
 
 		IntegerField
 		{
-			name:			"b"
+			name:			"priorBeta"
 			label:			qsTr("Beta prior: parameter b")
 			fieldWidth:		50
 			defaultValue:	1

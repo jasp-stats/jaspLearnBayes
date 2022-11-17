@@ -134,10 +134,10 @@ Form {
 				CheckBox { name: "estimatesPlotPrevalence";					label: qsTr("Prevalence");					checked: true; Layout.columnSpan: 2	}
 				CheckBox { name: "estimatesPlotSensitivity";				label: qsTr("Sensitivity");					checked: true						}
 				CheckBox { name: "estimatesPlotSpecificity";				label: qsTr("Specificity");					checked: true						}
-				CheckBox { name: "estimatesPlotTruePositiveRate";			label: qsTr("True positive rate")												}
-				CheckBox { name: "estimatesPlotFalsePositiveRate";			label: qsTr("False positive rate")												}
-				CheckBox { name: "estimatesPlotTrueNegativeRate";			label: qsTr("True negative rate")												}
-				CheckBox { name: "estimatesPlotFalseNegativeRate";			label: qsTr("False negative rate")												}
+				CheckBox { name: "estimatesPlotTruePositive";				label: qsTr("True positive rate")												}
+				CheckBox { name: "estimatesPlotFalsePositive";				label: qsTr("False positive rate")												}
+				CheckBox { name: "estimatesPlotTrueNegative";				label: qsTr("True negative rate")												}
+				CheckBox { name: "estimatesPlotFalseNegative";				label: qsTr("False negative rate")												}
 				CheckBox { name: "estimatesPlotPositivePredictiveValue";	label: qsTr("Positive predictive value")										}
 				CheckBox { name: "estimatesPlotNegativePredictiveValue";	label: qsTr("Negative predictive value")										}
 				CheckBox { name: "estimatesPlotFalseDiscoveryRate";			label: qsTr("False discovery rate")												}

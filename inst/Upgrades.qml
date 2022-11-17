@@ -33,14 +33,14 @@ Upgrades
 		ChangeRename {	from: "plotAlluvial";				to: "alluvialPlot"					}
 		ChangeRename {	from: "plotSignal";					to: "signalDetectionPlot"			}
 
-		ChangeRename {	from: "plotEstimates";				to: "estimatesPlot"					}
+		ChangeRename {	from: "plotEstimates";				to: "estimatesPlot"								}
 		ChangeRename {	from: "plotPrevalence";				to: "estimatesPlotPrevalence"					}
 		ChangeRename {	from: "plotSensitivity";			to: "estimatesPlotSensitivity"					}
 		ChangeRename {	from: "plotSpecificity";			to: "estimatesPlotSpecificity"					}
-		ChangeRename {	from: "plotTruePositive";			to: "estimatesPlotTruePositiveRate"				}
-		ChangeRename {	from: "plotFalsePositive";			to: "estimatesPlotFalsePositiveRate"			}
-		ChangeRename {	from: "plotTrueNegative";			to: "estimatesPlotTrueNegativeRate"				}
-		ChangeRename {	from: "plotFalseNegative";			to: "estimatesPlotFalseNegativeRate"			}
+		ChangeRename {	from: "plotTruePositive";			to: "estimatesPlotTruePositive"					}
+		ChangeRename {	from: "plotFalsePositive";			to: "estimatesPlotFalsePositive"				}
+		ChangeRename {	from: "plotTrueNegative";			to: "estimatesPlotTrueNegative"					}
+		ChangeRename {	from: "plotFalseNegative";			to: "estimatesPlotFalseNegative"				}
 		ChangeRename {	from: "plotPPV";					to: "estimatesPlotPositivePredictiveValue"		}
 		ChangeRename {	from: "plotNPV";					to: "estimatesPlotNegativePredictiveValue"		}
 		ChangeRename {	from: "plotFDR";					to: "estimatesPlotFalseDiscoveryRate"			}

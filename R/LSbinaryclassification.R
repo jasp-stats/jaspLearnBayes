@@ -1329,8 +1329,8 @@ coef.bcPosteriorParams <- function(results) {
 
   plots <- c("estimatesPlotPrevalence",
              "estimatesPlotSensitivity",             "estimatesPlotSpecificity",
-             "estimatesPlotTruePositiveRate",        "estimatesPlotFalsePositiveRate",
-             "estimatesPlotTrueNegativeRate",        "estimatesPlotFalseNegativeRate",
+             "estimatesPlotTruePositive",        "estimatesPlotFalsePositive",
+             "estimatesPlotTrueNegative",        "estimatesPlotFalseNegative",
              "estimatesPlotPositivePredictiveValue", "estimatesPlotNegativePredictiveValue",
              "estimatesPlotFalseDiscoveryRate",      "estimatesPlotFalseOmissionRate",
              "estimatesPlotFalsePositiveRate",       "estimatesPlotFalseNegativeRate",
