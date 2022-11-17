@@ -1,8 +1,8 @@
 context("Learn Bayes - Buffon's Needle Manipulation")
 
 ## default settings
-options <- analysisOptions("LSBuffonsneedlemanipulation")
-options$numberOfCrosses                <- 50
+options <- jaspTools::analysisOptions("LSBuffonsneedlemanipulation")
+options$numberOfCrosses                <- 10
 options$numberOfThrows                 <- 100
 options$priorAlpha                     <- 1
 options$priorBeta                      <- 1
@@ -15,6 +15,7 @@ options$priorPosteriorProportion       <- TRUE
 options$priorPosteriorProportionLegend <- TRUE
 options$priorPosteriorPiCi             <- TRUE
 options$priorPosteriorProportionLegend <- TRUE
+options$CIPropDistPlot                 <- TRUE
 options$priorPosteriorPiLegend         <- TRUE
 
 set.seed(1)

@@ -262,7 +262,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    # fill in the plot
    piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
 
-   if (options[["legendPiDistPlot"]]){
+   if (options[["priorPosteriorPiLegend"]]){
      piDistPlot$plotObject <-  piDistPlot$plotObject +
        ggplot2::theme(legend.position = "right")
    }

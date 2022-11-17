@@ -48,9 +48,9 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   med <- 2 * l / (qbeta(.5, options[["numberOfCrosses"]], options[["numberOfThrows"]] - options[["numberOfCrosses"]], lower.tail = FALSE) * d)
   CI95upper <- 2 * l / (qbeta(1-(1-options[["ciLevel"]])/2, options[["numberOfCrosses"]], options[["numberOfThrows"]] - options[["numberOfCrosses"]], lower.tail = FALSE) * d)
   mass <- pbeta(2*l/(options[["min"]]*d), options[["numberOfCrosses"]], options[["numberOfThrows"]] - options[["numberOfCrosses"]]) - pbeta(2*l/(options[["max"]]*d), options[["numberOfCrosses"]], options[["numberOfThrows"]] - options[["numberOfCrosses"]])
-  MLE <- 2*l/(options[["numberOfThrows"]]/options[["numberOfThrows"]]*d)
+  MLE <- 2*l/(options[["numberOfCrosses"]]/options[["numberOfThrows"]]*d)
 
-  summaryTable$addRows(list(NumCrosses = options[["numberOfThrows"]], NumObservations = options[["numberOfThrows"]], Mass = mass,
+  summaryTable$addRows(list(NumCrosses = options[["numberOfCrosses"]], NumObservations = options[["numberOfThrows"]], Mass = mass,
                            lowerCI = CI95lower, Median = med, upperCI = CI95upper, MLE = MLE))
   jaspResults[["summaryTable"]] <- summaryTable
 }
