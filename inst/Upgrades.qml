@@ -356,7 +356,7 @@ Upgrades
 	{
 		functionName:		"LSBuffonsneedlesimulation"
 		fromVersion:		"0.16.4"
-		toVersion:			"0.17"
+		toVersion:			"0.17.0"
 
 		ChangeRename {	from: "length";		to: "lengthToDistanceProportion"	}
 		ChangeRename {	from: "n";			to: "numberOfThrows"				}
@@ -374,5 +374,27 @@ Upgrades
 		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}
 		ChangeRename {	from: "CIArrow";				to: "priorPosteriorPiCi"		}
 		ChangeRename {	from: "legendPiDistPlot";		to: "priorPosteriorPiLegend"	}
+	}
+
+	Upgrade
+	{
+		functionName:		"LSgameofchance"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "winPoints";	to: "pointsToWin"				}
+		ChangeRename {	from: "nSims";		to: "numberOfSimulatedGames"	}
+		ChangeRename {	from: "CI";			to: "ci"						}
+	}
+
+	Upgrade
+	{
+		functionName:		"LSgameofskill"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "winPoints";	to: "pointsToWin"				}
+		ChangeRename {	from: "nSims";		to: "numberOfSimulatedGames"	}
+		ChangeRename {	from: "CI";			to: "ci"						}
 	}
 }

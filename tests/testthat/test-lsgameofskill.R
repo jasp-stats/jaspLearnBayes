@@ -2,7 +2,7 @@ context("Learn Bayes - Game of Skill")
 
 ## two players
 options <- jaspTools::analysisOptions("LSgameofskill")
-options$winPoints <- 4
+options$pointsToWin <- 4
 options$players <- list(list(values = c(1, 1)), list(values = c(2, 3)))
 set.seed(1)
 dataset <- NULL
@@ -10,7 +10,7 @@ dataset <- NULL
 results <- jaspTools::runAnalysis("LSgameofskill", dataset, options)#, makeTests = TRUE)
 
 test_that("Probability of Player 1 Winning plot matches", {
-  plotName <- results[["results"]][["CIPlot"]][["data"]]
+  plotName <- results[["results"]][["ciPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning")
 })
@@ -24,14 +24,14 @@ test_that("Summary Table results match", {
 
 ## three players
 options <- jaspTools::analysisOptions("LSgameofskill")
-options$winPoints <- 4
+options$pointsToWin <- 4
 options$players <- list(list(values =  c(1,1)), list(values = c(1, 2)), list(values = c(2, 3)))
 set.seed(1)
 dataset <- NULL
 results <- jaspTools::runAnalysis("LSgameofskill", dataset, options)#, makeTests = TRUE)
 
 test_that("Probability of Player 1 Winning plot matches", {
-  plotName <- results[["results"]][["CIPlot"]][["data"]]
+  plotName <- results[["results"]][["ciPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning-three players")
 })

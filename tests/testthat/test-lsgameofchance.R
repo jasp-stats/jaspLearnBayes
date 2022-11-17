@@ -3,16 +3,16 @@ context("Learn Bayes - Game of Chance")
 ## two players
 options <- jaspTools::analysisOptions("LSgameofchance")
 options$players <- list(list("values" = c(1,1)), list("values" = c(2,3)))
-options$winPoints <- 4
-options$nSims <- 500
-options$CI <- TRUE
+options$pointsToWin <- 4
+options$numberOfSimulatedGames <- 500
+options$ci <- TRUE
 
 set.seed(1)
 results <- jaspTools::runAnalysis("LSgameofchance", dataset=NULL, options=options)#, makeTests = TRUE)
 #jaspTools::makeTestTable(table)
 
 test_that("Game of Chance two-player plot matches", {
-  plotName <- results[["results"]][["CIPlot"]][["data"]]
+  plotName <- results[["results"]][["ciPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning-two-players")
 
@@ -27,7 +27,7 @@ test_that("Game of Chance summaryTable two-player results match", {
 
 ## three players
 options <- jaspTools::analysisOptions("LSgameofchance")
-options$winPoints <- 4
+options$pointsToWin <- 4
 options$players <- list(list(values =  c(1,1)), list(values = c(1, 2)), list(values = c(2, 3)))
 
 set.seed(1)
@@ -35,7 +35,7 @@ dataset <- NULL
 results <- jaspTools::runAnalysis("LSgameofchance", dataset, options)#, makeTests = TRUE)
 
 test_that("Probability of Player 1 Winning plot matches", {
-  plotName <- results[["results"]][["CIPlot"]][["data"]]
+  plotName <- results[["results"]][["ciPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "probability-of-player-1-winning")
 })
