@@ -344,6 +344,7 @@ Upgrades
 		ChangeRename {	from: "CI";			to: "ciLevel"						}
 
 		ChangeRename {	from: "showPropDistPlot";		to: "priorPosteriorProportion"			}
+		ChangeRename {	from: "CIPropDistPlot";			to: "priorPosteriorProportionCi"		}
 		ChangeRename {	from: "legendPropDistPlot";		to: "priorPosteriorProportionLegend"	}
 
 		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}
@@ -367,6 +368,7 @@ Upgrades
 		ChangeRename {	from: "color";				to: "needlePlotCrossingNeedlesColored"			}
 
 		ChangeRename {	from: "showPropDistPlot";		to: "priorPosteriorProportion"			}
+		ChangeRename {	from: "CIPropDistPlot";			to: "priorPosteriorProportionCi"		}
 		ChangeRename {	from: "legendPropDistPlot";		to: "priorPosteriorProportionLegend"	}
 
 		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}

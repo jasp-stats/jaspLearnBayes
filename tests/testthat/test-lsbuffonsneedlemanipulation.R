@@ -15,7 +15,7 @@ options$priorPosteriorProportion       <- TRUE
 options$priorPosteriorProportionLegend <- TRUE
 options$priorPosteriorPiCi             <- TRUE
 options$priorPosteriorProportionLegend <- TRUE
-options$CIPropDistPlot                 <- TRUE
+options$priorPosteriorProportionCi                 <- TRUE
 options$priorPosteriorPiLegend         <- TRUE
 
 set.seed(1)

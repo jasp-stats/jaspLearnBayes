@@ -109,7 +109,7 @@ Form
 
 			CheckBox
 			{
-				name: "CIPropDistPlot";
+				name: "priorPosteriorProportionCi";
 				label: qsTr("Credible interval")
 				checked: false
 			}

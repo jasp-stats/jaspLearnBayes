@@ -129,7 +129,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    propDistPlot$position <- 3
    #propDistPlot$dependOn(c("numberOfThrows", "priorAlpha", "priorBeta", "lengthToDistanceProportion", "ciLevel", "priorPosteriorProportion"))
    propDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]],
-                         options = c("priorPosteriorProportion", "CIPropDistPlot", "priorPosteriorProportionLegend"))
+                         options = c("priorPosteriorProportion", "priorPosteriorProportionCi", "priorPosteriorProportionLegend"))
    #propDistPlot$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
 
    # values
@@ -158,7 +158,7 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
        ggplot2::theme(legend.position = "right")
    }
 
-   if (options[["CIPropDistPlot"]]){
+   if (options[["priorPosteriorProportionCi"]]){
      propCI95lower <- qbeta((1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE)
      propCI95lower <- round(propCI95lower, digit = 2)
 
