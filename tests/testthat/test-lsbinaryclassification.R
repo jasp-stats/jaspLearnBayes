@@ -4,37 +4,37 @@ context("Learn Bayes - Binary Classification")
 options <- jaspTools::analysisOptions("LSbinaryclassification")
 options$introductoryText   <- FALSE
 options$inputType   <- "pointEstimates"
-options$prevalence  <- "0.1"
-options$sensitivity <- "0.8"
-options$specificity <- "0.8"
+options$prevalence  <- 0.1
+options$sensitivity <- 0.8
+options$specificity <- 0.8
 
-options$plotPriorPosteriorPositive <- TRUE
-options$plotIconPlot               <- TRUE
-options$plotROC                    <- TRUE
-options$plotTestCharacteristics    <- TRUE
-options$plotVaryingPrevalence      <- TRUE
-options$plotAlluvial               <- TRUE
-options$plotSignal                 <- TRUE
-options$plotEstimates              <- TRUE
-options$plotPrevalence             <- TRUE
-options$plotSensitivity            <- TRUE
-options$plotSpecificity            <- TRUE
-options$plotTruePositive           <- TRUE
-options$plotTrueNegative           <- TRUE
-options$plotFalsePositive          <- TRUE
-options$plotFalseNegative          <- TRUE
-options$plotPPV                    <- TRUE
-options$plotNPV                    <- TRUE
-options$plotFDR                    <- TRUE
-options$plotFOR                    <- TRUE
-options$plotFPF                    <- TRUE
-options$plotFNF                    <- TRUE
-options$plotAccuracy               <- TRUE
+options$probabilityPositivePlot                                 <- TRUE
+options$iconPlot                                                <- TRUE
+options$rocPlot                                                 <- TRUE
+options$testCharacteristicsPlot                                 <- TRUE
+options$predictiveValuesByPrevalence                            <- TRUE
+options$alluvialPlot                                            <- TRUE
+options$signalDetectionPlot                                     <- TRUE
+options$estimatesPlot                                           <- TRUE
+options$estimatesPlotPrevalence                                 <- TRUE
+options$estimatesPlotSensitivity                                <- TRUE
+options$estimatesPlotSpecificity                                <- TRUE
+options$estimatesPlotTruePositive                               <- TRUE
+options$estimatesPlotTrueNegative                               <- TRUE
+options$estimatesPlotFalsePositive                              <- TRUE
+options$estimatesPlotFalseNegative                              <- TRUE
+options$estimatesPlotPositivePredictiveValue                    <- TRUE
+options$estimatesPlotNegativePredictiveValue                    <- TRUE
+options$estimatesPlotFalseDiscoveryRate                         <- TRUE
+options$estimatesPlotFalseOmissionRate                          <- TRUE
+options$estimatesPlotFalsePositiveRate                          <- TRUE
+options$estimatesPlotFalseNegativeRate                          <- TRUE
+options$estimatesPlotAccuracy                                   <- TRUE
 
-options$statistics <- FALSE
-options$confusionMatrix <- TRUE
-options$confusionMatrixAddInfo <- TRUE
-options$confusionMatrixType <- "both"
+options$statistics                    <- FALSE
+options$confusionMatrix               <- TRUE
+options$confusionMatrixAdditionalInfo <- TRUE
+options$confusionMatrixType           <- "both"
 
 set.seed(1)
 results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
@@ -43,49 +43,49 @@ results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
 
 test_that("Alluvial plot matches", {
   testthat::skip_on_os("windows") # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotAlluvial"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_alluvialPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "alluvial-plot", dir="LSbinaryclassification")
 })
 
 test_that("Estimates plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotEstimates"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_estimatesPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "estimates", dir="LSbinaryclassification")
 })
 
 test_that("Icon plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotIconPlot"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_iconPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "icon-plot", dir="LSbinaryclassification")
 })
 
 test_that("Probability positive plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotPriorPosteriorPositive"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_probabilityPositivePlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "probability-positive", dir="LSbinaryclassification")
 })
 
 test_that("Receiving Operating Characteristic Curve plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotROC"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_rocPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "receiving-operating-characteristic-curve", dir="LSbinaryclassification")
 })
 
 test_that("Signal detection plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotSignal"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_signalDetectionPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "signal-detection", dir="LSbinaryclassification")
 })
 
 test_that("Test characteristics plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotTestCharacteristics"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_testCharacteristicsPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "test-characteristics", dir="LSbinaryclassification")
 })
 
 test_that("PPV and NPV by prevalence plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotVaryingPrevalence"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_predictiveValuesByPrevalence"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "ppv-and-npv-by-prevalence", dir="LSbinaryclassification")
 })
@@ -107,43 +107,43 @@ test_that("Confusion matrix table results match", {
 options <- jaspTools::analysisOptions("LSbinaryclassification")
 options$introductoryText <- FALSE
 options$inputType <- "data"
-options$marker <- "marker"
-options$labels <- "condition"
+options$marker    <- "marker"
+options$labels    <- "condition"
 options$threshold <- "0"
-options$prevalenceAlpha  <- "1"
-options$prevalenceBeta   <- "9"
-options$sensitivityAlpha <- "8"
-options$sensitivityBeta  <- "2"
-options$specificityAlpha <- "8"
-options$specificityBeta  <- "2"
+options$priorPrevalenceAlpha  <- 1
+options$priorPrevalenceBeta   <- 9
+options$priorSensitivityAlpha <- 8
+options$priorSensitivityBeta  <- 2
+options$priorSpecificityAlpha <- 8
+options$priorSpecificityBeta  <- 2
 
-options$plotPriorPosteriorPositive <- TRUE
-options$plotIconPlot               <- FALSE
-options$plotROC                    <- TRUE
-options$plotTestCharacteristics    <- TRUE
-options$plotVaryingPrevalence      <- TRUE
-options$plotAlluvial               <- TRUE
-options$plotSignal                 <- TRUE
-options$plotEstimates              <- TRUE
-options$plotPrevalence             <- TRUE
-options$plotSensitivity            <- TRUE
-options$plotSpecificity            <- TRUE
-options$plotTruePositive           <- TRUE
-options$plotTrueNegative           <- TRUE
-options$plotFalsePositive          <- TRUE
-options$plotFalseNegative          <- TRUE
-options$plotPPV                    <- TRUE
-options$plotNPV                    <- TRUE
-options$plotFDR                    <- TRUE
-options$plotFOR                    <- TRUE
-options$plotFPF                    <- TRUE
-options$plotFNF                    <- TRUE
-options$plotAccuracy               <- TRUE
+options$probabilityPositivePlot                 <- TRUE
+options$iconPlot                                <- FALSE
+options$rocPlot                                 <- TRUE
+options$testCharacteristicsPlot                 <- TRUE
+options$predictiveValuesByPrevalence            <- TRUE
+options$alluvialPlot                            <- TRUE
+options$signalDetectionPlot                     <- TRUE
+options$estimatesPlot                           <- TRUE
+options$estimatesPlotPrevalence                 <- TRUE
+options$estimatesPlotSensitivity                <- TRUE
+options$estimatesPlotSpecificity                <- TRUE
+options$estimatesPlotTruePositive               <- TRUE
+options$estimatesPlotTrueNegative               <- TRUE
+options$estimatesPlotFalsePositive              <- TRUE
+options$estimatesPlotFalseNegative              <- TRUE
+options$estimatesPlotPositivePredictiveValue    <- TRUE
+options$estimatesPlotNegativePredictiveValue    <- TRUE
+options$estimatesPlotFalseDiscoveryRate         <- TRUE
+options$estimatesPlotFalseOmissionRate          <- TRUE
+options$estimatesPlotFalsePositiveRate          <- TRUE
+options$estimatesPlotFalseNegativeRate          <- TRUE
+options$estimatesPlotAccuracy                   <- TRUE
 
-options$statistics <- TRUE
-options$confusionMatrix <- TRUE
-options$confusionMatrixAddInfo <- TRUE
-options$confusionMatrixType <- "both"
+options$statistics                    <- TRUE
+options$confusionMatrix               <- TRUE
+options$confusionMatrixAdditionalInfo <- TRUE
+options$confusionMatrixType           <- "both"
 
 set.seed(1)
 results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
@@ -152,19 +152,19 @@ results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
 
 test_that("Alluvial plot matches", {
   testthat::skip_on_os("windows") # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotAlluvial"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_alluvialPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "alluvial-plot-data", dir="LSbinaryclassification")
 })
 
 test_that("Estimates plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotEstimates"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_estimatesPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "estimates-data", dir="LSbinaryclassification")
 })
 
 test_that("Probability positive plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotPriorPosteriorPositive"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_probabilityPositivePlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "probability-positive-data", dir="LSbinaryclassification")
 })
@@ -173,7 +173,7 @@ test_that("Probability positive plot matches", {
   #TODO: Use Don's vdiffr version
   test_that("Receiving Operating Characteristic Curve plot matches", {
     skip_on_os(c("mac", "linux"))
-    plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotROC"]][["data"]]
+    plotName <- results[["results"]][["plots"]][["collection"]][["plots_rocPlot"]][["data"]]
     testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
     jaspTools::expect_equal_plots(testPlot, "receiving-operating-characteristic-curve-data", dir="LSbinaryclassification")
   })
@@ -181,19 +181,19 @@ test_that("Probability positive plot matches", {
 
 
 test_that("Signal detection plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotSignal"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_signalDetectionPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "signal-detection-data", dir="LSbinaryclassification")
 })
 
 test_that("Test characteristics plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotTestCharacteristics"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_testCharacteristicsPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "test-characteristics-data", dir="LSbinaryclassification")
 })
 
 test_that("PPV and NPV by prevalence plot matches", {
-  plotName <- results[["results"]][["plots"]][["collection"]][["plots_plotVaryingPrevalence"]][["data"]]
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_predictiveValuesByPrevalence"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "ppv-and-npv-by-prevalence-data", dir="LSbinaryclassification")
 })

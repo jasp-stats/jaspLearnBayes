@@ -10,6 +10,48 @@ Upgrades
 		fromVersion:	"0.16.4"
 		toVersion:		"0.17.0"
 
+		ChangeRename {	from: "prevalenceAlpha";	to: "priorPrevalenceAlpha"	}
+		ChangeRename {	from: "prevalenceBeta";		to: "priorPrevalenceBeta"	}
+		ChangeRename {	from: "sensitivityAlpha";	to: "priorSensitivityAlpha"	}
+		ChangeRename {	from: "sensitivityBeta";	to: "priorSensitivityBeta"	}
+		ChangeRename {	from: "specificityAlpha";	to: "priorSpecificityAlpha"	}
+		ChangeRename {	from: "specificityBeta";	to: "priorSpecificityBeta"	}
+
+		ChangeRename {	from: "confusionMatrixAddInfo";	to: "confusionMatrixAdditionalInfo"	}
+
+		ChangeRename {	from: "plotPriorPosteriorPositive";				to: "probabilityPositivePlot" }
+		ChangeRename {	from: "plotPriorPosteriorPositiveDistribution";	to: "probabilityPositivePlotEntireDistribution" }
+
+		ChangeRename {	from: "plotIconPlot";	to: "iconPlot"	}
+
+		ChangeRename {	from: "plotROC";		to: "rocPlot"								}
+		ChangeRename {	from: "plotRocLines";	to: "rocPlotPosteriorRealizations"			}
+		ChangeRename {	from: "plotRocLinesNr"; to: "rocPlotPosteriorRealizationsNumber"	}
+
+		ChangeRename {	from: "plotTestCharacteristics";	to: "testCharacteristicsPlot"		}
+		ChangeRename {	from: "plotVaryingPrevalence";		to: "predictiveValuesByPrevalence"	}
+		ChangeRename {	from: "plotAlluvial";				to: "alluvialPlot"					}
+		ChangeRename {	from: "plotSignal";					to: "signalDetectionPlot"			}
+
+		ChangeRename {	from: "plotEstimates";				to: "estimatesPlot"								}
+		ChangeRename {	from: "plotPrevalence";				to: "estimatesPlotPrevalence"					}
+		ChangeRename {	from: "plotSensitivity";			to: "estimatesPlotSensitivity"					}
+		ChangeRename {	from: "plotSpecificity";			to: "estimatesPlotSpecificity"					}
+		ChangeRename {	from: "plotTruePositive";			to: "estimatesPlotTruePositive"					}
+		ChangeRename {	from: "plotFalsePositive";			to: "estimatesPlotFalsePositive"				}
+		ChangeRename {	from: "plotTrueNegative";			to: "estimatesPlotTrueNegative"					}
+		ChangeRename {	from: "plotFalseNegative";			to: "estimatesPlotFalseNegative"				}
+		ChangeRename {	from: "plotPPV";					to: "estimatesPlotPositivePredictiveValue"		}
+		ChangeRename {	from: "plotNPV";					to: "estimatesPlotNegativePredictiveValue"		}
+		ChangeRename {	from: "plotFDR";					to: "estimatesPlotFalseDiscoveryRate"			}
+		ChangeRename {	from: "plotFOR";					to: "estimatesPlotFalseOmissionRate"			}
+		ChangeRename {	from: "plotFPF";					to: "estimatesPlotFalsePositiveRate"			}
+		ChangeRename {	from: "plotFNF";					to: "estimatesPlotFalseNegativeRate"			}
+		ChangeRename {	from: "plotAccuracy";				to: "estimatesPlotAccuracy"						}
+
+		ChangeRename {	from: "credibleInterval";	to: "ci"		}
+		ChangeRename {	from: "numberOfSamples";	to: "samples"	}
+
 		// qml_components/LSintrotext.qml
 		ChangeRename { from: "introText";	to: "introductoryText" }
 	}
@@ -130,7 +172,7 @@ Upgrades
 
 	}
 
-		Upgrade
+	Upgrade
 	{
 		functionName: 	"LSbinomialtesting"
 		fromVersion:	"0.16.4"
@@ -179,7 +221,7 @@ Upgrades
 					newModel["betaPriorBeta"] 	= model["parBeta"];
 					newModel["spikePoint"] 		= model["parPoint"];
 					newModel["value"]           = model["value"];
-					
+
 					return newModel;
 				})
 				return newModels;
@@ -285,6 +327,72 @@ Upgrades
 		ChangeRename { from: "bfTypevsNameSequential";					to: "sequentialAnalysisPredictivePerformancePlotBfVsHypothesis"}
 		ChangeRename { from: "bayesFactorTypeSequential";				to: "sequentialAnalysisPredictivePerformancePlotBfType"}
 		ChangeRename { from: "plotsIterativeUpdatingTable";				to: "sequentialAnalysisPredictivePerformancePlotUpdatingTable"}
+	}
 
+
+	Upgrade
+	{
+		functionName:		"LSBuffonsneedlemanipulation"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "length";		to: "lengthToDistanceProportion"	}
+		ChangeRename {	from: "n";			to: "numberOfThrows"				}
+		ChangeRename {	from: "k";			to: "numberOfCrosses"				}
+		ChangeRename {	from: "a";			to: "priorAlpha"					}
+		ChangeRename {	from: "b";			to: "priorBeta"						}
+		ChangeRename {	from: "CI";			to: "ciLevel"						}
+
+		ChangeRename {	from: "showPropDistPlot";		to: "priorPosteriorProportion"			}
+		ChangeRename {	from: "legendPropDistPlot";		to: "priorPosteriorProportionLegend"	}
+
+		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}
+		ChangeRename {	from: "CIArrow";				to: "priorPosteriorPiCi"		}
+		ChangeRename {	from: "legendPiDistPlot";		to: "priorPosteriorPiLegend"	}
+	}
+
+	Upgrade
+	{
+		functionName:		"LSBuffonsneedlesimulation"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "length";		to: "lengthToDistanceProportion"	}
+		ChangeRename {	from: "n";			to: "numberOfThrows"				}
+		ChangeRename {	from: "a";			to: "priorAlpha"					}
+		ChangeRename {	from: "b";			to: "priorBeta"						}
+		ChangeRename {	from: "CI";			to: "ciLevel"						}
+
+		ChangeRename {	from: "showNeedlePlot";		to: "needlePlot"			}
+		ChangeRename {	from: "color";				to: "needlePlotCrossingNeedlesColored"			}
+
+		ChangeRename {	from: "showPropDistPlot";		to: "priorPosteriorProportion"			}
+		ChangeRename {	from: "legendPropDistPlot";		to: "priorPosteriorProportionLegend"	}
+
+		ChangeRename {	from: "showPiDistPlot";			to: "priorPosteriorPi"			}
+		ChangeRename {	from: "CIArrow";				to: "priorPosteriorPiCi"		}
+		ChangeRename {	from: "legendPiDistPlot";		to: "priorPosteriorPiLegend"	}
+	}
+
+	Upgrade
+	{
+		functionName:		"LSgameofchance"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "winPoints";	to: "pointsToWin"				}
+		ChangeRename {	from: "nSims";		to: "numberOfSimulatedGames"	}
+		ChangeRename {	from: "CI";			to: "ci"						}
+	}
+
+	Upgrade
+	{
+		functionName:		"LSgameofskill"
+		fromVersion:		"0.16.4"
+		toVersion:			"0.17.0"
+
+		ChangeRename {	from: "winPoints";	to: "pointsToWin"				}
+		ChangeRename {	from: "nSims";		to: "numberOfSimulatedGames"	}
+		ChangeRename {	from: "CI";			to: "ci"						}
 	}
 }

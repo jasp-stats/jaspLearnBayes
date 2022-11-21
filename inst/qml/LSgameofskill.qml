@@ -41,7 +41,7 @@ Form {
 
 	IntegerField  
 	{ 
-		name: "winPoints"; 
+		name: "pointsToWin"; 
 		label: qsTr("Points needed to win the game"); 
 		fieldWidth: 50
 		defaultValue: 2 
@@ -49,7 +49,7 @@ Form {
 
 	IntegerField   
 	{ 
-		name: "nSims"; 
+		name: "numberOfSimulatedGames"; 
 		label: qsTr("Number of simulated games"); 
 		fieldWidth: 50
 		defaultValue: 500
@@ -58,7 +58,7 @@ Form {
 
 	CheckBox 
 	{ 
-		name: "CI"; 
+		name: "ci"; 
 		label: qsTr("95% HPD"); 
 		checked: true 
 	}
