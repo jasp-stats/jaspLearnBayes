@@ -589,10 +589,6 @@ msgid "Number of future trials"
 msgstr ""
 
 msgctxt "LSestimationpredictions|"
-msgid "Summary"
-msgstr ""
-
-msgctxt "LSestimationpredictions|"
 msgid "Point estimate"
 msgstr ""
 
@@ -600,10 +596,6 @@ msgstr ""
 msgctxt "LSestimationpredictions|"
 msgid "Plots"
 msgstr "绘图"
-
-msgctxt "LSestimationpredictions|"
-msgid "Posterior predictive distribution"
-msgstr ""
 
 msgctxt "LSestimationpredictions|"
 msgid "All"
@@ -631,10 +623,6 @@ msgstr ""
 
 msgctxt "LSestimationpredictions|"
 msgid "Upper"
-msgstr ""
-
-msgctxt "LSestimationpredictions|"
-msgid "Show sample proportions"
 msgstr ""
 
 msgctxt "LSestimationpredictions|"
@@ -698,10 +686,6 @@ msgid "Sequential Analysis"
 msgstr ""
 
 msgctxt "LSestimationsequential|"
-msgid "Point estimate"
-msgstr ""
-
-msgctxt "LSestimationsequential|"
 msgid "CI"
 msgstr ""
 
@@ -718,10 +702,6 @@ msgid "Updating table"
 msgstr ""
 
 msgctxt "LSestimationsequential|"
-msgid "Interval"
-msgstr ""
-
-msgctxt "LSestimationsequential|"
 msgid "Lower"
 msgstr ""
 
@@ -735,10 +715,6 @@ msgstr ""
 
 msgctxt "LSestimationsequential|"
 msgid "Stacked"
-msgstr ""
-
-msgctxt "LSestimationsequential|"
-msgid "Stacked distributions"
 msgstr ""
 
 msgctxt "LSestimationsequential|"
@@ -795,10 +771,6 @@ msgctxt "LSgaussiandatainput|"
 msgid "Selected"
 msgstr ""
 
-msgctxt "LSintrotext|"
-msgid "Introductory texts"
-msgstr ""
-
 msgctxt "LStestingpredictions|"
 msgid "Posterior Prediction"
 msgstr ""
@@ -808,20 +780,7 @@ msgid "Number of future trials"
 msgstr ""
 
 msgctxt "LStestingpredictions|"
-msgid "Summary"
-msgstr ""
-
-msgctxt "LStestingpredictions|"
 msgid "Point estimate"
-msgstr ""
-
-#, fuzzy
-msgctxt "LStestingpredictions|"
-msgid "Plots"
-msgstr "绘图"
-
-msgctxt "LStestingpredictions|"
-msgid "Posterior predictive distribution"
 msgstr ""
 
 msgctxt "LStestingpredictions|"
@@ -873,19 +832,7 @@ msgid "Upper"
 msgstr ""
 
 msgctxt "LStestingpredictions|"
-msgid "Show sample proportions"
-msgstr ""
-
-msgctxt "LStestingpredictions|"
 msgid "Predictions table"
-msgstr ""
-
-msgctxt "LStestingpredictiveperformance|"
-msgid "Predictive Performance"
-msgstr ""
-
-msgctxt "LStestingpredictiveperformance|"
-msgid "Prior predictive distribution"
 msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
@@ -937,10 +884,6 @@ msgid "Predictions table"
 msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
-msgid "Predictive accuracy"
-msgstr ""
-
-msgctxt "LStestingpredictiveperformance|"
 msgid "Normalized"
 msgstr ""
 
@@ -970,10 +913,6 @@ msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "log(BF₁₀)"
-msgstr ""
-
-msgctxt "LStestingpriorandposterior|"
-msgid "Prior and Posterior Distributions"
 msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
@@ -1038,10 +977,6 @@ msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Sequential Analysis"
-msgstr ""
-
-msgctxt "LStestingsequential|"
-msgid "Test results"
 msgstr ""
 
 msgctxt "LStestingsequential|"
@@ -1110,14 +1045,6 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior for the proportion of crosses"
-msgstr ""
-
-msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Prior parameter a: "
-msgstr ""
-
-msgctxt "LSBuffonsneedlemanipulation|"
-msgid "Prior parameter b:"
 msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
@@ -1222,4 +1149,108 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "to"
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter α: "
+msgstr ""
+
+msgctxt "LSBuffonsneedlemanipulation|"
+msgid "Prior parameter β:"
+msgstr ""
+
+msgctxt "LSestimationpredictions|"
+msgid "Summary table"
+msgstr ""
+
+msgctxt "LSestimationpredictions|"
+msgid "Distribution plot"
+msgstr ""
+
+msgctxt "LSestimationpredictions|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LSestimationpredictions|"
+msgid "As sample proportion"
+msgstr ""
+
+msgctxt "LSestimationpriorandposterior|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LSestimationsequential|"
+msgid "Point estimate plot"
+msgstr ""
+
+msgctxt "LSestimationsequential|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LSestimationsequential|"
+msgid "Interval estimate plot"
+msgstr ""
+
+msgctxt "LSestimationsequential|"
+msgid "Stacked distributions plot"
+msgstr ""
+
+msgctxt "LSintrotext|"
+msgid "Introductory text"
+msgstr ""
+
+msgctxt "LStestingpredictions|"
+msgid "Summary table"
+msgstr ""
+
+msgctxt "LStestingpredictions|"
+msgid "Predictive distribution plot"
+msgstr ""
+
+msgctxt "LStestingpredictions|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LStestingpredictions|"
+msgid "As sample proportion"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Prior Predictive Performance"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Distribution plot"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Predictive accuracy plot"
+msgstr ""
+
+msgctxt "LStestingpredictiveperformance|"
+msgid "Comparison"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Prior and Posterior"
+msgstr ""
+
+msgctxt "LStestingpriorandposterior|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LStestingsequential|"
+msgid "Predictive performance"
+msgstr ""
+
+msgctxt "LStestingsequential|"
+msgid "Type"
+msgstr ""
+
+msgctxt "LStestingsequential|"
+msgid "Comparison"
 msgstr ""
