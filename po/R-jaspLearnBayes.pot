@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.0\n"
-"POT-Creation-Date: 2022-11-30 10:31\n"
+"POT-Creation-Date: 2022-12-17 02:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -526,9 +526,6 @@ msgstr ""
 msgid "Please remove duplicates from the %s names."
 msgstr ""
 
-msgid "Incorrect arguments for the inverse cumulative density function"
-msgstr ""
-
 msgid "'Successes'"
 msgstr ""
 
@@ -800,9 +797,6 @@ msgid "normal (%.2f, %.2f)"
 msgstr ""
 
 msgid "normal (%s, %.2f)"
-msgstr ""
-
-msgid "USE '.dataArrowGaussianLS()'"
 msgstr ""
 
 msgid "Prior (μ)"
