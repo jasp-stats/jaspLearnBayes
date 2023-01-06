@@ -73,10 +73,14 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 }
 
 .bcParseOptions <- function(jaspResults, options) {
-  options <- .parseAndStoreFormulaOptions(jaspResults, options,
-                                          c(levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = "")),
-                                            "threshold")
-                                          )
+  options <- .parseAndStoreFormulaOptions(
+    jaspResults, options,
+    c("prevalence", "sensitivity", "specificity", 
+    "priorPrevalenceAlpha", "priorPrevalenceBeta", 
+    "priorSensitivityAlpha", "priorSensitivityBeta", 
+    "priorSpecificityAlpha", "priorSpecificityBeta", 
+    "threshold")
+    )
 
   if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
 
