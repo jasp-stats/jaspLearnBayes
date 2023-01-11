@@ -194,94 +194,90 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
   l <- options[["lengthToDistanceProportion"]]*d/100
   ## 3. Distribution Plot
   if (options[["priorPosteriorPi"]]){
-   piDistPlot <- createJaspPlot(title = gettextf("Implied Prior and Posterior for  %s", "\u03c0"),
-                                width = 480, height = 320)
-   piDistPlot$position <- 4
-   #piDistPlot$dependOn(c("numberOfThrows", "priorAlpha", "priorBeta", "lengthToDistanceProportion", "ciLevel", "priorPosteriorPi"))
-   piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]],
-                       options = c("priorPosteriorPi", "priorPosteriorPiLegend", "priorPosteriorPiCi", "min", "max", "highlight"))
+    piDistPlot <- createJaspPlot(title = gettextf("Implied Prior and Posterior for  %s", "\u03c0"),
+                                 width = 480, height = 320)
+    piDistPlot$position <- 4
+    #piDistPlot$dependOn(c("numberOfThrows", "priorAlpha", "priorBeta", "lengthToDistanceProportion", "ciLevel", "priorPosteriorPi"))
+    piDistPlot$dependOn(optionsFromObject = jaspResults[["summaryTable"]],
+                        options = c("priorPosteriorPi", "priorPosteriorPiLegend", "priorPosteriorPiCi", "min", "max", "highlight"))
 
-   CI95lower <- 2 * l / (qbeta((1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE) * d)
-   CI95lower <- round(CI95lower, digit = 2)
+    CI95lower <- 2 * l / (qbeta((1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE) * d)
+    CI95lower <- round(CI95lower, digit = 2)
 
-   med <- 2 * l / (qbeta(.5, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE) * d)
-   med <- round(med, digit = 2)
+    med <- 2 * l / (qbeta(.5, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE) * d)
+    med <- round(med, digit = 2)
 
-   CI95upper <- 2 * l / (qbeta(1-(1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE) * d)
-   CI95upper <- round(CI95upper, digit = 2)
+    CI95upper <- 2 * l / (qbeta(1-(1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE) * d)
+    CI95upper <- round(CI95upper, digit = 2)
 
-   xlimLower <- min(2,CI95lower-0.5)
-   xlimUpperer <- max(4,CI95upper+0.5)
+    xlimLower <- min(2,CI95lower-0.5)
+    xlimUpperer <- max(4,CI95upper+0.5)
 
-   x <- seq(xlimLower,xlimUpperer,length.out = 201)
-   yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["priorAlpha"]] + crosses, options[["priorBeta"]] + options[["numberOfThrows"]] - crosses)
-   yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["priorAlpha"]], options[["priorBeta"]])
-   # to avoid crash
-   if(max(yPost) == 0){
-      yPi <- seq(0, 1.6*max(yPrior), 1.6*max(yPost)/99)
-   }else{
-      yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
-   }
+    xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(xlimLower, xlimUpperer, options[["min"]], options[["max"]]))
 
+    x <- seq(min(xBreaks), max(xBreaks), length.out = 201)
+    yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["priorAlpha"]] + crosses, options[["priorBeta"]] + options[["numberOfThrows"]] - crosses)
+    yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["priorAlpha"]], options[["priorBeta"]])
 
-   xInterval <- seq(options[["min"]], options[["max"]], length.out = 100)
-   pInterval <- 2*l/(xInterval*d)
-   y <- 2 * l / (xInterval^2 * d) * dbeta(pInterval, options[["priorAlpha"]] + crosses, options[["priorBeta"]] + options[["numberOfThrows"]] - crosses)
+    yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, yPost, yPrior))
 
-   data <- data.frame(values = c(x, x, rep(pi, 100)),
-                     density = c(yPost, yPrior, yPi),
-                     group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("pi", 100))
-   )
+    xInterval <- seq(options[["min"]], options[["max"]], length.out = 100)
+    pInterval <- 2*l/(xInterval*d)
+    yInterval <- 2 * l / (xInterval^2 * d) * dbeta(pInterval, options[["priorAlpha"]] + crosses, options[["priorBeta"]] + options[["numberOfThrows"]] - crosses)
 
-   #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),"\u03c0"))
-   labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
+    yPi <- range(yBreaks)
 
-   piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
-     ggplot2::ggtitle("") + # for , pi
-     ggplot2::xlab("\u03c0") +
-     ggplot2::ylab(gettext("Density")) +
-     ggplot2::coord_cartesian(xlim = c(xlimLower, xlimUpperer), ylim = c(0, 1.6*max(yPost)))
+    data <- data.frame(
+      values  = c(x, x, rep(pi, 2)),
+      density = c(yPost, yPrior, yPi),
+      group   = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("pi", 2))
+    )
 
-   if (options[["highlight"]]){
+    labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
+    piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
+      jaspGraphs::scale_x_continuous(name = "\u03c0",           breaks = xBreaks, limits = range(xBreaks)) +
+      jaspGraphs::scale_y_continuous(name = gettext("Density"), breaks = yBreaks, limits = 1.2*range(yBreaks))
+
+    if (options[["highlight"]]){
       piDistPlot0 <- piDistPlot0 +
-        ggplot2::geom_polygon(data = data.frame(x = c(xInterval,rev(xInterval)), y = c(y, rep(0,100))),
-                              ggplot2::aes(x = x, y = y),
-                              fill = "steelblue")
-   }
-   piDistPlot0 <- piDistPlot0 +
-     ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
-     ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
-                                                "Implied Prior" = "black",
-                                                "pi" = "red"),
-                                 labels = labels) +
-     ggplot2::scale_linetype_manual("", values = c("Implied Posterior" = "solid",
-                                                   "Implied Prior" = "dashed",
-                                                   "pi" = "solid"),
-                                    labels = labels)
+        ggplot2::geom_ribbon(
+          data    = data.frame(x = xInterval, y = yInterval),
+          mapping = ggplot2::aes(x = x, ymin = 0, ymax = y),
+          fill    = "steelblue", inherit.aes = FALSE)
+    }
+    piDistPlot0 <- piDistPlot0 +
+      ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
+      ggplot2::scale_color_manual("", values = c("Implied Posterior" = "black",
+                                                 "Implied Prior" = "black",
+                                                 "pi" = "red"),
+                                  labels = labels) +
+      ggplot2::scale_linetype_manual("", values = c("Implied Posterior" = "solid",
+                                                    "Implied Prior" = "dashed",
+                                                    "pi" = "solid"),
+                                     labels = labels)
 
-   # fill in the plot
-   piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
+    # fill in the plot
+    piDistPlot$plotObject <- jaspGraphs::themeJasp(piDistPlot0)
 
-   if (options[["priorPosteriorPiLegend"]]){
-     piDistPlot$plotObject <-  piDistPlot$plotObject +
-       ggplot2::theme(legend.position = "right")
-   }
+    if (options[["priorPosteriorPiLegend"]]){
+      piDistPlot$plotObject <-  piDistPlot$plotObject +
+        ggplot2::theme(legend.position = "right")
+    }
 
-   if (options[["priorPosteriorPiCi"]]){
+    if (options[["priorPosteriorPiCi"]]){
 
 
-     piDistPlot$plotObject <- piDistPlot$plotObject +
-       ggplot2::annotate("text", x = xlimUpperer*0.8, y = 1.6*max(yPost),
-                         label = gettextf("%1$s%% CI: [%2$s, %3$s]", options[["ciLevel"]]*100, CI95lower, CI95upper),
+      piDistPlot$plotObject <- piDistPlot$plotObject +
+        ggplot2::annotate("text", x = (CI95lower + CI95upper)/2, y = max(yBreaks),
+                          label = gettextf("%1$s%% CI: [%2$s, %3$s]", options[["ciLevel"]]*100, CI95lower, CI95upper),
+                          size = 6, vjust = -1
+        ) +
+        ggplot2::annotate("segment", x = CI95lower, xend = CI95upper,
+                          y = max(yBreaks), yend = max(yBreaks),
+                          arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
+                          size = 1)
 
-                         size = 6
-       ) +
-       ggplot2::annotate("segment", x = CI95lower, xend = CI95upper,
-                         y = 1.45*max(yPost), yend = 1.45*max(yPost),
-                         arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
-                         size = 1)
-
-   }
-   jaspResults[["piDistPlot"]] <- piDistPlot
+    }
+    jaspResults[["piDistPlot"]] <- piDistPlot
   }
 }

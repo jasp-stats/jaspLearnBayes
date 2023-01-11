@@ -152,40 +152,39 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     xlimLower <- min(2,CI95lower-0.5)
     xlimUpperer <- max(4,CI95upper+0.5)
 
-    x <- seq(xlimLower,xlimUpperer,length.out = 201)
+    xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(xlimLower, xlimUpperer, options[["min"]], options[["max"]]))
+
+    x <- seq(min(xBreaks), max(xBreaks), length.out = 201)
+
     yPost <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["priorAlpha"]] + options[["numberOfCrosses"]], options[["priorBeta"]] + options[["numberOfThrows"]] - options[["numberOfCrosses"]])
     yPrior <- 2 * l / (x^2 * d) * dbeta((2 * l / (x * d)), options[["priorAlpha"]], options[["priorBeta"]])
 
-    # to avoid crash
-    if(max(yPost) == 0){
-      yPi <- seq(0, 1.6*max(yPrior), 1.6*max(yPost)/99)
-    }else{
-      yPi <- seq(0, 1.6*max(yPost), 1.6*max(yPost)/99)
-    }
+    yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, yPost, yPrior))
 
     xInterval <- seq(options[["min"]], options[["max"]], length.out = 100)
     pInterval <- 2*l/(xInterval*d)
-    y <- 2 * l / (xInterval^2 * d) * dbeta(pInterval, options[["priorAlpha"]] + options[["numberOfCrosses"]], options[["priorBeta"]] + options[["numberOfThrows"]] - options[["numberOfCrosses"]])
+    yInterval <- 2 * l / (xInterval^2 * d) * dbeta(pInterval, options[["priorAlpha"]] + options[["numberOfCrosses"]], options[["priorBeta"]] + options[["numberOfThrows"]] - options[["numberOfCrosses"]])
 
-    data <- data.frame(values = c(x, x, rep(pi, 100)),
-                      density = c(yPost, yPrior, yPi),
-                      group = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("pi", 100))
+    yPi <- range(yBreaks)
+
+    data <- data.frame(
+      values  = c(x, x, rep(pi, 2)),
+      density = c(yPost, yPrior, yPi),
+      group   = c(rep("Implied Posterior",201), rep("Implied Prior",201), rep("pi", 2))
     )
 
-    #data$group<-factor(data$group, levels=c(gettext("Implied Posterior"),gettext("Implied Prior"),gettext("\u03c0")))
     labels <- c(gettext("Implied Posterior"), gettext("Implied Prior"), "\u03c0")
-
     # plot
     piDistPlot0 <- ggplot2::ggplot(data = data,  ggplot2::aes(x = values, y = density)) +
-      ggplot2::ggtitle("") + # for , pi
-      ggplot2::xlab("\u03c0") +
-      ggplot2::ylab(gettext("Density")) +
-      ggplot2::coord_cartesian(xlim = c(xlimLower, xlimUpperer), ylim = c(0, 1.6*max(yPost)))
+      jaspGraphs::scale_x_continuous(name = "\u03c0",           breaks = xBreaks, limits = range(xBreaks)) +
+      jaspGraphs::scale_y_continuous(name = gettext("Density"), breaks = yBreaks, limits = 1.2*range(yBreaks))
+
     if (options[["highlight"]]){
-    piDistPlot0 <- piDistPlot0 +
-      ggplot2::geom_polygon(data = data.frame(x = c(xInterval,rev(xInterval)), y = c(y, rep(0,100))),
-                            ggplot2::aes(x = x, y = y),
-                            fill = "steelblue")
+      piDistPlot0 <- piDistPlot0 +
+        ggplot2::geom_ribbon(
+          data    = data.frame(x = xInterval, y = yInterval),
+          mapping = ggplot2::aes(x = x, ymin = 0, ymax = y),
+          fill    = "steelblue", inherit.aes = FALSE)
     }
     piDistPlot0 <- piDistPlot0 +
       ggplot2::geom_line(ggplot2::aes(color = group, linetype = group), size = 1) +
@@ -209,12 +208,12 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     if (options[["priorPosteriorPiCi"]]){
 
       piDistPlot$plotObject <- piDistPlot$plotObject +
-        ggplot2::annotate("text", x = xlimUpperer*0.8, y = 1.6*max(yPost),
+        ggplot2::annotate("text", x = (CI95lower + CI95upper)/2, y = max(yBreaks),
                           label = gettextf("%1$s%% CI: [%2$s, %3$s]", options[["ciLevel"]]*100, CI95lower, CI95upper),
-                          size = 6
+                          size = 6, vjust = -1
         ) +
         ggplot2::annotate("segment", x = CI95lower, xend = CI95upper,
-                          y = 1.45*max(yPost), yend = 1.45*max(yPost),
+                          y = max(yBreaks), yend = max(yBreaks),
                           arrow = grid::arrow(ends = "both", angle = 90, length = grid::unit(.2,"cm")),
                           size = 1)
 
