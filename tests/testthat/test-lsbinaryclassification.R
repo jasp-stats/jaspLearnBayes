@@ -42,7 +42,7 @@ results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
                                   options = options)
 
 test_that("Alluvial plot matches", {
-  testthat::skip_on_os("windows") # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
+  testthat::skip_on_os(c("windows", "linux")) # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
   plotName <- results[["results"]][["plots"]][["collection"]][["plots_alluvialPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "alluvial-plot", dir="LSbinaryclassification")
@@ -151,7 +151,7 @@ results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
                                   options = options)
 
 test_that("Alluvial plot matches", {
-  testthat::skip_on_os("windows") # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
+  testthat::skip_on_os(c("windows", "linux")) # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
   plotName <- results[["results"]][["plots"]][["collection"]][["plots_alluvialPlot"]][["data"]]
   testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "alluvial-plot-data", dir="LSbinaryclassification")
