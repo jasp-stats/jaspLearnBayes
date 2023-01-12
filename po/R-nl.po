@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2022-12-17 02:48\n"
-"PO-Revision-Date: 2022-06-09 15:20+0000\n"
-"Last-Translator: JASP Stats <b.boutin@uva.nl>\n"
+"PO-Revision-Date: 2023-01-13 12:30+0000\n"
+"Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/nl/>\n"
 "Language: nl\n"
@@ -12,24 +12,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 msgid "Summary Table"
 msgstr "Overzichtstabel"
 
-#, fuzzy
 msgid "Tosses"
-msgstr "Kruizen"
+msgstr "Gooien"
 
 msgid "Crosses"
 msgstr "Kruizen"
 
-#, fuzzy
 msgid "MLE for %s"
-msgstr "Mediaan voor %s"
+msgstr "MLE voor %s"
 
 msgid "Interval Mass"
-msgstr ""
+msgstr "Interval Massa"
 
 msgid "Median for %s"
 msgstr "Mediaan voor %s"
@@ -58,9 +56,8 @@ msgstr "Proportie van Kruizen"
 msgid "Density"
 msgstr "Dichtheid"
 
-#, fuzzy
 msgid "%1$s%% CI: [%2$s, %3$s]"
-msgstr "%s%% CI: [%s, %s]"
+msgstr "%1$s%% BI: [%2$s, %3$s]"
 
 msgid "Implied Prior and Posterior for %s"
 msgstr "Geïmpliceerde Prior en Posterior voor %s"
