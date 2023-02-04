@@ -1,27 +1,33 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-01-31 20:49+0000\n"
+"Last-Translator: Ünal Halit ÖZDEN <uozden@ticaret.edu.tr>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.16-dev\n"
 "X-Language: tr\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
 msgid "Learn Bayes"
-msgstr ""
+msgstr "Bayes Öğrenin"
 
 msgctxt "Description|"
 msgid "Counts"
-msgstr ""
+msgstr "Sayımlar"
 
 msgctxt "Description|"
 msgid "Binomial Estimation"
-msgstr ""
+msgstr "Binom Tahmini"
 
 msgctxt "Description|"
 msgid "Binomial Testing"
-msgstr ""
+msgstr "Binom Testi"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
@@ -37,27 +43,27 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Color palette"
-msgstr ""
+msgstr "Renk paleti"
 
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind"
-msgstr ""
+msgstr "Renk körü"
 
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind Alt."
-msgstr ""
+msgstr "Renk Körü Alt."
 
 msgctxt "LSbinomialestimation|"
 msgid "Viridis"
-msgstr ""
+msgstr "Viridis"
 
 msgctxt "LSbinomialestimation|"
 msgid "ggplot2"
-msgstr ""
+msgstr "ggplot2"
 
 msgctxt "LSbinomialestimation|"
 msgid "Gray"
-msgstr ""
+msgstr "Gri"
 
 msgctxt "LSbinomialestimation|"
 msgid "Model"
@@ -65,11 +71,11 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Distribution"
-msgstr ""
+msgstr "Dağılım"
 
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
-msgstr ""
+msgstr "parametreler (θ)"
 
 msgctxt "LSbinomialestimation|"
 msgid "Model "
@@ -81,7 +87,7 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Beta"
-msgstr ""
+msgstr "Beta"
 
 msgctxt "LSbinomialestimation|"
 msgid "α"
@@ -89,39 +95,39 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "β"
-msgstr ""
+msgstr "b"
 
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
-msgstr ""
+msgstr "θ₀"
 
 msgctxt "LSbinomialtesting|"
 msgid "Color palette"
-msgstr ""
+msgstr "Renk paleti"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind"
-msgstr ""
+msgstr "Renk körü"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind Alt."
-msgstr ""
+msgstr "Renk Körü Alt."
 
 msgctxt "LSbinomialtesting|"
 msgid "Viridis"
-msgstr ""
+msgstr "Viridis"
 
 msgctxt "LSbinomialtesting|"
 msgid "ggplot2"
-msgstr ""
+msgstr "ggplot2"
 
 msgctxt "LSbinomialtesting|"
 msgid "Gray"
-msgstr ""
+msgstr "Gri"
 
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
-msgstr ""
+msgstr "Hipotez"
 
 msgctxt "LSbinomialtesting|"
 msgid "Prior probability"
