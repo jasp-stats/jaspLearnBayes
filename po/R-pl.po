@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.0\n"
 "POT-Creation-Date: 2022-12-17 02:48\n"
-"PO-Revision-Date: 2023-04-13 17:11+0000\n"
+"PO-Revision-Date: 2023-04-14 22:50+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pl/>\n"
@@ -45,7 +45,7 @@ msgid "Prior and Posterior for Proportion of Crosses"
 msgstr ""
 
 msgid "Posterior"
-msgstr ""
+msgstr "Posterior"
 
 msgid "Prior"
 msgstr "Prior"
@@ -99,7 +99,7 @@ msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Oszacowanie"
 
 msgid "Notation"
 msgstr ""
@@ -111,7 +111,7 @@ msgid "Confusion Matrix"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% PU"
 
 msgid "Positive test"
 msgstr ""
@@ -405,7 +405,7 @@ msgid "Posterior (%s)"
 msgstr ""
 
 msgid "Posterior %s"
-msgstr ""
+msgstr "Posterior %s"
 
 msgid "Please specify successes and failures."
 msgstr ""
@@ -513,7 +513,7 @@ msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
 
 msgid "Observations"
-msgstr ""
+msgstr "Obserwacje"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr ""
@@ -744,7 +744,7 @@ msgid "Mean"
 msgstr ""
 
 msgid "Median"
-msgstr ""
+msgstr "Mediana"
 
 msgid "Mode"
 msgstr ""
