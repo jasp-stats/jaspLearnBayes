@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) {
+LSgaussianestimationInternal   <- function(jaspResults, dataset, options, state = NULL) {
 
   options <- .parseAndStoreFormulaOptions(jaspResults, options, c("plotsPosteriorBF", "plotsIterativeBF"))
 

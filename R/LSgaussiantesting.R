@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSgaussiantesting  <- function(jaspResults, dataset, options, state = NULL) {
+LSgaussiantestingInternal  <- function(jaspResults, dataset, options, state = NULL) {
 
   # introductory text
   if (options[["introText"]]).introductoryTextLS(jaspResults, options, "gaussTest")

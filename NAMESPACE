@@ -1,6 +1,8 @@
 export(LSbinaryclassification)
 export(LSbinomialestimation)
 export(LSbinomialtesting)
+export(LSgaussianestimationInternal)
+export(LSgaussiantestingInternal)
 export(LSgameofchance)
 export(LSgameofskill)
 export(LSBuffonsneedlesimulation)
