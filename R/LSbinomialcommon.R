@@ -1044,7 +1044,7 @@
 
 # all settings dependent on data input
 .dataDependenciesBinomialLS <- c("dataInputType",
-                                   "nSuccesses", "nFailures",                                 # for Counts
+                                   "dataCountsSuccesses", "dataCountsFailures", # for Counts
                                    "dataSequenceSequenceOfObservations",    "dataSequenceSuccesses", "dataSequenceFailures",  # for Sequence
                                    "dataVariableSelected", "dataVariableSuccesses", "dataVariableFailures",  # for Variable
                                    "models")
