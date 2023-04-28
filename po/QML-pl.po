@@ -1,10 +1,16 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-04-29 02:44+0000\n"
+"Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/pl/>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Language: pl\n"
 "X-Qt-Contexts: true\n"
 
@@ -42,11 +48,11 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind"
-msgstr "Colorblind"
+msgstr "Kontrastowy"
 
 msgctxt "LSbinomialestimation|"
 msgid "Colorblind Alt."
-msgstr "Colorblind 2"
+msgstr "Kontrastowy 2"
 
 msgctxt "LSbinomialestimation|"
 msgid "Viridis"
@@ -54,7 +60,7 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "ggplot2"
-msgstr ""
+msgstr "ggplot2"
 
 msgctxt "LSbinomialestimation|"
 msgid "Gray"
@@ -102,11 +108,11 @@ msgstr ""
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind"
-msgstr "Colorblind"
+msgstr "Kontrastowy"
 
 msgctxt "LSbinomialtesting|"
 msgid "Colorblind Alt."
-msgstr "Colorblind 2"
+msgstr "Kontrastowy 2"
 
 msgctxt "LSbinomialtesting|"
 msgid "Viridis"
@@ -114,7 +120,7 @@ msgstr ""
 
 msgctxt "LSbinomialtesting|"
 msgid "ggplot2"
-msgstr ""
+msgstr "ggplot2"
 
 msgctxt "LSbinomialtesting|"
 msgid "Gray"
@@ -778,11 +784,11 @@ msgstr ""
 
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind"
-msgstr "Colorblind"
+msgstr "Kontrastowy"
 
 msgctxt "LSgaussianestimation|"
 msgid "Colorblind Alt."
-msgstr "Colorblind 2"
+msgstr "Kontrastowy 2"
 
 msgctxt "LSgaussianestimation|"
 msgid "Viridis"
@@ -790,7 +796,7 @@ msgstr ""
 
 msgctxt "LSgaussianestimation|"
 msgid "ggplot2"
-msgstr ""
+msgstr "ggplot2"
 
 msgctxt "LSgaussianestimation|"
 msgid "Gray"
@@ -802,11 +808,11 @@ msgstr ""
 
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind"
-msgstr "Colorblind"
+msgstr "Kontrastowy"
 
 msgctxt "LSgaussiantesting|"
 msgid "Colorblind Alt."
-msgstr "Colorblind 2"
+msgstr "Kontrastowy 2"
 
 msgctxt "LSgaussiantesting|"
 msgid "Viridis"
@@ -814,7 +820,7 @@ msgstr ""
 
 msgctxt "LSgaussiantesting|"
 msgid "ggplot2"
-msgstr ""
+msgstr "ggplot2"
 
 msgctxt "LSgaussiantesting|"
 msgid "Gray"
