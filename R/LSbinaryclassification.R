@@ -32,9 +32,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   if(isFALSE(options[["introductoryText"]])) return()
   if(!is.null(jaspResults[["introductoryText"]])) return()
 
-  bayes <- system.file("icons", "bayes.png", package = "jaspLearnBayes")
-  #bayes <- "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/410.svg"
-  text <- gettextf('This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.
+  text <- gettext('This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.
 
                    Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).
 
@@ -54,7 +52,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    Formally, the probability that a subject has a positive condition after the test came out positive (i.e., positive predictive value) is obtained by applying the <b>Bayes theorem</b>:
 
-                   <img src = "file://%s", width="500">
+                   <img src = "img:jaspLearnBayes/icons/bayes.png", width="500">
 
                    <h5>References</h5>
                    Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.
@@ -64,7 +62,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                    <a href="https://wikipedia.org/wiki/Evaluation_of_binary_classifiers">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>
 
                    <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
-                   ', bayes)
+                   ')
 
   jaspResults[["introductoryText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
                                                text         = text,
