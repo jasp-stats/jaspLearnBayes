@@ -50,7 +50,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                    Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>. Sensitivity is the probability of testing positive if the condition is positive. Specificity is the probability of testing negative if the condition is negative. Property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.
                    Skewed characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical. For example, in certain situations it is more likely that a patient does not have a certain disease than does, even after testing positive for that disease.
 
-                   Formally, the probability that a subject has a positive condition after the test came out positive (i.e., positive predictive value) is obtained by applying the <b>Bayes theorem</b>:
+                   Formally, the probability that a subject has a positive condition after the test came out positive (i.e., positive predictive value) is obtained by applying <b>Bayes theorem</b>:
 
                    <img src = "img:jaspLearnBayes/icons/bayes.png", width="500">
 
