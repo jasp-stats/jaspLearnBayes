@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-05-13 02:43+0000\n"
+"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"jasp/jasplearnbayes-qml/zh_Hans/>\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -157,11 +163,11 @@ msgstr "绘图"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
-msgstr ""
+msgstr "概率为正"
 
 msgctxt "LSbinaryclassification|"
 msgid "Show entire distribution"
-msgstr ""
+msgstr "显示整体分布"
 
 msgctxt "LSbinaryclassification|"
 msgid "Icon plot"
@@ -169,23 +175,23 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "ROC"
-msgstr ""
+msgstr "ROC"
 
 msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
-msgstr ""
+msgstr "从后验添加实现"
 
 msgctxt "LSbinaryclassification|"
 msgid "Test characteristics by threshold"
-msgstr ""
+msgstr "按阈值检验特征"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by prevalence"
-msgstr ""
+msgstr "按患病率划分 PPV 和 NPV"
 
 msgctxt "LSbinaryclassification|"
 msgid "Alluvial plot"
-msgstr ""
+msgstr "冲积图"
 
 msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
