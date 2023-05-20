@@ -1,16 +1,10 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-20 02:44+0000\n"
-"Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
-"jasplearnbayes-qml/pl/>\n"
-"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Language: pl\n"
 "X-Qt-Contexts: true\n"
 
@@ -314,9 +308,10 @@ msgctxt "LSbinomialdatainput|"
 msgid "Selected"
 msgstr "Wybrane"
 
+#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data summary"
-msgstr ""
+msgstr "Podsumowanie"
 
 msgctxt "LSestimationpredictions|"
 msgid "Posterior Prediction"
@@ -362,9 +357,10 @@ msgctxt "LSestimationpredictions|"
 msgid "Upper"
 msgstr "Górna granica"
 
+#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Predictions table"
-msgstr ""
+msgstr "Tabela przewidywań"
 
 msgctxt "LSestimationsequential|"
 msgid "Sequential Analysis"
@@ -550,17 +546,20 @@ msgctxt "LStestingsequential|"
 msgid "vs."
 msgstr "vs."
 
+#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "BF₁₀"
-msgstr ""
+msgstr "BF₁₀"
 
+#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "BF₀₁"
-msgstr ""
+msgstr "BF₀₁"
 
+#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "log(BF₁₀)"
-msgstr ""
+msgstr "log(BF₁₀)"
 
 msgctxt "LStestingsequential|"
 msgid "Updating table"
@@ -878,17 +877,19 @@ msgctxt "LSestimationpriorandposterior|"
 msgid "BF"
 msgstr "BF"
 
+#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Observed proportion"
-msgstr ""
+msgstr "Proporcja obserwowana"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Conditional"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Point estimate"
-msgstr ""
+msgstr "Oszacowanie punktowe"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "CI"
@@ -898,13 +899,15 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Mass"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Lower"
-msgstr ""
+msgstr "Dolna granica"
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Upper"
-msgstr ""
+msgstr "Górna granica"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Joint"
@@ -926,9 +929,10 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Observed number of successes"
 msgstr "Obserwowana liczba sukcesów"
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictions table"
-msgstr ""
+msgstr "Tabela przewidywań"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Normalized"
@@ -1214,9 +1218,10 @@ msgctxt "LStestingpredictions|"
 msgid "Type"
 msgstr "Typ"
 
+#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "As sample proportion"
-msgstr ""
+msgstr "Proporcja próby"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Prior Predictive Performance"
@@ -1234,9 +1239,10 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive accuracy plot"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Comparison"
-msgstr ""
+msgstr "Porównanie"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and Posterior"
