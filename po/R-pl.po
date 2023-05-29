@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.0\n"
 "POT-Creation-Date: 2023-05-13 02:46\n"
-"PO-Revision-Date: 2023-05-12 15:52+0000\n"
+"PO-Revision-Date: 2023-05-30 19:48+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/pl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Weblate 4.18-dev\n"
 
 msgid "Summary Table"
-msgstr ""
+msgstr "Tabela podsumowująca"
 
 msgid "Tosses"
 msgstr ""
@@ -24,19 +24,19 @@ msgid "Crosses"
 msgstr ""
 
 msgid "MLE for %s"
-msgstr ""
+msgstr "MLE dla %s"
 
 msgid "Interval Mass"
 msgstr ""
 
 msgid "Median for %s"
-msgstr ""
+msgstr "Mediana dla %s"
 
 msgid "Lower"
 msgstr "Dolna granica"
 
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "%s%% przedział wiarygodności"
 
 msgid "Upper"
 msgstr "Górna granica"
@@ -226,7 +226,7 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parametr"
 
 msgid "Sensitivity"
 msgstr ""
@@ -343,7 +343,7 @@ msgid "False negative rate"
 msgstr ""
 
 msgid "Accuracy"
-msgstr ""
+msgstr "Dokładność"
 
 msgid "Proportion of a population affected by the condition."
 msgstr ""
@@ -1145,7 +1145,7 @@ msgid ""
 msgstr ""
 
 msgid "Mean"
-msgstr ""
+msgstr "Średnia"
 
 msgid "Median"
 msgstr "Mediana"
