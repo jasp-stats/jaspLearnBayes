@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-28 00:24+0000\n"
+"PO-Revision-Date: 2023-06-02 20:48+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/pl/>\n"
@@ -314,7 +314,6 @@ msgctxt "LSbinomialdatainput|"
 msgid "Selected"
 msgstr "Wybrane"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data summary"
 msgstr "Podsumowanie"
@@ -349,7 +348,7 @@ msgstr ""
 
 msgctxt "LSestimationpredictions|"
 msgid "CI"
-msgstr ""
+msgstr "PU"
 
 msgctxt "LSestimationpredictions|"
 msgid "Mass"
@@ -363,7 +362,6 @@ msgctxt "LSestimationpredictions|"
 msgid "Upper"
 msgstr "Górna granica"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Predictions table"
 msgstr "Tabela przewidywań"
@@ -378,7 +376,7 @@ msgstr "Wszystko"
 
 msgctxt "LSestimationsequential|"
 msgid "CI"
-msgstr ""
+msgstr "PU"
 
 msgctxt "LSestimationsequential|"
 msgid "Mass"
@@ -458,7 +456,7 @@ msgstr "Wybrane"
 
 msgctxt "LStestingpredictions|"
 msgid "Posterior Prediction"
-msgstr ""
+msgstr "Przewidywania a posteriori"
 
 msgctxt "LStestingpredictions|"
 msgid "Number of future trials"
@@ -474,7 +472,7 @@ msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "CI"
-msgstr ""
+msgstr "PU"
 
 msgctxt "LStestingpredictions|"
 msgid "mass"
@@ -502,7 +500,7 @@ msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "Marginal"
-msgstr ""
+msgstr "Brzegowe"
 
 msgctxt "LStestingpredictions|"
 msgid "Mass"
@@ -534,7 +532,7 @@ msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Normalized"
-msgstr ""
+msgstr "Znormalizowane"
 
 msgctxt "LStestingsequential|"
 msgid "Bayes factor"
@@ -552,12 +550,10 @@ msgctxt "LStestingsequential|"
 msgid "vs."
 msgstr "vs."
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "BF₁₀"
 msgstr "BF₁₀"
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "BF₀₁"
 msgstr "BF₀₁"
