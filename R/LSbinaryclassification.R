@@ -38,19 +38,26 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    Common binary classification applications are:
                    <ul>
-                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient suffers from a certain disease or not.</li>
-                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is a spam or not.</li>
-                     <li><b>Quality control</b> where the classification determines whether an industry standard has been met or not.</li>
+                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>
+                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>
+                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>
                    </ul>
 
-                   Due to the fact that binary classification is often used in medical testing, terminology in binary classification problems borrows from medical dictionary (e.g., prevalence, condition, marker).
+                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).
 
-                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule. In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative). In many applications, the conditions or the test may not be symmetric, therefore various types of errors are of interest in addition to an overall accuracy measure. These types of errors distinguish, for example, whether a patient suffers from a condition but the test came out negative (false negative), or whether a patient does not suffer from a condition but the test came out positive (false positive).
+                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.
+                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).
+                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.
+                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).
 
-                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>. Sensitivity is the probability of testing positive if the condition is positive. Specificity is the probability of testing negative if the condition is negative. Property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.
-                   Skewed characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical. For example, in certain situations it is more likely that a patient does not have a certain disease than does, even after testing positive for that disease.
+                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.
+                   Sensitivity is the probability of testing positive if the condition is positive.
+                   Specificity is the probability of testing negative if the condition is negative.
+                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.
+                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.
+                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.
 
-                   Formally, the probability that a subject has a positive condition after the test came out positive (i.e., positive predictive value) is obtained by applying <b>Bayes theorem</b>:
+                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:
 
                    <img src = "img:jaspLearnBayes/icons/bayes.png", width="500">
 
