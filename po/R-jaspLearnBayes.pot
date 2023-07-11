@@ -160,7 +160,7 @@ msgstr ""
 msgid "Specificity"
 msgstr ""
 
-msgid "beta(%s,%s)"
+msgid "beta(%1$s,%2$s)"
 msgstr ""
 
 msgid "Plots"
@@ -376,13 +376,13 @@ msgstr ""
 msgid "spike at %s"
 msgstr ""
 
-msgid "beta (%s, %s)"
+msgid "beta (%1$s, %2$s)"
 msgstr ""
 
-msgid "binomial (%i, %s)"
+msgid "binomial (%1$i, %2$s)"
 msgstr ""
 
-msgid "beta-binomial (%i, %s, %s)"
+msgid "beta-binomial (%1$i, %2$s, %3$s)"
 msgstr ""
 
 msgid "Estimation Summary"
@@ -406,7 +406,7 @@ msgstr ""
 msgid "Please specify successes and failures."
 msgstr ""
 
-msgid "These results are based on %i %s and %i %s."
+msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr ""
 
 msgid "Observation"
@@ -439,7 +439,7 @@ msgstr ""
 msgid "Prediction std. deviation"
 msgstr ""
 
-msgid "The prediction for %s %s is based on %s %s and %s %s."
+msgid "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s."
 msgstr ""
 
 msgid "Predicted sample proportions"
@@ -565,7 +565,7 @@ msgstr ""
 msgid "%s Sequential Analysis"
 msgstr ""
 
-msgid "Welcome to the %s analysis from the Learn Bayes module. This analysis illustrates Bayesian %s using %s examples."
+msgid "Welcome to the %1$s analysis from the Learn Bayes module. This analysis illustrates Bayesian %2$s using %3$s examples."
 msgstr ""
 
 msgid "%s (the population proportion of successes)"
@@ -574,7 +574,7 @@ msgstr ""
 msgid "%s (the population mean, variance is assumed to be known)"
 msgstr ""
 
-msgid "The analysis is split into 5 sections:\n      <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>\n           <li> %s </li>\n           <li> %s </li>\n           <li> %s </li>\n           <li> %s </li> </ol>"
+msgid "The analysis is split into 5 sections:\n      <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>\n           <li> %1$s </li>\n           <li> %2$s </li>\n           <li> %3$s </li>\n           <li> %4$s </li> </ol>"
 msgstr ""
 
 msgid "The 'Data' section allows you to specify data input for the analysis."
@@ -790,7 +790,7 @@ msgstr ""
 msgid "SD"
 msgstr ""
 
-msgid "normal (%s, %s)"
+msgid "normal (%1$s, %2$s)"
 msgstr ""
 
 msgid "normal (%.2f, %.2f)"

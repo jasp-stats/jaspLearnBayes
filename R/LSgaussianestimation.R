@@ -1190,11 +1190,11 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       # add footnote clarifying what dataset was used
       predictionsTable$addFootnote(gettextf(
-        "The prediction for %s future %s is based on %s.",
+        "The prediction for %1$s future %2$s is based on %3$s.",
         options[["posteriorPredictionNumberOfFutureTrials"]],
         ifelse (options[["posteriorPredictionNumberOfFutureTrials"]] == 1, gettext("observation"),gettext("observations")),
         if (is.null(data)) gettext("prior") else gettextf(
-          "%s past %s",
+          "%1$s past %2$s",
           data$N,
           ifelse (data$N == 1, gettext("observation"), gettext("observations"))
         )

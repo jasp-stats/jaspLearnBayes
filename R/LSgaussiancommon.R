@@ -151,7 +151,7 @@
     if (is.null(data)) {
 
       output <- list(
-        distribution = gettextf("normal (%s, %s)", prior[["parMuInp"]], prior[["parSigmaInp"]]),
+        distribution = gettextf("normal (%1$s, %2$s)", prior[["parMuInp"]], prior[["parSigmaInp"]]),
         mean         = prior[["parMu"]],
         median       = prior[["parMu"]],
         mode         = prior[["parMu"]],

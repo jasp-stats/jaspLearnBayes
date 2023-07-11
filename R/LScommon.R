@@ -46,9 +46,8 @@ gettextf <- function(fmt, ..., domain = NULL)  {
       }
     }
     if (models[[p]][["name"]] == "") {
-      models[[p]][["name"]] <- gettextf(
-        "%s %i",
-        ifelse (any(names(models[[p]]) %in% c("priorWeight")), "Hypothesis", "Model"),
+      models[[p]][["name"]] <- paste(
+        ifelse (any(names(models[[p]]) %in% c("priorWeight")), gettext("Hypothesis"), gettext("Model")),
         p
       )
     }
@@ -1690,7 +1689,7 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   if (text == "main") {
 
     introText <- gettextf(
-      "Welcome to the %s analysis from the Learn Bayes module. This analysis illustrates Bayesian %s using %s examples.",
+      "Welcome to the %1$s analysis from the Learn Bayes module. This analysis illustrates Bayesian %2$s using %3$s examples.",
       switch(
         analysis,
         "binEst"    = gettext("Binomial Estimation"),
@@ -1711,10 +1710,10 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
     overviewText <- gettextf(
       "The analysis is split into 5 sections:
       <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>
-           <li> %s </li>
-           <li> %s </li>
-           <li> %s </li>
-           <li> %s </li> </ol>
+           <li> %1$s </li>
+           <li> %2$s </li>
+           <li> %3$s </li>
+           <li> %4$s </li> </ol>
       ",
       ifelse (estimation,
              gettextf("Model - for specifying models that will be used for estimation. You can specify the model name, the prior distribution for the parameter %s, and parameters that define the distribution.", parameterInfo),
