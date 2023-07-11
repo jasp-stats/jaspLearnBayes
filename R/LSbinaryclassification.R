@@ -501,10 +501,10 @@ coef.bcPosteriorParams <- function(results) {
   post <- .bcGetPosterior(options, dataset)
   data <- data.frame(
     parameter = gettext(c("Prevalence", "Sensitivity", "Specificity")),
-    prior     = gettextf("beta(%s,%s)",
+    prior     = gettextf("beta(%1$s,%2$s)",
                          options[c("priorPrevalenceAlpha", "priorSensitivityAlpha", "priorSpecificityAlpha")],
                          options[c("priorPrevalenceBeta",  "priorSensitivityBeta",  "priorSpecificityBeta")]),
-    posterior = gettextf("beta(%s,%s)",
+    posterior = gettextf("beta(%1$s,%2$s)",
                          post[c("priorPrevalenceAlpha", "priorSensitivityAlpha", "priorSpecificityAlpha")],
                          post[c("priorPrevalenceBeta",  "priorSensitivityBeta",  "priorSpecificityBeta")])
   )

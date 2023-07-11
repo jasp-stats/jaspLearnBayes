@@ -209,7 +209,7 @@
     }
 
     output <- list(
-      distribution = gettextf("beta (%s, %s)", textAlpha, textBeta),
+      distribution = gettextf("beta (%1$s, %2$s)", textAlpha, textBeta),
       mean         = (prior[["betaPriorAlpha"]] + data$nSuccesses) / (prior[["betaPriorAlpha"]] + data$nSuccesses + prior[["betaPriorBeta"]] + data$nFailures),
       median       = qbeta(.5,   prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
       mode         = .modeBetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
@@ -282,7 +282,7 @@
   if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("binomial (%i, %s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePointInp"]]),
+      distribution = gettextf("binomial (%1$i, %2$s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePointInp"]]),
       mean         = prior[["spikePoint"]] * options[["posteriorPredictionNumberOfFutureTrials"]] / d,
       median       = qbinom(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
       mode         = .modeBinomialLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]], prop = prop),
@@ -308,7 +308,7 @@
     }
 
     output <- list(
-      distribution = gettextf("beta-binomial (%i, %s, %s)", options[["posteriorPredictionNumberOfFutureTrials"]], textAlpha, textBeta),
+      distribution = gettextf("beta-binomial (%1$i, %2$s, %3$s)", options[["posteriorPredictionNumberOfFutureTrials"]], textAlpha, textBeta),
       mean         = (prior[["betaPriorAlpha"]] + data$nSuccesses) * options[["posteriorPredictionNumberOfFutureTrials"]] / (prior[["betaPriorAlpha"]] + data$nSuccesses + prior[["betaPriorBeta"]] + data$nFailures) / d,
       median       = .qbetabinomLS(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) / d,
       mode         = .modeBetaBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prop = prop),

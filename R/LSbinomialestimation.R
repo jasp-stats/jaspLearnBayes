@@ -173,7 +173,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       # add footnote clarifying what dataset was used
       estimatesTable$addFootnote(gettextf(
-        "These results are based on %i %s and %i %s.",
+        "These results are based on %1$i %2$s and %3$i %4$s.",
         data[["nSuccesses"]], ifelse (data[["nSuccesses"]] == 1, gettext("success"), gettext("successes")),
         data[["nFailures"]],  ifelse (data[["nFailures"]]  == 1, gettext("failure"), gettext("failures"))
       ))
@@ -1138,7 +1138,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       # add footnote clarifying what dataset was used
       predictionsTable$addFootnote(gettextf(
-        "The prediction for %s %s is based on %s %s and %s %s.",
+        "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s.",
         options[["posteriorPredictionNumberOfFutureTrials"]], ifelse (options[["posteriorPredictionNumberOfFutureTrials"]] == 1, gettext("observation"), gettext("observations")),
         data[["nSuccesses"]], ifelse (data[["nSuccesses"]] == 1, gettext("success"), gettext("successes")),
         data[["nFailures"]],  ifelse (data[["nFailures"]] == 1,  gettext("failure"), gettext("failures"))

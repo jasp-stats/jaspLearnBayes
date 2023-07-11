@@ -256,7 +256,7 @@ msgstr "Densidade"
 msgid "Specificity"
 msgstr ""
 
-msgid "beta(%s,%s)"
+msgid "beta(%1$s,%2$s)"
 msgstr ""
 
 msgid "Plots"
@@ -492,13 +492,13 @@ msgstr ""
 msgid "spike at %s"
 msgstr ""
 
-msgid "beta (%s, %s)"
+msgid "beta (%1$s, %2$s)"
 msgstr ""
 
-msgid "binomial (%i, %s)"
+msgid "binomial (%1$i, %2$s)"
 msgstr ""
 
-msgid "beta-binomial (%i, %s, %s)"
+msgid "beta-binomial (%1$i, %2$s, %3$s)"
 msgstr ""
 
 #, fuzzy
@@ -527,7 +527,7 @@ msgstr "Amostras posteriores"
 msgid "Please specify successes and failures."
 msgstr ""
 
-msgid "These results are based on %i %s and %i %s."
+msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr ""
 
 msgid "Observation"
@@ -563,7 +563,7 @@ msgstr "Correção"
 msgid "Prediction std. deviation"
 msgstr ""
 
-msgid "The prediction for %s %s is based on %s %s and %s %s."
+msgid "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s."
 msgstr ""
 
 msgid "Predicted sample proportions"
@@ -716,10 +716,10 @@ msgid ""
 "You can either use a variable from a dataset loaded into JASP, specify an "
 "aggregated overview of the data, or enter the observations one by one (and "
 "update them during the analysis). </li>\n"
-"           <li> %s </li>\n"
-"           <li> %s </li>\n"
-"           <li> %s </li>\n"
-"           <li> %s </li> </ol>"
+"           <li> %1$s </li>\n"
+"           <li> %2$s </li>\n"
+"           <li> %3$s </li>\n"
+"           <li> %4$s </li> </ol>"
 msgstr ""
 
 msgid "The 'Data' section allows you to specify data input for the analysis."
@@ -1234,7 +1234,7 @@ msgstr ""
 msgid "SD"
 msgstr "DP"
 
-msgid "normal (%s, %s)"
+msgid "normal (%1$s, %2$s)"
 msgstr ""
 
 msgid "normal (%.2f, %.2f)"
