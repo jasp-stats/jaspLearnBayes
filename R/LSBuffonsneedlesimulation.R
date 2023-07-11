@@ -159,14 +159,14 @@ LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL
    }
 
    if (options[["priorPosteriorProportionCi"]]){
-     propCI95lower <- qbeta((1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE)
-     propCI95lower <- round(propCI95lower, digit = 2)
+       propCI95upper <- qbeta((1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE)
+       propCI95upper <- round(propCI95upper, digit = 2)
 
      propmed <- qbeta(.5, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE)
      propmed <- round(propmed, digit = 2)
 
-     propCI95upper <- qbeta(1-(1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE)
-     propCI95upper <- round(propCI95upper, digit = 2)
+     propCI95lower <- qbeta(1-(1-options[["ciLevel"]])/2, crosses, options[["numberOfThrows"]] - crosses, lower.tail = FALSE)
+     propCI95lower <- round(propCI95lower, digit = 2)
 
      propDistPlot$plotObject <- propDistPlot$plotObject +
        ggplot2::annotate("text", x = 0.75, y = 1.6*max(propPost),
