@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.2\n"
-"POT-Creation-Date: 2023-07-01 03:06\n"
+"POT-Creation-Date: 2023-07-15 03:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -520,9 +520,6 @@ msgstr ""
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
 msgstr ""
 
-msgid "%s %i"
-msgstr ""
-
 msgid "Please remove duplicates from the %s names."
 msgstr ""
 
@@ -823,7 +820,7 @@ msgstr ""
 msgid "Please, specify the standard deviation of the data."
 msgstr ""
 
-msgid "The prediction for %s future %s is based on %s."
+msgid "The prediction for %1$s future %2$s is based on %3$s."
 msgstr ""
 
 msgid "Sample means"

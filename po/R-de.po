@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2023-07-01 03:06\n"
+"POT-Creation-Date: 2023-07-15 03:05\n"
 "PO-Revision-Date: 2023-06-17 14:29+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -735,9 +735,6 @@ msgstr ""
 "Der Parameter '%1$s' für Modell/Hypothese '%2$s' muss zwischen 0 und 1 "
 "liegen."
 
-msgid "%s %i"
-msgstr "%s %i"
-
 msgid "Please remove duplicates from the %s names."
 msgstr "Bitte entferne Duplikate aus den %s-Namen."
 
@@ -780,9 +777,10 @@ msgstr "%s Vorhersagegenauigkeits-Diagramm"
 msgid "%s Sequential Analysis"
 msgstr "%s Sequenzielle Analyse"
 
+#, fuzzy
 msgid ""
-"Welcome to the %s analysis from the Learn Bayes module. This analysis "
-"illustrates Bayesian %s using %s examples."
+"Welcome to the %1$s analysis from the Learn Bayes module. This analysis "
+"illustrates Bayesian %2$s using %3$s examples."
 msgstr ""
 "Willkommen bei der %s-Analyse im Modul \"Bayes Lernen\". Diese Analyse "
 "illustriert Bayessche %s mit %s Beispielen."
@@ -1707,6 +1705,9 @@ msgstr "Zukünftige Daten"
 
 msgid "Inclusion BF"
 msgstr "Inklusion BF"
+
+#~ msgid "%s %i"
+#~ msgstr "%s %i"
 
 #~ msgid "Incorrect arguments for the inverse cumulative density function"
 #~ msgstr "Falsche Argumente für die inverse kumulative Dichtefunktion"

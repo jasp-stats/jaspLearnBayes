@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2023-07-01 03:06\n"
+"POT-Creation-Date: 2023-07-15 03:05\n"
 "PO-Revision-Date: 2023-04-21 17:50+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -697,9 +697,6 @@ msgid ""
 msgstr ""
 "モデル/仮説 '%2$s' のパラメータ '%1$s' は 0 から 1 の間でなければなりません."
 
-msgid "%s %i"
-msgstr "%s %i"
-
 msgid "Please remove duplicates from the %s names."
 msgstr "%s 名から重複を削除してください."
 
@@ -742,9 +739,10 @@ msgstr "%s 予測精度プロット"
 msgid "%s Sequential Analysis"
 msgstr "%s 逐次解析"
 
+#, fuzzy
 msgid ""
-"Welcome to the %s analysis from the Learn Bayes module. This analysis "
-"illustrates Bayesian %s using %s examples."
+"Welcome to the %1$s analysis from the Learn Bayes module. This analysis "
+"illustrates Bayesian %2$s using %3$s examples."
 msgstr ""
 "Learn Bayes モジュールの %s 分析へようこそ。この分析は、ベイズ %s を %s の例"
 "を使って説明しています."
@@ -1341,6 +1339,9 @@ msgstr ""
 
 msgid "Inclusion BF"
 msgstr "包含BF"
+
+#~ msgid "%s %i"
+#~ msgstr "%s %i"
 
 #~ msgid "Incorrect arguments for the inverse cumulative density function"
 #~ msgstr "逆累積密度関数の引数が正しくありません"
