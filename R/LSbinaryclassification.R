@@ -68,7 +68,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    <a href="https://wikipedia.org/wiki/Evaluation_of_binary_classifiers">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>
 
-                   <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
+                   <a href="https://wikipedia.org/wiki/Bayes%27_theorem">https://wikipedia.org/wiki/Bayes%27_theorem</a>
                    ')
 
   jaspResults[["introductoryText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
