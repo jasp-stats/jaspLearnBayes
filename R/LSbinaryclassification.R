@@ -32,7 +32,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   if(isFALSE(options[["introductoryText"]])) return()
   if(!is.null(jaspResults[["introductoryText"]])) return()
 
-  text <- gettext('This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.
+  text <- gettextf('This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.
 
                    Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).
 
@@ -68,7 +68,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    <a href="https://wikipedia.org/wiki/Evaluation_of_binary_classifiers">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>
 
-                   <a href="https://wikipedia.org/wiki/Bayes%27_theorem">https://wikipedia.org/wiki/Bayes%27_theorem</a>
+                   <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
                    ')
 
   jaspResults[["introductoryText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
