@@ -45,7 +45,7 @@ Form
 		label:			qsTr("Number of tosses:")
 		fieldWidth:		50
 		defaultValue:	100
-		min: 0
+		min: 1
 	}
 
 	IntegerField
