@@ -28,21 +28,7 @@ Form {
 
 	LS.LSintrotext{}
 
-	DropDown
-	{
-		name: "colorPalette"
-		label: qsTr("Color palette")
-		indexDefaultValue: 0
-		values:
-			[
-			{ label: qsTr("Colorblind"),		value: "colorblind"		},
-			{ label: qsTr("Colorblind Alt."),	value: "colorblind3"	},
-			{ label: qsTr("Viridis"),			value: "viridis"		},
-			{ label: qsTr("ggplot2"),			value: "ggplot2"		},
-			{ label: qsTr("Gray"),				value: "gray"			}
-			]
-	}
-
+	ColorPalette{}
 
 	LS.LSbinomialdatainput
 	{
@@ -116,7 +102,7 @@ Form {
 							[
 								{ label: qsTr("Beta"),		value: "beta"},
 								{ label: qsTr("Spike"),		value: "spike"}
-								
+
 							]
 						}
 					}
@@ -180,7 +166,7 @@ Form {
 	{
 		enabled:					binomialDataInput.dataInputType.value !== "counts"
 		bfTypevsNameSequential:		"models.name"
-		onEnabledChanged: 
+		onEnabledChanged:
 		{
 			if (!enabled) {
 				expanded = false
