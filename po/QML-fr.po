@@ -266,30 +266,6 @@ msgid "Number of posterior samples"
 msgstr ""
 
 msgctxt "LSbinomialestimation|"
-msgid "Color palette"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind Alt."
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "Viridis"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "ggplot2"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "Gray"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr ""
 
@@ -323,30 +299,6 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Color palette"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind Alt."
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Viridis"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "ggplot2"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Gray"
 msgstr ""
 
 msgctxt "LSbinomialtesting|"
@@ -502,30 +454,6 @@ msgid "95% HPD"
 msgstr ""
 
 msgctxt "LSgaussianestimation|"
-msgid "Color palette"
-msgstr ""
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind"
-msgstr ""
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind Alt."
-msgstr ""
-
-msgctxt "LSgaussianestimation|"
-msgid "Viridis"
-msgstr ""
-
-msgctxt "LSgaussianestimation|"
-msgid "ggplot2"
-msgstr ""
-
-msgctxt "LSgaussianestimation|"
-msgid "Gray"
-msgstr ""
-
-msgctxt "LSgaussianestimation|"
 msgid "Model"
 msgstr ""
 
@@ -559,30 +487,6 @@ msgstr ""
 
 msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
-msgstr ""
-
-msgctxt "LSgaussiantesting|"
-msgid "Color palette"
-msgstr ""
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind"
-msgstr ""
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind Alt."
-msgstr ""
-
-msgctxt "LSgaussiantesting|"
-msgid "Viridis"
-msgstr ""
-
-msgctxt "LSgaussiantesting|"
-msgid "ggplot2"
-msgstr ""
-
-msgctxt "LSgaussiantesting|"
-msgid "Gray"
 msgstr ""
 
 msgctxt "LSgaussiantesting|"

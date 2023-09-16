@@ -433,30 +433,6 @@ msgid "Number of posterior samples"
 msgstr "Número de mostras posteriores"
 
 msgctxt "LSbinomialestimation|"
-msgid "Color palette"
-msgstr "Paleta de cores"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind"
-msgstr "Daltónica"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind Alt."
-msgstr "Daltónica Alternativa"
-
-msgctxt "LSbinomialestimation|"
-msgid "Viridis"
-msgstr "Violeta"
-
-msgctxt "LSbinomialestimation|"
-msgid "ggplot2"
-msgstr "GGplot2"
-
-msgctxt "LSbinomialestimation|"
-msgid "Gray"
-msgstr "Gris"
-
-msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr "Modelo"
 
@@ -489,30 +465,6 @@ msgid "θ₀"
 msgstr "θ₀"
 
 msgctxt "LSbinomialtesting|"
-msgid "Color palette"
-msgstr "Paleta de cores"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind"
-msgstr "Daltónica"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind Alt."
-msgstr "Daltónica Alternativa"
-
-msgctxt "LSbinomialtesting|"
-msgid "Viridis"
-msgstr "Violeta"
-
-msgctxt "LSbinomialtesting|"
-msgid "ggplot2"
-msgstr "GGplot2"
-
-msgctxt "LSbinomialtesting|"
-msgid "Gray"
-msgstr "Gris"
-
-msgctxt "LSbinomialtesting|"
 msgid "Distribution"
 msgstr "Distribución"
 
@@ -543,30 +495,6 @@ msgstr "Número de xogos simulados"
 msgctxt "LSgameofskill|"
 msgid "95% HPD"
 msgstr "HPD do 95%"
-
-msgctxt "LSgaussianestimation|"
-msgid "Color palette"
-msgstr "Paleta de cores"
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind"
-msgstr "Daltónica"
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind Alt."
-msgstr "Daltónica Alternativa"
-
-msgctxt "LSgaussianestimation|"
-msgid "Viridis"
-msgstr "Violeta"
-
-msgctxt "LSgaussianestimation|"
-msgid "ggplot2"
-msgstr "GGplot2"
-
-msgctxt "LSgaussianestimation|"
-msgid "Gray"
-msgstr "Gris"
 
 msgctxt "LSgaussianestimation|"
 msgid "Model"
@@ -603,30 +531,6 @@ msgstr "Datos observados"
 msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
 msgstr "Amosar as medias mostrais"
-
-msgctxt "LSgaussiantesting|"
-msgid "Color palette"
-msgstr "Paleta de cores"
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind"
-msgstr "Daltónica"
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind Alt."
-msgstr "Daltónica Alternativa"
-
-msgctxt "LSgaussiantesting|"
-msgid "Viridis"
-msgstr "Violeta"
-
-msgctxt "LSgaussiantesting|"
-msgid "ggplot2"
-msgstr "GGplot2"
-
-msgctxt "LSgaussiantesting|"
-msgid "Gray"
-msgstr "Gris"
 
 msgctxt "LSgaussiantesting|"
 msgid "Hypothesis"

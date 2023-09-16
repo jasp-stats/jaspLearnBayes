@@ -37,30 +37,6 @@ msgid "Game of Skill"
 msgstr "Vaardigheidsspel"
 
 msgctxt "LSbinomialestimation|"
-msgid "Color palette"
-msgstr "Kleurenpalet"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind"
-msgstr "Kleurenblind"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind Alt."
-msgstr "Kleurenblind Alt."
-
-msgctxt "LSbinomialestimation|"
-msgid "Viridis"
-msgstr "Viridis"
-
-msgctxt "LSbinomialestimation|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSbinomialestimation|"
-msgid "Gray"
-msgstr "Grijs"
-
-msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr "Model"
 
@@ -95,30 +71,6 @@ msgstr "β"
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
 msgstr "θ₀"
-
-msgctxt "LSbinomialtesting|"
-msgid "Color palette"
-msgstr "Kleurenpalet"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind"
-msgstr "Kleurenblind"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind Alt."
-msgstr "Kleurenblind Alt."
-
-msgctxt "LSbinomialtesting|"
-msgid "Viridis"
-msgstr "Viridis"
-
-msgctxt "LSbinomialtesting|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSbinomialtesting|"
-msgid "Gray"
-msgstr "Grijs"
 
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
@@ -772,54 +724,6 @@ msgstr "Geloofwaardigheidsintervallen"
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
 msgstr "Aantal posterior steekproeven"
-
-msgctxt "LSgaussianestimation|"
-msgid "Color palette"
-msgstr "Kleurenpalet"
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind"
-msgstr "Kleurenblind"
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind Alt."
-msgstr "Kleurenblind Alt."
-
-msgctxt "LSgaussianestimation|"
-msgid "Viridis"
-msgstr "Viridis"
-
-msgctxt "LSgaussianestimation|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSgaussianestimation|"
-msgid "Gray"
-msgstr "Grijs"
-
-msgctxt "LSgaussiantesting|"
-msgid "Color palette"
-msgstr "Kleurenpalet"
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind"
-msgstr "Kleurenblind"
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind Alt."
-msgstr "Kleurenblind Alt."
-
-msgctxt "LSgaussiantesting|"
-msgid "Viridis"
-msgstr "Viridis"
-
-msgctxt "LSgaussiantesting|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSgaussiantesting|"
-msgid "Gray"
-msgstr "Grijs"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"

@@ -36,30 +36,6 @@ msgid "Game of Skill"
 msgstr "スキルのゲーム"
 
 msgctxt "LSbinomialestimation|"
-msgid "Color palette"
-msgstr "カラーパレット"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind"
-msgstr "カラーブラインド"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind Alt."
-msgstr "カラーブラインドのための代案"
-
-msgctxt "LSbinomialestimation|"
-msgid "Viridis"
-msgstr "ビリジアン"
-
-msgctxt "LSbinomialestimation|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSbinomialestimation|"
-msgid "Gray"
-msgstr "灰色"
-
-msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr "モデル"
 
@@ -94,30 +70,6 @@ msgstr "β"
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
 msgstr "θ₀"
-
-msgctxt "LSbinomialtesting|"
-msgid "Color palette"
-msgstr "カラーパレット"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind"
-msgstr "カラーブラインド"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind Alt."
-msgstr "カラーブラインドのための代案"
-
-msgctxt "LSbinomialtesting|"
-msgid "Viridis"
-msgstr "ビリジアン"
-
-msgctxt "LSbinomialtesting|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSbinomialtesting|"
-msgid "Gray"
-msgstr "灰色"
 
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
@@ -774,54 +726,6 @@ msgstr "信用区間"
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
 msgstr "事後サンプル数"
-
-msgctxt "LSgaussianestimation|"
-msgid "Color palette"
-msgstr "カラーパレット"
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind"
-msgstr "カラーブラインド"
-
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind Alt."
-msgstr "カラーブラインドのための代案"
-
-msgctxt "LSgaussianestimation|"
-msgid "Viridis"
-msgstr "ビリジアン"
-
-msgctxt "LSgaussianestimation|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSgaussianestimation|"
-msgid "Gray"
-msgstr "灰色"
-
-msgctxt "LSgaussiantesting|"
-msgid "Color palette"
-msgstr "カラーパレット"
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind"
-msgstr "カラーブラインド"
-
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind Alt."
-msgstr "カラーブラインドのための代案"
-
-msgctxt "LSgaussiantesting|"
-msgid "Viridis"
-msgstr "ビリジアン"
-
-msgctxt "LSgaussiantesting|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSgaussiantesting|"
-msgid "Gray"
-msgstr "灰色"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"

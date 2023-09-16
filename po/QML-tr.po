@@ -36,30 +36,6 @@ msgid "Game of Skill"
 msgstr ""
 
 msgctxt "LSbinomialestimation|"
-msgid "Color palette"
-msgstr "Renk paleti"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind"
-msgstr "Renk körü"
-
-msgctxt "LSbinomialestimation|"
-msgid "Colorblind Alt."
-msgstr "Renk Körü Alt."
-
-msgctxt "LSbinomialestimation|"
-msgid "Viridis"
-msgstr "Viridis"
-
-msgctxt "LSbinomialestimation|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSbinomialestimation|"
-msgid "Gray"
-msgstr "Gri"
-
-msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr ""
 
@@ -94,30 +70,6 @@ msgstr "b"
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
 msgstr "θ₀"
-
-msgctxt "LSbinomialtesting|"
-msgid "Color palette"
-msgstr "Renk paleti"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind"
-msgstr "Renk körü"
-
-msgctxt "LSbinomialtesting|"
-msgid "Colorblind Alt."
-msgstr "Renk Körü Alt."
-
-msgctxt "LSbinomialtesting|"
-msgid "Viridis"
-msgstr "Viridis"
-
-msgctxt "LSbinomialtesting|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-msgctxt "LSbinomialtesting|"
-msgid "Gray"
-msgstr "Gri"
 
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
@@ -778,66 +730,6 @@ msgstr ""
 msgctxt "LSbinaryclassification|"
 msgid "Number of posterior samples"
 msgstr ""
-
-#, fuzzy
-msgctxt "LSgaussianestimation|"
-msgid "Color palette"
-msgstr "Renk paleti"
-
-#, fuzzy
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind"
-msgstr "Renk körü"
-
-#, fuzzy
-msgctxt "LSgaussianestimation|"
-msgid "Colorblind Alt."
-msgstr "Renk Körü Alt."
-
-#, fuzzy
-msgctxt "LSgaussianestimation|"
-msgid "Viridis"
-msgstr "Viridis"
-
-#, fuzzy
-msgctxt "LSgaussianestimation|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-#, fuzzy
-msgctxt "LSgaussianestimation|"
-msgid "Gray"
-msgstr "Gri"
-
-#, fuzzy
-msgctxt "LSgaussiantesting|"
-msgid "Color palette"
-msgstr "Renk paleti"
-
-#, fuzzy
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind"
-msgstr "Renk körü"
-
-#, fuzzy
-msgctxt "LSgaussiantesting|"
-msgid "Colorblind Alt."
-msgstr "Renk Körü Alt."
-
-#, fuzzy
-msgctxt "LSgaussiantesting|"
-msgid "Viridis"
-msgstr "Viridis"
-
-#, fuzzy
-msgctxt "LSgaussiantesting|"
-msgid "ggplot2"
-msgstr "ggplot2"
-
-#, fuzzy
-msgctxt "LSgaussiantesting|"
-msgid "Gray"
-msgstr "Gri"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"
