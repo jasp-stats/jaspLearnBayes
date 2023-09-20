@@ -26,7 +26,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   summary <- .bcComputeSummary(jaspResults, results, options)
 
   .bcTables(results, summary, jaspResults, dataset, options, ready)
-  #.bcPlots (results, summary, jaspResults, dataset, options, ready)
+  .bcPlots (results, summary, jaspResults, dataset, options, ready)
 }
 
 .bcIntro <- function(jaspResults, options) {
@@ -175,6 +175,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
 summary.bcPointEstimates <- function(results, ...) {
   output <- data.frame(
+    variable       = names(results),
     statistic      = .bcTexts("statistic")[names(results)],
     estimate       = unlist(results),
     lowerCI        = NA,
@@ -340,6 +341,10 @@ coef.bcPosteriorParams <- function(results) {
   #   sensitivity = results[["priorSensitivityAlpha"]] / (results[["priorSensitivityAlpha"]] + results[["priorSensitivityBeta"]]),
   #   specificity = results[["priorSpecificityAlpha"]] / (results[["priorSpecificityAlpha"]] + results[["priorSpecificityBeta"]])
   # )
+}
+
+.bcExtract <- function(summary, statistic, quantity = "estimate") {
+  summary[match(statistic, summary[["variable"]]), quantity, drop = TRUE]
 }
 
 .bcDrawPosteriorSamples <- function(options, progress = FALSE) {
@@ -628,18 +633,18 @@ model{
     plotsContainer <- jaspResults[["plots"]]
   }
 
-  .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options, ready, position = 1)
-  .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
-  .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
-  .bcPlotTestCharacteristics   (results, plotsContainer, dataset, options, ready, position = 4)
-  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 5)
-  .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 6)
-  .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 7)
-  .bcPlotEstimates             (results, plotsContainer, dataset, options, ready, position = 8)
+  .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
+  .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
+  .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3)
+  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 4)
+  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 5)
+  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 6)
+  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 7)
+  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 8)
 }
 
 ## Prior posterior plot ----
-.bcPlotPriorPosteriorPositive <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotPriorPosteriorPositive <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["probabilityPositivePlot"]])     ) return()
   if(!is.null(plotsContainer[["probabilityPositivePlot"]]) ) return()
 
@@ -652,14 +657,14 @@ model{
     )
 
   if(ready) plotsContainer[["probabilityPositivePlot"]]$plotObject <-
-    .bcFillPlotPriorPosteriorPositive(results, dataset, options)
+    .bcFillPlotPriorPosteriorPositive(results, summary, dataset, options)
 }
 
-.bcFillPlotPriorPosteriorPositive <- function(results, dataset, options) {
+.bcFillPlotPriorPosteriorPositive <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotPriorPosteriorPositive")
 }
 
-.bcFillPlotPriorPosteriorPositive.bcPointEstimates <- function(results, dataset, options) {
+.bcFillPlotPriorPosteriorPositive.bcPointEstimates <- function(results, summary, dataset, options) {
 
   data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
                       result = gettext(c("Negative", "Positive")))
@@ -690,7 +695,7 @@ model{
   return(plot)
 }
 
-.bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, dataset, options) {
+.bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, summary, dataset, options) {
   if(options[["probabilityPositivePlotEntireDistribution"]]) {
     data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
                         result = gettext(c("Negative", "Positive")),
@@ -722,18 +727,16 @@ model{
 
     for(i in 1:nrow(data)) {
       if(data$test[i] == gettext("Not tested")) {
-        data$mean [i] <- mean    (results[["prevalence"]], na.rm=TRUE)
-        data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2, na.rm=TRUE)
-        data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2, na.rm=TRUE)
+        varName <- "prevalence"
       } else if(data$result[i] == gettext("Negative")) {
-        data$mean [i] <- mean    (results[["falseOmissionRate"]], na.rm=TRUE)
-        data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2, na.rm=TRUE)
-        data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2, na.rm=TRUE)
+        varName <- "falseOmissionRate"
       } else {
-        data$mean [i] <- mean    (results[["positivePredictiveValue"]], na.rm=TRUE)
-        data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2, na.rm=TRUE)
-        data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2, na.rm=TRUE)
+        varName <- "positivePredictiveValue"
       }
+
+      data$mean [i] <- .bcExtract(summary, varName)
+      data$lower[i] <- .bcExtract(summary, varName, "lowerCI")
+      data$upper[i] <- .bcExtract(summary, varName, "upperCI")
     }
 
     plot <- ggplot2::ggplot(data    = data,
@@ -762,7 +765,7 @@ model{
 }
 
 ## Icon plot ----
-.bcPlotIconPlot <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotIconPlot <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["iconPlot"]])     ) return()
   if(!is.null(plotsContainer[["iconPlot"]]) ) return()
 
@@ -775,15 +778,15 @@ model{
     )
 
   if(ready) plotsContainer[["iconPlot"]]$plotObject <-
-    .bcFillPlotIconPlot(results, dataset, options)
+    .bcFillPlotIconPlot(results, summary, dataset, options)
 
 }
 
-.bcFillPlotIconPlot <- function(results, dataset, options) {
+.bcFillPlotIconPlot <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotIconPlot")
 }
 
-.bcFillPlotIconPlot.default <- function(results, dataset, options) {
+.bcFillPlotIconPlot.default <- function(results, summary, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
@@ -792,8 +795,8 @@ model{
     gettext(c("True positive", "False positive", "False negative", "True negative")),
     levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
   )
-  data$prop <- summary(results, ciLevel = options[["ciLevel"]])[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
-
+  #data$prop <- summary[match(c("truePositive", "falsePositive", "falseNegative", "trueNegative"), summary$variable), "estimate", drop=TRUE]
+  data$prop <- .bcExtract(summary, c("truePositive", "falsePositive", "falseNegative", "trueNegative"))
   if(any(data$prop < 1e-4)) {
     npoints <- 1e6
     xside <- yside <- 1e3
@@ -841,7 +844,7 @@ model{
 }
 
 ## ROC curve plot ----
-.bcPlotROC <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotROC <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["rocPlot"]])     ) return()
   if(!is.null(plotsContainer[["rocPlot"]]) ) return()
 
@@ -855,19 +858,18 @@ model{
       )
 
   if(ready) plotsContainer[["rocPlot"]]$plotObject <-
-    .bcFillPlotROC(results, dataset, options) +
+    .bcFillPlotROC(results, summary, dataset, options) +
       ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
 }
 
-.bcFillPlotROC <- function(results, dataset, options) {
+.bcFillPlotROC <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotROC")
 }
 
-.bcFillPlotROC.default <- function(results, dataset, options) {
-  summ <- summary(results, ciLevel = options[["ciLevel"]])
+.bcFillPlotROC.default <- function(results, summary, dataset, options) {
 
-  threshold    <- qnorm(summ["specificity", "estimate"])
-  meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
+  threshold    <- qnorm(.bcExtract(summary, "specificity"))
+  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
   varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
   data <- data.frame(
@@ -875,8 +877,8 @@ model{
     tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
   )
 
-  pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
-                          tpr = summ["sensitivity",       "estimate"])
+  pointData <- data.frame(fpr = .bcExtract(summary, "falsePositiveRate"),
+                          tpr = .bcExtract(summary, "sensitivity"))
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x    = fpr,
@@ -929,7 +931,7 @@ model{
   return(plot)
 }
 
-.bcFillPlotROC.bcData <- function(results, dataset, options) {
+.bcFillPlotROC.bcData <- function(results, summary, dataset, options) {
 
   thresholds <- c(dataset$marker, options[["threshold"]])
 
@@ -998,7 +1000,7 @@ model{
 }
 
 ## Test characteristics ----
-.bcPlotTestCharacteristics <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotTestCharacteristics <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["testCharacteristicsPlot"]])     ) return()
   if(!is.null(plotsContainer[["testCharacteristicsPlot"]]) ) return()
 
@@ -1011,19 +1013,17 @@ model{
     )
 
   if(ready) plotsContainer[["testCharacteristicsPlot"]]$plotObject <-
-    .bcFillPlotTestCharacteristics(results, dataset, options)
+    .bcFillPlotTestCharacteristics(results, summary, dataset, options)
 }
 
 
-.bcFillPlotTestCharacteristics <- function(results, dataset, options) {
+.bcFillPlotTestCharacteristics <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotTestCharacteristics")
 }
 
-.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, dataset, options) {
-  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
-
-  threshold    <- qnorm(summ["specificity", "estimate"])
-  meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
+.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, summary, dataset, options) {
+  threshold    <- qnorm(.bcExtract(summary, "specificity"))
+  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
   varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
   data <- data.frame(
@@ -1033,7 +1033,7 @@ model{
   )
   pointData <- data.frame(
     x = threshold,
-    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+    y = .bcExtract(summary, c("sensitivity", "specificity"))
   )
   segmentData <- data.frame(x = threshold, xend = threshold, y = 0, yend = 1)
 
@@ -1057,7 +1057,7 @@ model{
   return(plot)
 }
 
-.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, dataset, options) {
+.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, summary, dataset, options) {
   alpha <- 1-options[["ciLevel"]]
 
   nPoints <- 101
@@ -1091,11 +1091,11 @@ model{
     data[i, "tnrUpper"]  <- quantile(tnr, p = 1-alpha/2, na.rm=TRUE)
   }
 
-  summ <- summary(results, ciLevel = options[["ciLevel"]])
+
   threshold <- mean(qnorm(results[["specificity"]]), na.rm=TRUE)
   pointData <- data.frame(
     x = threshold,
-    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+    y = .bcExtract(summary, c("sensitivity", "specificity"))
   )
 
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
@@ -1200,7 +1200,7 @@ model{
 }
 
 ## Varying prevalence plot ----
-.bcPlotVaryingPrevalence <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotVaryingPrevalence <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["predictiveValuesByPrevalence"]])     ) return()
   if(!is.null(plotsContainer[["predictiveValuesByPrevalence"]]) ) return()
 
@@ -1213,20 +1213,20 @@ model{
     )
 
   if(ready) plotsContainer[["predictiveValuesByPrevalence"]]$plotObject <-
-    .bcFillPlotVaryingPrevalence(results, dataset, options)
+    .bcFillPlotVaryingPrevalence(results, summary, dataset, options)
 }
 
-.bcFillPlotVaryingPrevalence <- function(results, dataset, options) {
+.bcFillPlotVaryingPrevalence <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotVaryingPrevalence")
 }
 
-.bcFillPlotVaryingPrevalence.bcPointEstimates <- function(results, dataset, options) {
-
-  data <- .bcComputeResultsPointEstimates(modifyList(results, list(prevalence = seq(0, 1, by=0.01))))
-  data <- data.frame(prevalence = data[["prevalence"]],
-                     positivePredictiveValue = data[["positivePredictiveValue"]],
-                     negativePredictiveValue = data[["negativePredictiveValue"]]
-                     )
+.bcFillPlotVaryingPrevalence.bcPointEstimates <- function(results, summary, dataset, options) {
+  data <- .bcStatistics(
+    data.frame(
+      prevalence = seq(0, 1, by = 0.01),
+      sensitivity = results[["sensitivity"]],
+      specificity = results[["specificity"]])
+  )
 
   pointData <- data.frame(
     x = rep(results[["prevalence"]], 2),
@@ -1250,7 +1250,7 @@ model{
   return(plot)
 }
 
-.bcFillPlotVaryingPrevalence.bcUncertainEstimates <- function(results, dataset, options) {
+.bcFillPlotVaryingPrevalence.bcUncertainEstimates <- function(results, summary, dataset, options) {
   alpha <- 1-options[["ciLevel"]]
   sensitivity <- results[["sensitivity"]]
   specificity <- results[["specificity"]]
@@ -1306,7 +1306,7 @@ model{
 }
 
 ## Alluvial plot ----
-.bcPlotAlluvial <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotAlluvial <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["alluvialPlot"]])     ) return()
   if(!is.null(plotsContainer[["alluvialPlot"]]) ) return()
 
@@ -1319,14 +1319,14 @@ model{
     )
 
   if(ready) plotsContainer[["alluvialPlot"]]$plotObject <-
-    .bcFillPlotAlluvial(results, dataset, options)
+    .bcFillPlotAlluvial(results, summary, dataset, options)
 }
 
-.bcFillPlotAlluvial <- function(results, dataset, options) {
+.bcFillPlotAlluvial <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotAlluvial")
 }
 
-.bcFillPlotAlluvial.default <- function(results, dataset, options) {
+.bcFillPlotAlluvial.default <- function(results, summary, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
@@ -1335,8 +1335,7 @@ model{
     gettext(c("True positive", "False positive", "False negative", "True negative")),
     levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
   )
-  data$prop <- summary(results, ciLevel = options[["ciLevel"]])[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
-
+  data$prop <- .bcExtract(summary, c("truePositive", "falsePositive", "falseNegative", "trueNegative"))
   plot <- ggplot2::ggplot(data = data,
                           mapping = ggplot2::aes(y = prop, axis1 = cond, axis2 = test)) +
     ggalluvial::geom_alluvium(mapping = ggplot2::aes(fill = out)) +
@@ -1354,7 +1353,7 @@ model{
 }
 
 ## Signal detection plot ----
-.bcPlotSignal <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotSignal <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["signalDetectionPlot"]])     ) return()
   if(!is.null(plotsContainer[["signalDetectionPlot"]]) ) return()
 
@@ -1367,23 +1366,22 @@ model{
     )
 
   if(ready) plotsContainer[["signalDetectionPlot"]]$plotObject <-
-    .bcFillPlotSignal(results, dataset, options)
+    .bcFillPlotSignal(results, summary, dataset, options)
 
 }
 
-.bcFillPlotSignal <- function(results, dataset, options) {
+.bcFillPlotSignal <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotSignal")
 }
 
-.bcFillPlotSignal.default <- function(results, dataset, options) {
-  summaryResults <- summary(results, ciLevel = options[["ciLevel"]])
-  threshold    <- qnorm(summaryResults["specificity", "estimate"])
-  meanPositive <- qnorm(summaryResults["sensitivity", "estimate"], mean = threshold)
+.bcFillPlotSignal.default <- function(results, summary, dataset, options) {
+  threshold    <- qnorm(.bcExtract(summary, "specificity"))
+  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
   lowerLimitX <- min(qnorm(0.01, c(0, meanPositive)))
   upperLimitX <- max(qnorm(0.99, c(0, meanPositive)))
 
-  prevalence <- summaryResults["prevalence", "estimate"]
+  prevalence <- .bcExtract(summary, "prevalence")
   plot <- ggplot2::ggplot() +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "steelblue"), alpha = 0.7)  +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkorange"), alpha = 0.7) +
@@ -1436,7 +1434,7 @@ model{
 }
 
 ## Estimates plot ----
-.bcPlotEstimates <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotEstimates <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["estimatesPlot"]]) ) return()
   if(!is.null(plotsContainer[["estimatesPlot"]]) ) return()
 
@@ -1459,17 +1457,16 @@ model{
     )
 
   if(ready && any(selectedPlots)) plotsContainer[["estimatesPlot"]]$plotObject <-
-    .bcFillPlotEstimates(results, dataset, options, selectedPlots)
+    .bcFillPlotEstimates(results, summary, dataset, options, selectedPlots)
 
 }
 
-.bcFillPlotEstimates <- function(results, dataset, options, selectedPlots) {
+.bcFillPlotEstimates <- function(results, summary, dataset, options, selectedPlots) {
   UseMethod(".bcFillPlotEstimates")
 }
 
-.bcFillPlotEstimates.default <- function(results, dataset, options, selectedPlots) {
+.bcFillPlotEstimates.default <- function(results, summary, dataset, options, selectedPlots) {
   if(options[["plotEstimatesType"]] == "interval") {
-    data <- summary(results, ciLevel = options[["ciLevel"]])
     rows <- c("prevalence",
               "sensitivity",             "specificity",
               "truePositive",            "falsePositive",
@@ -1479,7 +1476,7 @@ model{
               "falsePositiveRate",   "falseNegativeRate",
               "accuracy")[selectedPlots]
 
-    data <- data[rows,]
+    data <- .bcExtract(summary, rows, c("statistic", "estimate", "lowerCI", "upperCI"))
     data[["statistic"]] <- factor(data[["statistic"]], levels = rev(data[["statistic"]]))
 
     plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic))
@@ -1500,7 +1497,7 @@ model{
               "falsePositiveRate",   "falseNegativeRate",
               "accuracy")[selectedPlots]
     data <- as.data.frame(results[cols])
-    colNames <- summary(results, ciLevel = 0.95)[cols, "statistic"]
+    colNames <- .bcExtract(summary, cols, "statistic")
     colnames(data) <- colNames
     data <- tidyr::pivot_longer(data = data, cols = tidyr::everything(),
                                 names_to = "statistic", values_to = "estimate")
@@ -1518,8 +1515,8 @@ model{
   return(plot)
 }
 
-.bcFillPlotEstimates.bcPointEstimates <- function(results, dataset, options, selectedPlots) {
-  data <- summary(results, ciLevel = options[["ciLevel"]])
+.bcFillPlotEstimates.bcPointEstimates <- function(results, summary, dataset, options, selectedPlots) {
+  data <- summary
   rows <- c("prevalence",
             "sensitivity",             "specificity",
             "truePositive",            "falsePositive",
@@ -1642,3 +1639,4 @@ geom_png <- function(mapping = NULL, data = NULL) {
                  stat = ggplot2::StatIdentity, position = ggplot2::PositionIdentity,
                  show.legend = FALSE)
 }
+

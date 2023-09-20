@@ -138,7 +138,7 @@ Form {
 				CheckBox
 				{
 					name: "rocPlotPosteriorRealizations"; label: qsTr("Add realizations from the posterior"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"; childrenOnSameRow: true;
-					IntegerField{ name: "plotRocLinesNr"; min: 0; defaultValue: 100; max: 1000 }
+					IntegerField{ name: "rocPlotPosteriorRealizationsNumber"; min: 0; defaultValue: 100; max: 1000 }
 				}
 			}
 			CheckBox { name: "testCharacteristicsPlot";				label: qsTr("Test characteristics by threshold")	}
