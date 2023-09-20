@@ -23,9 +23,10 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   dataset <- .bcReadData    (jaspResults, dataset, options, ready)
 
   results <- .bcComputeResults(jaspResults, dataset, options, ready)
+  summary <- .bcComputeSummary(jaspResults, results, options)
 
-  .bcTables(results, jaspResults, dataset, options, ready)
-  .bcPlots (results, jaspResults, dataset, options, ready)
+  .bcTables(results, summary, jaspResults, dataset, options, ready)
+  #.bcPlots (results, summary, jaspResults, dataset, options, ready)
 }
 
 .bcIntro <- function(jaspResults, options) {
@@ -80,10 +81,10 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 .bcParseOptions <- function(jaspResults, options) {
   options <- .parseAndStoreFormulaOptions(
     jaspResults, options,
-    c("prevalence", "sensitivity", "specificity", 
-    "priorPrevalenceAlpha", "priorPrevalenceBeta", 
-    "priorSensitivityAlpha", "priorSensitivityBeta", 
-    "priorSpecificityAlpha", "priorSpecificityBeta", 
+    c("prevalence", "sensitivity", "specificity",
+    "priorPrevalenceAlpha", "priorPrevalenceBeta",
+    "priorSensitivityAlpha", "priorSensitivityBeta",
+    "priorSpecificityAlpha", "priorSpecificityBeta",
     "threshold")
     )
 
@@ -129,7 +130,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
 # Results computation and reshaping ----
 .bcComputeResults <- function(jaspResults, dataset, options, ready) {
-  if(!is.null(jaspResults[["results"]])) return(jaspResults[["results"]]$object)
+  if(!is.null(jaspResults[["results"]])) return(.bcStatistics(jaspResults[["results"]]$object))
 
   results <- switch(options[["inputType"]],
                     pointEstimates     = .bcComputeResultsPointEstimates(options),
@@ -141,21 +142,34 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     createJaspState(object       = results,
                     dependencies = c("inputType", "marker", "labels", "threshold", "samples",
                                      "truePositive", "falsePositive", "falseNegative", "trueNegative",
-                                     levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = ""))
+                                     "updatePrevalence", "orderConstraint", "positiveTests", "negativeTests",
+                                     c("sensitivity", "specificity", "prevalence"),
+                                     levels(interaction(c("priorSensitivity", "priorSpecificity", "priorPrevalence"), c("Alpha", "Beta"), sep = ""))
                                      )
                     )
 
-  return(results)
+  return(.bcStatistics(results))
+}
+
+.bcComputeSummary <- function(jaspResults, results, options) {
+  if(!is.null(jaspResults[["summary"]])) return(jaspResults[["summary"]]$object)
+
+  output <- summary(results, ciLevel = options[["ciLevel"]])
+
+  jaspResults[["summary"]] <- createJaspState(object = output)
+  jaspResults[["summary"]]$dependOn(optionsFromObject = jaspResults[["results"]], options = "ciLevel")
+
+  return(output)
 }
 
 .bcComputeResultsPointEstimates <- function(options) {
-  results <- .bcStatistics(
+  results <- list(
     prevalence  = options[["prevalence"]],
     sensitivity = options[["sensitivity"]],
     specificity = options[["specificity"]]
-    )
+  )
 
-  class(results) <- "bcPointEstimates"
+  class(results) <- c("bcPointEstimates", class(results))
   return(results)
 }
 
@@ -174,24 +188,44 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options, progress = TRUE) {
-  results <- .bcGetPosterior(options)
-  results <- .bcDrawPosteriorSamples(results, progress = progress)
+  #results <- .bcGetPosterior(options)
+  results <- .bcDrawPosteriorSamples(options, progress = progress)
 
-  class(results) <- c("bcUncertainEstimates")
+  class(results) <- c("bcUncertainEstimates", class(results))
   return(results)
 }
-summary.bcUncertainEstimates <- function(results, ciLevel) {
+# summary.bcUncertainEstimates <- function(results, ciLevel) {
+#   alpha <- 1-ciLevel
+#
+#   output <- data.frame(
+#     statistic      = .bcTexts("statistic")[names(results)],
+#     estimate       = vapply(results, mean, numeric(1), na.rm=TRUE),
+#     lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2, na.rm=TRUE),
+#     upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2, na.rm=TRUE),
+#     notation       = .bcTexts("notation")[names(results)],
+#     interpretation = .bcTexts("interpretation")[names(results)],
+#     stringsAsFactors = FALSE
+#     )
+#
+#   return(output)
+# }
+
+summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
   alpha <- 1-ciLevel
 
-  output <- data.frame(
-    statistic      = .bcTexts("statistic")[names(results)],
-    estimate       = vapply(results, mean, numeric(1), na.rm=TRUE),
-    lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2, na.rm=TRUE),
-    upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2, na.rm=TRUE),
-    notation       = .bcTexts("notation")[names(results)],
-    interpretation = .bcTexts("interpretation")[names(results)],
-    stringsAsFactors = FALSE
-    )
+  output <- posterior::summarise_draws(
+    results,
+    estimate = mean,
+    median = median,
+    sd = sd,
+    lowerCI = ~unname(quantile(.x, probs =   alpha/2)),
+    upperCI = ~unname(quantile(.x, probs = 1-alpha/2)),
+    ssEff = posterior::ess_bulk,
+    rhat = posterior::rhat
+  )
+  output[["statistic"]] <- .bcTexts("statistic")[output[["variable"]]]
+  output[["notation"]] <- .bcTexts("notation")[output[["variable"]]]
+  output[["interpretation"]] <- .bcTexts("interpretation")[output[["variable"]]]
 
   return(output)
 }
@@ -207,36 +241,67 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 }
 
 
-.bcStatistics <- function(prevalence, sensitivity, specificity) {
-  truePositive            <- prevalence*sensitivity
-  falsePositive           <- (1-prevalence)*(1-specificity)
-  trueNegative            <- (1-prevalence)*specificity
-  falseNegative           <- prevalence*(1-sensitivity)
-  positivePredictiveValue <- truePositive / (truePositive + falsePositive)
-  negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
-  falseDiscoveryRate      <- 1-positivePredictiveValue
-  falseOmissionRate       <- 1-negativePredictiveValue
-  falsePositiveRate       <- 1-specificity
-  falseNegativeRate       <- 1-sensitivity
-  accuracy                <- truePositive + trueNegative
+# .bcStatistics <- function(prevalence, sensitivity, specificity) {
+#   truePositive            <- prevalence*sensitivity
+#   falsePositive           <- (1-prevalence)*(1-specificity)
+#   trueNegative            <- (1-prevalence)*specificity
+#   falseNegative           <- prevalence*(1-sensitivity)
+#   positivePredictiveValue <- truePositive / (truePositive + falsePositive)
+#   negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
+#   falseDiscoveryRate      <- 1-positivePredictiveValue
+#   falseOmissionRate       <- 1-negativePredictiveValue
+#   falsePositiveRate       <- 1-specificity
+#   falseNegativeRate       <- 1-sensitivity
+#   accuracy                <- truePositive + trueNegative
+#
+#   results <- list(
+#     prevalence              = prevalence,
+#     sensitivity             = sensitivity,
+#     specificity             = specificity,
+#     truePositive            = truePositive,
+#     falsePositive           = falsePositive,
+#     trueNegative            = trueNegative,
+#     falseNegative           = falseNegative,
+#     positivePredictiveValue = positivePredictiveValue,
+#     negativePredictiveValue = negativePredictiveValue,
+#     falseDiscoveryRate      = falseDiscoveryRate,
+#     falseOmissionRate       = falseOmissionRate,
+#     falsePositiveRate       = falsePositiveRate,
+#     falseNegativeRate       = falseNegativeRate,
+#     accuracy                = accuracy
+#   )
+#
+#   return(results)
+# }
 
-  results <- list(
-    prevalence              = prevalence,
-    sensitivity             = sensitivity,
-    specificity             = specificity,
-    truePositive            = truePositive,
-    falsePositive           = falsePositive,
-    trueNegative            = trueNegative,
-    falseNegative           = falseNegative,
-    positivePredictiveValue = positivePredictiveValue,
-    negativePredictiveValue = negativePredictiveValue,
-    falseDiscoveryRate      = falseDiscoveryRate,
-    falseOmissionRate       = falseOmissionRate,
-    falsePositiveRate       = falsePositiveRate,
-    falseNegativeRate       = falseNegativeRate,
-    accuracy                = accuracy
+.bcStatistics <- function(results) {
+  cls <- class(results)
+  results <- within(
+    results,
+    {
+      truePositive            <- prevalence*sensitivity
+      falsePositive           <- (1-prevalence)*(1-specificity)
+      trueNegative            <- (1-prevalence)*specificity
+      falseNegative           <- prevalence*(1-sensitivity)
+      positivePredictiveValue <- truePositive / (truePositive + falsePositive)
+      negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
+      falseDiscoveryRate      <- 1-positivePredictiveValue
+      falseOmissionRate       <- 1-negativePredictiveValue
+      falsePositiveRate       <- 1-specificity
+      falseNegativeRate       <- 1-sensitivity
+      accuracy                <- truePositive + trueNegative
+    }
   )
 
+  statNames <- .bcTexts("statistic") |> names()
+  columnOrder <- match(statNames, names(results))
+
+  if(posterior::is_draws(results)) {
+    columnOrder <- c(columnOrder, match(c(".chain", ".iteration", ".draw"), names(results)))
+  }
+
+  results <- results[columnOrder]
+  class(results) <- cls
   return(results)
 }
 
@@ -270,38 +335,73 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 }
 
 coef.bcPosteriorParams <- function(results) {
-  .bcStatistics(
-    prevalence  = results[["priorPrevalenceAlpha"]]  / (results[["priorPrevalenceAlpha"]]  + results[["priorPrevalenceBeta"]] ),
-    sensitivity = results[["priorSensitivityAlpha"]] / (results[["priorSensitivityAlpha"]] + results[["priorSensitivityBeta"]]),
-    specificity = results[["priorSpecificityAlpha"]] / (results[["priorSpecificityAlpha"]] + results[["priorSpecificityBeta"]])
-  )
+  # .bcStatistics(
+  #   prevalence  = results[["priorPrevalenceAlpha"]]  / (results[["priorPrevalenceAlpha"]]  + results[["priorPrevalenceBeta"]] ),
+  #   sensitivity = results[["priorSensitivityAlpha"]] / (results[["priorSensitivityAlpha"]] + results[["priorSensitivityBeta"]]),
+  #   specificity = results[["priorSpecificityAlpha"]] / (results[["priorSpecificityAlpha"]] + results[["priorSpecificityBeta"]])
+  # )
 }
 
-.bcDrawPosteriorSamples <- function(options, progress = TRUE) {
-  prevalence <- sensitivity <- specificity <- numeric(options[["samples"]])
+.bcDrawPosteriorSamples <- function(options, progress = FALSE) {
 
-  if(progress)
-    startProgressbar(expectedTicks = options[["samples"]], label = gettext("Drawing samples"))
+  jags_data <- with(options, list(
+      z = 1, # ones trick
+      tp = truePositive,
+      pos = truePositive + falseNegative,
+      tn = trueNegative,
+      neg = trueNegative + falsePositive,
+      total = truePositive + trueNegative + falsePositive + falseNegative,
+      positiveTests = positiveTests,
+      totalTests = positiveTests + negativeTests,
+      updatePrevalence = as.integer(updatePrevalence),
+      orderConstraint = as.integer(orderConstraint),
+      priorPrevalenceAlpha = priorPrevalenceAlpha,
+      priorPrevalenceBeta = priorPrevalenceBeta,
+      priorSensitivityAlpha = priorSensitivityAlpha,
+      priorSensitivityBeta = priorSensitivityBeta,
+      priorSpecificityAlpha = priorSpecificityAlpha,
+      priorSpecificityBeta = priorSpecificityBeta
+  ))
 
-  for(i in seq_len(options[["samples"]])) {
-    prevalence[i]  <- rbeta(n=1L, options[["priorPrevalenceAlpha"]],  options[["priorPrevalenceBeta"]])
-    invalid <- TRUE
-    while(invalid) {
-      sensitivity[i] <- rbeta(n=1L, options[["priorSensitivityAlpha"]], options[["priorSensitivityBeta"]])
-      specificity[i] <- rbeta(n=1L, options[["priorSpecificityAlpha"]], options[["priorSpecificityBeta"]])
-      invalid <- (1-specificity[i]) > sensitivity[i]
-    }
-
-    if(progress) progressbarTick()
-  }
-  results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
-
-  class(results) <- "bcUncertainEstimates"
-  return(results)
+    samples <- runjags::run.jags(
+      model = .bcJagsModel,
+      monitor = c("prevalence", "sensitivity", "specificity"),
+      data = jags_data,
+      summarise = FALSE
+    )
+    samples <- posterior::as_draws_df(samples[["mcmc"]])
+    return(samples)
 }
+
+.bcJagsModel <- "
+model{
+  # priors
+  prevalence  ~ dbeta(priorPrevalenceAlpha,  priorPrevalenceBeta )
+  sensitivity ~ dbeta(priorSensitivityAlpha, priorSensitivityBeta)
+  specificity ~ dbeta(priorSpecificityAlpha, priorSpecificityBeta)
+
+  # likelihood
+
+  ## update sensitivity and specificity
+  tp ~ dbin(sensitivity, pos)
+  tn ~ dbin(specificity, neg)
+
+  ## update prevalence
+  prevalence2 <- ifelse(updatePrevalence==1, prevalence, 0.5)
+  pos ~ dbin(prevalence2, total)
+
+  ## correction as per Winkler & Smith
+  theta <- prevalence*sensitivity + (1-prevalence)*(1-specificity)
+  positiveTests ~ dbin(theta, totalTests)
+
+  # order constraints
+  constraint <- ifelse(orderConstraint, step(sensitivity-(1-specificity)), 1)
+  z ~ dbern(constraint)
+}
+"
 
 # Output tables ----
-.bcTables <- function(results, jaspResults, dataset, options, ready) {
+.bcTables <- function(results, summary, jaspResults, dataset, options, ready) {
 
   if(is.null(jaspResults[["tables"]])) {
     tablesContainer <- createJaspContainer(title = gettext("Tables"))
@@ -312,12 +412,13 @@ coef.bcPosteriorParams <- function(results) {
     tablesContainer <- jaspResults[["tables"]]
   }
 
-  .bcTableStatistics    (results, tablesContainer, dataset, options, ready)
-  .bcTableConfusion     (results, tablesContainer, dataset, options, ready)
+  .bcTableStatistics    (results, summary, tablesContainer, dataset, options, ready)
+  .bcTableConfusion     (results, summary, tablesContainer, dataset, options, ready)
+  return()
   .bcTablePriorPosterior(results, tablesContainer, dataset, options, ready)
 }
 
-.bcTableStatistics <- function(results, tablesContainer, dataset, options, ready) {
+.bcTableStatistics <- function(results, summary=NULL, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["statistics"]])     ) return()
   if(!is.null(tablesContainer[["statistics"]]) ) return()
 
@@ -326,27 +427,33 @@ coef.bcPosteriorParams <- function(results) {
   table$showSpecifiedColumnsOnly <- TRUE
 
   table$addColumnInfo(name = "statistic",  title = "")
-  table$addColumnInfo(name = "estimate", title = gettext("Estimate"), type = "number")
 
-  if(options[["inputType"]] != "pointEstimates")
+  if(options[["inputType"]] == "pointEstimates") {
+    table$addColumnInfo(name = "estimate", title = gettext("Estimate"), type = "number")
+  } else {
+    table$addColumnInfo(name = "estimate", title = gettext("Mean"),   type = "number")
+    table$addColumnInfo(name = "median",   title = gettext("Median"), type = "number")
+    table$addColumnInfo(name = "sd",       title = gettext("SD"),     type = "number")
+    if(options[["ci"]]) {
+      ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
+      table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
+      table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
+    }
+    table$addColumnInfo(name = "rhat", title = gettext("Rhat"),              overtitle = gettext("Diagnostics"), type = "number")
+    table$addColumnInfo(name = "ssEff", title = gettext("Eff. Sample Size"), overtitle = gettext("Diagnostics"), type = "number")
+
     table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
-
-  if(options[["ci"]]) {
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
-    ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
-    table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
-    table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
   }
 
   table$addColumnInfo(name = "notation", title = gettext("Notation"))
   table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
 
-  if(ready) table$setData(summary(results, ciLevel = options[["ciLevel"]]))
+  if(ready && !is.null(summary)) table$setData(summary)
 
   tablesContainer[["statistics"]] <- table
 }
 
-.bcTableConfusion <- function(results, tablesContainer, dataset, options, ready) {
+.bcTableConfusion <- function(results, summary, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["confusionMatrix"]])     ) return()
   if(!is.null(tablesContainer[["confusionMatrix"]]) ) return()
 
@@ -369,7 +476,6 @@ coef.bcPosteriorParams <- function(results) {
   }
 
   if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
     table$addColumnInfo(name = "pos_lower", title = gettextf("Lower %s", ciText), type = "number")
     table$addColumnInfo(name = "pos_upper", title = gettextf("Upper %s", ciText), type = "number")
   }
@@ -433,20 +539,18 @@ coef.bcPosteriorParams <- function(results) {
     }
   }
 
-  if(ready) .bcFillTableConfusion(results, table, options)
+  if(ready) .bcFillTableConfusion(summary, table, options)
 
   # footnotes
-  if(options[["inputType"]] != "pointEstimates")
+  if(options[["inputType"]] != "pointEstimates" && options[["confusionMatrixType"]] != "text")
     table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
-
-  if(options[["ci"]])
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
 
   tablesContainer[["confusionMatrix"]] <- table
 }
 
-.bcFillTableConfusion <- function(results, table, options) {
-  tab <- summary(results, ciLevel = options[["ciLevel"]])
+.bcFillTableConfusion <- function(summary, table, options) {
+  tab <- summary[, c("statistic", "estimate", "lowerCI", "upperCI")]
+  rownames(tab) <- summary[["variable"]]
 
   df <- data.frame(
     head       = gettext(c("Positive condition", "Negative condition", "True/Total")),
@@ -513,7 +617,7 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 # Output plots ----
-.bcPlots <- function(results, jaspResults, dataset, options, ready) {
+.bcPlots <- function(results, summary, jaspResults, dataset, options, ready) {
 
   if(is.null(jaspResults[["plots"]])) {
     plotsContainer <- createJaspContainer(title = gettext("Plots"))
@@ -1494,7 +1598,7 @@ coef.bcPosteriorParams <- function(results) {
    ),
    footnote = c(
      ci  = gettextf("Central credible intervals are based on %i samples.", options[["samples"]]),
-     posteriorEstimate = gettextf("Parameter estimates are posterior means based on %i samples.", options[["samples"]])
+     posteriorEstimate = gettextf("Parameter estimates are based on %i MCMC samples.", options[["samples"]])
    )
   )
 

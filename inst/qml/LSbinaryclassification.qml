@@ -86,8 +86,21 @@ Form {
 
 	Group
 	{
+		name: "observedTests"; title: qsTr("Observed tests")
+		IntegerField { name: "positiveTests";		label: qsTr("Positive tests")	}
+		IntegerField { name: "negativeTests";		label: qsTr("Negative tests")	}
+	}
+	Group
+	{
+	  visible: inputType.value !== "pointEstimates"
+	  title: qsTr("")
+	  CheckBox{ name: "updatePrevalence"; label: qsTr("Update prevalence"); checked: true}
+	  CheckBox{ name: "orderConstraint"; label: qsTr("Respect order constraint"); checked: true}
+	}
+
+	Section
+	{
 		title: qsTr("Tables")
-		CheckBox { name: "statistics";  label: qsTr("Statistics");	checked: true }
 		CheckBox
 		{
 			name: "confusionMatrix"; label: qsTr("Confusion matrix")
@@ -100,7 +113,11 @@ Form {
 			}
 			CheckBox { name: "confusionMatrixAdditionalInfo"; label: qsTr("Additional info"); checked: true }
 		}
-		CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
+
+		Group{
+		  CheckBox { name: "statistics";  label: qsTr("Statistics");	checked: true }
+		  CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
+		}
 	}
 
 	Section

@@ -20,10 +20,12 @@ Imports:
   scales,
   ggalluvial,
   ragg,
+  runjags,
   ggdist,
   grid,
   grDevices,
-  png
+  png,
+  posterior
 Remotes:
   jasp-stats/jaspBase,
   jasp-stats/jaspGraphs
