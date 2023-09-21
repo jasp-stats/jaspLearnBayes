@@ -60,7 +60,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:
 
-                   <img src = "img:jaspLearnBayes/icons/bayes.png", width="500">
+                   %s
 
                    <h5>References</h5>
                    Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.
@@ -70,7 +70,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                    <a href="https://wikipedia.org/wiki/Evaluation_of_binary_classifiers">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>
 
                    <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
-                   ')
+                   ', .bcBayesTheoremExpression())
 
   jaspResults[["introductoryText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
                                                text         = text,
@@ -1625,6 +1625,27 @@ model{
   )
 
   return(out)
+}
+
+.bcBayesTheoremExpression <- function() {
+  condition <- gettext("Condition")
+  test <- gettext("Test")
+  positive <- gettext("positive")
+  negative <- gettext("negative")
+  prevalence <- gettext("Prevalence")
+  sensitivity <- gettext("Sensitivity")
+  specificity <- gettext("Specificity")
+
+  theorem <- jaspBase::mathExpression(
+    r"{
+    \begin{aligned}
+p(& \text{Condition} = \text{positive} \mid \text{Test} = \text{positive}) \\
+& = \frac{p(\text{Condition}=\text{positive}) \times p(\text{Test} = \text{positive} \mid \text{Condition}=\text{positive})}{p(\text{Test} = \text{positive})}\\
+& = \frac{\text{Prevalence} \times \text{Sensitivity}}{\text{Prevalence} \times \text{Sensitivity} + (1-\text{Prevalence})\times(1-\text{Specificity})}
+\end{aligned}
+    }",
+    inline = FALSE
+  )
 }
 
 .bcwdnorm <- function(x, mean = 0, sd = 1, w = 1) {
