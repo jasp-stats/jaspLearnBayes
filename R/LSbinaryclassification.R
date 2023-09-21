@@ -147,7 +147,6 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                                      levels(interaction(c("priorSensitivity", "priorSpecificity", "priorPrevalence"), c("Alpha", "Beta"), sep = ""))
                                      )
                     )
-
   return(.bcStatistics(results))
 }
 
@@ -189,27 +188,11 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options, progress = TRUE) {
-  #results <- .bcGetPosterior(options)
   results <- .bcDrawPosteriorSamples(options, progress = progress)
 
   class(results) <- c("bcUncertainEstimates", class(results))
   return(results)
 }
-# summary.bcUncertainEstimates <- function(results, ciLevel) {
-#   alpha <- 1-ciLevel
-#
-#   output <- data.frame(
-#     statistic      = .bcTexts("statistic")[names(results)],
-#     estimate       = vapply(results, mean, numeric(1), na.rm=TRUE),
-#     lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2, na.rm=TRUE),
-#     upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2, na.rm=TRUE),
-#     notation       = .bcTexts("notation")[names(results)],
-#     interpretation = .bcTexts("interpretation")[names(results)],
-#     stringsAsFactors = FALSE
-#     )
-#
-#   return(output)
-# }
 
 summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
   alpha <- 1-ciLevel
@@ -231,16 +214,80 @@ summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
   return(output)
 }
 
-.bcComputeResultsFromData <- function(options, dataset, ready, progress = TRUE) {
-  if(!ready) return(.bcDrawPosteriorSamples(options))
-
-  results <- .bcGetPosterior(options, dataset)
-  results <- .bcDrawPosteriorSamples(results, progress = progress)
-
-  class(results) <- c("bcData", "bcUncertainEstimates")
+.bcComputeResultsFromData <- function(options, dataset, ready, threshold = NULL) {
+  if (!ready) {
+    opts <- list(
+      truePositive = 0, falsePositive = 0, falseNegative = 0, trueNegative = 0
+    )
+    tp <- fp <- fn <- tn <- 0
+  } else if (options[["inputType"]] == "data") {
+    if (!is.null(threshold))
+      dataset[["test"]] <- dataset[["marker"]] >= threshold
+    opts <- list(
+      truePositive = sum( dataset[["condition"]] &  dataset[["test"]]),
+      falsePositive = sum(!dataset[["condition"]] &  dataset[["test"]]),
+      falseNegative = sum( dataset[["condition"]] & !dataset[["test"]]),
+      trueNegative = sum(!dataset[["condition"]] & !dataset[["test"]])
+    )
+  }
+  newOptions <- utils::modifyList(options, opts)
+  results <- .bcDrawPosteriorSamples(newOptions)
+  class(results) <- c("bcData", "bcUncertainEstimates", class(results))
   return(results)
 }
 
+
+.bcComputeSummaryByThreshold <- function(jaspResults, options, dataset) {
+  if(!is.null(jaspResults[["summaryByThreshold"]])) return(jaspResults[["summaryByThreshold"]]$object)
+
+  if(nrow(dataset) < 50) {
+    thresholds <- c(dataset$marker, options[["threshold"]])
+  } else {
+    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.02), na.rm=TRUE), options[["threshold"]])
+  }
+  threshold <- sort(thresholds)
+
+  mcmcOptions <- list(
+    samples = options[["varyingThresholdSamples"]],
+    burnin = options[["varyingThresholdBurnin"]],
+    thinning = options[["varyingThresholdThinning"]],
+    chains = options[["varyingThresholdChains"]]
+  )
+  mcmcOptions <- utils::modifyList(options, mcmcOptions)
+
+  startProgressbar(expectedTicks = length(thresholds), label = gettext("Estimating parameters per varying thresholds..."))
+  results <- lapply(thresholds, function(threshold) {
+    res <- .bcComputeResultsFromData(mcmcOptions, dataset, TRUE, threshold)
+    res <- .bcStatistics(res)
+    class(res) <- c("bcVaryingThresholds", class(res))
+    res <- summary(res, ciLevel = mcmcOptions[["ciLevel"]], threshold = threshold)
+    progressbarTick()
+    return(res)
+  })
+  results <- do.call(rbind, results)
+  save(results, file = "~/Downloads/thresholds.Rdata")
+
+  jaspResults[["summaryByThreshold"]] <- jaspBase::createJaspState(object = results)
+  jaspResults[["summaryByThreshold"]]$dependOn(
+    optionsFromObject = jaspResults[["results"]],
+    options = c("ciLevel", "varyingThresholdSamples", "varyingThresholdBurnin", "varyingThresholdThinning", "varyingThresholdChains")
+    )
+  return(results)
+}
+
+summary.bcVaryingThresholds <- function(results, ciLevel, threshold) {
+  alpha <- 1-ciLevel
+
+  output <- posterior::summarise_draws(
+    results,
+    estimate = mean,
+    lowerCI = ~unname(quantile(.x, probs =   alpha/2)),
+    upperCI = ~unname(quantile(.x, probs = 1-alpha/2))
+  )
+  output[["threshold"]] <- threshold
+
+  return(output)
+}
 
 # .bcStatistics <- function(prevalence, sensitivity, specificity) {
 #   truePositive            <- prevalence*sensitivity
@@ -372,7 +419,11 @@ coef.bcPosteriorParams <- function(results) {
       model = .bcJagsModel,
       monitor = c("prevalence", "sensitivity", "specificity"),
       data = jags_data,
-      summarise = FALSE
+      summarise = FALSE,
+      sample = options[["samples"]],
+      burnin = options[["burnin"]],
+      thin = options[["thinning"]],
+      n.chains = options[["chains"]]
     )
     samples <- posterior::as_draws_df(samples[["mcmc"]])
     return(samples)
@@ -635,8 +686,8 @@ model{
 
   .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
-  .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3)
-  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 4)
+  .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3, jaspResults)
+  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 4, jaspResults)
   .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 5)
   .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 6)
   .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 7)
@@ -844,7 +895,7 @@ model{
 }
 
 ## ROC curve plot ----
-.bcPlotROC <- function(results, summary, plotsContainer, dataset, options, ready, position) {
+.bcPlotROC <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
   if( isFALSE(options[["rocPlot"]])     ) return()
   if(!is.null(plotsContainer[["rocPlot"]]) ) return()
 
@@ -858,15 +909,15 @@ model{
       )
 
   if(ready) plotsContainer[["rocPlot"]]$plotObject <-
-    .bcFillPlotROC(results, summary, dataset, options) +
+    .bcFillPlotROC(results, summary, dataset, options, jaspResults=jaspResults) +
       ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
 }
 
-.bcFillPlotROC <- function(results, summary, dataset, options) {
+.bcFillPlotROC <- function(results, summary, dataset, options, ...) {
   UseMethod(".bcFillPlotROC")
 }
 
-.bcFillPlotROC.default <- function(results, summary, dataset, options) {
+.bcFillPlotROC.default <- function(results, summary, dataset, options, ...) {
 
   threshold    <- qnorm(.bcExtract(summary, "specificity"))
   meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
@@ -931,23 +982,16 @@ model{
   return(plot)
 }
 
-.bcFillPlotROC.bcData <- function(results, summary, dataset, options) {
-
-  thresholds <- c(dataset$marker, options[["threshold"]])
+.bcFillPlotROC.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
 
   data <- data.frame(
-    fpr = numeric(length(thresholds)+2), tpr = numeric(length(thresholds)+2)
+    fpr = c(subset(thresholds, variable == "falsePositiveRate")[["estimate"]], 0, 1),
+    tpr = c(subset(thresholds, variable == "sensitivity")[["estimate"]], 0, 1)
   )
-  data[1,] <- c(0, 0)
-  data[2,] <- c(1, 1)
-  for(i in seq_along(thresholds)+2) {
-    res <- coef(.bcGetPosterior(options = options, dataset = dataset, threshold = thresholds[i]))
-    data[i,] <- unlist(res[c("falsePositiveRate", "sensitivity")])
-  }
 
-  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
-  pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
-                          tpr = summ["sensitivity",           "estimate"])
+  pointData <- data.frame(fpr = .bcExtract(summary, "falsePositiveRate"),
+                          tpr = .bcExtract(summary, "sensitivity"))
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x = fpr, y = tpr)
@@ -1000,7 +1044,7 @@ model{
 }
 
 ## Test characteristics ----
-.bcPlotTestCharacteristics <- function(results, summary, plotsContainer, dataset, options, ready, position) {
+.bcPlotTestCharacteristics <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
   if( isFALSE(options[["testCharacteristicsPlot"]])     ) return()
   if(!is.null(plotsContainer[["testCharacteristicsPlot"]]) ) return()
 
@@ -1012,16 +1056,17 @@ model{
                    height       = 500,
     )
 
+
   if(ready) plotsContainer[["testCharacteristicsPlot"]]$plotObject <-
-    .bcFillPlotTestCharacteristics(results, summary, dataset, options)
+    .bcFillPlotTestCharacteristics(results, summary, dataset, options, jaspResults=jaspResults)
 }
 
 
-.bcFillPlotTestCharacteristics <- function(results, summary, dataset, options) {
+.bcFillPlotTestCharacteristics <- function(results, summary, dataset, options, ...) {
   UseMethod(".bcFillPlotTestCharacteristics")
 }
 
-.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, summary, dataset, options) {
+.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, summary, dataset, options, ...) {
   threshold    <- qnorm(.bcExtract(summary, "specificity"))
   meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
@@ -1057,7 +1102,7 @@ model{
   return(plot)
 }
 
-.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, summary, dataset, options) {
+.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, summary, dataset, options, ...) {
   alpha <- 1-options[["ciLevel"]]
 
   nPoints <- 101
@@ -1130,41 +1175,21 @@ model{
   return(plot)
 }
 
-.bcFillPlotTestCharacteristics.bcData <- function(results, dataset, options) {
-  if(nrow(dataset) < 100) {
-    thresholds <- c(dataset$marker, options[["threshold"]])
-  } else {
-    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.01), na.rm=TRUE), options[["threshold"]])
-  }
-
+.bcFillPlotTestCharacteristics.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
   data <- data.frame(
-    threshold = thresholds,
-    tpr       = numeric(length(thresholds)),
-    tprLower  = numeric(length(thresholds)),
-    tprUpper  = numeric(length(thresholds)),
-    tnr       = numeric(length(thresholds)),
-    tnrLower  = numeric(length(thresholds)),
-    tnrUpper  = numeric(length(thresholds))
+    threshold = subset(thresholds, variable == "sensitivity")[["threshold"]],
+    tpr       = subset(thresholds, variable == "sensitivity")[["estimate"]],
+    tprLower  = subset(thresholds, variable == "sensitivity")[["lowerCI"]],
+    tprUpper  = subset(thresholds, variable == "sensitivity")[["upperCI"]],
+    tnr       = subset(thresholds, variable == "specificity")[["estimate"]],
+    tnrLower  = subset(thresholds, variable == "specificity")[["lowerCI"]],
+    tnrUpper  = subset(thresholds, variable == "specificity")[["upperCI"]]
   )
 
-  for(i in seq_len(nrow(data))) {
-    res <- .bcGetPosterior(options = options, dataset = dataset, threshold = data$threshold[i])
-    res <- .bcDrawPosteriorSamples(res, progress = FALSE)
-    res <- summary(res, ciLevel = options[["ciLevel"]])
-
-    data[i,"tpr"]      <- res["sensitivity", "estimate"]
-    data[i,"tprLower"] <- res["sensitivity", "lowerCI" ]
-    data[i,"tprUpper"] <- res["sensitivity", "upperCI" ]
-    data[i,"tnr"]      <- res["specificity", "estimate"]
-    data[i,"tnrLower"] <- res["specificity", "lowerCI" ]
-    data[i,"tnrUpper"] <- res["specificity", "upperCI" ]
-
-  }
-
-  summ <- summary(results, ciLevel = options[["ciLevel"]])
   pointData <- data.frame(
     x = options[["threshold"]],
-    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+    y = .bcExtract(summary, c("sensitivity", "specificity"))
   )
 
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
@@ -1404,7 +1429,7 @@ model{
   return(plot)
 }
 
-.bcFillPlotSignal.bcData <- function(results, dataset, options) {
+.bcFillPlotSignal.bcData <- function(results, summary, dataset, options) {
   histogram <- hist(dataset[["marker"]], plot = FALSE)
   counts    <- histogram[["counts"]]
   breaks    <- histogram[["breaks"]]
@@ -1594,8 +1619,8 @@ model{
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(
-     ci  = gettextf("Central credible intervals are based on %i samples.", options[["samples"]]),
-     posteriorEstimate = gettextf("Parameter estimates are based on %i MCMC samples.", options[["samples"]])
+     ci  = gettextf("Central credible intervals are based on %i samples.", options[["samples"]]*options[["chains"]]),
+     posteriorEstimate = gettextf("Parameter estimates are based on %i MCMC samples.", options[["samples"]]*options[["chains"]])
    )
   )
 

@@ -182,23 +182,104 @@ Form {
 		Group
 		{
 			visible: inputType.value !== "pointEstimates"
-			columns: 1
+			columns: 2
 			CheckBox
 			{
 				name:					"ci"
 				label:					qsTr("Credible intervals")
+				Layout.columnSpan:		2
 				childrenOnSameRow:		true
 				checked:				true
 				CIField { name: "ciLevel" }
 			}
-
-			IntegerField
+			Group
 			{
-				name: "samples"
-				label: qsTr("Number of posterior samples")
-				defaultValue: 10000
-				min: 1000
-				fieldWidth: 50
+				title: qsTr("MCMC parameters")
+				columns: 2
+				Group
+				{
+					title: inputType.value === "uncertainEstimates" ? "" : qsTr("For main model")
+					IntegerField
+					{
+						id: samples
+						name: "samples"
+						label: qsTr("No. samples")
+						defaultValue: 1e4
+						min: 10
+						max: 1e9
+						fieldWidth: 100
+					}
+					IntegerField
+					{
+						name: "burnin"
+						label: qsTr("No. burnin samples")
+						defaultValue: 500
+						min: 1
+						max: 1e9
+						fieldWidth: 100
+					}
+					IntegerField
+					{
+						name: "thinning"
+						label: qsTr("Thinning")
+						defaultValue: 1
+						min: 1
+						max: Math.floor(samples.value / 2)
+						fieldWidth: 100
+					}
+					IntegerField
+					{
+						name: "chains"
+						label: qsTr("No. chains")
+						defaultValue: 4
+						min: 1
+						max: 50
+						fieldWidth: 100
+					}
+				}
+
+				Group
+				{
+					title: qsTr("For varying threshold")
+					visible: inputType.value === "data"
+					IntegerField
+					{
+						id: varyingThresholdSamples
+						name: "varyingThresholdSamples"
+						label: qsTr("No. samples")
+						defaultValue: 1e3
+						min: 10
+						max: 1e9
+						fieldWidth: 100
+					}
+					IntegerField
+					{
+						name: "varyingThresholdBurnin"
+						label: qsTr("No. burnin samples")
+						defaultValue: 500
+						min: 1
+						max: 1e9
+						fieldWidth: 100
+					}
+					IntegerField
+					{
+						name: "varyingThresholdThinning"
+						label: qsTr("Thinning")
+						defaultValue: 1
+						min: 1
+						max: Math.floor(varyingThresholdSamples.value / 2)
+						fieldWidth: 100
+					}
+					IntegerField
+					{
+						name: "varyingThresholdChains"
+						label: qsTr("No. chains")
+						defaultValue: 2
+						min: 1
+						max: 10
+						fieldWidth: 100
+					}
+				}
 			}
 		}
 
