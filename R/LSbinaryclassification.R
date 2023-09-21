@@ -1386,8 +1386,10 @@ model{
   threshold    <- qnorm(.bcExtract(summary, "specificity"))
   meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
-  lowerLimitX <- min(qnorm(0.01, c(0, meanPositive)))
-  upperLimitX <- max(qnorm(0.99, c(0, meanPositive)))
+  lowerLimitX <- min(qnorm(0.001, c(0, meanPositive)))
+  upperLimitX <- max(qnorm(0.999, c(0, meanPositive)))
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX))
+  xLimits <- range(xBreaks)
 
   prevalence <- .bcExtract(summary, "prevalence")
   plot <- ggplot2::ggplot() +
@@ -1398,8 +1400,8 @@ model{
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), size = 1) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), size = 1) +
     ggplot2::geom_segment(ggplot2::aes(x = threshold, y = 0, xend = threshold, yend = Inf), linetype = 2, size = 1.5) +
-    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX)),
-                                limits = c(lowerLimitX, upperLimitX)) +
+    ggplot2::scale_x_continuous(breaks = xBreaks,
+                                limits = xLimits) +
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))))) +
     ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
