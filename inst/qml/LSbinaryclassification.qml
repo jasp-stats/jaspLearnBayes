@@ -118,7 +118,7 @@ Form {
 			CheckBox 
 			{ 
 				name: "statistics";	label: qsTr("Statistics");	checked: true 
-				
+
 				CheckBox { name: "statisticsAdditional";	label: qsTr("Additional Statistics");	checked: false}
 			}
 			CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
@@ -139,13 +139,14 @@ Form {
 			CheckBox { name: "iconPlot";						label: qsTr("Icon plot")							}
 			CheckBox
 			{
-				name: "rocPlot"; label: qsTr("ROC")
+				name: "rocPlot"; label: qsTr("Receiver operating characteristic (ROC)")
 				CheckBox
 				{
 					name: "rocPlotPosteriorRealizations"; label: qsTr("Add realizations from the posterior"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"; childrenOnSameRow: true;
 					IntegerField{ name: "rocPlotPosteriorRealizationsNumber"; min: 0; defaultValue: 100; max: 1000 }
 				}
 			}
+			CheckBox { name: "tocPlot";								label: qsTr("Total operating characteristic (TOC)")}
 			CheckBox { name: "testCharacteristicsPlot";				label: qsTr("Test characteristics by threshold")	}
 			CheckBox { name: "predictiveValuesByPrevalence";		label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "alluvialPlot";						label: qsTr("Alluvial plot")						}

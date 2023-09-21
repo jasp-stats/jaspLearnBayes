@@ -265,7 +265,6 @@ summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
     return(res)
   })
   results <- do.call(rbind, results)
-  save(results, file = "~/Downloads/thresholds.Rdata")
 
   jaspResults[["summaryByThreshold"]] <- jaspBase::createJaspState(object = results)
   jaspResults[["summaryByThreshold"]]$dependOn(
@@ -661,11 +660,12 @@ model{
   .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3, jaspResults)
-  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 4, jaspResults)
-  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 5)
-  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 6)
-  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 7)
-  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 8)
+  .bcPlotTOC                   (results, summary, plotsContainer, dataset, options, ready, position = 4, jaspResults)
+  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 5, jaspResults)
+  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 6)
+  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 7)
+  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 8)
+  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 9)
 }
 
 ## Prior posterior plot ----
@@ -946,7 +946,7 @@ model{
 
 
   plot <- plot +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
+    jaspGraphs::geom_abline2(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_line(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
@@ -1007,11 +1007,117 @@ model{
   }
 
   plot <- plot +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
+    jaspGraphs::geom_abline2(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_step(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
     ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
+
+
+  plot <- jaspGraphs::themeJasp(plot)
+
+  return(plot)
+}
+
+## TOC curve plot ----
+.bcPlotTOC <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
+  if( isFALSE(options[["tocPlot"]])     ) return()
+  if(!is.null(plotsContainer[["tocPlot"]]) ) return()
+
+  plotsContainer[["tocPlot"]] <-
+    createJaspPlot(
+      title        = gettext("Total Operating Characteristic Curve"),
+      dependencies = "tocPlot",
+      position     = position,
+      width        = 500,
+      height       = 500,
+    )
+
+  if(ready) plotsContainer[["tocPlot"]]$plotObject <-
+    .bcFillPlotTOC(results, summary, dataset, options, jaspResults=jaspResults)
+}
+
+.bcFillPlotTOC <- function(results, summary, dataset, options, ...) {
+  UseMethod(".bcFillPlotTOC")
+}
+
+.bcFillPlotTOC.default <- function(results, summary, dataset, options, ...) {
+  threshold    <- qnorm(.bcExtract(summary, "specificity"))
+  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
+  prevalence <- .bcExtract(summary, "prevalence")
+
+  varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+  fpr <- c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1)
+  tpr <- c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+
+  curveData <- data.frame(
+    tp = prevalence * tpr,
+    fp = (1-prevalence) * fpr
+  )
+
+  pointData <- data.frame(
+    tp = .bcExtract(summary, "truePositive"),
+    fp = .bcExtract(summary, "falsePositive")
+  )
+
+  boxData <- data.frame(x = c(0, prevalence, 1, 1-prevalence),
+                        y = c(0, prevalence, prevalence, 0))
+
+  diagLineData <- data.frame(x = c(0, 1), y = c(0, prevalence))
+
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, 1))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, .bcExtract(summary, "prevalence")))
+  xLimits <- range(xBreaks)
+  yLimits <- range(yBreaks)
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(data = boxData, mapping = ggplot2::aes(x = x, y = y), alpha = 0.0, color = "black", linetype = 2, linewidth = 1) +
+    ggplot2::geom_line(data = diagLineData, mapping = ggplot2::aes(x = x, y = y), linetype = 2) +
+    ggplot2::geom_line(data = curveData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 5) +
+    ggplot2::xlab(gettext("True positives + False positives")) +
+    ggplot2::ylab(gettext("True positives")) +
+    ggplot2::scale_x_continuous(breaks = xBreaks, limits = xLimits) +
+    ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
+
+
+  plot <- jaspGraphs::themeJasp(plot)
+
+  return(plot)
+}
+
+.bcFillPlotTOC.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
+
+  prevalence <- .bcExtract(summary, "prevalence")
+  curveData <- data.frame(
+    tp = c(subset(thresholds, variable == "truePositive")[["estimate"]], 0, prevalence),
+    fp = c(subset(thresholds, variable == "falsePositive")[["estimate"]], 0, 1-prevalence)
+  )
+  pointData <- data.frame(
+    tp = .bcExtract(summary, "truePositive"),
+    fp = .bcExtract(summary, "falsePositive")
+  )
+
+  boxData <- data.frame(x = c(0, prevalence, 1, 1-prevalence),
+                        y = c(0, prevalence, prevalence, 0))
+
+  diagLineData <- data.frame(x = c(0, 1), y = c(0, prevalence))
+
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, 1))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, .bcExtract(summary, "prevalence")))
+  xLimits <- range(xBreaks)
+  yLimits <- range(yBreaks)
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(data = boxData, mapping = ggplot2::aes(x = x, y = y), alpha = 0.0, color = "black", linetype = 2, linewidth = 1) +
+    ggplot2::geom_line(data = diagLineData, mapping = ggplot2::aes(x = x, y = y), linetype = 2) +
+    ggplot2::geom_line(data = curveData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 5) +
+    ggplot2::xlab(gettext("True positives + False positives")) +
+    ggplot2::ylab(gettext("True positives")) +
+    ggplot2::scale_x_continuous(breaks = xBreaks, limits = xLimits) +
+    ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
 
 
   plot <- jaspGraphs::themeJasp(plot)
