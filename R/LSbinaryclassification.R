@@ -682,7 +682,8 @@ model{
     )
 
   if(ready) plotsContainer[["probabilityPositivePlot"]]$plotObject <-
-    .bcFillPlotPriorPosteriorPositive(results, summary, dataset, options)
+    .bcFillPlotPriorPosteriorPositive(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
 .bcFillPlotPriorPosteriorPositive <- function(results, summary, dataset, options) {
@@ -803,7 +804,8 @@ model{
     )
 
   if(ready) plotsContainer[["iconPlot"]]$plotObject <-
-    .bcFillPlotIconPlot(results, summary, dataset, options)
+    .bcFillPlotIconPlot(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 
 }
 
@@ -1318,7 +1320,8 @@ model{
     )
 
   if(ready) plotsContainer[["alluvialPlot"]]$plotObject <-
-    .bcFillPlotAlluvial(results, summary, dataset, options)
+    .bcFillPlotAlluvial(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
 .bcFillPlotAlluvial <- function(results, summary, dataset, options) {
@@ -1365,7 +1368,8 @@ model{
     )
 
   if(ready) plotsContainer[["signalDetectionPlot"]]$plotObject <-
-    .bcFillPlotSignal(results, summary, dataset, options)
+    .bcFillPlotSignal(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 
 }
 
