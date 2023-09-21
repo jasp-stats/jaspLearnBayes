@@ -1034,7 +1034,8 @@ model{
 
 
   if(ready) plotsContainer[["testCharacteristicsPlot"]]$plotObject <-
-    .bcFillPlotTestCharacteristics(results, summary, dataset, options, jaspResults=jaspResults)
+    .bcFillPlotTestCharacteristics(results, summary, dataset, options, jaspResults=jaspResults) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
 
@@ -1214,7 +1215,8 @@ model{
     )
 
   if(ready) plotsContainer[["predictiveValuesByPrevalence"]]$plotObject <-
-    .bcFillPlotVaryingPrevalence(results, summary, dataset, options)
+    .bcFillPlotVaryingPrevalence(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
 .bcFillPlotVaryingPrevalence <- function(results, summary, dataset, options) {
@@ -1243,7 +1245,8 @@ model{
     ggplot2::ylab(gettext("Predictive Value")) +
     ggplot2::scale_color_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick")
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
       )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
@@ -1294,11 +1297,13 @@ model{
     ggplot2::ylab(gettext("Predictive Value")) +
     ggplot2::scale_color_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick")
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
     ) +
     ggplot2::scale_fill_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick")
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
     )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
