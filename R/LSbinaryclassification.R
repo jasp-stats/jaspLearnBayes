@@ -289,39 +289,6 @@ summary.bcVaryingThresholds <- function(results, ciLevel, threshold) {
   return(output)
 }
 
-# .bcStatistics <- function(prevalence, sensitivity, specificity) {
-#   truePositive            <- prevalence*sensitivity
-#   falsePositive           <- (1-prevalence)*(1-specificity)
-#   trueNegative            <- (1-prevalence)*specificity
-#   falseNegative           <- prevalence*(1-sensitivity)
-#   positivePredictiveValue <- truePositive / (truePositive + falsePositive)
-#   negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
-#   falseDiscoveryRate      <- 1-positivePredictiveValue
-#   falseOmissionRate       <- 1-negativePredictiveValue
-#   falsePositiveRate       <- 1-specificity
-#   falseNegativeRate       <- 1-sensitivity
-#   accuracy                <- truePositive + trueNegative
-#
-#   results <- list(
-#     prevalence              = prevalence,
-#     sensitivity             = sensitivity,
-#     specificity             = specificity,
-#     truePositive            = truePositive,
-#     falsePositive           = falsePositive,
-#     trueNegative            = trueNegative,
-#     falseNegative           = falseNegative,
-#     positivePredictiveValue = positivePredictiveValue,
-#     negativePredictiveValue = negativePredictiveValue,
-#     falseDiscoveryRate      = falseDiscoveryRate,
-#     falseOmissionRate       = falseOmissionRate,
-#     falsePositiveRate       = falsePositiveRate,
-#     falseNegativeRate       = falseNegativeRate,
-#     accuracy                = accuracy
-#   )
-#
-#   return(results)
-# }
-
 .bcStatistics <- function(results) {
   cls <- class(results)
   results <- within(
@@ -338,10 +305,14 @@ summary.bcVaryingThresholds <- function(results, ciLevel, threshold) {
       falsePositiveRate       <- 1-specificity
       falseNegativeRate       <- 1-sensitivity
       accuracy                <- truePositive + trueNegative
+      pretestOdds             <- prevalence / (1-prevalence)
+      positiveLikelihoodRatio <- sensitivity / (1-specificity)
+      negativeLikelihoodRatio <- (1-sensitivity) / (specificity)
+      fMeasure                <- 2 / (sensitivity^(-1) + positivePredictiveValue^{-1})
     }
   )
 
-  statNames <- .bcTexts("statistic") |> names()
+  statNames <- names(.bcTexts("statistic"))
   columnOrder <- match(statNames, names(results))
 
   if(posterior::is_draws(results)) {
@@ -474,12 +445,12 @@ model{
   .bcTablePriorPosterior(results, tablesContainer, dataset, options, ready)
 }
 
-.bcTableStatistics <- function(results, summary=NULL, tablesContainer, dataset, options, ready) {
+.bcTableStatistics <- function(results, summary, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["statistics"]])     ) return()
   if(!is.null(tablesContainer[["statistics"]]) ) return()
 
   table <- createJaspTable(title = gettext("Statistics"), position = 1)
-  table$dependOn(options = "statistics")
+  table$dependOn(options = c("statistics", "statisticsAdditional"))
   table$showSpecifiedColumnsOnly <- TRUE
 
   table$addColumnInfo(name = "statistic",  title = "")
@@ -504,7 +475,10 @@ model{
   table$addColumnInfo(name = "notation", title = gettext("Notation"))
   table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
 
-  if(ready && !is.null(summary)) table$setData(summary)
+  if(ready && !is.null(summary)) {
+    data <- if(options[["statisticsAdditional"]]) summary else summary[1:14,,drop=FALSE]
+    table$setData(data)
+  }
 
   tablesContainer[["statistics"]] <- table
 }
@@ -1584,7 +1558,11 @@ model{
       falseOmissionRate       = gettext("False omission rate"),
       falsePositiveRate       = gettext("False positive rate"),
       falseNegativeRate       = gettext("False negative rate"),
-      accuracy                = gettext("Accuracy")
+      accuracy                = gettext("Accuracy"),
+      pretestOdds             = gettext("Pretest odds"),
+      positiveLikelihoodRatio = gettext("Positive likelihood ratio"),
+      negativeLikelihoodRatio = gettext("Negative likelihood ratio"),
+      fMeasure                = gettext("F-measure")
     ),
     interpretation = c(
       prevalence              = gettext("Proportion of a population affected by the condition."),

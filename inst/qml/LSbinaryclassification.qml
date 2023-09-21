@@ -115,8 +115,13 @@ Form {
 		}
 
 		Group{
-		  CheckBox { name: "statistics";  label: qsTr("Statistics");	checked: true }
-		  CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
+			CheckBox 
+			{ 
+				name: "statistics";	label: qsTr("Statistics");	checked: true 
+				
+				CheckBox { name: "statisticsAdditional";	label: qsTr("Additional Statistics");	checked: false}
+			}
+			CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
 		}
 	}
 
