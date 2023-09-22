@@ -198,6 +198,16 @@ Form {
 
 		Group
 		{
+			title: qsTr("Colors")
+			columns: 2
+			TextField { name: "colorTruePositive";  label: qsTr("True positive"); defaultValue: "darkgreen"		}
+			TextField { name: "colorFalseNegative"; label: qsTr("False negative"); defaultValue: "red"			}
+			TextField { name: "colorFalsePositive"; label: qsTr("False positive"); defaultValue: "darkorange"	}
+			TextField { name: "colorTrueNegative";  label: qsTr("True negative"); defaultValue: "steelblue"		}
+		}
+
+		Group
+		{
 			visible: inputType.value !== "pointEstimates"
 			columns: 2
 			CheckBox

@@ -90,6 +90,12 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
 
+
+  colors <- .bcGetColors(options)[["values"]]
+
+  if(!.bcIsColor(colors))
+    jaspBase::.quitAnalysis(gettext("Some of the specified colors are not valid colors."))
+
   return(options)
 }
 
@@ -657,16 +663,16 @@ model{
     plotsContainer <- jaspResults[["plots"]]
   }
 
-  .bcPlotPR(results, summary, plotsContainer, dataset, options, ready, position = 0, jaspResults)
   .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3, jaspResults)
   .bcPlotTOC                   (results, summary, plotsContainer, dataset, options, ready, position = 4, jaspResults)
-  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 5, jaspResults)
-  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 6)
-  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 7)
-  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 8)
-  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 9)
+  .bcPlotPR                    (results, summary, plotsContainer, dataset, options, ready, position = 5, jaspResults)
+  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 6, jaspResults)
+  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 7)
+  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 8)
+  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 9)
+  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 10)
 }
 
 ## Prior posterior plot ----
@@ -798,7 +804,7 @@ model{
 
   plotsContainer[["iconPlot"]] <-
     createJaspPlot(title        = gettext("Icon Plot"),
-                   dependencies = "iconPlot",
+                   dependencies = c("iconPlot", .bcGetColors(options)[["names"]]),
                    position     = position,
                    width        = 500,
                    height       = 500
@@ -850,13 +856,13 @@ model{
     plot <- plot +
       ggplot2::geom_raster(mapping = ggplot2::aes(fill=outcome), alpha = 0) +
       geom_png(mapping = ggplot2::aes(w=0.75,h=0.75,img=img,col=outcome)) +
-      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
-      ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+      ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
+      ggplot2::scale_color_manual(name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
       ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1)), col = FALSE)
   } else {
     plot <- plot +
       ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome)) +
-      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+      ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
       ggplot2::guides(fill=ggplot2::guide_legend(ncol=2))
   }
 
@@ -1597,7 +1603,7 @@ model{
 
   plotsContainer[["alluvialPlot"]] <-
     createJaspPlot(title        = gettext("Alluvial Plot"),
-                   dependencies = "alluvialPlot",
+                   dependencies = c("alluvialPlot", .bcGetColors(options)[["names"]]),
                    position     = position,
                    width        = 500,
                    height       = 500
@@ -1629,7 +1635,7 @@ model{
     ggalluvial::stat_stratum(geom = "text", ggplot2::aes(label = ggplot2::after_stat(stratum)), size = 6) +
     ggplot2::scale_x_discrete(limits = c("cond", "test"),
                               labels = gettext(c("Condition", "Test"))) +
-    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue")) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1))) +
     ggplot2::ylab(gettext("Proportion of Population"))
 
@@ -1645,7 +1651,7 @@ model{
 
   plotsContainer[["signalDetectionPlot"]] <-
     createJaspPlot(title        = gettext("Signal Detection"),
-                   dependencies = "signalDetectionPlot",
+                   dependencies = c("signalDetectionPlot", .bcGetColors(options)[["names"]]),
                    position     = position,
                    width        = 500,
                    height       = 500
@@ -1683,7 +1689,7 @@ model{
                                 limits = xLimits) +
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))))) +
-    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Density"))
@@ -1712,7 +1718,7 @@ model{
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]]))) +
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(counts),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(counts))) +
-    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Count"))
@@ -1954,3 +1960,20 @@ geom_png <- function(mapping = NULL, data = NULL) {
                  show.legend = FALSE)
 }
 
+.bcGetColors <- function(options) {
+  names <- c("colorTruePositive", "colorFalsePositive", "colorFalseNegative", "colorTrueNegative")
+  list(
+    names = names,
+    values = unname(unlist(options[names])),
+    labels = gettext(c("True positive", "False positive", "False negative", "True negative"))
+  )
+}
+
+.bcIsColor <- function(x) {
+  for (color in x) {
+    res <- try(col2rgb(x),silent=TRUE)
+    if (jaspBase::isTryError(res))
+      return(FALSE)
+  }
+  return(TRUE)
+}
