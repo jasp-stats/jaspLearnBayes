@@ -194,6 +194,8 @@ Form {
 		title: qsTr("Options")
 		LS.LSintrotext {Layout.columnSpan: 2}
 
+		CheckBox { name: "computeResults"; label: qsTr("Compute results"); checked: true; Layout.columnSpan: 2}
+
 		Group
 		{
 			visible: inputType.value !== "pointEstimates"

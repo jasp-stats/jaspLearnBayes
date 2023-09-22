@@ -94,10 +94,10 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 }
 
 .bcIsReady <- function(options) {
-  if(options[["inputType"]] != "data") return(TRUE)
+  if(options[["inputType"]] != "data") return(options[["computeResults"]])
 
   if(options[["marker"]] != "" && options[["labels"]] != "") {
-    return(TRUE)
+    return(options[["computeResults"]])
   } else {
     return(FALSE)
   }
@@ -140,7 +140,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   jaspResults[["results"]] <-
     createJaspState(object       = results,
-                    dependencies = c("inputType", "marker", "labels", "threshold", "samples",
+                    dependencies = c("computeResults", "inputType", "marker", "labels", "threshold", "samples",
                                      "truePositive", "falsePositive", "falseNegative", "trueNegative",
                                      "updatePrevalence", "orderConstraint", "positiveTests", "negativeTests",
                                      c("sensitivity", "specificity", "prevalence"),
