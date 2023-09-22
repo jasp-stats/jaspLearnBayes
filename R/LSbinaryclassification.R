@@ -657,6 +657,7 @@ model{
     plotsContainer <- jaspResults[["plots"]]
   }
 
+  .bcPlotPR(results, summary, plotsContainer, dataset, options, ready, position = 0, jaspResults)
   .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
   .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3, jaspResults)
@@ -1123,6 +1124,178 @@ model{
   plot <- jaspGraphs::themeJasp(plot)
 
   return(plot)
+}
+
+## PR curve plot ----
+.bcPlotPR <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
+  if( isFALSE(options[["prPlot"]])     ) return()
+  if(!is.null(plotsContainer[["prPlot"]]) ) return()
+
+  plotsContainer[["prPlot"]] <-
+    createJaspPlot(
+      title        = gettext("Precision-recall"),
+      dependencies = c("prPlot", "ci", "ciLevel", "prPlotPosteriorRealizations", "prPlotPosteriorRealizationsNumber"),
+      position     = position,
+      width        = 500,
+      height       = 500,
+    )
+
+  if(ready) plotsContainer[["prPlot"]]$plotObject <-
+    .bcFillPlotPR(results, summary, dataset, options, jaspResults=jaspResults) +
+    ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
+}
+
+.bcFillPlotPR <- function(results, summary, dataset, options, ...) {
+  UseMethod(".bcFillPlotPR")
+}
+
+.bcFillPlotPR.default <- function(results, summary, dataset, options, ...) {
+
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+
+
+  threshold    <- qnorm(specificity)
+  meanPositive <- qnorm(sensitivity, mean = threshold)
+  varyingThreshold <- c(threshold, seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101))
+
+  curveData <- data.frame(
+    prevalence = prevalence,
+    sensitivity = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1),
+    specificity = c(pnorm(varyingThreshold,                      lower.tail = TRUE ), 1, 0)
+  )
+  curveData <- .bcStatistics(curveData)
+
+  pointData <- data.frame(sensitivity = sensitivity,
+                          positivePredictiveValue = curveData[["positivePredictiveValue"]][1])#.bcExtract(summary, "positivePredictiveValue"))
+
+  plot <- ggplot2::ggplot(mapping = ggplot2::aes(x    = sensitivity,
+                                                 y    = positivePredictiveValue))
+
+  if(options[["ci"]]) {
+    densityData <- data.frame(
+      sensitivity = results[["sensitivity"]],
+      positivePredictiveValue = results[["positivePredictiveValue"]]
+    )
+    breakLevel <- .bcGetLevel2D(densityData$sensitivity, densityData$positivePredictiveValue, options[["ciLevel"]])
+
+    plot <- plot +
+      ggplot2::stat_density2d(data = densityData, geom = "polygon",
+                              mapping = ggplot2::aes(fill = ggplot2::after_stat(level)),
+                              bins = 5) +
+      ggplot2::scale_fill_distiller(palette = "Blues", direction = 1) +
+      ggplot2::geom_density2d(data = densityData, breaks = breakLevel,
+                              size = 1, col = "black", linetype = 2)
+
+    prevalenceCiData <- data.frame(x = c(0, 1), lower = .bcExtract(summary, "prevalence", "lowerCI"), upper = .bcExtract(summary, "prevalence", "upperCI"))
+    plot <- plot +
+      ggplot2::geom_ribbon(
+        data = prevalenceCiData,
+        mapping = ggplot2::aes(x=x, ymin = lower, ymax = upper),
+        inherit.aes = FALSE,
+        fill = "firebrick", alpha = 0.3)
+  }
+
+  if(options[["inputType"]] == "uncertainEstimates" && options[["prPlotPosteriorRealizations"]]) {
+    for(i in seq_len(options[["prPlotPosteriorRealizationsNumber"]])) {
+      threshold    <- qnorm(results[["specificity"]][i])
+      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
+
+      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- data.frame(
+        prevalence = results[["prevalence"]][i],
+        sensitivity = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1),
+        specificity = c(pnorm(varyingThreshold,                      lower.tail = TRUE ), 1, 0)
+      )
+      iterData <- .bcStatistics(iterData)
+
+      plot <- plot +
+        ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
+    }
+  }
+
+
+  plot <- plot +
+    jaspGraphs::geom_abline2(slope = 0, intercept = prevalence, linetype = 2) +
+    ggplot2::geom_line(data = curveData, size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("Sensitivity (recall)")) +
+    ggplot2::ylab(gettext("Positive Predictive Value"))
+
+
+  plot <- jaspGraphs::themeJasp(plot)
+
+  return(plot)
+}
+
+.bcFillPlotPR.bcData <- function(results, summary, dataset, options, jaspResults) {
+  prevalence <- .bcExtract(summary, "prevalence")
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
+
+  curveData <- data.frame(
+    sensitivity = c(subset(thresholds, variable == "sensitivity")[["estimate"]], 0, 1),
+    positivePredictiveValue = c(subset(thresholds, variable == "positivePredictiveValue")[["estimate"]], 1, prevalence)
+  )
+
+  pointData <- data.frame(sensitivity = .bcExtract(summary, "sensitivity"),
+                          positivePredictiveValue = .bcExtract(summary, "positivePredictiveValue"))
+
+  plot <- ggplot2::ggplot(mapping = ggplot2::aes(x = sensitivity, y = positivePredictiveValue))
+
+  if(options[["ci"]]) {
+    densityData <- data.frame(
+      sensitivity = results[["sensitivity"]],
+      positivePredictiveValue = results[["positivePredictiveValue"]]
+    )
+    breakLevel <- .bcGetLevel2D(densityData$sensitivity, densityData$positivePredictiveValue, options[["ciLevel"]])
+
+    plot <- plot +
+      ggplot2::stat_density2d(data = densityData, geom = "polygon",
+                              mapping = ggplot2::aes(fill = ggplot2::after_stat(level)),
+                              bins = 5) +
+      ggplot2::scale_fill_distiller(palette = "Blues", direction = 1) +
+      ggplot2::geom_density2d(data = densityData, breaks = breakLevel,
+                              size = 1, col = "black", linetype = 2)
+
+    prevalenceCiData <- data.frame(x = c(0, 1), lower = .bcExtract(summary, "prevalence", "lowerCI"), upper = .bcExtract(summary, "prevalence", "upperCI"))
+    plot <- plot +
+      ggplot2::geom_ribbon(
+        data = prevalenceCiData,
+        mapping = ggplot2::aes(x=x, ymin = lower, ymax = upper),
+        inherit.aes = FALSE,
+        fill = "firebrick", alpha = 0.3)
+  }
+
+  if(options[["inputType"]] != "pointEstimates" && options[["prPlotPosteriorRealizations"]]) {
+    for(i in seq_len(options[["prPlotPosteriorRealizationsNumber"]])) {
+      threshold    <- qnorm(results[["specificity"]][i])
+      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
+      prev <- results[["prevalence"]][i]
+      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- data.frame(
+        prevalence = prev,
+        sensitivity = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1),
+        specificity = c(pnorm(varyingThreshold,                      lower.tail = TRUE ), 1, 0)
+      )
+      iterData <- .bcStatistics(iterData)
+
+      plot <- plot +
+        ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
+    }
+  }
+
+
+  plot <- plot +
+    jaspGraphs::geom_abline2(slope = 0, intercept = prevalence, linetype = 2) +
+    ggplot2::geom_line(data = curveData, size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("Sensitivity (recall)")) +
+    ggplot2::ylab(gettext("Positive Predictive Value"))
+
+
+  plot <- jaspGraphs::themeJasp(plot)
+
 }
 
 ## Test characteristics ----

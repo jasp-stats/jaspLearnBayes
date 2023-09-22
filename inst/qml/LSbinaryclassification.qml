@@ -146,7 +146,16 @@ Form {
 					IntegerField{ name: "rocPlotPosteriorRealizationsNumber"; min: 0; defaultValue: 100; max: 1000 }
 				}
 			}
-			CheckBox { name: "tocPlot";								label: qsTr("Total operating characteristic (TOC)")}
+			CheckBox { name: "tocPlot";								label: qsTr("Total operating characteristic (TOC)")	}
+			CheckBox
+			{
+				name: "prPlot"; label: qsTr("Precision-recall")
+				CheckBox
+				{
+					name: "prPlotPosteriorRealizations"; label: qsTr("Add realizations from the posterior"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"; childrenOnSameRow: true;
+					IntegerField{ name: "prPlotPosteriorRealizationsNumber"; min: 0; defaultValue: 100; max: 1000 }
+				}
+			}
 			CheckBox { name: "testCharacteristicsPlot";				label: qsTr("Test characteristics by threshold")	}
 			CheckBox { name: "predictiveValuesByPrevalence";		label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "alluvialPlot";						label: qsTr("Alluvial plot")						}
