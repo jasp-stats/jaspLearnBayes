@@ -43,6 +43,25 @@ Form {
 
 	Group
 	{
+		visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
+		columns: 3
+		title: qsTr("Priors")
+		Text{ text: qsTr("Prevalence") }
+		FormulaField { name: "priorPrevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 55}
+		FormulaField { name: "priorPrevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 55	}
+
+		Text{ text: qsTr("Sensitivity") }
+		FormulaField { name: "priorSensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
+		FormulaField { name: "priorSensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+
+		Text{ text: qsTr("Specificity") }
+		FormulaField { name: "priorSpecificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
+		FormulaField { name: "priorSpecificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+	}
+
+	Group
+	{
+		title: qsTr("Data")
 		visible: inputType.value === "data"
 		VariablesForm
 		{
@@ -68,24 +87,7 @@ Form {
 
 	Group
 	{
-		visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
-		columns: 3
-		title: qsTr("Priors")
-		Text{ text: qsTr("Prevalence") }
-		FormulaField { name: "priorPrevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 55}
-		FormulaField { name: "priorPrevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 55	}
-
-		Text{ text: qsTr("Sensitivity") }
-		FormulaField { name: "priorSensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
-		FormulaField { name: "priorSensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
-
-		Text{ text: qsTr("Specificity") }
-		FormulaField { name: "priorSpecificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
-		FormulaField { name: "priorSpecificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
-	}
-
-	Group
-	{
+		visible: inputType.value !== "pointEstimates"
 		name: "observedTests"; title: qsTr("Observed tests")
 		IntegerField { name: "positiveTests";		label: qsTr("Positive tests")	}
 		IntegerField { name: "negativeTests";		label: qsTr("Negative tests")	}
