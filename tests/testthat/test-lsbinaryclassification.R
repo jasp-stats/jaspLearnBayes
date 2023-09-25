@@ -191,15 +191,13 @@ test_that("Probability positive plot matches", {
   jaspTools::expect_equal_plots(testPlot, "probability-positive-data", dir="LSbinaryclassification")
 })
 
-{
-  #TODO: Use Don's vdiffr version
-  test_that("Receiving Operating Characteristic Curve plot matches", {
-    skip_on_os(c("mac", "linux"))
-    plotName <- results[["results"]][["plots"]][["collection"]][["plots_rocPlot"]][["data"]]
-    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
-    jaspTools::expect_equal_plots(testPlot, "receiving-operating-characteristic-curve-data", dir="LSbinaryclassification")
-  })
-}
+
+test_that("Receiving Operating Characteristic Curve plot matches", {
+  plotName <- results[["results"]][["plots"]][["collection"]][["plots_rocPlot"]][["data"]]
+  testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
+  jaspTools::expect_equal_plots(testPlot, "receiving-operating-characteristic-curve-data", dir="LSbinaryclassification")
+})
+
 
 
 test_that("Signal detection plot matches", {
@@ -223,61 +221,70 @@ test_that("PPV and NPV by prevalence plot matches", {
 test_that("Confusion Matrix table results match", {
   table <- results[["results"]][["tables"]][["collection"]][["tables_confusionMatrix"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list("Sensitivity", 0.853617585613721, 0.951377771203091, 0.908527820792427,
-                                      "False negative rate", 0.0486222287969091, 0.146382414386279,
-                                      0.0914721792075729, "Positive condition", "False negative",
-                                      0.00573111107389931, 0.0181994038449614, 0.0110449348609118,
-                                      "True positive", 0.0910487594642042, 0.129881672882025, 0.109684204862779,
-                                      "Prevalence", 0.100993363501433, 0.141735819388412, 0.120729139723691,
-                                      "False positive rate", 0.444793819629683, 0.510017048554804,
-                                      0.47723170327149, "Specificity", 0.489982951445196, 0.555206180370318,
-                                      0.52276829672851, "Negative condition", "True negative", 0.428748967815013,
-                                      0.49036390814685, 0.459654696673328, "False positive", 0.389502323249142,
-                                      0.450231840410815, 0.419616163602981, "Rareness", 0.899006636498567,
-                                      0.858264180611588, 0.879270860276309, "Accuracy", 0.538892152581733,
-                                      0.599568884863196, 0.569338901536107, "", "", "", "", "True/Total",
-                                      "Negative predictive value", 0.961407041351944, 0.987761345858896,
-                                      0.976531650504969, "Positive predictive value", 0.173785155214146,
-                                      0.243210163821242, 0.207225799308979, "", "", "", ""))
+                                 list("Sensitivity", 0.853779111361799, 0.951050732434266, 0.908557670487564,
+                                      "False negative rate", 0.0489492675657335, 0.146220888638201,
+                                      0.0914423295124356, "Positive condition", "False negative",
+                                      0.00576179487199414, 0.018100987390675, 0.0110485325784403,
+                                      "True positive", 0.0911973251723204, 0.129742901284888, 0.109797860082283,
+                                      "Prevalence", 0.10131587246111, 0.141902361984049, 0.120846392660723,
+                                      "False positive rate", 0.444217366611229, 0.509693733184746,
+                                      0.476908856673286, "Specificity", 0.490306266815254, 0.555782633388771,
+                                      0.523091143326714, "Negative condition", "True negative", 0.429169344925411,
+                                      0.490738060331644, 0.459879054569247, "False positive", 0.389380261720891,
+                                      0.449840579798052, 0.41927455277003, "Rareness", 0.89868412753889,
+                                      0.858097638015951, 0.879153607339276, "Accuracy", 0.538931600110022,
+                                      0.599860346671375, 0.56967691465153, "", "", "", "", "True/Total",
+                                      "Negative predictive value", 0.961646380572624, 0.98777558547579,
+                                      0.97653568516653, "Positive predictive value", 0.174111463998809,
+                                      0.242726250870084, 0.207523777149946, "", "", "", ""))
 })
 
 test_that("Statistics table results match", {
   table <- results[["results"]][["tables"]][["collection"]][["tables_statistics"]][["data"]]
   jaspTools::expect_equal_tables(table,
-                                 list(0.120729139723691, "Proportion of a population affected by the condition.",
-                                      0.100993363501433, "P(Condition = positive)", "Prevalence",
-                                      0.141735819388412, 0.908527820792427, "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive.",
-                                      0.853617585613721, "P(Test = positive | Condition = positive)",
-                                      "Sensitivity", 0.951377771203091, 0.52276829672851, "(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative.",
-                                      0.489982951445196, "P(Test = negative | Condition = negative)",
-                                      "Specificity", 0.555206180370318, 0.109684204862779, "Proportion of a population affected by a condition and correctly tested positive.",
-                                      0.0910487594642042, "P(Condition = positive <unicode> Test = positive)",
-                                      "True positive", 0.129881672882025, 0.419616163602981, "Proportion of a population not affected by a condition and incorrectly tested positive.",
-                                      0.389502323249142, "P(Condition = negative <unicode> Test = positive)",
-                                      "False positive", 0.450231840410815, 0.459654696673328, "Proportion of a population not affected by a condition and correctly tested negative.",
-                                      0.428748967815013, "P(Condition = negative <unicode> Test = negative)",
-                                      "True negative", 0.49036390814685, 0.0110449348609118, "Proportion of a population affected by a condition and incorrectly tested negative.",
-                                      0.00573111107389931, "P(Condition = positive <unicode> Test = negative)",
-                                      "False negative", 0.0181994038449614, 0.207225799308979, "Proportion of those who tested positive and are affected by the condition.",
-                                      0.173785155214146, "P(Condition = positive | Test = positive)",
-                                      "Positive predictive value", 0.243210163821242, 0.976531650504969,
-                                      "Proportion of those who tested negative and are not affected by the condition.",
-                                      0.961407041351944, "P(Condition = negative | Test = negative)",
-                                      "Negative predictive value", 0.987761345858896, 0.792774200691021,
-                                      "Proportion of false positives in the pool of those that test positive.",
-                                      0.756789836178758, "P(Condition = negative | Test = positive)",
-                                      "False discovery rate", 0.826214844785854, 0.0234683494950311,
-                                      "Proportion of false negatives in the pool of those that test negative.",
-                                      0.0122386541411042, "P(Condition = positive | Test = negative)",
-                                      "False omission rate", 0.038592958648056, 0.47723170327149,
-                                      "Complement proportion to specificity.", 0.444793819629683,
-                                      "P(Test = positive | Condition = negative)", "False positive rate",
-                                      0.510017048554804, 0.0914721792075729, "Complement proportion to sensitivity.",
-                                      0.0486222287969091, "P(Test = negative | Condition = positive)",
-                                      "False negative rate", 0.146382414386279, 0.569338901536107,
-                                      "Proportion of the population that is true positive or true negative.",
-                                      0.538892152581733, "P(Condition = positive <unicode> Test = positive <unicode> Condition = negative <unicode> Test = negative)",
-                                      "Accuracy", 0.599568884863196))
+                                 list(0.120846392660723, "Proportion of a population affected by the condition.",
+                                      0.10131587246111, 0.120596053638879, "P(Condition = positive)",
+                                      1.00007734737461, 0.0103155054905895, 25148.4183901585, "Prevalence",
+                                      0.141902361984049, 0.908557670487564, "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive.",
+                                      0.853779111361799, 0.910600106900222, "P(Test = positive | Condition = positive)",
+                                      1.00005476066721, 0.0250579585490953, 22388.5875672874, "Sensitivity",
+                                      0.951050732434266, 0.523091143326714, "(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative.",
+                                      0.490306266815254, 0.523232506673211, "P(Test = negative | Condition = negative)",
+                                      1.00006693334085, 0.0167206063501019, 23892.3076149721, "Specificity",
+                                      0.555782633388771, 0.109797860082283, "Proportion of a population affected by a condition and correctly tested positive.",
+                                      0.0911973251723204, 0.10957217331269, "P(Condition = positive <unicode> Test = positive)",
+                                      1.00015410066547, 0.00987577202481968, 24875.7674194863, "True positive",
+                                      0.129742901284888, 0.41927455277003, "Proportion of a population not affected by a condition and incorrectly tested positive.",
+                                      0.389380261720891, 0.419197990071671, "P(Condition = negative <unicode> Test = positive)",
+                                      1.0000491213492, 0.0154613850624348, 24169.0627375078, "False positive",
+                                      0.449840579798052, 0.459879054569247, "Proportion of a population not affected by a condition and correctly tested negative.",
+                                      0.429169344925411, 0.459974449980892, "P(Condition = negative <unicode> Test = negative)",
+                                      1.00007500601746, 0.0157077388383745, 23921.982523023, "True negative",
+                                      0.490738060331644, 0.0110485325784403, "Proportion of a population affected by a condition and incorrectly tested negative.",
+                                      0.00576179487199414, 0.0107503370273541, "P(Condition = positive <unicode> Test = negative)",
+                                      1.00004781126759, 0.00317293895543754, 22668.1489005594, "False negative",
+                                      0.018100987390675, 0.207523777149946, "Proportion of those who tested positive and are affected by the condition.",
+                                      0.174111463998809, 0.207236770555983, "P(Condition = positive | Test = positive)",
+                                      1.00011539745055, 0.0175469992350098, 25006.3377660076, "Positive predictive value",
+                                      0.242726250870084, 0.97653568516653, "Proportion of those who tested negative and are not affected by the condition.",
+                                      0.961646380572624, 0.977194848912109, "P(Condition = negative | Test = negative)",
+                                      1.00003962877827, 0.00670047789392488, 22752.8075104483, "Negative predictive value",
+                                      0.98777558547579, 0.792476222850054, "Proportion of false positives in the pool of those that test positive.",
+                                      0.757273749129916, 0.792763229444017, "P(Condition = negative | Test = positive)",
+                                      1.00011528903354, 0.0175469992350098, 25006.3377660076, "False discovery rate",
+                                      0.825888536001191, 0.0234643148334699, "Proportion of false negatives in the pool of those that test negative.",
+                                      0.0122244145242099, 0.022805151087891, "P(Condition = positive | Test = negative)",
+                                      1.00003951160333, 0.00670047789392488, 22752.8075104483, "False omission rate",
+                                      0.038353619427376, 0.476908856673286, "Complement proportion to specificity.",
+                                      0.444217366611229, 0.476767493326789, "P(Test = positive | Condition = negative)",
+                                      1.00006693334085, 0.0167206063501019, 23892.3076149721, "False positive rate",
+                                      0.509693733184746, 0.0914423295124356, "Complement proportion to sensitivity.",
+                                      0.0489492675657335, 0.0893998930997783, "P(Test = negative | Condition = positive)",
+                                      1.00005476066721, 0.0250579585490953, 22388.5875672874, "False negative rate",
+                                      0.146220888638201, 0.56967691465153, "Proportion of the population that is true positive or true negative.",
+                                      0.538931600110022, 0.569804219729413, "P(Condition = positive <unicode> Test = positive <unicode> Condition = negative <unicode> Test = negative)",
+                                      1.00001653844188, 0.0154959738174959, 23943.6741214115, "Accuracy",
+                                      0.599860346671375))
 })
 
 test_that("Analysis handles errors", {

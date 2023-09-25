@@ -142,20 +142,20 @@
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <polyline points='121.66,497.39 121.66,20.71 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
 <polyline points='121.66,497.39 598.34,497.39 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
-<rect x='201.97' y='508.35' width='316.05' height='67.65' style='stroke-width: 0.75; stroke: none;' />
-<rect x='201.97' y='508.35' width='316.05' height='67.65' style='stroke-width: 10.67; stroke: none;' />
-<rect x='215.92' y='513.83' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='215.92' y='513.83' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #006400;' />
-<rect x='215.92' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='215.92' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #FF8C00;' />
-<rect x='365.15' y='513.83' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='365.15' y='513.83' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #FF0000;' />
-<rect x='365.15' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='365.15' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #4682B4;' />
-<text x='252.74' y='533.85' style='font-size: 17.00px; font-family: sans;' textLength='97.33px' lengthAdjust='spacingAndGlyphs'>True positive</text>
-<text x='252.74' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='103.95px' lengthAdjust='spacingAndGlyphs'>False positive</text>
-<text x='401.97' y='533.85' style='font-size: 17.00px; font-family: sans;' textLength='110.58px' lengthAdjust='spacingAndGlyphs'>False negative</text>
-<text x='401.97' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='103.96px' lengthAdjust='spacingAndGlyphs'>True negative</text>
+<rect x='180.52' y='508.35' width='358.96' height='67.65' style='stroke-width: 0.75; stroke: none;' />
+<rect x='180.52' y='508.35' width='358.96' height='67.65' style='stroke-width: 10.67; stroke: none;' />
+<rect x='194.47' y='513.83' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='194.47' y='513.83' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #006400;' />
+<rect x='194.47' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='194.47' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #FF8C00;' />
+<rect x='364.49' y='513.83' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='364.49' y='513.83' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #FF0000;' />
+<rect x='364.49' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<rect x='364.49' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #4682B4;' />
+<text x='229.34' y='533.85' style='font-size: 17.00px; font-family: sans;' textLength='97.33px' lengthAdjust='spacingAndGlyphs'>True positive</text>
+<text x='229.21' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='103.95px' lengthAdjust='spacingAndGlyphs'>False positive</text>
+<text x='399.09' y='533.85' style='font-size: 17.00px; font-family: sans;' textLength='110.58px' lengthAdjust='spacingAndGlyphs'>False negative</text>
+<text x='399.23' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='103.96px' lengthAdjust='spacingAndGlyphs'>True negative</text>
 <text x='360.00' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='64.26px' lengthAdjust='spacingAndGlyphs'>icon-plot</text>
 </g>
 </svg>
