@@ -90,7 +90,6 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
 
-
   colors <- .bcGetColors(options)[["values"]]
 
   if(!.bcIsColor(colors))
@@ -391,18 +390,29 @@ coef.bcPosteriorParams <- function(results) {
       priorSpecificityBeta = priorSpecificityBeta
   ))
 
-    samples <- runjags::run.jags(
-      model = .bcJagsModel,
-      monitor = c("prevalence", "sensitivity", "specificity"),
-      data = jags_data,
-      summarise = FALSE,
-      sample = options[["samples"]],
-      burnin = options[["burnin"]],
-      thin = options[["thinning"]],
-      n.chains = options[["chains"]]
-    )
-    samples <- posterior::as_draws_df(samples[["mcmc"]])
-    return(samples)
+  # set a seed (same procedure as jaspGraphs)
+  jaspBase::.setSeedJASP(options)
+  RNGname <- "base::Wichmann-Hill"
+  inits <- vector("list", options[["chains"]])
+  for (i in seq_len(options[["chains"]])) {
+    inits[[i]]$.RNG.name <- RNGname
+    inits[[i]]$.RNG.seed <- stats::runif(1, 0, 2^31)
+  }
+
+  samples <- runjags::run.jags(
+    model = .bcJagsModel,
+    monitor = c("prevalence", "sensitivity", "specificity"),
+    data = jags_data,
+    summarise = FALSE,
+    sample = options[["samples"]],
+    burnin = options[["burnin"]],
+    thin = options[["thinning"]],
+    n.chains = options[["chains"]],
+    silent.jags = TRUE,
+    inits = inits
+  )
+  samples <- posterior::as_draws_df(samples[["mcmc"]])
+  return(samples)
 }
 
 .bcJagsModel <- "

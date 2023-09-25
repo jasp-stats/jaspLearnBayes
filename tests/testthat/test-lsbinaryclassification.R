@@ -155,6 +155,18 @@ options$colorFalseNegative <- "red"
 options$colorFalsePositive <- "darkorange"
 options$colorTrueNegative <- "steelblue"
 
+options$samples <- 1e4
+options$burnin <- 500
+options$thinning <- 1
+options$chains <- 4
+
+options$varyingThresholdSamples <- 1e3
+options$varyingThresholdBurnin <- 500
+options$varyingThresholdThinning <- 1
+options$varyingThresholdChains <- 2
+
+options$setSeed <- TRUE
+options$seed <- 1
 set.seed(1)
 results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
                                   dataset = "binaryClassification.csv",
@@ -282,6 +294,21 @@ test_that("Analysis handles errors", {
   options$labels <- "three"
   options$marker <- "marker"
 
+  options$colorTruePositive <- "darkgreen"
+  options$colorFalseNegative <- "red"
+  options$colorFalsePositive <- "darkorange"
+  options$colorTrueNegative <- "steelblue"
+
+  options$samples <- 1e4
+  options$burnin <- 500
+  options$thinning <- 1
+  options$chains <- 4
+
+  options$varyingThresholdSamples <- 1e3
+  options$varyingThresholdBurnin <- 500
+  options$varyingThresholdThinning <- 1
+  options$varyingThresholdChains <- 2
+
   results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
 
   testthat::expect_true(results[["results"]][["error"]])
@@ -293,6 +320,12 @@ test_that("Analysis handles errors", {
   options$inputType <- "data"
   options$labels <- "bin"
   options$marker <- "miss99"
+
+  options$colorTruePositive <- "darkgreen"
+  options$colorFalseNegative <- "red"
+  options$colorFalsePositive <- "darkorange"
+  options$colorTrueNegative <- "steelblue"
+
 
   results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
 
@@ -306,10 +339,33 @@ test_that("Analysis handles errors", {
   options$labels <- "bin"
   options$marker <- "badMarker"
 
+  options$colorTruePositive <- "darkgreen"
+  options$colorFalseNegative <- "red"
+  options$colorFalsePositive <- "darkorange"
+  options$colorTrueNegative <- "steelblue"
+
+
   results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
 
   testthat::expect_true(results[["results"]][["error"]])
   testthat::expect_identical(results[["results"]][["errorMessage"]],
                              "Mean of marker in positive condition (2) needs to be larger than the mean of marker in negative condition (1).")
+
+  # Bad colors
+  options <- jaspTools::analysisOptions("LSbinaryclassification")
+  options$inputType <- "data"
+  options$labels <- "bin"
+  options$marker <- "badMarker"
+
+  options$colorTruePositive <- "darkgree"
+  options$colorFalseNegative <- "ref"
+  options$colorFalsePositive <- "darkorange"
+  options$colorTrueNegative <- "steelblue"
+
+  results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
+
+  testthat::expect_true(results[["results"]][["error"]])
+  testthat::expect_identical(results[["results"]][["errorMessage"]],
+                             "Some of the specified colors are not valid colors.")
 
 })

@@ -223,6 +223,7 @@ Form {
 				checked:				true
 				CIField { name: "ciLevel" }
 			}
+			SetSeed{Layout.columnSpan:		2}
 			Group
 			{
 				title: qsTr("MCMC parameters")
