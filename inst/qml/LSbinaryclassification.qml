@@ -201,6 +201,7 @@ Form {
 		{
 			title: qsTr("Colors")
 			columns: 2
+			Layout.columnSpan: 2
 			TextField { name: "colorTruePositive";  label: qsTr("True positive"); defaultValue: "darkgreen"		}
 			TextField { name: "colorFalseNegative"; label: qsTr("False negative"); defaultValue: "red"			}
 			TextField { name: "colorFalsePositive"; label: qsTr("False positive"); defaultValue: "darkorange"	}
