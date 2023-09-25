@@ -157,6 +157,7 @@ Form {
 				}
 			}
 			CheckBox { name: "testCharacteristicsPlot";				label: qsTr("Test characteristics by threshold")	}
+			CheckBox { name: "ppvNpvPlot";							label: qsTr("PPV and NPV by threshold")				}
 			CheckBox { name: "predictiveValuesByPrevalence";		label: qsTr("PPV and NPV by prevalence")			}
 			CheckBox { name: "alluvialPlot";						label: qsTr("Alluvial plot")						}
 			CheckBox { name: "signalDetectionPlot";					label: qsTr("Signal detection"); 					}

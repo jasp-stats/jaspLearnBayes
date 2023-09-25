@@ -669,10 +669,11 @@ model{
   .bcPlotTOC                   (results, summary, plotsContainer, dataset, options, ready, position = 4, jaspResults)
   .bcPlotPR                    (results, summary, plotsContainer, dataset, options, ready, position = 5, jaspResults)
   .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 6, jaspResults)
-  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 7)
-  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 8)
-  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 9)
-  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 10)
+  .bcPlotPpvNpv                (results, summary, plotsContainer, dataset, options, ready, position = 7, jaspResults)
+  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 8)
+  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 9)
+  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 10)
+  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 11)
 }
 
 ## Prior posterior plot ----
@@ -1226,8 +1227,8 @@ model{
     jaspGraphs::geom_abline2(slope = 0, intercept = prevalence, linetype = 2) +
     ggplot2::geom_line(data = curveData, size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
-    ggplot2::xlab(gettext("Sensitivity (recall)")) +
-    ggplot2::ylab(gettext("Positive Predictive Value"))
+    ggplot2::xlab(gettext("Sensitivity (Recall)")) +
+    ggplot2::ylab(gettext("Positive Predictive Value (Precision)"))
 
 
   plot <- jaspGraphs::themeJasp(plot)
@@ -1296,8 +1297,8 @@ model{
     jaspGraphs::geom_abline2(slope = 0, intercept = prevalence, linetype = 2) +
     ggplot2::geom_line(data = curveData, size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
-    ggplot2::xlab(gettext("Sensitivity (recall)")) +
-    ggplot2::ylab(gettext("Positive Predictive Value"))
+    ggplot2::xlab(gettext("Sensitivity (Recall)")) +
+    ggplot2::ylab(gettext("Positive Predictive Value (Precision)"))
 
 
   plot <- jaspGraphs::themeJasp(plot)
@@ -1310,7 +1311,7 @@ model{
   if(!is.null(plotsContainer[["testCharacteristicsPlot"]]) ) return()
 
   plotsContainer[["testCharacteristicsPlot"]] <-
-    createJaspPlot(title        = gettext("Test Characteristics"),
+    createJaspPlot(title        = gettext("Test Characteristics by Threshold"),
                    dependencies = c("testCharacteristicsPlot", "ci", "ciLevel"),
                    position     = position,
                    width        = 500,
@@ -1356,7 +1357,7 @@ model{
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(varyingThreshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
@@ -1425,11 +1426,11 @@ model{
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     ) +
     ggplot2::scale_fill_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
@@ -1474,17 +1475,225 @@ model{
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     ) +
     ggplot2::scale_fill_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     )
 
   plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
 
   return(plot)
 }
+
+## PPV-NPV -----
+.bcPlotPpvNpv <- function(results, summary, plotsContainer, dataset, options, ready, position = 0, jaspResults) {
+  if( isFALSE(options[["ppvNpvPlot"]])     ) return()
+  if(!is.null(plotsContainer[["ppvNpvPlot"]]) ) return()
+
+  plotsContainer[["ppvNpvPlot"]] <-
+    createJaspPlot(
+      title        = gettext("PPV and NPV by Threshold"),
+      dependencies = c("ppvNpvPlot", "ci", "ciLevel"),
+      position     = position,
+      width        = 500,
+      height       = 500,
+    )
+
+  if(ready) plotsContainer[["ppvNpvPlot"]]$plotObject <-
+    .bcPlotFillPpvNpv(results, summary, dataset, options, jaspResults=jaspResults) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
+}
+
+.bcPlotFillPpvNpv <- function(results, summary, dataset, options, ...) {
+  UseMethod(".bcPlotFillPpvNpv")
+}
+
+.bcPlotFillPpvNpv.bcPointEstimates <- function(results, summary, dataset, options, ...) {
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+
+
+  threshold    <- qnorm(specificity)
+  meanPositive <- qnorm(sensitivity, mean = threshold)
+  varyingThreshold <- c(threshold, seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101))
+
+  curveData <- data.frame(
+    prevalence = prevalence,
+    sensitivity = pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE),
+    specificity = pnorm(varyingThreshold,                      lower.tail = TRUE )
+  )
+  curveData <- .bcStatistics(curveData)
+
+  curveData <- data.frame(
+    threshold = c(varyingThreshold, varyingThreshold),
+    y = c(curveData[["positivePredictiveValue"]], curveData[["negativePredictiveValue"]]),
+    group = rep(c(gettext("Positive"), gettext("Negative")), each = length(varyingThreshold))
+  )
+
+  pointData <- data.frame(
+    threshold = c(threshold, threshold),
+    y = .bcExtract(summary, c("positivePredictiveValue", "negativePredictiveValue"))
+  )
+
+  plot <- ggplot2::ggplot(mapping = ggplot2::aes(x = threshold, y = y))
+
+  plot <- plot +
+    ggplot2::geom_segment(ggplot2::aes(x = threshold, y = 0, xend = threshold, yend = 1), linetype = 2, size = 1) +
+    ggplot2::geom_line(data = curveData, size = 2, mapping = ggplot2::aes(group = group, col = group)) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("Test Threshold")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(varyingThreshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(varyingThreshold))) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    )
+
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+
+  return(plot)
+}
+
+.bcPlotFillPpvNpv.bcUncertainEstimates <- function(results, summary, dataset, options, ...) {
+  alpha <- 1-options[["ciLevel"]]
+
+  nPoints <- 101
+  data <- data.frame(
+    threshold = numeric(nPoints),
+    ppv       = numeric(nPoints),
+    ppvLower  = numeric(nPoints),
+    ppvUpper  = numeric(nPoints),
+    npv       = numeric(nPoints),
+    npvLower  = numeric(nPoints),
+    npvUpper  = numeric(nPoints)
+  )
+
+  thresholdPosterior    <- qnorm(results[["specificity"]])
+  meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
+
+  varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["samples"]])
+  for(i in seq_len(options[["samples"]]))
+    varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+
+  for(i in seq_len(nPoints)) {
+    sensitivity <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
+    specificity <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
+
+    stats <- .bcStatistics(list(prevalence = results[["prevalence"]], sensitivity = sensitivity, specificity = specificity))
+
+    ppv <- stats[["positivePredictiveValue"]]
+    npv <- stats[["negativePredictiveValue"]]
+    data[i, "threshold"] <- mean(varyingThreshold[i,], na.rm=TRUE)
+    data[i, "ppv"]       <- mean(ppv, na.rm=TRUE)
+    data[i, "ppvLower"]  <- quantile(ppv, p =   alpha/2, na.rm=TRUE)
+    data[i, "ppvUpper"]  <- quantile(ppv, p = 1-alpha/2, na.rm=TRUE)
+    data[i, "npv"]       <- mean(npv, na.rm=TRUE)
+    data[i, "npvLower"]  <- quantile(npv, p =   alpha/2, na.rm=TRUE)
+    data[i, "npvUpper"]  <- quantile(npv, p = 1-alpha/2, na.rm=TRUE)
+  }
+
+
+  threshold <- mean(qnorm(results[["specificity"]]), na.rm=TRUE)
+  pointData <- data.frame(
+    x = threshold,
+    y = .bcExtract(summary, c("positivePredictiveValue", "negativePredictiveValue"))
+  )
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1)
+
+  if(options[["ci"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=ppvLower,ymax=ppvUpper, fill = gettext("Positive")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=npvLower,ymax=npvUpper, fill = gettext("Negative")), alpha = 0.5)
+  }
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=ppv, color = gettext("Positive")), size = 2, alpha = 0.8) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=npv, color = gettext("Negative")), size = 2, alpha = 0.8) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test Threshold")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    )
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+
+  return(plot)
+}
+
+.bcPlotFillPpvNpv.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
+  data <- data.frame(
+    threshold = subset(thresholds, variable == "positivePredictiveValue")[["threshold"]],
+    tpr       = subset(thresholds, variable == "positivePredictiveValue")[["estimate"]],
+    tprLower  = subset(thresholds, variable == "positivePredictiveValue")[["lowerCI"]],
+    tprUpper  = subset(thresholds, variable == "positivePredictiveValue")[["upperCI"]],
+    tnr       = subset(thresholds, variable == "negativePredictiveValue")[["estimate"]],
+    tnrLower  = subset(thresholds, variable == "negativePredictiveValue")[["lowerCI"]],
+    tnrUpper  = subset(thresholds, variable == "negativePredictiveValue")[["upperCI"]]
+  )
+
+  pointData <- data.frame(
+    x = options[["threshold"]],
+    y = .bcExtract(summary, c("positivePredictiveValue", "negativePredictiveValue"))
+  )
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1)
+
+  if(options[["ci"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tprLower,ymax=tprUpper, fill = gettext("Positive")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tnrLower,ymax=tnrUpper, fill = gettext("Negative")), alpha = 0.5)
+  }
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Positive")), size = 2, alpha = 0.8) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Negative")), size = 2, alpha = 0.8) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test Threshold")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    )
+
+  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+
+  return(plot)
+}
+
 
 ## Varying prevalence plot ----
 .bcPlotVaryingPrevalence <- function(results, summary, plotsContainer, dataset, options, ready, position) {
@@ -1976,4 +2185,5 @@ geom_png <- function(mapping = NULL, data = NULL) {
       return(FALSE)
   }
   return(TRUE)
+
 }
