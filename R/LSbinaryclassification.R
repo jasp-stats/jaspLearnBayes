@@ -724,7 +724,7 @@ model{
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$probPositive)),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$probPositive))))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -793,7 +793,7 @@ model{
   }
 
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -873,7 +873,7 @@ model{
     ggplot2::scale_x_discrete(labels = NULL, breaks = NULL) +
     ggplot2::scale_y_discrete(labels = NULL, breaks = NULL)
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom")
 
   return(plot)
 }
@@ -961,7 +961,7 @@ model{
     ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1022,7 +1022,7 @@ model{
     ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1089,7 +1089,7 @@ model{
     ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1128,7 +1128,7 @@ model{
     ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1231,7 +1231,7 @@ model{
     ggplot2::ylab(gettext("Positive Predictive Value (Precision)"))
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1301,7 +1301,7 @@ model{
     ggplot2::ylab(gettext("Positive Predictive Value (Precision)"))
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
 }
 
@@ -1360,7 +1360,7 @@ model{
       values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1433,7 +1433,7 @@ model{
       values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1482,7 +1482,7 @@ model{
       values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1557,7 +1557,7 @@ model{
     )
 
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1637,7 +1637,7 @@ model{
       values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1689,7 +1689,7 @@ model{
       values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1743,7 +1743,7 @@ model{
       values = c("firebrick", "steelblue")
       )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1800,7 +1800,7 @@ model{
       values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1848,7 +1848,7 @@ model{
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1))) +
     ggplot2::ylab(gettext("Proportion of Population"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1903,7 +1903,7 @@ model{
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Density"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1932,7 +1932,7 @@ model{
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Count"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -2014,7 +2014,7 @@ model{
     ggplot2::xlab(gettext("Estimate")) +
     ggplot2::ylab(NULL)
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -2040,7 +2040,7 @@ model{
     ggplot2::xlab(gettext("Estimate")) +
     ggplot2::ylab(NULL)
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }

@@ -36,6 +36,11 @@ options$confusionMatrix               <- TRUE
 options$confusionMatrixAdditionalInfo <- TRUE
 options$confusionMatrixType           <- "both"
 
+options$colorTruePositive <- "darkgreen"
+options$colorFalseNegative <- "red"
+options$colorFalsePositive <- "darkorange"
+options$colorTrueNegative <- "steelblue"
+
 set.seed(1)
 results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
                                   dataset = "binaryClassification.csv",
@@ -144,6 +149,11 @@ options$statistics                    <- TRUE
 options$confusionMatrix               <- TRUE
 options$confusionMatrixAdditionalInfo <- TRUE
 options$confusionMatrixType           <- "both"
+
+options$colorTruePositive <- "darkgreen"
+options$colorFalseNegative <- "red"
+options$colorFalsePositive <- "darkorange"
+options$colorTrueNegative <- "steelblue"
 
 set.seed(1)
 results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
