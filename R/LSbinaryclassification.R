@@ -879,7 +879,7 @@ model{
     xside <- yside <- 10
   }
 
-  data$n <- round(npoints*data$prop, digits = 0)
+  data$n <- .bcRoundPreserveSum(npoints*data$prop, digits = 0)
   data <- data.frame(
     outcome = rep(data$out, data$n),
     x = rep(c(1:xside,xside:1), times = yside/2),
@@ -2215,4 +2215,14 @@ geom_png <- function(mapping = NULL, data = NULL) {
   }
   return(TRUE)
 
+}
+
+
+.bcRoundPreserveSum <- function(x, digits = 0) {
+  up <- 10 ^ digits
+  x <- x * up
+  y <- floor(x)
+  indices <- tail(order(x-y), round(sum(x)) - sum(y))
+  y[indices] <- y[indices] + 1
+  y / up
 }
