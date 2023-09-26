@@ -421,6 +421,9 @@ coef.bcPosteriorParams <- function(results) {
   RNGname <- "base::Wichmann-Hill"
   inits <- vector("list", options[["chains"]])
   for (i in seq_len(options[["chains"]])) {
+    inits[[i]]$prevalence <- 0.5
+    inits[[i]]$sensitivity <- 0.8
+    inits[[i]]$specificity <- 0.5
     inits[[i]]$.RNG.name <- RNGname
     inits[[i]]$.RNG.seed <- stats::runif(1, 0, 2^31)
   }
