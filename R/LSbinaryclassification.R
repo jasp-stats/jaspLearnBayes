@@ -279,6 +279,32 @@ summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
   return(results)
 }
 
+
+.bcVaryingThreshold <- function(prevalence, sensitivity, specificity) {
+  threshold    <- qnorm(specificity)
+  meanPositive <- qnorm(sensitivity, mean = threshold)
+
+  sensitivity <- 1
+  specificity <- 0
+  threshold <- -Inf
+
+  if(!is.infinite(meanPositive)) {
+    varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+    sensitivity <- c(sensitivity, pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE))
+    specificity <- c(specificity, pnorm(varyingThreshold, lower.tail = TRUE))
+    threshold   <- c(threshold, varyingThreshold)
+  }
+
+  sensitivity <- c(sensitivity, 0)
+  specificity <- c(specificity, 1)
+  threshold   <- c(threshold, Inf)
+
+  results <- .bcStatistics(list(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity))
+  results[["threshold"]] <- threshold
+
+  return(results)
+}
+
 summary.bcVaryingThresholds <- function(results, ciLevel, threshold) {
   alpha <- 1-ciLevel
 
@@ -912,14 +938,15 @@ model{
 }
 
 .bcFillPlotROC.default <- function(results, summary, dataset, options, ...) {
+  prevalence  <- .bcExtract(summary, "sensitivity")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
 
-  threshold    <- qnorm(.bcExtract(summary, "specificity"))
-  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
+  data <- .bcVaryingThreshold(prevalence, sensitivity, specificity)
 
-  varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
   data <- data.frame(
-    fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
-    tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+    fpr = data[["falsePositiveRate"]],
+    tpr = data[["sensitivity"]]
   )
 
   pointData <- data.frame(fpr = .bcExtract(summary, "falsePositiveRate"),
@@ -948,13 +975,10 @@ model{
 
   if(options[["inputType"]] == "uncertainEstimates" && options[["rocPlotPosteriorRealizations"]]) {
     for(i in seq_len(options[["rocPlotPosteriorRealizationsNumber"]])) {
-      threshold    <- qnorm(results[["specificity"]][i])
-      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
-
-      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- .bcVaryingThreshold(results[["prevalence"]][i], results[["sensitivity"]][i], results[["specificity"]][i])
       iterData <- data.frame(
-        fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
-        tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+        fpr = iterData[["falsePositiveRate"]],
+        tpr = iterData[["sensitivity"]]
       )
 
       plot <- plot +
@@ -1060,18 +1084,11 @@ model{
 }
 
 .bcFillPlotTOC.default <- function(results, summary, dataset, options, ...) {
-  threshold    <- qnorm(.bcExtract(summary, "specificity"))
-  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
-  prevalence <- .bcExtract(summary, "prevalence")
-
-  varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
-  fpr <- c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1)
-  tpr <- c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
-
-  curveData <- data.frame(
-    tp = prevalence * tpr,
-    fp = (1-prevalence) * fpr
-  )
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+  curveData <- .bcVaryingThreshold(prevalence, sensitivity, specificity)
+  curveData <- data.frame(tp = curveData[["truePositive"]], fp = curveData[["falsePositive"]])
 
   pointData <- data.frame(
     tp = .bcExtract(summary, "truePositive"),
@@ -1084,7 +1101,7 @@ model{
   diagLineData <- data.frame(x = c(0, 1), y = c(0, prevalence))
 
   xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, 1))
-  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, .bcExtract(summary, "prevalence")))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, prevalence))
   xLimits <- range(xBreaks)
   yLimits <- range(yBreaks)
 
@@ -1172,20 +1189,17 @@ model{
   sensitivity <- .bcExtract(summary, "sensitivity")
   specificity <- .bcExtract(summary, "specificity")
 
-
-  threshold    <- qnorm(specificity)
-  meanPositive <- qnorm(sensitivity, mean = threshold)
-  varyingThreshold <- c(threshold, seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101))
-
+  curveData <- .bcVaryingThreshold(prevalence, sensitivity, specificity)
   curveData <- data.frame(
     prevalence = prevalence,
-    sensitivity = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1),
-    specificity = c(pnorm(varyingThreshold,                      lower.tail = TRUE ), 1, 0)
+    sensitivity = curveData[["sensitivity"]],
+    specificity = curveData[["specificity"]]
   )
   curveData <- .bcStatistics(curveData)
 
-  pointData <- data.frame(sensitivity = sensitivity,
-                          positivePredictiveValue = curveData[["positivePredictiveValue"]][1])#.bcExtract(summary, "positivePredictiveValue"))
+  pointData <- .bcStatistics(list(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity))
+  pointData <- data.frame(sensitivity = pointData[["sensitivity"]],
+                          positivePredictiveValue = pointData[["positivePredictiveValue"]])
 
   plot <- ggplot2::ggplot(mapping = ggplot2::aes(x    = sensitivity,
                                                  y    = positivePredictiveValue))
@@ -1216,16 +1230,16 @@ model{
 
   if(options[["inputType"]] == "uncertainEstimates" && options[["prPlotPosteriorRealizations"]]) {
     for(i in seq_len(options[["prPlotPosteriorRealizationsNumber"]])) {
-      threshold    <- qnorm(results[["specificity"]][i])
-      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
-
-      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
-      iterData <- data.frame(
+      iterData <- .bcVaryingThreshold(
         prevalence = results[["prevalence"]][i],
-        sensitivity = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1),
-        specificity = c(pnorm(varyingThreshold,                      lower.tail = TRUE ), 1, 0)
+        sensitivity = results[["sensitivity"]][i],
+        specificity = results[["specificity"]][i]
       )
       iterData <- .bcStatistics(iterData)
+      iterData <- data.frame(
+        sensitivity = iterData[["sensitivity"]],
+        positivePredictiveValue = iterData[["positivePredictiveValue"]]
+      )
 
       plot <- plot +
         ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
@@ -1393,10 +1407,13 @@ model{
   meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
 
   varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["samples"]])
-  for(i in seq_len(options[["samples"]]))
-    varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  for (i in seq_len(options[["samples"]])) {
+    if (is.finite(meanPositivePosterior[i]))
+      varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  }
 
-  for(i in seq_len(nPoints)) {
+
+  for (i in seq_len(nPoints)) {
     tpr <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
     tnr <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
 
@@ -1590,10 +1607,12 @@ model{
   meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
 
   varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["samples"]])
-  for(i in seq_len(options[["samples"]]))
-    varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  for (i in seq_len(options[["samples"]])) {
+    if (is.finite(meanPositivePosterior[i]))
+      varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  }
 
-  for(i in seq_len(nPoints)) {
+  for (i in seq_len(nPoints)) {
     sensitivity <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
     specificity <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
 
