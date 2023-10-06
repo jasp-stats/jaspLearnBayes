@@ -47,16 +47,16 @@ Form {
 		columns: 3
 		title: qsTr("Priors")
 		Text{ text: qsTr("Prevalence") }
-		FormulaField { name: "priorPrevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 55}
-		FormulaField { name: "priorPrevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 55	}
+		FormulaField { name: "priorPrevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 65}
+		FormulaField { name: "priorPrevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 65	}
 
 		Text{ text: qsTr("Sensitivity") }
-		FormulaField { name: "priorSensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
-		FormulaField { name: "priorSensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+		FormulaField { name: "priorSensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 65	}
+		FormulaField { name: "priorSensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 65	}
 
 		Text{ text: qsTr("Specificity") }
-		FormulaField { name: "priorSpecificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 55	}
-		FormulaField { name: "priorSpecificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 55	}
+		FormulaField { name: "priorSpecificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 65	}
+		FormulaField { name: "priorSpecificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 65	}
 	}
 
 	Group
@@ -71,7 +71,7 @@ Form {
 			AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
 		}
 
-		FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"; fieldWidth: 55	}
+		FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"; fieldWidth: 65	}
 	}
 
 	Group
@@ -79,10 +79,10 @@ Form {
 		visible: inputType.value === "uncertainEstimates"
 		columns: 2
 		title: qsTr("Data")
-		IntegerField { name: "truePositive";  label: qsTr("True positive");  min: 0; defaultValue: 0; fieldWidth: 55	}
-		IntegerField { name: "falsePositive"; label: qsTr("False positive"); min: 0; defaultValue: 0; fieldWidth: 55	}
-		IntegerField { name: "falseNegative"; label: qsTr("False negative"); min: 0; defaultValue: 0; fieldWidth: 55	}
-		IntegerField { name: "trueNegative";  label: qsTr("True negative");  min: 0; defaultValue: 0; fieldWidth: 55	}
+		FormulaField { name: "truePositive";  label: qsTr("True positive");  min: 0; defaultValue: 0; fieldWidth: 65	}
+		FormulaField { name: "falsePositive"; label: qsTr("False positive"); min: 0; defaultValue: 0; fieldWidth: 65	}
+		FormulaField { name: "falseNegative"; label: qsTr("False negative"); min: 0; defaultValue: 0; fieldWidth: 65	}
+		FormulaField { name: "trueNegative";  label: qsTr("True negative");  min: 0; defaultValue: 0; fieldWidth: 65	}
 	}
 
 	Group
@@ -117,9 +117,9 @@ Form {
 		}
 
 		Group{
-			CheckBox 
-			{ 
-				name: "statistics";	label: qsTr("Statistics");	checked: true 
+			CheckBox
+			{
+				name: "statistics";	label: qsTr("Statistics");	checked: true
 
 				CheckBox { name: "statisticsAdditional";	label: qsTr("Additional Statistics");	checked: false}
 			}

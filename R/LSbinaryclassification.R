@@ -85,7 +85,8 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     "priorPrevalenceAlpha", "priorPrevalenceBeta",
     "priorSensitivityAlpha", "priorSensitivityBeta",
     "priorSpecificityAlpha", "priorSpecificityBeta",
-    "threshold")
+    "threshold",
+    "falseNegative", "trueNegative", "falsePositive", "truePositive")
     )
 
   if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
