@@ -705,7 +705,7 @@ model{
 
   .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
-  .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 3)
+  .bcPlotAreaPlot              (results, summary, plotsContainer, dataset, options, ready, position = 3)
   .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 4)
   .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 5)
   .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 6, jaspResults)
@@ -869,7 +869,7 @@ model{
                       KEEP.OUT.ATTRS = FALSE)
   data$out <- factor(
     gettext(c("True positive", "False positive", "False negative", "True negative")),
-    levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
+    levels = gettext(c("False negative", "True positive", "True negative", "False positive"))
   )
   #data$prop <- summary[match(c("truePositive", "falsePositive", "falseNegative", "trueNegative"), summary$variable), "estimate", drop=TRUE]
   data$prop <- .bcExtract(summary, c("truePositive", "falsePositive", "falseNegative", "trueNegative"))
@@ -919,6 +919,77 @@ model{
   return(plot)
 }
 
+## Area plot ----
+.bcPlotAreaPlot <- function(results, summary, plotsContainer, dataset, options, ready, position) {
+  if( isFALSE(options[["areaPlot"]])     ) return()
+  if(!is.null(plotsContainer[["areaPlot"]]) ) return()
+
+  plotsContainer[["areaPlot"]] <-
+    createJaspPlot(title        = gettext("Area Plot"),
+                   dependencies = c("areaPlot", .bcGetColors(options)[["names"]]),
+                   position     = position,
+                   width        = 500,
+                   height       = 500
+    )
+
+  if(ready) plotsContainer[["areaPlot"]]$plotObject <-
+    .bcFillPlotAreaPlot(results, summary, dataset, options) +
+    ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
+
+}
+
+.bcFillPlotAreaPlot <- function(results, summary, dataset, options) {
+  UseMethod(".bcFillPlotAreaPlot")
+}
+.bcFillPlotAreaPlot.default <- function(results, summary, dataset, options) {
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+
+  tp <- data.frame(
+    x = c(0, prevalence, prevalence, 0),
+    y = c(0, 0, sensitivity, sensitivity),
+    g = "truePositive"
+  )
+  fn <- data.frame(
+    x = c(0, prevalence, prevalence, 0),
+    y = c(sensitivity, sensitivity, 1, 1),
+    g = "falseNegative"
+  )
+  fp <- data.frame(
+    x = c(prevalence, 1, 1, prevalence),
+    y = c(0, 0, 1-specificity, 1-specificity),
+    g = "falsePositive"
+  )
+  tn <- data.frame(
+    x = c(prevalence, 1, 1, prevalence),
+    y = c(1-specificity, 1-specificity, 1, 1),
+    g = "trueNegative"
+  )
+
+  df <- rbind(tp, fn, fp, tn)
+
+  dfLine <- data.frame(
+    x = c(0, 0, prevalence, prevalence, 1, 1),
+    y = c(0, sensitivity, sensitivity, 1-specificity, 1-specificity, 0)
+  )
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(data = df, mapping = ggplot2::aes(x = x, y = y, fill = g)) +
+    ggplot2::geom_polygon(data = dfLine, mapping = ggplot2::aes(x = x, y = y), linetype = 2, fill = adjustcolor("white", alpha = 0), col = "black") +
+    ggplot2::scale_x_continuous(
+      gettext("Prevalence"), limits=c(0, 1)
+    ) +
+    ggplot2::scale_y_continuous(
+      gettext("Sensitivity"), limits=c(0, 1),
+      sec.axis = ggplot2::sec_axis(rev, name = "Specificity")
+    ) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], breaks = .bcGetColors(options)[["breaks"]], labels = .bcGetColors(options)[["labels"]]) +
+    jaspGraphs::themeJaspRaw(legend.position = "bottom") +
+    ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc"))) +
+    jaspGraphs::geom_rangeframe(sides = "lrb") +
+    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2))
+}
 ## ROC curve plot ----
 .bcPlotROC <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
   if( isFALSE(options[["rocPlot"]])     ) return()
@@ -1868,7 +1939,7 @@ model{
                       KEEP.OUT.ATTRS = FALSE)
   data$out <- factor(
     gettext(c("True positive", "False positive", "False negative", "True negative")),
-    levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
+    levels = gettext(c("False negative", "True positive", "True negative", "False positive"))
   )
   data$prop <- .bcExtract(summary, c("truePositive", "falsePositive", "falseNegative", "trueNegative"))
   plot <- ggplot2::ggplot(data = data,
@@ -1921,10 +1992,10 @@ model{
 
   prevalence <- .bcExtract(summary, "prevalence")
   plot <- ggplot2::ggplot() +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "steelblue"), alpha = 0.7)  +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkorange"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "red"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkgreen"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "trueNegative"), alpha = 0.7)  +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "falsePositive"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "falseNegative"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "truePositive"), alpha = 0.7) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), size = 1) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), size = 1) +
     ggplot2::geom_segment(ggplot2::aes(x = threshold, y = 0, xend = threshold, yend = Inf), linetype = 2, size = 1.5) +
@@ -1932,7 +2003,7 @@ model{
                                 limits = xLimits) +
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))))) +
-    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], breaks = .bcGetColors(options)[["breaks"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Density"))
@@ -1953,7 +2024,7 @@ model{
   group[ dataset$condition & !dataset$test] <- gettext("False negative")
   group[!dataset$condition & !dataset$test] <- gettext("True negative")
 
-  dataset$group <- factor(group, levels = gettext(c("True positive", "False positive", "False negative", "True negative")))
+  dataset$group <- factor(group, levels = gettext(c("False negative", "True positive", "True negative", "False positive")))
   plot <- ggplot2::ggplot(data = dataset, mapping = ggplot2::aes(x = marker, fill = group)) +
     ggplot2::geom_histogram(position = "identity", alpha = 0.4, color = "black", binwidth = binWidth, boundary = options[["threshold"]]) +
     ggplot2::geom_segment(ggplot2::aes(x = options[["threshold"]], y = 0, xend = options[["threshold"]], yend = Inf), linetype = 2, size = 1.5) +
@@ -2044,8 +2115,8 @@ model{
       ggdist::stat_halfeye()
   }
 
-  plot <- plot + ggplot2::xlim(c(0,1)) +
-    ggplot2::xlab(gettext("Estimate")) +
+  plot <- plot +
+    ggplot2::scale_x_continuous(name = gettext("Estimate"), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0", "0.25", "0.5", "0.75", "1"), limits = c(0, 1))
     ggplot2::ylab(NULL)
 
   plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
@@ -2070,8 +2141,8 @@ model{
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic)) +
     jaspGraphs::geom_point(size = 6)
 
-  plot <- plot + ggplot2::xlim(c(0,1)) +
-    ggplot2::xlab(gettext("Estimate")) +
+  plot <- plot +
+    ggplot2::scale_x_continuous(name = gettext("Estimate"), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0", "0.25", "0.5", "0.75", "1"), limits = c(0, 1)) +
     ggplot2::ylab(NULL)
 
   plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
@@ -2204,11 +2275,12 @@ geom_png <- function(mapping = NULL, data = NULL) {
 }
 
 .bcGetColors <- function(options) {
-  names <- c("colorTruePositive", "colorFalsePositive", "colorFalseNegative", "colorTrueNegative")
+  names <- c("colorFalseNegative", "colorTruePositive", "colorTrueNegative", "colorFalsePositive")
   list(
     names = names,
     values = unname(unlist(options[names])),
-    labels = gettext(c("True positive", "False positive", "False negative", "True negative"))
+    breaks = c("falseNegative", "truePositive", "trueNegative", "falsePositive"),
+    labels = gettext(c("False negative", "True positive", "True negative", "False positive"))
   )
 }
 
