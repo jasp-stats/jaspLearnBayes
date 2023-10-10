@@ -2116,7 +2116,7 @@ model{
   }
 
   plot <- plot +
-    ggplot2::scale_x_continuous(name = gettext("Estimate"), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0", "0.25", "0.5", "0.75", "1"), limits = c(0, 1))
+    ggplot2::scale_x_continuous(name = gettext("Estimate"), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0", "0.25", "0.5", "0.75", "1"), limits = c(0, 1)) +
     ggplot2::ylab(NULL)
 
   plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
