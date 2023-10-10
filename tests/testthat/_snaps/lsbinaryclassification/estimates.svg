@@ -81,11 +81,11 @@
 <polyline points='462.72,518.64 462.72,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <polyline points='579.67,518.64 579.67,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <polyline points='696.61,518.64 696.61,510.14 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<text x='228.83' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='228.83' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='345.78' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='462.72' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='462.72' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.5</text>
 <text x='579.67' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='696.61' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='696.61' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='462.72' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='66.15px' lengthAdjust='spacingAndGlyphs'>Estimate</text>
 <text x='462.72' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='72.77px' lengthAdjust='spacingAndGlyphs'>estimates</text>
 </g>
