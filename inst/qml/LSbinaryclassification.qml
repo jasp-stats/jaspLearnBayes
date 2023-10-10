@@ -139,6 +139,9 @@ Form {
 				CheckBox { name: "probabilityPositivePlotEntireDistribution"; label: qsTr("Show entire distribution"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data"}
 			}
 			CheckBox { name: "iconPlot";						label: qsTr("Icon plot")							}
+			CheckBox { name: "areaPlot";						label: qsTr("Area plot")							}
+			CheckBox { name: "alluvialPlot";						label: qsTr("Alluvial plot")						}
+			CheckBox { name: "signalDetectionPlot";					label: qsTr("Signal detection"); 					}
 			CheckBox
 			{
 				name: "rocPlot"; label: qsTr("Receiver operating characteristic (ROC)")
@@ -161,8 +164,6 @@ Form {
 			CheckBox { name: "testCharacteristicsPlot";				label: qsTr("Test characteristics by threshold")	}
 			CheckBox { name: "ppvNpvPlot";							label: qsTr("PPV and NPV by threshold")				}
 			CheckBox { name: "predictiveValuesByPrevalence";		label: qsTr("PPV and NPV by prevalence")			}
-			CheckBox { name: "alluvialPlot";						label: qsTr("Alluvial plot")						}
-			CheckBox { name: "signalDetectionPlot";					label: qsTr("Signal detection"); 					}
 			CheckBox
 			{
 				name: "estimatesPlot"; label: qsTr("Estimates"); columns: 2

@@ -705,15 +705,16 @@ model{
 
   .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
   .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
-  .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 3, jaspResults)
-  .bcPlotTOC                   (results, summary, plotsContainer, dataset, options, ready, position = 4, jaspResults)
-  .bcPlotPR                    (results, summary, plotsContainer, dataset, options, ready, position = 5, jaspResults)
-  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 6, jaspResults)
-  .bcPlotPpvNpv                (results, summary, plotsContainer, dataset, options, ready, position = 7, jaspResults)
-  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 8)
-  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 9)
-  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 10)
-  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 11)
+  .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 3)
+  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 4)
+  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 5)
+  .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 6, jaspResults)
+  .bcPlotTOC                   (results, summary, plotsContainer, dataset, options, ready, position = 7, jaspResults)
+  .bcPlotPR                    (results, summary, plotsContainer, dataset, options, ready, position = 8, jaspResults)
+  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 9, jaspResults)
+  .bcPlotPpvNpv                (results, summary, plotsContainer, dataset, options, ready, position = 10, jaspResults)
+  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 11)
+  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 12)
 }
 
 ## Prior posterior plot ----
