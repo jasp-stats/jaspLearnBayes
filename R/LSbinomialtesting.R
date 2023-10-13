@@ -1081,7 +1081,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           options[["sequentialAnalysisPredictivePerformancePlotBfType"]],
           "BF10"    = bquote("BF"["10"]),
           "BF01"    = bquote("BF"["01"]),
-          "LogBF10" = bquote(italic("log")*"(BF)"["10"])
+          "LogBF10" = bquote(italic("log")*"(BF"["10"]*")")
         )
       }
 
