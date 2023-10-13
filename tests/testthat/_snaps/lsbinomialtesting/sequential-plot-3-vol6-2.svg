@@ -71,8 +71,9 @@
 <text x='493.97' y='537.32' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>60</text>
 <text x='296.41' y='567.49' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='91.68px' lengthAdjust='spacingAndGlyphs'>Observation</text>
 <text transform='translate(17.30,300.59) rotate(-90)' style='font-size: 17.00px; font-style: italic; font-family: sans;' textLength='22.68px' lengthAdjust='spacingAndGlyphs'>log</text>
-<text transform='translate(17.30,276.54) rotate(-90)' style='font-size: 17.00px; font-family: sans;' textLength='33.05px' lengthAdjust='spacingAndGlyphs'>(BF)</text>
-<text transform='translate(20.45,243.49) rotate(-90)' style='font-size: 11.90px; font-family: sans;' textLength='13.24px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text transform='translate(17.30,276.54) rotate(-90)' style='font-size: 17.00px; font-family: sans;' textLength='27.39px' lengthAdjust='spacingAndGlyphs'>(BF</text>
+<text transform='translate(20.45,249.15) rotate(-90)' style='font-size: 11.90px; font-family: sans;' textLength='13.24px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text transform='translate(17.30,235.92) rotate(-90)' style='font-size: 17.00px; font-family: sans;' textLength='5.66px' lengthAdjust='spacingAndGlyphs'>)</text>
 <rect x='524.68' y='20.71' width='195.32' height='76.12' style='stroke-width: 0.75; stroke: none;' />
 <rect x='524.68' y='20.71' width='195.32' height='76.12' style='stroke-width: 10.67; stroke: none;' />
 <rect x='530.16' y='34.66' width='42.52' height='28.35' style='stroke-width: 10.67; stroke: none;' />
