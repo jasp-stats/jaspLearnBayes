@@ -42,8 +42,8 @@ Section
 			value:		"variable"
 			label:		qsTr("Select variable")
 			id:			dataInputTypeC
-			checked: 	mainWindow.dataAvailable
-			enabled:	mainWindow.dataAvailable
+			checked: 	dataSetInfo.dataAvailable
+			enabled:	dataSetInfo.dataAvailable
 		}
 
 		RadioButton
@@ -51,7 +51,7 @@ Section
 			value:		"counts"
 			label:		qsTr("Specify data summary")
 			id:			dataInputTypeA
-			checked:	!mainWindow.dataAvailable
+			checked:	!dataSetInfo.dataAvailable
 		}
 
 		RadioButton
