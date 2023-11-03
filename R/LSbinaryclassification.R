@@ -1606,6 +1606,7 @@ model{
 
   if(ready) plotsContainer[["ppvNpvPlot"]]$plotObject <-
     .bcPlotFillPpvNpv(results, summary, dataset, options, jaspResults=jaspResults) +
+      ggplot2::ylab(gettext("Predictive Value")) +
       ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
