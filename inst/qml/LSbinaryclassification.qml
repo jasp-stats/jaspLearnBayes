@@ -95,7 +95,6 @@ Form {
 	Group
 	{
 	  visible: inputType.value !== "pointEstimates"
-	  title: qsTr("")
 	  CheckBox{ name: "updatePrevalence"; label: qsTr("Update prevalence"); checked: true}
 	  CheckBox{ name: "orderConstraint"; label: qsTr("Respect order constraint"); checked: true}
 	}
