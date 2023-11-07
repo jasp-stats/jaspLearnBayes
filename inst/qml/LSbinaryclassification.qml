@@ -122,7 +122,7 @@ Form {
 
 				CheckBox { name: "statisticsAdditional";	label: qsTr("Additional Statistics");	checked: false}
 			}
-			CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: inputType.value === "uncertainEstimates" || inputType.value === "data" }
+			CheckBox { name: "priorPosterior"; label: qsTr("Priors and posteriors"); visible: false }
 		}
 	}
 

@@ -498,7 +498,6 @@ model{
   .bcTableStatistics    (results, summary, tablesContainer, dataset, options, ready)
   .bcTableConfusion     (results, summary, tablesContainer, dataset, options, ready)
   return()
-  .bcTablePriorPosterior(results, tablesContainer, dataset, options, ready)
 }
 
 .bcTableStatistics <- function(results, summary, tablesContainer, dataset, options, ready) {
