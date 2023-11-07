@@ -167,10 +167,19 @@ options$varyingThresholdChains <- 2
 
 options$setSeed <- TRUE
 options$seed <- 1
+options(BINARY_CLASSIFICATION_SAMPLES = "bc-data-samples.Rds")
+options(BINARY_CLASSIFICATION_SUMMARY_BY_THRESHOLD = "bc-data-summary-by-threshold.Rds")
 set.seed(1)
-results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
-                                  dataset = "binaryClassification.csv",
-                                  options = options)
+# temporarily replace functions that rely on JAGS to avoid seed issues
+testthat::with_mocked_bindings(
+  results <- jaspTools::runAnalysis(name    = "LSbinaryclassification",
+                                    dataset = "binaryClassification.csv",
+                                    options = options),
+  .bcSamplesByThreshold = .bcLoadSamplesByThreshold,
+  .bcRunJags = .bcLoadRunJags,
+  # in principle .package should be NULL, but since jaspTools::runAnalysis installs the module we gotta do it this way
+  .package = "jaspLearnBayes"
+)
 
 test_that("Alluvial plot matches", {
   testthat::skip_on_os(c("windows", "linux")) # see https://github.com/jasp-stats/jaspLearnBayes/pull/120
@@ -287,6 +296,7 @@ test_that("Statistics table results match", {
                                       0.599832112751126))
 })
 
+# Errors ----
 test_that("Analysis handles errors", {
   set.seed(1)
   data <- data.frame(bin = factor(sample(1:2, 100, TRUE)), three = factor(sample(1:3, 100, TRUE)))

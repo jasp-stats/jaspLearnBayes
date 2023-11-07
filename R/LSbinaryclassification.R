@@ -261,6 +261,17 @@ summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
   )
   mcmcOptions <- utils::modifyList(options, mcmcOptions)
 
+  results <- .bcSamplesByThreshold(thresholds, mcmcOptions, dataset)
+
+  jaspResults[["summaryByThreshold"]] <- jaspBase::createJaspState(object = results)
+  jaspResults[["summaryByThreshold"]]$dependOn(
+    optionsFromObject = jaspResults[["results"]],
+    options = c("ciLevel", "varyingThresholdSamples", "varyingThresholdBurnin", "varyingThresholdThinning", "varyingThresholdChains")
+    )
+  return(results)
+}
+
+.bcSamplesByThreshold <- function(thresholds, mcmcOptions, dataset) {
   startProgressbar(expectedTicks = length(thresholds), label = gettext("Estimating parameters per varying thresholds..."))
   results <- lapply(thresholds, function(threshold) {
     res <- .bcComputeResultsFromData(mcmcOptions, dataset, TRUE, threshold)
@@ -271,12 +282,6 @@ summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
     return(res)
   })
   results <- do.call(rbind, results)
-
-  jaspResults[["summaryByThreshold"]] <- jaspBase::createJaspState(object = results)
-  jaspResults[["summaryByThreshold"]]$dependOn(
-    optionsFromObject = jaspResults[["results"]],
-    options = c("ciLevel", "varyingThresholdSamples", "varyingThresholdBurnin", "varyingThresholdThinning", "varyingThresholdChains")
-    )
   return(results)
 }
 
@@ -429,7 +434,7 @@ coef.bcPosteriorParams <- function(results) {
     inits[[i]]$.RNG.seed <- stats::runif(1, 0, 2^31)
   }
 
-  samples <- runjags::run.jags(
+  samples <- .bcRunJags(
     model = .bcJagsModel,
     monitor = c("prevalence", "sensitivity", "specificity"),
     data = jags_data,
@@ -441,8 +446,14 @@ coef.bcPosteriorParams <- function(results) {
     silent.jags = TRUE,
     inits = inits
   )
+
   samples <- posterior::as_draws_df(samples[["mcmc"]])
   return(samples)
+}
+
+# just a wrapper to replace for testing
+.bcRunJags <- function(...) {
+  runjags::run.jags(...)
 }
 
 .bcJagsModel <- "
