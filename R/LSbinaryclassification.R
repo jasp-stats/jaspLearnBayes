@@ -23,9 +23,10 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
   dataset <- .bcReadData    (jaspResults, dataset, options, ready)
 
   results <- .bcComputeResults(jaspResults, dataset, options, ready)
+  summary <- .bcComputeSummary(jaspResults, results, options)
 
-  .bcTables(results, jaspResults, dataset, options, ready)
-  .bcPlots (results, jaspResults, dataset, options, ready)
+  .bcTables(results, summary, jaspResults, dataset, options, ready)
+  .bcPlots (results, summary, jaspResults, dataset, options, ready)
 }
 
 .bcIntro <- function(jaspResults, options) {
@@ -59,7 +60,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
                    Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:
 
-                   <img src = "img:jaspLearnBayes/icons/bayes.png", width="500">
+                   %s
 
                    <h5>References</h5>
                    Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.
@@ -69,7 +70,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
                    <a href="https://wikipedia.org/wiki/Evaluation_of_binary_classifiers">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>
 
                    <a href="https://wikipedia.org/wiki/Bayes%%27_theorem">https://wikipedia.org/wiki/Bayes%%27_theorem</a>
-                   ')
+                   ', .bcBayesTheoremExpression())
 
   jaspResults[["introductoryText"]] <- createJaspHtml(title        = gettext("Welcome to binary classification with JASP!"),
                                                text         = text,
@@ -80,23 +81,29 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 .bcParseOptions <- function(jaspResults, options) {
   options <- .parseAndStoreFormulaOptions(
     jaspResults, options,
-    c("prevalence", "sensitivity", "specificity", 
-    "priorPrevalenceAlpha", "priorPrevalenceBeta", 
-    "priorSensitivityAlpha", "priorSensitivityBeta", 
-    "priorSpecificityAlpha", "priorSpecificityBeta", 
-    "threshold")
+    c("prevalence", "sensitivity", "specificity",
+    "priorPrevalenceAlpha", "priorPrevalenceBeta",
+    "priorSensitivityAlpha", "priorSensitivityBeta",
+    "priorSpecificityAlpha", "priorSpecificityBeta",
+    "threshold",
+    "falseNegative", "trueNegative", "falsePositive", "truePositive")
     )
 
   if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
+
+  colors <- .bcGetColors(options)[["values"]]
+
+  if(!.bcIsColor(colors))
+    jaspBase::.quitAnalysis(gettext("Some of the specified colors are not valid colors."))
 
   return(options)
 }
 
 .bcIsReady <- function(options) {
-  if(options[["inputType"]] != "data") return(TRUE)
+  if(options[["inputType"]] != "data") return(options[["computeResults"]])
 
   if(options[["marker"]] != "" && options[["labels"]] != "") {
-    return(TRUE)
+    return(options[["computeResults"]])
   } else {
     return(FALSE)
   }
@@ -129,7 +136,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
 # Results computation and reshaping ----
 .bcComputeResults <- function(jaspResults, dataset, options, ready) {
-  if(!is.null(jaspResults[["results"]])) return(jaspResults[["results"]]$object)
+  if(!is.null(jaspResults[["results"]])) return(.bcStatistics(jaspResults[["results"]]$object))
 
   results <- switch(options[["inputType"]],
                     pointEstimates     = .bcComputeResultsPointEstimates(options),
@@ -139,28 +146,41 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   jaspResults[["results"]] <-
     createJaspState(object       = results,
-                    dependencies = c("inputType", "marker", "labels", "threshold", "samples",
+                    dependencies = c("computeResults", "inputType", "marker", "labels", "threshold", "samples",
                                      "truePositive", "falsePositive", "falseNegative", "trueNegative",
-                                     levels(interaction(c("sensitivity", "specificity", "prevalence"), c("", "Alpha", "Beta"), sep = ""))
+                                     "updatePrevalence", "orderConstraint", "positiveTests", "negativeTests",
+                                     c("sensitivity", "specificity", "prevalence"),
+                                     levels(interaction(c("priorSensitivity", "priorSpecificity", "priorPrevalence"), c("Alpha", "Beta"), sep = ""))
                                      )
                     )
+  return(.bcStatistics(results))
+}
 
-  return(results)
+.bcComputeSummary <- function(jaspResults, results, options) {
+  if(!is.null(jaspResults[["summary"]])) return(jaspResults[["summary"]]$object)
+
+  output <- summary(results, ciLevel = options[["ciLevel"]])
+
+  jaspResults[["summary"]] <- createJaspState(object = output)
+  jaspResults[["summary"]]$dependOn(optionsFromObject = jaspResults[["results"]], options = "ciLevel")
+
+  return(output)
 }
 
 .bcComputeResultsPointEstimates <- function(options) {
-  results <- .bcStatistics(
+  results <- list(
     prevalence  = options[["prevalence"]],
     sensitivity = options[["sensitivity"]],
     specificity = options[["specificity"]]
-    )
+  )
 
-  class(results) <- "bcPointEstimates"
+  class(results) <- c("bcPointEstimates", class(results))
   return(results)
 }
 
 summary.bcPointEstimates <- function(results, ...) {
   output <- data.frame(
+    variable       = names(results),
     statistic      = .bcTexts("statistic")[names(results)],
     estimate       = unlist(results),
     lowerCI        = NA,
@@ -174,69 +194,169 @@ summary.bcPointEstimates <- function(results, ...) {
 }
 
 .bcComputeResultsUncertainEstimates <- function(options, progress = TRUE) {
-  results <- .bcGetPosterior(options)
-  results <- .bcDrawPosteriorSamples(results, progress = progress)
+  results <- .bcDrawPosteriorSamples(options, progress = progress)
 
-  class(results) <- c("bcUncertainEstimates")
+  class(results) <- c("bcUncertainEstimates", class(results))
   return(results)
 }
-summary.bcUncertainEstimates <- function(results, ciLevel) {
+
+summary.bcUncertainEstimates <- function(results, ciLevel=0.95) {
   alpha <- 1-ciLevel
 
-  output <- data.frame(
-    statistic      = .bcTexts("statistic")[names(results)],
-    estimate       = vapply(results, mean, numeric(1), na.rm=TRUE),
-    lowerCI        = vapply(results, quantile, numeric(1), prob=alpha/2, na.rm=TRUE),
-    upperCI        = vapply(results, quantile, numeric(1), prob=1-alpha/2, na.rm=TRUE),
-    notation       = .bcTexts("notation")[names(results)],
-    interpretation = .bcTexts("interpretation")[names(results)],
-    stringsAsFactors = FALSE
-    )
+  output <- posterior::summarise_draws(
+    results,
+    estimate = mean,
+    median = median,
+    sd = sd,
+    lowerCI = ~unname(quantile(.x, probs =   alpha/2)),
+    upperCI = ~unname(quantile(.x, probs = 1-alpha/2)),
+    ssEff = posterior::ess_bulk,
+    rhat = posterior::rhat
+  )
+  output[["statistic"]] <- .bcTexts("statistic")[output[["variable"]]]
+  output[["notation"]] <- .bcTexts("notation")[output[["variable"]]]
+  output[["interpretation"]] <- .bcTexts("interpretation")[output[["variable"]]]
 
   return(output)
 }
 
-.bcComputeResultsFromData <- function(options, dataset, ready, progress = TRUE) {
-  if(!ready) return(.bcDrawPosteriorSamples(options))
-
-  results <- .bcGetPosterior(options, dataset)
-  results <- .bcDrawPosteriorSamples(results, progress = progress)
-
-  class(results) <- c("bcData", "bcUncertainEstimates")
+.bcComputeResultsFromData <- function(options, dataset, ready, threshold = NULL) {
+  if (!ready) {
+    opts <- list(
+      truePositive = 0, falsePositive = 0, falseNegative = 0, trueNegative = 0
+    )
+    tp <- fp <- fn <- tn <- 0
+  } else if (options[["inputType"]] == "data") {
+    if (!is.null(threshold))
+      dataset[["test"]] <- dataset[["marker"]] >= threshold
+    opts <- list(
+      truePositive = sum( dataset[["condition"]] &  dataset[["test"]]),
+      falsePositive = sum(!dataset[["condition"]] &  dataset[["test"]]),
+      falseNegative = sum( dataset[["condition"]] & !dataset[["test"]]),
+      trueNegative = sum(!dataset[["condition"]] & !dataset[["test"]])
+    )
+  }
+  newOptions <- utils::modifyList(options, opts)
+  results <- .bcDrawPosteriorSamples(newOptions)
+  class(results) <- c("bcData", "bcUncertainEstimates", class(results))
   return(results)
 }
 
 
-.bcStatistics <- function(prevalence, sensitivity, specificity) {
-  truePositive            <- prevalence*sensitivity
-  falsePositive           <- (1-prevalence)*(1-specificity)
-  trueNegative            <- (1-prevalence)*specificity
-  falseNegative           <- prevalence*(1-sensitivity)
-  positivePredictiveValue <- truePositive / (truePositive + falsePositive)
-  negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
-  falseDiscoveryRate      <- 1-positivePredictiveValue
-  falseOmissionRate       <- 1-negativePredictiveValue
-  falsePositiveRate       <- 1-specificity
-  falseNegativeRate       <- 1-sensitivity
-  accuracy                <- truePositive + trueNegative
+.bcComputeSummaryByThreshold <- function(jaspResults, options, dataset) {
+  if(!is.null(jaspResults[["summaryByThreshold"]])) return(jaspResults[["summaryByThreshold"]]$object)
 
-  results <- list(
-    prevalence              = prevalence,
-    sensitivity             = sensitivity,
-    specificity             = specificity,
-    truePositive            = truePositive,
-    falsePositive           = falsePositive,
-    trueNegative            = trueNegative,
-    falseNegative           = falseNegative,
-    positivePredictiveValue = positivePredictiveValue,
-    negativePredictiveValue = negativePredictiveValue,
-    falseDiscoveryRate      = falseDiscoveryRate,
-    falseOmissionRate       = falseOmissionRate,
-    falsePositiveRate       = falsePositiveRate,
-    falseNegativeRate       = falseNegativeRate,
-    accuracy                = accuracy
+  if(nrow(dataset) < 50) {
+    thresholds <- c(dataset$marker, options[["threshold"]])
+  } else {
+    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.02), na.rm=TRUE), options[["threshold"]])
+  }
+  threshold <- sort(thresholds)
+
+  mcmcOptions <- list(
+    samples = options[["varyingThresholdSamples"]],
+    burnin = options[["varyingThresholdBurnin"]],
+    thinning = options[["varyingThresholdThinning"]],
+    chains = options[["varyingThresholdChains"]]
+  )
+  mcmcOptions <- utils::modifyList(options, mcmcOptions)
+
+  results <- .bcSamplesByThreshold(thresholds, mcmcOptions, dataset)
+
+  jaspResults[["summaryByThreshold"]] <- jaspBase::createJaspState(object = results)
+  jaspResults[["summaryByThreshold"]]$dependOn(
+    optionsFromObject = jaspResults[["results"]],
+    options = c("ciLevel", "varyingThresholdSamples", "varyingThresholdBurnin", "varyingThresholdThinning", "varyingThresholdChains")
+    )
+  return(results)
+}
+
+.bcSamplesByThreshold <- function(thresholds, mcmcOptions, dataset) {
+  startProgressbar(expectedTicks = length(thresholds), label = gettext("Estimating parameters per varying thresholds..."))
+  results <- lapply(thresholds, function(threshold) {
+    res <- .bcComputeResultsFromData(mcmcOptions, dataset, TRUE, threshold)
+    res <- .bcStatistics(res)
+    class(res) <- c("bcVaryingThresholds", class(res))
+    res <- summary(res, ciLevel = mcmcOptions[["ciLevel"]], threshold = threshold)
+    progressbarTick()
+    return(res)
+  })
+  results <- do.call(rbind, results)
+  return(results)
+}
+
+
+.bcVaryingThreshold <- function(prevalence, sensitivity, specificity) {
+  threshold    <- qnorm(specificity)
+  meanPositive <- qnorm(sensitivity, mean = threshold)
+
+  sensitivity <- 1
+  specificity <- 0
+  threshold <- -Inf
+
+  if(!is.infinite(meanPositive)) {
+    varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+    sensitivity <- c(sensitivity, pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE))
+    specificity <- c(specificity, pnorm(varyingThreshold, lower.tail = TRUE))
+    threshold   <- c(threshold, varyingThreshold)
+  }
+
+  sensitivity <- c(sensitivity, 0)
+  specificity <- c(specificity, 1)
+  threshold   <- c(threshold, Inf)
+
+  results <- .bcStatistics(list(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity))
+  results[["threshold"]] <- threshold
+
+  return(results)
+}
+
+summary.bcVaryingThresholds <- function(results, ciLevel, threshold) {
+  alpha <- 1-ciLevel
+
+  output <- posterior::summarise_draws(
+    results,
+    estimate = mean,
+    lowerCI = ~unname(quantile(.x, probs =   alpha/2)),
+    upperCI = ~unname(quantile(.x, probs = 1-alpha/2))
+  )
+  output[["threshold"]] <- threshold
+
+  return(output)
+}
+
+.bcStatistics <- function(results) {
+  cls <- class(results)
+  results <- within(
+    results,
+    {
+      truePositive            <- prevalence*sensitivity
+      falsePositive           <- (1-prevalence)*(1-specificity)
+      trueNegative            <- (1-prevalence)*specificity
+      falseNegative           <- prevalence*(1-sensitivity)
+      positivePredictiveValue <- truePositive / (truePositive + falsePositive)
+      negativePredictiveValue <- trueNegative / (trueNegative + falseNegative)
+      falseDiscoveryRate      <- 1-positivePredictiveValue
+      falseOmissionRate       <- 1-negativePredictiveValue
+      falsePositiveRate       <- 1-specificity
+      falseNegativeRate       <- 1-sensitivity
+      accuracy                <- truePositive + trueNegative
+      pretestOdds             <- prevalence / (1-prevalence)
+      positiveLikelihoodRatio <- sensitivity / (1-specificity)
+      negativeLikelihoodRatio <- (1-sensitivity) / (specificity)
+      fMeasure                <- 2 / (sensitivity^(-1) + positivePredictiveValue^{-1})
+    }
   )
 
+  statNames <- names(.bcTexts("statistic"))
+  columnOrder <- match(statNames, names(results))
+
+  if(posterior::is_draws(results)) {
+    columnOrder <- c(columnOrder, match(c(".chain", ".iteration", ".draw"), names(results)))
+  }
+
+  results <- results[columnOrder]
+  class(results) <- cls
   return(results)
 }
 
@@ -270,38 +390,101 @@ summary.bcUncertainEstimates <- function(results, ciLevel) {
 }
 
 coef.bcPosteriorParams <- function(results) {
-  .bcStatistics(
-    prevalence  = results[["priorPrevalenceAlpha"]]  / (results[["priorPrevalenceAlpha"]]  + results[["priorPrevalenceBeta"]] ),
-    sensitivity = results[["priorSensitivityAlpha"]] / (results[["priorSensitivityAlpha"]] + results[["priorSensitivityBeta"]]),
-    specificity = results[["priorSpecificityAlpha"]] / (results[["priorSpecificityAlpha"]] + results[["priorSpecificityBeta"]])
-  )
+  # .bcStatistics(
+  #   prevalence  = results[["priorPrevalenceAlpha"]]  / (results[["priorPrevalenceAlpha"]]  + results[["priorPrevalenceBeta"]] ),
+  #   sensitivity = results[["priorSensitivityAlpha"]] / (results[["priorSensitivityAlpha"]] + results[["priorSensitivityBeta"]]),
+  #   specificity = results[["priorSpecificityAlpha"]] / (results[["priorSpecificityAlpha"]] + results[["priorSpecificityBeta"]])
+  # )
 }
 
-.bcDrawPosteriorSamples <- function(options, progress = TRUE) {
-  prevalence <- sensitivity <- specificity <- numeric(options[["samples"]])
+.bcExtract <- function(summary, statistic, quantity = "estimate") {
+  summary[match(statistic, summary[["variable"]]), quantity, drop = TRUE]
+}
 
-  if(progress)
-    startProgressbar(expectedTicks = options[["samples"]], label = gettext("Drawing samples"))
+.bcDrawPosteriorSamples <- function(options, progress = FALSE) {
 
-  for(i in seq_len(options[["samples"]])) {
-    prevalence[i]  <- rbeta(n=1L, options[["priorPrevalenceAlpha"]],  options[["priorPrevalenceBeta"]])
-    invalid <- TRUE
-    while(invalid) {
-      sensitivity[i] <- rbeta(n=1L, options[["priorSensitivityAlpha"]], options[["priorSensitivityBeta"]])
-      specificity[i] <- rbeta(n=1L, options[["priorSpecificityAlpha"]], options[["priorSpecificityBeta"]])
-      invalid <- (1-specificity[i]) > sensitivity[i]
-    }
+  jags_data <- with(options, list(
+      z = 1, # ones trick
+      tp = truePositive,
+      pos = truePositive + falseNegative,
+      tn = trueNegative,
+      neg = trueNegative + falsePositive,
+      total = truePositive + trueNegative + falsePositive + falseNegative,
+      positiveTests = positiveTests,
+      totalTests = positiveTests + negativeTests,
+      updatePrevalence = as.integer(updatePrevalence),
+      orderConstraint = as.integer(orderConstraint),
+      priorPrevalenceAlpha = priorPrevalenceAlpha,
+      priorPrevalenceBeta = priorPrevalenceBeta,
+      priorSensitivityAlpha = priorSensitivityAlpha,
+      priorSensitivityBeta = priorSensitivityBeta,
+      priorSpecificityAlpha = priorSpecificityAlpha,
+      priorSpecificityBeta = priorSpecificityBeta
+  ))
 
-    if(progress) progressbarTick()
+  # set a seed (same procedure as jaspGraphs)
+  jaspBase::.setSeedJASP(options)
+  RNGname <- "base::Wichmann-Hill"
+  inits <- vector("list", options[["chains"]])
+  for (i in seq_len(options[["chains"]])) {
+    inits[[i]]$prevalence <- 0.5
+    inits[[i]]$sensitivity <- 0.8
+    inits[[i]]$specificity <- 0.5
+    inits[[i]]$.RNG.name <- RNGname
+    inits[[i]]$.RNG.seed <- stats::runif(1, 0, 2^31)
   }
-  results <- .bcStatistics(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity)
 
-  class(results) <- "bcUncertainEstimates"
-  return(results)
+  samples <- .bcRunJags(
+    model = .bcJagsModel,
+    monitor = c("prevalence", "sensitivity", "specificity"),
+    data = jags_data,
+    summarise = FALSE,
+    sample = options[["samples"]],
+    burnin = options[["burnin"]],
+    thin = options[["thinning"]],
+    n.chains = options[["chains"]],
+    silent.jags = TRUE,
+    inits = inits
+  )
+
+  samples <- posterior::as_draws_df(samples[["mcmc"]])
+  return(samples)
 }
+
+# just a wrapper to replace for testing
+.bcRunJags <- function(...) {
+  runjags::run.jags(...)
+}
+
+.bcJagsModel <- "
+model{
+  # priors
+  prevalence  ~ dbeta(priorPrevalenceAlpha,  priorPrevalenceBeta )
+  sensitivity ~ dbeta(priorSensitivityAlpha, priorSensitivityBeta)
+  specificity ~ dbeta(priorSpecificityAlpha, priorSpecificityBeta)
+
+  # likelihood
+
+  ## update sensitivity and specificity
+  tp ~ dbin(sensitivity, pos)
+  tn ~ dbin(specificity, neg)
+
+  ## update prevalence
+  prevalence2 <- ifelse(updatePrevalence==1, prevalence, 0.5)
+  pos ~ dbin(prevalence2, total)
+
+  ## correction as per Winkler & Smith
+  theta <- prevalence*sensitivity + (1-prevalence)*(1-specificity)
+  positiveTests ~ dbin(theta, totalTests)
+
+  # order constraints
+  constraint <- ifelse(orderConstraint, step(sensitivity-(1-specificity)), 1)
+  z ~ dbern(constraint)
+}
+"
 
 # Output tables ----
-.bcTables <- function(results, jaspResults, dataset, options, ready) {
+.bcTables <- function(results, summary, jaspResults, dataset, options, ready) {
 
   if(is.null(jaspResults[["tables"]])) {
     tablesContainer <- createJaspContainer(title = gettext("Tables"))
@@ -312,41 +495,50 @@ coef.bcPosteriorParams <- function(results) {
     tablesContainer <- jaspResults[["tables"]]
   }
 
-  .bcTableStatistics    (results, tablesContainer, dataset, options, ready)
-  .bcTableConfusion     (results, tablesContainer, dataset, options, ready)
-  .bcTablePriorPosterior(results, tablesContainer, dataset, options, ready)
+  .bcTableStatistics    (results, summary, tablesContainer, dataset, options, ready)
+  .bcTableConfusion     (results, summary, tablesContainer, dataset, options, ready)
+  return()
 }
 
-.bcTableStatistics <- function(results, tablesContainer, dataset, options, ready) {
+.bcTableStatistics <- function(results, summary, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["statistics"]])     ) return()
   if(!is.null(tablesContainer[["statistics"]]) ) return()
 
   table <- createJaspTable(title = gettext("Statistics"), position = 1)
-  table$dependOn(options = "statistics")
+  table$dependOn(options = c("statistics", "statisticsAdditional"))
   table$showSpecifiedColumnsOnly <- TRUE
 
   table$addColumnInfo(name = "statistic",  title = "")
-  table$addColumnInfo(name = "estimate", title = gettext("Estimate"), type = "number")
 
-  if(options[["inputType"]] != "pointEstimates")
+  if(options[["inputType"]] == "pointEstimates") {
+    table$addColumnInfo(name = "estimate", title = gettext("Estimate"), type = "number")
+  } else {
+    table$addColumnInfo(name = "estimate", title = gettext("Mean"),   type = "number")
+    table$addColumnInfo(name = "median",   title = gettext("Median"), type = "number")
+    table$addColumnInfo(name = "sd",       title = gettext("SD"),     type = "number")
+    if(options[["ci"]]) {
+      ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
+      table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
+      table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
+    }
+    table$addColumnInfo(name = "rhat", title = gettext("Rhat"),              overtitle = gettext("Diagnostics"), type = "number")
+    table$addColumnInfo(name = "ssEff", title = gettext("Eff. Sample Size"), overtitle = gettext("Diagnostics"), type = "number")
+
     table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
-
-  if(options[["ci"]]) {
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
-    ciLevelPercent <- gettextf("%s%% Credible Interval", 100*options[["ciLevel"]])
-    table$addColumnInfo(name = "lowerCI", title = gettext("Lower"), overtitle = ciLevelPercent, type = "number")
-    table$addColumnInfo(name = "upperCI", title = gettext("Upper"), overtitle = ciLevelPercent, type = "number")
   }
 
   table$addColumnInfo(name = "notation", title = gettext("Notation"))
   table$addColumnInfo(name = "interpretation", title = gettext("Interpretation"))
 
-  if(ready) table$setData(summary(results, ciLevel = options[["ciLevel"]]))
+  if(ready && !is.null(summary)) {
+    data <- if(options[["statisticsAdditional"]]) summary else summary[1:14,,drop=FALSE]
+    table$setData(data)
+  }
 
   tablesContainer[["statistics"]] <- table
 }
 
-.bcTableConfusion <- function(results, tablesContainer, dataset, options, ready) {
+.bcTableConfusion <- function(results, summary, tablesContainer, dataset, options, ready) {
   if( isFALSE(options[["confusionMatrix"]])     ) return()
   if(!is.null(tablesContainer[["confusionMatrix"]]) ) return()
 
@@ -369,7 +561,6 @@ coef.bcPosteriorParams <- function(results) {
   }
 
   if(options[["ci"]] && options[["confusionMatrixType"]] != "text") {
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
     table$addColumnInfo(name = "pos_lower", title = gettextf("Lower %s", ciText), type = "number")
     table$addColumnInfo(name = "pos_upper", title = gettextf("Upper %s", ciText), type = "number")
   }
@@ -433,20 +624,18 @@ coef.bcPosteriorParams <- function(results) {
     }
   }
 
-  if(ready) .bcFillTableConfusion(results, table, options)
+  if(ready) .bcFillTableConfusion(summary, table, options)
 
   # footnotes
-  if(options[["inputType"]] != "pointEstimates")
+  if(options[["inputType"]] != "pointEstimates" && options[["confusionMatrixType"]] != "text")
     table$addFootnote(message = .bcTexts("footnote", options = options)[["posteriorEstimate"]])
-
-  if(options[["ci"]])
-    table$addFootnote(message = .bcTexts("footnote", options = options)[["ci"]])
 
   tablesContainer[["confusionMatrix"]] <- table
 }
 
-.bcFillTableConfusion <- function(results, table, options) {
-  tab <- summary(results, ciLevel = options[["ciLevel"]])
+.bcFillTableConfusion <- function(summary, table, options) {
+  tab <- summary[, c("statistic", "estimate", "lowerCI", "upperCI")]
+  rownames(tab) <- summary[["variable"]]
 
   df <- data.frame(
     head       = gettext(c("Positive condition", "Negative condition", "True/Total")),
@@ -513,7 +702,7 @@ coef.bcPosteriorParams <- function(results) {
 }
 
 # Output plots ----
-.bcPlots <- function(results, jaspResults, dataset, options, ready) {
+.bcPlots <- function(results, summary, jaspResults, dataset, options, ready) {
 
   if(is.null(jaspResults[["plots"]])) {
     plotsContainer <- createJaspContainer(title = gettext("Plots"))
@@ -524,18 +713,22 @@ coef.bcPosteriorParams <- function(results) {
     plotsContainer <- jaspResults[["plots"]]
   }
 
-  .bcPlotPriorPosteriorPositive(results, plotsContainer, dataset, options, ready, position = 1)
-  .bcPlotIconPlot              (results, plotsContainer, dataset, options, ready, position = 2)
-  .bcPlotROC                   (results, plotsContainer, dataset, options, ready, position = 3)
-  .bcPlotTestCharacteristics   (results, plotsContainer, dataset, options, ready, position = 4)
-  .bcPlotVaryingPrevalence     (results, plotsContainer, dataset, options, ready, position = 5)
-  .bcPlotAlluvial              (results, plotsContainer, dataset, options, ready, position = 6)
-  .bcPlotSignal                (results, plotsContainer, dataset, options, ready, position = 7)
-  .bcPlotEstimates             (results, plotsContainer, dataset, options, ready, position = 8)
+  .bcPlotPriorPosteriorPositive(results, summary, plotsContainer, dataset, options, ready, position = 1)
+  .bcPlotIconPlot              (results, summary, plotsContainer, dataset, options, ready, position = 2)
+  .bcPlotAreaPlot              (results, summary, plotsContainer, dataset, options, ready, position = 3)
+  .bcPlotAlluvial              (results, summary, plotsContainer, dataset, options, ready, position = 4)
+  .bcPlotSignal                (results, summary, plotsContainer, dataset, options, ready, position = 5)
+  .bcPlotROC                   (results, summary, plotsContainer, dataset, options, ready, position = 6, jaspResults)
+  .bcPlotTOC                   (results, summary, plotsContainer, dataset, options, ready, position = 7, jaspResults)
+  .bcPlotPR                    (results, summary, plotsContainer, dataset, options, ready, position = 8, jaspResults)
+  .bcPlotTestCharacteristics   (results, summary, plotsContainer, dataset, options, ready, position = 9, jaspResults)
+  .bcPlotPpvNpv                (results, summary, plotsContainer, dataset, options, ready, position = 10, jaspResults)
+  .bcPlotVaryingPrevalence     (results, summary, plotsContainer, dataset, options, ready, position = 11)
+  .bcPlotEstimates             (results, summary, plotsContainer, dataset, options, ready, position = 12)
 }
 
 ## Prior posterior plot ----
-.bcPlotPriorPosteriorPositive <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotPriorPosteriorPositive <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["probabilityPositivePlot"]])     ) return()
   if(!is.null(plotsContainer[["probabilityPositivePlot"]]) ) return()
 
@@ -548,14 +741,15 @@ coef.bcPosteriorParams <- function(results) {
     )
 
   if(ready) plotsContainer[["probabilityPositivePlot"]]$plotObject <-
-    .bcFillPlotPriorPosteriorPositive(results, dataset, options)
+    .bcFillPlotPriorPosteriorPositive(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
-.bcFillPlotPriorPosteriorPositive <- function(results, dataset, options) {
+.bcFillPlotPriorPosteriorPositive <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotPriorPosteriorPositive")
 }
 
-.bcFillPlotPriorPosteriorPositive.bcPointEstimates <- function(results, dataset, options) {
+.bcFillPlotPriorPosteriorPositive.bcPointEstimates <- function(results, summary, dataset, options) {
 
   data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
                       result = gettext(c("Negative", "Positive")))
@@ -581,12 +775,12 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, data$probPositive)),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, data$probPositive))))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, dataset, options) {
+.bcFillPlotPriorPosteriorPositive.bcUncertainEstimates <- function(results, summary, dataset, options) {
   if(options[["probabilityPositivePlotEntireDistribution"]]) {
     data <- expand.grid(test   = gettext(c("Not tested", "Tested")),
                         result = gettext(c("Negative", "Positive")),
@@ -618,18 +812,16 @@ coef.bcPosteriorParams <- function(results) {
 
     for(i in 1:nrow(data)) {
       if(data$test[i] == gettext("Not tested")) {
-        data$mean [i] <- mean    (results[["prevalence"]], na.rm=TRUE)
-        data$lower[i] <- quantile(results[["prevalence"]], p =   alpha/2, na.rm=TRUE)
-        data$upper[i] <- quantile(results[["prevalence"]], p = 1-alpha/2, na.rm=TRUE)
+        varName <- "prevalence"
       } else if(data$result[i] == gettext("Negative")) {
-        data$mean [i] <- mean    (results[["falseOmissionRate"]], na.rm=TRUE)
-        data$lower[i] <- quantile(results[["falseOmissionRate"]], p =   alpha/2, na.rm=TRUE)
-        data$upper[i] <- quantile(results[["falseOmissionRate"]], p = 1-alpha/2, na.rm=TRUE)
+        varName <- "falseOmissionRate"
       } else {
-        data$mean [i] <- mean    (results[["positivePredictiveValue"]], na.rm=TRUE)
-        data$lower[i] <- quantile(results[["positivePredictiveValue"]], p =   alpha/2, na.rm=TRUE)
-        data$upper[i] <- quantile(results[["positivePredictiveValue"]], p = 1-alpha/2, na.rm=TRUE)
+        varName <- "positivePredictiveValue"
       }
+
+      data$mean [i] <- .bcExtract(summary, varName)
+      data$lower[i] <- .bcExtract(summary, varName, "lowerCI")
+      data$upper[i] <- .bcExtract(summary, varName, "upperCI")
     }
 
     plot <- ggplot2::ggplot(data    = data,
@@ -652,44 +844,45 @@ coef.bcPosteriorParams <- function(results) {
   }
 
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
 ## Icon plot ----
-.bcPlotIconPlot <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotIconPlot <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["iconPlot"]])     ) return()
   if(!is.null(plotsContainer[["iconPlot"]]) ) return()
 
   plotsContainer[["iconPlot"]] <-
     createJaspPlot(title        = gettext("Icon Plot"),
-                   dependencies = "iconPlot",
+                   dependencies = c("iconPlot", .bcGetColors(options)[["names"]]),
                    position     = position,
                    width        = 500,
                    height       = 500
     )
 
   if(ready) plotsContainer[["iconPlot"]]$plotObject <-
-    .bcFillPlotIconPlot(results, dataset, options)
+    .bcFillPlotIconPlot(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 
 }
 
-.bcFillPlotIconPlot <- function(results, dataset, options) {
+.bcFillPlotIconPlot <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotIconPlot")
 }
 
-.bcFillPlotIconPlot.default <- function(results, dataset, options) {
+.bcFillPlotIconPlot.default <- function(results, summary, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
                       KEEP.OUT.ATTRS = FALSE)
   data$out <- factor(
     gettext(c("True positive", "False positive", "False negative", "True negative")),
-    levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
+    levels = gettext(c("False negative", "True positive", "True negative", "False positive"))
   )
-  data$prop <- summary(results, ciLevel = options[["ciLevel"]])[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
-
+  #data$prop <- summary[match(c("truePositive", "falsePositive", "falseNegative", "trueNegative"), summary$variable), "estimate", drop=TRUE]
+  data$prop <- .bcExtract(summary, c("truePositive", "falsePositive", "falseNegative", "trueNegative"))
   if(any(data$prop < 1e-4)) {
     npoints <- 1e6
     xside <- yside <- 1e3
@@ -701,7 +894,7 @@ coef.bcPosteriorParams <- function(results) {
     xside <- yside <- 10
   }
 
-  data$n <- round(npoints*data$prop, digits = 0)
+  data$n <- .bcRoundPreserveSum(npoints*data$prop, digits = 0)
   data <- data.frame(
     outcome = rep(data$out, data$n),
     x = rep(c(1:xside,xside:1), times = yside/2),
@@ -715,13 +908,13 @@ coef.bcPosteriorParams <- function(results) {
     plot <- plot +
       ggplot2::geom_raster(mapping = ggplot2::aes(fill=outcome), alpha = 0) +
       geom_png(mapping = ggplot2::aes(w=0.75,h=0.75,img=img,col=outcome)) +
-      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
-      ggplot2::scale_color_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+      ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
+      ggplot2::scale_color_manual(name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
       ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1)), col = FALSE)
   } else {
     plot <- plot +
       ggplot2::geom_tile(mapping = ggplot2::aes(fill=outcome)) +
-      ggplot2::scale_fill_manual (name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+      ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
       ggplot2::guides(fill=ggplot2::guide_legend(ncol=2))
   }
 
@@ -731,13 +924,84 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::scale_x_discrete(labels = NULL, breaks = NULL) +
     ggplot2::scale_y_discrete(labels = NULL, breaks = NULL)
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom")
 
   return(plot)
 }
 
+## Area plot ----
+.bcPlotAreaPlot <- function(results, summary, plotsContainer, dataset, options, ready, position) {
+  if( isFALSE(options[["areaPlot"]])     ) return()
+  if(!is.null(plotsContainer[["areaPlot"]]) ) return()
+
+  plotsContainer[["areaPlot"]] <-
+    createJaspPlot(title        = gettext("Area Plot"),
+                   dependencies = c("areaPlot", .bcGetColors(options)[["names"]]),
+                   position     = position,
+                   width        = 500,
+                   height       = 500
+    )
+
+  if(ready) plotsContainer[["areaPlot"]]$plotObject <-
+    .bcFillPlotAreaPlot(results, summary, dataset, options) +
+    ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
+
+}
+
+.bcFillPlotAreaPlot <- function(results, summary, dataset, options) {
+  UseMethod(".bcFillPlotAreaPlot")
+}
+.bcFillPlotAreaPlot.default <- function(results, summary, dataset, options) {
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+
+  tp <- data.frame(
+    x = c(0, prevalence, prevalence, 0),
+    y = c(0, 0, sensitivity, sensitivity),
+    g = "truePositive"
+  )
+  fn <- data.frame(
+    x = c(0, prevalence, prevalence, 0),
+    y = c(sensitivity, sensitivity, 1, 1),
+    g = "falseNegative"
+  )
+  fp <- data.frame(
+    x = c(prevalence, 1, 1, prevalence),
+    y = c(0, 0, 1-specificity, 1-specificity),
+    g = "falsePositive"
+  )
+  tn <- data.frame(
+    x = c(prevalence, 1, 1, prevalence),
+    y = c(1-specificity, 1-specificity, 1, 1),
+    g = "trueNegative"
+  )
+
+  df <- rbind(tp, fn, fp, tn)
+
+  dfLine <- data.frame(
+    x = c(0, 0, prevalence, prevalence, 1, 1),
+    y = c(0, sensitivity, sensitivity, 1-specificity, 1-specificity, 0)
+  )
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(data = df, mapping = ggplot2::aes(x = x, y = y, fill = g)) +
+    ggplot2::geom_polygon(data = dfLine, mapping = ggplot2::aes(x = x, y = y), linetype = 2, fill = adjustcolor("white", alpha = 0), col = "black") +
+    ggplot2::scale_x_continuous(
+      gettext("Prevalence"), limits=c(0, 1)
+    ) +
+    ggplot2::scale_y_continuous(
+      gettext("Sensitivity"), limits=c(0, 1),
+      sec.axis = ggplot2::sec_axis(rev, name = "Specificity")
+    ) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], breaks = .bcGetColors(options)[["breaks"]], labels = .bcGetColors(options)[["labels"]]) +
+    jaspGraphs::themeJaspRaw(legend.position = "bottom") +
+    ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc"))) +
+    jaspGraphs::geom_rangeframe(sides = "lrb") +
+    ggplot2::guides(fill=ggplot2::guide_legend(ncol=2))
+}
 ## ROC curve plot ----
-.bcPlotROC <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotROC <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
   if( isFALSE(options[["rocPlot"]])     ) return()
   if(!is.null(plotsContainer[["rocPlot"]]) ) return()
 
@@ -751,28 +1015,28 @@ coef.bcPosteriorParams <- function(results) {
       )
 
   if(ready) plotsContainer[["rocPlot"]]$plotObject <-
-    .bcFillPlotROC(results, dataset, options) +
+    .bcFillPlotROC(results, summary, dataset, options, jaspResults=jaspResults) +
       ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
 }
 
-.bcFillPlotROC <- function(results, dataset, options) {
+.bcFillPlotROC <- function(results, summary, dataset, options, ...) {
   UseMethod(".bcFillPlotROC")
 }
 
-.bcFillPlotROC.default <- function(results, dataset, options) {
-  summ <- summary(results, ciLevel = options[["ciLevel"]])
+.bcFillPlotROC.default <- function(results, summary, dataset, options, ...) {
+  prevalence  <- .bcExtract(summary, "sensitivity")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
 
-  threshold    <- qnorm(summ["specificity", "estimate"])
-  meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
+  data <- .bcVaryingThreshold(prevalence, sensitivity, specificity)
 
-  varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
   data <- data.frame(
-    fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
-    tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+    fpr = data[["falsePositiveRate"]],
+    tpr = data[["sensitivity"]]
   )
 
-  pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
-                          tpr = summ["sensitivity",       "estimate"])
+  pointData <- data.frame(fpr = .bcExtract(summary, "falsePositiveRate"),
+                          tpr = .bcExtract(summary, "sensitivity"))
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x    = fpr,
@@ -797,13 +1061,10 @@ coef.bcPosteriorParams <- function(results) {
 
   if(options[["inputType"]] == "uncertainEstimates" && options[["rocPlotPosteriorRealizations"]]) {
     for(i in seq_len(options[["rocPlotPosteriorRealizationsNumber"]])) {
-      threshold    <- qnorm(results[["specificity"]][i])
-      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
-
-      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- .bcVaryingThreshold(results[["prevalence"]][i], results[["sensitivity"]][i], results[["specificity"]][i])
       iterData <- data.frame(
-        fpr = c(pnorm(varyingThreshold,                      lower.tail = FALSE), 0, 1),
-        tpr = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1)
+        fpr = iterData[["falsePositiveRate"]],
+        tpr = iterData[["sensitivity"]]
       )
 
       plot <- plot +
@@ -813,35 +1074,28 @@ coef.bcPosteriorParams <- function(results) {
 
 
   plot <- plot +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
+    jaspGraphs::geom_abline2(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_line(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
     ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotROC.bcData <- function(results, dataset, options) {
-
-  thresholds <- c(dataset$marker, options[["threshold"]])
+.bcFillPlotROC.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
 
   data <- data.frame(
-    fpr = numeric(length(thresholds)+2), tpr = numeric(length(thresholds)+2)
+    fpr = c(subset(thresholds, variable == "falsePositiveRate")[["estimate"]], 0, 1),
+    tpr = c(subset(thresholds, variable == "sensitivity")[["estimate"]], 0, 1)
   )
-  data[1,] <- c(0, 0)
-  data[2,] <- c(1, 1)
-  for(i in seq_along(thresholds)+2) {
-    res <- coef(.bcGetPosterior(options = options, dataset = dataset, threshold = thresholds[i]))
-    data[i,] <- unlist(res[c("falsePositiveRate", "sensitivity")])
-  }
 
-  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
-  pointData <- data.frame(fpr = summ["falsePositiveRate", "estimate"],
-                          tpr = summ["sensitivity",           "estimate"])
+  pointData <- data.frame(fpr = .bcExtract(summary, "falsePositiveRate"),
+                          tpr = .bcExtract(summary, "sensitivity"))
 
   plot <- ggplot2::ggplot(data    = data,
                           mapping = ggplot2::aes(x = fpr, y = tpr)
@@ -881,45 +1135,313 @@ coef.bcPosteriorParams <- function(results) {
   }
 
   plot <- plot +
-    ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2) +
+    jaspGraphs::geom_abline2(slope = 1, intercept = 0, linetype = 2) +
     ggplot2::geom_step(size = 1.5) +
     jaspGraphs::geom_point(data = pointData, size = 5) +
     ggplot2::xlab(gettext("False Positive Rate (1-Specificity)")) +
     ggplot2::ylab(gettext("True Positive Rate (Sensitivity)"))
 
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
+## TOC curve plot ----
+.bcPlotTOC <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
+  if( isFALSE(options[["tocPlot"]])     ) return()
+  if(!is.null(plotsContainer[["tocPlot"]]) ) return()
+
+  plotsContainer[["tocPlot"]] <-
+    createJaspPlot(
+      title        = gettext("Total Operating Characteristic Curve"),
+      dependencies = "tocPlot",
+      position     = position,
+      width        = 500,
+      height       = 500,
+    )
+
+  if(ready) plotsContainer[["tocPlot"]]$plotObject <-
+    .bcFillPlotTOC(results, summary, dataset, options, jaspResults=jaspResults)
+}
+
+.bcFillPlotTOC <- function(results, summary, dataset, options, ...) {
+  UseMethod(".bcFillPlotTOC")
+}
+
+.bcFillPlotTOC.default <- function(results, summary, dataset, options, ...) {
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+  curveData <- .bcVaryingThreshold(prevalence, sensitivity, specificity)
+  curveData <- data.frame(tp = curveData[["truePositive"]], fp = curveData[["falsePositive"]])
+
+  pointData <- data.frame(
+    tp = .bcExtract(summary, "truePositive"),
+    fp = .bcExtract(summary, "falsePositive")
+  )
+
+  boxData <- data.frame(x = c(0, prevalence, 1, 1-prevalence),
+                        y = c(0, prevalence, prevalence, 0))
+
+  diagLineData <- data.frame(x = c(0, 1), y = c(0, prevalence))
+
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, 1))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, prevalence))
+  xLimits <- range(xBreaks)
+  yLimits <- range(yBreaks)
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(data = boxData, mapping = ggplot2::aes(x = x, y = y), alpha = 0.0, color = "black", linetype = 2, linewidth = 1) +
+    ggplot2::geom_line(data = diagLineData, mapping = ggplot2::aes(x = x, y = y), linetype = 2) +
+    ggplot2::geom_line(data = curveData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 5) +
+    ggplot2::xlab(gettext("True positives + False positives")) +
+    ggplot2::ylab(gettext("True positives")) +
+    ggplot2::scale_x_continuous(breaks = xBreaks, limits = xLimits) +
+    ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
+
+
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
+
+  return(plot)
+}
+
+.bcFillPlotTOC.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
+
+  prevalence <- .bcExtract(summary, "prevalence")
+  curveData <- data.frame(
+    tp = c(subset(thresholds, variable == "truePositive")[["estimate"]], 0, prevalence),
+    fp = c(subset(thresholds, variable == "falsePositive")[["estimate"]], 0, 1-prevalence)
+  )
+  pointData <- data.frame(
+    tp = .bcExtract(summary, "truePositive"),
+    fp = .bcExtract(summary, "falsePositive")
+  )
+
+  boxData <- data.frame(x = c(0, prevalence, 1, 1-prevalence),
+                        y = c(0, prevalence, prevalence, 0))
+
+  diagLineData <- data.frame(x = c(0, 1), y = c(0, prevalence))
+
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, 1))
+  yBreaks <- jaspGraphs::getPrettyAxisBreaks(c(0, .bcExtract(summary, "prevalence")))
+  xLimits <- range(xBreaks)
+  yLimits <- range(yBreaks)
+
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_polygon(data = boxData, mapping = ggplot2::aes(x = x, y = y), alpha = 0.0, color = "black", linetype = 2, linewidth = 1) +
+    ggplot2::geom_line(data = diagLineData, mapping = ggplot2::aes(x = x, y = y), linetype = 2) +
+    ggplot2::geom_line(data = curveData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x = tp+fp, y = tp), size = 5) +
+    ggplot2::xlab(gettext("True positives + False positives")) +
+    ggplot2::ylab(gettext("True positives")) +
+    ggplot2::scale_x_continuous(breaks = xBreaks, limits = xLimits) +
+    ggplot2::scale_y_continuous(breaks = yBreaks, limits = yLimits)
+
+
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
+
+  return(plot)
+}
+
+## PR curve plot ----
+.bcPlotPR <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
+  if( isFALSE(options[["prPlot"]])     ) return()
+  if(!is.null(plotsContainer[["prPlot"]]) ) return()
+
+  plotsContainer[["prPlot"]] <-
+    createJaspPlot(
+      title        = gettext("Precision-recall"),
+      dependencies = c("prPlot", "ci", "ciLevel", "prPlotPosteriorRealizations", "prPlotPosteriorRealizationsNumber"),
+      position     = position,
+      width        = 500,
+      height       = 500,
+    )
+
+  if(ready) plotsContainer[["prPlot"]]$plotObject <-
+    .bcFillPlotPR(results, summary, dataset, options, jaspResults=jaspResults) +
+    ggplot2::xlim(c(0,1)) + ggplot2::ylim(c(0,1))
+}
+
+.bcFillPlotPR <- function(results, summary, dataset, options, ...) {
+  UseMethod(".bcFillPlotPR")
+}
+
+.bcFillPlotPR.default <- function(results, summary, dataset, options, ...) {
+
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+
+  curveData <- .bcVaryingThreshold(prevalence, sensitivity, specificity)
+  curveData <- data.frame(
+    prevalence = prevalence,
+    sensitivity = curveData[["sensitivity"]],
+    specificity = curveData[["specificity"]]
+  )
+  curveData <- .bcStatistics(curveData)
+
+  pointData <- .bcStatistics(list(prevalence = prevalence, sensitivity = sensitivity, specificity = specificity))
+  pointData <- data.frame(sensitivity = pointData[["sensitivity"]],
+                          positivePredictiveValue = pointData[["positivePredictiveValue"]])
+
+  plot <- ggplot2::ggplot(mapping = ggplot2::aes(x    = sensitivity,
+                                                 y    = positivePredictiveValue))
+
+  if(options[["ci"]]) {
+    densityData <- data.frame(
+      sensitivity = results[["sensitivity"]],
+      positivePredictiveValue = results[["positivePredictiveValue"]]
+    )
+    breakLevel <- .bcGetLevel2D(densityData$sensitivity, densityData$positivePredictiveValue, options[["ciLevel"]])
+
+    plot <- plot +
+      ggplot2::stat_density2d(data = densityData, geom = "polygon",
+                              mapping = ggplot2::aes(fill = ggplot2::after_stat(level)),
+                              bins = 5) +
+      ggplot2::scale_fill_distiller(palette = "Blues", direction = 1) +
+      ggplot2::geom_density2d(data = densityData, breaks = breakLevel,
+                              size = 1, col = "black", linetype = 2)
+
+    prevalenceCiData <- data.frame(x = c(0, 1), lower = .bcExtract(summary, "prevalence", "lowerCI"), upper = .bcExtract(summary, "prevalence", "upperCI"))
+    plot <- plot +
+      ggplot2::geom_ribbon(
+        data = prevalenceCiData,
+        mapping = ggplot2::aes(x=x, ymin = lower, ymax = upper),
+        inherit.aes = FALSE,
+        fill = "firebrick", alpha = 0.3)
+  }
+
+  if(options[["inputType"]] == "uncertainEstimates" && options[["prPlotPosteriorRealizations"]]) {
+    for(i in seq_len(options[["prPlotPosteriorRealizationsNumber"]])) {
+      iterData <- .bcVaryingThreshold(
+        prevalence = results[["prevalence"]][i],
+        sensitivity = results[["sensitivity"]][i],
+        specificity = results[["specificity"]][i]
+      )
+      iterData <- .bcStatistics(iterData)
+      iterData <- data.frame(
+        sensitivity = iterData[["sensitivity"]],
+        positivePredictiveValue = iterData[["positivePredictiveValue"]]
+      )
+
+      plot <- plot +
+        ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
+    }
+  }
+
+
+  plot <- plot +
+    jaspGraphs::geom_abline2(slope = 0, intercept = prevalence, linetype = 2) +
+    ggplot2::geom_line(data = curveData, size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("Sensitivity (Recall)")) +
+    ggplot2::ylab(gettext("Positive Predictive Value (Precision)"))
+
+
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
+
+  return(plot)
+}
+
+.bcFillPlotPR.bcData <- function(results, summary, dataset, options, jaspResults) {
+  prevalence <- .bcExtract(summary, "prevalence")
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
+
+  curveData <- data.frame(
+    sensitivity = c(subset(thresholds, variable == "sensitivity")[["estimate"]], 0, 1),
+    positivePredictiveValue = c(subset(thresholds, variable == "positivePredictiveValue")[["estimate"]], 1, prevalence)
+  )
+
+  pointData <- data.frame(sensitivity = .bcExtract(summary, "sensitivity"),
+                          positivePredictiveValue = .bcExtract(summary, "positivePredictiveValue"))
+
+  plot <- ggplot2::ggplot(mapping = ggplot2::aes(x = sensitivity, y = positivePredictiveValue))
+
+  if(options[["ci"]]) {
+    densityData <- data.frame(
+      sensitivity = results[["sensitivity"]],
+      positivePredictiveValue = results[["positivePredictiveValue"]]
+    )
+    breakLevel <- .bcGetLevel2D(densityData$sensitivity, densityData$positivePredictiveValue, options[["ciLevel"]])
+
+    plot <- plot +
+      ggplot2::stat_density2d(data = densityData, geom = "polygon",
+                              mapping = ggplot2::aes(fill = ggplot2::after_stat(level)),
+                              bins = 5) +
+      ggplot2::scale_fill_distiller(palette = "Blues", direction = 1) +
+      ggplot2::geom_density2d(data = densityData, breaks = breakLevel,
+                              size = 1, col = "black", linetype = 2)
+
+    prevalenceCiData <- data.frame(x = c(0, 1), lower = .bcExtract(summary, "prevalence", "lowerCI"), upper = .bcExtract(summary, "prevalence", "upperCI"))
+    plot <- plot +
+      ggplot2::geom_ribbon(
+        data = prevalenceCiData,
+        mapping = ggplot2::aes(x=x, ymin = lower, ymax = upper),
+        inherit.aes = FALSE,
+        fill = "firebrick", alpha = 0.3)
+  }
+
+  if(options[["inputType"]] != "pointEstimates" && options[["prPlotPosteriorRealizations"]]) {
+    for(i in seq_len(options[["prPlotPosteriorRealizationsNumber"]])) {
+      threshold    <- qnorm(results[["specificity"]][i])
+      meanPositive <- qnorm(results[["sensitivity"]][i], mean = threshold)
+      prev <- results[["prevalence"]][i]
+      varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
+      iterData <- data.frame(
+        prevalence = prev,
+        sensitivity = c(pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE), 0, 1),
+        specificity = c(pnorm(varyingThreshold,                      lower.tail = TRUE ), 1, 0)
+      )
+      iterData <- .bcStatistics(iterData)
+
+      plot <- plot +
+        ggplot2::geom_line(data = iterData, size = 1, alpha = 0.05)
+    }
+  }
+
+
+  plot <- plot +
+    jaspGraphs::geom_abline2(slope = 0, intercept = prevalence, linetype = 2) +
+    ggplot2::geom_line(data = curveData, size = 1.5) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("Sensitivity (Recall)")) +
+    ggplot2::ylab(gettext("Positive Predictive Value (Precision)"))
+
+
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
+
+}
+
 ## Test characteristics ----
-.bcPlotTestCharacteristics <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotTestCharacteristics <- function(results, summary, plotsContainer, dataset, options, ready, position, jaspResults) {
   if( isFALSE(options[["testCharacteristicsPlot"]])     ) return()
   if(!is.null(plotsContainer[["testCharacteristicsPlot"]]) ) return()
 
   plotsContainer[["testCharacteristicsPlot"]] <-
-    createJaspPlot(title        = gettext("Test Characteristics"),
+    createJaspPlot(title        = gettext("Test Characteristics by Threshold"),
                    dependencies = c("testCharacteristicsPlot", "ci", "ciLevel"),
                    position     = position,
                    width        = 500,
                    height       = 500,
     )
 
+
   if(ready) plotsContainer[["testCharacteristicsPlot"]]$plotObject <-
-    .bcFillPlotTestCharacteristics(results, dataset, options)
+    .bcFillPlotTestCharacteristics(results, summary, dataset, options, jaspResults=jaspResults) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
 
-.bcFillPlotTestCharacteristics <- function(results, dataset, options) {
+.bcFillPlotTestCharacteristics <- function(results, summary, dataset, options, ...) {
   UseMethod(".bcFillPlotTestCharacteristics")
 }
 
-.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, dataset, options) {
-  summ <- summary(results, ciLevel = sqrt(options[["ciLevel"]]))
-
-  threshold    <- qnorm(summ["specificity", "estimate"])
-  meanPositive <- qnorm(summ["sensitivity", "estimate"], mean = threshold)
+.bcFillPlotTestCharacteristics.bcPointEstimates <- function(results, summary, dataset, options, ...) {
+  threshold    <- qnorm(.bcExtract(summary, "specificity"))
+  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
   varyingThreshold <- seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101)
   data <- data.frame(
@@ -929,7 +1451,7 @@ coef.bcPosteriorParams <- function(results) {
   )
   pointData <- data.frame(
     x = threshold,
-    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+    y = .bcExtract(summary, c("sensitivity", "specificity"))
   )
   segmentData <- data.frame(x = threshold, xend = threshold, y = 0, yend = 1)
 
@@ -945,15 +1467,15 @@ coef.bcPosteriorParams <- function(results) {
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(varyingThreshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, dataset, options) {
+.bcFillPlotTestCharacteristics.bcUncertainEstimates <- function(results, summary, dataset, options, ...) {
   alpha <- 1-options[["ciLevel"]]
 
   nPoints <- 101
@@ -971,10 +1493,13 @@ coef.bcPosteriorParams <- function(results) {
   meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
 
   varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["samples"]])
-  for(i in seq_len(options[["samples"]]))
-    varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  for (i in seq_len(options[["samples"]])) {
+    if (is.finite(meanPositivePosterior[i]))
+      varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  }
 
-  for(i in seq_len(nPoints)) {
+
+  for (i in seq_len(nPoints)) {
     tpr <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
     tnr <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
 
@@ -987,11 +1512,11 @@ coef.bcPosteriorParams <- function(results) {
     data[i, "tnrUpper"]  <- quantile(tnr, p = 1-alpha/2, na.rm=TRUE)
   }
 
-  summ <- summary(results, ciLevel = options[["ciLevel"]])
+
   threshold <- mean(qnorm(results[["specificity"]]), na.rm=TRUE)
   pointData <- data.frame(
     x = threshold,
-    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+    y = .bcExtract(summary, c("sensitivity", "specificity"))
   )
 
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
@@ -1014,53 +1539,33 @@ coef.bcPosteriorParams <- function(results) {
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     ) +
     ggplot2::scale_fill_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotTestCharacteristics.bcData <- function(results, dataset, options) {
-  if(nrow(dataset) < 100) {
-    thresholds <- c(dataset$marker, options[["threshold"]])
-  } else {
-    thresholds <- c(quantile(dataset$marker, seq(0, 1, by = 0.01), na.rm=TRUE), options[["threshold"]])
-  }
-
+.bcFillPlotTestCharacteristics.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
   data <- data.frame(
-    threshold = thresholds,
-    tpr       = numeric(length(thresholds)),
-    tprLower  = numeric(length(thresholds)),
-    tprUpper  = numeric(length(thresholds)),
-    tnr       = numeric(length(thresholds)),
-    tnrLower  = numeric(length(thresholds)),
-    tnrUpper  = numeric(length(thresholds))
+    threshold = subset(thresholds, variable == "sensitivity")[["threshold"]],
+    tpr       = subset(thresholds, variable == "sensitivity")[["estimate"]],
+    tprLower  = subset(thresholds, variable == "sensitivity")[["lowerCI"]],
+    tprUpper  = subset(thresholds, variable == "sensitivity")[["upperCI"]],
+    tnr       = subset(thresholds, variable == "specificity")[["estimate"]],
+    tnrLower  = subset(thresholds, variable == "specificity")[["lowerCI"]],
+    tnrUpper  = subset(thresholds, variable == "specificity")[["upperCI"]]
   )
 
-  for(i in seq_len(nrow(data))) {
-    res <- .bcGetPosterior(options = options, dataset = dataset, threshold = data$threshold[i])
-    res <- .bcDrawPosteriorSamples(res, progress = FALSE)
-    res <- summary(res, ciLevel = options[["ciLevel"]])
-
-    data[i,"tpr"]      <- res["sensitivity", "estimate"]
-    data[i,"tprLower"] <- res["sensitivity", "lowerCI" ]
-    data[i,"tprUpper"] <- res["sensitivity", "upperCI" ]
-    data[i,"tnr"]      <- res["specificity", "estimate"]
-    data[i,"tnrLower"] <- res["specificity", "lowerCI" ]
-    data[i,"tnrUpper"] <- res["specificity", "upperCI" ]
-
-  }
-
-  summ <- summary(results, ciLevel = options[["ciLevel"]])
   pointData <- data.frame(
     x = options[["threshold"]],
-    y = c(summ["sensitivity", "estimate"], summ["specificity", "estimate"])
+    y = .bcExtract(summary, c("sensitivity", "specificity"))
   )
 
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
@@ -1083,20 +1588,231 @@ coef.bcPosteriorParams <- function(results) {
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
     ggplot2::scale_color_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     ) +
     ggplot2::scale_fill_manual(
       name   = gettext("Characteristic"),
-      values = c("steelblue", "firebrick")
+      values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
+## PPV-NPV -----
+.bcPlotPpvNpv <- function(results, summary, plotsContainer, dataset, options, ready, position = 0, jaspResults) {
+  if( isFALSE(options[["ppvNpvPlot"]])     ) return()
+  if(!is.null(plotsContainer[["ppvNpvPlot"]]) ) return()
+
+  plotsContainer[["ppvNpvPlot"]] <-
+    createJaspPlot(
+      title        = gettext("PPV and NPV by Threshold"),
+      dependencies = c("ppvNpvPlot", "ci", "ciLevel"),
+      position     = position,
+      width        = 500,
+      height       = 500,
+    )
+
+  if(ready) plotsContainer[["ppvNpvPlot"]]$plotObject <-
+    .bcPlotFillPpvNpv(results, summary, dataset, options, jaspResults=jaspResults) +
+      ggplot2::ylab(gettext("Predictive Value")) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
+}
+
+.bcPlotFillPpvNpv <- function(results, summary, dataset, options, ...) {
+  UseMethod(".bcPlotFillPpvNpv")
+}
+
+.bcPlotFillPpvNpv.bcPointEstimates <- function(results, summary, dataset, options, ...) {
+  prevalence  <- .bcExtract(summary, "prevalence")
+  sensitivity <- .bcExtract(summary, "sensitivity")
+  specificity <- .bcExtract(summary, "specificity")
+
+
+  threshold    <- qnorm(specificity)
+  meanPositive <- qnorm(sensitivity, mean = threshold)
+  varyingThreshold <- c(threshold, seq(qnorm(0.01), qnorm(0.99, meanPositive), length.out = 101))
+
+  curveData <- data.frame(
+    prevalence = prevalence,
+    sensitivity = pnorm(varyingThreshold, mean = meanPositive, lower.tail = FALSE),
+    specificity = pnorm(varyingThreshold,                      lower.tail = TRUE )
+  )
+  curveData <- .bcStatistics(curveData)
+
+  curveData <- data.frame(
+    threshold = c(varyingThreshold, varyingThreshold),
+    y = c(curveData[["positivePredictiveValue"]], curveData[["negativePredictiveValue"]]),
+    group = rep(c(gettext("Positive"), gettext("Negative")), each = length(varyingThreshold))
+  )
+
+  pointData <- data.frame(
+    threshold = c(threshold, threshold),
+    y = .bcExtract(summary, c("positivePredictiveValue", "negativePredictiveValue"))
+  )
+
+  plot <- ggplot2::ggplot(mapping = ggplot2::aes(x = threshold, y = y))
+
+  plot <- plot +
+    ggplot2::geom_segment(ggplot2::aes(x = threshold, y = 0, xend = threshold, yend = 1), linetype = 2, size = 1) +
+    ggplot2::geom_line(data = curveData, size = 2, mapping = ggplot2::aes(group = group, col = group)) +
+    jaspGraphs::geom_point(data = pointData, size = 5) +
+    ggplot2::xlab(gettext("Test Threshold")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(varyingThreshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(varyingThreshold))) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    )
+
+
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
+
+  return(plot)
+}
+
+.bcPlotFillPpvNpv.bcUncertainEstimates <- function(results, summary, dataset, options, ...) {
+  alpha <- 1-options[["ciLevel"]]
+
+  nPoints <- 101
+  data <- data.frame(
+    threshold = numeric(nPoints),
+    ppv       = numeric(nPoints),
+    ppvLower  = numeric(nPoints),
+    ppvUpper  = numeric(nPoints),
+    npv       = numeric(nPoints),
+    npvLower  = numeric(nPoints),
+    npvUpper  = numeric(nPoints)
+  )
+
+  thresholdPosterior    <- qnorm(results[["specificity"]])
+  meanPositivePosterior <- qnorm(results[["sensitivity"]], mean = thresholdPosterior)
+
+  varyingThreshold <- matrix(data = NA, nrow = nPoints, ncol = options[["samples"]])
+  for (i in seq_len(options[["samples"]])) {
+    if (is.finite(meanPositivePosterior[i]))
+      varyingThreshold[,i] <- seq(qnorm(0.01), qnorm(0.99, meanPositivePosterior[i]), length.out = nPoints)
+  }
+
+  for (i in seq_len(nPoints)) {
+    sensitivity <- pnorm(varyingThreshold[i,], mean = meanPositivePosterior, lower.tail = FALSE)
+    specificity <- pnorm(varyingThreshold[i,], mean = 0,                     lower.tail = TRUE)
+
+    stats <- .bcStatistics(list(prevalence = results[["prevalence"]], sensitivity = sensitivity, specificity = specificity))
+
+    ppv <- stats[["positivePredictiveValue"]]
+    npv <- stats[["negativePredictiveValue"]]
+    data[i, "threshold"] <- mean(varyingThreshold[i,], na.rm=TRUE)
+    data[i, "ppv"]       <- mean(ppv, na.rm=TRUE)
+    data[i, "ppvLower"]  <- quantile(ppv, p =   alpha/2, na.rm=TRUE)
+    data[i, "ppvUpper"]  <- quantile(ppv, p = 1-alpha/2, na.rm=TRUE)
+    data[i, "npv"]       <- mean(npv, na.rm=TRUE)
+    data[i, "npvLower"]  <- quantile(npv, p =   alpha/2, na.rm=TRUE)
+    data[i, "npvUpper"]  <- quantile(npv, p = 1-alpha/2, na.rm=TRUE)
+  }
+
+
+  threshold <- mean(qnorm(results[["specificity"]]), na.rm=TRUE)
+  pointData <- data.frame(
+    x = threshold,
+    y = .bcExtract(summary, c("positivePredictiveValue", "negativePredictiveValue"))
+  )
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = threshold, linetype = 2, size = 1)
+
+  if(options[["ci"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=ppvLower,ymax=ppvUpper, fill = gettext("Positive")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=npvLower,ymax=npvUpper, fill = gettext("Negative")), alpha = 0.5)
+  }
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=ppv, color = gettext("Positive")), size = 2, alpha = 0.8) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=npv, color = gettext("Negative")), size = 2, alpha = 0.8) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test Threshold")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    )
+
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
+
+  return(plot)
+}
+
+.bcPlotFillPpvNpv.bcData <- function(results, summary, dataset, options, jaspResults) {
+  thresholds <- .bcComputeSummaryByThreshold(jaspResults = jaspResults, options = options, dataset = dataset)
+  data <- data.frame(
+    threshold = subset(thresholds, variable == "positivePredictiveValue")[["threshold"]],
+    tpr       = subset(thresholds, variable == "positivePredictiveValue")[["estimate"]],
+    tprLower  = subset(thresholds, variable == "positivePredictiveValue")[["lowerCI"]],
+    tprUpper  = subset(thresholds, variable == "positivePredictiveValue")[["upperCI"]],
+    tnr       = subset(thresholds, variable == "negativePredictiveValue")[["estimate"]],
+    tnrLower  = subset(thresholds, variable == "negativePredictiveValue")[["lowerCI"]],
+    tnrUpper  = subset(thresholds, variable == "negativePredictiveValue")[["upperCI"]]
+  )
+
+  pointData <- data.frame(
+    x = options[["threshold"]],
+    y = .bcExtract(summary, c("positivePredictiveValue", "negativePredictiveValue"))
+  )
+
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=threshold)) +
+    ggplot2::geom_vline(xintercept = options[["threshold"]], linetype = 2, size = 1)
+
+  if(options[["ci"]]) {
+    plot <- plot +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tprLower,ymax=tprUpper, fill = gettext("Positive")), alpha = 0.5) +
+      ggplot2::geom_ribbon(mapping = ggplot2::aes(ymin=tnrLower,ymax=tnrUpper, fill = gettext("Negative")), alpha = 0.5)
+  }
+
+  plot <- plot +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tpr, color = gettext("Positive")), size = 2, alpha = 0.8) +
+    ggplot2::geom_line(mapping = ggplot2::aes(y=tnr, color = gettext("Negative")), size = 2, alpha = 0.8) +
+    jaspGraphs::geom_point(data = pointData, mapping = ggplot2::aes(x=x,y=y), size = 5) +
+    ggplot2::xlab(gettext("Test Threshold")) +
+    ggplot2::ylab(gettext("Predictive Value")) +
+    ggplot2::ylab(NULL) +
+    ggplot2::ylim(c(0, 1)) +
+    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(data$threshold),
+                                limits = range(jaspGraphs::getPrettyAxisBreaks(data$threshold))) +
+    ggplot2::scale_color_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    ) +
+    ggplot2::scale_fill_manual(
+      name   = gettext("Predictive Value"),
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
+    )
+
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
+
+  return(plot)
+}
+
+
 ## Varying prevalence plot ----
-.bcPlotVaryingPrevalence <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotVaryingPrevalence <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["predictiveValuesByPrevalence"]])     ) return()
   if(!is.null(plotsContainer[["predictiveValuesByPrevalence"]]) ) return()
 
@@ -1109,20 +1825,21 @@ coef.bcPosteriorParams <- function(results) {
     )
 
   if(ready) plotsContainer[["predictiveValuesByPrevalence"]]$plotObject <-
-    .bcFillPlotVaryingPrevalence(results, dataset, options)
+    .bcFillPlotVaryingPrevalence(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
-.bcFillPlotVaryingPrevalence <- function(results, dataset, options) {
+.bcFillPlotVaryingPrevalence <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotVaryingPrevalence")
 }
 
-.bcFillPlotVaryingPrevalence.bcPointEstimates <- function(results, dataset, options) {
-
-  data <- .bcComputeResultsPointEstimates(modifyList(results, list(prevalence = seq(0, 1, by=0.01))))
-  data <- data.frame(prevalence = data[["prevalence"]],
-                     positivePredictiveValue = data[["positivePredictiveValue"]],
-                     negativePredictiveValue = data[["negativePredictiveValue"]]
-                     )
+.bcFillPlotVaryingPrevalence.bcPointEstimates <- function(results, summary, dataset, options) {
+  data <- .bcStatistics(
+    data.frame(
+      prevalence = seq(0, 1, by = 0.01),
+      sensitivity = results[["sensitivity"]],
+      specificity = results[["specificity"]])
+  )
 
   pointData <- data.frame(
     x = rep(results[["prevalence"]], 2),
@@ -1138,15 +1855,16 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::ylab(gettext("Predictive Value")) +
     ggplot2::scale_color_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick")
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
       )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotVaryingPrevalence.bcUncertainEstimates <- function(results, dataset, options) {
+.bcFillPlotVaryingPrevalence.bcUncertainEstimates <- function(results, summary, dataset, options) {
   alpha <- 1-options[["ciLevel"]]
   sensitivity <- results[["sensitivity"]]
   specificity <- results[["specificity"]]
@@ -1189,50 +1907,52 @@ coef.bcPosteriorParams <- function(results) {
     ggplot2::ylab(gettext("Predictive Value")) +
     ggplot2::scale_color_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick")
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
     ) +
     ggplot2::scale_fill_manual(
       name   = gettext("Predictive Value"),
-      values = c("steelblue", "firebrick")
+      breaks = c(gettext("Positive"), gettext("Negative")),
+      values = c("firebrick", "steelblue")
     )
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
 ## Alluvial plot ----
-.bcPlotAlluvial <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotAlluvial <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["alluvialPlot"]])     ) return()
   if(!is.null(plotsContainer[["alluvialPlot"]]) ) return()
 
   plotsContainer[["alluvialPlot"]] <-
     createJaspPlot(title        = gettext("Alluvial Plot"),
-                   dependencies = "alluvialPlot",
+                   dependencies = c("alluvialPlot", .bcGetColors(options)[["names"]]),
                    position     = position,
                    width        = 500,
                    height       = 500
     )
 
   if(ready) plotsContainer[["alluvialPlot"]]$plotObject <-
-    .bcFillPlotAlluvial(results, dataset, options)
+    .bcFillPlotAlluvial(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 }
 
-.bcFillPlotAlluvial <- function(results, dataset, options) {
+.bcFillPlotAlluvial <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotAlluvial")
 }
 
-.bcFillPlotAlluvial.default <- function(results, dataset, options) {
+.bcFillPlotAlluvial.default <- function(results, summary, dataset, options) {
 
   data <- expand.grid(cond = gettext(c("Positive", "Negative")),
                       test = gettext(c("Positive", "Negative")),
                       KEEP.OUT.ATTRS = FALSE)
   data$out <- factor(
     gettext(c("True positive", "False positive", "False negative", "True negative")),
-    levels = gettext(c("True positive", "False positive", "False negative", "True negative"))
+    levels = gettext(c("False negative", "True positive", "True negative", "False positive"))
   )
-  data$prop <- summary(results, ciLevel = options[["ciLevel"]])[c("truePositive", "falsePositive", "falseNegative", "trueNegative"), "estimate"]
-
+  data$prop <- .bcExtract(summary, c("truePositive", "falsePositive", "falseNegative", "trueNegative"))
   plot <- ggplot2::ggplot(data = data,
                           mapping = ggplot2::aes(y = prop, axis1 = cond, axis2 = test)) +
     ggalluvial::geom_alluvium(mapping = ggplot2::aes(fill = out)) +
@@ -1240,69 +1960,71 @@ coef.bcPosteriorParams <- function(results) {
     ggalluvial::stat_stratum(geom = "text", ggplot2::aes(label = ggplot2::after_stat(stratum)), size = 6) +
     ggplot2::scale_x_discrete(limits = c("cond", "test"),
                               labels = gettext(c("Condition", "Test"))) +
-    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue")) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2, override.aes = list(alpha = 1))) +
     ggplot2::ylab(gettext("Proportion of Population"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
 ## Signal detection plot ----
-.bcPlotSignal <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotSignal <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["signalDetectionPlot"]])     ) return()
   if(!is.null(plotsContainer[["signalDetectionPlot"]]) ) return()
 
   plotsContainer[["signalDetectionPlot"]] <-
     createJaspPlot(title        = gettext("Signal Detection"),
-                   dependencies = "signalDetectionPlot",
+                   dependencies = c("signalDetectionPlot", .bcGetColors(options)[["names"]]),
                    position     = position,
                    width        = 500,
                    height       = 500
     )
 
   if(ready) plotsContainer[["signalDetectionPlot"]]$plotObject <-
-    .bcFillPlotSignal(results, dataset, options)
+    .bcFillPlotSignal(results, summary, dataset, options) +
+      ggplot2::theme(legend.text = ggplot2::element_text(margin = ggplot2::margin(r = 0.2, unit = "npc")))
 
 }
 
-.bcFillPlotSignal <- function(results, dataset, options) {
+.bcFillPlotSignal <- function(results, summary, dataset, options) {
   UseMethod(".bcFillPlotSignal")
 }
 
-.bcFillPlotSignal.default <- function(results, dataset, options) {
-  summaryResults <- summary(results, ciLevel = options[["ciLevel"]])
-  threshold    <- qnorm(summaryResults["specificity", "estimate"])
-  meanPositive <- qnorm(summaryResults["sensitivity", "estimate"], mean = threshold)
+.bcFillPlotSignal.default <- function(results, summary, dataset, options) {
+  threshold    <- qnorm(.bcExtract(summary, "specificity"))
+  meanPositive <- qnorm(.bcExtract(summary, "sensitivity"), mean = threshold)
 
-  lowerLimitX <- min(qnorm(0.01, c(0, meanPositive)))
-  upperLimitX <- max(qnorm(0.99, c(0, meanPositive)))
+  lowerLimitX <- min(qnorm(0.001, c(0, meanPositive)))
+  upperLimitX <- max(qnorm(0.999, c(0, meanPositive)))
+  xBreaks <- jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX))
+  xLimits <- range(xBreaks)
 
-  prevalence <- summaryResults["prevalence", "estimate"]
+  prevalence <- .bcExtract(summary, "prevalence")
   plot <- ggplot2::ggplot() +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "steelblue"), alpha = 0.7)  +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkorange"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "red"), alpha = 0.7) +
-    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "darkgreen"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "trueNegative"), alpha = 0.7)  +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "falsePositive"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(lowerLimitX, threshold), geom = "area", mapping = ggplot2::aes(fill = "falseNegative"), alpha = 0.7) +
+    ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), xlim = c(threshold, upperLimitX), geom = "area", mapping = ggplot2::aes(fill = "truePositive"), alpha = 0.7) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = 0, sd = 1, w = 1-prevalence), size = 1) +
     ggplot2::stat_function(fun = .bcwdnorm, args = list(mean = meanPositive, sd = 1, w = prevalence), size = 1) +
     ggplot2::geom_segment(ggplot2::aes(x = threshold, y = 0, xend = threshold, yend = Inf), linetype = 2, size = 1.5) +
-    ggplot2::scale_x_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(lowerLimitX, upperLimitX)),
-                                limits = c(lowerLimitX, upperLimitX)) +
+    ggplot2::scale_x_continuous(breaks = xBreaks,
+                                limits = xLimits) +
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(c(0, prevalence * dnorm(0), (1-prevalence) * dnorm(0))))) +
-    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], breaks = .bcGetColors(options)[["breaks"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Density"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotSignal.bcData <- function(results, dataset, options) {
+.bcFillPlotSignal.bcData <- function(results, summary, dataset, options) {
   histogram <- hist(dataset[["marker"]], plot = FALSE)
   counts    <- histogram[["counts"]]
   breaks    <- histogram[["breaks"]]
@@ -1313,7 +2035,7 @@ coef.bcPosteriorParams <- function(results) {
   group[ dataset$condition & !dataset$test] <- gettext("False negative")
   group[!dataset$condition & !dataset$test] <- gettext("True negative")
 
-  dataset$group <- factor(group, levels = gettext(c("True positive", "False positive", "False negative", "True negative")))
+  dataset$group <- factor(group, levels = gettext(c("False negative", "True positive", "True negative", "False positive")))
   plot <- ggplot2::ggplot(data = dataset, mapping = ggplot2::aes(x = marker, fill = group)) +
     ggplot2::geom_histogram(position = "identity", alpha = 0.4, color = "black", binwidth = binWidth, boundary = options[["threshold"]]) +
     ggplot2::geom_segment(ggplot2::aes(x = options[["threshold"]], y = 0, xend = options[["threshold"]], yend = Inf), linetype = 2, size = 1.5) +
@@ -1321,18 +2043,18 @@ coef.bcPosteriorParams <- function(results) {
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(dataset[["marker"]]))) +
     ggplot2::scale_y_continuous(breaks = jaspGraphs::getPrettyAxisBreaks(counts),
                                 limits = range(jaspGraphs::getPrettyAxisBreaks(counts))) +
-    ggplot2::scale_fill_manual(name = "", values = c("darkgreen", "darkorange", "red", "steelblue"), labels = gettext(c("True positive", "False positive", "False negative", "True negative"))) +
+    ggplot2::scale_fill_manual (name = "", values = .bcGetColors(options)[["values"]], labels = .bcGetColors(options)[["labels"]]) +
     ggplot2::guides(fill=ggplot2::guide_legend(ncol=2)) +
     ggplot2::xlab(gettext("Marker")) +
     ggplot2::ylab(gettext("Count"))
 
-  plot <- jaspGraphs::themeJasp(plot, legend.position = "bottom")
+  plot <- plot + jaspGraphs::themeJaspRaw(legend.position = "bottom") + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
 ## Estimates plot ----
-.bcPlotEstimates <- function(results, plotsContainer, dataset, options, ready, position) {
+.bcPlotEstimates <- function(results, summary, plotsContainer, dataset, options, ready, position) {
   if( isFALSE(options[["estimatesPlot"]]) ) return()
   if(!is.null(plotsContainer[["estimatesPlot"]]) ) return()
 
@@ -1355,17 +2077,16 @@ coef.bcPosteriorParams <- function(results) {
     )
 
   if(ready && any(selectedPlots)) plotsContainer[["estimatesPlot"]]$plotObject <-
-    .bcFillPlotEstimates(results, dataset, options, selectedPlots)
+    .bcFillPlotEstimates(results, summary, dataset, options, selectedPlots)
 
 }
 
-.bcFillPlotEstimates <- function(results, dataset, options, selectedPlots) {
+.bcFillPlotEstimates <- function(results, summary, dataset, options, selectedPlots) {
   UseMethod(".bcFillPlotEstimates")
 }
 
-.bcFillPlotEstimates.default <- function(results, dataset, options, selectedPlots) {
+.bcFillPlotEstimates.default <- function(results, summary, dataset, options, selectedPlots) {
   if(options[["plotEstimatesType"]] == "interval") {
-    data <- summary(results, ciLevel = options[["ciLevel"]])
     rows <- c("prevalence",
               "sensitivity",             "specificity",
               "truePositive",            "falsePositive",
@@ -1375,7 +2096,7 @@ coef.bcPosteriorParams <- function(results) {
               "falsePositiveRate",   "falseNegativeRate",
               "accuracy")[selectedPlots]
 
-    data <- data[rows,]
+    data <- .bcExtract(summary, rows, c("statistic", "estimate", "lowerCI", "upperCI"))
     data[["statistic"]] <- factor(data[["statistic"]], levels = rev(data[["statistic"]]))
 
     plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic))
@@ -1396,7 +2117,7 @@ coef.bcPosteriorParams <- function(results) {
               "falsePositiveRate",   "falseNegativeRate",
               "accuracy")[selectedPlots]
     data <- as.data.frame(results[cols])
-    colNames <- summary(results, ciLevel = 0.95)[cols, "statistic"]
+    colNames <- .bcExtract(summary, cols, "statistic")
     colnames(data) <- colNames
     data <- tidyr::pivot_longer(data = data, cols = tidyr::everything(),
                                 names_to = "statistic", values_to = "estimate")
@@ -1405,17 +2126,17 @@ coef.bcPosteriorParams <- function(results) {
       ggdist::stat_halfeye()
   }
 
-  plot <- plot + ggplot2::xlim(c(0,1)) +
-    ggplot2::xlab(gettext("Estimate")) +
+  plot <- plot +
+    ggplot2::scale_x_continuous(name = gettext("Estimate"), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0", "0.25", "0.5", "0.75", "1"), limits = c(0, 1)) +
     ggplot2::ylab(NULL)
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
 
-.bcFillPlotEstimates.bcPointEstimates <- function(results, dataset, options, selectedPlots) {
-  data <- summary(results, ciLevel = options[["ciLevel"]])
+.bcFillPlotEstimates.bcPointEstimates <- function(results, summary, dataset, options, selectedPlots) {
+  data <- summary
   rows <- c("prevalence",
             "sensitivity",             "specificity",
             "truePositive",            "falsePositive",
@@ -1431,11 +2152,11 @@ coef.bcPosteriorParams <- function(results) {
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(x=estimate,y=statistic)) +
     jaspGraphs::geom_point(size = 6)
 
-  plot <- plot + ggplot2::xlim(c(0,1)) +
-    ggplot2::xlab(gettext("Estimate")) +
+  plot <- plot +
+    ggplot2::scale_x_continuous(name = gettext("Estimate"), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0", "0.25", "0.5", "0.75", "1"), limits = c(0, 1)) +
     ggplot2::ylab(NULL)
 
-  plot <- jaspGraphs::themeJasp(plot)
+  plot <- plot + jaspGraphs::themeJaspRaw() + jaspGraphs::geom_rangeframe()
 
   return(plot)
 }
@@ -1458,7 +2179,11 @@ coef.bcPosteriorParams <- function(results) {
       falseOmissionRate       = gettext("False omission rate"),
       falsePositiveRate       = gettext("False positive rate"),
       falseNegativeRate       = gettext("False negative rate"),
-      accuracy                = gettext("Accuracy")
+      accuracy                = gettext("Accuracy"),
+      pretestOdds             = gettext("Pretest odds"),
+      positiveLikelihoodRatio = gettext("Positive likelihood ratio"),
+      negativeLikelihoodRatio = gettext("Negative likelihood ratio"),
+      fMeasure                = gettext("F-measure")
     ),
     interpretation = c(
       prevalence              = gettext("Proportion of a population affected by the condition."),
@@ -1493,12 +2218,33 @@ coef.bcPosteriorParams <- function(results) {
      accuracy                = gettextf("P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)", "\u2227", "\u2228")
    ),
    footnote = c(
-     ci  = gettextf("Central credible intervals are based on %i samples.", options[["samples"]]),
-     posteriorEstimate = gettextf("Parameter estimates are posterior means based on %i samples.", options[["samples"]])
+     ci  = gettextf("Central credible intervals are based on %i samples.", options[["samples"]]*options[["chains"]]),
+     posteriorEstimate = gettextf("Parameter estimates are based on %i MCMC samples.", options[["samples"]]*options[["chains"]])
    )
   )
 
   return(out)
+}
+
+.bcBayesTheoremExpression <- function() {
+  condition <- gettext("Condition")
+  test <- gettext("Test")
+  positive <- gettext("positive")
+  negative <- gettext("negative")
+  prevalence <- gettext("Prevalence")
+  sensitivity <- gettext("Sensitivity")
+  specificity <- gettext("Specificity")
+
+  theorem <- jaspBase::mathExpression(
+    r"{
+    \begin{aligned}
+p(& \text{Condition} = \text{positive} \mid \text{Test} = \text{positive}) \\
+& = \frac{p(\text{Condition}=\text{positive}) \times p(\text{Test} = \text{positive} \mid \text{Condition}=\text{positive})}{p(\text{Test} = \text{positive})}\\
+& = \frac{\text{Prevalence} \times \text{Sensitivity}}{\text{Prevalence} \times \text{Sensitivity} + (1-\text{Prevalence})\times(1-\text{Specificity})}
+\end{aligned}
+    }",
+    inline = FALSE
+  )
 }
 
 .bcwdnorm <- function(x, mean = 0, sd = 1, w = 1) {
@@ -1537,4 +2283,34 @@ geom_png <- function(mapping = NULL, data = NULL) {
   ggplot2::layer(data = data, mapping = mapping, geom = GeomPNG,
                  stat = ggplot2::StatIdentity, position = ggplot2::PositionIdentity,
                  show.legend = FALSE)
+}
+
+.bcGetColors <- function(options) {
+  names <- c("colorFalseNegative", "colorTruePositive", "colorTrueNegative", "colorFalsePositive")
+  list(
+    names = names,
+    values = unname(unlist(options[names])),
+    breaks = c("falseNegative", "truePositive", "trueNegative", "falsePositive"),
+    labels = gettext(c("False negative", "True positive", "True negative", "False positive"))
+  )
+}
+
+.bcIsColor <- function(x) {
+  for (color in x) {
+    res <- try(col2rgb(x),silent=TRUE)
+    if (jaspBase::isTryError(res))
+      return(FALSE)
+  }
+  return(TRUE)
+
+}
+
+
+.bcRoundPreserveSum <- function(x, digits = 0) {
+  up <- 10 ^ digits
+  x <- x * up
+  y <- floor(x)
+  indices <- tail(order(x-y), round(sum(x)) - sum(y))
+  y[indices] <- y[indices] + 1
+  y / up
 }
