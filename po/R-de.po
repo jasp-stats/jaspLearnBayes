@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2023-07-15 03:05\n"
-"PO-Revision-Date: 2023-07-15 12:10+0000\n"
+"PO-Revision-Date: 2023-11-06 09:06+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 msgid "Summary Table"
 msgstr "Übersichtstabelle"
@@ -413,7 +413,7 @@ msgid "Positive predictive value"
 msgstr "Positiv prädiktiver Wert"
 
 msgid "Negative predictive value"
-msgstr "Negativ prädiktiver Wert"
+msgstr "Negativer Vorhersagewert"
 
 msgid "False discovery rate"
 msgstr "Falscherkennungsrate"
@@ -428,7 +428,7 @@ msgid "False negative rate"
 msgstr "Falsch-negativ-Rate"
 
 msgid "Accuracy"
-msgstr "Treffergenauigkeit"
+msgstr "Genauigkeit"
 
 msgid "Proportion of a population affected by the condition."
 msgstr "Anteil einer Grundgesamtheit, die von dem Zustand betroffen ist."
@@ -560,6 +560,7 @@ msgstr "Datenzusammenfassung"
 msgid "Counts"
 msgstr "Anzahlen"
 
+#, fuzzy
 msgid "Proportion"
 msgstr "Anteil"
 
