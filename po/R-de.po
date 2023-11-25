@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2023-07-15 03:05\n"
-"PO-Revision-Date: 2023-11-18 02:41+0000\n"
-"Last-Translator: Thomas Langkamp <thomas.lassdiesonnerein@gmx.de>\n"
+"PO-Revision-Date: 2023-11-18 20:24+0000\n"
+"Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
 "Language: de\n"
@@ -560,6 +560,7 @@ msgstr "Datenzusammenfassung"
 msgid "Counts"
 msgstr "Anzahlen"
 
+#, fuzzy
 msgid "Proportion"
 msgstr "Anteil"
 
