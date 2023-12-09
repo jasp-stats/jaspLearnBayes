@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-07-15 03:05\n"
+"POT-Creation-Date: 2023-12-09 02:44\n"
 "PO-Revision-Date: 2023-07-16 19:06+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -81,6 +81,7 @@ msgstr "Gráfica de Agullas"
 msgid "Implied Prior and Posterior for  %s"
 msgstr "Previa e Posterior Implícitas para %s"
 
+#, fuzzy
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
 "statistical procedure where subjects are classified into two groups based on "
@@ -138,8 +139,7 @@ msgid ""
 "condition after the test is positive (i.e., the positive predictive value) "
 "is obtained by applying <b>Bayes theorem</b>:\n"
 "\n"
-"                   <img src = \"img:jaspLearnBayes/icons/bayes.png\", "
-"width=\"500\">\n"
+"                   %s\n"
 "\n"
 "                   <h5>References</h5>\n"
 "                   Pepe, M. S. (2003). <i>The statistical evaluation of "
@@ -154,8 +154,8 @@ msgid ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 "Esta análise mostra a <b>Clasificación Binaria</b>, que é un procedemento "
 "estatístico habitual no que os elementos se clasifican en dous grupos, en "
@@ -229,11 +229,14 @@ msgstr ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 
 msgid "Welcome to binary classification with JASP!"
 msgstr "Benvido á clasificación binaria con JASP!"
+
+msgid "Some of the specified colors are not valid colors."
+msgstr ""
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
 msgstr "A variable de 'Condición positiva (binaria)' debe ter dous niveis!"
@@ -248,8 +251,8 @@ msgstr ""
 "É necesario que a media do marcador na condición positiva (%1$s) sexa maior "
 "que a media do marcador na condición negativa (%2$s)."
 
-msgid "Drawing samples"
-msgstr "Extraendo mostras"
+msgid "Estimating parameters per varying thresholds..."
+msgstr ""
 
 msgid "Tables"
 msgstr "Táboas"
@@ -259,6 +262,24 @@ msgstr "Estatísticos"
 
 msgid "Estimate"
 msgstr "Estimar"
+
+msgid "Mean"
+msgstr "Media"
+
+msgid "Median"
+msgstr "Mediana"
+
+msgid "SD"
+msgstr "DP"
+
+msgid "Rhat"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Eff. Sample Size"
+msgstr ""
 
 msgid "Notation"
 msgstr "Notación"
@@ -365,6 +386,10 @@ msgstr "Falsos negativos"
 msgid "True negative"
 msgstr "Verdadeiros negativos"
 
+#, fuzzy
+msgid "Area Plot"
+msgstr "Gráfica Aluvial"
+
 msgid "Receiving Operating Characteristic Curve"
 msgstr "Curva Característica Operativa da Recepción"
 
@@ -374,7 +399,31 @@ msgstr "Cociente de Falsos Positivos (Especificidade 1)"
 msgid "True Positive Rate (Sensitivity)"
 msgstr "Cociente de Verdadeiros Positivos (Sensibilidade)"
 
-msgid "Test Characteristics"
+#, fuzzy
+msgid "Total Operating Characteristic Curve"
+msgstr "Curva Característica Operativa da Recepción"
+
+#, fuzzy
+msgid "True positives + False positives"
+msgstr "Cociente de Verdadeiros Positivos (Sensibilidade)"
+
+#, fuzzy
+msgid "True positives"
+msgstr "Verdadeiros positivos"
+
+msgid "Precision-recall"
+msgstr ""
+
+#, fuzzy
+msgid "Sensitivity (Recall)"
+msgstr "Sensibilidade"
+
+#, fuzzy
+msgid "Positive Predictive Value (Precision)"
+msgstr "Valor preditivo positivo"
+
+#, fuzzy
+msgid "Test Characteristics by Threshold"
 msgstr "Características da Proba"
 
 msgid "Test Threshold"
@@ -383,11 +432,15 @@ msgstr "Limiar da Proba"
 msgid "Characteristic"
 msgstr "Característica"
 
-msgid "PPV and NPV by Prevalence"
+#, fuzzy
+msgid "PPV and NPV by Threshold"
 msgstr "VPP e VPN por Prevalencia"
 
 msgid "Predictive Value"
 msgstr "Valor Preditivo"
+
+msgid "PPV and NPV by Prevalence"
+msgstr "VPP e VPN por Prevalencia"
 
 msgid "Alluvial Plot"
 msgstr "Gráfica Aluvial"
@@ -433,6 +486,20 @@ msgstr "Proporción de falsos negativos"
 
 msgid "Accuracy"
 msgstr "Precisión"
+
+msgid "Pretest odds"
+msgstr ""
+
+#, fuzzy
+msgid "Positive likelihood ratio"
+msgstr "Condición positiva"
+
+#, fuzzy
+msgid "Negative likelihood ratio"
+msgstr "Condición negativa"
+
+msgid "F-measure"
+msgstr ""
 
 msgid "Proportion of a population affected by the condition."
 msgstr "Proporción da poboación afectada pola condición."
@@ -552,9 +619,18 @@ msgstr ""
 msgid "Central credible intervals are based on %i samples."
 msgstr "Os intervalos de credibilidade centrais está baseados en %i mostras."
 
-msgid "Parameter estimates are posterior means based on %i samples."
+#, fuzzy
+msgid "Parameter estimates are based on %i MCMC samples."
 msgstr ""
 "As estimacións dos parámetros son medias posteriores, baseadas en %i mostras."
+
+#, fuzzy
+msgid "positive"
+msgstr "Positivo"
+
+#, fuzzy
+msgid "negative"
+msgstr "Negativo"
 
 msgid "Data Summary"
 msgstr "Resumo de Datos"
@@ -1572,12 +1648,6 @@ msgstr ""
 "'superior'. Devolve a masa posterior do parámetro que hai dentro do "
 "intervalo personalizado.</li>%s</ul>"
 
-msgid "Mean"
-msgstr "Media"
-
-msgid "Median"
-msgstr "Mediana"
-
 msgid "Mode"
 msgstr "Moda"
 
@@ -1631,9 +1701,6 @@ msgstr "Habilidade Previa"
 msgid "Only numeric values are allowed in the input."
 msgstr "Só se admiten valores numéricos na achega."
 
-msgid "SD"
-msgstr "DP"
-
 msgid "normal (%1$s, %2$s)"
 msgstr "Normal (%1$s, %2$s)"
 
@@ -1678,6 +1745,9 @@ msgstr "Datos futuros"
 
 msgid "Inclusion BF"
 msgstr "FB da Inclusión"
+
+#~ msgid "Drawing samples"
+#~ msgstr "Extraendo mostras"
 
 #~ msgid "%s %i"
 #~ msgstr "%s %i"

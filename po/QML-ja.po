@@ -644,10 +644,6 @@ msgid "Icon plot"
 msgstr "アイコンプロット"
 
 msgctxt "LSbinaryclassification|"
-msgid "ROC"
-msgstr "ROC"
-
-msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
 msgstr "事後分布から実現値を追加"
 
@@ -722,10 +718,6 @@ msgstr "オプション"
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
 msgstr "信用区間"
-
-msgctxt "LSbinaryclassification|"
-msgid "Number of posterior samples"
-msgstr "事後サンプル数"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"
@@ -1153,4 +1145,84 @@ msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Comparison"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Observed tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Positive tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Negative tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Update prevalence"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Respect order constraint"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Additional Statistics"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Area plot"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Receiver operating characteristic (ROC)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Total operating characteristic (TOC)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Precision-recall"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "PPV and NPV by threshold"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Compute results"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Colors"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "MCMC parameters"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "For main model"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. samples"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. burnin samples"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Thinning"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. chains"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "For varying threshold"
 msgstr ""

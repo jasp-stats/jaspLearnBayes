@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2023-07-15 03:05\n"
+"POT-Creation-Date: 2023-12-09 02:44\n"
 "PO-Revision-Date: 2023-10-18 15:29+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -132,8 +132,7 @@ msgid ""
 "condition after the test is positive (i.e., the positive predictive value) "
 "is obtained by applying <b>Bayes theorem</b>:\n"
 "\n"
-"                   <img src = \"img:jaspLearnBayes/icons/bayes.png\", "
-"width=\"500\">\n"
+"                   %s\n"
 "\n"
 "                   <h5>References</h5>\n"
 "                   Pepe, M. S. (2003). <i>The statistical evaluation of "
@@ -148,8 +147,8 @@ msgid ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 "Deze analyse demonstreert <b>binaire classificatie</b>, een gangbare "
 "statistische procedure waarbij personen op basis van een classificatieregel "
@@ -219,11 +218,14 @@ msgstr ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 
 msgid "Welcome to binary classification with JASP!"
 msgstr "Welkom bij de binaire classificatie met JASP!"
+
+msgid "Some of the specified colors are not valid colors."
+msgstr ""
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
 msgstr "De variabele \"Positieve conditie (binair)\" moet twee niveaus hebben!"
@@ -238,8 +240,8 @@ msgstr ""
 "Het gemiddelde van de marker in de positieve conditie (%1$s) moet groter "
 "zijn dan het gemiddelde van de marker in de negatieve conditie (%2$s)."
 
-msgid "Drawing samples"
-msgstr "Trek steekproeven"
+msgid "Estimating parameters per varying thresholds..."
+msgstr ""
 
 msgid "Tables"
 msgstr "Tabellen"
@@ -249,6 +251,24 @@ msgstr "Statistieken"
 
 msgid "Estimate"
 msgstr "Schatting"
+
+msgid "Mean"
+msgstr "Gemiddelde"
+
+msgid "Median"
+msgstr "Mediaan"
+
+msgid "SD"
+msgstr "SD"
+
+msgid "Rhat"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Eff. Sample Size"
+msgstr ""
 
 msgid "Notation"
 msgstr "Notatie"
@@ -355,6 +375,10 @@ msgstr "Fout negatief"
 msgid "True negative"
 msgstr "Terecht negatief"
 
+#, fuzzy
+msgid "Area Plot"
+msgstr "Alluviaal Grafiek"
+
 msgid "Receiving Operating Characteristic Curve"
 msgstr "Ontvangende Operationele Karakteristiekcurve"
 
@@ -364,7 +388,31 @@ msgstr "Fout Positieven (1-Specificiteit)"
 msgid "True Positive Rate (Sensitivity)"
 msgstr "Terecht Positieven (Sensitiviteit)"
 
-msgid "Test Characteristics"
+#, fuzzy
+msgid "Total Operating Characteristic Curve"
+msgstr "Ontvangende Operationele Karakteristiekcurve"
+
+#, fuzzy
+msgid "True positives + False positives"
+msgstr "Terecht Positieven (Sensitiviteit)"
+
+#, fuzzy
+msgid "True positives"
+msgstr "Terecht positief"
+
+msgid "Precision-recall"
+msgstr ""
+
+#, fuzzy
+msgid "Sensitivity (Recall)"
+msgstr "Sensitiviteit"
+
+#, fuzzy
+msgid "Positive Predictive Value (Precision)"
+msgstr "Positief voorspellende waarde"
+
+#, fuzzy
+msgid "Test Characteristics by Threshold"
 msgstr "Testkarakteristieken"
 
 msgid "Test Threshold"
@@ -373,11 +421,15 @@ msgstr "Test Drempelwaarde"
 msgid "Characteristic"
 msgstr "Kenmerk"
 
-msgid "PPV and NPV by Prevalence"
+#, fuzzy
+msgid "PPV and NPV by Threshold"
 msgstr "PPV en NPV naar Prevalentie"
 
 msgid "Predictive Value"
 msgstr "Voorspellende Waarde"
+
+msgid "PPV and NPV by Prevalence"
+msgstr "PPV en NPV naar Prevalentie"
 
 msgid "Alluvial Plot"
 msgstr "Alluviaal Grafiek"
@@ -423,6 +475,20 @@ msgstr "Fout-negatieven"
 
 msgid "Accuracy"
 msgstr "Nauwkeurigheid"
+
+msgid "Pretest odds"
+msgstr ""
+
+#, fuzzy
+msgid "Positive likelihood ratio"
+msgstr "Positieve conditie"
+
+#, fuzzy
+msgid "Negative likelihood ratio"
+msgstr "Negatieve conditie"
+
+msgid "F-measure"
+msgstr ""
 
 msgid "Proportion of a population affected by the condition."
 msgstr "Proportie van een populatie die door de conditie wordt getroffen."
@@ -546,9 +612,18 @@ msgid "Central credible intervals are based on %i samples."
 msgstr ""
 "De centrale geloofwaardigheidsintervallen zijn gebaseerd op %i steekproeven."
 
-msgid "Parameter estimates are posterior means based on %i samples."
+#, fuzzy
+msgid "Parameter estimates are based on %i MCMC samples."
 msgstr ""
 "Parameterschattingen zijn posterior gemiddelden op basis van %i steekproeven."
+
+#, fuzzy
+msgid "positive"
+msgstr "Positief"
+
+#, fuzzy
+msgid "negative"
+msgstr "Negatief"
 
 msgid "Data Summary"
 msgstr "Gegevensoverzicht"
@@ -1588,12 +1663,6 @@ msgstr ""
 "'onder-' en 'bovengrens'. Het geeft de achterste massa van de parameter "
 "terug die binnen het aangepaste interval valt.</li>%s</ul>"
 
-msgid "Mean"
-msgstr "Gemiddelde"
-
-msgid "Median"
-msgstr "Mediaan"
-
 msgid "Mode"
 msgstr "Modus"
 
@@ -1648,9 +1717,6 @@ msgstr "Prior Vaardigheid"
 msgid "Only numeric values are allowed in the input."
 msgstr "Alleen numerieke waarden zijn toegestaan in de invoer."
 
-msgid "SD"
-msgstr "SD"
-
 msgid "normal (%1$s, %2$s)"
 msgstr "normaal (%1$s, %2$s)"
 
@@ -1695,6 +1761,9 @@ msgstr "Toekomstige gegevens"
 
 msgid "Inclusion BF"
 msgstr "Inclusie BF"
+
+#~ msgid "Drawing samples"
+#~ msgstr "Trek steekproeven"
 
 #~ msgid "%s %i"
 #~ msgstr "%s %i"

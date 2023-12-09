@@ -349,10 +349,6 @@ msgid "Icon plot"
 msgstr "Gráfica de iconas"
 
 msgctxt "LSbinaryclassification|"
-msgid "ROC"
-msgstr "ROC"
-
-msgctxt "LSbinaryclassification|"
 msgid "Add realizations from the posterior"
 msgstr "Engadir as realizacións do posterior"
 
@@ -427,10 +423,6 @@ msgstr "Opcións"
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
 msgstr "Intervalos de credibilidade"
-
-msgctxt "LSbinaryclassification|"
-msgid "Number of posterior samples"
-msgstr "Número de mostras posteriores"
 
 msgctxt "LSbinomialestimation|"
 msgid "Model"
@@ -1155,3 +1147,83 @@ msgstr "Tipo"
 msgctxt "LStestingsequential|"
 msgid "Comparison"
 msgstr "Comparación"
+
+msgctxt "LSbinaryclassification|"
+msgid "Observed tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Positive tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Negative tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Update prevalence"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Respect order constraint"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Additional Statistics"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Area plot"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Receiver operating characteristic (ROC)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Total operating characteristic (TOC)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Precision-recall"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "PPV and NPV by threshold"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Compute results"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Colors"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "MCMC parameters"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "For main model"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. samples"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. burnin samples"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Thinning"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. chains"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "For varying threshold"
+msgstr ""

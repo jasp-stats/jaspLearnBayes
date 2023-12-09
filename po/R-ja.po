@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2023-07-15 03:05\n"
+"POT-Creation-Date: 2023-12-09 02:44\n"
 "PO-Revision-Date: 2023-04-21 17:50+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -134,8 +134,7 @@ msgid ""
 "condition after the test is positive (i.e., the positive predictive value) "
 "is obtained by applying <b>Bayes theorem</b>:\n"
 "\n"
-"                   <img src = \"img:jaspLearnBayes/icons/bayes.png\", "
-"width=\"500\">\n"
+"                   %s\n"
 "\n"
 "                   <h5>References</h5>\n"
 "                   Pepe, M. S. (2003). <i>The statistical evaluation of "
@@ -150,8 +149,8 @@ msgid ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 "この分析は、分類ルールに基づいて被験者を2つのグループに分類する一般的な統計手"
 "順である<b>二項分類</b>を示しています。\n"
@@ -209,11 +208,14 @@ msgstr ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a"
 
 msgid "Welcome to binary classification with JASP!"
 msgstr "JASPによる二項分類へようこそ!"
+
+msgid "Some of the specified colors are not valid colors."
+msgstr ""
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
 msgstr "'陽性条件 (二値)' 変数は、2 つの水準を持っている必要があります!"
@@ -228,8 +230,8 @@ msgstr ""
 "陽性状態のマーカーの平均（%1$s）は、陰性状態のマーカーの平均（%2$s）よりも大"
 "きくする必要があります."
 
-msgid "Drawing samples"
-msgstr "サンプルの描画"
+msgid "Estimating parameters per varying thresholds..."
+msgstr ""
 
 msgid "Tables"
 msgstr "表"
@@ -239,6 +241,24 @@ msgstr "統計量"
 
 msgid "Estimate"
 msgstr "推定"
+
+msgid "Mean"
+msgstr "平均値"
+
+msgid "Median"
+msgstr "中央値"
+
+msgid "SD"
+msgstr "標準偏差"
+
+msgid "Rhat"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Eff. Sample Size"
+msgstr ""
 
 msgid "Notation"
 msgstr "ノーテーション"
@@ -345,6 +365,10 @@ msgstr "偽陰性"
 msgid "True negative"
 msgstr "真陰性"
 
+#, fuzzy
+msgid "Area Plot"
+msgstr "沖積プロット"
+
 msgid "Receiving Operating Characteristic Curve"
 msgstr "受信者操作特性曲線"
 
@@ -354,7 +378,31 @@ msgstr "偽陽性率(1-特異度)"
 msgid "True Positive Rate (Sensitivity)"
 msgstr "真陽性率(感度)"
 
-msgid "Test Characteristics"
+#, fuzzy
+msgid "Total Operating Characteristic Curve"
+msgstr "受信者操作特性曲線"
+
+#, fuzzy
+msgid "True positives + False positives"
+msgstr "真陽性率(感度)"
+
+#, fuzzy
+msgid "True positives"
+msgstr "真陽性"
+
+msgid "Precision-recall"
+msgstr ""
+
+#, fuzzy
+msgid "Sensitivity (Recall)"
+msgstr "感度"
+
+#, fuzzy
+msgid "Positive Predictive Value (Precision)"
+msgstr "正の予測値"
+
+#, fuzzy
+msgid "Test Characteristics by Threshold"
 msgstr "テスト特性"
 
 msgid "Test Threshold"
@@ -363,11 +411,15 @@ msgstr "検査閾値"
 msgid "Characteristic"
 msgstr "特性"
 
-msgid "PPV and NPV by Prevalence"
+#, fuzzy
+msgid "PPV and NPV by Threshold"
 msgstr "有病率によるPPVとNPV"
 
 msgid "Predictive Value"
 msgstr "予測値"
+
+msgid "PPV and NPV by Prevalence"
+msgstr "有病率によるPPVとNPV"
 
 msgid "Alluvial Plot"
 msgstr "沖積プロット"
@@ -413,6 +465,20 @@ msgstr "偽陰性率(False negative rate)"
 
 msgid "Accuracy"
 msgstr "精度"
+
+msgid "Pretest odds"
+msgstr ""
+
+#, fuzzy
+msgid "Positive likelihood ratio"
+msgstr "陽性条件"
+
+#, fuzzy
+msgid "Negative likelihood ratio"
+msgstr "陰性条件"
+
+msgid "F-measure"
+msgstr ""
 
 msgid "Proportion of a population affected by the condition."
 msgstr "条件に影響される母集団の割合."
@@ -515,8 +581,17 @@ msgstr "P(条件＝陽性 %1$s テスト＝陽性 %2$s 条件＝陰性 %1$s テ�
 msgid "Central credible intervals are based on %i samples."
 msgstr "中央信頼区間は、%iサンプルに基づいています."
 
-msgid "Parameter estimates are posterior means based on %i samples."
+#, fuzzy
+msgid "Parameter estimates are based on %i MCMC samples."
 msgstr "パラメータの推定値は，%i個のサンプルに基づく事後平均である."
+
+#, fuzzy
+msgid "positive"
+msgstr "陽性"
+
+#, fuzzy
+msgid "negative"
+msgstr "陰性"
 
 msgid "Data Summary"
 msgstr "データ要約"
@@ -1235,12 +1310,6 @@ msgid ""
 "interval.</li>%s</ul>"
 msgstr ""
 
-msgid "Mean"
-msgstr "平均値"
-
-msgid "Median"
-msgstr "中央値"
-
 msgid "Mode"
 msgstr "最頻値"
 
@@ -1292,9 +1361,6 @@ msgstr ""
 msgid "Only numeric values are allowed in the input."
 msgstr ""
 
-msgid "SD"
-msgstr "標準偏差"
-
 msgid "normal (%1$s, %2$s)"
 msgstr ""
 
@@ -1339,6 +1405,9 @@ msgstr ""
 
 msgid "Inclusion BF"
 msgstr "包含BF"
+
+#~ msgid "Drawing samples"
+#~ msgstr "サンプルの描画"
 
 #~ msgid "%s %i"
 #~ msgstr "%s %i"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.2\n"
-"POT-Creation-Date: 2023-07-15 03:05\n"
+"POT-Creation-Date: 2023-12-09 02:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -127,8 +127,7 @@ msgid ""
 "condition after the test is positive (i.e., the positive predictive value) "
 "is obtained by applying <b>Bayes theorem</b>:\n"
 "\n"
-"                   <img src = \"img:jaspLearnBayes/icons/bayes.png\", "
-"width=\"500\">\n"
+"                   %s\n"
 "\n"
 "                   <h5>References</h5>\n"
 "                   Pepe, M. S. (2003). <i>The statistical evaluation of "
@@ -143,11 +142,14 @@ msgid ""
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes"
-"%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
+"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 
 msgid "Welcome to binary classification with JASP!"
+msgstr ""
+
+msgid "Some of the specified colors are not valid colors."
 msgstr ""
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
@@ -161,7 +163,7 @@ msgid ""
 "of marker in negative condition (%2$s)."
 msgstr ""
 
-msgid "Drawing samples"
+msgid "Estimating parameters per varying thresholds..."
 msgstr ""
 
 msgid "Tables"
@@ -171,6 +173,24 @@ msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
+msgstr ""
+
+msgid "Mean"
+msgstr ""
+
+msgid "Median"
+msgstr ""
+
+msgid "SD"
+msgstr ""
+
+msgid "Rhat"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Eff. Sample Size"
 msgstr ""
 
 msgid "Notation"
@@ -278,6 +298,9 @@ msgstr ""
 msgid "True negative"
 msgstr ""
 
+msgid "Area Plot"
+msgstr ""
+
 msgid "Receiving Operating Characteristic Curve"
 msgstr ""
 
@@ -287,7 +310,25 @@ msgstr ""
 msgid "True Positive Rate (Sensitivity)"
 msgstr ""
 
-msgid "Test Characteristics"
+msgid "Total Operating Characteristic Curve"
+msgstr ""
+
+msgid "True positives + False positives"
+msgstr ""
+
+msgid "True positives"
+msgstr ""
+
+msgid "Precision-recall"
+msgstr ""
+
+msgid "Sensitivity (Recall)"
+msgstr ""
+
+msgid "Positive Predictive Value (Precision)"
+msgstr ""
+
+msgid "Test Characteristics by Threshold"
 msgstr ""
 
 msgid "Test Threshold"
@@ -296,10 +337,13 @@ msgstr ""
 msgid "Characteristic"
 msgstr ""
 
-msgid "PPV and NPV by Prevalence"
+msgid "PPV and NPV by Threshold"
 msgstr ""
 
 msgid "Predictive Value"
+msgstr ""
+
+msgid "PPV and NPV by Prevalence"
 msgstr ""
 
 msgid "Alluvial Plot"
@@ -345,6 +389,18 @@ msgid "False negative rate"
 msgstr ""
 
 msgid "Accuracy"
+msgstr ""
+
+msgid "Pretest odds"
+msgstr ""
+
+msgid "Positive likelihood ratio"
+msgstr ""
+
+msgid "Negative likelihood ratio"
+msgstr ""
+
+msgid "F-measure"
 msgstr ""
 
 msgid "Proportion of a population affected by the condition."
@@ -448,7 +504,13 @@ msgstr ""
 msgid "Central credible intervals are based on %i samples."
 msgstr ""
 
-msgid "Parameter estimates are posterior means based on %i samples."
+msgid "Parameter estimates are based on %i MCMC samples."
+msgstr ""
+
+msgid "positive"
+msgstr ""
+
+msgid "negative"
 msgstr ""
 
 msgid "Data Summary"
@@ -1143,12 +1205,6 @@ msgid ""
 "interval.</li>%s</ul>"
 msgstr ""
 
-msgid "Mean"
-msgstr ""
-
-msgid "Median"
-msgstr ""
-
 msgid "Mode"
 msgstr ""
 
@@ -1194,9 +1250,6 @@ msgid "Prior Skill"
 msgstr ""
 
 msgid "Only numeric values are allowed in the input."
-msgstr ""
-
-msgid "SD"
 msgstr ""
 
 msgid "normal (%1$s, %2$s)"
