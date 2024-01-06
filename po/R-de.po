@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2023-12-09 02:44\n"
-"PO-Revision-Date: 2023-12-28 19:06+0000\n"
+"PO-Revision-Date: 2024-01-04 11:06+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
@@ -232,7 +232,7 @@ msgid "Welcome to binary classification with JASP!"
 msgstr "Willkommen zur binären Klassifizierung mit JASP!"
 
 msgid "Some of the specified colors are not valid colors."
-msgstr ""
+msgstr "Einige der angegebenen Farben sind keine gültigen Farben."
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
 msgstr "Die Variable 'Positiver Zustand (binär)' muss zwei Stufen haben!"
@@ -247,8 +247,9 @@ msgstr ""
 "Der Marker-Mittelwert im positiven Zustand (%1$s) muss größer sein als der "
 "Marker-Mittelwert im negativen Zustand (%2$s)."
 
+#, fuzzy
 msgid "Estimating parameters per varying thresholds..."
-msgstr ""
+msgstr "Parameterschätzung mit variierenden Schwellwerten..."
 
 msgid "Tables"
 msgstr "Tabellen"
@@ -269,13 +270,13 @@ msgid "SD"
 msgstr "SD"
 
 msgid "Rhat"
-msgstr ""
+msgstr "R-Dach"
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostiken"
 
 msgid "Eff. Sample Size"
-msgstr ""
+msgstr "Eff. Stichprobenumfang"
 
 msgid "Notation"
 msgstr "Notation"
@@ -382,9 +383,8 @@ msgstr "Falsch negativ"
 msgid "True negative"
 msgstr "Richtig negativ"
 
-#, fuzzy
 msgid "Area Plot"
-msgstr "Flussdiagramm"
+msgstr "Flächendiagramm"
 
 msgid "Receiving Operating Characteristic Curve"
 msgstr "Operationscharakteristiks-Kurve"
@@ -397,30 +397,28 @@ msgstr "Richtig-Positiv-Rate (Sensitivität)"
 
 #, fuzzy
 msgid "Total Operating Characteristic Curve"
-msgstr "Operationscharakteristiks-Kurve"
+msgstr "Gesamte Operationscharakteristiks-Kurve"
 
-#, fuzzy
 msgid "True positives + False positives"
-msgstr "Richtig-Positiv-Rate (Sensitivität)"
+msgstr "Richtig-Positive + Falsch-Positive"
+
+msgid "True positives"
+msgstr "Richtig Positive"
 
 #, fuzzy
-msgid "True positives"
-msgstr "Richtig positiv"
-
 msgid "Precision-recall"
-msgstr ""
+msgstr "Genauigkeit-Trefferquote"
 
 #, fuzzy
 msgid "Sensitivity (Recall)"
-msgstr "Sensitivität"
+msgstr "Sensitivität (Trefferquote)"
 
 #, fuzzy
 msgid "Positive Predictive Value (Precision)"
-msgstr "Positiv prädiktiver Wert"
+msgstr "Positiv prädiktiver Wert (Genauigkeit)"
 
-#, fuzzy
 msgid "Test Characteristics by Threshold"
-msgstr "Testcharakteristiken"
+msgstr "Testcharakteristiken nach Schwellwert"
 
 msgid "Test Threshold"
 msgstr "Test-Schwellenwert"
@@ -482,19 +480,20 @@ msgstr "Falsch-negativ-Rate"
 msgid "Accuracy"
 msgstr "Genauigkeit"
 
+#, fuzzy
 msgid "Pretest odds"
-msgstr ""
+msgstr "Prä-Test-Chancen"
 
 #, fuzzy
 msgid "Positive likelihood ratio"
-msgstr "Positiver Zustand"
+msgstr "Positiver Likelihood-Quotient"
 
 #, fuzzy
 msgid "Negative likelihood ratio"
-msgstr "Negativer Zustand"
+msgstr "Negativer Likelihood-Quotient"
 
 msgid "F-measure"
-msgstr ""
+msgstr "F-Maß"
 
 msgid "Proportion of a population affected by the condition."
 msgstr "Anteil einer Grundgesamtheit, die von dem Zustand betroffen ist."
@@ -616,18 +615,14 @@ msgstr ""
 msgid "Central credible intervals are based on %i samples."
 msgstr "Zentrale Glaubwürdigkeitsintervalle basieren auf %i-Stichproben."
 
-#, fuzzy
 msgid "Parameter estimates are based on %i MCMC samples."
-msgstr ""
-"Parameterschätzungen sind Posterior-Mittelwerte auf Basis von %i Stichproben."
+msgstr "Parameterschätzungen basieren auf %i MCMC-Stichproben."
 
-#, fuzzy
 msgid "positive"
-msgstr "Positiv"
+msgstr "positiv"
 
-#, fuzzy
 msgid "negative"
-msgstr "Negativ"
+msgstr "negativ"
 
 msgid "Data Summary"
 msgstr "Datenzusammenfassung"
@@ -635,7 +630,6 @@ msgstr "Datenzusammenfassung"
 msgid "Counts"
 msgstr "Anzahlen"
 
-#, fuzzy
 msgid "Proportion"
 msgstr "Anteil"
 
@@ -649,7 +643,7 @@ msgid "spike at %s"
 msgstr "Impuls bei %s"
 
 msgid "beta (%1$s, %2$s)"
-msgstr "beta (%1$s, %2$s)"
+msgstr "Beta (%1$s, %2$s)"
 
 msgid "binomial (%1$i, %2$s)"
 msgstr "Binomial (%1$i, %2$s)"
