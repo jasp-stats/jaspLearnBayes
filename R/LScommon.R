@@ -1509,15 +1509,12 @@ hdi.density    <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
 .containerPlots2LS             <- function(jaspResults, options, analysis, type) {
 
   if (is.null(jaspResults[[paste0("containerPlots", type)]])) {
-    containerPlots <- createJaspContainer(title = gettextf(
-      "%1$s %2$s Plots",
-      switch(
-        options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
-        "conditional" = gettext("Conditional"),
-        "joint"       = gettext("Joint"),
-        "marginal"    = gettext("Marginal")
-      ),
-      type))
+    translatedType <- switch(type, "Prior" = gettext("Prior"), "Posterior" = gettext("Posterior"), type)
+    containerPlots <- createJaspContainer(title = switch(
+                         options[[ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")]],
+                         "conditional" = gettextf("Conditional %s Plots", type),
+                         "joint"       = gettextf("Joint %s Plots", type),
+                         "marginal"    = gettextf("Marginal %s Plots", type)))
     containerPlots$dependOn(c(
       ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
       ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
