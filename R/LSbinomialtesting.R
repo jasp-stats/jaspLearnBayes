@@ -1457,7 +1457,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       ))
 
       # add footnote clarifying what dataset was used
-      predictionsTable$addFootnote(gettextf("The prediction for %1$i observation(s) is based on %2$i success(es) and $3$i failure(s)",
+      predictionsTable$addFootnote(gettextf("The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)",
                                     options[["posteriorPredictionNumberOfFutureTrials"]],
                                     data[["nSuccesses"]],
                                     data[["nFailures"]]))
