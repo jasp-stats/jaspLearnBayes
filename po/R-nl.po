@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2023-12-09 02:44\n"
+"POT-Creation-Date: 2024-01-20 02:45\n"
 "PO-Revision-Date: 2023-10-18 15:29+0000\n"
 "Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
@@ -766,6 +766,10 @@ msgstr "Log(likelihood)"
 msgid "P(H|data)"
 msgstr "P(H|data)"
 
+#, fuzzy
+msgid "These results are based on %1$i success(es) and %2$i failure(s)"
+msgstr "Deze resultaten zijn gebaseerd op %1$i %2$s en %3$i %4$s."
+
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
 "not defined."
@@ -800,6 +804,12 @@ msgstr "Observaties"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Er moeten ten minste 2 hypothesen worden gespecificeerd."
+
+#, fuzzy
+msgid ""
+"The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i "
+"failure(s)"
+msgstr "De voorspelling voor %1$s %2$s is gebaseerd op %3$s %4$s en %5$s %6$s."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
 msgstr "De parameter '%1$s' voor model/hypothese \"%2$s\" moet positief zijn."
@@ -838,6 +848,17 @@ msgstr "Voorspellingsoverzicht"
 
 msgid "%s Prediction Plots"
 msgstr "%s Voorspellingsgrafieken"
+
+#, fuzzy
+msgid "Conditional %s Plots"
+msgstr "Voorwaardelijke kans"
+
+#, fuzzy
+msgid "Joint %s Plots"
+msgstr "%1$s %2$s Grafieken"
+
+msgid "Marginal %s Plots"
+msgstr ""
 
 msgid "%1$s %2$s Prediction Plots"
 msgstr "%1$s %2$s Voorspellingsgrafieken"

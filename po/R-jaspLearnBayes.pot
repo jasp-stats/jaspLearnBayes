@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.18.3\n"
-"POT-Creation-Date: 2024-01-13 02:45\n"
+"POT-Creation-Date: 2024-01-20 02:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -547,6 +547,9 @@ msgstr ""
 msgid "P(H|data)"
 msgstr ""
 
+msgid "These results are based on %1$i success(es) and %2$i failure(s)"
+msgstr ""
+
 msgid "The plot could not be created because the posterior model probabilities are not defined."
 msgstr ""
 
@@ -575,6 +578,9 @@ msgid "Observations"
 msgstr ""
 
 msgid "At least 2 hypotheses need to be specified."
+msgstr ""
+
+msgid "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)"
 msgstr ""
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
@@ -611,6 +617,15 @@ msgid "Prediction Summary"
 msgstr ""
 
 msgid "%s Prediction Plots"
+msgstr ""
+
+msgid "Conditional %s Plots"
+msgstr ""
+
+msgid "Joint %s Plots"
+msgstr ""
+
+msgid "Marginal %s Plots"
 msgstr ""
 
 msgid "%1$s %2$s Prediction Plots"

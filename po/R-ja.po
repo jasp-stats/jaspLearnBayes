@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2023-12-09 02:44\n"
+"POT-Creation-Date: 2024-01-20 02:45\n"
 "PO-Revision-Date: 2023-04-21 17:50+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -732,6 +732,10 @@ msgstr "log(likelihood)"
 msgid "P(H|data)"
 msgstr "P(H|data)"
 
+#, fuzzy
+msgid "These results are based on %1$i success(es) and %2$i failure(s)"
+msgstr "この結果は、%1$i %2$sと%3$i %4$sに基づいています."
+
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
 "not defined."
@@ -763,6 +767,12 @@ msgstr "観測値"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "少なくとも2つの仮説を指定する必要があります."
+
+#, fuzzy
+msgid ""
+"The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i "
+"failure(s)"
+msgstr "%s %sの予測は、%s %sと%s %sに基づいています."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
 msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければなりません."
@@ -801,6 +811,17 @@ msgstr "予測の要約"
 
 msgid "%s Prediction Plots"
 msgstr "%s 予測プロット"
+
+#, fuzzy
+msgid "Conditional %s Plots"
+msgstr "条件付き確率"
+
+#, fuzzy
+msgid "Joint %s Plots"
+msgstr "%1$s %2$s プロット"
+
+msgid "Marginal %s Plots"
+msgstr ""
 
 msgid "%1$s %2$s Prediction Plots"
 msgstr "%1$s %2$s 予測プロット"
