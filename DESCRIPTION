@@ -20,6 +20,7 @@ Imports:
   scales,
   ggalluvial,
   ragg,
+  rjags,
   runjags,
   ggdist,
   grid,
