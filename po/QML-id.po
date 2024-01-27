@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-01-15 15:06+0000\n"
-"Last-Translator: Rania Rahida <raniarahida@gmail.com>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
-"jasplearnbayes-qml/id/>\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -262,17 +256,19 @@ msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
 msgstr "Interval yang dapat dipercaya"
 
+#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 msgctxt "LSbinomialestimation|"
 msgid "Distribution"
 msgstr "Distribusi"
 
+#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
-msgstr ""
+msgstr "Parameter (θ)"
 
 msgctxt "LSbinomialestimation|"
 msgid "Model "
@@ -398,9 +394,10 @@ msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
-msgstr ""
+msgstr "Plot"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Needle plot"
@@ -410,9 +407,10 @@ msgctxt "LSBuffonsneedlesimulation|"
 msgid "Color crossing needles"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr ""
+msgstr "Prior dan posterior untuk proporsi persilangan"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Legend"
