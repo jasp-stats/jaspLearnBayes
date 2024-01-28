@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-01-20 02:45\n"
-"PO-Revision-Date: 2023-12-09 14:30+0000\n"
+"PO-Revision-Date: 2024-01-29 12:01+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Virgin-Header: remove this line if you change anything in the header.\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
@@ -756,9 +756,8 @@ msgstr "log(verosimilitude)"
 msgid "P(H|data)"
 msgstr "P(H|datos)"
 
-#, fuzzy
 msgid "These results are based on %1$i success(es) and %2$i failure(s)"
-msgstr "Estes resultados baséanse en %1$i %2$s e %3$i %4$s."
+msgstr "Estes resultados baséanse en %1$i acerto(s) e %2$i fallo(s)"
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
@@ -795,11 +794,12 @@ msgstr "Observacións"
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Cando menos, é necesario indicar 2 hipóteses."
 
-#, fuzzy
 msgid ""
 "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i "
 "failure(s)"
-msgstr "A predición para %1$s %2$s baséase en %3$s %4$s e %5$s %6$s."
+msgstr ""
+"A predición para %1$i observación(s) baséase en %2$i acerto(s) e %3$i "
+"fallo(s)"
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
 msgstr "O parámetro '%1$s' para o modelo/a hipótese '%2$s' debe ser positivo."
@@ -839,16 +839,14 @@ msgstr "Resumo de Predicións"
 msgid "%s Prediction Plots"
 msgstr "%s Gráficas de Predición"
 
-#, fuzzy
 msgid "Conditional %s Plots"
-msgstr "Probabilidade condicionada"
+msgstr "Gráficas de %s condicionada"
 
-#, fuzzy
 msgid "Joint %s Plots"
-msgstr "Gráficas %1$s %2$s"
+msgstr "Gráficas de %s conxunta"
 
 msgid "Marginal %s Plots"
-msgstr ""
+msgstr "Gráficas de %s marxinal"
 
 msgid "%1$s %2$s Prediction Plots"
 msgstr "%1$s %2$s Gráficas de Predición"
