@@ -46,7 +46,7 @@ Description
 		qml:	"LSbinomialtesting.qml"
 		func:	"LSbinomialtesting"
 	}
-/*
+
 	GroupTitle
 	{
 		title: 	qsTr("Continuous")
@@ -57,16 +57,16 @@ Description
 	{
 		title:	qsTr("Gaussian Estimation")
 		qml:	"LSgaussianestimation.qml"
-		func:	"LSgaussianestimation"
+		func:	"LSgaussianestimationInternal"
 	}
 
 	Analysis
 	{
 		title:	qsTr("Gaussian Testing")
 		qml:	"LSgaussiantesting.qml"
-		func:	"LSgaussiantesting"
+		func:	"LSgaussiantestingInternal"
 	}
-*/
+
 	GroupTitle
 	{
 		title:	qsTr("The Problem of Points")
