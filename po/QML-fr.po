@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-04-06 02:41+0000\n"
+"PO-Revision-Date: 2024-04-07 21:01+0000\n"
 "Last-Translator: robachowyk <kaya.robach@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/fr/>\n"
@@ -65,15 +65,15 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Input type"
-msgstr ""
+msgstr "Type d'entrée"
 
 msgctxt "LSbinaryclassification|"
 msgid "Point estimates"
-msgstr ""
+msgstr "Estimations ponctuelles"
 
 msgctxt "LSbinaryclassification|"
 msgid "Uncertain estimates"
-msgstr ""
+msgstr "Estimations incertaines"
 
 msgctxt "LSbinaryclassification|"
 msgid "Load data and specify threshold"
