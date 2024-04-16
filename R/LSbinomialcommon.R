@@ -349,7 +349,7 @@
     # yDensity <- dbeta(xDensity, shape1 = alpha, shape2 = beta)
     # yDensity[c(1, length(yDensity))] <- 0
 
-    denBeta <- .dbetaLS(alpha, beta)
+    denBeta <- .getDensityBetaLS(alpha, beta)
     class(denBeta) <- "density"
 
     HDI <- HDInterval::hdi(denBeta, coverage, allowSplit = T)
@@ -412,8 +412,8 @@
 }
 .betaSupportLS              <- function(alpha, beta, successses, failures, BF) {
 
-  tempPost  <- .dbetaLS(alpha + successses, beta + failures)
-  tempPrior <- .dbetaLS(alpha, beta)
+  tempPost  <- .getDensityBetaLS(alpha + successses, beta + failures)
+  tempPrior <- .getDensityBetaLS(alpha, beta)
 
   xSeq   <- tempPost$x
   yPost  <- tempPost$y
@@ -679,7 +679,7 @@
 
   return(dat)
 }
-.dbetaLS                    <- function(alpha, beta) {
+.getDensityBetaLS           <- function(alpha, beta) {
 
   y <- c(
     pbeta(.001, alpha, beta)*1000,
@@ -694,6 +694,53 @@
   ))
 }
 .is.wholenumber             <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+
+# custom cdf/pdf/invcdf functions that include truncation
+.dbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1){
+    return(stats::dbeta(x, alpha, beta))
+  } else {
+    num <- stats::dbeta(x, alpha, beta)
+    den <- pbeta(upper, alpha, beta) - pbeta(lower, alpha, beta)
+    lik <- num/den
+    lik[x < lower | x > upper] <- 0
+    return(lik)
+  }
+}
+.pbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1){
+    return(stats::pbeta(x, alpha, beta))
+  } else {
+    p  <- stats::pbeta(x, alpha, beta)
+    C1 <- stats::pbeta(lower, alpha, alpha)
+    C2 <- stats::pbeta(upper, beta,  beta)
+    p  <- (p - C1) / (C2 - C1)
+    p[x < lower] <- 0
+    p[x > upper] <- 1
+    return(p)
+  }
+}
+.qbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1){
+    return(stats::qbeta(x, alpha, beta))
+  } else {
+
+    q <- sapply(x, function(xi) {
+      stats::optim(
+        par     = (lower + upper) / 2 ,
+        fn      = function(p) ( .pbetaLS(p, alpha, beta, lower, upper) - xi)^2,
+        lower   = lower,
+        upper   = upper,
+        method  = "L-BFGS-B",
+        control = list(
+          factr = 1e3
+        )
+      )$par
+    })
+
+    return(q)
+  }
+}
 
 # plotting functions
 .dataLinesBinomialLS        <- function(data, prior) {
@@ -863,7 +910,7 @@
       } else if (estimate == "mode" && prior[["betaPriorAlpha"]] + data$nSuccesses < 1 && prior[["betaPriorBeta"]] + data$nFailures < 1 &&
                  prior[["betaPriorAlpha"]] + data$nSuccesses == prior[["betaPriorBeta"]] + data$nFailures) {
         x <- c(0, 1)
-        y <- .dbetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+        y <- .getDensityBetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
         y <- y$y[c(1, length(y$y))]
       } else {
         x <- .estimateBinomialLS(data, prior)[[estimate]]
