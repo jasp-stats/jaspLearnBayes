@@ -18,7 +18,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='-0.000000000000064' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
 </g>
 <defs>
   <clipPath id='cpNTYuMTB8NjQ4LjI4fDIzLjcwfDUwNS45Ng=='>
@@ -67,11 +67,11 @@
 <polyline points='47.60,179.58 56.10,179.58 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <polyline points='47.60,118.69 56.10,118.69 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <polyline points='648.28,505.96 648.28,23.70 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
-<polyline points='648.28,484.04 656.79,484.04 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='648.28,392.70 656.79,392.70 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='648.28,301.36 656.79,301.36 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='648.28,210.02 656.79,210.02 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='648.28,118.69 656.79,118.69 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='656.79,484.04 648.28,484.04 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='656.79,392.70 648.28,392.70 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='656.79,301.36 648.28,301.36 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='656.79,210.02 648.28,210.02 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='656.79,118.69 648.28,118.69 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
 <text x='658.98' y='489.89' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='658.98' y='398.55' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>0.05</text>
 <text x='658.98' y='307.21' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.1</text>

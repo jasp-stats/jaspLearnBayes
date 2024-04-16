@@ -68,17 +68,15 @@
 <text x='613.18' y='487.05' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>4</text>
 <text x='689.48' y='487.05' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='9.46px' lengthAdjust='spacingAndGlyphs'>5</text>
 <text x='384.28' y='517.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='113.39px' lengthAdjust='spacingAndGlyphs'>Test Threshold</text>
-<rect x='189.70' y='536.69' width='389.16' height='39.31' style='stroke-width: 0.75; stroke: none;' />
-<rect x='189.70' y='536.69' width='389.16' height='39.31' style='stroke-width: 10.67; stroke: none;' />
-<text x='247.15' y='562.20' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='103.94px' lengthAdjust='spacingAndGlyphs'>Characteristic</text>
-<rect x='307.59' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='310.42' y1='556.35' x2='333.10' y2='556.35' style='stroke-width: 4.27; stroke: #B22222; stroke-linecap: butt;' />
-<line x1='310.42' y1='556.35' x2='333.10' y2='556.35' style='stroke-width: 4.27; stroke: #B22222; stroke-linecap: butt;' />
-<rect x='444.72' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='447.56' y1='556.35' x2='470.23' y2='556.35' style='stroke-width: 4.27; stroke: #4682B4; stroke-linecap: butt;' />
-<line x1='447.56' y1='556.35' x2='470.23' y2='556.35' style='stroke-width: 4.27; stroke: #4682B4; stroke-linecap: butt;' />
-<text x='342.87' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='76.54px' lengthAdjust='spacingAndGlyphs'>Sensitivity</text>
-<text x='480.00' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='76.54px' lengthAdjust='spacingAndGlyphs'>Specificity</text>
+<rect x='72.47' y='536.69' width='623.63' height='39.31' style='stroke-width: 0.75; stroke: none;' />
+<rect x='72.47' y='536.69' width='623.63' height='39.31' style='stroke-width: 10.67; stroke: none;' />
+<text x='129.92' y='562.20' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='103.94px' lengthAdjust='spacingAndGlyphs'>Characteristic</text>
+<rect x='187.37' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='190.20' y1='556.35' x2='212.88' y2='556.35' style='stroke-width: 4.27; stroke: #B22222; stroke-linecap: butt;' />
+<rect x='441.73' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='444.57' y1='556.35' x2='467.24' y2='556.35' style='stroke-width: 4.27; stroke: #4682B4; stroke-linecap: butt;' />
+<text x='215.71' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='76.54px' lengthAdjust='spacingAndGlyphs'>Sensitivity</text>
+<text x='470.08' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='76.54px' lengthAdjust='spacingAndGlyphs'>Specificity</text>
 <text x='384.28' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='141.74px' lengthAdjust='spacingAndGlyphs'>test-characteristics</text>
 </g>
 </svg>
