@@ -208,13 +208,19 @@
       textBeta <- MASS::fractions(prior[["betaPriorBeta"]] + data$nFailures)
     }
 
+    # extract names for readability
+    alpha <- prior[["betaPriorAlpha"]] + data$nSuccesses
+    beta  <- prior[["betaPriorBeta"]]  + data$nFailures
+    lower <- prior[["priorTruncationLower"]]
+    upper <- prior[["priorTruncationUpper"]]
+
     output <- list(
-      distribution = gettextf("beta (%1$s, %2$s)", textAlpha, textBeta),
-      mean         = (prior[["betaPriorAlpha"]] + data$nSuccesses) / (prior[["betaPriorAlpha"]] + data$nSuccesses + prior[["betaPriorBeta"]] + data$nFailures),
-      median       = qbeta(.5,   prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-      mode         = .modeBetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-      lCI          = qbeta(.025, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-      uCI          = qbeta(.975, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+      distribution = gettextf("beta(%1$s, %2$s)%3$s", textAlpha, textBeta, if(lower == 0 & upper == 1) "" else paste0("T[", lower, ",", upper, "]")),
+      mean         = .betaMeanLS(alpha, beta, lower, upper),
+      median       = .qbetaLS(.5, alpha, beta, lower, upper),
+      mode         = .betaModeLS(alpha, beta, lower, upper),
+      lCI          = .qbetaLS(.025, alpha, beta, lower, upper),
+      uCI          = .qbetaLS(.975, alpha, beta, lower, upper)
     )
 
 
@@ -430,18 +436,6 @@
 
   return(support)
 
-}
-.modeBetaLS                 <- function(alpha, beta) {
-  if (alpha == 1 && beta == 1)
-    return("[0, 1]")
-  else if (alpha < 1 && beta < 1 && alpha == beta)
-    return("{0, 1}")
-  else if (alpha <= 1 && beta > 1)
-    return(0)
-  else if (alpha  > 1 && beta <= 1)
-    return(1)
-  else
-    return((alpha-1)/(alpha+beta-2))
 }
 .modeBinomialLS             <- function(N, p, prop = FALSE) {
   if (prop) d <- N else d <- 1
@@ -697,7 +691,7 @@
 
 # custom cdf/pdf/invcdf functions that include truncation
 .dbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
-  if (lower == 0 && upper == 1){
+  if (lower == 0 && upper == 1) {
     return(stats::dbeta(x, alpha, beta))
   } else {
     num <- stats::dbeta(x, alpha, beta)
@@ -708,7 +702,7 @@
   }
 }
 .pbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
-  if (lower == 0 && upper == 1){
+  if (lower == 0 && upper == 1) {
     return(stats::pbeta(x, alpha, beta))
   } else {
     p  <- stats::pbeta(x, alpha, beta)
@@ -721,7 +715,7 @@
   }
 }
 .qbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
-  if (lower == 0 && upper == 1){
+  if (lower == 0 && upper == 1) {
     return(stats::qbeta(x, alpha, beta))
   } else {
 
@@ -739,6 +733,39 @@
     })
 
     return(q)
+  }
+}
+.betaMeanLS                 <- function(alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    return(alpha / (alpha + beta))
+  } else {
+    return(stats::integrate(function(x) x * .dbetaLS(x, alpha, beta, lower, upper), lower, upper)$value)
+  }
+}
+.betaModeLS                 <- function(alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    if (alpha == 1 && beta == 1)
+      return("[0, 1]")
+    else if (alpha < 1 && beta < 1 && alpha == beta)
+      return("{0, 1}")
+    else if (alpha <= 1 && beta > 1)
+      return(0)
+    else if (alpha  > 1 && beta <= 1)
+      return(1)
+    else
+      return((alpha-1)/(alpha+beta-2))
+  } else {
+    if (alpha == 1 && beta == 1)
+      return(paste0("[", lower, ", ", upper, "]"))
+    else if (alpha < 1 && beta < 1 && alpha == beta && lower == upper)
+      return(paste0("{", lower, ", ", upper, "}"))
+    else
+      return(optim(
+        par    = (lower + upper) / 2,
+        fn     = function(p) -.dbetaLS(p, alpha, beta, lower, upper),
+        lower  = lower,
+        upper  = upper,
+        method = "L-BFGS-B")$par)
   }
 }
 

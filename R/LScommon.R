@@ -26,7 +26,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
 .evaluatePriors       <- function(models, type) {
   for (p in 1:length(models)) {
     for (i in 1:length(models[[p]])) {
-      if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight")) {
+      if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight", "priorTruncationLower", "priorTruncationUpper")) {
         models[[p]][[paste0(names(models[[p]])[i],"Inp")]] <- models[[p]][[i]]
         models[[p]][[i]] <- eval(parse(text = models[[p]][[i]]))
 
