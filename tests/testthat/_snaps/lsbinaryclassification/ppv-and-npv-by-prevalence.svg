@@ -18,7 +18,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='-0.000000000000064' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
 </g>
 <defs>
   <clipPath id='cpNzguNzR8NzIwLjAwfDIwLjcxfDQ1OS44OA=='>
@@ -161,17 +161,15 @@
 <text x='690.85' y='487.05' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='33.09px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <text x='399.37' y='517.23' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='85.07px' lengthAdjust='spacingAndGlyphs'>Prevalence</text>
 <text transform='translate(16.68,240.29) rotate(-90)' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='122.86px' lengthAdjust='spacingAndGlyphs'>Predictive Value</text>
-<rect x='211.19' y='536.69' width='376.36' height='39.31' style='stroke-width: 0.75; stroke: none;' />
-<rect x='211.19' y='536.69' width='376.36' height='39.31' style='stroke-width: 10.67; stroke: none;' />
-<text x='278.10' y='562.20' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='122.86px' lengthAdjust='spacingAndGlyphs'>Predictive Value</text>
-<rect x='348.00' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='350.83' y1='556.35' x2='373.51' y2='556.35' style='stroke-width: 4.27; stroke: #B22222; stroke-linecap: butt;' />
-<line x1='350.83' y1='556.35' x2='373.51' y2='556.35' style='stroke-width: 4.27; stroke: #B22222; stroke-linecap: butt;' />
-<rect x='464.73' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<line x1='467.56' y1='556.35' x2='490.24' y2='556.35' style='stroke-width: 4.27; stroke: #4682B4; stroke-linecap: butt;' />
-<line x1='467.56' y1='556.35' x2='490.24' y2='556.35' style='stroke-width: 4.27; stroke: #4682B4; stroke-linecap: butt;' />
-<text x='383.62' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='59.54px' lengthAdjust='spacingAndGlyphs'>Positive</text>
-<text x='500.20' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='67.11px' lengthAdjust='spacingAndGlyphs'>Negative</text>
+<rect x='91.31' y='536.69' width='616.11' height='39.31' style='stroke-width: 0.75; stroke: none;' />
+<rect x='91.31' y='536.69' width='616.11' height='39.31' style='stroke-width: 10.67; stroke: none;' />
+<text x='158.22' y='562.20' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='122.86px' lengthAdjust='spacingAndGlyphs'>Predictive Value</text>
+<rect x='225.13' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='227.97' y1='556.35' x2='250.64' y2='556.35' style='stroke-width: 4.27; stroke: #B22222; stroke-linecap: butt;' />
+<rect x='462.49' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
+<line x1='465.33' y1='556.35' x2='488.01' y2='556.35' style='stroke-width: 4.27; stroke: #4682B4; stroke-linecap: butt;' />
+<text x='253.48' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='59.54px' lengthAdjust='spacingAndGlyphs'>Positive</text>
+<text x='490.84' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='67.11px' lengthAdjust='spacingAndGlyphs'>Negative</text>
 <text x='399.37' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='206.99px' lengthAdjust='spacingAndGlyphs'>ppv-and-npv-by-prevalence</text>
 </g>
 </svg>
