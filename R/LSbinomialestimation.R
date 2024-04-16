@@ -452,7 +452,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         if (type == "Posterior" && options[["posteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataProportionBinomialLS(tempData)
-          if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+          if (is.nan(dfPointsPP$x)) dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
 
