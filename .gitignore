@@ -56,6 +56,5 @@ Rproj.user
 do-not-share/
 renv/settings.json
 renv/activate.R
-renv.lock
 .Rprofile
 .Rbuildignore
