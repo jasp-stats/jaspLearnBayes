@@ -301,7 +301,7 @@
   if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("binomial (%1$i, %2$s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePointInp"]]),
+      distribution = gettextf("binomial(%1$i, %2$s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePointInp"]]),
       mean         = prior[["spikePoint"]] * options[["posteriorPredictionNumberOfFutureTrials"]] / d,
       median       = stats::qbinom(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
       mode         = .binomModeLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]], prop = prop),

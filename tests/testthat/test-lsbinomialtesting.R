@@ -110,9 +110,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -301,9 +301,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -480,9 +480,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -659,9 +659,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -838,9 +838,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1012,9 +1012,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1047,9 +1047,9 @@ context("Learn Bayes - Binomial Testing")
   test_that("Predictions table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", "spike at 0.5", 0.5, "binomial (1, 0.5)",
-                                        0.5, 0.181526448024068, "Hypothesis Beta", "beta (21, 41)",
-                                        0.338709677419355, "beta-binomial (1, 21, 41)", 0.338709677419355,
+                                   list("Hypothesis Spike", "spike at 0.5", 0.5, "binomial(1, 0.5)",
+                                        0.5, 0.181526448024068, "Hypothesis Beta", "beta(21, 41)",
+                                        0.338709677419355, "beta-binomial(1, 21, 41)", 0.338709677419355,
                                         0.818473551975932, "Marginal", 0.367988136778075, 0.367988136778075
                                    ))
   })
@@ -1207,9 +1207,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1233,9 +1233,9 @@ context("Learn Bayes - Binomial Testing")
   test_that("Prediction summary table match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", "spike at 0.5", 0.5, "binomial (10, 0.5)",
-                                        5, 0.181526448024068, "Hypothesis Beta", "beta (21, 41)", 0.338709677419355,
-                                        "beta-binomial (10, 21, 41)", 3.38709677419355, 0.818473551975932,
+                                   list("Hypothesis Spike", "spike at 0.5", 0.5, "binomial(10, 0.5)",
+                                        5, 0.181526448024068, "Hypothesis Beta", "beta(21, 41)", 0.338709677419355,
+                                        "beta-binomial(10, 21, 41)", 3.38709677419355, 0.818473551975932,
                                         "Marginal", 0.367988136778075, 3.67988136778075))
   })
 
@@ -1368,9 +1368,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis Spike", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = ""),
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis Beta", betaPriorAlpha = "1",
-                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1505,7 +1505,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "spike", value = ""))
+                              spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1673,7 +1673,7 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "beta", value = ""))
+                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1841,9 +1841,9 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = ".1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "beta", value = ""), list(priorWeight = "1",
-                                                                                 name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1", spikePoint = "0.5",
-                                                                                 type = "beta", value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                         list(priorWeight = "1", name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1",
+                              spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
@@ -1981,14 +1981,15 @@ context("Learn Bayes - Binomial Testing")
   options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = ".1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "beta", value = ""), list(priorWeight = "1",
-                                                                                 name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1", spikePoint = "0.5",
-                                                                                 type = "beta", value = "2"), list(priorWeight = "1", name = "Hypothesis 3",
-                                                                                                                   betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                                                   value = "3"), list(priorWeight = "1", name = "Hypothesis 4", betaPriorAlpha = "1",
-                                                                                                                                      betaPriorBeta = "1", spikePoint = "0.5", type = "spike", value = "4"),
+                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                         list(priorWeight = "1", name = "Hypothesis 2", betaPriorAlpha = "1", betaPriorBeta = ".1",
+                              spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1),
+                         list(priorWeight = "1", name = "Hypothesis 3", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "3", priorTruncationLower = 0, priorTruncationUpper = 1),
+                         list(priorWeight = "1", name = "Hypothesis 4", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = "4", priorTruncationLower = 0, priorTruncationUpper = 1),
                          list(priorWeight = "1", name = "Hypothesis 5", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.6", type = "spike", value = "5"))
+                              spikePoint = "0.6", type = "spike", value = "5", priorTruncationLower = 0, priorTruncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
