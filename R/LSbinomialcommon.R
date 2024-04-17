@@ -871,10 +871,10 @@
 
 
   } else if (type == "prediction") {
-    # adding  (+ 1e-5) to the first lower bound because the quantile function is not inverse of cumulatiove
+    # adding  (+ 1e-5) to the first lower bound because the quantile function is not inverse of cumulative
     # distribution function and the lower boundary is not part of the interval. Wanted to write custom
-    # quantile function for the lower bound, however, the aproximation in R reusults in inability to fix
-    # the borderline cases: CI for BinomialLS distribution with 3 trials, probabily .5 and coverage 75%
+    # quantile function for the lower bound, however, the approximation in R results in inability to fix
+    # the borderline cases: CI for BinomialLS distribution with 3 trials, probability .5 and coverage 75%
     if (prior[["type"]] == "spike")
       x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior[["spikePoint"]])
     else if (prior[["type"]] == "beta")
