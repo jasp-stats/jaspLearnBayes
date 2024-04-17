@@ -109,6 +109,12 @@ gettextf <- function(fmt, ..., domain = NULL)  {
   sequence <- sequence[sequence != ""]
   return(sequence)
 }
+.formatFractionInput  <- function(input, evaluatedInput) {
+  if (!is.na(as.numeric(input)))
+    return(evaluatedInput)
+  else
+    return(MASS::fractions(evaluatedInput))
+}
 
 # plotting functions
 .plotPriorPosteriorLS  <- function(allLines, allArrows, dfPoints = NULL, xName = NULL, xRange = c(0,1)) {
