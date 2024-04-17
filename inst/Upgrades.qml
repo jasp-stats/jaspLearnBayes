@@ -395,4 +395,66 @@ Upgrades
 		ChangeRename {	from: "nSims";		to: "numberOfSimulatedGames"	}
 		ChangeRename {	from: "CI";			to: "ci"						}
 	}
+
+	Upgrade
+	{
+		functionName:		"LSbinomialestimation"
+		fromVersion:		"0.18.3"
+		toVersion:			"0.19.0"
+
+		ChangeJS
+		{
+			name:		"models"
+			jsFunction:	function(options)
+			{
+				let newModels = options["models"].map(model => {
+					let newModel 			= {};
+ 					newModel["name"] 			= model["name"];
+					newModel["type"] 			= model["type"];
+					newModel["betaPriorAlpha"] 	= model["betaPriorAlpha"];
+					newModel["betaPriorBeta"] 	= model["betaPriorBeta"];
+					newModel["spikePoint"] 		= model["spikePoint"];
+					newModel["value"]           = model["value"];
+					newModel["truncationLower"]	= "0";
+					newModel["truncationUpper"]	= "1";
+
+					return newModel;
+				})
+
+				return newModels;
+			}
+		}
+	}
+
+	Upgrade
+	{
+		functionName:		"LSbinomialtesting"
+		fromVersion:		"0.18.3"
+		toVersion:			"0.19.0"
+
+		ChangeJS
+		{
+			name:		"models"
+			jsFunction:	function(options)
+			{
+				let newModels = options["models"].map(model => {
+					let newModel 			= {};
+ 					newModel["name"] 			= model["name"];
+					newModel["type"] 			= model["type"];
+					newModel["priorWeight"] 	= model["priorWeight"];
+					newModel["betaPriorAlpha"] 	= model["betaPriorAlpha"];
+					newModel["betaPriorBeta"] 	= model["betaPriorBeta"];
+					newModel["spikePoint"] 		= model["spikePoint"];
+					newModel["value"]           = model["value"];
+					newModel["truncationLower"]	= "0";
+					newModel["truncationUpper"]	= "1";
+
+					return newModel;
+				})
+
+				return newModels;
+			}
+		}
+	}
+
 }

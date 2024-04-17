@@ -155,12 +155,12 @@ Form {
 						FormulaField
 						{
 							label:				qsTr("Lower")
-							name:				"priorTruncationLower"
-							id:					priorTruncationLower
+							name:				"truncationLower"
+							id:					truncationLower
 							visible:			typeItem.currentValue === "beta"
 							value:				"0"
 							min:				0
-							max:				priorTruncationUpper.value
+							max:				truncationUpper.value
 							inclusive:			JASP.MinOnly
 							fieldWidth:			70 * preferencesModel.uiScale
 							useExternalBorder:	false
@@ -170,11 +170,11 @@ Form {
 						FormulaField
 						{
 							label:				qsTr("Upper")
-							name:				"priorTruncationUpper"
-							id:					priorTruncationUpper
+							name:				"truncationUpper"
+							id:					truncationUpper
 							visible:			typeItem.currentValue === "beta"
 							value:				"1"
-							min:				priorTruncationLower.value
+							min:				truncationLower.value
 							max:				1
 							inclusive:			JASP.MaxOnly
 							fieldWidth:			70 * preferencesModel.uiScale

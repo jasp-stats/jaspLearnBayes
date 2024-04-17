@@ -67,9 +67,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Beta", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -250,9 +250,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -541,9 +541,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -685,9 +685,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point",betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -793,9 +793,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -895,9 +895,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -997,9 +997,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1093,9 +1093,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.3", type = "spike", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1189,7 +1189,7 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1312,7 +1312,7 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "median"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "beta", value = "", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1437,9 +1437,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
-                              type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              type = "spike", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models 2", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
-                              type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1516,9 +1516,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
-                              type = "spike", value = "", priorTruncationLower = 0, priorTruncationUpper = 1),
+                              type = "spike", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models 2", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
-                              type = "beta", value = "2", priorTruncationLower = 0, priorTruncationUpper = 1))
+                              type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
