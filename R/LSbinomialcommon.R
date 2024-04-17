@@ -229,8 +229,8 @@
 }
 .testBinomialLS             <- function(data, models) {
 
-  names     <- rep(NA, length(models))
-  prior     <- rep(NA, length(models))
+  names    <- rep(NA, length(models))
+  prior    <- rep(NA, length(models))
   logLik   <- rep(NA, length(models))
 
   obsProp  <- data$nSuccesses / (data$nSuccesses + data$nFailures)
@@ -249,8 +249,21 @@
 
       } else if (tempPrior[["type"]] == "beta") {
 
-        logLik[i]   <- extraDistr::dbbinom(data$nSuccesses, data$nSuccesses + data$nFailures,
-                                            tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]], log = TRUE)
+        logLik[i]   <- extraDistr::dbbinom(data$nSuccesses, data$nSuccesses + data$nFailures, tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]], log = TRUE)
+
+        # truncation adjustment
+        if (!(tempPrior[["priorTruncationLower"]] == 0 && tempPrior[["priorTruncationUpper"]] == 1)) {
+
+          # truncation adjustment (using change from prior to posterior samples satisfying the constraint)
+          tempPriorLower <- stats::pbeta(tempPrior[["priorTruncationLower"]], tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]])
+          tempPriorUpper <- stats::pbeta(tempPrior[["priorTruncationUpper"]], tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]])
+
+          tempPostLower <- stats::pbeta(tempPrior[["priorTruncationLower"]], data$nSuccesses + tempPrior[["betaPriorAlpha"]], data$nFailures + tempPrior[["betaPriorBeta"]])
+          tempPostUper  <- stats::pbeta(tempPrior[["priorTruncationUpper"]], data$nSuccesses + tempPrior[["betaPriorAlpha"]], data$nFailures + tempPrior[["betaPriorBeta"]])
+
+          logLik[i]  <- logLik[i] + log(tempPostUper - tempPostLower) - log(tempPriorUpper - tempPriorLower)
+
+        }
 
       }
 
