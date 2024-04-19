@@ -39,7 +39,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
         } else if (type %in% c("binEst", "binTest") && names(models[[p]])[i] %in% c("truncationLower", "truncationLower") && (models[[p]][[i]] < 0 || models[[p]][[i]] > 1)) {
           .quitAnalysis(
             gettextf(
-              "The truncation range for model/hypothesis '%2$s' must be within [0, 1] interval.",
+              "The truncation range for model/hypothesis '%s' must be within [0, 1] interval.",
               gsub("par", "", names(models[[p]])[i]),
               models[[p]][["name"]]))
         } else if (names(models[[p]])[i] =="spikePoint" && (models[[p]][[i]] < 0 || models[[p]][[i]] > 1) && type %in% c("binEst", "binTest")) {
