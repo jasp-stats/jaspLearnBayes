@@ -196,25 +196,31 @@
 
   } else if (prior[["type"]] == "beta") {
 
-    # in order to keep decimals as decimals ifuser fills them that way
-    if (!is.na(as.numeric(prior[["betaPriorAlphaInp"]]))) {
-      textAlpha <- prior[["betaPriorAlpha"]] + data$nSuccesses
-    } else {
-      textAlpha <- MASS::fractions(prior[["betaPriorAlpha"]] + data$nSuccesses)
-    }
-    if (!is.na(as.numeric(prior[["betaPriorBetaInp"]]))) {
-      textBeta <- prior[["betaPriorBeta"]] + data$nFailures
-    } else {
-      textBeta <- MASS::fractions(prior[["betaPriorBeta"]] + data$nFailures)
-    }
+    # extract names for readability
+    alpha <- prior[["betaPriorAlpha"]] + data$nSuccesses
+    beta  <- prior[["betaPriorBeta"]]  + data$nFailures
+    lower <- prior[["truncationLower"]]
+    upper <- prior[["truncationUpper"]]
+
+    # use fractions if users used them in the input
+    textAlpha <- .formatFractionInput(prior[["betaPriorAlphaInp"]], alpha)
+    textBeta  <- .formatFractionInput(prior[["betaPriorBetaInp"]], beta)
+    textLower <- .formatFractionInput(prior[["truncationLowerInp"]], lower)
+    textUpper <- .formatFractionInput(prior[["truncationUpperInp"]], upper)
+
+    # create distribution name
+    if (lower == 0 && upper == 1)
+      distributionText <- gettextf("beta(%1$s, %2$s)", textAlpha, textBeta)
+    else
+      distributionText <- gettextf("beta(%1$s, %2$s)T[%3$s, %4$s]", textAlpha, textBeta, textLower, textUpper)
 
     output <- list(
-      distribution = gettextf("beta (%1$s, %2$s)", textAlpha, textBeta),
-      mean         = (prior[["betaPriorAlpha"]] + data$nSuccesses) / (prior[["betaPriorAlpha"]] + data$nSuccesses + prior[["betaPriorBeta"]] + data$nFailures),
-      median       = qbeta(.5,   prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-      mode         = .modeBetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-      lCI          = qbeta(.025, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-      uCI          = qbeta(.975, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+      distribution = distributionText,
+      mean         = .betaMeanLS(alpha, beta, lower, upper),
+      median       = .qbetaLS(.5, alpha, beta, lower, upper),
+      mode         = .betaModeLS(alpha, beta, lower, upper),
+      lCI          = .qbetaLS(.025, alpha, beta, lower, upper),
+      uCI          = .qbetaLS(.975, alpha, beta, lower, upper)
     )
 
 
@@ -223,8 +229,8 @@
 }
 .testBinomialLS             <- function(data, models) {
 
-  names     <- rep(NA, length(models))
-  prior     <- rep(NA, length(models))
+  names    <- rep(NA, length(models))
+  prior    <- rep(NA, length(models))
   logLik   <- rep(NA, length(models))
 
   obsProp  <- data$nSuccesses / (data$nSuccesses + data$nFailures)
@@ -243,8 +249,21 @@
 
       } else if (tempPrior[["type"]] == "beta") {
 
-        logLik[i]   <- extraDistr::dbbinom(data$nSuccesses, data$nSuccesses + data$nFailures,
-                                            tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]], log = TRUE)
+        logLik[i]   <- extraDistr::dbbinom(data$nSuccesses, data$nSuccesses + data$nFailures, tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]], log = TRUE)
+
+        # truncation adjustment
+        if (!(tempPrior[["truncationLower"]] == 0 && tempPrior[["truncationUpper"]] == 1)) {
+
+          # truncation adjustment (using change from prior to posterior samples satisfying the constraint)
+          tempPriorLower <- stats::pbeta(tempPrior[["truncationLower"]], tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]])
+          tempPriorUpper <- stats::pbeta(tempPrior[["truncationUpper"]], tempPrior[["betaPriorAlpha"]], tempPrior[["betaPriorBeta"]])
+
+          tempPostLower <- stats::pbeta(tempPrior[["truncationLower"]], data$nSuccesses + tempPrior[["betaPriorAlpha"]], data$nFailures + tempPrior[["betaPriorBeta"]])
+          tempPostUper  <- stats::pbeta(tempPrior[["truncationUpper"]], data$nSuccesses + tempPrior[["betaPriorAlpha"]], data$nFailures + tempPrior[["betaPriorBeta"]])
+
+          logLik[i]  <- logLik[i] + log(tempPostUper - tempPostLower) - log(tempPriorUpper - tempPriorLower)
+
+        }
 
       }
 
@@ -282,39 +301,46 @@
   if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("binomial (%1$i, %2$s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePointInp"]]),
+      distribution = gettextf("binomial(%1$i, %2$s)", options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePointInp"]]),
       mean         = prior[["spikePoint"]] * options[["posteriorPredictionNumberOfFutureTrials"]] / d,
-      median       = qbinom(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
-      mode         = .modeBinomialLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]], prop = prop),
-      lCI          = qbinom(0.025, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
-      uCI          = qbinom(0.975, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
-      SD           = .computeSdBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d
+      median       = stats::qbinom(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
+      mode         = .binomModeLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]], prop = prop),
+      lCI          = stats::qbinom(0.025, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
+      uCI          = stats::qbinom(0.975, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d,
+      SD           = .binomSdLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["spikePoint"]]) / d
     )
 
     return(output)
 
   } else if (prior[["type"]] == "beta") {
 
-    # in order to keep decimals as decimals ifuser fills them that way
-    if (!is.na(as.numeric(prior[["betaPriorAlphaInp"]]))) {
-      textAlpha <- prior[["betaPriorAlpha"]] + data$nSuccesses
-    } else {
-      textAlpha <- MASS::fractions(prior[["betaPriorAlpha"]] + data$nSuccesses)
-    }
-    if (!is.na(as.numeric(prior[["betaPriorBetaInp"]]))) {
-      textBeta <- prior[["betaPriorBeta"]] + data$nFailures
-    } else {
-      textBeta <- MASS::fractions(prior[["betaPriorBeta"]] + data$nFailures)
-    }
+    # extract names for readability
+    alpha <- prior[["betaPriorAlpha"]] + data$nSuccesses
+    beta  <- prior[["betaPriorBeta"]]  + data$nFailures
+    lower <- prior[["truncationLower"]]
+    upper <- prior[["truncationUpper"]]
+    n     <- options[["posteriorPredictionNumberOfFutureTrials"]]
+
+    # use fractions if users used them in the input
+    textAlpha <- .formatFractionInput(prior[["betaPriorAlphaInp"]], alpha)
+    textBeta  <- .formatFractionInput(prior[["betaPriorBetaInp"]], beta)
+    textLower <- .formatFractionInput(prior[["truncationLowerInp"]], lower)
+    textUpper <- .formatFractionInput(prior[["truncationUpperInp"]], upper)
+
+    # create distribution name
+    if (lower == 0 && upper == 1)
+      distributionText <- gettextf("beta-binomial(%1$i, %2$s, %3$s)", n, textAlpha, textBeta)
+    else
+      distributionText <- gettextf("binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])", n, textAlpha, textBeta, textLower, textUpper)
 
     output <- list(
-      distribution = gettextf("beta-binomial (%1$i, %2$s, %3$s)", options[["posteriorPredictionNumberOfFutureTrials"]], textAlpha, textBeta),
-      mean         = (prior[["betaPriorAlpha"]] + data$nSuccesses) * options[["posteriorPredictionNumberOfFutureTrials"]] / (prior[["betaPriorAlpha"]] + data$nSuccesses + prior[["betaPriorBeta"]] + data$nFailures) / d,
-      median       = .qbetabinomLS(.5, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) / d,
-      mode         = .modeBetaBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prop = prop),
-      lCI          = .qbetabinomLS(0.025, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) / d,
-      uCI          = .qbetabinomLS(0.975, options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) / d,
-      SD           = .computeSdBetaBinomLS(options[["posteriorPredictionNumberOfFutureTrials"]], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) / d
+      distribution = distributionText,
+      mean         = .bbinomMeanLS(n, alpha, beta, lower, upper) / d,
+      median       = .qbbinomLS(.5, n, alpha, beta, lower, upper) / d,
+      mode         = .bbinomModeLS(n, alpha, beta, lower, upper, prop = prop),
+      lCI          = .qbbinomLS(0.025, n, alpha, beta, lower, upper) / d,
+      uCI          = .qbbinomLS(0.975, n, alpha, beta, lower, upper) / d,
+      SD           = .bbinomSdLS(n, alpha, beta, lower, upper) / d
     )
 
     return(output)
@@ -325,35 +351,34 @@
   x <- 0:n
 
   if (prior[["type"]] == "spike") {
-    y <- dbinom(x, n, prior[["spikePoint"]])
+    y <- stats::dbinom(x, n, prior[["spikePoint"]])
   } else if (prior[["type"]] == "beta") {
-    y <- sapply(x, function(s)extraDistr::dbbinom(s, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures))
+    y <- .dbbinomLS(x, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
   }
 
   return(y)
 }
-.betaHDILS                  <- function(alpha, beta, coverage) {
+.betaHDILS                  <- function(alpha, beta, lower, upper, coverage) {
 
   if (alpha == 1 & beta == 1) {
 
     # do central in case that alpha & beta == 1, the interval is weird otherwise
-    HDI <- c(.5 - coverage/2, .5 + coverage/2)
-
-  } else if (alpha >= 1 & beta >= 1) {
-
-    HDI <- HDInterval::hdi(qbeta, coverage, shape1 = alpha, shape2 = beta)
+    HDI <- c(
+      .qbetaLS((1 - coverage)/2,     alpha, beta, lower, upper),
+      .qbetaLS(1 - (1 - coverage)/2, alpha, beta, lower, upper)
+    )
 
   } else {
-    # new density approach - instead of pdf, use scaled cdf
-    # xDensity <- seq(0, 1, .00001)
-    # yDensity <- dbeta(xDensity, shape1 = alpha, shape2 = beta)
-    # yDensity[c(1, length(yDensity))] <- 0
 
-    denBeta <- .dbetaLS(alpha, beta)
+    # new density approach - instead of pdf, use scaled cdf
+    # - more computationally stable then using quantile function
+    # - deals with infinities in the parameter boundaries
+
+    denBeta <- .getDensityBetaLS(alpha, beta, lower, upper)
     class(denBeta) <- "density"
 
     HDI <- HDInterval::hdi(denBeta, coverage, allowSplit = T)
-    HDI <- round(HDI, 5) # dealing with precission
+    HDI <- round(HDI, 5) # dealing with precision issues
     HDI[HDI[,1] <= min(denBeta$x),1] <- 0
     HDI[HDI[,2] >= max(denBeta$x),2] <- 1
 
@@ -368,7 +393,7 @@
   # HDI <- my_hdi(qbinom, coverage, size = n, prob = theta)
 
   xDensity <- 0:n
-  yDensity <- dbinom(xDensity, n, theta)
+  yDensity <- stats::dbinom(xDensity, n, theta)
   yDensity <- round(yDensity, 10)
   denBinom <- list(
     x = xDensity,
@@ -380,19 +405,19 @@
   HDI <- matrix(as.vector(HDI), ncol = 2)
   return(HDI)
 }
-.betabinomialHDILS          <- function(n, alpha, beta, coverage) {
+.betabinomialHDILS          <- function(n, alpha, beta, lower, upper, coverage) {
 
   if (alpha == 1 & beta == 1) {
 
     HDI <-     x <- c(
-      .qbetabinomLS((1 - coverage)/2 + 1e-5,  n, alpha, beta),
-      .qbetabinomLS(1 - (1 - coverage)/2,     n, alpha, beta)
+      .qbbinomLS((1 - coverage)/2 + 1e-5,  n, alpha, beta, lower, upper),
+      .qbbinomLS(1 - (1 - coverage)/2,     n, alpha, beta, lower, upper)
     )
 
   } else {
 
     xDensity <- 0:n
-    yDensity <- sapply(xDensity,function(s)extraDistr::dbbinom(s, n, alpha, beta))
+    yDensity <- sapply(xDensity,function(s) .dbbinomLS(s, n, alpha, beta, lower, upper))
     yDensity <- round(yDensity, 10)
     denBeta <- list(
       x = xDensity,
@@ -406,20 +431,17 @@
   HDI <- matrix(as.vector(HDI), ncol = 2)
   return(HDI)
 }
-.qbetabinomLS               <- function(p, n, alpha, beta) {
-  # the rounding is due to numerical imprecission in extraDistr::pbbinom
-  return(c(0:n)[match(TRUE, round(sapply(0:n, function(s)extraDistr::pbbinom(s, n, alpha, beta)),10) >= p)])
-}
-.betaSupportLS              <- function(alpha, beta, successses, failures, BF) {
+.betaSupportLS              <- function(alpha, beta, lower, upper, successses, failures, BF) {
 
-  tempPost  <- .dbetaLS(alpha + successses, beta + failures)
-  tempPrior <- .dbetaLS(alpha, beta)
+  tempPost  <- .getDensityBetaLS(alpha + successses, beta + failures, lower, upper)
+  tempPrior <- .getDensityBetaLS(alpha, beta, lower, upper)
 
   xSeq   <- tempPost$x
   yPost  <- tempPost$y
   yPrior <- tempPrior$y
 
   bfRes  <- yPost/yPrior
+  bfRes[yPrior == 0] <- 0
 
   seqTF <- bfRes>BF
 
@@ -431,63 +453,7 @@
   return(support)
 
 }
-.modeBetaLS                 <- function(alpha, beta) {
-  if (alpha == 1 && beta == 1)
-    return("[0, 1]")
-  else if (alpha < 1 && beta < 1 && alpha == beta)
-    return("{0, 1}")
-  else if (alpha <= 1 && beta > 1)
-    return(0)
-  else if (alpha  > 1 && beta <= 1)
-    return(1)
-  else
-    return((alpha-1)/(alpha+beta-2))
-}
-.modeBinomialLS             <- function(N, p, prop = FALSE) {
-  if (prop) d <- N else d <- 1
-  if (p == 0)
-    return(0)
-  else if (p == 1)
-    return(N / d)
-  else if (.is.wholenumber((N + 1)*p))
-    return(paste0("{", ((N + 1)*p-1) / d, ", ", ((N + 1)*p) / d,  "}"))
-  else
-    return(floor((N + 1)*p) / d)
-}
-.modeBetaBinomLS            <- function(N, alpha, beta, prop = FALSE) {
-  if (prop) d <- N else d <- 1
-  if (alpha == 1 && beta == 1)
-    return(paste0("[0, ", N / d,"]"))
-  else if (alpha < 1 && beta < 1 && alpha == beta)
-    return(paste0("{0, ", N / d,"}"))
-  else if (alpha <= 1 && beta > 1)
-    return(0)
-  else if (alpha  > 1 && beta <= 1)
-    return(N / d)
-  else {
-    tempD   <- extraDistr::dbbinom(0:N, N, alpha, beta)
-    tempMed <- c(0:N)[tempD == max(tempD)]
-    if (length(tempMed) > 1) {
-      return(paste0("{", paste(tempMed / d, collapse = ", "), "}"))
-    } else {
-      return(tempMed / d)
-    }
-  }
-}
-.computeSdBinomLS           <- function(N, p, prop = FALSE) {
-  if (prop) d <- N else d <- 1
 
-  sd <- sqrt( N*p*(1-p) )
-
-  return(sd / d)
-}
-.computeSdBetaBinomLS       <- function(N, alpha, beta, prop = FALSE) {
-  if (prop) d <- N else d <- 1
-
-  sd <- sqrt( (N*alpha*beta*(N+alpha+beta)) / ( (alpha+beta)^2*(alpha+beta+1) ) )
-
-  return(sd / d)
-}
 .marginalCentralBinomialLS  <- function(density, spikes, coverage, l.bound = 0, u.bound = 1, densityDiscrete = FALSE) {
 
   if (!is.null(density)) {
@@ -679,12 +645,12 @@
 
   return(dat)
 }
-.dbetaLS                    <- function(alpha, beta) {
+.getDensityBetaLS           <- function(alpha, beta, lower, upper) {
 
   y <- c(
-    pbeta(.001, alpha, beta)*1000,
-    dbeta(seq(.0015, .9985, .001), alpha, beta),
-    pbeta(.999, alpha, beta, lower.tail = F)*1000
+    .pbetaLS(.001, alpha, beta, lower, upper)*1000,
+    .dbetaLS(seq(.0015, .9985, .001), alpha, beta, lower, upper),
+    (1-.pbetaLS(.999, alpha, beta, lower, upper))*1000
   )
   x <- c(.0005, seq(.0015, .9985, .001), .9995)
 
@@ -695,14 +661,187 @@
 }
 .is.wholenumber             <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
 
+# custom cdf/pdf/invcdf functions that include truncation
+.dbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    return(stats::dbeta(x, alpha, beta))
+  } else {
+    num <- stats::dbeta(x, alpha, beta)
+    den <- pbeta(upper, alpha, beta) - pbeta(lower, alpha, beta)
+    lik <- num/den
+    lik[x < lower | x > upper] <- 0
+    return(lik)
+  }
+}
+.pbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    return(stats::pbeta(x, alpha, beta))
+  } else {
+    p  <- stats::pbeta(x, alpha, beta)
+    C1 <- stats::pbeta(lower, alpha, beta)
+    C2 <- stats::pbeta(upper, alpha, beta)
+    p  <- (p - C1) / (C2 - C1)
+    p[x < lower] <- 0
+    p[x > upper] <- 1
+    return(p)
+  }
+}
+.qbetaLS                    <- function(x, alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    return(stats::qbeta(x, alpha, beta))
+  } else {
+
+    q <- sapply(x, function(xi) {
+      stats::optim(
+        par     = (lower + upper) / 2 ,
+        fn      = function(p) ( .pbetaLS(p, alpha, beta, lower, upper) - xi)^2,
+        lower   = lower,
+        upper   = upper,
+        method  = "L-BFGS-B",
+        control = list(
+          factr = 1e3
+        )
+      )$par
+    })
+
+    return(q)
+  }
+}
+.betaMeanLS                 <- function(alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    return(alpha / (alpha + beta))
+  } else {
+    return(stats::integrate(function(x) x * .dbetaLS(x, alpha, beta, lower, upper), lower, upper)$value)
+  }
+}
+.betaModeLS                 <- function(alpha, beta, lower = 0, upper = 1){
+  if (lower == 0 && upper == 1) {
+    if (alpha == 1 && beta == 1)
+      return("[0, 1]")
+    else if (alpha < 1 && beta < 1 && alpha == beta)
+      return("{0, 1}")
+    else if (alpha <= 1 && beta > 1)
+      return(0)
+    else if (alpha  > 1 && beta <= 1)
+      return(1)
+    else
+      return((alpha-1)/(alpha+beta-2))
+  } else {
+    if (alpha == 1 && beta == 1)
+      return(paste0("[", lower, ", ", upper, "]"))
+    else if (alpha < 1 && beta < 1 && alpha == beta && lower == (1-upper))
+      return(paste0("{", lower, ", ", upper, "}"))
+    else
+      return(optim(
+        par    = (lower + upper) / 2,
+        fn     = function(p) -.dbetaLS(p, alpha, beta, lower, upper),
+        lower  = lower,
+        upper  = upper,
+        method = "L-BFGS-B")$par)
+  }
+}
+
+.dbbinomLS                  <- function(x, size, alpha, beta, lower = 0, upper = 1) {
+  if (lower == 0 && upper == 1) {
+    return(extraDistr::dbbinom(x, size, alpha, beta))
+  } else {
+    return(sapply(x, function(xi) {
+      integrate(
+        f     = function(p) {
+          stats::dbinom(x = xi, size = size, prob = p) * .dbetaLS(p, alpha, beta, lower, upper)
+        },
+        lower = lower,
+        upper = upper)$value
+    }))
+  }
+}
+.pbbinomLS                  <- function(x, size, alpha, beta, lower = 0, upper = 1) {
+  if (lower == 0 && upper == 1) {
+    return(extraDistr::pbbinom(x, size, alpha, beta))
+  } else {
+    return(sapply(x, function(xi) {
+      sum(.dbbinomLS(0:xi, size, alpha, beta, lower, upper))
+    }))
+  }
+}
+.qbbinomLS                  <- function(x, size, alpha, beta, lower = 0, upper = 1) {
+  if (lower == 0 && upper == 1) {
+    # return(extraDistr::qbbinom(x, size, alpha, beta))
+    # the rounding is due to numerical imprecision in extraDistr::pbbinom
+    return(c(0:size)[match(TRUE, round(sapply(0:size, function(s) extraDistr::pbbinom(s, size, alpha, beta)),10) >= x)])
+  } else {
+    return(c(0:size)[match(TRUE, round(sapply(0:size, function(s) .pbbinomLS(s, size, alpha, beta, lower, upper)),10) >= x)])
+  }
+}
+.bbinomSdLS                 <- function(N, alpha, beta, lower = 0, upper = 1, prop = FALSE) {
+
+  if (prop) d <- N else d <- 1
+
+  if (lower == 0 && upper == 1) {
+    return(sqrt( (N*alpha*beta*(N+alpha+beta)) / ( (alpha+beta)^2*(alpha+beta+1) ) ) / d)
+  } else {
+    return(sqrt(sum(sapply(0:N, function(x) x^2 * .dbbinomLS(x, N, alpha, beta, lower, upper))) - .bbinomMeanLS(N, alpha, beta, lower, upper)^2) / d)
+  }
+}
+.bbinomMeanLS               <- function(N, alpha, beta, lower = 0, upper = 1, prop = FALSE) {
+
+  if (prop) d <- N else d <- 1
+
+  if (lower == 0 && upper == 1) {
+    return(alpha * N / (alpha + beta) / d)
+  } else {
+    return(sum(sapply(0:N, function(x) x * .dbbinomLS(x, N, alpha, beta, lower, upper))) / d)
+  }
+}
+.bbinomModeLS               <- function(N, alpha, beta, lower = 0, upper = 1, prop = FALSE) {
+
+  if (prop) d <- N else d <- 1
+
+  if (lower == 0 && upper == 1) {
+    if (alpha == 1 && beta == 1)
+      return(paste0("[0, ", N / d,"]"))
+    else if (alpha < 1 && beta < 1 && alpha == beta)
+      return(paste0("{0", ", ", N / d,"}"))
+    else if (alpha <= 1 && beta > 1)
+      return(0)
+    else if (alpha  > 1 && beta <= 1)
+      return(N / d)
+  }
+
+  tempD   <- round(.dbbinomLS(0:N, N, alpha, beta, lower, upper), 10)
+  tempMed <- c(0:N)[tempD == max(tempD)]
+  if (length(tempMed) > 1) {
+    return(paste0("{", paste(tempMed / d, collapse = ", "), "}"))
+  } else {
+    return(tempMed / d)
+  }
+}
+
+.binomModeLS                <- function(N, p, prop = FALSE) {
+  if (prop) d <- N else d <- 1
+  if (p == 0)
+    return(0)
+  else if (p == 1)
+    return(N / d)
+  else if (.is.wholenumber((N + 1)*p))
+    return(paste0("{", ((N + 1)*p-1) / d, ", ", ((N + 1)*p) / d,  "}"))
+  else
+    return(floor((N + 1)*p) / d)
+}
+.binomSdLS                  <- function(N, p, prop = FALSE) {
+  if (prop) d <- N else d <- 1
+
+  sd <- sqrt( N*p*(1-p) )
+
+  return(sd / d)
+}
+
 # plotting functions
 .dataLinesBinomialLS        <- function(data, prior) {
 
   xSeq   <- round(seq(.001, .999, .001), 5)
-  yPost  <- round((pbeta(xSeq + .001, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) - pbeta(xSeq - .001, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures))*(1/(.001*2)),10)
-  yPrior <- round((pbeta(xSeq + .001, prior[["betaPriorAlpha"]], prior[["betaPriorBeta"]]) -
-                      pbeta(xSeq - .001, prior[["betaPriorAlpha"]], prior[["betaPriorBeta"]]))
-                   *(1/(.001*2)),10)
+  yPost  <- round((.pbetaLS(xSeq + .001, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]) - .pbetaLS(xSeq - .001, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]))*(1/(.001*2)),10)
+  yPrior <- round((.pbetaLS(xSeq + .001, prior[["betaPriorAlpha"]], prior[["betaPriorBeta"]], prior[["truncationLower"]], prior[["truncationUpper"]]) - .pbetaLS(xSeq - .001, prior[["betaPriorAlpha"]], prior[["betaPriorBeta"]], prior[["truncationLower"]], prior[["truncationUpper"]]))*(1/(.001*2)),10)
 
   linesGroup <- c(yPost, yPrior)
   thetaGroup <- c(xSeq, xSeq)
@@ -718,7 +857,7 @@
     if (prior[["type"]] == "spike")
       x <- matrix(prior[["spikePoint"]], ncol = 2, nrow = 1)
     else if (prior[["type"]] == "beta")
-      x <- .betaHDILS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, coverage)
+      x <- .betaHDILS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]], coverage)
 
 
   } else if (type == "prediction") {
@@ -726,7 +865,7 @@
     if (prior[["type"]] == "spike")
       x <- .binomialHDILS(n, prior[["spikePoint"]], coverage)
     else if (prior[["type"]] == "beta")
-      x <- .betabinomialHDILS(n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, coverage)
+      x <- .betabinomialHDILS(n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]], coverage)
 
 
   }
@@ -741,20 +880,20 @@
     if (prior[["type"]] == "spike")
       x <- matrix(prior[["spikePoint"]], ncol = 2, nrow = 1)
     else if (prior[["type"]] == "beta")
-      x <- qbeta(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+      x <- .qbetaLS(c((1 - coverage)/2, 1 - (1 - coverage)/2), prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
 
 
   } else if (type == "prediction") {
-    # adding  (+ 1e-5) to the first lower bound because the quantile function is not inverse of cumulatiove
+    # adding  (+ 1e-5) to the first lower bound because the quantile function is not inverse of cumulative
     # distribution function and the lower boundary is not part of the interval. Wanted to write custom
-    # quantile function for the lower bound, however, the aproximation in R reusults in inability to fix
-    # the borderline cases: CI for BinomialLS distribution with 3 trials, probabily .5 and coverage 75%
+    # quantile function for the lower bound, however, the approximation in R results in inability to fix
+    # the borderline cases: CI for BinomialLS distribution with 3 trials, probability .5 and coverage 75%
     if (prior[["type"]] == "spike")
       x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior[["spikePoint"]])
     else if (prior[["type"]] == "beta")
       x <- c(
-        .qbetabinomLS((1 - coverage)/2 + 1e-5, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures),
-        .qbetabinomLS(1 - (1 - coverage)/2,     n , prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+        .qbbinomLS((1 - coverage)/2 + 1e-5, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]),
+        .qbbinomLS(1 - (1 - coverage)/2,     n , prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
       )
 
 
@@ -770,17 +909,18 @@
     if (prior[["type"]] == "spike")
       coverage <- ifelse (lCI <= prior[["spikePoint"]] & prior[["spikePoint"]] <= uCI, 1, 0)
     else if (prior[["type"]] == "beta")
-      coverage <- pbeta(uCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) -
-        pbeta(lCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+      coverage <- .pbetaLS(uCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]) -
+        .pbetaLS(lCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
 
 
   } else if (type == "prediction") {
 
     if (prior[["type"]] == "spike")
-      coverage <- sum(sapply(lCI:uCI, function(s)dbinom(s, n, prior[["spikePoint"]])))
+      coverage <- sum(sapply(lCI:uCI, function(s)
+        stats::dbinom(s, n, prior[["spikePoint"]])))
     else if (prior[["type"]] == "beta")
       coverage <- sum(sapply(lCI:uCI, function(s)
-        extraDistr::dbbinom(s, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)))
+        .dbbinomLS(s, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])))
 
   }
 
@@ -795,14 +935,14 @@
     uCI      <- prior[["spikePoint"]]
   } else if (prior[["type"]] == "beta") {
 
-    x        <- .betaSupportLS(prior[["betaPriorAlpha"]], prior[["betaPriorBeta"]], data$nSuccesses, data$nFailures, BF)
+    x        <- .betaSupportLS(prior[["betaPriorAlpha"]], prior[["betaPriorBeta"]], prior[["truncationLower"]], prior[["truncationUpper"]], data$nSuccesses, data$nFailures, BF)
 
     if (nrow(x) > 0) {
       lCI      <- x$lCI
       uCI      <- x$uCI
       coverage <- sum(sapply(1:length(lCI),function(i) {
-        pbeta(uCI[i], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures) -
-          pbeta(lCI[i], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+        .pbetaLS(uCI[i], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]) -
+          .pbetaLS(lCI[i], prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
       }))
     } else {
       lCI      <- NA
@@ -826,9 +966,9 @@
   x <- 0:n
 
   if (prior[["type"]] == "spike")
-    y <- dbinom(x, n, prior[["spikePoint"]])
+    y <- stats::dbinom(x, n, prior[["spikePoint"]])
   else if (prior[["type"]] == "beta")
-    y <- sapply(x, function(s)extraDistr::dbbinom(s, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures))
+    y <- .dbbinomLS(x, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
 
 
   dat <- data.frame(x = x, y = y)
@@ -863,11 +1003,11 @@
       } else if (estimate == "mode" && prior[["betaPriorAlpha"]] + data$nSuccesses < 1 && prior[["betaPriorBeta"]] + data$nFailures < 1 &&
                  prior[["betaPriorAlpha"]] + data$nSuccesses == prior[["betaPriorBeta"]] + data$nFailures) {
         x <- c(0, 1)
-        y <- .dbetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+        y <- .getDensityBetaLS(prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
         y <- y$y[c(1, length(y$y))]
       } else {
         x <- .estimateBinomialLS(data, prior)[[estimate]]
-        y <- dbeta(x, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+        y <- .dbetaLS(x, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
       }
     }
 
@@ -882,7 +1022,7 @@
       else
         x <- .predictBinomialLS(data, prior, options, prop)[[estimate]]
 
-      y <- dbinom(x * d, N, prior[["spikePoint"]])
+      y <- stats::dbinom(x * d, N, prior[["spikePoint"]])
     } else if (prior[["type"]] == "beta") {
 
       x <- .predictBinomialLS(data, prior, options, prop)[[estimate]]
@@ -893,11 +1033,11 @@
                  prior[["betaPriorAlpha"]] + data$nSuccesses == prior[["betaPriorBeta"]] + data$nFailures)
           x <- c(0, N) / d
         else {
-          x <- extraDistr::dbbinom(0:N, N, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+          x <- .dbbinomLS(0:N, N, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
           x <- c(0:N)[x == max(x)] / d
         }
       }
-      y <- extraDistr::dbbinom(x * d, N, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures)
+      y <- .dbbinomLS(x * d, N, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
     }
 
   }

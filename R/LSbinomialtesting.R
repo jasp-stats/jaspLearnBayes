@@ -182,14 +182,13 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           else
             tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[sapply(options[["models"]], function(p)p$name) == options[["priorPredictivePerformanceBfVsHypothesis"]]])
 
-        if (tempBF != "") {
-          if (options[["priorPredictivePerformanceBfType"]] == "BF10")
-            tempRow$bf <- tempBF
-          else if (options[["priorPredictivePerformanceBfType"]] == "BF01")
-            tempRow$bf <- 1/tempBF
-          else if (options[["priorPredictivePerformanceBfType"]] == "LogBF10")
-            tempRow$bf <- log(tempBF)
-        }
+        if (tempBF != "")
+          tempRow$bf <- switch(
+            options[["priorPredictivePerformanceBfType"]],
+            "BF10"    = tempBF,
+            "BF01"    = 1/tempBF,
+            "LogBF10" = log(tempBF)
+          )
 
         testsTable$addRows(tempRow)
       }
@@ -409,8 +408,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     } else if ((type == "Posterior" && !ready["data"]) || (type == "Posterior" && !ready["models"])) {
 
       for (i in 1:length(options[["models"]])) {
-        plotsIndividual[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
-                                                                           width = 530, height = 400, aspectRatio = 0.7)
+        plotsIndividual[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name, width = 530, height = 400, aspectRatio = 0.7)
       }
       return()
 

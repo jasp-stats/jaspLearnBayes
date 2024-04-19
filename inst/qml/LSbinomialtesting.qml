@@ -51,7 +51,8 @@ Form {
 				Label { text: qsTr("Hypothesis");			Layout.leftMargin: 5 * preferencesModel.uiScale; Layout.preferredWidth: 148 * preferencesModel.uiScale}
 				Label { text: qsTr("Prior probability");	Layout.preferredWidth: 100 * preferencesModel.uiScale	}
 				Label { text: qsTr("Distribution");			Layout.preferredWidth: 80 * preferencesModel.uiScale	}
-				Label { text: qsTr("Parameter (θ)");																}
+				Label { text: qsTr("Parameter (θ)"); 		Layout.preferredWidth: 170 * preferencesModel.uiScale	}
+				Label { text: qsTr("Truncation"); }
 			}
 			ComponentsList
 			{
@@ -109,7 +110,6 @@ Form {
 					Row
 					{
 						spacing:				4 * preferencesModel.uiScale
-						Layout.preferredWidth:	150 * preferencesModel.uiScale
 						FormulaField
 						{
 							label:				qsTr("α")
@@ -144,6 +144,39 @@ Form {
 							min:				0
 							max:				1
 							inclusive:			JASP.MinMax
+							fieldWidth:			70 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+						}
+					}
+					Row
+					{
+						spacing:				4 * preferencesModel.uiScale
+						FormulaField
+						{
+							label:				qsTr("Lower")
+							name:				"truncationLower"
+							id:					truncationLower
+							visible:			typeItem.currentValue === "beta"
+							value:				"0"
+							min:				0
+							max:				truncationUpper.value
+							inclusive:			JASP.MinOnly
+							fieldWidth:			70 * preferencesModel.uiScale
+							useExternalBorder:	false
+							showBorder:			true
+							controlXOffset:		6 * preferencesModel.uiScale
+						}
+						FormulaField
+						{
+							label:				qsTr("Upper")
+							name:				"truncationUpper"
+							id:					truncationUpper
+							visible:			typeItem.currentValue === "beta"
+							value:				"1"
+							min:				truncationLower.value
+							max:				1
+							inclusive:			JASP.MaxOnly
 							fieldWidth:			70 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true

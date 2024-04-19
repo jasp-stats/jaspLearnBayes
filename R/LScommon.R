@@ -26,7 +26,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
 .evaluatePriors       <- function(models, type) {
   for (p in 1:length(models)) {
     for (i in 1:length(models[[p]])) {
-      if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight")) {
+      if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight", "truncationLower", "truncationUpper")) {
         models[[p]][[paste0(names(models[[p]])[i],"Inp")]] <- models[[p]][[i]]
         models[[p]][[i]] <- eval(parse(text = models[[p]][[i]]))
 
@@ -34,6 +34,12 @@ gettextf <- function(fmt, ..., domain = NULL)  {
           .quitAnalysis(
             gettextf(
               "The parameter '%1$s' for model/hypothesis '%2$s' must be positive.",
+              gsub("par", "", names(models[[p]])[i]),
+              models[[p]][["name"]]))
+        } else if (type %in% c("binEst", "binTest") && names(models[[p]])[i] %in% c("truncationLower", "truncationLower") && (models[[p]][[i]] < 0 || models[[p]][[i]] > 1)) {
+          .quitAnalysis(
+            gettextf(
+              "The truncation range for model/hypothesis '%s' must be within [0, 1] interval.",
               gsub("par", "", names(models[[p]])[i]),
               models[[p]][["name"]]))
         } else if (names(models[[p]])[i] =="spikePoint" && (models[[p]][[i]] < 0 || models[[p]][[i]] > 1) && type %in% c("binEst", "binTest")) {
@@ -102,6 +108,12 @@ gettextf <- function(fmt, ..., domain = NULL)  {
   sequence <- trimws(sequence, which = c("both"))
   sequence <- sequence[sequence != ""]
   return(sequence)
+}
+.formatFractionInput  <- function(input, evaluatedInput) {
+  if (!is.na(as.numeric(input)))
+    return(evaluatedInput)
+  else
+    return(MASS::fractions(evaluatedInput))
 }
 
 # plotting functions

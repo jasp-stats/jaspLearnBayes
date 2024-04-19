@@ -67,9 +67,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "spike", value = ""), list(name = "Models Beta",
-                                                                                  betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5", type = "beta",
-                                                                                  value = "2"))
+                              spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Beta", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -90,57 +90,57 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Updating Table results match", {
     table <- results[["results"]][["containerIterativeUpdating"]][["collection"]][["containerIterativeUpdating_estimatesSequentialTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("beta (1, 1)", "spike at 0.5", 0, "beta (1, 2)", "spike at 0.5",
-                                        1, "beta (2, 2)", "spike at 0.5", 2, "beta (3, 2)", "spike at 0.5",
-                                        3, "beta (3, 3)", "spike at 0.5", 4, "beta (3, 4)", "spike at 0.5",
-                                        5, "beta (3, 5)", "spike at 0.5", 6, "beta (4, 5)", "spike at 0.5",
-                                        7, "beta (5, 5)", "spike at 0.5", 8, "beta (6, 5)", "spike at 0.5",
-                                        9, "beta (7, 5)", "spike at 0.5", 10, "beta (8, 5)", "spike at 0.5",
-                                        11, "beta (8, 6)", "spike at 0.5", 12, "beta (9, 6)", "spike at 0.5",
-                                        13, "beta (10, 6)", "spike at 0.5", 14, "beta (11, 6)", "spike at 0.5",
-                                        15, "beta (12, 6)", "spike at 0.5", 16, "beta (12, 7)", "spike at 0.5",
-                                        17, "beta (13, 7)", "spike at 0.5", 18, "beta (14, 7)", "spike at 0.5",
-                                        19, "beta (15, 7)", "spike at 0.5", 20, "beta (16, 7)", "spike at 0.5",
-                                        21, "beta (16, 8)", "spike at 0.5", 22, "beta (17, 8)", "spike at 0.5",
-                                        23, "beta (18, 8)", "spike at 0.5", 24, "beta (19, 8)", "spike at 0.5",
-                                        25, "beta (20, 8)", "spike at 0.5", 26, "beta (21, 8)", "spike at 0.5",
-                                        27, "beta (21, 9)", "spike at 0.5", 28, "beta (21, 10)", "spike at 0.5",
-                                        29, "beta (22, 10)", "spike at 0.5", 30, "beta (23, 10)", "spike at 0.5",
-                                        31, "beta (24, 10)", "spike at 0.5", 32, "beta (24, 11)", "spike at 0.5",
-                                        33, "beta (25, 11)", "spike at 0.5", 34, "beta (26, 11)", "spike at 0.5",
-                                        35, "beta (26, 12)", "spike at 0.5", 36, "beta (26, 13)", "spike at 0.5",
-                                        37, "beta (26, 14)", "spike at 0.5", 38, "beta (26, 15)", "spike at 0.5",
-                                        39, "beta (27, 15)", "spike at 0.5", 40, "beta (28, 15)", "spike at 0.5",
-                                        41, "beta (28, 16)", "spike at 0.5", 42, "beta (29, 16)", "spike at 0.5",
-                                        43, "beta (30, 16)", "spike at 0.5", 44, "beta (30, 17)", "spike at 0.5",
-                                        45, "beta (31, 17)", "spike at 0.5", 46, "beta (31, 18)", "spike at 0.5",
-                                        47, "beta (31, 19)", "spike at 0.5", 48, "beta (31, 20)", "spike at 0.5",
-                                        49, "beta (32, 20)", "spike at 0.5", 50, "beta (32, 21)", "spike at 0.5",
-                                        51, "beta (32, 22)", "spike at 0.5", 52, "beta (33, 22)", "spike at 0.5",
-                                        53, "beta (33, 23)", "spike at 0.5", 54, "beta (34, 23)", "spike at 0.5",
-                                        55, "beta (34, 24)", "spike at 0.5", 56, "beta (35, 24)", "spike at 0.5",
-                                        57, "beta (36, 24)", "spike at 0.5", 58, "beta (37, 24)", "spike at 0.5",
-                                        59, "beta (38, 24)", "spike at 0.5", 60, "beta (39, 24)", "spike at 0.5",
-                                        61, "beta (40, 24)", "spike at 0.5", 62, "beta (40, 25)", "spike at 0.5",
-                                        63, "beta (40, 26)", "spike at 0.5", 64, "beta (40, 27)", "spike at 0.5",
-                                        65, "beta (40, 28)", "spike at 0.5", 66, "beta (40, 29)", "spike at 0.5",
-                                        67, "beta (41, 29)", "spike at 0.5", 68, "beta (42, 29)", "spike at 0.5",
-                                        69, "beta (43, 29)", "spike at 0.5", 70, "beta (43, 30)", "spike at 0.5",
-                                        71, "beta (44, 30)", "spike at 0.5", 72, "beta (44, 31)", "spike at 0.5",
-                                        73, "beta (45, 31)", "spike at 0.5", 74, "beta (46, 31)", "spike at 0.5",
-                                        75, "beta (47, 31)", "spike at 0.5", 76, "beta (47, 32)", "spike at 0.5",
-                                        77, "beta (48, 32)", "spike at 0.5", 78, "beta (49, 32)", "spike at 0.5",
-                                        79, "beta (50, 32)", "spike at 0.5", 80, "beta (51, 32)", "spike at 0.5",
-                                        81, "beta (52, 32)", "spike at 0.5", 82, "beta (53, 32)", "spike at 0.5",
-                                        83, "beta (53, 33)", "spike at 0.5", 84, "beta (53, 34)", "spike at 0.5",
-                                        85, "beta (53, 35)", "spike at 0.5", 86, "beta (54, 35)", "spike at 0.5",
-                                        87, "beta (54, 36)", "spike at 0.5", 88, "beta (54, 37)", "spike at 0.5",
-                                        89, "beta (55, 37)", "spike at 0.5", 90, "beta (56, 37)", "spike at 0.5",
-                                        91, "beta (56, 38)", "spike at 0.5", 92, "beta (56, 39)", "spike at 0.5",
-                                        93, "beta (56, 40)", "spike at 0.5", 94, "beta (56, 41)", "spike at 0.5",
-                                        95, "beta (57, 41)", "spike at 0.5", 96, "beta (57, 42)", "spike at 0.5",
-                                        97, "beta (58, 42)", "spike at 0.5", 98, "beta (58, 43)", "spike at 0.5",
-                                        99, "beta (59, 43)", "spike at 0.5", 100))
+                                   list("beta(1, 1)", "spike at 0.5", 0, "beta(1, 2)", "spike at 0.5",
+                                        1, "beta(2, 2)", "spike at 0.5", 2, "beta(3, 2)", "spike at 0.5",
+                                        3, "beta(3, 3)", "spike at 0.5", 4, "beta(3, 4)", "spike at 0.5",
+                                        5, "beta(3, 5)", "spike at 0.5", 6, "beta(4, 5)", "spike at 0.5",
+                                        7, "beta(5, 5)", "spike at 0.5", 8, "beta(6, 5)", "spike at 0.5",
+                                        9, "beta(7, 5)", "spike at 0.5", 10, "beta(8, 5)", "spike at 0.5",
+                                        11, "beta(8, 6)", "spike at 0.5", 12, "beta(9, 6)", "spike at 0.5",
+                                        13, "beta(10, 6)", "spike at 0.5", 14, "beta(11, 6)", "spike at 0.5",
+                                        15, "beta(12, 6)", "spike at 0.5", 16, "beta(12, 7)", "spike at 0.5",
+                                        17, "beta(13, 7)", "spike at 0.5", 18, "beta(14, 7)", "spike at 0.5",
+                                        19, "beta(15, 7)", "spike at 0.5", 20, "beta(16, 7)", "spike at 0.5",
+                                        21, "beta(16, 8)", "spike at 0.5", 22, "beta(17, 8)", "spike at 0.5",
+                                        23, "beta(18, 8)", "spike at 0.5", 24, "beta(19, 8)", "spike at 0.5",
+                                        25, "beta(20, 8)", "spike at 0.5", 26, "beta(21, 8)", "spike at 0.5",
+                                        27, "beta(21, 9)", "spike at 0.5", 28, "beta(21, 10)", "spike at 0.5",
+                                        29, "beta(22, 10)", "spike at 0.5", 30, "beta(23, 10)", "spike at 0.5",
+                                        31, "beta(24, 10)", "spike at 0.5", 32, "beta(24, 11)", "spike at 0.5",
+                                        33, "beta(25, 11)", "spike at 0.5", 34, "beta(26, 11)", "spike at 0.5",
+                                        35, "beta(26, 12)", "spike at 0.5", 36, "beta(26, 13)", "spike at 0.5",
+                                        37, "beta(26, 14)", "spike at 0.5", 38, "beta(26, 15)", "spike at 0.5",
+                                        39, "beta(27, 15)", "spike at 0.5", 40, "beta(28, 15)", "spike at 0.5",
+                                        41, "beta(28, 16)", "spike at 0.5", 42, "beta(29, 16)", "spike at 0.5",
+                                        43, "beta(30, 16)", "spike at 0.5", 44, "beta(30, 17)", "spike at 0.5",
+                                        45, "beta(31, 17)", "spike at 0.5", 46, "beta(31, 18)", "spike at 0.5",
+                                        47, "beta(31, 19)", "spike at 0.5", 48, "beta(31, 20)", "spike at 0.5",
+                                        49, "beta(32, 20)", "spike at 0.5", 50, "beta(32, 21)", "spike at 0.5",
+                                        51, "beta(32, 22)", "spike at 0.5", 52, "beta(33, 22)", "spike at 0.5",
+                                        53, "beta(33, 23)", "spike at 0.5", 54, "beta(34, 23)", "spike at 0.5",
+                                        55, "beta(34, 24)", "spike at 0.5", 56, "beta(35, 24)", "spike at 0.5",
+                                        57, "beta(36, 24)", "spike at 0.5", 58, "beta(37, 24)", "spike at 0.5",
+                                        59, "beta(38, 24)", "spike at 0.5", 60, "beta(39, 24)", "spike at 0.5",
+                                        61, "beta(40, 24)", "spike at 0.5", 62, "beta(40, 25)", "spike at 0.5",
+                                        63, "beta(40, 26)", "spike at 0.5", 64, "beta(40, 27)", "spike at 0.5",
+                                        65, "beta(40, 28)", "spike at 0.5", 66, "beta(40, 29)", "spike at 0.5",
+                                        67, "beta(41, 29)", "spike at 0.5", 68, "beta(42, 29)", "spike at 0.5",
+                                        69, "beta(43, 29)", "spike at 0.5", 70, "beta(43, 30)", "spike at 0.5",
+                                        71, "beta(44, 30)", "spike at 0.5", 72, "beta(44, 31)", "spike at 0.5",
+                                        73, "beta(45, 31)", "spike at 0.5", 74, "beta(46, 31)", "spike at 0.5",
+                                        75, "beta(47, 31)", "spike at 0.5", 76, "beta(47, 32)", "spike at 0.5",
+                                        77, "beta(48, 32)", "spike at 0.5", 78, "beta(49, 32)", "spike at 0.5",
+                                        79, "beta(50, 32)", "spike at 0.5", 80, "beta(51, 32)", "spike at 0.5",
+                                        81, "beta(52, 32)", "spike at 0.5", 82, "beta(53, 32)", "spike at 0.5",
+                                        83, "beta(53, 33)", "spike at 0.5", 84, "beta(53, 34)", "spike at 0.5",
+                                        85, "beta(53, 35)", "spike at 0.5", 86, "beta(54, 35)", "spike at 0.5",
+                                        87, "beta(54, 36)", "spike at 0.5", 88, "beta(54, 37)", "spike at 0.5",
+                                        89, "beta(55, 37)", "spike at 0.5", 90, "beta(56, 37)", "spike at 0.5",
+                                        91, "beta(56, 38)", "spike at 0.5", 92, "beta(56, 39)", "spike at 0.5",
+                                        93, "beta(56, 40)", "spike at 0.5", 94, "beta(56, 41)", "spike at 0.5",
+                                        95, "beta(57, 41)", "spike at 0.5", 96, "beta(57, 42)", "spike at 0.5",
+                                        97, "beta(58, 42)", "spike at 0.5", 98, "beta(58, 43)", "spike at 0.5",
+                                        99, "beta(59, 43)", "spike at 0.5", 100))
   })
 
   test_that("Posterior Plots matches", {
@@ -164,8 +164,8 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Predictions Table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                        list("Models Spike", "spike at 0.5", 0.5, "binomial (1, 0.5)", 0.5,
-                             0.5, "Models Beta", "beta (59, 43)", 0.57843137254902, "beta-binomial (1, 59, 43)",
+                        list("Models Spike", "spike at 0.5", 0.5, "binomial(1, 0.5)", 0.5,
+                             0.5, "Models Beta", "beta(59, 43)", 0.57843137254902, "beta-binomial(1, 59, 43)",
                              0.57843137254902, 0.493810206253452))
   })
 
@@ -173,7 +173,7 @@ context("Learn Bayes - Binomial Estimation")
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models Spike", "spike at 0.5", 0.5, "spike at 0.5", 0.5, "Models Beta",
-                                        "beta (59, 43)", 0.57843137254902, "beta (1, 1)", 0.5))
+                                        "beta(59, 43)", 0.57843137254902, "beta(1, 1)", 0.5))
   })
 
   test_that("Data Summary table results match", {
@@ -250,9 +250,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -268,105 +268,105 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Sequential Updating Table results match", {
     table <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_tableIterative"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("[0.094, 0.906]", 0.5, "[0.300, 0.300]", 0.3, 0, "[0.044, 0.772]",
-                                        0.38572756813239, "[0.300, 0.300]", 0.3, 1, "[0.147, 0.853]",
-                                        0.5, "[0.300, 0.300]", 0.3, 2, "[0.239, 0.895]", 0.578592809309287,
+                                   list("[0.094, 0.905]", 0.5, "[0.300, 0.300]", 0.3, 0, "[0.044, 0.772]",
+                                        0.38572756813239, "[0.300, 0.300]", 0.3, 1, "[0.148, 0.854]",
+                                        0.5, "[0.300, 0.300]", 0.3, 2, "[0.238, 0.894]", 0.578592809309287,
                                         "[0.300, 0.300]", 0.3, 3, "[0.184, 0.816]", 0.5, "[0.300, 0.300]",
-                                        0.3, 4, "[0.149, 0.746]", 0.440155204634766, "[0.300, 0.300]",
-                                        0.3, 5, "[0.124, 0.685]", 0.39308483281063, "[0.300, 0.300]",
+                                        0.3, 4, "[0.148, 0.746]", 0.440155204634766, "[0.300, 0.300]",
+                                        0.3, 5, "[0.124, 0.684]", 0.39308483281063, "[0.300, 0.300]",
                                         0.3, 6, "[0.182, 0.732]", 0.451694156223663, "[0.300, 0.300]",
-                                        0.3, 7, "[0.234, 0.766]", 0.5, "[0.300, 0.300]", 0.3, 8, "[0.281, 0.793]",
-                                        0.54049281421956, "[0.300, 0.300]", 0.3, 9, "[0.323, 0.814]",
-                                        0.574923338650419, "[0.300, 0.300]", 0.3, 10, "[0.361, 0.832]",
-                                        0.604556744392119, "[0.300, 0.300]", 0.3, 11, "[0.328, 0.792]",
-                                        0.565167213922496, "[0.300, 0.300]", 0.3, 12, "[0.362, 0.809]",
+                                        0.3, 7, "[0.234, 0.766]", 0.5, "[0.300, 0.300]", 0.3, 8, "[0.280, 0.792]",
+                                        0.54049281421956, "[0.300, 0.300]", 0.3, 9, "[0.324, 0.815]",
+                                        0.574923338650419, "[0.300, 0.300]", 0.3, 10, "[0.362, 0.832]",
+                                        0.604556744392119, "[0.300, 0.300]", 0.3, 11, "[0.328, 0.791]",
+                                        0.565167213922496, "[0.300, 0.300]", 0.3, 12, "[0.362, 0.808]",
                                         0.591773498675099, "[0.300, 0.300]", 0.3, 13, "[0.392, 0.823]",
                                         0.61531276594024, "[0.300, 0.300]", 0.3, 14, "[0.420, 0.836]",
                                         0.636286181644356, "[0.300, 0.300]", 0.3, 15, "[0.446, 0.846]",
                                         0.65509143085512, "[0.300, 0.300]", 0.3, 16, "[0.416, 0.816]",
-                                        0.622894794821295, "[0.300, 0.300]", 0.3, 17, "[0.439, 0.827]",
-                                        0.640565733353753, "[0.300, 0.300]", 0.3, 18, "[0.461, 0.836]",
-                                        0.656655004344889, "[0.300, 0.300]", 0.3, 19, "[0.481, 0.845]",
-                                        0.671365816585758, "[0.300, 0.300]", 0.3, 20, "[0.500, 0.852]",
+                                        0.622894794821295, "[0.300, 0.300]", 0.3, 17, "[0.440, 0.827]",
+                                        0.640565733353753, "[0.300, 0.300]", 0.3, 18, "[0.460, 0.836]",
+                                        0.656655004344889, "[0.300, 0.300]", 0.3, 19, "[0.482, 0.845]",
+                                        0.671365816585758, "[0.300, 0.300]", 0.3, 20, "[0.500, 0.853]",
                                         0.684868008478614, "[0.300, 0.300]", 0.3, 21, "[0.474, 0.828]",
-                                        0.65784657834052, "[0.300, 0.300]", 0.3, 22, "[0.491, 0.835]",
+                                        0.65784657834052, "[0.300, 0.300]", 0.3, 22, "[0.492, 0.836]",
                                         0.670836999809617, "[0.300, 0.300]", 0.3, 23, "[0.508, 0.843]",
-                                        0.682877205036544, "[0.300, 0.300]", 0.3, 24, "[0.523, 0.849]",
-                                        0.69406775991081, "[0.300, 0.300]", 0.3, 25, "[0.538, 0.855]",
+                                        0.682877205036544, "[0.300, 0.300]", 0.3, 24, "[0.522, 0.849]",
+                                        0.69406775991081, "[0.300, 0.300]", 0.3, 25, "[0.537, 0.855]",
                                         0.704495525209941, "[0.300, 0.300]", 0.3, 26, "[0.551, 0.861]",
                                         0.714235913830798, "[0.300, 0.300]", 0.3, 27, "[0.528, 0.840]",
-                                        0.691449298248634, "[0.300, 0.300]", 0.3, 28, "[0.507, 0.820]",
+                                        0.691449298248634, "[0.300, 0.300]", 0.3, 28, "[0.507, 0.821]",
                                         0.670070729920772, "[0.300, 0.300]", 0.3, 29, "[0.520, 0.827]",
                                         0.679967316384646, "[0.300, 0.300]", 0.3, 30, "[0.533, 0.833]",
-                                        0.689287516232948, "[0.300, 0.300]", 0.3, 31, "[0.545, 0.838]",
-                                        0.698080254263729, "[0.300, 0.300]", 0.3, 32, "[0.526, 0.820]",
+                                        0.689287516232948, "[0.300, 0.300]", 0.3, 31, "[0.544, 0.838]",
+                                        0.698080254263729, "[0.300, 0.300]", 0.3, 32, "[0.526, 0.821]",
                                         0.678871788869583, "[0.300, 0.300]", 0.3, 33, "[0.537, 0.826]",
                                         0.687472547900221, "[0.300, 0.300]", 0.3, 34, "[0.548, 0.831]",
                                         0.695624641542151, "[0.300, 0.300]", 0.3, 35, "[0.531, 0.815]",
-                                        0.677942968082248, "[0.300, 0.300]", 0.3, 36, "[0.514, 0.799]",
-                                        0.661137560458077, "[0.300, 0.300]", 0.3, 37, "[0.499, 0.783]",
-                                        0.64514491836568, "[0.300, 0.300]", 0.3, 38, "[0.484, 0.768]",
-                                        0.62990751702158, "[0.300, 0.300]", 0.3, 39, "[0.495, 0.774]",
-                                        0.638447436303181, "[0.300, 0.300]", 0.3, 40, "[0.505, 0.780]",
-                                        0.646602144702128, "[0.300, 0.300]", 0.3, 41, "[0.492, 0.766]",
-                                        0.632340703720261, "[0.300, 0.300]", 0.3, 42, "[0.502, 0.772]",
-                                        0.640275248179192, "[0.300, 0.300]", 0.3, 43, "[0.511, 0.777]",
-                                        0.647874567128595, "[0.300, 0.300]", 0.3, 44, "[0.498, 0.764]",
-                                        0.634471796690132, "[0.300, 0.300]", 0.3, 45, "[0.508, 0.769]",
-                                        0.641880701656875, "[0.300, 0.300]", 0.3, 46, "[0.495, 0.757]",
-                                        0.629129419469412, "[0.300, 0.300]", 0.3, 47, "[0.484, 0.744]",
-                                        0.616874813086074, "[0.300, 0.300]", 0.3, 48, "[0.473, 0.732]",
+                                        0.677942968082248, "[0.300, 0.300]", 0.3, 36, "[0.514, 0.798]",
+                                        0.661137560458077, "[0.300, 0.300]", 0.3, 37, "[0.498, 0.782]",
+                                        0.64514491836568, "[0.300, 0.300]", 0.3, 38, "[0.484, 0.767]",
+                                        0.62990751702158, "[0.300, 0.300]", 0.3, 39, "[0.496, 0.774]",
+                                        0.638447436303181, "[0.300, 0.300]", 0.3, 40, "[0.505, 0.779]",
+                                        0.646602144702128, "[0.300, 0.300]", 0.3, 41, "[0.492, 0.765]",
+                                        0.632340703720261, "[0.300, 0.300]", 0.3, 42, "[0.502, 0.771]",
+                                        0.640275248179192, "[0.300, 0.300]", 0.3, 43, "[0.511, 0.776]",
+                                        0.647874567128595, "[0.300, 0.300]", 0.3, 44, "[0.498, 0.763]",
+                                        0.634471796690132, "[0.300, 0.300]", 0.3, 45, "[0.507, 0.768]",
+                                        0.641880701656875, "[0.300, 0.300]", 0.3, 46, "[0.496, 0.756]",
+                                        0.629129419469412, "[0.300, 0.300]", 0.3, 47, "[0.484, 0.745]",
+                                        0.616874813086074, "[0.300, 0.300]", 0.3, 48, "[0.474, 0.733]",
                                         0.605088428278435, "[0.300, 0.300]", 0.3, 49, "[0.482, 0.738]",
-                                        0.612492624209658, "[0.300, 0.300]", 0.3, 50, "[0.471, 0.727]",
-                                        0.601220656886222, "[0.300, 0.300]", 0.3, 51, "[0.461, 0.716]",
-                                        0.590356033725692, "[0.300, 0.300]", 0.3, 52, "[0.470, 0.721]",
+                                        0.612492624209658, "[0.300, 0.300]", 0.3, 50, "[0.472, 0.727]",
+                                        0.601220656886222, "[0.300, 0.300]", 0.3, 51, "[0.462, 0.716]",
+                                        0.590356033725692, "[0.300, 0.300]", 0.3, 52, "[0.470, 0.722]",
                                         0.597627465725956, "[0.300, 0.300]", 0.3, 53, "[0.460, 0.711]",
                                         0.587204447349039, "[0.300, 0.300]", 0.3, 54, "[0.469, 0.716]",
-                                        0.594280619749873, "[0.300, 0.300]", 0.3, 55, "[0.459, 0.706]",
-                                        0.584265290819207, "[0.300, 0.300]", 0.3, 56, "[0.467, 0.711]",
-                                        0.591155626527085, "[0.300, 0.300]", 0.3, 57, "[0.475, 0.717]",
-                                        0.597821293739793, "[0.300, 0.300]", 0.3, 58, "[0.483, 0.722]",
+                                        0.594280619749873, "[0.300, 0.300]", 0.3, 55, "[0.460, 0.706]",
+                                        0.584265290819207, "[0.300, 0.300]", 0.3, 56, "[0.468, 0.711]",
+                                        0.591155626527085, "[0.300, 0.300]", 0.3, 57, "[0.476, 0.717]",
+                                        0.597821293739793, "[0.300, 0.300]", 0.3, 58, "[0.484, 0.722]",
                                         0.604273104107719, "[0.300, 0.300]", 0.3, 59, "[0.490, 0.727]",
                                         0.610521186566894, "[0.300, 0.300]", 0.3, 60, "[0.498, 0.731]",
-                                        0.616575040384333, "[0.300, 0.300]", 0.3, 61, "[0.505, 0.736]",
-                                        0.622443583334046, "[0.300, 0.300]", 0.3, 62, "[0.496, 0.726]",
-                                        0.613060533443989, "[0.300, 0.300]", 0.3, 63, "[0.487, 0.717]",
-                                        0.603956150474431, "[0.300, 0.300]", 0.3, 64, "[0.479, 0.708]",
-                                        0.595118204160828, "[0.300, 0.300]", 0.3, 65, "[0.471, 0.699]",
-                                        0.586535169305878, "[0.300, 0.300]", 0.3, 66, "[0.463, 0.691]",
-                                        0.578196175742505, "[0.300, 0.300]", 0.3, 67, "[0.470, 0.695]",
-                                        0.584109131212598, "[0.300, 0.300]", 0.3, 68, "[0.477, 0.700]",
-                                        0.589858603518289, "[0.300, 0.300]", 0.3, 69, "[0.483, 0.705]",
-                                        0.59545128002427, "[0.300, 0.300]", 0.3, 70, "[0.476, 0.696]",
+                                        0.616575040384333, "[0.300, 0.300]", 0.3, 61, "[0.504, 0.736]",
+                                        0.622443583334046, "[0.300, 0.300]", 0.3, 62, "[0.496, 0.727]",
+                                        0.613060533443989, "[0.300, 0.300]", 0.3, 63, "[0.488, 0.717]",
+                                        0.603956150474431, "[0.300, 0.300]", 0.3, 64, "[0.478, 0.708]",
+                                        0.595118204160828, "[0.300, 0.300]", 0.3, 65, "[0.472, 0.700]",
+                                        0.586535169305878, "[0.300, 0.300]", 0.3, 66, "[0.464, 0.691]",
+                                        0.578196175742505, "[0.300, 0.300]", 0.3, 67, "[0.470, 0.696]",
+                                        0.584109131212598, "[0.300, 0.300]", 0.3, 68, "[0.476, 0.700]",
+                                        0.589858603518289, "[0.300, 0.300]", 0.3, 69, "[0.484, 0.705]",
+                                        0.59545128002427, "[0.300, 0.300]", 0.3, 70, "[0.476, 0.697]",
                                         0.58744105050883, "[0.300, 0.300]", 0.3, 71, "[0.482, 0.701]",
-                                        0.592917347189705, "[0.300, 0.300]", 0.3, 72, "[0.475, 0.693]",
-                                        0.585150168403083, "[0.300, 0.300]", 0.3, 73, "[0.481, 0.697]",
-                                        0.590514466487781, "[0.300, 0.300]", 0.3, 74, "[0.487, 0.701]",
-                                        0.595741809870873, "[0.300, 0.300]", 0.3, 75, "[0.493, 0.706]",
+                                        0.592917347189705, "[0.300, 0.300]", 0.3, 72, "[0.474, 0.693]",
+                                        0.585150168403083, "[0.300, 0.300]", 0.3, 73, "[0.482, 0.698]",
+                                        0.590514466487781, "[0.300, 0.300]", 0.3, 74, "[0.488, 0.702]",
+                                        0.595741809870873, "[0.300, 0.300]", 0.3, 75, "[0.494, 0.706]",
                                         0.600837377135875, "[0.300, 0.300]", 0.3, 76, "[0.486, 0.698]",
                                         0.593358338512864, "[0.300, 0.300]", 0.3, 77, "[0.492, 0.702]",
-                                        0.598357914811768, "[0.300, 0.300]", 0.3, 78, "[0.497, 0.706]",
+                                        0.598357914811768, "[0.300, 0.300]", 0.3, 78, "[0.498, 0.706]",
                                         0.603236048712387, "[0.300, 0.300]", 0.3, 79, "[0.503, 0.710]",
                                         0.607997111862196, "[0.300, 0.300]", 0.3, 80, "[0.508, 0.714]",
-                                        0.612645268578687, "[0.300, 0.300]", 0.3, 81, "[0.514, 0.717]",
-                                        0.617184487995694, "[0.300, 0.300]", 0.3, 82, "[0.519, 0.721]",
+                                        0.612645268578687, "[0.300, 0.300]", 0.3, 81, "[0.514, 0.718]",
+                                        0.617184487995694, "[0.300, 0.300]", 0.3, 82, "[0.518, 0.721]",
                                         0.621618555365786, "[0.300, 0.300]", 0.3, 83, "[0.512, 0.714]",
                                         0.61450101368092, "[0.300, 0.300]", 0.3, 84, "[0.505, 0.707]",
-                                        0.607544611226366, "[0.300, 0.300]", 0.3, 85, "[0.499, 0.700]",
-                                        0.600743937631615, "[0.300, 0.300]", 0.3, 86, "[0.504, 0.703]",
+                                        0.607544611226366, "[0.300, 0.300]", 0.3, 85, "[0.500, 0.700]",
+                                        0.600743937631615, "[0.300, 0.300]", 0.3, 86, "[0.504, 0.704]",
                                         0.605163663866717, "[0.300, 0.300]", 0.3, 87, "[0.498, 0.697]",
                                         0.598537968373689, "[0.300, 0.300]", 0.3, 88, "[0.492, 0.690]",
-                                        0.592055780320433, "[0.300, 0.300]", 0.3, 89, "[0.497, 0.694]",
-                                        0.59642653398455, "[0.300, 0.300]", 0.3, 90, "[0.502, 0.697]",
+                                        0.592055780320433, "[0.300, 0.300]", 0.3, 89, "[0.498, 0.694]",
+                                        0.59642653398455, "[0.300, 0.300]", 0.3, 90, "[0.501, 0.697]",
                                         0.600704624291, "[0.300, 0.300]", 0.3, 91, "[0.496, 0.691]",
                                         0.594403685290299, "[0.300, 0.300]", 0.3, 92, "[0.490, 0.684]",
-                                        0.588233553913292, "[0.300, 0.300]", 0.3, 93, "[0.484, 0.678]",
-                                        0.582190198964589, "[0.300, 0.300]", 0.3, 94, "[0.479, 0.672]",
-                                        0.576269753178822, "[0.300, 0.300]", 0.3, 95, "[0.484, 0.676]",
-                                        0.580535426024885, "[0.300, 0.300]", 0.3, 96, "[0.478, 0.670]",
-                                        0.574749482467959, "[0.300, 0.300]", 0.3, 97, "[0.483, 0.673]",
-                                        0.578945969319675, "[0.300, 0.300]", 0.3, 98, "[0.478, 0.667]",
-                                        0.573288632711558, "[0.300, 0.300]", 0.3, 99, "[0.482, 0.671]",
+                                        0.588233553913292, "[0.300, 0.300]", 0.3, 93, "[0.484, 0.677]",
+                                        0.582190198964589, "[0.300, 0.300]", 0.3, 94, "[0.478, 0.671]",
+                                        0.576269753178822, "[0.300, 0.300]", 0.3, 95, "[0.484, 0.675]",
+                                        0.580535426024885, "[0.300, 0.300]", 0.3, 96, "[0.478, 0.669]",
+                                        0.574749482467959, "[0.300, 0.300]", 0.3, 97, "[0.482, 0.672]",
+                                        0.578945969319675, "[0.300, 0.300]", 0.3, 98, "[0.478, 0.666]",
+                                        0.573288632711558, "[0.300, 0.300]", 0.3, 99, "[0.482, 0.670]",
                                         0.577418036585966, "[0.300, 0.300]", 0.3, 100))
   })
 
@@ -454,15 +454,15 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Predictions table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta-binomial (10, 60, 44)",
-                                        6, 1.62789504128088, "Models Point", "spike at 0.3", 0.3, "binomial (10, 0.3)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta-binomial(10, 60, 44)",
+                                        6, 1.62789504128088, "Models Point", "spike at 0.3", 0.3, "binomial(10, 0.3)",
                                         3, 1.44913767461894))
   })
 
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -541,9 +541,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -606,7 +606,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -685,9 +685,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point",betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -714,7 +714,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -793,9 +793,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -816,7 +816,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -895,9 +895,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -918,7 +918,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -997,9 +997,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1014,7 +1014,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -1093,9 +1093,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mode"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "2", betaPriorBeta = "2",
-                              spikePoint = "0.5", type = "beta", value = ""), list(name = "Models Point",
-                                                                                 betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.3", type = "spike",
-                                                                                 value = "2"))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1110,7 +1110,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (60, 44)", 0.57843137254902, "beta (2, 2)",
+                                   list("Models Beta", "beta(60, 44)", 0.57843137254902, "beta(2, 2)",
                                         0.5, "Models Point", "spike at 0.3", 0.3, "spike at 0.3", 0.3
                                    ))
   })
@@ -1189,7 +1189,7 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models Spike", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "spike", value = ""))
+                              spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1228,7 +1228,7 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Predictions Summary table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Spike", "spike at 0.5", 0.5, "binomial (1, 0.5)", 0.5,
+                                   list("Models Spike", "spike at 0.5", 0.5, "binomial(1, 0.5)", 0.5,
                                         0.5))
   })
 
@@ -1312,7 +1312,7 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "median"
   options$models <- list(list(name = "Models Beta", betaPriorAlpha = "1", betaPriorBeta = "1",
-                              spikePoint = "0.5", type = "beta", value = ""))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1352,14 +1352,14 @@ context("Learn Bayes - Binomial Estimation")
   test_that("Predictions Summary table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (59, 43)", 0.578945969319675, "beta-binomial (1, 59, 43)",
+                                   list("Models Beta", "beta(59, 43)", 0.578945969319675, "beta-binomial(1, 59, 43)",
                                         1, 0.493810206253452))
   })
 
   test_that("Estimation Summary table results match", {
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Models Beta", "beta (59, 43)", 0.58, "beta (1, 1)", "[0, 1]"
+                                   list("Models Beta", "beta(59, 43)", 0.58, "beta(1, 1)", "[0, 1]"
                                    ))
   })
 
@@ -1437,15 +1437,16 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
-                              type = "spike", value = ""), list(name = "Models 2", betaPriorAlpha = "1",
-                                                                betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              type = "spike", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 2", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
+                              type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
   table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list("Models 1", "spike at 0.5", 0.5, "spike at 0.5", 0.5, "Models 2",
-                                      "beta (4, 7)", 0.363636363636364, "beta (1, 1)", 0.5))
+                                      "beta(4, 7)", 0.363636363636364, "beta(1, 1)", 0.5))
 }
 {
   options <- analysisOptions("LSbinomialestimation")
@@ -1515,8 +1516,9 @@ context("Learn Bayes - Binomial Estimation")
   options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
   options$posteriorPredictionSummaryTablePointEstimate <- "mean"
   options$models <- list(list(name = "Models 1", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
-                              type = "spike", value = ""), list(name = "Models 2", betaPriorAlpha = "1",
-                                                                betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2"))
+                              type = "spike", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 2", betaPriorAlpha = "1", betaPriorBeta = "1", spikePoint = "0.5",
+                              type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- ""
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
@@ -1526,7 +1528,7 @@ context("Learn Bayes - Binomial Estimation")
     table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
                                    list("Models 1", "spike at 0.5", 0.5, "spike at 0.5", 0.5, "Models 2",
-                                        "beta (6, 4)", 0.6, "beta (1, 1)", 0.5))
+                                        "beta(6, 4)", 0.6, "beta(1, 1)", 0.5))
   })
 
   test_that("Data Summary table results match", {
