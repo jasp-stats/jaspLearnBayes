@@ -1227,3 +1227,31 @@ msgstr "Nº cadeas"
 msgctxt "LSbinaryclassification|"
 msgid "For varying threshold"
 msgstr "Por limiar variante"
+
+msgctxt "LSbinomialestimation|"
+msgid "Truncation"
+msgstr ""
+
+#, fuzzy
+msgctxt "LSbinomialestimation|"
+msgid "Lower"
+msgstr "Inferior"
+
+#, fuzzy
+msgctxt "LSbinomialestimation|"
+msgid "Upper"
+msgstr "Superior"
+
+msgctxt "LSbinomialtesting|"
+msgid "Truncation"
+msgstr ""
+
+#, fuzzy
+msgctxt "LSbinomialtesting|"
+msgid "Lower"
+msgstr "Inferior"
+
+#, fuzzy
+msgctxt "LSbinomialtesting|"
+msgid "Upper"
+msgstr "Superior"

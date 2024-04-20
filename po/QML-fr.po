@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-04-09 13:34+0000\n"
-"Last-Translator: robachowyk <kaya.robach@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/jasp/"
-"jasplearnbayes-qml/fr/>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Language: fr\n"
 "X-Qt-Contexts: true\n"
 
@@ -723,9 +717,10 @@ msgctxt "LSgaussiandatainput|"
 msgid "Data"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
-msgstr ""
+msgstr "Type d'entrée"
 
 msgctxt "LSgaussiandatainput|"
 msgid "Select variable"
@@ -1233,4 +1228,28 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "For varying threshold"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Upper"
 msgstr ""

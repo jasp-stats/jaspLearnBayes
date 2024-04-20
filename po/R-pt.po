@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2024-01-20 02:45\n"
+"POT-Creation-Date: 2024-04-20 02:44\n"
 "PO-Revision-Date: 2022-08-29 00:27+0000\n"
 "Last-Translator: Laura Durans <lauraadurans@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
@@ -557,13 +557,19 @@ msgstr ""
 msgid "spike at %s"
 msgstr ""
 
-msgid "beta (%1$s, %2$s)"
+msgid "beta(%1$s, %2$s)"
 msgstr ""
 
-msgid "binomial (%1$i, %2$s)"
+msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
 msgstr ""
 
-msgid "beta-binomial (%1$i, %2$s, %3$s)"
+msgid "binomial(%1$i, %2$s)"
+msgstr ""
+
+msgid "beta-binomial(%1$i, %2$s, %3$s)"
+msgstr ""
+
+msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
 msgstr ""
 
 #, fuzzy
@@ -721,6 +727,11 @@ msgid ""
 msgstr ""
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
+msgstr ""
+
+msgid ""
+"The truncation range for model/hypothesis '%s' must be within [0, 1] "
+"interval."
 msgstr ""
 
 msgid ""

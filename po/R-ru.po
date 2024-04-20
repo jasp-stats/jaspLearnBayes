@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.2\n"
-"POT-Creation-Date: 2024-01-20 02:45\n"
+"POT-Creation-Date: 2024-04-20 02:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -531,13 +531,19 @@ msgstr ""
 msgid "spike at %s"
 msgstr ""
 
-msgid "beta (%1$s, %2$s)"
+msgid "beta(%1$s, %2$s)"
 msgstr ""
 
-msgid "binomial (%1$i, %2$s)"
+msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
 msgstr ""
 
-msgid "beta-binomial (%1$i, %2$s, %3$s)"
+msgid "binomial(%1$i, %2$s)"
+msgstr ""
+
+msgid "beta-binomial(%1$i, %2$s, %3$s)"
+msgstr ""
+
+msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
 msgstr ""
 
 msgid "Estimation Summary"
@@ -687,6 +693,11 @@ msgid ""
 msgstr ""
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
+msgstr ""
+
+msgid ""
+"The truncation range for model/hypothesis '%s' must be within [0, 1] "
+"interval."
 msgstr ""
 
 msgid ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
-"POT-Creation-Date: 2024-01-20 02:45\n"
+"POT-Creation-Date: 2024-04-20 02:44\n"
 "PO-Revision-Date: 2023-04-21 17:50+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
@@ -611,13 +611,24 @@ msgstr "失敗数"
 msgid "spike at %s"
 msgstr "%s でスパイク"
 
-msgid "beta (%1$s, %2$s)"
+#, fuzzy
+msgid "beta(%1$s, %2$s)"
 msgstr "beta (%1$s, %2$s)"
 
-msgid "binomial (%1$i, %2$s)"
+#, fuzzy
+msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
+msgstr "beta (%1$s, %2$s)"
+
+#, fuzzy
+msgid "binomial(%1$i, %2$s)"
 msgstr "binomial (%1$i, %2$s)"
 
-msgid "beta-binomial (%1$i, %2$s, %3$s)"
+#, fuzzy
+msgid "beta-binomial(%1$i, %2$s, %3$s)"
+msgstr "beta-binomial (%1$i, %2$s, %3$s)"
+
+#, fuzzy
+msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
 msgstr "beta-binomial (%1$i, %2$s, %3$s)"
 
 msgid "Estimation Summary"
@@ -775,6 +786,12 @@ msgid ""
 msgstr "%s %sの予測は、%s %sと%s %sに基づいています."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
+msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければなりません."
+
+#, fuzzy
+msgid ""
+"The truncation range for model/hypothesis '%s' must be within [0, 1] "
+"interval."
 msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければなりません."
 
 msgid ""

@@ -1239,3 +1239,27 @@ msgstr ""
 msgctxt "LSbinaryclassification|"
 msgid "For varying threshold"
 msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Upper"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Truncation"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Upper"
+msgstr ""
