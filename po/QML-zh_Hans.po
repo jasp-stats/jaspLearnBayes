@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-05-06 06:07+0000\n"
-"Last-Translator: Cochrane <cunyikang@qq.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"jasp/jasplearnbayes-qml/zh_Hans/>\n"
-"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.3\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
 
@@ -499,9 +493,10 @@ msgctxt "LSestimationpredictions|"
 msgid "Plots"
 msgstr "绘图"
 
+#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgctxt "LSestimationpredictions|"
 msgid "Stacked"
@@ -611,9 +606,10 @@ msgctxt "LSestimationsequential|"
 msgid "Upper"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgctxt "LSestimationsequential|"
 msgid "Stacked"
@@ -817,9 +813,10 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "log(BF₁₀)"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
-msgstr ""
+msgstr "先验分布"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Conditional"
