@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-05-23 16:46+0000\n"
+"Last-Translator: Koen Derks <koen-derks@hotmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6-dev\n"
 "X-Language: nl\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -1151,108 +1157,104 @@ msgstr "Vergelijking"
 
 msgctxt "LSbinaryclassification|"
 msgid "Observed tests"
-msgstr ""
+msgstr "Waargenomen toetsen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive tests"
-msgstr ""
+msgstr "Positieve toetsen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative tests"
-msgstr ""
+msgstr "Negatieve toetsen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Update prevalence"
-msgstr ""
+msgstr "Update prevalentie"
 
 msgctxt "LSbinaryclassification|"
 msgid "Respect order constraint"
-msgstr ""
+msgstr "Ordebeperking respecteren"
 
 msgctxt "LSbinaryclassification|"
 msgid "Additional Statistics"
-msgstr ""
+msgstr "Aanvullende Statistieken"
 
 msgctxt "LSbinaryclassification|"
 msgid "Area plot"
-msgstr ""
+msgstr "Gebiedsfiguur"
 
 msgctxt "LSbinaryclassification|"
 msgid "Receiver operating characteristic (ROC)"
-msgstr ""
+msgstr "Ontvanger operationele karakteristiek (ROC)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Total operating characteristic (TOC)"
-msgstr ""
+msgstr "Totale operationele karakteristiek (TOC)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Precision-recall"
-msgstr ""
+msgstr "Precisie-recall"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by threshold"
-msgstr ""
+msgstr "PPV en NPV per drempel"
 
 msgctxt "LSbinaryclassification|"
 msgid "Compute results"
-msgstr ""
+msgstr "Bereken resultaten"
 
 msgctxt "LSbinaryclassification|"
 msgid "Colors"
-msgstr ""
+msgstr "Kleuren"
 
 msgctxt "LSbinaryclassification|"
 msgid "MCMC parameters"
-msgstr ""
+msgstr "MCMC parameters"
 
 msgctxt "LSbinaryclassification|"
 msgid "For main model"
-msgstr ""
+msgstr "Voor hoofdmodel"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. samples"
-msgstr ""
+msgstr "No. trekkingen"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. burnin samples"
-msgstr ""
+msgstr "No. inbrandtrekkingen"
 
 msgctxt "LSbinaryclassification|"
 msgid "Thinning"
-msgstr ""
+msgstr "Verdunning"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. chains"
-msgstr ""
+msgstr "No. ketens"
 
 msgctxt "LSbinaryclassification|"
 msgid "For varying threshold"
-msgstr ""
+msgstr "Voor variërende drempel"
 
 msgctxt "LSbinomialestimation|"
 msgid "Truncation"
-msgstr ""
+msgstr "Truncatie"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Lower"
 msgstr "Onder"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Upper"
 msgstr "Boven"
 
 msgctxt "LSbinomialtesting|"
 msgid "Truncation"
-msgstr ""
+msgstr "Truncatie"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Lower"
 msgstr "Onder"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Upper"
 msgstr "Boven"
