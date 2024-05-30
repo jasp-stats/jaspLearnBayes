@@ -58,3 +58,4 @@ renv/settings.json
 renv/activate.R
 .Rprofile
 .Rbuildignore
+_processedLockFile.lock
