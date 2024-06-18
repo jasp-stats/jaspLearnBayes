@@ -68,7 +68,7 @@ Form {
 			preferredHeight: jaspTheme.smallDefaultVariablesFormHeight
 			AvailableVariablesList { name: "allVariablesList" }
 			AssignedVariablesList { name: "marker";	title: qsTr("Marker");	allowedColumns: ["scale"];				singleVariable: true	}
-			AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	suggestedColumns: ["ordinal", "nominal"];	singleVariable: true	}
+			AssignedVariablesList { name: "labels";	title: qsTr("Positive condition (binary)");	allowedColumns: ["nominal"];	singleVariable: true	}
 		}
 
 		FormulaField { name: "threshold";	label: qsTr("Test threshold"); defaultValue: "0"; fieldWidth: 65	}

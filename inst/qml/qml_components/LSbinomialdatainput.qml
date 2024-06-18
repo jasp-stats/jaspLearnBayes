@@ -143,7 +143,7 @@ Section
 				name:				"dataVariableSelected"
 				title:				qsTr("Selected")
 				singleVariable:		true
-				allowedColumns:		["ordinal", "nominal"]
+				allowedColumns:		["nominal"]
 
 				onCountChanged:
 				{
