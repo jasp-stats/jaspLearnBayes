@@ -48,9 +48,9 @@ Form {
 
 			RowLayout
 			{
-				Label { text: qsTr("Model");			Layout.leftMargin: 5 * preferencesModel.uiScale; Layout.preferredWidth: 210 * preferencesModel.uiScale}
+				Label { text: qsTr("Model");			Layout.leftMargin: 5 * preferencesModel.uiScale; Layout.preferredWidth: 100 * preferencesModel.uiScale}
 				Label { text: qsTr("Distribution");		Layout.preferredWidth: 97 * preferencesModel.uiScale}
-				Label { text: qsTr("Parameter (θ)"); 	Layout.preferredWidth: 170 * preferencesModel.uiScale}
+				Label { text: qsTr("Parameter (θ)"); 	Layout.preferredWidth: 128 * preferencesModel.uiScale}
 				Label { text: qsTr("Truncation"); }
 			}
 
@@ -63,13 +63,13 @@ Form {
 					Row
 					{
 						spacing:				4 * preferencesModel.uiScale
-						Layout.preferredWidth:	210 * preferencesModel.uiScale
+						Layout.preferredWidth:	100 * preferencesModel.uiScale
 						TextField
 						{
 							label: 				""
 							name: 				"name"
 							startValue:			qsTr("Model ") + (rowIndex + 1)
-							fieldWidth:			160 * preferencesModel.uiScale
+							fieldWidth:			100 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
 						}
@@ -77,7 +77,7 @@ Form {
 					Row
 					{
 						spacing: 4 * preferencesModel.uiScale
-						Layout.preferredWidth: 100 * preferencesModel.uiScale
+						Layout.preferredWidth: 90 * preferencesModel.uiScale
 						DropDown
 						{
 							id: typeItem
@@ -101,10 +101,9 @@ Form {
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
-							fieldWidth:			70 * preferencesModel.uiScale
+							fieldWidth:			55 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
-							controlXOffset:		6 * preferencesModel.uiScale
 						}
 						FormulaField
 						{
@@ -114,7 +113,7 @@ Form {
 							value:				"1"
 							min:				0
 							inclusive:			JASP.None
-							fieldWidth:			70 * preferencesModel.uiScale
+							fieldWidth:			55 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
 						}
@@ -127,7 +126,7 @@ Form {
 							min:				0
 							max:				1
 							inclusive:			JASP.MinMax
-							fieldWidth:			70 * preferencesModel.uiScale
+							fieldWidth:			55 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
 						}
@@ -145,10 +144,9 @@ Form {
 							min:				0
 							max:				truncationUpper.value
 							inclusive:			JASP.MinOnly
-							fieldWidth:			70 * preferencesModel.uiScale
+							fieldWidth:			55 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
-							controlXOffset:		6 * preferencesModel.uiScale
 						}
 						FormulaField
 						{
@@ -160,7 +158,7 @@ Form {
 							min:				truncationLower.value
 							max:				1
 							inclusive:			JASP.MaxOnly
-							fieldWidth:			70 * preferencesModel.uiScale
+							fieldWidth:			55 * preferencesModel.uiScale
 							useExternalBorder:	false
 							showBorder:			true
 						}
