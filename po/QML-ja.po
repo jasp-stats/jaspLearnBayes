@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2024-06-20 16:09+0000\n"
+"Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.6-rc\n"
 "X-Language: ja\n"
 "X-Qt-Contexts: true\n"
 
@@ -1013,244 +1019,240 @@ msgstr "ビュフォンの針"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Number of tosses:"
-msgstr ""
+msgstr "トスの数:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Highlight interval"
-msgstr ""
+msgstr "ハイライト間隔"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "from"
-msgstr ""
+msgstr "次から"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "to"
-msgstr ""
+msgstr "次まで"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Number of tosses:"
-msgstr ""
+msgstr "トスの数:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Highlight interval"
-msgstr ""
+msgstr "ハイライト間隔"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "from"
-msgstr ""
+msgstr "次から"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "to"
-msgstr ""
+msgstr "次まで"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter α: "
-msgstr ""
+msgstr "事前パラメータα: "
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter β:"
-msgstr ""
+msgstr "事前パラメータβ:"
 
 msgctxt "LSestimationpredictions|"
 msgid "Summary table"
-msgstr ""
+msgstr "要約表"
 
 msgctxt "LSestimationpredictions|"
 msgid "Distribution plot"
-msgstr ""
+msgstr "分布プロット"
 
 msgctxt "LSestimationpredictions|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LSestimationpredictions|"
 msgid "As sample proportion"
-msgstr ""
+msgstr "標本比率として"
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LSestimationsequential|"
 msgid "Point estimate plot"
-msgstr ""
+msgstr "点推定プロット"
 
 msgctxt "LSestimationsequential|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LSestimationsequential|"
 msgid "Interval estimate plot"
-msgstr ""
+msgstr "区間推定プロット"
 
 msgctxt "LSestimationsequential|"
 msgid "Stacked distributions plot"
-msgstr ""
+msgstr "積み上げ分布プロット"
 
 msgctxt "LSintrotext|"
 msgid "Introductory text"
-msgstr ""
+msgstr "紹介文"
 
 msgctxt "LStestingpredictions|"
 msgid "Summary table"
-msgstr ""
+msgstr "要約表"
 
 msgctxt "LStestingpredictions|"
 msgid "Predictive distribution plot"
-msgstr ""
+msgstr "予測分布プロット"
 
 msgctxt "LStestingpredictions|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LStestingpredictions|"
 msgid "As sample proportion"
-msgstr ""
+msgstr "標本比率として"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Prior Predictive Performance"
-msgstr ""
+msgstr "事前予測性能"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Distribution plot"
-msgstr ""
+msgstr "分布プロット"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Predictive accuracy plot"
-msgstr ""
+msgstr "予測精度プロット"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Comparison"
-msgstr ""
+msgstr "比較"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior and Posterior"
-msgstr ""
+msgstr "事前分布と事後分布"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LStestingsequential|"
 msgid "Predictive performance"
-msgstr ""
+msgstr "予測性能"
 
 msgctxt "LStestingsequential|"
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgctxt "LStestingsequential|"
 msgid "Comparison"
-msgstr ""
+msgstr "比較"
 
 msgctxt "LSbinaryclassification|"
 msgid "Observed tests"
-msgstr ""
+msgstr "観測検定"
 
 msgctxt "LSbinaryclassification|"
 msgid "Positive tests"
-msgstr ""
+msgstr "陽性検定"
 
 msgctxt "LSbinaryclassification|"
 msgid "Negative tests"
-msgstr ""
+msgstr "陰性検定"
 
 msgctxt "LSbinaryclassification|"
 msgid "Update prevalence"
-msgstr ""
+msgstr "有病率更新"
 
 msgctxt "LSbinaryclassification|"
 msgid "Respect order constraint"
-msgstr ""
+msgstr "順序制約の尊重"
 
 msgctxt "LSbinaryclassification|"
 msgid "Additional Statistics"
-msgstr ""
+msgstr "その他の統計"
 
 msgctxt "LSbinaryclassification|"
 msgid "Area plot"
-msgstr ""
+msgstr "面プロット"
 
 msgctxt "LSbinaryclassification|"
 msgid "Receiver operating characteristic (ROC)"
-msgstr ""
+msgstr "受信者操作特性(ROC)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Total operating characteristic (TOC)"
-msgstr ""
+msgstr "Total operating characteristic (TOC)"
 
 msgctxt "LSbinaryclassification|"
 msgid "Precision-recall"
-msgstr ""
+msgstr "適合率-再現率"
 
 msgctxt "LSbinaryclassification|"
 msgid "PPV and NPV by threshold"
-msgstr ""
+msgstr "閾値による陽性的中率（PPV）および陰性的中率（NPV）"
 
 msgctxt "LSbinaryclassification|"
 msgid "Compute results"
-msgstr ""
+msgstr "結果を算出"
 
 msgctxt "LSbinaryclassification|"
 msgid "Colors"
-msgstr ""
+msgstr "カラー"
 
 msgctxt "LSbinaryclassification|"
 msgid "MCMC parameters"
-msgstr ""
+msgstr "MCMCパラメータ"
 
 msgctxt "LSbinaryclassification|"
 msgid "For main model"
-msgstr ""
+msgstr "メインモデルにおいて"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. samples"
-msgstr ""
+msgstr "サンプル数"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. burnin samples"
-msgstr ""
+msgstr "バーンインサンプルの数"
 
 msgctxt "LSbinaryclassification|"
 msgid "Thinning"
-msgstr ""
+msgstr "Thinning(間引き間隔)"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. chains"
-msgstr ""
+msgstr "チェーンの数"
 
 msgctxt "LSbinaryclassification|"
 msgid "For varying threshold"
-msgstr ""
+msgstr "閾値を変化させる場合"
 
 msgctxt "LSbinomialestimation|"
 msgid "Truncation"
-msgstr ""
+msgstr "切断"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Lower"
-msgstr "下"
+msgstr "下限"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Upper"
-msgstr "上"
+msgstr "上限"
 
 msgctxt "LSbinomialtesting|"
 msgid "Truncation"
-msgstr ""
+msgstr "切断"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Lower"
-msgstr "下"
+msgstr "下限"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Upper"
-msgstr "上"
+msgstr "上限"
