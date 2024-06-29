@@ -77,10 +77,6 @@ msgid "Hypothesis"
 msgstr "Hypothese"
 
 msgctxt "LSbinomialtesting|"
-msgid "Prior probability"
-msgstr "Prior-Wahrscheinlichkeit"
-
-msgctxt "LSbinomialtesting|"
 msgid "Distribution"
 msgstr "Verteilung"
 
@@ -1250,9 +1246,13 @@ msgid "Truncation"
 msgstr "Abschneiden"
 
 msgctxt "LSbinomialtesting|"
-msgid "Lower"
-msgstr "Untere"
+msgid "Prior prob."
+msgstr ""
 
 msgctxt "LSbinomialtesting|"
-msgid "Upper"
-msgstr "Obere"
+msgid "Lo"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Up"
+msgstr ""

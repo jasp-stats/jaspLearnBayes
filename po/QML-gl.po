@@ -133,10 +133,6 @@ msgid "P(H)"
 msgstr "P(H)"
 
 msgctxt "LSbinomialtesting|"
-msgid "Prior probability"
-msgstr "Probabilidade previa"
-
-msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
 msgstr "Hipótese"
 
@@ -1245,9 +1241,13 @@ msgid "Truncation"
 msgstr "Tronzado"
 
 msgctxt "LSbinomialtesting|"
-msgid "Lower"
-msgstr "Inferior"
+msgid "Prior prob."
+msgstr ""
 
 msgctxt "LSbinomialtesting|"
-msgid "Upper"
-msgstr "Superior"
+msgid "Lo"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Up"
+msgstr ""
