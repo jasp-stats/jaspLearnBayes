@@ -2070,11 +2070,13 @@ model{
 
   plotsContainer[["estimatesPlot"]] <-
     createJaspPlot(title        = gettext("Estimates"),
-                   dependencies = c("estimatesPlot", plots, "plotEstimatesType"),
+                   dependencies = c("estimatesPlot", plots, "plotEstimatesType", "ci"),
                    position     = position,
                    width        = 500,
                    height       = 50 + 50 * sum(selectedPlots)
     )
+  if (options[["ci"]])
+    plotsContainer[["estimatesPlot"]]$dependOn("ciLevel")
 
   if(ready && any(selectedPlots)) plotsContainer[["estimatesPlot"]]$plotObject <-
     .bcFillPlotEstimates(results, summary, dataset, options, selectedPlots)
