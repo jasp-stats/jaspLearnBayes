@@ -153,11 +153,6 @@ Form
                     name: "highlight";
                     label: qsTr("Highlight interval")
                     checked: false
-                }
-
-
-                Group
-                {
                     columns: 2
 
                     DoubleField
@@ -168,8 +163,6 @@ Form
                         max: parseFloat(minmaxMax.value);
                         defaultValue: 3;
                         id: minmaxMin;
-                        enabled: minmax.checked
-                        Layout.leftMargin: jaspTheme.columnGroupSpacing
                     }
 
                     DoubleField
@@ -180,9 +173,6 @@ Form
                         max: options.max;
                         defaultValue: 3.2;
                         id: minmaxMax;
-                        enabled: minmax.checked;
-                        Layout.leftMargin: jaspTheme.columnGroupSpacing
-
                     }
 
                 }

@@ -45,11 +45,12 @@ Form
 		label:			qsTr("Number of tosses:")
 		fieldWidth:		50
 		defaultValue:	100
-		min: 1
+		min:			nCrosses.value
 	}
 
 	IntegerField
 	{
+		id:				nCrosses
 		name:			"numberOfCrosses"
 		label:			qsTr("Number of crosses:")
 		fieldWidth:		50
@@ -141,14 +142,11 @@ Form
 
                 CheckBox
                 {
-                    name: "highlight";
-                    label: qsTr("Highlight interval")
-                    checked: false
-                }
-
-                Group
-                {
+					name:		"highlight";
+					label:		qsTr("Highlight interval")
+					checked:	false
                     columns: 2
+
                     DoubleField
                     {
                         name: "min";
@@ -156,8 +154,7 @@ Form
                         min: options.min;
                         max: parseFloat(minmaxMax.value);
                         defaultValue: 3;
-                        id: minmaxMin;
-                        enabled: minmax.checked
+						id: minmaxMin
                         Layout.leftMargin: jaspTheme.columnGroupSpacing
 
                     }
@@ -170,7 +167,6 @@ Form
                         max: options.max;
                         defaultValue: 3.2;
                         id: minmaxMax;
-                        enabled: minmax.checked
                         Layout.leftMargin: jaspTheme.columnGroupSpacing
 
                     }
