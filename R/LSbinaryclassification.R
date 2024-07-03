@@ -89,6 +89,17 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
     "falseNegative", "trueNegative", "falsePositive", "truePositive")
     )
 
+  priorParms <- options[grep("^prior\\w+[Alpha,Beta]$", names(options))] |>
+    unlist() |>
+    as.numeric()
+
+  if(!all(priorParms > 0))
+    gettextf(
+      "JAGS requires strictly positive parameters for Beta priors.
+      Set {\u03B1, \u03B2} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
+      ) |>
+      jaspBase::.quitAnalysis()
+
   if(options[["inputType"]] == "pointEstimates") options[["ci"]] <- FALSE
 
   colors <- .bcGetColors(options)[["values"]]

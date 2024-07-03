@@ -46,17 +46,73 @@ Form {
 		visible: inputType.value === "uncertainEstimates" || inputType.value === "data"
 		columns: 3
 		title: qsTr("Priors")
+
 		Text{ text: qsTr("Prevalence") }
-		FormulaField { name: "priorPrevalenceAlpha";  label: qsTr("~ Beta(α = ");		afterLabel: ",";		min: 0; defaultValue: "1"	; fieldWidth: 65}
-		FormulaField { name: "priorPrevalenceBeta";   label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "9"; fieldWidth: 65	}
+
+		FormulaField
+		{
+			name:			"priorPrevalenceAlpha"
+			label:			qsTr("~ Beta(α = ")
+			afterLabel:		","
+			min:			0.00001
+			defaultValue:	"1"
+			fieldWidth:		65
+		}
+
+		FormulaField
+		{
+			name:			"priorPrevalenceBeta"
+			label:			"β = "
+			afterLabel:		qsTr(")");
+			min:			0.00001
+			defaultValue:	"9"
+			fieldWidth:		65
+		}
 
 		Text{ text: qsTr("Sensitivity") }
-		FormulaField { name: "priorSensitivityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 65	}
-		FormulaField { name: "priorSensitivityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 65	}
+
+		FormulaField
+		{
+			name:			"priorSensitivityAlpha"
+			label:			qsTr("~ Beta(α = ")
+			afterLabel:		","
+			min:			0.00001
+			defaultValue:	"8"
+			fieldWidth:		65
+		}
+
+		FormulaField
+		{
+			name:			"priorSensitivityBeta"
+			label:			"β = "
+			afterLabel:		qsTr(")")
+			min:			0.00001
+			defaultValue:	"2"
+			fieldWidth:		65
+		}
 
 		Text{ text: qsTr("Specificity") }
-		FormulaField { name: "priorSpecificityAlpha"; label: qsTr("~ Beta(α = ");	afterLabel: ",";		min: 0; defaultValue: "8"; fieldWidth: 65	}
-		FormulaField { name: "priorSpecificityBeta";  label: "β = ";								afterLabel: qsTr(")");	min: 0; defaultValue: "2"; fieldWidth: 65	}
+
+		FormulaField
+		{
+			name:			"priorSpecificityAlpha"
+			label:			qsTr("~ Beta(α = ")
+			afterLabel:		","
+			min:			0.00001
+			defaultValue:	"8"
+			fieldWidth:		65
+		}
+
+		FormulaField
+		{
+			name:			"priorSpecificityBeta"
+			label:			"β = "
+			afterLabel:		qsTr(")")
+			min:			0.00001
+			defaultValue:	"2"
+			fieldWidth:		65
+		}
+
 	}
 
 	Group
