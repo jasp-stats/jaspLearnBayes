@@ -15,8 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
 LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) {
 
   options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "sequentialAnalysisPointEstimatePlotCiBf"))
@@ -166,6 +164,9 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           tempRow["posterior"]    <- tempResults[["distribution"]]
           tempRow["posteriorEst"] <- tempResults[[options[["priorAndPosteriorPointEstimate"]]]]
 
+          if (is.na(tempResults[[options[["priorAndPosteriorPointEstimate"]]]]))
+            estimatesTable$addFootnote(attr(tempResults, "errorMessage"), symbol = gettext("Warning: "))
+
         }
 
         estimatesTable$addRows(tempRow)
@@ -293,6 +294,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         allLines    <- c(allLines, list(dfLinesPP))
         legend      <- rbind(legend, c(options[["models"]][[i]]$type, options[["models"]][[i]]$name))
+
+        # check and handle errors
+        if (anyNA(dfLinesPP)) {
+          plotsSimple$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+          return()
+        }
 
       }
     }
@@ -428,6 +435,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           } else
             dfLinesPP  <- dfLinesPP[dfLinesPP$g == type,]
 
+          # check and handle errors
+          if (anyNA(dfLinesPP)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
+
 
           if (!is.null(dfCI)) {
             for (r in 1:nrow(dfCI)) {
@@ -452,7 +465,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         if (type == "Posterior" && options[["posteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataProportionBinomialLS(tempData)
-          if (is.nan(dfPointsPP$x)) dfPointsPP <- NULL
+          if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
 
@@ -523,7 +536,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataProportionBinomialLS(data)
-          if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+          if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
 
@@ -588,23 +601,28 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         if (options[["sequentialAnalysisPointEstimatePlotCi"]]) {
 
           if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "central") {
-            tempCIPP <- .dataCentralBinomialLS(tempData, options[["models"]][[h]],
-                                                options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter")
+
+            tempCIPP <- try(.dataCentralBinomialLS(tempData, options[["models"]][[h]],
+                                                options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter"))
+            if (jaspBase::isTryError(tempCIPP)) tempCIPP <- NULL
+
           } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "HPD") {
 
-            tempCIPP <- .dataHPDBinomialLS(tempData, options[["models"]][[h]],
-                                            options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter")
-            if (nrow(tempCIPP) == 2)CIunimodal <- FALSE
+            tempCIPP <- try(.dataHPDBinomialLS(tempData, options[["models"]][[h]],
+                                            options[["sequentialAnalysisPointEstimatePlotCiMass"]], type = "parameter"))
+            if (jaspBase::isTryError(tempCIPP)) tempCIPP <- NULL
+            if (!is.null(tempCIPP) && nrow(tempCIPP) == 2) CIunimodal <- FALSE
 
           } else if (options[["sequentialAnalysisPointEstimatePlotCiType"]] == "support") {
 
-            tempCIPP <- .dataSupportBinomialLS(tempData, options[["models"]][[h]],
-                                               options[["sequentialAnalysisPointEstimatePlotCiBf"]])
-            if (nrow(tempCIPP) == 0)tempCIPP <- NULL
+            tempCIPP <- try(.dataSupportBinomialLS(tempData, options[["models"]][[h]],
+                                               options[["sequentialAnalysisPointEstimatePlotCiBf"]]))
+            if (jaspBase::isTryError(tempCIPP)) tempCIPP <- NULL
+            if (!is.null(tempCIPP) && nrow(tempCIPP) == 0)tempCIPP <- NULL
 
           }
 
-          if (nrow(tempCIPP) == 1 && CIunimodal) {
+          if (!is.null(tempCIPP) && nrow(tempCIPP) == 1 && CIunimodal) {
 
             tempCI <- rbind(tempCI, data.frame(
               y1   = tempCIPP$xStart,
@@ -613,7 +631,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
               name = options[["models"]][[h]]$name
             ))
 
-          } else if (nrow(tempCIPP) == 1 && !CIunimodal) {
+          } else if (!is.null(tempCIPP) && nrow(tempCIPP) == 1 && !CIunimodal) {
 
             tempCI <- rbind(
               tempCI,
@@ -638,7 +656,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
             )
             CIunimodal <- TRUE
 
-          } else if (nrow(tempCIPP) == 2) {
+          } else if (!is.null(tempCIPP) && nrow(tempCIPP) == 2) {
 
             tempCI1 <- rbind(
               tempCI1,
@@ -658,11 +676,15 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
                 name = options[["models"]][[h]]$name
               ))
 
-          } else if (nrow(tempCIPP) > 2)
+          } else if (!is.null(tempCIPP) && nrow(tempCIPP) > 2)
             .quitAnalysis(gettext("More than bimodal CIs are not implemented in the Sequential analysis plot."))
         }
 
       }
+
+      # remove NAs to save plotting in case of numerical precision
+      tempLines <- na.omit(tempLines)
+      tempCI    <- na.omit(tempCI)
 
       plotDataLines <- c(plotDataLines, list(tempLines))
 
@@ -730,8 +752,9 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         allLines  <- c()
         allArrows <- c()
         legend    <- NULL
+        skipPlot  <- FALSE
 
-        # too many iterations crashes JASP
+        # too many iterations crash JASP
         if (length(data[["y"]]) > 10)
           iterSequence <- round(seq(0, length(data[["y"]]), length.out = 10))
         else
@@ -763,9 +786,19 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
             allLines    <- c(allLines, list(dfLinesPP))
             legend      <- rbind(legend, c(options[["models"]][[i]]$type, iteration))
 
+            # check and handle errors
+            if (anyNA(dfLinesPP)) {
+              tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+              skipPlot <- TRUE
+              break
+            }
+
           }
 
         }
+
+        if (skipPlot)
+          next
 
         xName  <- bquote(.(gettext("Population proportion"))~theta)
 
@@ -882,9 +915,10 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         allLines  <- c()
         allArrows <- c()
-        legend     <- NULL
+        legend    <- NULL
+        skipPlot  <- FALSE
 
-        # too many iterations crashes JASP
+        # too many iterations crash JASP
         if (length(data[["y"]]) > 10)
           iterSequence <- round(seq(0, length(data[["y"]]), length.out = 10))
         else
@@ -916,9 +950,19 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
             allLines    <- c(allLines, list(dfLinesPP))
             legend      <- rbind(legend, c(options[["models"]][[i]]$type, iteration))
 
+            # check and handle errors
+            if (anyNA(dfLinesPP)) {
+              tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+              skipPlot <- TRUE
+              break
+            }
+
           }
 
         }
+
+        if (skipPlot)
+          next
 
         xName  <- bquote(.(gettext("Population proportion"))~theta)
 
@@ -1133,6 +1177,11 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           predictiveSD   = tempPrediction[["SD"]]
         )
 
+        if (is.na(tempResults[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]))
+          predictionsTable$addFootnote(attr(tempResults, "errorMessage"), symbol = gettext("Warning: "))
+        else if(is.na(tempPrediction[["SD"]]) || is.na(tempPrediction[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]))
+          predictionsTable$addFootnote(attr(tempPrediction, "errorMessage"), symbol = gettext("Warning: "))
+
         predictionsTable$addRows(tempRow)
       }
 
@@ -1191,7 +1240,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         }
 
         dfCI   <- NULL
-        dfHist <- NULL
+        dfHist <- try(.dataHistBinomialLS(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]]))
+
+        if (jaspBase::isTryError(dfHist) || abs(sum(dfHist$y) - 1) > 1e-5 ) {
+          tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+          next
+        }
 
         if (options[["posteriorPredictionDistributionPlotIndividualCi"]]) {
 
@@ -1235,7 +1289,6 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           }
         }
 
-        dfHist  <- .dataHistBinomialLS(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]])
 
         if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
           dfHist$x <- dfHist$x/options[["posteriorPredictionNumberOfFutureTrials"]]
@@ -1302,14 +1355,19 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       for (i in 1:length(options[["models"]])) {
 
-        dfHist   <- .dataHistBinomialLS2(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]])
-        dfHist$g <- options[["models"]][[i]]$name
+        dfHist   <- try(.dataHistBinomialLS2(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]]))
+
+        if (jaspBase::isTryError(dfHist)) {
+          plotsPredictions$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+          return()
+        }
 
         if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
           dfHist$x <- dfHist$x/options[["posteriorPredictionNumberOfFutureTrials"]]
         }
 
         # it's not beta, but I'm lazzy to rewrite a function I wanna use
+        dfHist$g <- options[["models"]][[i]]$name
         legend   <- rbind(legend, c("beta", options[["models"]][[i]]$name))
         allLines<- c(allLines, list(dfHist))
       }

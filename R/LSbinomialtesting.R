@@ -178,17 +178,24 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[which.max(tempResults$logLik)])
         else if (options[["priorPredictivePerformanceBfComparison"]] == "vs")
           if (options[["models"]][[i]][["name"]] == options[["priorPredictivePerformanceBfVsHypothesis"]])
-            tempBF <- ""
+            tempBF <- NA
           else
             tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[sapply(options[["models"]], function(p)p$name) == options[["priorPredictivePerformanceBfVsHypothesis"]]])
 
-        if (tempBF != "")
+        if (!is.na(tempBF))
           tempRow$bf <- switch(
             options[["priorPredictivePerformanceBfType"]],
             "BF10"    = tempBF,
             "BF01"    = 1/tempBF,
             "LogBF10" = log(tempBF)
           )
+
+        if (is.na(tempRow$logLik))
+          testsTable$addFootnote(
+            gettextf(
+              "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
+              options[["models"]][[i]]$name),
+            symbol = gettext("Warning: "))
 
         testsTable$addRows(tempRow)
       }
@@ -242,8 +249,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     legend       <- NULL
     tempResults <- .testBinomialLS(data, options[["models"]])
 
-    if (any(is.nan(tempResults$posterior))) {
-      plotsSimple$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+    if (anyNA(tempResults$posterior)) {
+      plotsSimple$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
       return()
     }
 
@@ -458,6 +465,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           else if (options[[ifelse (type == "Prior", "priorDistributionPlotConditionalCiType", "posteriorDistributionPlotConditionalCiType")]] == "support")
             dfCI <- .dataSupportBinomialLS(tempData, options[["models"]][[i]], options[["posteriorDistributionPlotConditionalCiBf"]])
 
+          if (anyNA(dfCI)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
+
         }
 
         if (options[["models"]][[i]]$type == "spike")
@@ -467,6 +479,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           dfLinesPP   <- .dataLinesBinomialLS(tempData, options[["models"]][[i]])
           dfLinesPP   <- dfLinesPP[dfLinesPP$g == type,]
           dfLinesPP$y <- dfLinesPP$y
+
+          if (anyNA(dfLinesPP)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
 
           if (!is.null(dfCI)) {
             for (r in 1:nrow(dfCI)) {
@@ -541,8 +558,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tempResults <- .testBinomialLS(data, options[["models"]])
         tempData    <- data
 
-        if (any(is.nan(tempResults$posterior))) {
-          plotsPredictions$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+        if (anyNA(tempResults$posterior)) {
+          plotsPredictions$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
           return()
         }
       }
@@ -982,8 +999,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         "y" = tempY,
         "g" = sapply(options[["models"]],function(x)x$name))
 
-      if (any(is.nan(dfHistAll$y))) {
-        plotsPredAccuracy$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+      if (anyNA(dfHistAll$y)) {
+        plotsPredAccuracy$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
         return()
       }
 
@@ -1082,7 +1099,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     }
 
-    if (any(is.nan(unlist(results))) || any(is.infinite(unlist(results)))) {
+    if (anyNA(unlist(results)) || any(is.infinite(unlist(results)))) {
       plotsIterative$setError(gettext("Plotting not possible: One of the Bayes factor is equal to infinity."))
       return()
     }
@@ -1238,10 +1255,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     legend       <- NULL
     tempResults <- .testBinomialLS(data, options[["models"]])
 
-    if (any(is.nan(tempResults$posterior))) {
+    if (anyNA(tempResults$posterior)) {
       plotsBothError <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
       plotsBoth[["plotsBothError"]] <- plotsBothError
-      plotsBothError$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+      plotsBothError$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
       return()
     }
 
@@ -1270,7 +1287,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
       dfPointsPP <- .dataProportionBinomialLS(data)
-      if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+      if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
     } else
       dfPointsPP <- NULL
 
@@ -1370,6 +1387,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         else if (options[["models"]][[i]]$type == "beta") {
           dfLinesPP  <- .dataLinesBinomialLS(data, options[["models"]][[i]])
 
+          if (anyNA(dfLinesPP)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
+
           if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
             dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
             dfLinesPP$g <- "Prior = Posterior"
@@ -1379,7 +1401,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataProportionBinomialLS(data)
-          if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+          if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
 
