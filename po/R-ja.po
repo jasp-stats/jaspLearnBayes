@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.1.0\n"
 "POT-Creation-Date: 2024-04-20 02:44\n"
-"PO-Revision-Date: 2023-04-21 17:50+0000\n"
+"PO-Revision-Date: 2024-07-02 17:10+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/ja/>\n"
@@ -11,21 +11,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 msgid "Summary Table"
 msgstr "要約表"
 
-#, fuzzy
 msgid "Tosses"
-msgstr "交差"
+msgstr "トス数"
 
 msgid "Crosses"
 msgstr "交差"
 
-#, fuzzy
 msgid "MLE for %s"
-msgstr "%sの中央値"
+msgstr "%sのMLE"
 
 msgid "Interval Mass"
 msgstr ""
@@ -57,26 +55,24 @@ msgstr "交差の割合"
 msgid "Density"
 msgstr "密度"
 
-#, fuzzy
 msgid "%1$s%% CI: [%2$s, %3$s]"
-msgstr "%s%% CI: [%s, %s]"
+msgstr "%1$s%% CI: [%2$s, %3$s]"
 
 msgid "Implied Prior and Posterior for %s"
-msgstr "%sにおける暗黙の事前確率と事後確率"
+msgstr "%sにおけるモデルの事前確率と事後確率"
 
 msgid "Implied Posterior"
-msgstr "暗黙の事後確率"
+msgstr "モデルの事後確率"
 
 msgid "Implied Prior"
-msgstr "暗黙の事前分布"
+msgstr "モデルの事前分布"
 
 msgid "Needle Plot"
 msgstr "ニードルプロット"
 
 msgid "Implied Prior and Posterior for  %s"
-msgstr "%sにおける暗黙の事前分布と事後分布"
+msgstr "%sにおけるモデルの事前分布と事後分布"
 
-#, fuzzy
 msgid ""
 "This analysis demonstrates <b>binary classification</b> which is a common "
 "statistical procedure where subjects are classified into two groups based on "
@@ -155,61 +151,69 @@ msgstr ""
 "この分析は、分類ルールに基づいて被験者を2つのグループに分類する一般的な統計手"
 "順である<b>二項分類</b>を示しています。\n"
 "\n"
-"                   二値分類とは、対象者に関するデータを二分して、二値の決定"
-"（例：Yes/No、true/false）に到達させる手順です。\n"
+"                   "
+"二値分類とは、対象者に関するデータを二分して、二値の決定（例：Yes/No、true/"
+"false）に到達させる手順です。\n"
 "\n"
 "                   一般的なバイナリ分類のアプリケーションは以下の通りです。\n"
 "                   <ul> \n"
-"                     <li><b>医学検査・診断</b> 患者が特定の病気にかかっている"
-"かどうかを判断するための分類</li>\n"
-"                     <li><b>スパム検出</b> メッセージ（例：電子メール）がスパ"
-"ムかどうかを分類する場合</li>\n"
-"                     <li><b>品質管理</b> 業界標準が満たされているかどうかを分"
-"類する場合</li>\n"
+"                     <li><b>医学検査・診断</b> "
+"患者が特定の病気にかかっているかどうかを判断するための分類</li>\n"
+"                     <li><b>スパム検出</b> "
+"メッセージ（例：電子メール）がスパムかどうかを分類する場合</li>\n"
+"                     <li><b>品質管理</b> "
+"業界標準が満たされているかどうかを分類する場合</li>\n"
 "                   </ul> \n"
 "\n"
-"                   二値分類は医学的なテストでよく使われるため、二値分類問題の"
-"用語は医学辞書を参考にしています (例: prevalence, condition, marker)。\n"
+"                   二値分類は医学的なテストでよく使われるため、"
+"二値分類問題の用語は医学辞書を参考にしています (例: prevalence, condition, "
+"marker)。\n"
 "\n"
 "                   実際には、対象者の<i>真の</i>状態と、分類ルールによって与"
-"えられた<i>割り当てられたラベル</i>との間には、重要な区別があります。JASPで"
-"は、真の状態を<b>条件</b>（ポジティブ/ネガティブ）と呼び、割り当てられたラベ"
-"ルを<b>テスト</b>（ポジティブ/ネガティブ）と呼びます。多くの応用例では、条件"
-"やテストが対称的ではない場合があり、そのため、全体的な精度の測定に加えて、さ"
-"まざまなタイプの誤差が注目されます。これらのタイプのエラーは、例えば、患者が"
-"ある状態に苦しんでいるのに、テストが陰性になった（偽陰性）のか、あるいは、患"
-"者がある状態に苦しんでいないのに、テストが陽性になった（偽陽性）のかを区別し"
-"ます。\n"
+"えられた<i>割り当てられたラベル</i>との間には、重要な区別があります。\n"
+"                   JASPでは、真の状態を<b>条件</b>（ポジティブ/ネガティブ）と"
+"呼び、割り当てられたラベルを<b>テスト</b>（ポジティブ/ネガティブ）と呼びます"
+"。\n"
+"                   多くの応用例では、条件やテストが対称的ではない場合があり、"
+"そのため、全体的な精度の測定に加えて、さまざまなタイプの誤差が注目されます。"
 "\n"
-"                   テストの特性は、通常、<b>感度</b>と<b>特異度</b>という言葉"
-"で表現されます。感度とは、状態が陽性である場合に陽性と判定される確率のことで"
-"す。特異度とは、条件が陰性の場合に陰性と判定される確率のことです。条件の特性"
-"とは、<b>有病率</b>のことで、これは母集団の中で条件が陽性である被験者の割合を"
-"意味します。\n"
+"                   これらのタイプのエラーは、例えば、患者がある状態に苦しんで"
+"いるのに、テストが陰性になった（偽陰性）のか、あるいは、患者がある状態に苦し"
+"んでいないのに、テストが陽性になった（偽陽性）のかを区別します。\n"
+"\n"
+"                   "
+"テストの特性は、通常、<b>感度</b>と<b>特異度</b>という言葉で表現されます。\n"
+"                   "
+"感度とは、状態が陽性である場合に陽性と判定される確率のことです。\n"
+"                   "
+"特異度とは、条件が陰性の場合に陰性と判定される確率のことです。\n"
+"                   条件の特性とは、<b>有病率</b>のことで、これは母集団の中で"
+"条件が陽性である被験者の割合を意味します。\n"
 "                   テストや有病率の特性に偏りがあると、素人目には逆説的に見え"
-"るような状況になることがあります。例えば、ある状況では、ある病気の検査で陽性"
-"であっても、患者がその病気に罹患していない可能性の方が高い場合があります。\n"
+"るような状況になることがあります。\n"
+"                   例えば、ある状況では、ある病気の検査で陽性であっても、患者"
+"がその病気に罹患していない可能性の方が高い場合があります。\n"
 "\n"
-"                   形式的には、検査で陽性になった後、被験者が陽性である確率"
-"（すなわち、陽性予測値）は、<b>ベイズの定理</b>を適用することで得られます。\n"
+"                   形式的には、検査で陽性になった後、被験者が陽性である確率（"
+"すなわち、陽性予測値）は、<b>ベイズの定理</b>を適用することで得られます。\n"
 "\n"
-"                   <img src = \"file://%s\", width=\"500\">。\n"
+"                   %s\n"
 "\n"
-"                   <h5>参考文献</h5> </h5\n"
+"                   <h5>参考文献</h5> \n"
 "                   Pepe, M. S. (2003).<i>The statistical evaluation of "
-"medical tests for classification and prediction</i>.Oxford University "
-"Press.\n"
+"medical tests for classification and prediction</i>.Oxford University Press."
+"\n"
 "\n"
 "                   <a href=\"https://wikipedia.org/wiki/"
-"Binary_classification\">https://wikipedia.org/wiki/Binary_classification</"
-"a>\n"
+"Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>"
+"\n"
 "\n"
 "                   <a href=\"https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/"
 "Evaluation_of_binary_classifiers</a>\n"
 "\n"
-"                   <a href=\"https://wikipedia.org/wiki/Bayes%"
-"%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\""
+">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 
 msgid "Welcome to binary classification with JASP!"
 msgstr "JASPによる二項分類へようこそ!"
@@ -365,9 +369,8 @@ msgstr "偽陰性"
 msgid "True negative"
 msgstr "真陰性"
 
-#, fuzzy
 msgid "Area Plot"
-msgstr "沖積プロット"
+msgstr "面プロット"
 
 msgid "Receiving Operating Characteristic Curve"
 msgstr "受信者操作特性曲線"
@@ -378,32 +381,26 @@ msgstr "偽陽性率(1-特異度)"
 msgid "True Positive Rate (Sensitivity)"
 msgstr "真陽性率(感度)"
 
-#, fuzzy
 msgid "Total Operating Characteristic Curve"
 msgstr "受信者操作特性曲線"
 
-#, fuzzy
 msgid "True positives + False positives"
-msgstr "真陽性率(感度)"
+msgstr "真陽性 + 偽陽性"
 
-#, fuzzy
 msgid "True positives"
 msgstr "真陽性"
 
 msgid "Precision-recall"
 msgstr ""
 
-#, fuzzy
 msgid "Sensitivity (Recall)"
-msgstr "感度"
+msgstr "感度 (再現率)"
 
-#, fuzzy
 msgid "Positive Predictive Value (Precision)"
-msgstr "正の予測値"
+msgstr "陽性適中率(精度)"
 
-#, fuzzy
 msgid "Test Characteristics by Threshold"
-msgstr "テスト特性"
+msgstr "閾値によるテスト特性"
 
 msgid "Test Threshold"
 msgstr "検査閾値"
@@ -411,9 +408,8 @@ msgstr "検査閾値"
 msgid "Characteristic"
 msgstr "特性"
 
-#, fuzzy
 msgid "PPV and NPV by Threshold"
-msgstr "有病率によるPPVとNPV"
+msgstr "閾値によるPPVとNPV"
 
 msgid "Predictive Value"
 msgstr "予測値"
@@ -469,13 +465,11 @@ msgstr "精度"
 msgid "Pretest odds"
 msgstr ""
 
-#, fuzzy
 msgid "Positive likelihood ratio"
-msgstr "陽性条件"
+msgstr "陽性尤度比"
 
-#, fuzzy
 msgid "Negative likelihood ratio"
-msgstr "陰性条件"
+msgstr "陰性尤度比"
 
 msgid "F-measure"
 msgstr ""
@@ -581,15 +575,12 @@ msgstr "P(条件＝陽性 %1$s テスト＝陽性 %2$s 条件＝陰性 %1$s テ�
 msgid "Central credible intervals are based on %i samples."
 msgstr "中央信頼区間は、%iサンプルに基づいています."
 
-#, fuzzy
 msgid "Parameter estimates are based on %i MCMC samples."
-msgstr "パラメータの推定値は，%i個のサンプルに基づく事後平均である."
+msgstr "パラメータの推定値は，%i 個のMCMCサンプルに基づいている."
 
-#, fuzzy
 msgid "positive"
 msgstr "陽性"
 
-#, fuzzy
 msgid "negative"
 msgstr "陰性"
 
@@ -611,25 +602,20 @@ msgstr "失敗数"
 msgid "spike at %s"
 msgstr "%s でスパイク"
 
-#, fuzzy
 msgid "beta(%1$s, %2$s)"
 msgstr "beta (%1$s, %2$s)"
 
-#, fuzzy
 msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
-msgstr "beta (%1$s, %2$s)"
+msgstr "beta(%1$s, %2$s)T[%3$s, %4$s]"
 
-#, fuzzy
 msgid "binomial(%1$i, %2$s)"
 msgstr "binomial (%1$i, %2$s)"
 
-#, fuzzy
 msgid "beta-binomial(%1$i, %2$s, %3$s)"
 msgstr "beta-binomial (%1$i, %2$s, %3$s)"
 
-#, fuzzy
 msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
-msgstr "beta-binomial (%1$i, %2$s, %3$s)"
+msgstr "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
 
 msgid "Estimation Summary"
 msgstr "推定値要約"
@@ -743,9 +729,8 @@ msgstr "log(likelihood)"
 msgid "P(H|data)"
 msgstr "P(H|data)"
 
-#, fuzzy
 msgid "These results are based on %1$i success(es) and %2$i failure(s)"
-msgstr "この結果は、%1$i %2$sと%3$i %4$sに基づいています."
+msgstr "この結果は、成功数 %1$i と失敗数 %2$i に基づいています"
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
@@ -779,20 +764,18 @@ msgstr "観測値"
 msgid "At least 2 hypotheses need to be specified."
 msgstr "少なくとも2つの仮説を指定する必要があります."
 
-#, fuzzy
 msgid ""
 "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i "
 "failure(s)"
-msgstr "%s %sの予測は、%s %sと%s %sに基づいています."
+msgstr "観測 %1$i の予測は、成功数 %2$i と失敗数 %3$i に基づいています"
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
 msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければなりません."
 
-#, fuzzy
 msgid ""
 "The truncation range for model/hypothesis '%s' must be within [0, 1] "
 "interval."
-msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければなりません."
+msgstr "モデル/仮説 '%s' の切断範囲 '%s' は[0-1]の区間でなければなりません."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
@@ -829,13 +812,11 @@ msgstr "予測の要約"
 msgid "%s Prediction Plots"
 msgstr "%s 予測プロット"
 
-#, fuzzy
 msgid "Conditional %s Plots"
-msgstr "条件付き確率"
+msgstr "条件付き %s プロット"
 
-#, fuzzy
 msgid "Joint %s Plots"
-msgstr "%1$s %2$s プロット"
+msgstr "同時 %s プロット"
 
 msgid "Marginal %s Plots"
 msgstr ""
@@ -852,13 +833,11 @@ msgstr "%s 予測精度プロット"
 msgid "%s Sequential Analysis"
 msgstr "%s 逐次解析"
 
-#, fuzzy
 msgid ""
 "Welcome to the %1$s analysis from the Learn Bayes module. This analysis "
 "illustrates Bayesian %2$s using %3$s examples."
-msgstr ""
-"Learn Bayes モジュールの %s 分析へようこそ。この分析は、ベイズ %s を %s の例"
-"を使って説明しています."
+msgstr "Learn Bayes モジュールの %1$s 分析へようこそ。この分析は、ベイズ %2$s を %3$"
+"s の例を使って説明しています."
 
 msgid "%s (the population proportion of successes)"
 msgstr "%s (成功数の母集団比率)"
