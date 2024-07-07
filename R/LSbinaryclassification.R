@@ -95,8 +95,7 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 
   if(!is.null(priorParms) && length(priorParms) > 0 && !all(priorParms > 0))
     gettextf(
-      "JAGS requires strictly positive parameters for Beta priors.
-      Set {\u03B1, \u03B2} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
+      "JAGS requires strictly positive parameters for Beta priors. Set {\u03B1, \u03B2} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
       ) |>
       jaspBase::.quitAnalysis()
 
