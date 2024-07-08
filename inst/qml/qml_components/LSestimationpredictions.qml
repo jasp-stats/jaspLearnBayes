@@ -156,6 +156,7 @@ Section
 								fieldWidth:		50
 								defaultValue:	1
 								min:			plotsPredictionLower.value
+								max:			predictionN.value
 								inclusive:		JASP.MinMax
 							}
 

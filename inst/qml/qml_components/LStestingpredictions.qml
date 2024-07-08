@@ -145,6 +145,7 @@ Section
 								fieldWidth:		50
 								defaultValue:	1
 								min:			plotsPredictionPostLower.value
+								max:			predictionN.value
 								inclusive:		JASP.MinMax
 							}
 
@@ -255,7 +256,8 @@ Section
 								fieldWidth:			50
 								defaultValue:		analysisType === "binomial" ? 1 : 1
 								min:				plotsPredictionPostMarginalLower.value
-								inclusive:			JASP.MinOnly
+								max:				predictionN.value
+								inclusive:			JASP.MinMax
 							}
 						}
 					}
