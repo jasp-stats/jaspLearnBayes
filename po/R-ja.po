@@ -775,7 +775,7 @@ msgstr "モデル/仮説 '%2$s' のパラメータ '%1$s' は正でなければ�
 msgid ""
 "The truncation range for model/hypothesis '%s' must be within [0, 1] "
 "interval."
-msgstr "モデル/仮説 '%s' の切断範囲 '%s' は[0-1]の区間でなければなりません."
+msgstr "モデル/仮説 の切断範囲 '%s' は[0-1]の区間でなければなりません."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
