@@ -165,7 +165,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           tempRow["posteriorEst"] <- tempResults[[options[["priorAndPosteriorPointEstimate"]]]]
 
           if (is.na(tempResults[[options[["priorAndPosteriorPointEstimate"]]]]))
-            estimatesTable$addFootnote(attr(tempResults, "errorMessage"), symbol = gettext("Warning: "))
+            estimatesTable$addFootnote(attr(tempResults, "errorMessage"), symbol = gettext("Warning:"))
 
         }
 
@@ -1178,9 +1178,9 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         )
 
         if (is.na(tempResults[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]))
-          predictionsTable$addFootnote(attr(tempResults, "errorMessage"), symbol = gettext("Warning: "))
+          predictionsTable$addFootnote(attr(tempResults, "errorMessage"), symbol = gettext("Warning:"))
         else if(is.na(tempPrediction[["SD"]]) || is.na(tempPrediction[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]))
-          predictionsTable$addFootnote(attr(tempPrediction, "errorMessage"), symbol = gettext("Warning: "))
+          predictionsTable$addFootnote(attr(tempPrediction, "errorMessage"), symbol = gettext("Warning:"))
 
         predictionsTable$addRows(tempRow)
       }
@@ -1240,12 +1240,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
         }
 
         dfCI   <- NULL
-        dfHist <- try(.dataHistBinomialLS(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]]))
-
-        if (jaspBase::isTryError(dfHist) || abs(sum(dfHist$y) - 1) > 1e-5 ) {
-          tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
-          next
-        }
+        dfHist <- .dataHistBinomialLS(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]])
 
         if (options[["posteriorPredictionDistributionPlotIndividualCi"]]) {
 
@@ -1289,6 +1284,10 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
           }
         }
 
+        if (anyNA(dfHist) || anyNA(dfCI) || abs(sum(dfHist$y) - 1) > 1e-5 ) {
+          tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+          next
+        }
 
         if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
           dfHist$x <- dfHist$x/options[["posteriorPredictionNumberOfFutureTrials"]]
@@ -1355,9 +1354,9 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
       for (i in 1:length(options[["models"]])) {
 
-        dfHist   <- try(.dataHistBinomialLS2(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]]))
+        dfHist <- .dataHistBinomialLS2(data, options[["models"]][[i]], options[["posteriorPredictionNumberOfFutureTrials"]])
 
-        if (jaspBase::isTryError(dfHist)) {
+        if (anyNA(dfHist)) {
           plotsPredictions$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
           return()
         }

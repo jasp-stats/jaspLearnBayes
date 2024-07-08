@@ -36,7 +36,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
   # load, check, transform and process data
   if (ready["data"])
     data <- .readDataBinomialLS(dataset, options)
-
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(data, file = "C:/JASP/data.RDS")
   # data summary table ifrequested (but not ifthe data counts were added directly)
   .summaryBinomialLS(jaspResults, data, options, "binTest")
 
@@ -197,7 +198,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
             gettextf(
               "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
               options[["models"]][[i]]$name),
-            symbol = gettext("Warning: "))
+            symbol = gettext("Warning:"))
         }
 
         tableRows[[i]] <- tempRow
@@ -209,7 +210,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tableRows$posterior <- NA
         testsTable$addFootnote(
           gettext("Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."),
-          symbol = gettext("Warning: "))
+          symbol = gettext("Warning:"))
       }
       testsTable$setData(tableRows)
 
@@ -857,13 +858,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           }
         }
 
-        if (anyNA(dfCI)) {
+        dfHist  <- .dataHistBinomialLS(tempData, options[["models"]][[i]], predictionN)
+
+        if (anyNA(dfCI) || anyNA(dfHist)) {
           tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
           next
         }
-
-
-        dfHist  <- .dataHistBinomialLS(tempData, options[["models"]][[i]], predictionN)
 
         if (type == "Prior") {
           if (options[["priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess"]])
@@ -970,10 +970,18 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tablePredictions$addColumns(tempProb[,i])
       }
     } else if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]] == "joint") {
+      if (anyNA(tempProb)) {
+        tablePredictions$setError(gettext("The table could not be created because the posterior model probabilities are not defined for all models."))
+        return()
+      }
       for (i in 1:length(options[["models"]])) {
         tablePredictions$addColumns(tempProb[,i]*tempResults[i,"posterior"])
       }
     } else if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]] == "marginal") {
+      if (anyNA(tempProb)) {
+        tablePredictions$setError(gettext("The table could not be created because the posterior model probabilities are not defined for all models."))
+        return()
+      }
       tablePredictions$addColumns(apply(tempProb*matrix(tempResults[,"posterior"], byrow = T, ncol = length(options[["models"]]), nrow = tempN + 1), 1, sum))
     }
 
@@ -988,7 +996,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     plotsPredAccuracy <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
 
-    plotsPredAccuracy$position <- 1
+    plotsPredAccuracy$position <- 2
     plotsPredAccuracy$dependOn(c(.dataDependenciesBinomialLS, "colorPalette"))
 
     containerPredictiveAccuracy[["plotsPredAccuracy"]] <- plotsPredAccuracy
@@ -1491,14 +1499,36 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           predictiveEst   = tempPrediction[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]
         )
 
-        predictionsTable$addRows(tempRow)
+        if (is.na(tempRow$prob)) {
+          marglikIssue <- TRUE
+          predictionsTable$addFootnote(
+            gettextf(
+              "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
+              options[["models"]][[i]]$name),
+            symbol = gettext("Warning:"))
+        }
+
+        tableRows[[i]] <- tempRow
       }
 
-      predictionsTable$addRows(list(
-        hypothesis     = "Marginal",
-        posteriorEst   = margEst[["posteriorEst"]],
-        predictiveEst  = margEst[["predictionEst"]]
-      ))
+      tableRows <- do.call(rbind.data.frame, tableRows)
+      if (marglikIssue) {
+        tableRows$prob <- NA
+        predictionsTable$addFootnote(
+          gettext("Posterior probabilities and marginal prediction could not be computed since the marginal likelihoods are not available for some models."),
+          symbol = gettext("Warning:"))
+      } else {
+        margEst   <- try(.predictionTableEstimate(data, options, options[["posteriorPredictionSummaryTablePointEstimate"]]))
+        tableRows <- rbind(tableRows, data.frame(
+          hypothesis     = "Marginal",
+          posteriorEst   = margEst[["posteriorEst"]],
+          predictiveEst  = margEst[["predictionEst"]]
+        ))
+      }
+
+      predictionsTable$setData(tableRows)
+
+
 
       # add footnote clarifying what dataset was used
       predictionsTable$addFootnote(gettextf("The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)",
