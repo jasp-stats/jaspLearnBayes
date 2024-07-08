@@ -162,7 +162,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       return()
     } else if (ready["models"]) {
 
-      tempResults <- .testBinomialLS(data, options[["models"]])
+      tempResults  <- .testBinomialLS(data, options[["models"]])
+      marglikIssue <- FALSE
+      tableRows    <- list()
 
       for (i in 1:length(options[["models"]])) {
 
@@ -182,23 +184,34 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           else
             tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[sapply(options[["models"]], function(p)p$name) == options[["priorPredictivePerformanceBfVsHypothesis"]]])
 
-        if (!is.na(tempBF))
-          tempRow$bf <- switch(
-            options[["priorPredictivePerformanceBfType"]],
-            "BF10"    = tempBF,
-            "BF01"    = 1/tempBF,
-            "LogBF10" = log(tempBF)
-          )
+        tempRow$bf <- switch(
+          options[["priorPredictivePerformanceBfType"]],
+          "BF10"    = tempBF,
+          "BF01"    = 1/tempBF,
+          "LogBF10" = log(tempBF)
+        )
 
-        if (is.na(tempRow$logLik))
+        if (is.na(tempRow$logLik)) {
+          marglikIssue <- TRUE
           testsTable$addFootnote(
             gettextf(
               "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
               options[["models"]][[i]]$name),
             symbol = gettext("Warning: "))
+        }
 
-        testsTable$addRows(tempRow)
+        tableRows[[i]] <- tempRow
       }
+
+      tableRows <- do.call(rbind.data.frame, tableRows)
+      if (marglikIssue) {
+        tableRows$bf <- NA
+        tableRows$posterior <- NA
+        testsTable$addFootnote(
+          gettext("Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."),
+          symbol = gettext("Warning: "))
+      }
+      testsTable$setData(tableRows)
 
       # add footnote clarifying what dataset was used
       testsTable$addFootnote(gettextf("These results are based on %1$i success(es) and %2$i failure(s)", data[["nSuccesses"]], data[["nFailures"]]))
@@ -844,6 +857,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           }
         }
 
+        if (anyNA(dfCI)) {
+          tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+          next
+        }
+
+
         dfHist  <- .dataHistBinomialLS(tempData, options[["models"]][[i]], predictionN)
 
         if (type == "Prior") {
@@ -969,7 +988,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     plotsPredAccuracy <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
 
-    plotsPredAccuracy$position <- 2
+    plotsPredAccuracy$position <- 1
     plotsPredAccuracy$dependOn(c(.dataDependenciesBinomialLS, "colorPalette"))
 
     containerPredictiveAccuracy[["plotsPredAccuracy"]] <- plotsPredAccuracy
@@ -1099,7 +1118,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     }
 
-    if (anyNA(unlist(results)) || any(is.infinite(unlist(results)))) {
+    if (anyNA(unlist(results))) {
+      plotsIterative$setError(gettext("Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."))
+      return()
+    }
+
+    if (any(is.infinite(unlist(results)))) {
       plotsIterative$setError(gettext("Plotting not possible: One of the Bayes factor is equal to infinity."))
       return()
     }

@@ -1486,7 +1486,7 @@
       ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
       ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
     ))
-    containerPlots$position <- ifelse (type == "Prior", 3, 6)
+    containerPlots$position <- ifelse (type == "Prior", 3, 4)
     jaspResults[[paste0("containerPlots", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlots", type)]]
@@ -1523,7 +1523,7 @@
       ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType",    "posteriorPredictionDistributionPlotType"),
       if (type == "Posterior") "posteriorPredictionNumberOfFutureTrials"
     ))
-    containerPlots$position <- ifelse (type == "Prior", 4, 10)
+    containerPlots$position <- ifelse (type == "Prior", 6, 10)
     jaspResults[[paste0("containerPlotsPrediction", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlotsPrediction", type)]]
@@ -1554,7 +1554,7 @@
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       )))
-    containerBoth$position <- 7
+    containerBoth$position <- 5
     containerBoth$dependOn(c("priorAndPosteriorDistributionPlot", "priorAndPosteriorDistributionPlotType"))
 
     jaspResults[["containerBoth"]] <- containerBoth
@@ -1587,7 +1587,7 @@
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Normalized")
       )))
-    containerPredictiveAccuracy$position <- 5
+    containerPredictiveAccuracy$position <- 7
     containerPredictiveAccuracy$dependOn(c("priorPredictivePerformanceAccuracyPlot", "priorPredictivePerformanceAccuracyPlotType"))
 
     jaspResults[["containerPredictiveAccuracy"]] <- containerPredictiveAccuracy

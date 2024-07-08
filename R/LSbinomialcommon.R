@@ -757,12 +757,16 @@
     return(extraDistr::dbbinom(x, size, alpha, beta))
   } else {
     return(sapply(x, function(xi) {
-      integrate(
+      tempInt <- try(integrate(
         f     = function(p) {
           stats::dbinom(x = xi, size = size, prob = p) * .dbetaLS(p, alpha, beta, lower, upper)
         },
         lower = lower,
-        upper = upper)$value
+        upper = upper))
+      if (jaspBase::isTryError(tempInt))
+        return(NA)
+      else
+        return(tempInt$value)
     }))
   }
 }

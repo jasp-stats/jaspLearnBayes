@@ -427,6 +427,12 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
           dfLinesPP  <- .dataLinesBinomialLS(tempData, options[["models"]][[i]])
 
+          # check and handle errors
+          if (anyNA(dfLinesPP)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
+
           if (type == "Posterior" && options[["posteriorDistributionPloPriorDistribution"]]) {
             if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
               dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
@@ -434,12 +440,6 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
             }
           } else
             dfLinesPP  <- dfLinesPP[dfLinesPP$g == type,]
-
-          # check and handle errors
-          if (anyNA(dfLinesPP)) {
-            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
-            next
-          }
 
 
           if (!is.null(dfCI)) {
