@@ -36,8 +36,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
   # load, check, transform and process data
   if (ready["data"])
     data <- .readDataBinomialLS(dataset, options)
-  saveRDS(options, file = "C:/JASP/options.RDS")
-  saveRDS(data, file = "C:/JASP/data.RDS")
+
   # data summary table ifrequested (but not ifthe data counts were added directly)
   .summaryBinomialLS(jaspResults, data, options, "binTest")
 
@@ -1483,7 +1482,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
       tempTests <- .testBinomialLS(data, options[["models"]])
       tempMeans <- NULL
-      margEst   <- .predictionTableEstimate(data, options, options[["posteriorPredictionSummaryTablePointEstimate"]])
+      tableRows <- list()
+
       # add rows for each hypothesis
       for (i in 1:length(options[["models"]])) {
 
