@@ -127,9 +127,9 @@ Section
 								label:			qsTr("Mass")
 								fieldWidth:		50
 								defaultValue:	95
-								min:			0
+								min:			1
 								max:			100
-								inclusive:		JASP.MaxOnly
+								inclusive:		JASP.MinMax
 							}
 
 							IntegerField
