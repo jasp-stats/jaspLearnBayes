@@ -907,8 +907,8 @@
       x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior[["spikePoint"]])
     else if (prior[["type"]] == "beta")
       x <- c(
-        .qbbinomLS((1 - coverage)/2 + 1e-5, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]),
-        .qbbinomLS(1 - (1 - coverage)/2,     n , prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
+        .qbbinomLS((1 - coverage)/2 + 1e-5,  n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]),
+        .qbbinomLS(1 - (1 - coverage)/2,     n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
       )
 
 

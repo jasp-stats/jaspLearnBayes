@@ -606,7 +606,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         # it's not beta, but I'm lazzy to rewrite a function I wanna use
         legend   <- rbind(legend, c("beta", options[["models"]][[i]]$name))
-        allLines<- c(allLines, list(dfHist))
+        allLines <- c(allLines, list(dfHist))
       }
 
       if (type == "Prior") {
@@ -778,14 +778,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       if (type == "Prior") {
         predictionN  <- data[["nSuccesses"]] + data[["nFailures"]]
         tempResults  <- .testBinomialLS(data, options[["models"]])
-        tempData    <- data.frame(
+        tempData     <- data.frame(
           nSuccesses = 0,
           nFailures  = 0
         )
       } else if (type == "Posterior") {
         predictionN  <- options[["posteriorPredictionNumberOfFutureTrials"]]
         tempResults  <- .testBinomialLS(data, options[["models"]])
-        tempData    <- data
+        tempData     <- data
       }
 
       for (i in 1:length(options[["models"]])) {
@@ -814,19 +814,19 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
           if (options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiType","posteriorPredictionDistributionPlotConditionalCiType")]] == "central") {
 
-            dfCI <- .dataCentralBinomialLS(data, options[["models"]][[i]],
+            dfCI <- .dataCentralBinomialLS(tempData, options[["models"]][[i]],
                                            options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiMass","posteriorPredictionDistributionPlotConditionalCiMass")]],
                                            n = predictionN,type = "prediction")
 
           } else if (options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiType","posteriorPredictionDistributionPlotConditionalCiType")]] == "HPD") {
 
-            dfCI <- .dataHPDBinomialLS(data, options[["models"]][[i]],
+            dfCI <- .dataHPDBinomialLS(tempData, options[["models"]][[i]],
                                        options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiMass","posteriorPredictionDistributionPlotConditionalCiMass")]],
                                        n = predictionN, type = "prediction")
 
           } else if (options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiType","posteriorPredictionDistributionPlotConditionalCiType")]] == "custom") {
 
-            dfCI <- .dataCustomBinomialLS(data, options[["models"]][[i]],
+            dfCI <- .dataCustomBinomialLS(tempData, options[["models"]][[i]],
                                           options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiLower","posteriorPredictionDistributionPlotConditionalCiLower")]],
                                           options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]],
                                           n = predictionN, type = "prediction")
