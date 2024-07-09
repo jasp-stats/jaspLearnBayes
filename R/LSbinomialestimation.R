@@ -1256,6 +1256,13 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
           } else if (options[["posteriorPredictionDistributionPlotIndividualCiType"]] == "custom") {
 
+            if (options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
+              options[["posteriorPredictionDistributionPlotIndividualCiLower"]] <-
+                options[["posteriorPredictionNumberOfFutureTrials"]] * options[["posteriorPredictionDistributionPlotIndividualCiLower"]]
+              options[["posteriorPredictionDistributionPlotIndividualCiUpper"]] <-
+                options[["posteriorPredictionNumberOfFutureTrials"]] * options[["posteriorPredictionDistributionPlotIndividualCiUpper"]]
+            }
+
             dfCI <- .dataCustomBinomialLS(data, options[["models"]][[i]],
                                           options[["posteriorPredictionDistributionPlotIndividualCiLower"]], options[["posteriorPredictionDistributionPlotIndividualCiUpper"]],
                                           n = options[["posteriorPredictionNumberOfFutureTrials"]], type = "prediction")
