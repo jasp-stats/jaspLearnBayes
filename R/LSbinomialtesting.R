@@ -916,7 +916,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     tablePredictions$position <- 3
     tablePredictions$dependOn(c(
       .dataDependenciesBinomialLS,
-      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotPredictionsTable", "posteriorPredictionDistributionPlotPredictionsTable")
+      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotPredictionsTable", "posteriorPredictionDistributionPlotPredictionsTable"),
+      if (type == "Posterior") "posteriorPredictionDistributionPlotAsSampleProportion"
     ))
     containerPlots[["tablePredictions"]] <- tablePredictions
 
