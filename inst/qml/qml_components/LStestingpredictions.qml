@@ -121,7 +121,7 @@ Section
 								inclusive:		JASP.MinMax
 							}
 
-							IntegerField
+							DoubleField
 							{
 								visible:		plotsPredictionPostTypeCI.currentText == "custom"
 								enabled:		plotsPredictionPostCI.checked
@@ -135,7 +135,7 @@ Section
 								inclusive:		JASP.MinMax
 							}
 
-							IntegerField
+							DoubleField
 							{
 								visible:		plotsPredictionPostTypeCI.currentText == "custom"
 								enabled:		plotsPredictionPostCI.checked
@@ -145,7 +145,7 @@ Section
 								fieldWidth:		50
 								defaultValue:	1
 								min:			plotsPredictionPostLower.value
-								max:			predictionN.value
+								max:			predictionPlotProp.checked ? 1	: predictionN.value
 								inclusive:		JASP.MinMax
 							}
 
@@ -256,7 +256,7 @@ Section
 								fieldWidth:			50
 								defaultValue:		analysisType === "binomial" ? 1 : 1
 								min:				plotsPredictionPostMarginalLower.value
-								max:				predictionN.value
+								max:				predictionPlotProp.checked ? 1	: predictionN.value
 								inclusive:			JASP.MinMax
 							}
 						}
