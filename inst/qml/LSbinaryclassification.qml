@@ -54,7 +54,8 @@ Form {
 			name:			"priorPrevalenceAlpha"
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
-			min:			0.00001
+			min:			0
+			inclusive:		0
 			defaultValue:	"1"
 			fieldWidth:		65
 		}
@@ -64,7 +65,8 @@ Form {
 			name:			"priorPrevalenceBeta"
 			label:			"β = "
 			afterLabel:		qsTr(")");
-			min:			0.00001
+			min:			0
+			inclusive:		0
 			defaultValue:	"9"
 			fieldWidth:		65
 		}
@@ -76,7 +78,8 @@ Form {
 			name:			"priorSensitivityAlpha"
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
-			min:			0.00001
+			min:			0
+			inclusive:		0
 			defaultValue:	"8"
 			fieldWidth:		65
 		}
@@ -86,7 +89,8 @@ Form {
 			name:			"priorSensitivityBeta"
 			label:			"β = "
 			afterLabel:		qsTr(")")
-			min:			0.00001
+			min:			0
+			inclusive:		0
 			defaultValue:	"2"
 			fieldWidth:		65
 		}
@@ -98,7 +102,8 @@ Form {
 			name:			"priorSpecificityAlpha"
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
-			min:			0.00001
+			min:			0
+			inclusive:		0
 			defaultValue:	"8"
 			fieldWidth:		65
 		}
@@ -108,7 +113,8 @@ Form {
 			name:			"priorSpecificityBeta"
 			label:			"β = "
 			afterLabel:		qsTr(")")
-			min:			0.00001
+			min:			0
+			inclusive:		0
 			defaultValue:	"2"
 			fieldWidth:		65
 		}
