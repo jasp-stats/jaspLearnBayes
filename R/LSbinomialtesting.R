@@ -1490,6 +1490,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       tempTests <- .testBinomialLS(data, options[["models"]])
       tempMeans <- NULL
       tableRows <- list()
+      marglikIssue <- FALSE
 
       # add rows for each hypothesis
       for (i in 1:length(options[["models"]])) {
@@ -1528,6 +1529,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         margEst   <- try(.predictionTableEstimate(data, options, options[["posteriorPredictionSummaryTablePointEstimate"]]))
         tableRows <- rbind(tableRows, data.frame(
           hypothesis     = "Marginal",
+          posterior      = "",
+          prob           = NA,
+          predictive     = "",
           posteriorEst   = margEst[["posteriorEst"]],
           predictiveEst  = margEst[["predictionEst"]]
         ))
