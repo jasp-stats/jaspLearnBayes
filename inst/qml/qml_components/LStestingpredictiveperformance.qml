@@ -91,12 +91,12 @@ Section
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
-						min:			0
+						min:			1
 						max:			100
-						inclusive:		JASP.MaxOnly
+						inclusive:		JASP.MinMax
 					}
 
-					DoubleField
+					IntegerField
 					{
 						visible:		plotsPredictionTypeCI.currentText == "custom"
 						enabled:		plotsPredictionCI.checked
@@ -104,12 +104,12 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPredictionLower
 						fieldWidth:		50
-						defaultValue:	analysisType === "binomial" ? 0.25 : -1
-						min:			analysisType === "binomial" ? 0    : -9999999999
+						defaultValue:	analysisType === "binomial" ? 0		: -1
+						min:			analysisType === "binomial" ? 0		: -9999999999
 						max:			plotsPredictionUpper.value; inclusive: JASP.MinMax
 					}
 
-					DoubleField
+					IntegerField
 					{
 						visible:		plotsPredictionTypeCI.currentText == "custom"
 						enabled:		plotsPredictionCI.checked
@@ -117,9 +117,9 @@ Section
 						label:			qsTr("Upper")
 						id:				plotsPredictionUpper
 						fieldWidth:		50
-						defaultValue:	analysisType === "binomial" ? 0.75 : 1
+						defaultValue:	analysisType === "binomial" ? 1		: 1
 						min:			plotsPredictionLower.value
-						max:			analysisType === "binomial" ? 1    : 9999999999
+						//max:			analysisType === "binomial" ? 1		: 9999999999
 						inclusive:		JASP.MinMax
 					}
 
@@ -200,12 +200,12 @@ Section
 						label:			qsTr("Mass")
 						fieldWidth:		50
 						defaultValue:	95
-						min:			0
+						min:			1
 						max:			100
-						inclusive:		JASP.MaxOnly
+						inclusive:		JASP.MinMax
 					}
 
-					DoubleField
+					IntegerField
 					{
 						visible:		plotsPredictionMarginalTypeCI.currentText == "custom"
 						enabled:		plotsPredictionMarginalCI.checked
@@ -213,13 +213,13 @@ Section
 						label:			qsTr("Lower")
 						id:				plotsPredictionMarginalLower
 						fieldWidth:		50
-						defaultValue:	analysisType === "binomial" ? 0.25 :  -1
-						min:			analysisType === "binomial" ? 0    : -9999999999
+						defaultValue:	analysisType === "binomial" ? 0		:  -1
+						min:			analysisType === "binomial" ? 0		: -9999999999
 						max:			plotsPredictionMarginalUpper.value;
 						inclusive:		JASP.MinMax
 					}
 
-					DoubleField
+					IntegerField
 					{
 						visible:		plotsPredictionMarginalTypeCI.currentText == "custom"
 						enabled:		plotsPredictionMarginalCI.checked
@@ -227,9 +227,9 @@ Section
 						label:			qsTr("Upper")
 						id:				plotsPredictionMarginalUpper
 						fieldWidth:		50
-						defaultValue:	analysisType === "binomial" ? 0.75 : 1
+						defaultValue:	analysisType === "binomial" ? 1		: 1
 						min:			plotsPredictionMarginalLower.value
-						max:			analysisType === "binomial" ? 1    : 9999999999
+						//max:			analysisType === "binomial" ? 1    : 9999999999
 						inclusive:		JASP.MinOnly
 					}
 				}

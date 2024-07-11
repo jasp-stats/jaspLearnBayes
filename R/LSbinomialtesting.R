@@ -162,7 +162,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       return()
     } else if (ready["models"]) {
 
-      tempResults <- .testBinomialLS(data, options[["models"]])
+      tempResults  <- .testBinomialLS(data, options[["models"]])
+      marglikIssue <- FALSE
+      tableRows    <- list()
 
       for (i in 1:length(options[["models"]])) {
 
@@ -178,20 +180,38 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[which.max(tempResults$logLik)])
         else if (options[["priorPredictivePerformanceBfComparison"]] == "vs")
           if (options[["models"]][[i]][["name"]] == options[["priorPredictivePerformanceBfVsHypothesis"]])
-            tempBF <- ""
+            tempBF <- NA
           else
             tempBF <- exp(tempResults$logLik[i]) / exp(tempResults$logLik[sapply(options[["models"]], function(p)p$name) == options[["priorPredictivePerformanceBfVsHypothesis"]]])
 
-        if (tempBF != "")
-          tempRow$bf <- switch(
-            options[["priorPredictivePerformanceBfType"]],
-            "BF10"    = tempBF,
-            "BF01"    = 1/tempBF,
-            "LogBF10" = log(tempBF)
-          )
+        tempRow$bf <- switch(
+          options[["priorPredictivePerformanceBfType"]],
+          "BF10"    = tempBF,
+          "BF01"    = 1/tempBF,
+          "LogBF10" = log(tempBF)
+        )
 
-        testsTable$addRows(tempRow)
+        if (is.na(tempRow$logLik)) {
+          marglikIssue <- TRUE
+          testsTable$addFootnote(
+            gettextf(
+              "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
+              options[["models"]][[i]]$name),
+            symbol = gettext("Warning:"))
+        }
+
+        tableRows[[i]] <- tempRow
       }
+
+      tableRows <- do.call(rbind.data.frame, tableRows)
+      if (marglikIssue) {
+        tableRows$bf <- NA
+        tableRows$posterior <- NA
+        testsTable$addFootnote(
+          gettext("Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."),
+          symbol = gettext("Warning:"))
+      }
+      testsTable$setData(tableRows)
 
       # add footnote clarifying what dataset was used
       testsTable$addFootnote(gettextf("These results are based on %1$i success(es) and %2$i failure(s)", data[["nSuccesses"]], data[["nFailures"]]))
@@ -242,8 +262,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     legend       <- NULL
     tempResults <- .testBinomialLS(data, options[["models"]])
 
-    if (any(is.nan(tempResults$posterior))) {
-      plotsSimple$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+    if (anyNA(tempResults$posterior)) {
+      plotsSimple$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
       return()
     }
 
@@ -458,6 +478,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           else if (options[[ifelse (type == "Prior", "priorDistributionPlotConditionalCiType", "posteriorDistributionPlotConditionalCiType")]] == "support")
             dfCI <- .dataSupportBinomialLS(tempData, options[["models"]][[i]], options[["posteriorDistributionPlotConditionalCiBf"]])
 
+          if (anyNA(dfCI)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
+
         }
 
         if (options[["models"]][[i]]$type == "spike")
@@ -467,6 +492,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           dfLinesPP   <- .dataLinesBinomialLS(tempData, options[["models"]][[i]])
           dfLinesPP   <- dfLinesPP[dfLinesPP$g == type,]
           dfLinesPP$y <- dfLinesPP$y
+
+          if (anyNA(dfLinesPP)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
 
           if (!is.null(dfCI)) {
             for (r in 1:nrow(dfCI)) {
@@ -541,8 +571,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tempResults <- .testBinomialLS(data, options[["models"]])
         tempData    <- data
 
-        if (any(is.nan(tempResults$posterior))) {
-          plotsPredictions$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+        if (anyNA(tempResults$posterior)) {
+          plotsPredictions$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
           return()
         }
       }
@@ -576,7 +606,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         # it's not beta, but I'm lazzy to rewrite a function I wanna use
         legend   <- rbind(legend, c("beta", options[["models"]][[i]]$name))
-        allLines<- c(allLines, list(dfHist))
+        allLines <- c(allLines, list(dfHist))
       }
 
       if (type == "Prior") {
@@ -748,14 +778,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       if (type == "Prior") {
         predictionN  <- data[["nSuccesses"]] + data[["nFailures"]]
         tempResults  <- .testBinomialLS(data, options[["models"]])
-        tempData    <- data.frame(
+        tempData     <- data.frame(
           nSuccesses = 0,
           nFailures  = 0
         )
       } else if (type == "Posterior") {
         predictionN  <- options[["posteriorPredictionNumberOfFutureTrials"]]
         tempResults  <- .testBinomialLS(data, options[["models"]])
-        tempData    <- data
+        tempData     <- data
       }
 
       for (i in 1:length(options[["models"]])) {
@@ -784,19 +814,25 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
           if (options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiType","posteriorPredictionDistributionPlotConditionalCiType")]] == "central") {
 
-            dfCI <- .dataCentralBinomialLS(data, options[["models"]][[i]],
+            dfCI <- .dataCentralBinomialLS(tempData, options[["models"]][[i]],
                                            options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiMass","posteriorPredictionDistributionPlotConditionalCiMass")]],
                                            n = predictionN,type = "prediction")
 
           } else if (options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiType","posteriorPredictionDistributionPlotConditionalCiType")]] == "HPD") {
 
-            dfCI <- .dataHPDBinomialLS(data, options[["models"]][[i]],
+            dfCI <- .dataHPDBinomialLS(tempData, options[["models"]][[i]],
                                        options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiMass","posteriorPredictionDistributionPlotConditionalCiMass")]],
                                        n = predictionN, type = "prediction")
 
           } else if (options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiType","posteriorPredictionDistributionPlotConditionalCiType")]] == "custom") {
 
-            dfCI <- .dataCustomBinomialLS(data, options[["models"]][[i]],
+            if (type == "Posterior" && options[["posteriorPredictionDistributionPlotAsSampleProportion"]]) {
+              options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiLower","posteriorPredictionDistributionPlotConditionalCiLower")]] <-
+                predictionN * options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiLower","posteriorPredictionDistributionPlotConditionalCiLower")]]
+              options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]] <-
+                predictionN * options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]]
+            }
+            dfCI <- .dataCustomBinomialLS(tempData, options[["models"]][[i]],
                                           options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiLower","posteriorPredictionDistributionPlotConditionalCiLower")]],
                                           options[[ifelse (type == "Prior","priorPredictivePerformanceDistributionPlotConditionalCiUpper","posteriorPredictionDistributionPlotConditionalCiUpper")]],
                                           n = predictionN, type = "prediction")
@@ -828,6 +864,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         }
 
         dfHist  <- .dataHistBinomialLS(tempData, options[["models"]][[i]], predictionN)
+
+        if (anyNA(dfCI) || anyNA(dfHist)) {
+          tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+          next
+        }
 
         if (type == "Prior") {
           if (options[["priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess"]])
@@ -875,7 +916,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     tablePredictions$position <- 3
     tablePredictions$dependOn(c(
       .dataDependenciesBinomialLS,
-      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotPredictionsTable", "posteriorPredictionDistributionPlotPredictionsTable")
+      ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotPredictionsTable", "posteriorPredictionDistributionPlotPredictionsTable"),
+      if (type == "Posterior") "posteriorPredictionDistributionPlotAsSampleProportion"
     ))
     containerPlots[["tablePredictions"]] <- tablePredictions
 
@@ -934,10 +976,18 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tablePredictions$addColumns(tempProb[,i])
       }
     } else if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]] == "joint") {
+      if (anyNA(tempProb)) {
+        tablePredictions$setError(gettext("The table could not be created because the posterior model probabilities are not defined for all models."))
+        return()
+      }
       for (i in 1:length(options[["models"]])) {
         tablePredictions$addColumns(tempProb[,i]*tempResults[i,"posterior"])
       }
     } else if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]] == "marginal") {
+      if (anyNA(tempProb)) {
+        tablePredictions$setError(gettext("The table could not be created because the posterior model probabilities are not defined for all models."))
+        return()
+      }
       tablePredictions$addColumns(apply(tempProb*matrix(tempResults[,"posterior"], byrow = T, ncol = length(options[["models"]]), nrow = tempN + 1), 1, sum))
     }
 
@@ -982,8 +1032,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         "y" = tempY,
         "g" = sapply(options[["models"]],function(x)x$name))
 
-      if (any(is.nan(dfHistAll$y))) {
-        plotsPredAccuracy$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+      if (anyNA(dfHistAll$y)) {
+        plotsPredAccuracy$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
         return()
       }
 
@@ -1082,7 +1132,12 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     }
 
-    if (any(is.nan(unlist(results))) || any(is.infinite(unlist(results)))) {
+    if (anyNA(unlist(results))) {
+      plotsIterative$setError(gettext("Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."))
+      return()
+    }
+
+    if (any(is.infinite(unlist(results)))) {
       plotsIterative$setError(gettext("Plotting not possible: One of the Bayes factor is equal to infinity."))
       return()
     }
@@ -1238,10 +1293,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     legend       <- NULL
     tempResults <- .testBinomialLS(data, options[["models"]])
 
-    if (any(is.nan(tempResults$posterior))) {
+    if (anyNA(tempResults$posterior)) {
       plotsBothError <- createJaspPlot(width = 530, height = 400, aspectRatio = 0.7)
       plotsBoth[["plotsBothError"]] <- plotsBothError
-      plotsBothError$setError(gettext("The plot could not be created because the posterior model probabilities are not defined."))
+      plotsBothError$setError(gettext("The plot could not be created because the posterior model probabilities are not defined for all models."))
       return()
     }
 
@@ -1270,7 +1325,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
       dfPointsPP <- .dataProportionBinomialLS(data)
-      if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+      if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
     } else
       dfPointsPP <- NULL
 
@@ -1370,6 +1425,11 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         else if (options[["models"]][[i]]$type == "beta") {
           dfLinesPP  <- .dataLinesBinomialLS(data, options[["models"]][[i]])
 
+          if (anyNA(dfLinesPP)) {
+            tempPlot$setError(gettextf("Plot could not be produced due to lacking numerical precision for %1$s.", options[["models"]][[i]]$name))
+            next
+          }
+
           if (all(dfLinesPP$y[dfLinesPP$g == "Prior"] == dfLinesPP$y[dfLinesPP$g == "Posterior"])) {
             dfLinesPP   <- dfLinesPP[dfLinesPP$g == "Posterior",]
             dfLinesPP$g <- "Prior = Posterior"
@@ -1379,7 +1439,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
         if (options[["priorAndPosteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- .dataProportionBinomialLS(data)
-          if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+          if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
 
@@ -1429,7 +1489,9 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
       tempTests <- .testBinomialLS(data, options[["models"]])
       tempMeans <- NULL
-      margEst   <- .predictionTableEstimate(data, options, options[["posteriorPredictionSummaryTablePointEstimate"]])
+      tableRows <- list()
+      marglikIssue <- FALSE
+
       # add rows for each hypothesis
       for (i in 1:length(options[["models"]])) {
 
@@ -1445,14 +1507,39 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
           predictiveEst   = tempPrediction[[options[["posteriorPredictionSummaryTablePointEstimate"]]]]
         )
 
-        predictionsTable$addRows(tempRow)
+        if (is.na(tempRow$prob)) {
+          marglikIssue <- TRUE
+          predictionsTable$addFootnote(
+            gettextf(
+              "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
+              options[["models"]][[i]]$name),
+            symbol = gettext("Warning:"))
+        }
+
+        tableRows[[i]] <- tempRow
       }
 
-      predictionsTable$addRows(list(
-        hypothesis     = "Marginal",
-        posteriorEst   = margEst[["posteriorEst"]],
-        predictiveEst  = margEst[["predictionEst"]]
-      ))
+      tableRows <- do.call(rbind.data.frame, tableRows)
+      if (marglikIssue) {
+        tableRows$prob <- NA
+        predictionsTable$addFootnote(
+          gettext("Posterior probabilities and marginal prediction could not be computed since the marginal likelihoods are not available for some models."),
+          symbol = gettext("Warning:"))
+      } else {
+        margEst   <- try(.predictionTableEstimate(data, options, options[["posteriorPredictionSummaryTablePointEstimate"]]))
+        tableRows <- rbind(tableRows, data.frame(
+          hypothesis     = "Marginal",
+          posterior      = "",
+          prob           = NA,
+          predictive     = "",
+          posteriorEst   = margEst[["posteriorEst"]],
+          predictiveEst  = margEst[["predictionEst"]]
+        ))
+      }
+
+      predictionsTable$setData(tableRows)
+
+
 
       # add footnote clarifying what dataset was used
       predictionsTable$addFootnote(gettextf("The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)",

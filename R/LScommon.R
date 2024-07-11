@@ -15,15 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# general functions
-
-# This is a temporary fix
-# TODO: remove it when R will solve this problem!
-gettextf <- function(fmt, ..., domain = NULL)  {
-  return(sprintf(gettext(fmt, domain = domain), ...))
-}
-
-.evaluatePriors       <- function(models, type) {
+.evaluatePriors        <- function(models, type) {
   for (p in 1:length(models)) {
     for (i in 1:length(models[[p]])) {
       if (names(models[[p]])[i] %in% c("betaPriorAlpha", "betaPriorBeta", "spikePoint", "parMu", "parSigma", "priorWeight", "truncationLower", "truncationUpper")) {
@@ -68,7 +60,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
 
   return(models)
 }
-.scalePriors          <- function(models) {
+.scalePriors           <- function(models) {
   unscaled <- sapply(models, function(x)x$priorWeight)
   scaled   <- unscaled/sum(unscaled)
   for (i in 1:length(models)) {
@@ -76,7 +68,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
   }
   return(models)
 }
-.aproximateSupportLS  <- function(xSeq, seqTF) {
+.aproximateSupportLS   <- function(xSeq, seqTF) {
   xStart <- NULL
   xEnd   <- NULL
 
@@ -101,7 +93,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
 
   return(cbind.data.frame("lCI" = xSeq[xStart], "uCI" = xSeq[xEnd]))
 }
-.cleanSequence        <- function(sequence) {
+.cleanSequence         <- function(sequence) {
   sequence <- gsub(",", "\n", sequence)
   sequence <- gsub(";", "\n", sequence)
   sequence <- unlist(strsplit(sequence, split = "\n"))
@@ -109,11 +101,27 @@ gettextf <- function(fmt, ..., domain = NULL)  {
   sequence <- sequence[sequence != ""]
   return(sequence)
 }
-.formatFractionInput  <- function(input, evaluatedInput) {
+.formatFractionInput   <- function(input, evaluatedInput) {
   if (!is.na(as.numeric(input)))
     return(evaluatedInput)
   else
     return(MASS::fractions(evaluatedInput))
+}
+.checkAndRecoverErrors <- function(output) {
+
+  anyError <- FALSE
+  for (i in seq_along(output)) {
+    if (jaspBase::isTryError(output[[i]])) {
+      output[[i]] <- NA
+      anyError    <- TRUE
+    }
+  }
+
+  if (anyError)
+    attr(output, "errorMessage") <- gettextf("Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range).",
+                                             output$distribution)
+
+  return(output)
 }
 
 # plotting functions
@@ -1478,7 +1486,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
       ifelse (type == "Prior", "priorDistributionPlot", "posteriorDistributionPlot"),
       ifelse (type == "Prior", "priorDistributionPlotType", "posteriorDistributionPlotType")
     ))
-    containerPlots$position <- ifelse (type == "Prior", 3, 6)
+    containerPlots$position <- ifelse (type == "Prior", 3, 4)
     jaspResults[[paste0("containerPlots", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlots", type)]]
@@ -1515,7 +1523,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
       ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType",    "posteriorPredictionDistributionPlotType"),
       if (type == "Posterior") "posteriorPredictionNumberOfFutureTrials"
     ))
-    containerPlots$position <- ifelse (type == "Prior", 4, 10)
+    containerPlots$position <- ifelse (type == "Prior", 6, 10)
     jaspResults[[paste0("containerPlotsPrediction", type)]] <- containerPlots
   } else {
     containerPlots <- jaspResults[[paste0("containerPlotsPrediction", type)]]
@@ -1546,7 +1554,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Marginal")
       )))
-    containerBoth$position <- 7
+    containerBoth$position <- 5
     containerBoth$dependOn(c("priorAndPosteriorDistributionPlot", "priorAndPosteriorDistributionPlotType"))
 
     jaspResults[["containerBoth"]] <- containerBoth
@@ -1579,7 +1587,7 @@ gettextf <- function(fmt, ..., domain = NULL)  {
         "joint"       = gettext("Joint"),
         "marginal"    = gettext("Normalized")
       )))
-    containerPredictiveAccuracy$position <- 5
+    containerPredictiveAccuracy$position <- 7
     containerPredictiveAccuracy$dependOn(c("priorPredictivePerformanceAccuracyPlot", "priorPredictivePerformanceAccuracyPlotType"))
 
     jaspResults[["containerPredictiveAccuracy"]] <- containerPredictiveAccuracy

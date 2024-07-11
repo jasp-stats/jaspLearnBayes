@@ -436,7 +436,7 @@ LSgaussianestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
         if (type == "Posterior" && options[["posteriorDistributionPlotObservedProportion"]]) {
           dfPointsPP <- data.frame(x = data[["mean"]], y = 0, g = "Sample Mean")
-          if (is.nan(dfPointsPP$x))dfPointsPP <- NULL
+          if (anyNA(dfPointsPP$x)) dfPointsPP <- NULL
         } else
           dfPointsPP <- NULL
 

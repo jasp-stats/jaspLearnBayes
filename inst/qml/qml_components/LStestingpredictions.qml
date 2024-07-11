@@ -116,12 +116,12 @@ Section
 								label:			qsTr("mass")
 								fieldWidth:		50
 								defaultValue:	95
-								min:			0
+								min:			1
 								max:			100
-								inclusive:		JASP.MaxOnly
+								inclusive:		JASP.MinMax
 							}
 
-							IntegerField
+							DoubleField
 							{
 								visible:		plotsPredictionPostTypeCI.currentText == "custom"
 								enabled:		plotsPredictionPostCI.checked
@@ -135,7 +135,7 @@ Section
 								inclusive:		JASP.MinMax
 							}
 
-							IntegerField
+							DoubleField
 							{
 								visible:		plotsPredictionPostTypeCI.currentText == "custom"
 								enabled:		plotsPredictionPostCI.checked
@@ -145,6 +145,7 @@ Section
 								fieldWidth:		50
 								defaultValue:	1
 								min:			plotsPredictionPostLower.value
+								max:			predictionPlotProp.checked ? 1	: predictionN.value
 								inclusive:		JASP.MinMax
 							}
 
@@ -226,9 +227,9 @@ Section
 								label:				qsTr("Mass")
 								fieldWidth:			50
 								defaultValue:		95
-								min:				0
+								min:				1
 								max:				100
-								inclusive:			JASP.MaxOnly
+								inclusive:			JASP.MinMax
 							}
 
 							DoubleField
@@ -255,7 +256,8 @@ Section
 								fieldWidth:			50
 								defaultValue:		analysisType === "binomial" ? 1 : 1
 								min:				plotsPredictionPostMarginalLower.value
-								inclusive:			JASP.MinOnly
+								max:				predictionPlotProp.checked ? 1	: predictionN.value
+								inclusive:			JASP.MinMax
 							}
 						}
 					}

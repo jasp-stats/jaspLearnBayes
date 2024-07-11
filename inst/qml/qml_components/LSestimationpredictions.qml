@@ -127,12 +127,12 @@ Section
 								label:			qsTr("Mass")
 								fieldWidth:		50
 								defaultValue:	95
-								min:			0
+								min:			1
 								max:			100
-								inclusive:		JASP.MaxOnly
+								inclusive:		JASP.MinMax
 							}
 
-							IntegerField
+							DoubleField
 							{
 								visible:		plotsPredictionType.currentText == "custom"
 								enabled:		plotsPredictionCI.checked
@@ -146,7 +146,7 @@ Section
 								inclusive:		JASP.MinMax
 							}
 
-							IntegerField
+							DoubleField
 							{
 								visible:		plotsPredictionType.currentText == "custom"
 								enabled:		plotsPredictionCI.checked
@@ -156,6 +156,7 @@ Section
 								fieldWidth:		50
 								defaultValue:	1
 								min:			plotsPredictionLower.value
+								max:			predictionPlotProp.checked ? 1	: predictionN.value
 								inclusive:		JASP.MinMax
 							}
 

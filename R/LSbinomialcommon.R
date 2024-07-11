@@ -216,13 +216,15 @@
 
     output <- list(
       distribution = distributionText,
-      mean         = .betaMeanLS(alpha, beta, lower, upper),
-      median       = .qbetaLS(.5, alpha, beta, lower, upper),
-      mode         = .betaModeLS(alpha, beta, lower, upper),
-      lCI          = .qbetaLS(.025, alpha, beta, lower, upper),
-      uCI          = .qbetaLS(.975, alpha, beta, lower, upper)
+      mean         = try(.betaMeanLS(alpha, beta, lower, upper)),
+      median       = try(.qbetaLS(.5, alpha, beta, lower, upper)),
+      mode         = try(.betaModeLS(alpha, beta, lower, upper)),
+      lCI          = try(.qbetaLS(.025, alpha, beta, lower, upper)),
+      uCI          = try(.qbetaLS(.975, alpha, beta, lower, upper))
     )
 
+    # check and recover from errors
+    output <- .checkAndRecoverErrors(output)
 
     return(output)
   }
@@ -262,11 +264,12 @@
           tempPostUper  <- stats::pbeta(tempPrior[["truncationUpper"]], data$nSuccesses + tempPrior[["betaPriorAlpha"]], data$nFailures + tempPrior[["betaPriorBeta"]])
 
           logLik[i]  <- logLik[i] + log(tempPostUper - tempPostLower) - log(tempPriorUpper - tempPriorLower)
-
         }
 
       }
 
+      if (is.infinite(logLik[i]))
+        logLik[i] <- NA
 
     } else {
       logLik[i] <- 0
@@ -277,7 +280,7 @@
   if (data$nSuccesses + data$nFailures > 0) {
 
     priorWeightLogLik   <- log(prior) + logLik
-    normConst  <- log(sum(exp(priorWeightLogLik)))
+    normConst  <- log(sum(exp(priorWeightLogLik), na.rm = TRUE))
     posterior  <- exp(priorWeightLogLik - normConst)
 
   } else {
@@ -335,13 +338,16 @@
 
     output <- list(
       distribution = distributionText,
-      mean         = .bbinomMeanLS(n, alpha, beta, lower, upper) / d,
-      median       = .qbbinomLS(.5, n, alpha, beta, lower, upper) / d,
-      mode         = .bbinomModeLS(n, alpha, beta, lower, upper, prop = prop),
-      lCI          = .qbbinomLS(0.025, n, alpha, beta, lower, upper) / d,
-      uCI          = .qbbinomLS(0.975, n, alpha, beta, lower, upper) / d,
-      SD           = .bbinomSdLS(n, alpha, beta, lower, upper) / d
+      mean         = try(.bbinomMeanLS(n, alpha, beta, lower, upper) / d),
+      median       = try(.qbbinomLS(.5, n, alpha, beta, lower, upper) / d),
+      mode         = try(.bbinomModeLS(n, alpha, beta, lower, upper, prop = prop)),
+      lCI          = try(.qbbinomLS(0.025, n, alpha, beta, lower, upper) / d),
+      uCI          = try(.qbbinomLS(0.975, n, alpha, beta, lower, upper) / d),
+      SD           = try(.bbinomSdLS(n, alpha, beta, lower, upper) / d)
     )
+
+    # check and recover from errors
+    output <- .checkAndRecoverErrors(output)
 
     return(output)
   }
@@ -666,10 +672,11 @@
   if (lower == 0 && upper == 1) {
     return(stats::dbeta(x, alpha, beta))
   } else {
-    num <- stats::dbeta(x, alpha, beta)
-    den <- pbeta(upper, alpha, beta) - pbeta(lower, alpha, beta)
-    lik <- num/den
+    num <- stats::dbeta(x, alpha, beta, log = TRUE)
+    den <- log(pbeta(upper, alpha, beta) - pbeta(lower, alpha, beta))
+    lik <- exp(num  - den)
     lik[x < lower | x > upper] <- 0
+    lik[is.nan(lik)] <- NA
     return(lik)
   }
 }
@@ -683,6 +690,7 @@
     p  <- (p - C1) / (C2 - C1)
     p[x < lower] <- 0
     p[x > upper] <- 1
+    p[is.nan(p)] <- NA
     return(p)
   }
 }
@@ -692,18 +700,18 @@
   } else {
 
     q <- sapply(x, function(xi) {
-      stats::optim(
+      tempOptim <- stats::optim(
         par     = (lower + upper) / 2 ,
         fn      = function(p) ( .pbetaLS(p, alpha, beta, lower, upper) - xi)^2,
         lower   = lower,
         upper   = upper,
-        method  = "L-BFGS-B",
-        control = list(
-          factr = 1e3
-        )
-      )$par
+        method  = "Brent"
+      )
+      if (is.na(tempOptim$value) || tempOptim$value > 1e-5)
+        return(NA)
+      else
+        return(tempOptim$par)
     })
-
     return(q)
   }
 }
@@ -711,7 +719,10 @@
   if (lower == 0 && upper == 1) {
     return(alpha / (alpha + beta))
   } else {
-    return(stats::integrate(function(x) x * .dbetaLS(x, alpha, beta, lower, upper), lower, upper)$value)
+    tempMean <- stats::integrate(function(x) x * .dbetaLS(x, alpha, beta, lower, upper), lower, upper)$value
+    if (tempMean < lower || tempMean > upper)
+      stop("Mean is outside of the truncation bounds -- numerical precision error.")
+    return(tempMean)
   }
 }
 .betaModeLS                 <- function(alpha, beta, lower = 0, upper = 1){
@@ -746,12 +757,16 @@
     return(extraDistr::dbbinom(x, size, alpha, beta))
   } else {
     return(sapply(x, function(xi) {
-      integrate(
+      tempInt <- try(integrate(
         f     = function(p) {
           stats::dbinom(x = xi, size = size, prob = p) * .dbetaLS(p, alpha, beta, lower, upper)
         },
         lower = lower,
-        upper = upper)$value
+        upper = upper))
+      if (jaspBase::isTryError(tempInt))
+        return(NA)
+      else
+        return(tempInt$value)
     }))
   }
 }
@@ -892,8 +907,8 @@
       x <- qbinom(c((1 - coverage)/2 + 1e-5, 1 - (1 - coverage)/2), n, prior[["spikePoint"]])
     else if (prior[["type"]] == "beta")
       x <- c(
-        .qbbinomLS((1 - coverage)/2 + 1e-5, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]),
-        .qbbinomLS(1 - (1 - coverage)/2,     n , prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
+        .qbbinomLS((1 - coverage)/2 + 1e-5,  n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]),
+        .qbbinomLS(1 - (1 - coverage)/2,     n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
       )
 
 
@@ -908,9 +923,14 @@
 
     if (prior[["type"]] == "spike")
       coverage <- ifelse (lCI <= prior[["spikePoint"]] & prior[["spikePoint"]] <= uCI, 1, 0)
-    else if (prior[["type"]] == "beta")
-      coverage <- .pbetaLS(uCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]) -
-        .pbetaLS(lCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
+    else if (prior[["type"]] == "beta") {
+      if (uCI >= prior[["truncationUpper"]] && lCI <= prior[["truncationLower"]])
+        coverage <- 1
+      else
+        coverage <- .pbetaLS(uCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]]) -
+          .pbetaLS(lCI, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])
+    }
+
 
 
   } else if (type == "prediction") {
@@ -923,6 +943,7 @@
         .dbbinomLS(s, n, prior[["betaPriorAlpha"]] + data$nSuccesses, prior[["betaPriorBeta"]] + data$nFailures, prior[["truncationLower"]], prior[["truncationUpper"]])))
 
   }
+
 
   dat       <- data.frame(xStart = lCI, xEnd = uCI, g = "custom", coverage = coverage, parameter = "theta")
   return(dat)
