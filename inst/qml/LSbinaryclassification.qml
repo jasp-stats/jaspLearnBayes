@@ -55,7 +55,7 @@ Form {
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
 			min:			0
-			inclusive:		0
+			inclusive:		false
 			defaultValue:	"1"
 			fieldWidth:		65
 		}
@@ -66,7 +66,7 @@ Form {
 			label:			"β = "
 			afterLabel:		qsTr(")");
 			min:			0
-			inclusive:		0
+			inclusive:		false
 			defaultValue:	"9"
 			fieldWidth:		65
 		}
@@ -79,7 +79,7 @@ Form {
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
 			min:			0
-			inclusive:		0
+			inclusive:		false
 			defaultValue:	"8"
 			fieldWidth:		65
 		}
@@ -90,7 +90,7 @@ Form {
 			label:			"β = "
 			afterLabel:		qsTr(")")
 			min:			0
-			inclusive:		0
+			inclusive:		false
 			defaultValue:	"2"
 			fieldWidth:		65
 		}
@@ -103,7 +103,7 @@ Form {
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
 			min:			0
-			inclusive:		0
+			inclusive:		false
 			defaultValue:	"8"
 			fieldWidth:		65
 		}
@@ -114,7 +114,7 @@ Form {
 			label:			"β = "
 			afterLabel:		qsTr(")")
 			min:			0
-			inclusive:		0
+			inclusive:		false
 			defaultValue:	"2"
 			fieldWidth:		65
 		}
