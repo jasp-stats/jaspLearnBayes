@@ -20,6 +20,7 @@ import QtQuick.Layouts 1.3
 import JASP.Controls 1.0
 import JASP.Widgets 1.0
 import JASP.Theme 1.0
+import JASP
 import "../qml/qml_components" as LS
 
 Form {
@@ -55,7 +56,7 @@ Form {
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
 			min:			0
-			inclusive:		false
+			inclusive:		JASP.None
 			defaultValue:	"1"
 			fieldWidth:		65
 		}
@@ -66,7 +67,7 @@ Form {
 			label:			"β = "
 			afterLabel:		qsTr(")");
 			min:			0
-			inclusive:		false
+			inclusive:		JASP.None
 			defaultValue:	"9"
 			fieldWidth:		65
 		}
@@ -79,7 +80,7 @@ Form {
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
 			min:			0
-			inclusive:		false
+			inclusive:		JASP.None
 			defaultValue:	"8"
 			fieldWidth:		65
 		}
@@ -90,7 +91,7 @@ Form {
 			label:			"β = "
 			afterLabel:		qsTr(")")
 			min:			0
-			inclusive:		false
+			inclusive:		JASP.None
 			defaultValue:	"2"
 			fieldWidth:		65
 		}
@@ -103,7 +104,7 @@ Form {
 			label:			qsTr("~ Beta(α = ")
 			afterLabel:		","
 			min:			0
-			inclusive:		false
+			inclusive:		JASP.None
 			defaultValue:	"8"
 			fieldWidth:		65
 		}
@@ -114,7 +115,7 @@ Form {
 			label:			"β = "
 			afterLabel:		qsTr(")")
 			min:			0
-			inclusive:		false
+			inclusive:		JASP.None
 			defaultValue:	"2"
 			fieldWidth:		65
 		}
