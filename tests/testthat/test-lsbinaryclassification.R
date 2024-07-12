@@ -386,4 +386,52 @@ test_that("Analysis handles errors", {
   testthat::expect_identical(results[["results"]][["errorMessage"]],
                              "Some of the specified colors are not valid colors.")
 
+  # All illegal prior parameters
+  options <- jaspTools::analysisOptions("LSbinaryclassification")
+  options$inputType <- "data"
+  options$labels <- "bin"
+  options$marker <- "badMarker"
+
+  options$colorTruePositive <- "darkgree"
+  options$colorFalseNegative <- "red"
+  options$colorFalsePositive <- "darkorange"
+  options$colorTrueNegative <- "steelblue"
+
+  options$priorPrevalenceAlpha  <- 0
+  options$priorPrevalenceBeta   <- 0
+  options$priorSensitivityAlpha <- 0
+  options$priorSensitivityBeta  <- 0
+  options$priorSpecificityAlpha <- 0
+  options$priorSpecificityBeta  <- 0
+
+  results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
+
+  testthat::expect_true(results[["results"]][["error"]])
+  testthat::expect_identical(results[["results"]][["errorMessage"]],
+                             "JAGS requires strictly positive parameters for Beta priors. Set {\u03B1, \u03B2} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity.")
+
+  # Some illegal prior parameters
+  options <- jaspTools::analysisOptions("LSbinaryclassification")
+  options$inputType <- "data"
+  options$labels <- "bin"
+  options$marker <- "badMarker"
+
+  options$colorTruePositive <- "darkgree"
+  options$colorFalseNegative <- "red"
+  options$colorFalsePositive <- "darkorange"
+  options$colorTrueNegative <- "steelblue"
+
+  options$priorPrevalenceAlpha  <- 1
+  options$priorPrevalenceBeta   <- 1
+  options$priorSensitivityAlpha <- 1
+  options$priorSensitivityBeta  <- 0
+  options$priorSpecificityAlpha <- 1
+  options$priorSpecificityBeta  <- 0
+
+  results <- jaspTools::runAnalysis("LSbinaryclassification", data, options)
+
+  testthat::expect_true(results[["results"]][["error"]])
+  testthat::expect_identical(results[["results"]][["errorMessage"]],
+                             "JAGS requires strictly positive parameters for Beta priors. Set {\u03B1, \u03B2} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity.")
+
 })
