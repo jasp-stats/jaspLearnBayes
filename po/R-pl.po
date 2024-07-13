@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.0\n"
-"POT-Creation-Date: 2024-04-20 02:44\n"
+"POT-Creation-Date: 2024-07-13 02:46\n"
 "PO-Revision-Date: 2024-06-20 22:09+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -151,6 +151,11 @@ msgid ""
 msgstr ""
 
 msgid "Welcome to binary classification with JASP!"
+msgstr ""
+
+msgid ""
+"JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 "
+"for the prior distributions of Prevalence, Sensitivity, and Specificity."
 msgstr ""
 
 msgid "Some of the specified colors are not valid colors."
@@ -579,11 +584,17 @@ msgstr "Posterior %s"
 msgid "Please specify successes and failures."
 msgstr "Należy zdefiniować sukcesy i porażki."
 
+msgid "Warning:"
+msgstr ""
+
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr ""
 
 msgid "Observation"
 msgstr "Obserwacje"
+
+msgid "Plot could not be produced due to lacking numerical precision for %1$s."
+msgstr ""
 
 msgid "Population proportion"
 msgstr "Proporcja populacji"
@@ -664,18 +675,34 @@ msgstr ""
 msgid "P(H|data)"
 msgstr ""
 
+msgid ""
+"Summary of %1$s could not be computed. The most likely reason is the lack of "
+"numerical precision due to the truncation-data conflict (i.e., majority of "
+"the posterior distribution lies outside of the truncation range)."
+msgstr ""
+
+msgid ""
+"Bayes factors and posterior probabilities could not be computed since the "
+"marginal likelihoods are not available for some models."
+msgstr ""
+
 msgid "These results are based on %1$i success(es) and %2$i failure(s)"
 msgstr ""
 
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
-"not defined."
+"not defined for all models."
 msgstr ""
 
 msgid "P(Successes|%s)"
 msgstr ""
 
 msgid "P(Successes)"
+msgstr ""
+
+msgid ""
+"The table could not be created because the posterior model probabilities are "
+"not defined for all models."
 msgstr ""
 
 msgid "Please specify a hypothesis for comparison."
@@ -697,6 +724,11 @@ msgid "Observations"
 msgstr "Obserwacje"
 
 msgid "At least 2 hypotheses need to be specified."
+msgstr ""
+
+msgid ""
+"Posterior probabilities and marginal prediction could not be computed since "
+"the marginal likelihoods are not available for some models."
 msgstr ""
 
 msgid ""

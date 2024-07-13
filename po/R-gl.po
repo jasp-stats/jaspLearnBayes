@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-04-20 02:44\n"
+"POT-Creation-Date: 2024-07-13 02:46\n"
 "PO-Revision-Date: 2024-04-28 12:07+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
@@ -232,6 +232,11 @@ msgstr ""
 
 msgid "Welcome to binary classification with JASP!"
 msgstr "Benvido á clasificación binaria con JASP!"
+
+msgid ""
+"JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 "
+"for the prior distributions of Prevalence, Sensitivity, and Specificity."
+msgstr ""
 
 msgid "Some of the specified colors are not valid colors."
 msgstr "Algunhas das cores indicadas non son cores válidas."
@@ -670,11 +675,17 @@ msgstr "%s posterior"
 msgid "Please specify successes and failures."
 msgstr "Por favor, indica os acertos e os fracasos."
 
+msgid "Warning:"
+msgstr ""
+
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr "Estes resultados baséanse en %1$i %2$s e %3$i %4$s."
 
 msgid "Observation"
 msgstr "Observación"
+
+msgid "Plot could not be produced due to lacking numerical precision for %1$s."
+msgstr ""
 
 msgid "Population proportion"
 msgstr "Proporción de poboación"
@@ -762,12 +773,24 @@ msgstr "log(verosimilitude)"
 msgid "P(H|data)"
 msgstr "P(H|datos)"
 
+msgid ""
+"Summary of %1$s could not be computed. The most likely reason is the lack of "
+"numerical precision due to the truncation-data conflict (i.e., majority of "
+"the posterior distribution lies outside of the truncation range)."
+msgstr ""
+
+msgid ""
+"Bayes factors and posterior probabilities could not be computed since the "
+"marginal likelihoods are not available for some models."
+msgstr ""
+
 msgid "These results are based on %1$i success(es) and %2$i failure(s)"
 msgstr "Estes resultados baséanse en %1$i acerto(s) e %2$i fallo(s)"
 
+#, fuzzy
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
-"not defined."
+"not defined for all models."
 msgstr ""
 "A gráfica non se pode xerar porque as probabilidades posteriores do modelo "
 "non están definidas."
@@ -777,6 +800,14 @@ msgstr "P(Acertos|%s)"
 
 msgid "P(Successes)"
 msgstr "P(Acertos)"
+
+#, fuzzy
+msgid ""
+"The table could not be created because the posterior model probabilities are "
+"not defined for all models."
+msgstr ""
+"A gráfica non se pode xerar porque as probabilidades posteriores do modelo "
+"non están definidas."
 
 msgid "Please specify a hypothesis for comparison."
 msgstr "Por favor, indica unha hipótese para cotexar."
@@ -801,6 +832,11 @@ msgid "At least 2 hypotheses need to be specified."
 msgstr "Cando menos, é necesario indicar 2 hipóteses."
 
 msgid ""
+"Posterior probabilities and marginal prediction could not be computed since "
+"the marginal likelihoods are not available for some models."
+msgstr ""
+
+msgid ""
 "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i "
 "failure(s)"
 msgstr ""
@@ -814,8 +850,8 @@ msgid ""
 "The truncation range for model/hypothesis '%s' must be within [0, 1] "
 "interval."
 msgstr ""
-"O rango de tronzado para o modelo/a hipótese '%s' debe estar no intervalo ["
-"0, 1]."
+"O rango de tronzado para o modelo/a hipótese '%s' debe estar no intervalo "
+"[0, 1]."
 
 msgid ""
 "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."

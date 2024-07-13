@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
-"POT-Creation-Date: 2024-04-20 02:44\n"
+"POT-Creation-Date: 2024-07-13 02:46\n"
 "PO-Revision-Date: 2024-06-10 08:20+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
@@ -224,6 +224,11 @@ msgstr ""
 
 msgid "Welcome to binary classification with JASP!"
 msgstr "Willkommen zur binären Klassifizierung mit JASP!"
+
+msgid ""
+"JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 "
+"for the prior distributions of Prevalence, Sensitivity, and Specificity."
+msgstr ""
 
 msgid "Some of the specified colors are not valid colors."
 msgstr "Einige der angegebenen Farben sind keine gültigen Farben."
@@ -672,11 +677,17 @@ msgstr "Posterior %s"
 msgid "Please specify successes and failures."
 msgstr "Bitte gib Erfolge und Misserfolge an."
 
+msgid "Warning:"
+msgstr ""
+
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr "Diese Ergebnisse basieren auf %1$i %2$s und %3$i %4$s."
 
 msgid "Observation"
 msgstr "Beobachtung"
+
+msgid "Plot could not be produced due to lacking numerical precision for %1$s."
+msgstr ""
 
 msgid "Population proportion"
 msgstr "Grundgesamtheits-Verhältnis"
@@ -767,12 +778,24 @@ msgstr "Log(Likelihood)"
 msgid "P(H|data)"
 msgstr "P(H|Daten)"
 
+msgid ""
+"Summary of %1$s could not be computed. The most likely reason is the lack of "
+"numerical precision due to the truncation-data conflict (i.e., majority of "
+"the posterior distribution lies outside of the truncation range)."
+msgstr ""
+
+msgid ""
+"Bayes factors and posterior probabilities could not be computed since the "
+"marginal likelihoods are not available for some models."
+msgstr ""
+
 msgid "These results are based on %1$i success(es) and %2$i failure(s)"
 msgstr "Diese Ergebnisse basieren auf %1$i Erfolg(en) und %2$i Misserfolg(en)"
 
+#, fuzzy
 msgid ""
 "The plot could not be created because the posterior model probabilities are "
-"not defined."
+"not defined for all models."
 msgstr ""
 "Das Diagramm konnte nicht erstellt werden, da die Posterior-"
 "Modellwahrscheinlichkeiten nicht definiert sind."
@@ -782,6 +805,14 @@ msgstr "P(Erfolge|%s)"
 
 msgid "P(Successes)"
 msgstr "P(Erfolge)"
+
+#, fuzzy
+msgid ""
+"The table could not be created because the posterior model probabilities are "
+"not defined for all models."
+msgstr ""
+"Das Diagramm konnte nicht erstellt werden, da die Posterior-"
+"Modellwahrscheinlichkeiten nicht definiert sind."
 
 msgid "Please specify a hypothesis for comparison."
 msgstr "Bitte gib eine Hypothese zum Vergleich an."
@@ -803,6 +834,11 @@ msgstr "Beobachtungen"
 
 msgid "At least 2 hypotheses need to be specified."
 msgstr "Es müssen mindestens 2 Hypothesen spezifiziert werden."
+
+msgid ""
+"Posterior probabilities and marginal prediction could not be computed since "
+"the marginal likelihoods are not available for some models."
+msgstr ""
 
 msgid ""
 "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i "
