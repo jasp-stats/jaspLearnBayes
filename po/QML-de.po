@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-07-14 13:09+0000\n"
+"PO-Revision-Date: 2024-07-19 08:09+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/de/>\n"
@@ -1237,7 +1237,7 @@ msgstr "Für variierenden Schwellwert"
 
 msgctxt "LSbinomialestimation|"
 msgid "Truncation"
-msgstr "Abschneiden"
+msgstr "Stutzung"
 
 msgctxt "LSbinomialestimation|"
 msgid "Lower"
@@ -1249,7 +1249,7 @@ msgstr "Obere"
 
 msgctxt "LSbinomialtesting|"
 msgid "Truncation"
-msgstr "Abschneiden"
+msgstr "Stutzung"
 
 msgctxt "LSbinomialtesting|"
 msgid "Prior prob."
