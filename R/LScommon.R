@@ -542,7 +542,7 @@
       legend.key.width  = ggplot2::unit(1.5,"cm"),
 
       axis.line.y  = ggplot2::element_blank(),
-      #axis.text.y  = ggplot2::element_blank(),
+      axis.text.y  = ggplot2::element_text(margin = ggplot2::margin(l = 10)),
       axis.ticks.y = ggplot2::element_blank(),
       axis.title.y = ggplot2::element_blank(),
       legend.position = "none"
