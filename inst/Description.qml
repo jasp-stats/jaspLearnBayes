@@ -7,7 +7,7 @@ Description
 	name: 			"jaspLearnBayes"
 	icon:			"learning-stats.png"
 	description:	qsTr("Learn Bayesian statistics with simple examples and supporting text")
-	version			: "0.19.0"
+	version			: "0.19.2"
 	requiresData:	false
 	author:			"JASP Team"
 	maintainer:		"JASP Team <info@jasp-stats.org>"
