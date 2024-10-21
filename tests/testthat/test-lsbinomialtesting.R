@@ -115,7 +115,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Hypothesis Beta plot matches", {
@@ -306,7 +306,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Hypothesis Spike plot matches", {
@@ -485,7 +485,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Hypothesis Spike plot matches", {
@@ -546,9 +546,9 @@ context("Learn Bayes - Binomial Testing")
   test_that("Testing Summary table results match", {
     table <- results[["results"]][["testsContainer"]][["collection"]][["testsContainer_testsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", -5.616913585436, 0.181526448024068, 0.5, 1.50603972126269,
-                                        "Hypothesis Beta", -4.11087386417331, 0.818473551975932, 0.5
-                                   ))
+                                   list("",               "Hypothesis Spike", -5.616913585436,   0.181526448024068, 0.5,
+                                        1.50603972126269, "Hypothesis Beta",  -4.11087386417331, 0.818473551975932, 0.5)
+    )
   })
 }
 ### more options vol. 3 (spike + beta)
@@ -664,7 +664,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Hypothesis Spike plot matches", {
@@ -725,9 +725,9 @@ context("Learn Bayes - Binomial Testing")
   test_that("Testing Summary table results match", {
     table <- results[["results"]][["testsContainer"]][["collection"]][["testsContainer_testsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", -5.616913585436, 0.181526448024068, 0.5, 1.50603972126269,
-                                        "Hypothesis Beta", -4.11087386417331, 0.818473551975932, 0.5
-                                   ))
+                                   list("",               "Hypothesis Spike", -5.616913585436,   0.181526448024068, 0.5,
+                                        1.50603972126269, "Hypothesis Beta",  -4.11087386417331, 0.818473551975932, 0.5)
+    )
   })
 }
 ### more options vol. 4 (spike + beta)
@@ -843,7 +843,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Prior and Posterior plot matches", {
@@ -898,9 +898,9 @@ context("Learn Bayes - Binomial Testing")
   test_that("Testing Summary table results match", {
     table <- results[["results"]][["testsContainer"]][["collection"]][["testsContainer_testsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", -5.616913585436, 0.181526448024068, 0.5, 1.50603972126269,
-                                        "Hypothesis Beta", -4.11087386417331, 0.818473551975932, 0.5
-                                   ))
+                                   list("",               "Hypothesis Spike", -5.616913585436,   0.181526448024068, 0.5,
+                                        1.50603972126269, "Hypothesis Beta",  -4.11087386417331, 0.818473551975932, 0.5)
+    )
   })
 }
 ### more options vol. 5 (spike + beta)
@@ -1017,7 +1017,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Prior and Posterio matches", {
@@ -1047,11 +1047,10 @@ context("Learn Bayes - Binomial Testing")
   test_that("Predictions table results match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", "spike at 0.5", 0.5, "binomial(1, 0.5)",
-                                        0.5, 0.181526448024068, "Hypothesis Beta", "beta(21, 41)",
-                                        0.338709677419355, "beta-binomial(1, 21, 41)", 0.338709677419355,
-                                        0.818473551975932, "Marginal", 0.367988136778075, 0.367988136778075
-                                   ))
+                                   list("Hypothesis Spike", "spike at 0.5", 0.5,               "binomial(1, 0.5)",         0.5,               0.181526448024068,
+                                        "Hypothesis Beta",  "beta(21, 41)", 0.338709677419355, "beta-binomial(1, 21, 41)", 0.338709677419355, 0.818473551975932,
+                                        "Marginal",         "",             0.367988136778075, "",                         0.367988136778075, "")
+    )
   })
 
   test_that("Sequential plot matches", {
@@ -1094,9 +1093,9 @@ context("Learn Bayes - Binomial Testing")
   test_that("Testing Summary table results match", {
     table <- results[["results"]][["testsContainer"]][["collection"]][["testsContainer_testsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list(-1.50603972126269, "Hypothesis Spike", -5.616913585436, 0.181526448024068,
-                                        0.5, "Hypothesis Beta", -4.11087386417331, 0.818473551975932,
-                                        0.5))
+                                   list(-1.50603972126269, "Hypothesis Spike", -5.616913585436,   0.181526448024068, 0.5,
+                                        "",                "Hypothesis Beta",  -4.11087386417331, 0.818473551975932, 0.5)
+    )
   })
 }
 ### more options vol. 6 (spike + beta)
@@ -1212,7 +1211,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Prediction Posterior plot matches", {
@@ -1233,10 +1232,10 @@ context("Learn Bayes - Binomial Testing")
   test_that("Prediction summary table match", {
     table <- results[["results"]][["containerPredictions"]][["collection"]][["containerPredictions_predictionsTable"]][["data"]]
     jaspTools::expect_equal_tables(table,
-                                   list("Hypothesis Spike", "spike at 0.5", 0.5, "binomial(10, 0.5)",
-                                        5, 0.181526448024068, "Hypothesis Beta", "beta(21, 41)", 0.338709677419355,
-                                        "beta-binomial(10, 21, 41)", 3.38709677419355, 0.818473551975932,
-                                        "Marginal", 0.367988136778075, 3.67988136778075))
+                                   list("Hypothesis Spike", "spike at 0.5", 0.5,               "binomial(10, 0.5)",         5,                0.181526448024068,
+                                        "Hypothesis Beta",  "beta(21, 41)", 0.338709677419355, "beta-binomial(10, 21, 41)", 3.38709677419355, 0.818473551975932,
+                                        "Marginal",         "",             0.367988136778075, "",                          3.67988136778075, "")
+    )
   })
 
   test_that("Sequential plot matches", {
@@ -1373,7 +1372,7 @@ context("Learn Bayes - Binomial Testing")
                               betaPriorBeta = "1", spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Posterior Prediction plot matches", {
@@ -1508,7 +1507,7 @@ context("Learn Bayes - Binomial Testing")
                               spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Hypothesis 1 plot matches", {
@@ -1676,7 +1675,7 @@ context("Learn Bayes - Binomial Testing")
                               spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Prior and Posterior matches", {
@@ -1846,7 +1845,7 @@ context("Learn Bayes - Binomial Testing")
                               spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Prior Prediction plot matches", {
@@ -1992,7 +1991,7 @@ context("Learn Bayes - Binomial Testing")
                               spikePoint = "0.6", type = "spike", value = "5", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "facFive"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
 
 
   test_that("Prior Prediction plot matches", {

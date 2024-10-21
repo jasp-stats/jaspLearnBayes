@@ -72,7 +72,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Sequential Updating Plot matches", {
@@ -255,7 +255,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
 
@@ -546,7 +546,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Models Beta plot matches", {
@@ -690,7 +690,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Sequantial Updating plot matches", {
@@ -798,7 +798,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Models Beta plot matches", {
@@ -900,7 +900,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Models Beta plot matches", {
@@ -1002,7 +1002,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Prediction plot matches", {
@@ -1098,7 +1098,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.3", type = "spike", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Prediction plot matches", {
@@ -1192,7 +1192,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Sequential Updating plot matches", {
@@ -1315,7 +1315,7 @@ context("Learn Bayes - Binomial Estimation")
                               spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- "contBinom"
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
 
@@ -1442,7 +1442,7 @@ context("Learn Bayes - Binomial Estimation")
                               type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- ""
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
   table <- results[["results"]][["estimatesContainer"]][["collection"]][["estimatesContainer_estimatesTable"]][["data"]]
   jaspTools::expect_equal_tables(table,
                                  list("Models 1", "spike at 0.5", 0.5, "spike at 0.5", 0.5, "Models 2",
@@ -1521,7 +1521,7 @@ context("Learn Bayes - Binomial Estimation")
                               type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
   options$dataVariableSelected <- ""
   set.seed(1)
-  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug", options)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
 
   test_that("Estimation Summary table results match", {
