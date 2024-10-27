@@ -907,12 +907,6 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 }
 .tablePredictions2LS                    <- function(jaspResults, data, ready, options, type = c("Prior", "Posterior")) {
 
-  if(!ready["data"]) {
-    data <- list(y = NULL,
-                 nSuccesses = 0,
-                 nFailures = 0)
-  }
-
   containerPlots <- .containerPrediction2PlotsLS(jaspResults, options, "binTest", type)
 
   if (is.null(containerPlots[["tablePredictions"]])) {

@@ -18,12 +18,7 @@
 # data load and summary
 .readyBinomialLS       <- function(options) {
   # are data ready
-  if (options[["dataInputType"]] == "counts")
-    readyData <- TRUE
-  else if (options[["dataInputType"]] == "sequence")
-    readyData <- length(options[["dataSequenceSuccesses"]]) > 0 || length(options[["dataSequenceFailures"]]) > 0
-  else if (options[["dataInputType"]] == "variable")
-    readyData <- length(options[["dataVariableSuccesses"]]) > 0 || length(options[["dataVariableFailures"]]) > 0
+  readyData <- length(options[["dataInputType"]]) > 0
 
   # are priors ready
   readyPriors <- length(options[["models"]]) > 0
