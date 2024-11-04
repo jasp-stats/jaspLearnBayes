@@ -553,7 +553,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     containerPlots[[paste0("priorPredictivePerformanceDistributionPlot",type)]] <- plotsPredictions
 
 
-    if (!all(ready) || (data[["nSuccesses"]] == 0 && data[["nFailures"]] == 0))
+    if (!all(ready) || (sum(data$nSuccesses, data$nFailures) == 0 && type == "Prior"))
       return()
     else {
 
@@ -763,7 +763,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       plotsPredictionsIndividual[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if ((!ready["data"] && ready["models"]) || (data[["nSuccesses"]] == 0 & data[["nFailures"]] == 0)) {
+    } else if ((!ready["data"] && ready["models"]) || (sum(data$nSuccesses, data$nFailures) == 0 && type == "Prior")) {
 
       for (i in 1:length(options[["models"]])) {
         plotsPredictionsIndividual[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
@@ -957,7 +957,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         tablePredictions$addColumnInfo(name = "marginal", title = gettextf("P(Successes)"), type = "number")
     }
 
-    if (!ready["models"] || (ready["models"] && sum(data$nSuccesses, data$nFailures) == 0))
+    if (!ready["models"] || (ready["models"] && type == "Prior" && sum(data$nSuccesses, data$nFailures) == 0))
       return()
 
 

@@ -559,7 +559,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
                               "colorPalette"))
     containerIterative[["plotsIterative"]] <- plotsIterative
 
-    if (!all(ready))
+    if (!all(ready) || sum(data$nSuccesses, data$nFailures) == 0)
       return()
 
     plotDataLines <- list()
@@ -728,7 +728,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       plotsIterative[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["models"]) {
+    } else if ((!ready["data"] && ready["models"]) || sum(data$nSuccesses, data$nFailures) == 0) {
 
       for (i in 1:length(options[["models"]])) {
         plotsIterative[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
@@ -819,7 +819,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
                                       "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "colorPalette"))
     containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
-    if (!all(ready))
+    if (!all(ready) || sum(data$nSuccesses, data$nFailures) == 0)
       return()
 
 
@@ -892,7 +892,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       plotsIterativeInterval[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["models"]) {
+    } else if ((!ready["data"] && ready["models"]) || sum(data$nSuccesses, data$nFailures) == 0) {
 
       for (i in 1:length(options[["models"]])) {
         plotsIterativeInterval[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
