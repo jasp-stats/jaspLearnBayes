@@ -151,16 +151,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     testsContainer[["testsTable"]] <- testsTable
 
+    if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "" && sum(data$nSuccesses, data$nFailures) == 0) ||
+        (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != "" && sum(data$nSuccesses, data$nFailures) == 0))
+      testsTable$addFootnote(gettext("Please specify successes and failures."))
+
     if (ready["data"] && !ready["models"])
       return()
-    else if (!ready["data"]) {
 
-      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]]  != "") ||
-          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != ""))
-        testsTable$addFootnote(gettext("Please specify successes and failures."))
-
-      return()
-    } else if (ready["models"]) {
+    else if (ready["models"]) {
 
       tempResults  <- .testBinomialLS(data, options[["models"]])
       marglikIssue <- FALSE
@@ -555,7 +553,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     containerPlots[[paste0("priorPredictivePerformanceDistributionPlot",type)]] <- plotsPredictions
 
 
-    if (!all(ready) || (data[["nSuccesses"]] == 0 && data[["nFailures"]] == 0))
+    if (!all(ready) || (sum(data$nSuccesses, data$nFailures) == 0 && type == "Prior"))
       return()
     else {
 
@@ -765,7 +763,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       plotsPredictionsIndividual[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if ((!ready["data"] && ready["models"]) || (data[["nSuccesses"]] == 0 & data[["nFailures"]] == 0)) {
+    } else if ((!ready["data"] && ready["models"]) || (sum(data$nSuccesses, data$nFailures) == 0 && type == "Prior")) {
 
       for (i in 1:length(options[["models"]])) {
         plotsPredictionsIndividual[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
@@ -939,9 +937,17 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       tablePredictions$addColumns(c(0:tempN)/tempN)
     } else {
       tablePredictions$addColumnInfo(name = "successes", title = gettext("Successes"), type = "integer")
-      tablePredictions$addColumns(0:tempN)
+      if (tempN > 0)
+        tablePredictions$addColumns(0:tempN)
     }
 
+
+    if (type != "Prior") {
+
+      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "" && sum(data$nSuccesses, data$nFailures) == 0) ||
+          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != "" && sum(data$nSuccesses, data$nFailures) == 0))
+        tablePredictions$addFootnote(gettext("Please specify successes and failures."))
+    }
 
     if (ready["models"]) {
       if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]] %in% c("joint", "conditional")) {
@@ -950,18 +956,10 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
         }
       } else if (options[[ifelse (type == "Prior", "priorPredictivePerformanceDistributionPlotType", "posteriorPredictionDistributionPlotType")]] == "marginal")
         tablePredictions$addColumnInfo(name = "marginal", title = gettextf("P(Successes)"), type = "number")
-    } else
-      return()
-
-
-    if (!ready["data"] && type != "Prior") {
-
-      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "") ||
-          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
-        tablePredictions$addFootnote(gettext("Please specify successes and failures."))
-
-      return()
     }
+
+    if (!ready["models"] || (ready["models"] && type == "Prior" && sum(data$nSuccesses, data$nFailures) == 0))
+      return()
 
 
     tempResults <- .testBinomialLS(tempData, options[["models"]])
@@ -1195,7 +1193,7 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
     }
 
 
-    if (!all(ready))
+    if (!all(ready) || (ready["models"] && sum(data$nSuccesses, data$nFailures) == 0))
       return()
 
     if (options[["sequentialAnalysisPredictivePerformancePlotType"]] == "BF") {
@@ -1475,17 +1473,14 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
 
     containerPredictions[["predictionsTable"]] <- predictionsTable
 
+    if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "" && sum(data$nSuccesses, data$nFailures) == 0) ||
+        (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != "" && sum(data$nSuccesses, data$nFailures) == 0))
+      predictionsTable$addFootnote(gettext("Please specify successes and failures."))
+
     if (ready["data"] && !ready["models"])
       return()
-    else if (!ready["data"]) {
 
-      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "") ||
-          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
-        predictionsTable$addFootnote(gettext("Please specify successes and failures."))
-
-      return()
-
-    } else {
+    else {
 
       tempTests <- .testBinomialLS(data, options[["models"]])
       tempMeans <- NULL

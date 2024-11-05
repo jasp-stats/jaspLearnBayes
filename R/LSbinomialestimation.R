@@ -128,17 +128,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     estimatesContainer[["estimatesTable"]] <- estimatesTable
 
+    if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "" && sum(data$nSuccesses, data$nFailures) == 0) ||
+        (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != "" && sum(data$nSuccesses, data$nFailures) == 0))
+      estimatesTable$addFootnote(gettext("Please specify successes and failures."))
+
     if (ready["data"] && !ready["models"])
       return()
-    else if (!ready["data"]) {
 
-      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]]  != "") ||
-          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != ""))
-        estimatesTable$addFootnote(gettext("Please specify successes and failures."))
-
-      return()
-
-    } else if (ready["models"]) {
+    else if (ready["models"]) {
 
       # add rows for each hypothesis
       for (i in 1:length(options[["models"]])) {
@@ -210,7 +207,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
     }
 
 
-    if (!all(ready))
+    if (!all(ready) || (ready["models"] && sum(data$nSuccesses, data$nFailures) == 0))
       return()
     else {
       # add models to the first row
@@ -562,7 +559,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
                               "colorPalette"))
     containerIterative[["plotsIterative"]] <- plotsIterative
 
-    if (!all(ready))
+    if (!all(ready) || sum(data$nSuccesses, data$nFailures) == 0)
       return()
 
     plotDataLines <- list()
@@ -731,7 +728,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       plotsIterative[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["models"]) {
+    } else if ((!ready["data"] && ready["models"]) || sum(data$nSuccesses, data$nFailures) == 0) {
 
       for (i in 1:length(options[["models"]])) {
         plotsIterative[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
@@ -822,7 +819,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
                                       "sequentialAnalysisIntervalEstimatePlotLower", "sequentialAnalysisIntervalEstimatePlotUpper", "colorPalette"))
     containerIterativeInterval[["sequentialAnalysisIntervalEstimatePlot"]] <- plotsIterativeInterval
 
-    if (!all(ready))
+    if (!all(ready) || sum(data$nSuccesses, data$nFailures) == 0)
       return()
 
 
@@ -895,7 +892,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       plotsIterativeInterval[[""]] <- createJaspPlot(title = "", width = 530, height = 400, aspectRatio = 0.7)
       return()
 
-    } else if (!ready["data"] && ready["models"]) {
+    } else if ((!ready["data"] && ready["models"]) || sum(data$nSuccesses, data$nFailures) == 0) {
 
       for (i in 1:length(options[["models"]])) {
         plotsIterativeInterval[[options[["models"]][[i]]$name]] <- createJaspPlot(title = options[["models"]][[i]]$name,
@@ -1019,7 +1016,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       }
     }
 
-    if (!all(ready))
+    if (!all(ready) || (ready["models"] && sum(data$nSuccesses, data$nFailures) == 0))
       return()
 
     iterSeq <- 0:length(data[["y"]])
@@ -1097,7 +1094,7 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       }
     }
 
-    if (!all(ready))
+    if (!all(ready) || (ready["models"] && sum(data$nSuccesses, data$nFailures) == 0))
       return()
 
     iterSeq <- 0:length(data[["y"]])
@@ -1150,17 +1147,14 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
 
     containerPredictions[["predictionsTable"]] <- predictionsTable
 
+    if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "" && sum(data$nSuccesses, data$nFailures) == 0) ||
+        (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != "" && sum(data$nSuccesses, data$nFailures) == 0))
+      predictionsTable$addFootnote(gettext("Please specify successes and failures."))
+
     if (ready["data"] && !ready["models"])
       return()
-    else if (!ready["data"]) {
 
-      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "") ||
-          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
-        predictionsTable$addFootnote(gettext("Please specify successes and failures."))
-
-      return()
-
-    } else {
+    else {
 
       # add rows for each hypothesis
       for (i in 1:length(options[["models"]])) {
@@ -1413,6 +1407,9 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       tablePredictions$addColumns(0:options[["posteriorPredictionNumberOfFutureTrials"]])
     }
 
+    if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]] != "" && sum(data$nSuccesses, data$nFailures) == 0) ||
+        (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]] != "" && sum(data$nSuccesses, data$nFailures) == 0))
+      tablePredictions$addFootnote(gettext("Please specify successes and failures."))
 
     if (ready["models"]) {
       for (i in seq_along(options[["models"]])) {
@@ -1420,16 +1417,6 @@ LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) 
       }
     } else
       return()
-
-
-    if (!ready["data"]) {
-
-      if ((options[["dataInputType"]] == "variable" && options[["dataVariableSelected"]]     != "") ||
-          (options[["dataInputType"]] == "sequence" && options[["dataSequenceSequenceOfObservations"]]    != ""))
-        tablePredictions$addFootnote(gettext("Please specify successes and failures."))
-
-      return()
-    }
 
 
     tempPred    <- NULL
