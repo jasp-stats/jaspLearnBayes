@@ -50,13 +50,7 @@
 
     } else if (options[["dataInputType"]] == "variable") {
 
-      # this is stupidly written #rework
-      if (!is.null(dataset)) {
-        tempY <- dataset
-      } else{
-        tempY <- .readDataSetToEnd(columns = options[["dataVariableSelected"]])[,1]
-      }
-
+      tempY   <- dataset[[ options[["dataVariableSelected"]] ]]
       data$SD <- options[["dataVariableSd"]]
 
     }

@@ -122,21 +122,19 @@ LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) 
 .bcReadData <- function(jaspResults, dataset, options, ready) {
   if(options[["inputType"]] != "data" || !ready) return(NULL)
 
-  if(is.null(dataset)) {
-    dataset <- .readDataSetToEnd(columns = c(options[["marker"]], options[["labels"]]))
-    dataset <- dataset[complete.cases(dataset),]
+  dataset <- dataset[c(options[["marker"]], options[["labels"]])]
+  dataset <- dataset[complete.cases(dataset), ]
 
-    labels <- dataset[[options[["labels"]]]]
-    levels <- levels(as.factor(labels))
-    if(length(levels) != 2)    .quitAnalysis(gettext("The 'Positive condition (binary)' variable must have two levels!"))
-    if(any(table(labels) < 1)) .quitAnalysis(gettext("Each condition needs at least one observation."))
+  labels <- dataset[[options[["labels"]]]]
+  levels <- levels(as.factor(labels))
+  if(length(levels) != 2)    .quitAnalysis(gettext("The 'Positive condition (binary)' variable must have two levels!"))
+  if(any(table(labels) < 1)) .quitAnalysis(gettext("Each condition needs at least one observation."))
 
-    dataset <- data.frame(
-      marker    = dataset[[options[["marker"]]]],
-      condition = labels == levels[2], # second level is "positive" condition
-      test      = dataset[[options[["marker"]]]] >= options[["threshold"]]
-    )
-  }
+  dataset <- data.frame(
+    marker    = dataset[[options[["marker"]]]],
+    condition = labels == levels[2], # second level is "positive" condition
+    test      = dataset[[options[["marker"]]]] >= options[["threshold"]]
+  )
 
   if(mean(subset(dataset, condition)$marker) < mean(subset(dataset, !condition)$marker))
     .quitAnalysis(gettextf("Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s).", levels[2], levels[1]))
