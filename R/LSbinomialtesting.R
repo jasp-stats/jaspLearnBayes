@@ -937,7 +937,8 @@ LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
       tablePredictions$addColumns(c(0:tempN)/tempN)
     } else {
       tablePredictions$addColumnInfo(name = "successes", title = gettext("Successes"), type = "integer")
-      tablePredictions$addColumns(0:tempN)
+      if (tempN > 0)
+        tablePredictions$addColumns(0:tempN)
     }
 
 
