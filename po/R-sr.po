@@ -2,115 +2,123 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.19.2\n"
 "POT-Creation-Date: 2024-10-19 02:55\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-03-28 12:20+0000\n"
+"Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
+"Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-r/sr/>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 msgid "Summary Table"
-msgstr ""
+msgstr "Збирна табела"
 
 msgid "Tosses"
-msgstr ""
+msgstr "Бацање"
 
 msgid "Crosses"
-msgstr ""
+msgstr "Крстови"
 
 msgid "MLE for %s"
-msgstr ""
+msgstr "MLE за %s"
 
 msgid "Interval Mass"
-msgstr ""
+msgstr "Интервална маса"
 
 msgid "Median for %s"
-msgstr ""
+msgstr "Медијана за %s"
 
 msgid "Lower"
-msgstr ""
+msgstr "Ниже"
 
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "%s%% веродостојан интервал"
 
 msgid "Upper"
-msgstr ""
+msgstr "Горњи"
 
 msgid "Prior and Posterior for Proportion of Crosses"
-msgstr ""
+msgstr "Претходни и постериорни за пропорцију укрштања"
 
 msgid "Posterior"
-msgstr ""
+msgstr "Задњи"
 
 msgid "Prior"
-msgstr ""
+msgstr "Претходно"
 
 msgid "Proportion of Crosses"
-msgstr ""
+msgstr "Пропорција укрштања"
 
 msgid "Density"
-msgstr ""
+msgstr "Густина"
 
 msgid "%1$s%% CI: [%2$s, %3$s]"
-msgstr ""
+msgstr "%1$s%% CI: [%2$s, %3$s]"
 
 msgid "Implied Prior and Posterior for %s"
-msgstr ""
+msgstr "Подразумевани претходни и постериорни за %s"
 
 msgid "Implied Posterior"
-msgstr ""
+msgstr "Подразумевана задња"
 
 msgid "Implied Prior"
-msgstr ""
+msgstr "Подразумевана претходна"
 
 msgid "Needle Plot"
-msgstr ""
+msgstr "Графикон игле"
 
 msgid "Implied Prior and Posterior for  %s"
-msgstr ""
+msgstr "Подразумевани претходни и постериорни за  %s"
 
 msgid "This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.\n\n                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).\n\n                   Common binary classification applications are:\n                   <ul>\n                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>\n                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>\n                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>\n                   </ul>\n\n                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).\n\n                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.\n                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).\n                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.\n                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).\n\n                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.\n                   Sensitivity is the probability of testing positive if the condition is positive.\n                   Specificity is the probability of testing negative if the condition is negative.\n                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.\n                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.\n                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.\n\n                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:\n\n                   %s\n\n                   <h5>References</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "Добродошли у бинарну класификацију са JASP-ом!"
 
 msgid "JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
 msgstr ""
+"JAGS захтева строго позитивне параметре за Beta претходне услове. Поставите {"
+"α, β} > 0 за претходне расподеле за преваленцу, сензитивност и специфичност."
 
 msgid "Some of the specified colors are not valid colors."
-msgstr ""
+msgstr "Неке од наведених боја нису важеће."
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "Варијабла 'Позитивни услов (бинарни)' мора имати два нивоа!"
 
 msgid "Each condition needs at least one observation."
-msgstr ""
+msgstr "Сваки услов захтева бар једно опажање."
 
 msgid "Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s)."
 msgstr ""
+"Средња вредност маркера у позитивном услову (%1$s) мора бити већа од средње "
+"вредности маркера у негативном услову (%2$s)."
 
 msgid "Estimating parameters per varying thresholds..."
-msgstr ""
+msgstr "Процена параметара за различите прагове..."
 
 msgid "Tables"
-msgstr ""
+msgstr "Табеле"
 
 msgid "Statistics"
 msgstr ""
 
 msgid "Estimate"
-msgstr ""
+msgstr "Проценити"
 
 msgid "Mean"
-msgstr ""
+msgstr "Аритметичка средина"
 
 msgid "Median"
-msgstr ""
+msgstr "Медијана"
 
 msgid "SD"
-msgstr ""
+msgstr "SD"
 
 msgid "Rhat"
 msgstr ""
@@ -131,7 +139,7 @@ msgid "Confusion Matrix"
 msgstr ""
 
 msgid "%s%% CI"
-msgstr ""
+msgstr "%s%% CI"
 
 msgid "Positive test"
 msgstr ""
@@ -176,7 +184,7 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
+msgstr "Параметар"
 
 msgid "Sensitivity"
 msgstr ""
@@ -428,7 +436,7 @@ msgid "Data Summary"
 msgstr ""
 
 msgid "Counts"
-msgstr ""
+msgstr "Бројеви"
 
 msgid "Proportion"
 msgstr ""
@@ -479,7 +487,7 @@ msgid "Please specify successes and failures."
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Упозорење:"
 
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr ""
@@ -545,10 +553,10 @@ msgid "Testing Summary"
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "Hypothesis"
 msgstr ""
@@ -899,7 +907,7 @@ msgid "Prior (μ)"
 msgstr ""
 
 msgid "Prior Mean"
-msgstr ""
+msgstr "Средња вредност претходног услова"
 
 msgid "Posterior (μ)"
 msgstr ""
