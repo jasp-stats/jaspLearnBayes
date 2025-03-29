@@ -1,0 +1,940 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jaspLearnBayes 0.19.2\n"
+"POT-Creation-Date: 2024-10-19 02:55\n"
+"PO-Revision-Date: 2025-03-28 12:20+0000\n"
+"Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
+"Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-r/sr/>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.11-dev\n"
+
+msgid "Summary Table"
+msgstr "Збирна табела"
+
+msgid "Tosses"
+msgstr "Бацање"
+
+msgid "Crosses"
+msgstr "Крстови"
+
+msgid "MLE for %s"
+msgstr "MLE за %s"
+
+msgid "Interval Mass"
+msgstr "Интервална маса"
+
+msgid "Median for %s"
+msgstr "Медијана за %s"
+
+msgid "Lower"
+msgstr "Ниже"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% веродостојан интервал"
+
+msgid "Upper"
+msgstr "Горњи"
+
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Претходни и постериорни за пропорцију укрштања"
+
+msgid "Posterior"
+msgstr "Задњи"
+
+msgid "Prior"
+msgstr "Претходно"
+
+msgid "Proportion of Crosses"
+msgstr "Пропорција укрштања"
+
+msgid "Density"
+msgstr "Густина"
+
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "%1$s%% CI: [%2$s, %3$s]"
+
+msgid "Implied Prior and Posterior for %s"
+msgstr "Подразумевани претходни и постериорни за %s"
+
+msgid "Implied Posterior"
+msgstr "Подразумевана задња"
+
+msgid "Implied Prior"
+msgstr "Подразумевана претходна"
+
+msgid "Needle Plot"
+msgstr "Графикон игле"
+
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Подразумевани претходни и постериорни за  %s"
+
+msgid "This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.\n\n                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).\n\n                   Common binary classification applications are:\n                   <ul>\n                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>\n                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>\n                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>\n                   </ul>\n\n                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).\n\n                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.\n                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).\n                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.\n                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).\n\n                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.\n                   Sensitivity is the probability of testing positive if the condition is positive.\n                   Specificity is the probability of testing negative if the condition is negative.\n                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.\n                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.\n                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.\n\n                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:\n\n                   %s\n\n                   <h5>References</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+msgstr ""
+
+msgid "Welcome to binary classification with JASP!"
+msgstr "Добродошли у бинарну класификацију са JASP-ом!"
+
+msgid "JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
+msgstr ""
+"JAGS захтева строго позитивне параметре за Beta претходне услове. Поставите {"
+"α, β} > 0 за претходне расподеле за преваленцу, сензитивност и специфичност."
+
+msgid "Some of the specified colors are not valid colors."
+msgstr "Неке од наведених боја нису важеће."
+
+msgid "The 'Positive condition (binary)' variable must have two levels!"
+msgstr "Варијабла 'Позитивни услов (бинарни)' мора имати два нивоа!"
+
+msgid "Each condition needs at least one observation."
+msgstr "Сваки услов захтева бар једно опажање."
+
+msgid "Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s)."
+msgstr ""
+"Средња вредност маркера у позитивном услову (%1$s) мора бити већа од средње "
+"вредности маркера у негативном услову (%2$s)."
+
+msgid "Estimating parameters per varying thresholds..."
+msgstr "Процена параметара за различите прагове..."
+
+msgid "Tables"
+msgstr "Табеле"
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Estimate"
+msgstr "Проценити"
+
+msgid "Mean"
+msgstr "Аритметичка средина"
+
+msgid "Median"
+msgstr "Медијана"
+
+msgid "SD"
+msgstr "SD"
+
+msgid "Rhat"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Eff. Sample Size"
+msgstr ""
+
+msgid "Notation"
+msgstr ""
+
+msgid "Interpretation"
+msgstr ""
+
+msgid "Confusion Matrix"
+msgstr ""
+
+msgid "%s%% CI"
+msgstr "%s%% CI"
+
+msgid "Positive test"
+msgstr ""
+
+msgid "Outcome"
+msgstr ""
+
+msgid "Lower %s"
+msgstr ""
+
+msgid "Upper %s"
+msgstr ""
+
+msgid "Negative test"
+msgstr ""
+
+msgid "Positive/Total"
+msgstr ""
+
+msgid "Negative/Total"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Positive condition"
+msgstr ""
+
+msgid "Negative condition"
+msgstr ""
+
+msgid "True/Total"
+msgstr ""
+
+msgid "Prevalence"
+msgstr ""
+
+msgid "Rareness"
+msgstr ""
+
+msgid "Priors and Posteriors"
+msgstr ""
+
+msgid "Parameter"
+msgstr "Параметар"
+
+msgid "Sensitivity"
+msgstr ""
+
+msgid "Specificity"
+msgstr ""
+
+msgid "beta(%1$s,%2$s)"
+msgstr ""
+
+msgid "Plots"
+msgstr ""
+
+msgid "Probability Positive"
+msgstr ""
+
+msgid "Not tested"
+msgstr ""
+
+msgid "Tested"
+msgstr ""
+
+msgid "Negative"
+msgstr ""
+
+msgid "Positive"
+msgstr ""
+
+msgid "Test Result"
+msgstr ""
+
+msgid "P(Condition = positive)"
+msgstr ""
+
+msgid "Icon Plot"
+msgstr ""
+
+msgid "True positive"
+msgstr ""
+
+msgid "False positive"
+msgstr ""
+
+msgid "False negative"
+msgstr ""
+
+msgid "True negative"
+msgstr ""
+
+msgid "Area Plot"
+msgstr ""
+
+msgid "Receiving Operating Characteristic Curve"
+msgstr ""
+
+msgid "False Positive Rate (1-Specificity)"
+msgstr ""
+
+msgid "True Positive Rate (Sensitivity)"
+msgstr ""
+
+msgid "Total Operating Characteristic Curve"
+msgstr ""
+
+msgid "True positives + False positives"
+msgstr ""
+
+msgid "True positives"
+msgstr ""
+
+msgid "Precision-recall"
+msgstr ""
+
+msgid "Sensitivity (Recall)"
+msgstr ""
+
+msgid "Positive Predictive Value (Precision)"
+msgstr ""
+
+msgid "Test Characteristics by Threshold"
+msgstr ""
+
+msgid "Test Threshold"
+msgstr ""
+
+msgid "Characteristic"
+msgstr ""
+
+msgid "PPV and NPV by Threshold"
+msgstr ""
+
+msgid "Predictive Value"
+msgstr ""
+
+msgid "PPV and NPV by Prevalence"
+msgstr ""
+
+msgid "Alluvial Plot"
+msgstr ""
+
+msgid "Condition"
+msgstr ""
+
+msgid "Test"
+msgstr ""
+
+msgid "Proportion of Population"
+msgstr ""
+
+msgid "Signal Detection"
+msgstr ""
+
+msgid "Marker"
+msgstr ""
+
+msgid "Count"
+msgstr ""
+
+msgid "Estimates"
+msgstr ""
+
+msgid "Positive predictive value"
+msgstr ""
+
+msgid "Negative predictive value"
+msgstr ""
+
+msgid "False discovery rate"
+msgstr ""
+
+msgid "False omission rate"
+msgstr ""
+
+msgid "False positive rate"
+msgstr ""
+
+msgid "False negative rate"
+msgstr ""
+
+msgid "Accuracy"
+msgstr ""
+
+msgid "Pretest odds"
+msgstr ""
+
+msgid "Positive likelihood ratio"
+msgstr ""
+
+msgid "Negative likelihood ratio"
+msgstr ""
+
+msgid "F-measure"
+msgstr ""
+
+msgid "Proportion of a population affected by the condition."
+msgstr ""
+
+msgid "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive."
+msgstr ""
+
+msgid "(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative."
+msgstr ""
+
+msgid "Proportion of a population affected by a condition and correctly tested positive."
+msgstr ""
+
+msgid "Proportion of a population not affected by a condition and incorrectly tested positive."
+msgstr ""
+
+msgid "Proportion of a population not affected by a condition and correctly tested negative."
+msgstr ""
+
+msgid "Proportion of a population affected by a condition and incorrectly tested negative."
+msgstr ""
+
+msgid "Proportion of those who tested positive and are affected by the condition."
+msgstr ""
+
+msgid "Proportion of those who tested negative and are not affected by the condition."
+msgstr ""
+
+msgid "Proportion of false positives in the pool of those that test positive."
+msgstr ""
+
+msgid "Proportion of false negatives in the pool of those that test negative."
+msgstr ""
+
+msgid "Complement proportion to specificity."
+msgstr ""
+
+msgid "Complement proportion to sensitivity."
+msgstr ""
+
+msgid "Proportion of the population that is true positive or true negative."
+msgstr ""
+
+msgid "P(Test = positive | Condition = positive)"
+msgstr ""
+
+msgid "P(Test = negative | Condition = negative)"
+msgstr ""
+
+msgid "P(Condition = positive %s Test = positive)"
+msgstr ""
+
+msgid "P(Condition = negative %s Test = positive)"
+msgstr ""
+
+msgid "P(Condition = negative %s Test = negative)"
+msgstr ""
+
+msgid "P(Condition = positive %s Test = negative)"
+msgstr ""
+
+msgid "P(Condition = positive | Test = positive)"
+msgstr ""
+
+msgid "P(Condition = negative | Test = negative)"
+msgstr ""
+
+msgid "P(Condition = negative | Test = positive)"
+msgstr ""
+
+msgid "P(Condition = positive | Test = negative)"
+msgstr ""
+
+msgid "P(Test = positive | Condition = negative)"
+msgstr ""
+
+msgid "P(Test = negative | Condition = positive)"
+msgstr ""
+
+msgid "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)"
+msgstr ""
+
+msgid "Central credible intervals are based on %i samples."
+msgstr ""
+
+msgid "Parameter estimates are based on %i MCMC samples."
+msgstr ""
+
+msgid "positive"
+msgstr ""
+
+msgid "negative"
+msgstr ""
+
+msgid "Data Summary"
+msgstr ""
+
+msgid "Counts"
+msgstr "Бројеви"
+
+msgid "Proportion"
+msgstr ""
+
+msgid "Successes"
+msgstr ""
+
+msgid "Failures"
+msgstr ""
+
+msgid "spike at %s"
+msgstr ""
+
+msgid "beta(%1$s, %2$s)"
+msgstr ""
+
+msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
+msgstr ""
+
+msgid "binomial(%1$i, %2$s)"
+msgstr ""
+
+msgid "beta-binomial(%1$i, %2$s, %3$s)"
+msgstr ""
+
+msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
+msgstr ""
+
+msgid "Estimation Summary"
+msgstr ""
+
+msgid "Model"
+msgstr ""
+
+msgid "Prior (%s)"
+msgstr ""
+
+msgid "Prior %s"
+msgstr ""
+
+msgid "Posterior (%s)"
+msgstr ""
+
+msgid "Posterior %s"
+msgstr ""
+
+msgid "Please specify successes and failures."
+msgstr ""
+
+msgid "Warning:"
+msgstr "Упозорење:"
+
+msgid "These results are based on %1$i %2$s and %3$i %4$s."
+msgstr ""
+
+msgid "Observation"
+msgstr ""
+
+msgid "Plot could not be produced due to lacking numerical precision for %1$s."
+msgstr ""
+
+msgid "Population proportion"
+msgstr ""
+
+msgid "Prior = Posterior"
+msgstr ""
+
+msgid "More than bimodal CIs are not implemented in the Sequential analysis plot."
+msgstr ""
+
+msgid "%i%% CI"
+msgstr ""
+
+msgid "%i%% HPD"
+msgstr ""
+
+msgid "SI (BF=%s)"
+msgstr ""
+
+msgid "Prediction (Successes)"
+msgstr ""
+
+msgid "Prediction %s"
+msgstr ""
+
+msgid "Prediction std. deviation"
+msgstr ""
+
+msgid "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s."
+msgstr ""
+
+msgid "Predicted sample proportions"
+msgstr ""
+
+msgid "Predicted number of successes"
+msgstr ""
+
+msgid "Probability"
+msgstr ""
+
+msgid "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."
+msgstr ""
+
+msgid "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."
+msgstr ""
+
+msgid "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."
+msgstr ""
+
+msgid "Proportion of Successes"
+msgstr ""
+
+msgid "Testing Summary"
+msgstr ""
+
+msgid "BF%s"
+msgstr "BF%s"
+
+msgid "log(BF%s)"
+msgstr "log(BF%s)"
+
+msgid "Hypothesis"
+msgstr ""
+
+msgid "P(H)"
+msgstr ""
+
+msgid "log(likelihood)"
+msgstr ""
+
+msgid "P(H|data)"
+msgstr ""
+
+msgid "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range)."
+msgstr ""
+
+msgid "Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."
+msgstr ""
+
+msgid "These results are based on %1$i success(es) and %2$i failure(s)"
+msgstr ""
+
+msgid "The plot could not be created because the posterior model probabilities are not defined for all models."
+msgstr ""
+
+msgid "P(Successes|%s)"
+msgstr ""
+
+msgid "P(Successes)"
+msgstr ""
+
+msgid "The table could not be created because the posterior model probabilities are not defined for all models."
+msgstr ""
+
+msgid "Please specify a hypothesis for comparison."
+msgstr ""
+
+msgid "Conditional probability"
+msgstr ""
+
+msgid "Joint probability"
+msgstr ""
+
+msgid "Posterior probability"
+msgstr ""
+
+msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
+msgstr ""
+
+msgid "Observations"
+msgstr ""
+
+msgid "At least 2 hypotheses need to be specified."
+msgstr ""
+
+msgid "Posterior probabilities and marginal prediction could not be computed since the marginal likelihoods are not available for some models."
+msgstr ""
+
+msgid "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)"
+msgstr ""
+
+msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
+msgstr ""
+
+msgid "The truncation range for model/hypothesis '%s' must be within [0, 1] interval."
+msgstr ""
+
+msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
+msgstr ""
+
+msgid "Please remove duplicates from the %s names."
+msgstr ""
+
+msgid "'Successes'"
+msgstr ""
+
+msgid "%1$s %2$s Plots"
+msgstr ""
+
+msgid "Prior and Posterior Plots"
+msgstr ""
+
+msgid "Sequential Analysis: Point Estimate"
+msgstr ""
+
+msgid "%s Sequential Analysis: Interval"
+msgstr ""
+
+msgid "Sequential Analysis: Stacked"
+msgstr ""
+
+msgid "Sequential Posterior Updating"
+msgstr ""
+
+msgid "Prediction Summary"
+msgstr ""
+
+msgid "%s Prediction Plots"
+msgstr ""
+
+msgid "Conditional %s Plots"
+msgstr ""
+
+msgid "Joint %s Plots"
+msgstr ""
+
+msgid "Marginal %s Plots"
+msgstr ""
+
+msgid "%1$s %2$s Prediction Plots"
+msgstr ""
+
+msgid "%s Prior and Posterior Plots"
+msgstr ""
+
+msgid "%s Predictive Accuracy Plot"
+msgstr ""
+
+msgid "%s Sequential Analysis"
+msgstr ""
+
+msgid "Welcome to the %1$s analysis from the Learn Bayes module. This analysis illustrates Bayesian %2$s using %3$s examples."
+msgstr ""
+
+msgid "%s (the population proportion of successes)"
+msgstr ""
+
+msgid "%s (the population mean, variance is assumed to be known)"
+msgstr ""
+
+msgid "The analysis is split into 5 sections:\n      <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>\n           <li> %1$s </li>\n           <li> %2$s </li>\n           <li> %3$s </li>\n           <li> %4$s </li> </ol>"
+msgstr ""
+
+msgid "The 'Data' section allows you to specify data input for the analysis."
+msgstr ""
+
+msgid "The 'Select variable' option allows the selection of a variable ('Selected') from a dataset loaded into JASP. %s"
+msgstr ""
+
+msgid "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis."
+msgstr ""
+
+msgid "The 'Enter sequence' option allows manual input of a specific order of observations. %s"
+msgstr ""
+
+msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
+msgstr ""
+
+msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
+msgstr ""
+
+msgid "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>"
+msgstr ""
+
+msgid "The 'Binomial Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The marginal likelihood corresponds to a binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with the chance parameter equal to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The marginal likelihood corresponds to a beta-binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with parameters %3$s and %4$s corresponding to the shape parameters of the prior beta distribution.</li></ul>"
+msgstr ""
+
+msgid "The 'Gaussian Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population mean of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the location of the spike, and standard deviation as %2$s/%7$sN, where 'N' stands for the number of observations.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with mean %3$s and standard deviation %4$s. The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the mean of the prior distribution, and standard deviation of %7$s( %2$s%6$s/N + %4$s%6$s ).</li></ul>"
+msgstr ""
+
+msgid "The posterior probabilities 'P(H|data)' are then computed using Bayes formula,\n        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> where 'P(H)' represents the prior probability of the hypothesis, 'P(data|H)' the marginal likelihood of the data given the hypothesis, and 'P(data)' the probability of the data. The factor 'P(data)' equals the sum of marginal likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
+msgstr ""
+
+msgid "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model (selected from the 'vs.' dropdown menu) and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgstr ""
+
+msgid "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:\n    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>"
+msgstr ""
+
+msgid "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %4$s distributions are visualized as continuous lines."
+msgstr ""
+
+msgid "The 'All' option shows all %1$s for parameter %2$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis."
+msgstr ""
+
+msgid "The 'Stacked' option shows all %1$s for parameter %2$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Individual' option shows %1$s for parameter %2$s individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
+msgstr ""
+
+msgid "Furthermore, the 'Observed data' checkbox allows the visualization of the observed %s as a black cross in the figure."
+msgstr ""
+
+msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
+msgstr ""
+
+msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s over the parameter by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Marginal' option collapses across all individual %1$s, weighting them by their %2$s probability.%3$s It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%4$s"
+msgstr ""
+
+msgid "The 'Prior and posterior distribution' option displays the prior and posterior distribution of the parameter %1$s for the individual %2$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %3$s distributions are visualized as continuous lines. Prior distributions are visualized as dashed grey lines and the posterior distribution as solid black lines. In addition, the observed data summary can be visualized as a black cross by selecting the '%4$s' checkbox."
+msgstr ""
+
+msgid "The 'Conditional' option shows all prior and posterior distributions for parameter %1$s independently, as if they were considered as individual models (without the existence of other hypotheses)."
+msgstr ""
+
+msgid "The 'Joint' option shows all prior and posterior distributions for parameter %1$s when considered together in light of the other hypotheses. In addition, the 'Overlying' option allows the visualization all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Marginal' option collapses across all individual prior and posterior distributions, weighting them by their prior and posterior probability."
+msgstr ""
+
+msgid "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %1$s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%2$s"
+msgstr ""
+
+msgid "The 'Updating table' option generates a numerical summary of the displayed figures."
+msgstr ""
+
+msgid "The 'Stacked distributions' option displays a plot with the sequential updating of the posterior distribution density (x- and y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another, creating a depth effect (z-axis)."
+msgstr ""
+
+msgid "The 'Interval' option displays a sequential plot with the probability of parameter %s lying inside of the interval ranging from ('lower') to ('upper'), (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
+msgstr ""
+
+msgid "The 'All' option shows the probability of parameter %s lying inside of the specified range for all models in one figure, allowing for easier comparison."
+msgstr ""
+
+msgid "The 'Stacked' option visualizes the interval for all prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Posterior updating table' option generates a numerical summary of the updating process for parameter %s. The 'Observation' column tracks how many observations have been already encountered for the corresponding posterior distribution. The first row (observation = 0) corresponds to the prior distribution and the last row corresponds to the final posterior distribution after the prior distribution was updated with all observations."
+msgstr ""
+
+msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
+msgstr ""
+
+msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
+msgstr ""
+
+msgid "The 'Posterior prediction' section allows the prediction of future data based on the estimated models%s"
+msgstr ""
+
+msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s"
+msgstr ""
+
+msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions."
+msgstr ""
+
+msgid "The 'Prediction Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Posterior (%1$s)' - the estimated posterior distribution for parameter %1$s (used for prediction)</li>%2$s<li>'Posterior %4$s' - the %5$s of the specified posterior distribution</li><li>'Prediction%3$s' - the predictive distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted data</li></ul>"
+msgstr ""
+
+msgid "The 'Posterior predictive distribution' option displays figures of predictive distributions based on posterior distributions of the individual models. The '%1$s' checkbox transforms the figures with predicted data%2$s into figures with %3$s."
+msgstr ""
+
+msgid "The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."
+msgstr ""
+
+msgid "The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s"
+msgstr ""
+
+msgid "The '%1$s' option displays figures of predictive distributions based on posterior distributions of the individual models. %2$s"
+msgstr ""
+
+msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s"
+msgstr ""
+
+msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the  visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses."
+msgstr ""
+
+msgid "The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."
+msgstr ""
+
+msgid "The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."
+msgstr ""
+
+msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses)."
+msgstr ""
+
+msgid "The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
+msgstr ""
+
+msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."
+msgstr ""
+
+msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown  (the selected hypothesis correponds to the '0' in BF%1$s%2$s). The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgstr ""
+
+msgid "The 'Updating table' option generates a numerical summary of the displayed figure."
+msgstr ""
+
+msgid "<ul><li>'central' - a central interval (or quantile) that covers the central 'mass'%% area of the distribution</li><li>'HPD' - a highest posterior density interval that covers 'mass'%% area with the shortest range</li><li>'custom' - an interval defined by a 'lower' and 'upper' bound. It returns the posterior mass of the parameter falling inside the custom interval.</li>%s</ul>"
+msgstr ""
+
+msgid "Mode"
+msgstr ""
+
+msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
+msgstr ""
+
+msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
+msgstr ""
+
+msgid "Warning: The number of point(s) required to win should be at least 1!"
+msgstr ""
+
+msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
+msgstr ""
+
+msgid "Warning: No negative input values! Adjust the inputs!"
+msgstr ""
+
+msgid "Players"
+msgstr ""
+
+msgid "p(win 1 point)"
+msgstr ""
+
+msgid "Points Gained"
+msgstr ""
+
+msgid "Analytical"
+msgstr ""
+
+msgid "p(win the game)"
+msgstr ""
+
+msgid "Simulated"
+msgstr ""
+
+msgid "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings."
+msgstr ""
+
+msgid "Prior Skill"
+msgstr ""
+
+msgid "Only numeric values are allowed in the input."
+msgstr ""
+
+msgid "normal (%1$s, %2$s)"
+msgstr ""
+
+msgid "normal (%.2f, %.2f)"
+msgstr ""
+
+msgid "normal (%s, %.2f)"
+msgstr ""
+
+msgid "Prior (μ)"
+msgstr ""
+
+msgid "Prior Mean"
+msgstr "Средња вредност претходног услова"
+
+msgid "Posterior (μ)"
+msgstr ""
+
+msgid "Posterior Mean"
+msgstr ""
+
+msgid "Population mean"
+msgstr ""
+
+msgid "Prediction"
+msgstr ""
+
+msgid "Prediction Mean"
+msgstr ""
+
+msgid "Please, specify the standard deviation of the data."
+msgstr ""
+
+msgid "The prediction for %1$s future %2$s is based on %3$s."
+msgstr ""
+
+msgid "Sample means"
+msgstr ""
+
+msgid "Future data"
+msgstr ""
+
+msgid "Inclusion BF"
+msgstr ""
