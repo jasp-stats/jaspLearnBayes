@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.2\n"
 "POT-Creation-Date: 2024-07-13 02:46\n"
-"PO-Revision-Date: 2025-04-01 15:06+0000\n"
+"PO-Revision-Date: 2025-04-02 18:57+0000\n"
 "Last-Translator: Иван Рудаков <riv@polygene.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/ru/>\n"
@@ -48,7 +48,7 @@ msgid "Posterior"
 msgstr "Апостериорное распределение"
 
 msgid "Prior"
-msgstr "Априорное распределение"
+msgstr "Априорная вероятность"
 
 msgid "Proportion of Crosses"
 msgstr ""
@@ -179,7 +179,7 @@ msgid "Tables"
 msgstr ""
 
 msgid "Statistics"
-msgstr ""
+msgstr "Описательные статистики"
 
 msgid "Estimate"
 msgstr ""
@@ -197,7 +197,7 @@ msgid "Rhat"
 msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Диагностика"
 
 msgid "Eff. Sample Size"
 msgstr ""
@@ -577,7 +577,7 @@ msgid "Please specify successes and failures."
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Предупреждение:"
 
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr ""
@@ -650,10 +650,10 @@ msgid "Testing Summary"
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "КБ%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(КБ%s)"
 
 msgid "Hypothesis"
 msgstr ""
@@ -1359,4 +1359,4 @@ msgid "Future data"
 msgstr ""
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "Включение КБ"
