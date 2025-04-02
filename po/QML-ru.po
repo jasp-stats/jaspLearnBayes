@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-04-01 15:06+0000\n"
+"PO-Revision-Date: 2025-04-02 18:57+0000\n"
 "Last-Translator: Иван Рудаков <riv@polygene.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/ru/>\n"
@@ -128,7 +128,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
-msgstr ""
+msgstr "Априорные распределения"
 
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
@@ -268,7 +268,7 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Distribution"
-msgstr ""
+msgstr "Распределение"
 
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
@@ -304,7 +304,7 @@ msgstr ""
 
 msgctxt "LSbinomialtesting|"
 msgid "Distribution"
-msgstr ""
+msgstr "Распределение"
 
 msgctxt "LSbinomialtesting|"
 msgid "Parameter (θ)"
@@ -492,7 +492,7 @@ msgstr ""
 
 msgctxt "LSgaussianestimation|"
 msgid "Distribution"
-msgstr ""
+msgstr "Распределение"
 
 msgctxt "LSgaussianestimation|"
 msgid "Parameter (μ)"
@@ -528,7 +528,7 @@ msgstr ""
 
 msgctxt "LSgaussiantesting|"
 msgid "Distribution"
-msgstr ""
+msgstr "Распределение"
 
 msgctxt "LSgaussiantesting|"
 msgid "Parameter (μ)"
@@ -688,7 +688,7 @@ msgstr ""
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Prior distribution"
-msgstr ""
+msgstr "Априорное распределение"
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Type"
@@ -868,7 +868,7 @@ msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "Conditional"
-msgstr ""
+msgstr "Условные"
 
 msgctxt "LStestingpredictions|"
 msgid "CI"
@@ -934,9 +934,10 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Type"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Conditional"
-msgstr ""
+msgstr "Условные"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Point estimate"
@@ -1028,15 +1029,16 @@ msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
-msgstr ""
+msgstr "Априорное распределение"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Type"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Conditional"
-msgstr ""
+msgstr "Условные"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Point estimate"
@@ -1102,9 +1104,10 @@ msgctxt "LStestingsequential|"
 msgid "Type"
 msgstr ""
 
+#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Conditional"
-msgstr ""
+msgstr "Условные"
 
 msgctxt "LStestingsequential|"
 msgid "Joint"
