@@ -3,9 +3,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Language: ru\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
@@ -89,6 +86,22 @@ msgid "Specificity"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
+msgid "Priors"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "~ Beta(α = "
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid ")"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Data"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
 msgid "Marker"
 msgstr ""
 
@@ -98,10 +111,6 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Test threshold"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Data"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
@@ -121,23 +130,27 @@ msgid "True negative"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
-msgid "Priors"
-msgstr "Априорные распределения"
-
-msgctxt "LSbinaryclassification|"
-msgid "~ Beta(α = "
+msgid "Observed tests"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
-msgid ")"
+msgid "Positive tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Negative tests"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Update prevalence"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Respect order constraint"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Tables"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Statistics"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
@@ -161,6 +174,14 @@ msgid "Additional info"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
+msgid "Statistics"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Additional Statistics"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
 msgstr ""
 
@@ -181,15 +202,7 @@ msgid "Icon plot"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
-msgid "Add realizations from the posterior"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Test characteristics by threshold"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "PPV and NPV by prevalence"
+msgid "Area plot"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
@@ -198,6 +211,34 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Signal detection"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Receiver operating characteristic (ROC)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Add realizations from the posterior"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Total operating characteristic (TOC)"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Precision-recall"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Test characteristics by threshold"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "PPV and NPV by threshold"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "PPV and NPV by prevalence"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
@@ -253,7 +294,43 @@ msgid "Options"
 msgstr ""
 
 msgctxt "LSbinaryclassification|"
+msgid "Compute results"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Colors"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "MCMC parameters"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "For main model"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. samples"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. burnin samples"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "Thinning"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "No. chains"
+msgstr ""
+
+msgctxt "LSbinaryclassification|"
+msgid "For varying threshold"
 msgstr ""
 
 msgctxt "LSbinomialestimation|"
@@ -262,10 +339,14 @@ msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Distribution"
-msgstr "Распределение"
+msgstr ""
 
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Truncation"
 msgstr ""
 
 msgctxt "LSbinomialestimation|"
@@ -292,16 +373,32 @@ msgctxt "LSbinomialestimation|"
 msgid "θ₀"
 msgstr ""
 
+msgctxt "LSbinomialestimation|"
+msgid "Lower"
+msgstr ""
+
+msgctxt "LSbinomialestimation|"
+msgid "Upper"
+msgstr ""
+
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
 msgstr ""
 
 msgctxt "LSbinomialtesting|"
+msgid "Prior prob."
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
 msgid "Distribution"
-msgstr "Распределение"
+msgstr ""
 
 msgctxt "LSbinomialtesting|"
 msgid "Parameter (θ)"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Truncation"
 msgstr ""
 
 msgctxt "LSbinomialtesting|"
@@ -330,6 +427,14 @@ msgstr ""
 
 msgctxt "LSbinomialtesting|"
 msgid "θ₀"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Lo"
+msgstr ""
+
+msgctxt "LSbinomialtesting|"
+msgid "Up"
 msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
@@ -486,7 +591,7 @@ msgstr ""
 
 msgctxt "LSgaussianestimation|"
 msgid "Distribution"
-msgstr "Распределение"
+msgstr ""
 
 msgctxt "LSgaussianestimation|"
 msgid "Parameter (μ)"
@@ -522,7 +627,7 @@ msgstr ""
 
 msgctxt "LSgaussiantesting|"
 msgid "Distribution"
-msgstr "Распределение"
+msgstr ""
 
 msgctxt "LSgaussiantesting|"
 msgid "Parameter (μ)"
@@ -656,10 +761,9 @@ msgctxt "LSestimationpredictions|"
 msgid "Mass"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Lower"
-msgstr "Нижний"
+msgstr ""
 
 msgctxt "LSestimationpredictions|"
 msgid "Upper"
@@ -683,7 +787,7 @@ msgstr ""
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Prior distribution"
-msgstr "Априорное распределение"
+msgstr ""
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Type"
@@ -709,10 +813,9 @@ msgctxt "LSestimationpriorandposterior|"
 msgid "Mass"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSestimationpriorandposterior|"
 msgid "Lower"
-msgstr "Нижний"
+msgstr ""
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Upper"
@@ -762,10 +865,9 @@ msgctxt "LSestimationsequential|"
 msgid "Interval estimate plot"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "Lower"
-msgstr "Нижний"
+msgstr ""
 
 msgctxt "LSestimationsequential|"
 msgid "Upper"
@@ -865,7 +967,7 @@ msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "Conditional"
-msgstr "Условные"
+msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "CI"
@@ -903,10 +1005,9 @@ msgctxt "LStestingpredictions|"
 msgid "Mass"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpredictions|"
 msgid "Lower"
-msgstr "Нижний"
+msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "Upper"
@@ -932,10 +1033,9 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Type"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Conditional"
-msgstr "Условные"
+msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Point estimate"
@@ -949,10 +1049,9 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Mass"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Lower"
-msgstr "Нижний"
+msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Upper"
@@ -1028,16 +1127,15 @@ msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
-msgstr "Априорное распределение"
+msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Type"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Conditional"
-msgstr "Условные"
+msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Point estimate"
@@ -1051,10 +1149,9 @@ msgctxt "LStestingpriorandposterior|"
 msgid "Mass"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Lower"
-msgstr "Нижний"
+msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Upper"
@@ -1104,10 +1201,9 @@ msgctxt "LStestingsequential|"
 msgid "Type"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingsequential|"
 msgid "Conditional"
-msgstr "Условные"
+msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Joint"
@@ -1151,112 +1247,4 @@ msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Updating table"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Observed tests"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Positive tests"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Negative tests"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Update prevalence"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Respect order constraint"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Additional Statistics"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Area plot"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Receiver operating characteristic (ROC)"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Total operating characteristic (TOC)"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Precision-recall"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "PPV and NPV by threshold"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Compute results"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Colors"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "MCMC parameters"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "For main model"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "No. samples"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "No. burnin samples"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "Thinning"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "No. chains"
-msgstr ""
-
-msgctxt "LSbinaryclassification|"
-msgid "For varying threshold"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "Truncation"
-msgstr ""
-
-msgctxt "LSbinomialestimation|"
-msgid "Lower"
-msgstr "Нижний"
-
-msgctxt "LSbinomialestimation|"
-msgid "Upper"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Truncation"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Prior prob."
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Lo"
-msgstr ""
-
-msgctxt "LSbinomialtesting|"
-msgid "Up"
 msgstr ""
