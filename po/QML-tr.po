@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-05-16 23:05+0000\n"
+"Last-Translator: Ertuğrul Uyar <ertugruluyar.academic@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/tr/>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.12-dev\n"
 "X-Language: tr\n"
 "X-Qt-Contexts: true\n"
 
@@ -717,7 +723,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
-msgstr ""
+msgstr "Güvenilir aralıklar"
 
 msgctxt "LSgaussiantesting|"
 msgid "Observed mean"
@@ -961,7 +967,7 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Güvenilir aralık"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
@@ -1009,7 +1015,7 @@ msgstr ""
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Credible interval"
-msgstr ""
+msgstr "Güvenilir aralık"
 
 msgctxt "Description|"
 msgid "Buffon's Needle"
@@ -1211,9 +1217,10 @@ msgctxt "LSbinaryclassification|"
 msgid "For main model"
 msgstr ""
 
+#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "No. samples"
-msgstr ""
+msgstr "Örnek yok"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. burnin samples"
