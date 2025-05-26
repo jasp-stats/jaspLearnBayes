@@ -159,7 +159,7 @@
       estSD   <- .estimateGaussianSDLS(prior, data)
 
       output <- list(
-        distribution = gettextf("normal (%.2f, %.2f)", estMean, estSD),
+        distribution = gettextf("normal (%1$.2f, %2$.2f)", estMean, estSD),
         mean         = estMean,
         median       = estMean,
         lCI          = stats::qnorm(  (1-CI)/2, estMean, estSD),
@@ -230,7 +230,7 @@
   if (prior[["type"]] == "spike") {
 
     output <- list(
-      distribution = gettextf("normal (%s, %.2f)", prior[["spikePointInp"]], data$SD),
+      distribution = gettextf("normal (%1$s, %2$.2f)", prior[["spikePointInp"]], data$SD),
       mean         = prior[["spikePoint"]],
       median       = prior[["spikePoint"]],
       mode         = prior[["spikePoint"]],
@@ -255,7 +255,7 @@
     }
 
     output <- list(
-      distribution = gettextf("normal (%.2f, %.2f)", predMean, predSD),
+      distribution = gettextf("normal (%1$.2f, %2$.2f)", predMean, predSD),
       mean         = predMean,
       median       = predMean,
       mode         = predMean,
