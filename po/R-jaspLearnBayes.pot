@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.20.0\n"
-"POT-Creation-Date: 2025-04-26 03:04\n"
+"POT-Creation-Date: 2025-05-31 03:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -889,10 +889,10 @@ msgstr ""
 msgid "normal (%1$s, %2$s)"
 msgstr ""
 
-msgid "normal (%.2f, %.2f)"
+msgid "normal (%1$.2f, %2$.2f)"
 msgstr ""
 
-msgid "normal (%s, %.2f)"
+msgid "normal (%1$s, %2$.2f)"
 msgstr ""
 
 msgid "Prior (μ)"

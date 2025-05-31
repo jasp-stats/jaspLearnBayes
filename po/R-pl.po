@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.17.0\n"
-"POT-Creation-Date: 2024-07-13 02:46\n"
+"POT-Creation-Date: 2025-05-31 03:05\n"
 "PO-Revision-Date: 2025-05-31 03:03+0000\n"
 "Last-Translator: Tomasz Misiuro <tomaszmisiuro@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/jasp/"
@@ -1327,11 +1327,13 @@ msgstr ""
 msgid "normal (%1$s, %2$s)"
 msgstr ""
 
-msgid "normal (%.2f, %.2f)"
-msgstr ""
+#, fuzzy
+msgid "normal (%1$.2f, %2$.2f)"
+msgstr "dwumianowy (%1$i, %2$s)"
 
-msgid "normal (%s, %.2f)"
-msgstr ""
+#, fuzzy
+msgid "normal (%1$s, %2$.2f)"
+msgstr "dwumianowy (%1$i, %2$s)"
 
 msgid "Prior (μ)"
 msgstr ""
