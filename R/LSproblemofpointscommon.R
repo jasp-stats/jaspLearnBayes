@@ -122,10 +122,8 @@ compareChanceNPlayers <- function(k1, t, p, simulation){
   }
 
   # estimated probability that each player wins
-  pSimulated <- vector()
-  for (i in 1:length(p)){
-    pSimulated[i] <- length(which(recordGame == i))/simulation
-  }
+  pSimulated <- table(factor(recordGame, levels = seq_along(p)))
+  pSimulated <- c(pSimulated / sum(pSimulated))
 
   pCumulative <- matrix(0, nrow = length(p), ncol = simulation)
   pCumulative[recordGame[1],1] <- 1
@@ -139,16 +137,43 @@ compareChanceNPlayers <- function(k1, t, p, simulation){
     }
   }
 
+
   ## Calculating the probability using negative multinomial distribution and resursive function
   pCalculated <- 0
+
+  combsK <- combinations(k)
   for (l in 1:(prod(k)/k[1])){
-    pCalculated <- pCalculated + exp(MGLM::dnegmn(Y = combinations(k)[l,2:length(k)],
-                                              beta = combinations(k)[1], prob = p[2:length(p)]))
+    # pCalculated <- pCalculated + exp(MGLM::dnegmn(Y = combinations(k)[l,2:length(k)],
+    #                                           beta = combinations(k)[1], prob = p[2:length(p)]))
+    pCalculated <- pCalculated + c(exp(dnegmnManual(Y = combsK[l,2:length(k)], beta = combsK[1], prob = p[2:length(p)])))
+
   }
 
   # calculating difference between the simulated and the calculated probability of player 1 winning
   dif <- abs(pSimulated - pCalculated)
   return (list(pSimulated, pCalculated, dif, pCumulative))
+}
+
+dnegmnManual <- function(Y, beta, prob) {
+
+  # trimmed down version of MGLM::dnegmn
+  # in particular, this one returns -Inf instead of an error
+  # the argument adjustments are identical to those inside MGLM::dnegmn
+
+  Y <- matrix(Y, 1, length(Y))
+  prob <- matrix(prob, nrow(Y), length(prob), byrow = TRUE)
+  beta <- matrix(beta, nrow(Y), 1)
+  beta <- matrix(beta, , 1)
+
+  m <- rowSums(Y)
+  d <- ncol(Y)
+
+  # avoids 0 * log(0) = NaN
+  yTimesLogProb <- ifelse(prob == 0 & Y == 0, 0, Y * log(prob))
+  logl <- lgamma(beta + rowSums(Y)) - lgamma(beta) - rowSums(lgamma(Y + 1)) + rowSums(yTimesLogProb) + beta * log1p(-rowSums(prob))
+  # logl <- lgamma(beta + rowSums(Y)) - lgamma(beta) - rowSums(lgamma(Y + 1)) + rowSums(Y * log(prob)) + beta * log1p(-rowSums(prob))
+  logl
+
 }
 
 compareSkillTwoPlayers <- function(m, n, t, alpha = 1, beta = 1, simulation){
