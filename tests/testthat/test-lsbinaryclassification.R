@@ -144,6 +144,7 @@ options$estimatesPlotFalseOmissionRate          <- TRUE
 options$estimatesPlotFalsePositiveRate          <- TRUE
 options$estimatesPlotFalseNegativeRate          <- TRUE
 options$estimatesPlotAccuracy                   <- TRUE
+options$plotEstimatesType <- "interval"
 
 options$statistics                    <- TRUE
 options$confusionMatrix               <- TRUE
