@@ -281,7 +281,7 @@ msgid "Positive test"
 msgstr "நேர்மறை சோதனை"
 
 msgid "Outcome"
-msgstr "விளைவுகள்"
+msgstr "விளைவாக"
 
 msgid "Lower %s"
 msgstr "கீழ் %s"
@@ -425,7 +425,7 @@ msgid "Condition"
 msgstr "நிபந்தனை"
 
 msgid "Test"
-msgstr "தேர்வு"
+msgstr "சோதனை"
 
 msgid "Proportion of Population"
 msgstr "மக்கள்தொகையின் விகிதம்"
