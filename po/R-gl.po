@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2025-05-31 03:05\n"
-"PO-Revision-Date: 2025-06-23 17:16+0000\n"
+"PO-Revision-Date: 2025-07-19 03:12+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/gl/>\n"
@@ -258,7 +258,7 @@ msgstr ""
 "que a media do marcador na condición negativa (%2$s)."
 
 msgid "Estimating parameters per varying thresholds..."
-msgstr "Estimando parámetros por limiares variables..."
+msgstr "Estimando parámetros por lindeiros variables..."
 
 msgid "Tables"
 msgstr "Táboas"
@@ -423,16 +423,16 @@ msgid "Positive Predictive Value (Precision)"
 msgstr "Valor preditivo positivo (Precisión)"
 
 msgid "Test Characteristics by Threshold"
-msgstr "Características da proba por Limiar"
+msgstr "Características da proba por lindeiro"
 
 msgid "Test Threshold"
-msgstr "Limiar da Proba"
+msgstr "Lindeiro da proba"
 
 msgid "Characteristic"
 msgstr "Característica"
 
 msgid "PPV and NPV by Threshold"
-msgstr "VPP e VPN por Limiar"
+msgstr "VPP e VPN por lindeiro"
 
 msgid "Predictive Value"
 msgstr "Valor Preditivo"
