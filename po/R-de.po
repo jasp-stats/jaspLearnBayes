@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.6.1\n"
 "Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
 "POT-Creation-Date: 2025-05-31 03:05\n"
-"PO-Revision-Date: 2025-06-15 10:02+0000\n"
+"PO-Revision-Date: 2025-07-27 10:03+0000\n"
 "Last-Translator: Johannes Keyser <joke@fsfe.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/de/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==0 ? 0 : n==1 ? 0 : 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 msgid "Summary Table"
 msgstr "Übersichtstabelle"
@@ -1795,13 +1795,11 @@ msgstr "Es sind nur numerische Werte in der Eingabe erlaubt."
 msgid "normal (%1$s, %2$s)"
 msgstr "Normal (%1$s, %2$s)"
 
-#, fuzzy
 msgid "normal (%1$.2f, %2$.2f)"
-msgstr "Normal (%.2f, %.2f)"
+msgstr "Normal (%1$.2f, %2$.2f)"
 
-#, fuzzy
 msgid "normal (%1$s, %2$.2f)"
-msgstr "Normal (%1$s, %2$s)"
+msgstr "Normal (%1$s, %2$.2f)"
 
 msgid "Prior (μ)"
 msgstr "Prior (μ)"
