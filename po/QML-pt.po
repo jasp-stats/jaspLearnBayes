@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2025-08-06 02:02+0000\n"
+"Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/pt/>\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Language: pt\n"
 "X-Source-Language: American English\n"
 "X-Qt-Contexts: true\n"
@@ -14,7 +20,7 @@ msgstr "Aprenda Bayes"
 
 msgctxt "Description|"
 msgid "Counts"
-msgstr ""
+msgstr "Contagens"
 
 msgctxt "Description|"
 msgid "Binomial Estimation"
@@ -22,28 +28,27 @@ msgstr "Estimação binomial"
 
 msgctxt "Description|"
 msgid "Binomial Testing"
-msgstr ""
+msgstr "Teste Binomial"
 
 msgctxt "Description|"
 msgid "The Problem of Points"
-msgstr ""
+msgstr "O Problema dos Pontos"
 
 msgctxt "Description|"
 msgid "Game of Chance"
-msgstr ""
+msgstr "Jogo de Azar"
 
 msgctxt "Description|"
 msgid "Game of Skill"
-msgstr ""
+msgstr "Jogo de Habilidade"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr "Modelo"
 
 msgctxt "LSbinomialestimation|"
 msgid "Distribution"
-msgstr ""
+msgstr "Distribuição"
 
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
@@ -137,7 +142,6 @@ msgctxt "LSgameofskill|"
 msgid "95% HPD"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Model"
 msgstr "Modelo"
@@ -154,7 +158,6 @@ msgctxt "LSgaussianestimation|"
 msgid "Spike"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Normal"
 msgstr "Normal"
@@ -191,7 +194,6 @@ msgctxt "LSgaussiantesting|"
 msgid "Spike"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Normal"
 msgstr "Normal"
@@ -212,7 +214,6 @@ msgctxt "LSgaussiantesting|"
 msgid "Sample means"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
 msgstr "Dados"
@@ -257,10 +258,9 @@ msgctxt "LSbinomialdatainput|"
 msgid "Available"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Selected"
-msgstr "Selecionada"
+msgstr "Selecionado"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Data summary"
@@ -278,10 +278,9 @@ msgctxt "LSestimationpredictions|"
 msgid "Point estimate"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Plots"
-msgstr "Diagramas"
+msgstr "Gráficos"
 
 msgctxt "LSestimationpredictions|"
 msgid "All"
@@ -355,7 +354,6 @@ msgctxt "LSestimationsequential|"
 msgid "Posterior updating table"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
 msgstr "Dados"
@@ -400,7 +398,6 @@ msgctxt "LSgaussiandatainput|"
 msgid "Available"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Selected"
 msgstr "Selecionada"
@@ -569,7 +566,6 @@ msgctxt "LSbinaryclassification|"
 msgid "Test threshold"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Data"
 msgstr "Dados"
@@ -630,10 +626,9 @@ msgctxt "LSbinaryclassification|"
 msgid "Priors and posteriors"
 msgstr ""
 
-#, fuzzy
 msgctxt "LSbinaryclassification|"
 msgid "Plots"
-msgstr "Diagramas"
+msgstr "Gráficos"
 
 msgctxt "LSbinaryclassification|"
 msgid "Probability positive"
@@ -831,7 +826,6 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "Normalized"
 msgstr ""
 
-#, fuzzy
 msgctxt "LStestingpredictiveperformance|"
 msgid "Bayes Factor"
 msgstr "Fator de Bayes"
