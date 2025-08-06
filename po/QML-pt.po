@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-06 02:02+0000\n"
+"PO-Revision-Date: 2025-08-06 07:43+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/pt/>\n"
@@ -52,43 +52,43 @@ msgstr "Distribuição"
 
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
-msgstr ""
+msgstr "Parâmetro (θ)"
 
 msgctxt "LSbinomialestimation|"
 msgid "Model "
-msgstr ""
+msgstr "Modelo "
 
 msgctxt "LSbinomialestimation|"
 msgid "Spike"
-msgstr ""
+msgstr "Pico"
 
 msgctxt "LSbinomialestimation|"
 msgid "Beta"
-msgstr ""
+msgstr "Beta"
 
 msgctxt "LSbinomialestimation|"
 msgid "α"
-msgstr ""
+msgstr "α"
 
 msgctxt "LSbinomialestimation|"
 msgid "β"
-msgstr ""
+msgstr "β"
 
 msgctxt "LSbinomialestimation|"
 msgid "θ₀"
-msgstr ""
+msgstr "θ₀"
 
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis"
-msgstr ""
+msgstr "Hipótese"
 
 msgctxt "LSbinomialtesting|"
 msgid "Distribution"
-msgstr ""
+msgstr "Distribuição"
 
 msgctxt "LSbinomialtesting|"
 msgid "Parameter (θ)"
-msgstr ""
+msgstr "Parâmetro (θ)"
 
 msgctxt "LSbinomialtesting|"
 msgid "Hypothesis "
