@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-10 14:02+0000\n"
+"PO-Revision-Date: 2025-08-11 22:02+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/pt/>\n"
@@ -98,27 +98,22 @@ msgctxt "LSbinomialtesting|"
 msgid "P(H)"
 msgstr "P(H)"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Spike"
 msgstr "Pico"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "Beta"
 msgstr "Beta"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "α"
 msgstr "α"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "β"
 msgstr "β"
 
-#, fuzzy
 msgctxt "LSbinomialtesting|"
 msgid "θ₀"
 msgstr "θ₀"
@@ -151,7 +146,6 @@ msgctxt "LSgaussianestimation|"
 msgid "Model"
 msgstr "Modelo"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Distribution"
 msgstr "Distribuição"
@@ -160,7 +154,6 @@ msgctxt "LSgaussianestimation|"
 msgid "Parameter (μ)"
 msgstr "Parâmetro (μ)"
 
-#, fuzzy
 msgctxt "LSgaussianestimation|"
 msgid "Spike"
 msgstr "Pico"
@@ -185,12 +178,10 @@ msgctxt "LSgaussianestimation|"
 msgid "Show sample means"
 msgstr "Mostrar médias amostrais"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Hypothesis"
 msgstr "Hipótese"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Distribution"
 msgstr "Distribuição"
@@ -199,7 +190,6 @@ msgctxt "LSgaussiantesting|"
 msgid "Parameter (μ)"
 msgstr "Parâmetro (μ)"
 
-#, fuzzy
 msgctxt "LSgaussiantesting|"
 msgid "Spike"
 msgstr "Pico"
