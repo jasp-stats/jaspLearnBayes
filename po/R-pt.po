@@ -298,7 +298,7 @@ msgid "Lower %s"
 msgstr "Inferior %s"
 
 msgid "Upper %s"
-msgstr "% Superiores"
+msgstr "%s Superiores"
 
 msgid "Negative test"
 msgstr "Teste negativo"
