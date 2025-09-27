@@ -840,8 +840,8 @@ msgstr ""
 
 msgid "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis."
 msgstr ""
-"'Zenbaketak zehaztu' aukerak datu agregatuak erabiltzea ahalbidetzen du. %1$"
-"s Horrek esan nahi du %2$ak behin bakarrik eguneratzen direla, datu osoekin. "
+"'Zenbaketak zehaztu' aukerak datu agregatuak erabiltzea ahalbidetzen du. %1$s"
+"s Horrek esan nahi du %2$s behin bakarrik eguneratzen direla, datu osoekin. "
 "Behaketen ordenari buruzko informazio faltak analisi sekuentziala erabiltzea "
 "eragozten du."
 
@@ -1121,9 +1121,6 @@ msgstr ""
 
 msgid "The '%1$s' option displays figures of predictive distributions based on posterior distributions of the individual models. %2$s"
 msgstr ""
-"'Banakako' aukerak eredu bakoitzerako ondorengo banaketa prediktiboak "
-"erakusten ditu irudi bereizietan. Puntu-estimazio mota desberdinak ('Puntu-"
-"estimazioa') eta tarte sinesgarriak ('CI') bistaratzea posible da:%s"
 
 msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s"
 msgstr ""
