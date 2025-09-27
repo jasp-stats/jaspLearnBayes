@@ -1,0 +1,1300 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jaspLearnBayes 0.95.0\n"
+"POT-Creation-Date: 2025-06-21 03:07\n"
+"PO-Revision-Date: 2025-09-22 15:01+0000\n"
+"Last-Translator: Jose Ramon Rueda <joseramon.rueda@ehu.eus>\n"
+"Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-r/eu/>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
+
+msgid "Summary Table"
+msgstr "Laburpen Taula"
+
+#, fuzzy
+msgid "Tosses"
+msgstr "Jaurtiketak ¿entseguak?"
+
+#, fuzzy
+msgid "Crosses"
+msgstr "Gurutzaketak"
+
+msgid "MLE for %s"
+msgstr "MLE %s-rako"
+
+msgid "Interval Mass"
+msgstr "Tarteko Masa"
+
+msgid "Median for %s"
+msgstr "Mediana %s-rako"
+
+msgid "Lower"
+msgstr "Behekoa"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% Sinesgarritasun Tartea"
+
+msgid "Upper"
+msgstr "Goikoa"
+
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "Aurrekoa eta Atzekoa Gurutzaketen Proportziorako"
+
+msgid "Posterior"
+msgstr "Ondorengoa"
+
+msgid "Prior"
+msgstr "Aurrekoa"
+
+msgid "Proportion of Crosses"
+msgstr "Gurutzaketen Proportzioa"
+
+msgid "Density"
+msgstr "Dentsitatea"
+
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "%1$s%% KT: [%2$s, %3$s]"
+
+msgid "Implied Prior and Posterior for %s"
+msgstr "Aurreko eta Ondorengoa inplizituak %s-rako"
+
+msgid "Implied Posterior"
+msgstr "Ondorengo Inplizitua"
+
+msgid "Implied Prior"
+msgstr "Aurrekoa Inplizitua"
+
+msgid "Needle Plot"
+msgstr "Orratz Grafikoa"
+
+msgid "Implied Prior and Posterior for  %s"
+msgstr "Aurreko eta Ondorengo Inplizituak %s-rako"
+
+#, fuzzy
+msgid "This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.\n\n                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).\n\n                   Common binary classification applications are:\n                   <ul>\n                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>\n                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>\n                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>\n                   </ul>\n\n                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).\n\n                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.\n                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).\n                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.\n                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).\n\n                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.\n                   Sensitivity is the probability of testing positive if the condition is positive.\n                   Specificity is the probability of testing negative if the condition is negative.\n                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.\n                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.\n                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.\n\n                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:\n\n                   %s\n\n                   <h5>References</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+msgstr ""
+"Analisi honek sailkapen bitarra erakusten du, hau da, prozedura estatistiko "
+"arrunta, non subjektuak bi taldetan sailkatzen diren sailkapen-arau baten "
+"arabera.\n"
+"\n"
+"                    Sailkapen bitarra subjektuari buruzko datuak "
+"dikotomizatu egiten diren prozedura bat da, erabaki bitar batera iristeko ("
+"adibidez, bai/ez, egia/gezurra).\n"
+"\n"
+"                   Sailkapen bitarraren aplikazio ohikoenak hauek dira:\n"
+"                   <ul>\n"
+"                           <li><b>Proba eta diagnostiko medikoak</b>, non "
+"sailkapenak paziente batek gaixotasun jakin bat duen ala ez zehazten "
+"duen.</li>\n"
+"                          <li><b>Spam detekzioa</b>, non sailkapenak mezu "
+"bat (adibidez, mezu elektroniko bat) spam den ala ez zehazten duen.</li>\n"
+"                            <li><b>Kalitate kontrola</b>, non sailkapenak "
+"industria-estandar bat betetzen den ala ez zehazten duen.</li>\n"
+"\n"
+"                   </ul>\n"
+"\n"
+"                    Sailkapen bitarra askotan erabiltzen denez proba "
+"medikoetan, sailkapen bitarren arazoen inguruko terminologia terminologia "
+"medikoarekin antzekoa da (adibidez, prebalentzia, egoera, markatzailea).\n"
+"\n"
+"                    Praktikan, bereizketa garrantzitsua dago subjektuaren "
+"*egiazko* egoeraren eta sailkapen-arauak emandako *esleitutako* etiketaren "
+"artean.\n"
+"                   JASP-en, benetako egoerari *baldintza* deitzen zaio ("
+"positiboa/negatiboa) eta esleitutako etiketari *proba* (positiboa/negatiboa)."
+"\n"
+"                   Aplikazio askotan, baldintzak edo probak ez dira "
+"simetrikoak izango, beraz, errore mota desberdinak interesgarriak dira "
+"zehaztasun-neurri orokorraz gain.\n"
+"                   Errore mota hauek bereizten dute, adibidez, paziente "
+"batek gaixotasun bat duen baina proba negatiboa izan den (faltsu negatiboa), "
+"edo paziente batek gaixotasunik ez duen baina proba positiboa izan den ("
+"faltsu positibo).\n"
+"\n"
+"Probaren propietateak normalean *sentikortasuna* eta *espezifikotasuna* "
+"kontuan hartuta deskribatzen dira.\n"
+"\n"
+"                  Sentikortasuna positibo emateko probabilitatea da "
+"baldintza positiboa bada.\n"
+"                   Espezifikotasuna negatibo emateko probabilitatea da "
+"baldintza negatiboa bada.\n"
+"                   Baldintzaren propietate bat prebalentzia da, hau da, "
+"populazioan baldintza positiboa duten subjektuen proportzioa.\n"
+"                   Probaren edo prebalentziaren ezaugarri asimetrikoek begi "
+"ez-trebatuarentzat paradoxikoak izan daitezkeen egoerak sor ditzakete.\n"
+"                   Adibidez, egoera batzuetan litekeena da paziente batek "
+"gaixotasun jakin bat ez izatea izatea baino, gaixotasun horretan positibo "
+"eman ondoren ere.\n"
+"\n"
+"Formalki, subjektu batek baldintza positiboa izateko probabilitatea proba "
+"positiboa izan ondoren (hau da, balio prediktibo positiboa) Bayesen teorema "
+"aplikatuz lortzen da:\n"
+"\n"
+"                    %s\n"
+"\n"
+"Erreferentziak\n"
+"\n"
+"                      Pepe, M. S. (2003). Sailkapen eta iragarpenerako "
+"proben medikoen ebaluazio estatistikoa. Oxford University Press.\n"
+"\n"
+"                     <a href="
+"\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/"
+"wiki/Binary_classification</a>\n"
+"\n"
+"                    <a href="
+"\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://"
+"wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n"
+"\n"
+"                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\""
+">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+
+#, fuzzy
+msgid "Welcome to binary classification with JASP!"
+msgstr "Ongi etorri JASP-rekin sailkapen bitarrara   edo binarioa?!"
+
+msgid "JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
+msgstr ""
+"JAGS-ek parametro zorrotz positiboak behar ditu Beta aurretikoetarako. "
+"Ezarri {α, β} > 0 Prebalentzia, Sentikortasun eta Espezifikotasun aurretiko "
+"banaketetarako."
+
+msgid "Some of the specified colors are not valid colors."
+msgstr "Zehaztutako kolore batzuk ez dira baliozko koloreak."
+
+msgid "The 'Positive condition (binary)' variable must have two levels!"
+msgstr "'Baldintza positiboa (binarioa)' aldagaiak bi maila izan behar ditu!"
+
+msgid "Each condition needs at least one observation."
+msgstr "Baldintza bakoitzak gutxienez behaketa bat behar du."
+
+msgid "Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s)."
+msgstr ""
+"Markatzailearen batez bestekoa baldintza positiboan (%1$s) markatzailearen "
+"batez bestekoa baldintza negatiboan (%2$s) baino handiagoa izan behar da."
+
+msgid "Estimating parameters per varying thresholds..."
+msgstr "Parametroak kalkulatzen atalase aldakorren arabera..."
+
+msgid "Tables"
+msgstr "Taulak"
+
+msgid "Statistics"
+msgstr "Estatistikoak"
+
+msgid "Estimate"
+msgstr "Estimazioa"
+
+msgid "Mean"
+msgstr "Batez bestekoa"
+
+msgid "Median"
+msgstr "Mediana"
+
+msgid "SD"
+msgstr "DE"
+
+msgid "Rhat"
+msgstr "Rhat"
+
+msgid "Diagnostics"
+msgstr "Diagnosiak"
+
+msgid "Eff. Sample Size"
+msgstr "Laginaren Tamaina Eraginkorra"
+
+msgid "Notation"
+msgstr "Notazioa"
+
+msgid "Interpretation"
+msgstr "Interpretazioa"
+
+msgid "Confusion Matrix"
+msgstr "Nahasmen Matrizea"
+
+msgid "%s%% CI"
+msgstr "%s%% KT"
+
+msgid "Positive test"
+msgstr "Proba positiboa"
+
+msgid "Outcome"
+msgstr "Emaitza"
+
+msgid "Lower %s"
+msgstr "%s baxuagoak"
+
+msgid "Upper %s"
+msgstr "%s altuagoak"
+
+msgid "Negative test"
+msgstr "Proba negatiboa"
+
+msgid "Positive/Total"
+msgstr "Positiboa/Guztira"
+
+msgid "Negative/Total"
+msgstr "Negatiboa/Guztira"
+
+msgid "Total"
+msgstr "Guztira"
+
+msgid "Positive condition"
+msgstr "Karakteristika presente (ad.gaixoa)"
+
+msgid "Negative condition"
+msgstr "Karakteristikarik gabe (ad. ez gaixoa)"
+
+msgid "True/Total"
+msgstr "Egia/Guztira"
+
+msgid "Prevalence"
+msgstr "Prebalentzia"
+
+msgid "Rareness"
+msgstr "Arrarotasuna"
+
+msgid "Priors and Posteriors"
+msgstr "Aurrekoak eta Ondorengoak"
+
+msgid "Parameter"
+msgstr "Parametroa"
+
+msgid "Sensitivity"
+msgstr "Sentsibilitatea"
+
+msgid "Specificity"
+msgstr "Espezifikotasuna"
+
+msgid "beta(%1$s,%2$s)"
+msgstr "beta(%1$s,%2$s)"
+
+msgid "Plots"
+msgstr "Grafikoak"
+
+msgid "Probability Positive"
+msgstr "Probabilitatea Positiboa"
+
+msgid "Not tested"
+msgstr "Ez da probatu???"
+
+msgid "Tested"
+msgstr "Probatua"
+
+msgid "Negative"
+msgstr "Negatiboa"
+
+msgid "Positive"
+msgstr "Positiboa"
+
+msgid "Test Result"
+msgstr "Probaren Emaitza"
+
+msgid "P(Condition = positive)"
+msgstr "P(Baldintza = positiboa)"
+
+msgid "Icon Plot"
+msgstr "Ikonoen grafikoa"
+
+msgid "True positive"
+msgstr "Benetako positiboak"
+
+msgid "False positive"
+msgstr "Positibo faltsuak"
+
+msgid "False negative"
+msgstr "Gezurrezko negatiboa"
+
+msgid "True negative"
+msgstr "Benetako positiboa"
+
+msgid "Area Plot"
+msgstr "Azalera Grafikoa"
+
+#, fuzzy
+msgid "Receiving Operating Characteristic Curve"
+msgstr "Hartzeko Funtzionamendu Ezaugarria Kurba"
+
+msgid "False Positive Rate (1-Specificity)"
+msgstr "Gezurrezko Positibo Ratioa (1-Espezifikotasuna)"
+
+msgid "True Positive Rate (Sensitivity)"
+msgstr "Egiazko Positibo Ratioa (Sentsibilitatea)"
+
+#, fuzzy
+msgid "Total Operating Characteristic Curve"
+msgstr "Funtzionamendu Ezaugarri Osoa Kurba"
+
+#, fuzzy
+msgid "True positives + False positives"
+msgstr "Egiazko positiboak + Gezurrezko positiboak"
+
+#, fuzzy
+msgid "True positives"
+msgstr "Egiazko positiboak"
+
+msgid "Precision-recall"
+msgstr "Zehaztasun-berreskurapena"
+
+msgid "Sensitivity (Recall)"
+msgstr "Sentikortasuna (Gogorapena)"
+
+msgid "Positive Predictive Value (Precision)"
+msgstr "Balio Iragarle Positiboa (Zehaztasuna)"
+
+msgid "Test Characteristics by Threshold"
+msgstr "Proba Ezaugarriak Atalasearen arabera"
+
+msgid "Test Threshold"
+msgstr "Proba Atalasea"
+
+msgid "Characteristic"
+msgstr "Ezaugarria"
+
+#, fuzzy
+msgid "PPV and NPV by Threshold"
+msgstr "PPV eta NPV Atalasearen arabera"
+
+msgid "Predictive Value"
+msgstr "Balio Iragarlea"
+
+msgid "PPV and NPV by Prevalence"
+msgstr "PPV eta NPV Prebalentziaren arabera"
+
+msgid "Alluvial Plot"
+msgstr "Alubioi Grafikoa"
+
+msgid "Condition"
+msgstr "Baldintza  (ad.gaixoa)????"
+
+msgid "Test"
+msgstr "Proba"
+
+msgid "Proportion of Population"
+msgstr "Biztanleriaren Proportzioa"
+
+msgid "Signal Detection"
+msgstr "Seinale Detekzioa"
+
+msgid "Marker"
+msgstr "Markatzailea"
+
+msgid "Count"
+msgstr "Zenbaketa"
+
+msgid "Estimates"
+msgstr "Estimazioak"
+
+msgid "Positive predictive value"
+msgstr "Balio iragarle positiboa"
+
+msgid "Negative predictive value"
+msgstr "Balio iragarle negatiboa"
+
+msgid "False discovery rate"
+msgstr "Emaitza faltsuaren ratioa"
+
+msgid "False omission rate"
+msgstr "Ez-egite faltsuaren tasa"
+
+msgid "False positive rate"
+msgstr "Positibo faltsu ratioa"
+
+msgid "False negative rate"
+msgstr "Negatibo faltsu ratioa"
+
+msgid "Accuracy"
+msgstr "Zehaztasuna"
+
+msgid "Pretest odds"
+msgstr "Proba aurretiko oddsa"
+
+msgid "Positive likelihood ratio"
+msgstr "Egiazkotasun positibo ratioa"
+
+msgid "Negative likelihood ratio"
+msgstr "Egiazkotasun negatibo ratioa"
+
+msgid "F-measure"
+msgstr "F-neurria"
+
+#, fuzzy
+msgid "Proportion of a population affected by the condition."
+msgstr "Baldintzak??? eragindako populazio baten proportzioa."
+
+#, fuzzy
+msgid "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive."
+msgstr ""
+"(Benetako positiboen tasa) Baldintzak?? eragindako eta behar bezala positibo "
+"eman dutenen proportzioa."
+
+#, fuzzy
+msgid "(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative."
+msgstr ""
+"(Benetako negatiboen tasa) Baldintzak??? eragindako ez diren eta behar "
+"bezala negatibo eman dutenen proportzioa."
+
+#, fuzzy
+msgid "Proportion of a population affected by a condition and correctly tested positive."
+msgstr ""
+"Baldintzak eragindako eta behar bezala positibo eman duen populazio baten "
+"proportzioa."
+
+msgid "Proportion of a population not affected by a condition and incorrectly tested positive."
+msgstr ""
+"Baldintzak eragindako ez den eta oker positibo eman duen populazio baten "
+"proportzioa."
+
+msgid "Proportion of a population not affected by a condition and correctly tested negative."
+msgstr ""
+"Baldintzak eragindako ez den eta behar bezala negatibo eman duen populazio "
+"baten proportzioa."
+
+msgid "Proportion of a population affected by a condition and incorrectly tested negative."
+msgstr ""
+"Baldintzak eragindako eta oker negatibo eman duen populazio baten "
+"proportzioa."
+
+msgid "Proportion of those who tested positive and are affected by the condition."
+msgstr "Positibo eman duten eta baldintzak eragindakoen proportzioa."
+
+msgid "Proportion of those who tested negative and are not affected by the condition."
+msgstr "Negatibo eman duten eta baldintzak eragindako ez direnen proportzioa."
+
+msgid "Proportion of false positives in the pool of those that test positive."
+msgstr "Positibo eman dutenen multzoan positibo faltsuen proportzioa."
+
+msgid "Proportion of false negatives in the pool of those that test negative."
+msgstr "Negatibo eman dutenen multzoan faltsu negatiboen proportzioa."
+
+msgid "Complement proportion to specificity."
+msgstr "Espezifikotasunarekiko proporzio osagarria."
+
+msgid "Complement proportion to sensitivity."
+msgstr "Sentikortasunarekiko proporzio osagarria."
+
+msgid "Proportion of the population that is true positive or true negative."
+msgstr "Populaziotik benetako positiboa edo benetako negatiboa den proportzioa."
+
+#, fuzzy
+msgid "P(Test = positive | Condition = positive)"
+msgstr "P(Proba = positiboa | Baldintza = positiboa)"
+
+msgid "P(Test = negative | Condition = negative)"
+msgstr "P(Proba = negatiboa | Baldintza = negatiboa)"
+
+msgid "P(Condition = positive %s Test = positive)"
+msgstr "P(Baldintza = positiboa %s Proba = positiboa)"
+
+msgid "P(Condition = negative %s Test = positive)"
+msgstr "P(Baldintza = negatiboa %s Proba = positiboa)"
+
+msgid "P(Condition = negative %s Test = negative)"
+msgstr "P(Baldintza = negatiboa %s Proba = negatiboa)"
+
+msgid "P(Condition = positive %s Test = negative)"
+msgstr "P(Baldintza = positiboa %s Proba = negatiboa)"
+
+msgid "P(Condition = positive | Test = positive)"
+msgstr "P(Baldintza = positiboa | Proba = positiboa)"
+
+msgid "P(Condition = negative | Test = negative)"
+msgstr "P(Baldintza = negatiboa | Proba = negatiboa)"
+
+msgid "P(Condition = negative | Test = positive)"
+msgstr "P(Baldintza = positiboa | Proba = negatiboa)"
+
+msgid "P(Condition = positive | Test = negative)"
+msgstr "P(Baldintza = positiboa | Baldintza = negatiboa)"
+
+msgid "P(Test = positive | Condition = negative)"
+msgstr "P(Proba = positiboa | Baldintza = negatiboa)"
+
+msgid "P(Test = negative | Condition = positive)"
+msgstr "P(Proba = negatiboa | Baldintza = positiboa)"
+
+msgid "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)"
+msgstr ""
+"P(Baldintza = positiboa %1$s Proba = positiboa %2$s Baldintza = negatiboa %1$"
+"s Proba = negatiboa)"
+
+msgid "Central credible intervals are based on %i samples."
+msgstr "Sinesgarritasun tarte zentralak %i laginetan oinarritzen dira."
+
+msgid "Parameter estimates are based on %i MCMC samples."
+msgstr "Parametroen estimazioak %i MCMC laginetan oinarritzen dira."
+
+msgid "positive"
+msgstr "positiboa"
+
+msgid "negative"
+msgstr "negatiboa"
+
+msgid "Data Summary"
+msgstr "Datuen laburpena"
+
+msgid "Counts"
+msgstr "Zenbaketak"
+
+msgid "Proportion"
+msgstr "Proportzioa"
+
+msgid "Successes"
+msgstr "Arrakastak"
+
+msgid "Failures"
+msgstr "Porrotak"
+
+msgid "spike at %s"
+msgstr "%s-tan gailurra"
+
+msgid "beta(%1$s, %2$s)"
+msgstr "beta(%1$s, %2$s)"
+
+msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
+msgstr "beta(%1$s, %2$s)T[%3$s, %4$s]"
+
+msgid "binomial(%1$i, %2$s)"
+msgstr "binomial(%1$i, %2$s)"
+
+msgid "beta-binomial(%1$i, %2$s, %3$s)"
+msgstr "beta-binomial(%1$i, %2$s, %3$s)"
+
+msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
+msgstr "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
+
+msgid "Estimation Summary"
+msgstr "Estimazio Laburpena"
+
+msgid "Model"
+msgstr "Eredua"
+
+msgid "Prior (%s)"
+msgstr "Aurrekoa (%s)"
+
+msgid "Prior %s"
+msgstr "Aurrekoa %s"
+
+msgid "Posterior (%s)"
+msgstr "Ondorengoa (%s)"
+
+msgid "Posterior %s"
+msgstr "Ondorengoa %s"
+
+msgid "Please specify successes and failures."
+msgstr "Zehaztu arrakastak eta porrotak."
+
+msgid "Warning:"
+msgstr "Abisua:"
+
+msgid "These results are based on %1$i %2$s and %3$i %4$s."
+msgstr "Emaitza hauek %1$i %2$s eta %3$i %4$s-tan oinarritzen dira."
+
+msgid "Observation"
+msgstr "Behaketa"
+
+msgid "Plot could not be produced due to lacking numerical precision for %1$s."
+msgstr "Ezin izan da grafikoa sortu %1$s-rako zehaztasun numeriko faltagatik."
+
+msgid "Population proportion"
+msgstr "Populazio proportzioa"
+
+msgid "Prior = Posterior"
+msgstr "Aurrekoa = Ondorengoa"
+
+msgid "More than bimodal CIs are not implemented in the Sequential analysis plot."
+msgstr ""
+"BImodal KT baino gehiago ez daude inplementatuta analisi sekuentzialaren "
+"grafikoan."
+
+msgid "%i%% CI"
+msgstr "%i%% KT"
+
+msgid "%i%% HPD"
+msgstr "%i%% HPD"
+
+#, fuzzy
+msgid "SI (BF=%s)"
+msgstr "SI (BF=%s)"
+
+msgid "Prediction (Successes)"
+msgstr "Aurreikuspena (Arrakastak)"
+
+msgid "Prediction %s"
+msgstr "Aurreikuspena %s"
+
+msgid "Prediction std. deviation"
+msgstr "Aurreikuspenaren desbideratze estandarra"
+
+msgid "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s."
+msgstr ""
+"%1$s %2$s-rako aurreikuspena %3$s %4$s eta %5$s %6$s-tan oinarritzen da."
+
+msgid "Predicted sample proportions"
+msgstr "Aurreikusitako lagin proportzioak"
+
+msgid "Predicted number of successes"
+msgstr "Aurreikusitako arrakasta kopurua"
+
+msgid "Probability"
+msgstr "Probabilitatea"
+
+msgid "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."
+msgstr ""
+"KT goiko muga etorkizuneko behaketa kopurua baino handiagoa da. Mesedez, "
+"aldatu goiko KT mugaren balioa ezarpenen panelean."
+
+msgid "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."
+msgstr ""
+"KT beheko muga etorkizuneko behaketa kopurua baino handiagoa da. Mesedez, "
+"aldatu beheko KT mugaren balioa ezarpenen panelean."
+
+msgid "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."
+msgstr ""
+"KT beheko muga goiko KI muga baino handiagoa da. Mesedez, aldatu KT mugen "
+"balioa ezarpenen panelean."
+
+msgid "Proportion of Successes"
+msgstr "Arrakasta-Proportzioa"
+
+msgid "Testing Summary"
+msgstr "Proben Laburpena"
+
+msgid "BF%s"
+msgstr "BF%s"
+
+msgid "log(BF%s)"
+msgstr "log(BF%s)"
+
+msgid "Hypothesis"
+msgstr "Hipotesia"
+
+msgid "P(H)"
+msgstr "P(H)"
+
+msgid "log(likelihood)"
+msgstr "log(egiazkotasuna) log(likelihood)"
+
+msgid "P(H|data)"
+msgstr "P(H|datuak)"
+
+#, fuzzy
+msgid "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range)."
+msgstr ""
+"%1$s-ren laburpena ezin izan da kalkulatu. Arrazoirik probableena mozketa-"
+"datuen arteko gatazkaren ondoriozko zehaztasun numeriko falta da (hau da, "
+"atzeko banaketaren gehiengoa mozketa????-tartetik kanpo dago)."
+
+msgid "Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."
+msgstr ""
+"Bayes faktoreak eta ondorengo probabilitateak ezin izan dira kalkulatu, "
+"eredu batzuetarako probabilitate marjinalak ez daudelako eskuragarri."
+
+msgid "These results are based on %1$i success(es) and %2$i failure(s)"
+msgstr "Emaitza hauek %1$i arrakasta(k) eta %2$i porrot(t)etan oinarritzen dira"
+
+msgid "The plot could not be created because the posterior model probabilities are not defined for all models."
+msgstr ""
+"Diagrama ezin izan da sortu, atzeko ereduaren probabilitateak ez daudelako "
+"eredu guztietarako definituta."
+
+msgid "P(Successes|%s)"
+msgstr "P(Arrakastak|%s)"
+
+msgid "P(Successes)"
+msgstr "P(Arrakastak)"
+
+msgid "The table could not be created because the posterior model probabilities are not defined for all models."
+msgstr ""
+"Taula ezin izan da sortu, atzeko ereduaren probabilitateak ez daudelako "
+"eredu guztietarako definituta."
+
+msgid "Please specify a hypothesis for comparison."
+msgstr "Mesedez, zehaztu hipotesi bat konparaziorako."
+
+msgid "Conditional probability"
+msgstr "Probabilitate baldintzatua"
+
+msgid "Joint probability"
+msgstr "Probabilitate bateratua"
+
+msgid "Posterior probability"
+msgstr "Ondorengo Probabilitatea"
+
+msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
+msgstr ""
+"Grafiko egitea ezinezkoa: Bayes faktoreetako bat infinituaren berdina da."
+
+msgid "Observations"
+msgstr "Behaketak"
+
+msgid "At least 2 hypotheses need to be specified."
+msgstr "Gutxienez 2 hipotesi zehaztu behar dira."
+
+msgid "Posterior probabilities and marginal prediction could not be computed since the marginal likelihoods are not available for some models."
+msgstr ""
+"Ondorengo probabilitateak eta iragarpen marjinala ezin izan dira kalkulatu, "
+"eredu batzuetarako probabilitate marjinalak ez baitaude eskuragarri."
+
+msgid "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)"
+msgstr ""
+"%1$i behaketarako iragarpena %2$i arrakasta(tan) eta %3$i porrot(etan) "
+"oinarritzen da"
+
+msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
+msgstr "'%2$s' eredu/hipotesirako '%1$s' parametroa positiboa izan behar da."
+
+msgid "The truncation range for model/hypothesis '%s' must be within [0, 1] interval."
+msgstr "'%s' eredu/hipotesirako mozketa-tartea [0, 1] tartean egon behar da."
+
+msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
+msgstr ""
+"'%2$s' eredu/hipotesirako '%1$s' parametroa 0 eta 1 artean egon behar da."
+
+msgid "Please remove duplicates from the %s names."
+msgstr "Mesedez, kendu errepikatuak %s izenetatik."
+
+msgid "'Successes'"
+msgstr "'Arrakastak'"
+
+msgid "%1$s %2$s Plots"
+msgstr "%1$s %2$s grafikoak"
+
+msgid "Prior and Posterior Plots"
+msgstr "Aurreko eta Ondorengo Grafikoak"
+
+msgid "Sequential Analysis: Point Estimate"
+msgstr "Analisi Sekuentziala: Puntu-Estimazioa"
+
+msgid "%s Sequential Analysis: Interval"
+msgstr "%s Analisi Sekuentziala: Tartea"
+
+msgid "Sequential Analysis: Stacked"
+msgstr "Analisi Sekuentziala: Pilatuta"
+
+msgid "Sequential Posterior Updating"
+msgstr "Ondorengo Eguneratze Sekuentziala"
+
+msgid "Prediction Summary"
+msgstr "Aurreikuspenaren Laburpena"
+
+msgid "%s Prediction Plots"
+msgstr "%s Aurreikuspen Grafikoak"
+
+msgid "Conditional %s Plots"
+msgstr "Baldintzapeko %s Grafikoak"
+
+msgid "Joint %s Plots"
+msgstr "Elkartutako %s Grafikoak"
+
+msgid "Marginal %s Plots"
+msgstr "Marjinako %s Grafikoak"
+
+msgid "%1$s %2$s Prediction Plots"
+msgstr "%1$s %2$s Aurreikuspen Grafikoak"
+
+msgid "%s Prior and Posterior Plots"
+msgstr "%s Aurreko eta Ondorengo Grafikoak"
+
+msgid "%s Predictive Accuracy Plot"
+msgstr "%s Aurreikuspen Zehaztasunaren Grafikoa"
+
+msgid "%s Sequential Analysis"
+msgstr "%s Analisi Sekuentziala"
+
+msgid "Welcome to the %1$s analysis from the Learn Bayes module. This analysis illustrates Bayesian %2$s using %3$s examples."
+msgstr ""
+"Ongi etorri Learn Bayes moduluko %1$s analisira. Analisi honek Bayes %2$s "
+"ilustratzen du %3$s adibide erabiliz."
+
+msgid "%s (the population proportion of successes)"
+msgstr "%s (populazio arrakasten proportzioa)"
+
+msgid "%s (the population mean, variance is assumed to be known)"
+msgstr "%s (populazioaren batez bestekoa, bariantza ezaguna dela suposatzen da)"
+
+msgid "The analysis is split into 5 sections:\n      <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>\n           <li> %1$s </li>\n           <li> %2$s </li>\n           <li> %3$s </li>\n           <li> %4$s </li> </ol>"
+msgstr ""
+"Analisia 5 ataletan banatuta dago:\n"
+"             <ol> <li> Datuak - kalkuluetarako datu-sarrera zehazteko. JASP-"
+"en kargatutako datu-multzo bateko aldagai bat erabil dezakezu, datuen "
+"ikuspegi orokorra zehaztu edo behaketak banan-banan sartu (eta analisian "
+"zehar eguneratu). </li>\n"
+"                       <li> %1$s </li>\n"
+"                       <li> %2$s </li>\n"
+"                       <li> %3$s </li>\n"
+"                       <li> %4$s </li> </ol>"
+
+msgid "The 'Data' section allows you to specify data input for the analysis."
+msgstr ""
+"'Datuak' atalak analisietarako datu-sarrera zehazteko aukera ematen dizu."
+
+msgid "The 'Select variable' option allows the selection of a variable ('Selected') from a dataset loaded into JASP. %s"
+msgstr ""
+"'Aldagaia hautatu' aukerak JASP-en kargatutako datu-multzo batetik aldagai "
+"bat ('Hautatua') hautatzea ahalbidetzen du. %s"
+
+msgid "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis."
+msgstr ""
+"'Zenbaketak zehaztu' aukerak datu agregatuak erabiltzea ahalbidetzen du. %1$"
+"s Horrek esan nahi du %2$ak behin bakarrik eguneratzen direla, datu osoekin. "
+"Behaketen ordenari buruzko informazio faltak analisi sekuentziala erabiltzea "
+"eragozten du."
+
+#, fuzzy
+msgid "The 'Enter sequence' option allows manual input of a specific order of observations. %s"
+msgstr ""
+"'Segida sartu' aukerak behaketen ordena zehatz bat eskuz sartzea "
+"ahalbidetzen du. %s"
+
+msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
+msgstr ""
+"'Estimazio binomiala' analisiak bi banaketa mota eskaintzen ditu %1$s "
+"parametroarentzat, arrakastaren oinarrizko populazio proportzioa adierazten "
+"duena:\n"
+"                  <ul><li>'Garrantzia(%2$s)' - probabilitate masa guztia "
+"puntu batean (%2$s) kontzentratzeko. Honek populazio proportzioa %2$s dela "
+"ziurtasunez dioen uste aurrekoa adierazten du. Uste hau hain da sendoa, ezen "
+"inongo daturik ezin baitu uste aurreko hau mugitu. Beraz, atzekoa ere %2$s-"
+"tan garra bat da. Aurreko eta ondorengo %5$s-ak, orduan, gailurraren "
+"kokapenari dagozkio.</li><li>'Beta(%3$s, %4$s)' - %1$s parametroaren balio "
+"guztietan probabilitate-dentsitatea esleitzeko, %3$s eta %4$s parametroak "
+"dituen beta banaketa baten arabera. %6$s 'S' arrakastak eta 'F' porrotak "
+"behatu ondoren, ondorengo banaketa beta(%3$s + S, %4$s + F)-ra eguneratzen "
+"da, dagokion %5$s kalkulatuta.</li></ul>"
+
+#, fuzzy
+msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
+msgstr ""
+"'Gaussiar Estimazioa' analisiak bi aurreko banaketa mota eskaintzen ditu "
+"banaketa normal baten %1$s parametroarentzat, Normala(%1$s, %2$s), %2$s "
+"desbideratze estandar ezagunarekin:\n"
+"                   <ul><li>'Gailurra(%3$s)' - probabilitate-masa guztia "
+"puntu bakarrean (%3$s) kontzentratzeko. Honek populazioaren proportzioa %3$s "
+"dela ziurtasunez dioen aurreko ustea adierazten du. Uste hori hain da "
+"sendoa, ezen ez dagoen datuek aurreko uste hori mugitu ezin dutenean. Beraz, "
+"atzeko balioa ere %3$s-n erpin bat da. Aurreko eta atzeko %8$s-ak erpinaren "
+"kokapenari dagozkio.</li><li>'Normala(%3$s, %4$s)' - %1$s parametroaren "
+"balio guztietan probabilitate-dentsitatea esleitzeko, %3$s batez bestekoa "
+"eta %4$s desbideratze estandarra parametroak dituen banaketa normal baten "
+"arabera. Aurreko %8$s %3$s banaketa normalaren batez besteko parametroari "
+"dagokio. %5$s batez bestekoarekin 'N' behaketa ikusi ondoren, atzeko "
+"banaketa normala eguneratzen da ((%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) +"
+" (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) "
+") %8$s atzeko banaketaren batez bestekoari dagokiolarik.</li></ul>"
+
+msgid "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>"
+msgstr ""
+"'Estimazio Laburpena' taulak banakako modeloen laburpen numerikoak erakusten "
+"ditu. Bistaratutako puntu-estimazioa 'Puntu-estimazioa' aukera erabiliz alda "
+"daiteke. Taula honako zutabe hauek osatzen dute:\n"
+"          <ul><li>'Modeloa' - zehaztutako modeloen izenak</li><li>'Aurrekoa "
+"(%1$s)' - %1$s parametrorako zehaztutako aurreko banaketa</li><li>'Aurrekoa "
+"%2$s' - zehaztutako aurreko banaketaren %3$s</li><li>'Atzekoa (%1$s)' - %1$s "
+"parametrorako kalkulatutako ondorengo banaketa (hau da, datuekin "
+"eguneratutako aurreko banaketa)</li><li>'Atzekoa %2$s' - ondorengo "
+"banaketaren %3$s</li></ul>"
+
+msgid "The 'Binomial Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The marginal likelihood corresponds to a binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with the chance parameter equal to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The marginal likelihood corresponds to a beta-binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with parameters %3$s and %4$s corresponding to the shape parameters of the prior beta distribution.</li></ul>"
+msgstr ""
+"'Binomial Testing' analisiak bi aurreko banaketa mota eskaintzen ditu %1$s "
+"parametrorako, arrakastaren oinarrizko populazio proportzioa adierazten "
+"dutenak:\n"
+"                  <ul><li>'Spike(%2$s)' - probabilitate dentsitate guztia "
+"kokapen bakarrean (%2$s) kontzentratzeko. Probabilitate marjinala arrakasta "
+"kopuru behatuan ebaluatutako dentsitate binomial bati dagokio, behaketa "
+"kopuruaren berdina den tamainarekin eta aukera parametroa puntako "
+"kokapenaren berdina denarekin.</li><li>'Beta(%3$s, %4$s)' - probabilitate "
+"dentsitatea %1$s parametroaren balio guztietan esleitzeko, %3$s eta %4$s "
+"parametroak dituen beta banaketa baten arabera. Probabilitate marjinala "
+"arrakasta kopuru behatuan ebaluatutako beta-binomial dentsitate bati "
+"dagokio, behaketa kopuruaren berdina den tamainarekin eta aurreko beta "
+"banaketaren forma parametroei dagozkien %3$s eta %4$s "
+"parametroekin.</li></ul>"
+
+msgid "The 'Gaussian Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population mean of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the location of the spike, and standard deviation as %2$s/%7$sN, where 'N' stands for the number of observations.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with mean %3$s and standard deviation %4$s. The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the mean of the prior distribution, and standard deviation of %7$s( %2$s%6$s/N + %4$s%6$s ).</li></ul>"
+msgstr ""
+"'Gaussiar Testa' analisiak bi banaketa mota eskaintzen ditu %1$s "
+"parametroarentzat, banaketa normal baten azpiko populazio-batez bestekoa "
+"adierazten duena, Normala(%1$s, %2$s), %2$s desbideratze estandar "
+"ezagunarekin:\n"
+"                   <ul><li>'Garrantzia(%3$s)' - probabilitate-dentsitate "
+"guztia kokapen bakarrean kontzentratzeko (%3$s). Probabilitate marjinala "
+"batez besteko behatuan ebaluatutako dentsitate normal bati dagokio, batez "
+"bestekoa garratzaren kokapenaren berdina izanik, eta desbideratze estandarra "
+"%2$s/%7$sN izanik, non 'N' behaketa kopurua den.</li><li>'Normala(%3$s, %4$s)"
+"' - probabilitate-dentsitatea %1$s parametroaren balio guztietan esleitzeko, "
+"batez bestekoa %3$s eta desbideratze estandarra %4$s dituen banaketa normal "
+"baten arabera. Marjina-probabilitatea batez besteko behatuan ebaluatutako "
+"dentsitate normal bati dagokio, batez bestekoa aurreko banaketaren batez "
+"bestekoaren berdina izanik eta %7$s-ko desbideratze estandarrarekin ( %2$s%6$"
+"s/N + %4$s%6$s ).</li></ul>"
+
+msgid "The posterior probabilities 'P(H|data)' are then computed using Bayes formula,\n        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> where 'P(H)' represents the prior probability of the hypothesis, 'P(data|H)' the marginal likelihood of the data given the hypothesis, and 'P(data)' the probability of the data. The factor 'P(data)' equals the sum of marginal likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
+msgstr ""
+"'P(H|data)' atzeko probabilitateak Bayes-en formula erabiliz kalkulatzen "
+"dira,\n"
+"                  <center>P(H|data) = P(H) * P(data|H) / P(data),</center> "
+"non 'P(H)' hipotesiaren aurreko probabilitatea adierazten duen, 'P(data|H)' "
+"hipotesia emanda datuen probabilitate marjinala, eta 'P(data)' datuen "
+"probabilitatea. 'P(data)' faktorea probabilitate marjinalen batura aurreko "
+"probabilitateekin biderkatuta da, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
+
+msgid "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model (selected from the 'vs.' dropdown menu) and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgstr ""
+"'BF' Bayes faktoreak bi ereduen ondorengo probabilitateak aurreko "
+"probabilitateekin zatituz lor daitezke,\n"
+"                   <center>BF%1$s%2$s = ( P(H%1$s|datuak)/P(H%2$s|datuak) ) /"
+" ( P(H%1$s)/P(H%2$s) ),</center> non 'BF%1$s%2$s' lehenengo ereduaren aldeko "
+"Bayes faktorea den, bigarren ereduarekin alderatuta ('vs.' goitibeherako "
+"menuan hautatua) eta aurreikuspen erlatiboaren neurri natural gisa "
+"interpreta daitekeen. Hipotesia gainerako hipotesiekin alderatzen duen Bayes "
+"faktore bat kalkulatzea ere posible da 'vs.'. bigarren hipotesia gainerako "
+"hipotesien baturarekin trukatzen da' guztiek, eta hau honela sinplifikatu "
+"daiteke,\n"
+"                   <center>BF%1$s%2$s = ( P(H%1$s|datuak)/(1-P(H%1$s|datuak))"
+" ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>Bayes faktoreen zenbakitzailea eta "
+"izendatzailea alderantzikatu daitezke 'BF%2$s%1$s' aukera hautatuz (bigarren "
+"hipotesiaren aldeko ebidentzia kuantifikatuz), edo eskala logaritmiko batera "
+"eraldatu 'log(BF%1$s%2$s)' aukera hautatuz."
+
+msgid "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:\n    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>"
+msgstr ""
+"'Proben Laburpena' taulak hipotesien laburpen numerikoak erakusten ditu. "
+"Zutabe hauek osatzen dute:\n"
+"          <ul><li>'Hipotesia' - zehaztutako hipotesi izenak</li><li>'P(H)' - "
+"hipotesiaren aurreko probabilitatea</li><li>'log(likelihood)' - hipotesiaren "
+"marjinal-probabilitatearen logaritmoa</li><li>'P(H|datuak)' - hipotesiaren "
+"ondorengo probabilitatea (datuekin eguneratu ondoren)</li><li>%s</li></ul>"
+
+msgid "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %4$s distributions are visualized as continuous lines."
+msgstr ""
+"'%1$s' aukerak %3$s parametroaren %2$s grafikoak erakusten ditu. Aldez "
+"aurretiko banaketak gezi gisa bistaratzen dira (dentsitatea infinitua dela "
+"esan nahi dute) eta %4$s banaketak lerro jarraitu gisa."
+
+msgid "The 'All' option shows all %1$s for parameter %2$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis."
+msgstr ""
+"'Guztiak' aukerak %2$s parametrorako %1$s guztiak bata bestearen gainean "
+"erakusten ditu, y ardatzeko dentsitate eta probabilitate eskala komun "
+"batekin alderaketa errazagoa ahalbidetuz."
+
+msgid "The 'Stacked' option shows all %1$s for parameter %2$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+"'Pilatutako' aukerak %2$s parametrorako %1$s guztiak erakusten ditu irudi "
+"bakar batean, z ardatzean 'gehiago' marraztean sortutako sakontasun "
+"efektuarekin."
+
+msgid "The 'Individual' option shows %1$s for parameter %2$s individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
+msgstr ""
+"'Banakako' aukerak %1$s %2$s parametrorako banaka erakusten du irudi "
+"bereizietan. Puntu-estimazio mota desberdinak ('Puntu-estimazioa') eta tarte "
+"sinesgarriak ('CI') bistaratzea posible da:%3$s"
+
+msgid "Furthermore, the 'Observed data' checkbox allows the visualization of the observed %s as a black cross in the figure."
+msgstr ""
+"Gainera, 'Behatutako datuak' kontrol-laukiak behatutako %s-ak irudian "
+"gurutze beltz gisa bistaratzea ahalbidetzen du."
+
+msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
+msgstr ""
+"'Baldintzapekoa' aukerak %2$s parametrorako %1$s guztiak erakusten ditu modu "
+"independentean, banakako eredutzat hartuko balira bezala (beste hipotesirik "
+"gabe). Puntu-estimazio mota desberdinak ('Puntu-estimazioa') eta "
+"sinesgarritasun-tarteak ('CI') bistaratzea posible da:%3$s"
+
+msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s over the parameter by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+"'Elkartua' aukerak %2$s parametrorako %1$s guztiak erakusten ditu, beste "
+"hipotesiak kontuan hartuta batera kontuan hartuta (parametroaren gaineko %1$"
+"sen dentsitatea hipotesiaren %3$s probabilitatearekin biderkatuz). Horrez "
+"gain, 'Gaineratuta' aukerak %1$s guztiak bata bestearen gainean bistaratzea "
+"ahalbidetzen du, y ardatzeko dentsitate eta probabilitate eskala komun "
+"batekin alderaketa errazagoa ahalbidetuz, eta 'Pilatutako' aukerak %1$s "
+"guztiak irudi bakarrean erakusten ditu, z ardatzean 'gehiago' banaketa "
+"gehigarriak marraztean sortutako sakontasun efektuarekin."
+
+msgid "The 'Marginal' option collapses across all individual %1$s, weighting them by their %2$s probability.%3$s It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%4$s"
+msgstr ""
+"'Marginala' aukera %1$s indibidual guztietan erortzen da, %2$s "
+"probabilitatearen arabera haztatuz.%3$s Puntu-estimazio mota desberdinak "
+"('Puntu-estimazioa') eta tarte sinesgarriak ('CI') bistaratzea posible "
+"da:%4$s"
+
+msgid "The 'Prior and posterior distribution' option displays the prior and posterior distribution of the parameter %1$s for the individual %2$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %3$s distributions are visualized as continuous lines. Prior distributions are visualized as dashed grey lines and the posterior distribution as solid black lines. In addition, the observed data summary can be visualized as a black cross by selecting the '%4$s' checkbox."
+msgstr ""
+"'Aurreko eta ondorengo banaketa' aukerak %1$s parametroaren aurreko eta "
+"ondorengo banaketa erakusten du %2$s banakoarentzat. Aurreko banaketa "
+"puntualak gezi gisa bistaratzen dira (dentsitatea infinitua dela esan nahi "
+"dute) eta %3$s banaketak lerro jarraitu gisa. Aurreko banaketak lerro gris "
+"eten gisa bistaratzen dira eta ondorengo banaketa lerro beltz jarraitu gisa. "
+"Horrez gain, behatutako datuen laburpena gurutze beltz gisa bistaratu "
+"daiteke '%4$s' kontrol-laukia hautatuta."
+
+msgid "The 'Conditional' option shows all prior and posterior distributions for parameter %1$s independently, as if they were considered as individual models (without the existence of other hypotheses)."
+msgstr ""
+"'Baldintzapekoa' aukerak %1$s parametroaren aurreko eta ondorengo banaketa "
+"guztiak erakusten ditu modu independentean, banakako eredutzat hartuko "
+"balira bezala (beste hipotesirik gabe)."
+
+msgid "The 'Joint' option shows all prior and posterior distributions for parameter %1$s when considered together in light of the other hypotheses. In addition, the 'Overlying' option allows the visualization all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Marginal' option collapses across all individual prior and posterior distributions, weighting them by their prior and posterior probability."
+msgstr ""
+
+msgid "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %1$s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%2$s"
+msgstr ""
+
+msgid "The 'Updating table' option generates a numerical summary of the displayed figures."
+msgstr ""
+
+msgid "The 'Stacked distributions' option displays a plot with the sequential updating of the posterior distribution density (x- and y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another, creating a depth effect (z-axis)."
+msgstr ""
+
+msgid "The 'Interval' option displays a sequential plot with the probability of parameter %s lying inside of the interval ranging from ('lower') to ('upper'), (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
+msgstr ""
+
+msgid "The 'All' option shows the probability of parameter %s lying inside of the specified range for all models in one figure, allowing for easier comparison."
+msgstr ""
+
+msgid "The 'Stacked' option visualizes the interval for all prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+
+msgid "The 'Posterior updating table' option generates a numerical summary of the updating process for parameter %s. The 'Observation' column tracks how many observations have been already encountered for the corresponding posterior distribution. The first row (observation = 0) corresponds to the prior distribution and the last row corresponds to the final posterior distribution after the prior distribution was updated with all observations."
+msgstr ""
+
+msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
+msgstr ""
+
+msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
+msgstr ""
+
+msgid "The 'Posterior prediction' section allows the prediction of future data based on the estimated models%s"
+msgstr ""
+
+msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s"
+msgstr ""
+
+msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions."
+msgstr ""
+
+msgid "The 'Prediction Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Posterior (%1$s)' - the estimated posterior distribution for parameter %1$s (used for prediction)</li>%2$s<li>'Posterior %4$s' - the %5$s of the specified posterior distribution</li><li>'Prediction%3$s' - the predictive distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted data</li></ul>"
+msgstr ""
+"'Aurreikuspen Laburpena' taulak modelo bakoitzaren laburpen numerikoak "
+"erakusten ditu. Bistaratutako puntu-estimazioa 'Puntu-estimazioa' aukera "
+"erabiliz alda daiteke. Taula honako zutabe hauek osatzen dute:\n"
+"          <ul><li>'Modeloa' - zehaztutako modeloen izenak</li><li>'Atzekoa "
+"(%1$s)' - %1$s parametroaren atzeko banaketa estimatua (aurreikuspenerako "
+"erabilia)</li>%2$s<li>'Atzekoa %4$s' - zehaztutako atzeko banaketaren "
+"%5$s</li><li>'Aurreikuspena%3$s' - datu berrien aurreikuspen-banaketa</"
+"li><li>'Aurreikuspena %4$s' - aurreikusitako datuen %5$s</li></ul>"
+
+msgid "The 'Posterior predictive distribution' option displays figures of predictive distributions based on posterior distributions of the individual models. The '%1$s' checkbox transforms the figures with predicted data%2$s into figures with %3$s."
+msgstr ""
+"'Ondorengo banaketa prediktiboa' aukerak banakako ereduen atzeko banaketetan "
+"oinarritutako banaketa prediktiboen zifrak erakusten ditu. '%1$s' kontrol-"
+"laukiak %2$s aurreikusitako datuak dituzten zifrak %3$s dituzten zifra "
+"bihurtzen ditu."
+
+msgid "The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."
+msgstr ""
+"'Guztiak' aukerak atzeko aurreikuspen banaketa guztiak bata bestearen "
+"gainean erakusten ditu, y ardatzeko dentsitate eskala komun batekin errazago "
+"alderatzea ahalbidetuz."
+
+msgid "The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+"'Pilatutako' aukerak atzeko banaketa prediktibo guztiak erakusten ditu irudi "
+"bakarrean, z ardatzean 'aurrerago' banaketa gehigarriak marraztean sortutako "
+"sakontasun efektuarekin."
+
+msgid "The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s"
+msgstr ""
+"'Banakako' aukerak modelo bakoitzerako ondorengo banaketa prediktiboak "
+"erakusten ditu irudi bereizietan. Puntu-estimazio mota desberdinak ('Puntu-"
+"estimazioa') eta tarte sinesgarriak ('CI') bistaratzea posible da:%s"
+
+msgid "The '%1$s' option displays figures of predictive distributions based on posterior distributions of the individual models. %2$s"
+msgstr ""
+"'Banakako' aukerak eredu bakoitzerako ondorengo banaketa prediktiboak "
+"erakusten ditu irudi bereizietan. Puntu-estimazio mota desberdinak ('Puntu-"
+"estimazioa') eta tarte sinesgarriak ('CI') bistaratzea posible da:%s"
+
+msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s"
+msgstr ""
+"'Baldintzapeko' aukerak %2$s parametrorako %1$s guztiak erakusten ditu modu "
+"independentean, banakako eredutzat hartuko balira bezala (beste hipotesirik "
+"gabe). Sinesgarritasun tarte desberdinak ('CI') bistaratzea posible da: %3$s"
+
+msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the  visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr ""
+"'Elkartua' aukerak %2$s parametrorako %1$s guztiak erakusten ditu, beste "
+"hipotesiak kontuan hartuta batera kontuan hartuta (%1$sen dentsitatea "
+"hipotesiaren %3$s probabilitatearekin biderkatuz). Horrez gain, "
+"'Gaineratuta' aukerak %1$s guztiak bata bestearen gainean bistaratzea "
+"ahalbidetzen du, y ardatzeko dentsitate eta probabilitate eskala komun "
+"batekin alderaketa errazagoa ahalbidetuz, eta 'Pilatutako' aukerak %1$s "
+"guztiak irudi bakarrean erakusten ditu, z ardatzean 'gehiago' banaketa "
+"gehigarriak marraztean sortutako sakontasun efektuarekin."
+
+msgid "The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses."
+msgstr ""
+"'Aurreikuspen-zehaztasuna' aukerak hipotesi guztien arteko aurreikuspen-"
+"zehaztasuna alderatzea ahalbidetzen du. Aurreikuspen-zehaztasunak datuak "
+"hipotesiak emanda zenbateraino betetzeko probabilitatea adierazten du."
+
+msgid "The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."
+msgstr ""
+"'Baldintzapekoa' aukerak iragarpen-zehaztasun guztiak modu independentean "
+"erakusten ditu, banakako eredutzat hartuko balira bezala (beste hipotesirik "
+"gabe)."
+
+msgid "The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."
+msgstr ""
+"'Joint' aukerak hipotesien aldez aurretiko probabilitateak kontuan hartzen "
+"direnean aurreikuspen-zehaztasun guztiak erakusten ditu (baldintzapeko "
+"aurreikuspen-zehaztasunak hipotesien aldez aurretiko probabilitateekin "
+"biderkatuz)."
+
+msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses)."
+msgstr ""
+"'Normalizatua' aukerak beste hipotesiak kontuan hartuta kontuan hartutako "
+"iragarpen-zehaztasun guztiak erakusten ditu (datuen probabilitatearen "
+"arabera iragarpen-zehaztasun bateratuak normalizatuz, eta hori hipotesien "
+"ondorengo probabilitatearen berdina da)."
+
+msgid "The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
+msgstr ""
+"'Proben emaitzak' aukerak hipotesi guztien iragarpen-zehaztasunaren aldaketa "
+"sekuentzialarekin grafiko bat erakusten du (y ardatza). Irudiak eguneratze-"
+"prozesua bistaratzen du, datu-puntu indibidualak bata bestearen atzetik "
+"iristen balira bezala (x ardatza)."
+
+msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."
+msgstr ""
+"'Normalizatua' aukerak beste hipotesien argitan batera kontuan hartutako "
+"iragarpen-zehaztasun guztiak erakusten ditu (iragarpen-zehaztasun bateratuak "
+"datuen probabilitatearen arabera normalizatuz, eta hau hipotesien ondorengo "
+"probabilitatearen berdina da une jakin batean)."
+
+msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown  (the selected hypothesis correponds to the '0' in BF%1$s%2$s). The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgstr ""
+"'Bayes faktorea' aukerak hipotesien aurreikuspen-zehaztasuna gainerako "
+"hipotesiekin ('vs. Guztiekin'), hipotesi onenarekin ('vs. onenarekin') edo "
+"'vs.' goitibeherako menuan hautatutako hipotesi espezifiko batekin alderatu "
+"dezake (hautatutako hipotesia BF%1$s%2$s-ko '0'-ri dagokio). Bayes faktoreen "
+"izendatzailea eta izendatzailea alderantzikatu daitezke 'BF%2$s%1$s' aukera "
+"hautatuz (bigarren hipotesiaren aldeko ebidentzia kuantifikatuz), edo eskala "
+"logaritmiko batera eraldatu 'log(BF%1$s%2$s)' aukera hautatuz."
+
+msgid "The 'Updating table' option generates a numerical summary of the displayed figure."
+msgstr ""
+"'Taula eguneratzen' aukerak bistaratutako irudiaren laburpen numerikoa "
+"sortzen du."
+
+msgid "<ul><li>'central' - a central interval (or quantile) that covers the central 'mass'%% area of the distribution</li><li>'HPD' - a highest posterior density interval that covers 'mass'%% area with the shortest range</li><li>'custom' - an interval defined by a 'lower' and 'upper' bound. It returns the posterior mass of the parameter falling inside the custom interval.</li>%s</ul>"
+msgstr ""
+"<ul><li>'zentrala' - banaketaren erdiko 'masa'%% eremua hartzen duen tarte "
+"zentral bat (edo kuantila).</li><li>'HPD' - tarte laburrena duen 'masa'%% "
+"eremua hartzen duen dentsitate atzeko tarte handieneko bat.</"
+"li><li>'pertsonalizatua' - 'beheko' eta 'goiko' muga batez definitutako "
+"tartea. Tarte pertsonalizatuaren barruan dagoen parametroaren atzeko masa "
+"itzultzen du.</li>%s</ul>"
+
+msgid "Mode"
+msgstr "Moda"
+
+msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
+msgstr "Abisua: Jokalari kopurua gutxienez 2 izan behar da. Doitu sarrerak!"
+
+msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
+msgstr "Abisua: Jokalari kopurua gehienez 9 izan behar da. Doitu sarrerak!"
+
+msgid "Warning: The number of point(s) required to win should be at least 1!"
+msgstr "Abisua: Irabazteko behar diren puntu kopurua gutxienez 1 izan behar da!"
+
+#, fuzzy
+msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
+msgstr "Abisua: %1$s jokalariak dagoeneko irabazi du jokoa. Doitu sarrerak!"
+
+msgid "Warning: No negative input values! Adjust the inputs!"
+msgstr "Abisua: Ez dago sarrera-balio negatiborik! Doitu sarrerak!"
+
+msgid "Players"
+msgstr "Jokalariak"
+
+msgid "p(win 1 point)"
+msgstr "p(puntu 1 irabazi)"
+
+msgid "Points Gained"
+msgstr "Lortutako Puntuak"
+
+msgid "Analytical"
+msgstr "Analitikoa"
+
+msgid "p(win the game)"
+msgstr "p(jokoa irabazi)"
+
+msgid "Simulated"
+msgstr "Simulatua"
+
+msgid "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings."
+msgstr ""
+"Jokalari kopurua (%1$i) ez da berdina jokalari bakoitzak eteten denean "
+"lortutako puntu kopuruarekin (%2$i). Mesedez, egiaztatu ezarpen egokiak."
+
+msgid "Prior Skill"
+msgstr "Aurreko Trebetasuna"
+
+msgid "Only numeric values are allowed in the input."
+msgstr "Balio numerikoak bakarrik onartzen dira sarreran."
+
+msgid "normal (%1$s, %2$s)"
+msgstr "normala (%1$s, %2$s)"
+
+msgid "normal (%1$.2f, %2$.2f)"
+msgstr "normala (%1$.2f, %2$.2f)"
+
+msgid "normal (%1$s, %2$.2f)"
+msgstr "normala (%1$s, %2$.2f)"
+
+msgid "Prior (μ)"
+msgstr "Aurrekoa (μ)"
+
+msgid "Prior Mean"
+msgstr "Aurreko Batez bestekoa"
+
+msgid "Posterior (μ)"
+msgstr "Ondorengoa (μ)"
+
+msgid "Posterior Mean"
+msgstr "Ondorengo Batez bestekoa"
+
+msgid "Population mean"
+msgstr "Populazioaren batez bestekoa"
+
+msgid "Prediction"
+msgstr "Iragarpena"
+
+msgid "Prediction Mean"
+msgstr "Iragarpen Batez bestekoa"
+
+msgid "Please, specify the standard deviation of the data."
+msgstr "Mesedez, zehaztu datuen desbideratze estandarra."
+
+msgid "The prediction for %1$s future %2$s is based on %3$s."
+msgstr "%1$s etorkizuneko %2$s-ren iragarpena %3$s-n oinarritzen da."
+
+msgid "Sample means"
+msgstr "Laginaren batez bestekoak"
+
+msgid "Future data"
+msgstr "Etorkizuneko datuak"
+
+msgid "Inclusion BF"
+msgstr "Inklusio BF"
