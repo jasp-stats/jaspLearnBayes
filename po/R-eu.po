@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.95.0\n"
 "POT-Creation-Date: 2025-06-21 03:07\n"
-"PO-Revision-Date: 2025-09-22 15:01+0000\n"
-"Last-Translator: Jose Ramon Rueda <joseramon.rueda@ehu.eus>\n"
+"PO-Revision-Date: 2025-10-01 11:01+0000\n"
+"Last-Translator: Ángel Prieto <angel.prieto.fi@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/eu/>\n"
 "Language: eu\n"
@@ -34,19 +34,19 @@ msgid "Median for %s"
 msgstr "Mediana %s-rako"
 
 msgid "Lower"
-msgstr "Behekoa"
+msgstr "Beheko"
 
 msgid "%s%% Credible Interval"
 msgstr "%s%% Sinesgarritasun Tartea"
 
 msgid "Upper"
-msgstr "Goikoa"
+msgstr "Goiko"
 
 msgid "Prior and Posterior for Proportion of Crosses"
 msgstr "Aurrekoa eta Atzekoa Gurutzaketen Proportziorako"
 
 msgid "Posterior"
-msgstr "Ondorengoa"
+msgstr "Atzekoa"
 
 msgid "Prior"
 msgstr "Aurrekoa"
@@ -196,13 +196,13 @@ msgid "Median"
 msgstr "Mediana"
 
 msgid "SD"
-msgstr "DE"
+msgstr "SD"
 
 msgid "Rhat"
 msgstr "Rhat"
 
 msgid "Diagnostics"
-msgstr "Diagnosiak"
+msgstr "Diagnostikoak"
 
 msgid "Eff. Sample Size"
 msgstr "Laginaren Tamaina Eraginkorra"
@@ -217,7 +217,7 @@ msgid "Confusion Matrix"
 msgstr "Nahasmen Matrizea"
 
 msgid "%s%% CI"
-msgstr "%s%% KT"
+msgstr "%s%% CI"
 
 msgid "Positive test"
 msgstr "Proba positiboa"
@@ -765,7 +765,7 @@ msgid "%1$s %2$s Plots"
 msgstr "%1$s %2$s grafikoak"
 
 msgid "Prior and Posterior Plots"
-msgstr "Aurreko eta Ondorengo Grafikoak"
+msgstr "Aurreko eta ondorengo grafikoak"
 
 msgid "Sequential Analysis: Point Estimate"
 msgstr "Analisi Sekuentziala: Puntu-Estimazioa"
