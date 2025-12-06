@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.19.2\n"
 "POT-Creation-Date: 2025-05-31 03:05\n"
-"PO-Revision-Date: 2025-08-24 09:01+0000\n"
+"PO-Revision-Date: 2025-12-05 21:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/sr/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 msgid "Summary Table"
 msgstr "Збирна табела"
@@ -33,13 +33,13 @@ msgid "Median for %s"
 msgstr "Медијана за %s"
 
 msgid "Lower"
-msgstr "Ниже"
+msgstr "Нижи"
 
 msgid "%s%% Credible Interval"
 msgstr "%s%% веродостојан интервал"
 
 msgid "Upper"
-msgstr "Горњи"
+msgstr "Виши"
 
 msgid "Prior and Posterior for Proportion of Crosses"
 msgstr "Претходни и постериорни за пропорцију укрштања"
@@ -48,7 +48,7 @@ msgid "Posterior"
 msgstr "Задњи"
 
 msgid "Prior"
-msgstr "Претходно"
+msgstr "Претходни"
 
 msgid "Proportion of Crosses"
 msgstr "Пропорција укрштања"
@@ -186,7 +186,7 @@ msgid "Statistics"
 msgstr "Статистике"
 
 msgid "Estimate"
-msgstr "Проценити"
+msgstr "Процена"
 
 msgid "Mean"
 msgstr "Аритметичка средина"
@@ -366,7 +366,7 @@ msgid "Condition"
 msgstr ""
 
 msgid "Test"
-msgstr ""
+msgstr "Тест"
 
 msgid "Proportion of Population"
 msgstr ""
@@ -533,19 +533,19 @@ msgid "Counts"
 msgstr "Бројеви"
 
 msgid "Proportion"
-msgstr ""
+msgstr "Пропорција"
 
 msgid "Successes"
-msgstr ""
+msgstr "Успеси"
 
 msgid "Failures"
-msgstr ""
+msgstr "Неуспеси"
 
 msgid "spike at %s"
 msgstr ""
 
 msgid "beta(%1$s, %2$s)"
-msgstr ""
+msgstr "бета (β) (%1$s, %2$s)"
 
 msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
 msgstr ""
@@ -563,7 +563,7 @@ msgid "Estimation Summary"
 msgstr ""
 
 msgid "Model"
-msgstr ""
+msgstr "Модел"
 
 msgid "Prior (%s)"
 msgstr ""
@@ -660,7 +660,7 @@ msgid "log(BF%s)"
 msgstr "log(BF%s)"
 
 msgid "Hypothesis"
-msgstr ""
+msgstr "Хипотеза"
 
 msgid "P(H)"
 msgstr ""
@@ -711,7 +711,7 @@ msgid "Joint probability"
 msgstr ""
 
 msgid "Posterior probability"
-msgstr ""
+msgstr "Постериорна вероватноћа"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
