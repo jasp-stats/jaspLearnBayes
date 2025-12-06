@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-09-21 06:54+0000\n"
+"PO-Revision-Date: 2025-12-05 22:00+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/sr/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "Description|"
@@ -19,7 +19,7 @@ msgstr "Учите Бајерову"
 
 msgctxt "Description|"
 msgid "Learn Bayesian statistics with simple examples and supporting text"
-msgstr ""
+msgstr "Учите Бејзову статистику са једноставним примерима и помоћним текстом"
 
 msgctxt "Description|"
 msgid "Binary Classification"
@@ -163,7 +163,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "Матрица забуне"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
@@ -695,11 +695,11 @@ msgstr ""
 
 msgctxt "LSbinomialdatainput|"
 msgid "Successes"
-msgstr ""
+msgstr "Успеси"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Failures"
-msgstr ""
+msgstr "Неуспеси"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Comma-separated Sequence of Observations"
@@ -831,7 +831,7 @@ msgstr ""
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Posterior distribution"
-msgstr ""
+msgstr "Постериорна расподела"
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "BF"
@@ -1183,7 +1183,7 @@ msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Posterior distribution"
-msgstr ""
+msgstr "Постериорна расподела"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "BF"
