@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-08 21:00+0000\n"
+"PO-Revision-Date: 2025-12-12 23:03+0000\n"
 "Last-Translator: Marko Bojović <bojovicmarko@outlook.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-qml/sr/>\n"
@@ -1103,11 +1103,11 @@ msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Comparison"
-msgstr ""
+msgstr "Поређење"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs."
-msgstr ""
+msgstr "наспрам"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. rest"
@@ -1227,11 +1227,11 @@ msgstr ""
 
 msgctxt "LStestingsequential|"
 msgid "Comparison"
-msgstr ""
+msgstr "Поређење"
 
 msgctxt "LStestingsequential|"
 msgid "vs. all"
-msgstr ""
+msgstr "наспрам свих"
 
 msgctxt "LStestingsequential|"
 msgid "vs. best"
