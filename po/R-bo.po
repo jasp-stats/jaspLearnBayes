@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 03:04\n"
-"PO-Revision-Date: 2025-12-29 01:00+0000\n"
+"PO-Revision-Date: 2026-01-06 14:01+0000\n"
 "Last-Translator: Zev Oster <zevelijah@gmail.com>\n"
 "Language-Team: Tibetan <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/bo/>\n"
@@ -52,8 +52,9 @@ msgstr ""
 msgid "Proportion of Crosses"
 msgstr ""
 
+#, fuzzy
 msgid "Density"
-msgstr ""
+msgstr "སྟུག་ཚད།"
 
 msgid "%1$s%% CI: [%2$s, %3$s]"
 msgstr ""
@@ -430,8 +431,9 @@ msgstr ""
 msgid "Data Summary"
 msgstr ""
 
+#, fuzzy
 msgid "Counts"
-msgstr ""
+msgstr "གྲངས་བཤེར།"
 
 msgid "Proportion"
 msgstr ""
@@ -547,11 +549,13 @@ msgstr ""
 msgid "Testing Summary"
 msgstr ""
 
+#, fuzzy
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
+#, fuzzy
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "Hypothesis"
 msgstr ""
