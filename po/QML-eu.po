@@ -938,7 +938,8 @@ msgstr "Buffonen Orratza Manipulatzen"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr "Orratzaren luzeraren eta lerro arteko distantziaren arteko proportzioa:"
+msgstr ""
+"Orratzaren luzeraren eta lerro arteko distantziaren arteko proportzioa:"
 
 #, fuzzy
 msgctxt "LSBuffonsneedlemanipulation|"
