@@ -140,16 +140,18 @@
 <rect x='124.40' y='20.71' width='471.20' height='471.20' style='stroke-width: 0.00; stroke: none;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polyline points='124.40,491.91 124.40,20.71 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<polyline points='124.40,491.91 595.60,491.91 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
 <rect x='69.43' y='502.87' width='581.15' height='73.13' style='stroke-width: 0.75; stroke: none;' />
 <rect x='69.43' y='502.87' width='581.15' height='73.13' style='stroke-width: 10.67; stroke: none;' />
 <rect x='80.39' y='508.35' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='80.39' y='508.35' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #FF0000;' />
+<rect x='80.39' y='508.35' width='28.35' height='28.35' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF0000;' />
 <rect x='80.39' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='80.39' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #006400;' />
+<rect x='80.39' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #006400;' />
 <rect x='368.79' y='508.35' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='368.79' y='508.35' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #4682B4;' />
+<rect x='368.79' y='508.35' width='28.35' height='28.35' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #4682B4;' />
 <rect x='368.79' y='542.17' width='28.35' height='28.35' style='stroke-width: 10.67; stroke: none;' />
-<rect x='368.79' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.75; stroke: none; fill: #FF8C00;' />
+<rect x='368.79' y='542.17' width='28.35' height='28.35' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF8C00;' />
 <text x='108.73' y='528.37' style='font-size: 17.00px; font-family: sans;' textLength='110.58px' lengthAdjust='spacingAndGlyphs'>False negative</text>
 <text x='108.73' y='562.20' style='font-size: 17.00px; font-family: sans;' textLength='97.33px' lengthAdjust='spacingAndGlyphs'>True positive</text>
 <text x='397.14' y='528.37' style='font-size: 17.00px; font-family: sans;' textLength='103.96px' lengthAdjust='spacingAndGlyphs'>True negative</text>
