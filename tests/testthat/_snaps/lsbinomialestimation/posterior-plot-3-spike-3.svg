@@ -19,29 +19,29 @@
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 10.67; stroke: none;' />
-<rect x='120.54' y='20.71' width='599.46' height='485.25' style='stroke-width: 10.67; stroke: none;' />
-<line x1='420.27' y1='483.90' x2='420.27' y2='153.05' style='stroke-width: 2.13; stroke-linecap: butt;' />
-<polyline points='427.36,165.32 420.27,153.05 413.18,165.32 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
-<polyline points='147.79,483.90 692.75,483.90 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<line x1='147.47' y1='505.96' x2='693.07' y2='505.96' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<rect x='120.54' y='20.71' width='599.46' height='485.25' style='stroke-width: 0.00; stroke: none;' />
+<rect x='112.03' y='20.71' width='607.97' height='485.25' style='stroke-width: 10.67; stroke: none;' />
+<line x1='416.02' y1='483.90' x2='416.02' y2='153.05' style='stroke-width: 2.13; stroke-linecap: butt;' />
+<polyline points='423.10,165.32 416.02,153.05 408.93,165.32 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
+<polyline points='139.67,483.90 692.37,483.90 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<line x1='139.35' y1='505.96' x2='692.68' y2='505.96' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<rect x='112.03' y='20.71' width='607.97' height='485.25' style='stroke-width: 0.00; stroke: none;' />
 <text x='112.03' y='489.75' text-anchor='end' style='font-size: 17.00px; font-family: sans;' textLength='102.07px' lengthAdjust='spacingAndGlyphs'>Models Spike</text>
-<polyline points='120.54,505.96 720.00,505.96 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
-<polyline points='147.79,514.46 147.79,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='256.78,514.46 256.78,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='365.77,514.46 365.77,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='474.77,514.46 474.77,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='583.76,514.46 583.76,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<polyline points='692.75,514.46 692.75,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
-<text x='147.79' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='256.78' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='365.77' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='474.77' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<text x='583.76' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.8</text>
-<text x='692.75' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='333.27' y='563.96' style='font-size: 17.00px; font-family: sans;' textLength='161.62px' lengthAdjust='spacingAndGlyphs'>Population proportion</text>
-<text x='494.89' y='563.96' style='font-size: 17.00px; font-family: sans;' textLength='4.25px' lengthAdjust='spacingAndGlyphs'> </text>
-<text x='499.14' y='563.96' style='font-size: 17.00px; font-family: sans;' textLength='8.13px' lengthAdjust='spacingAndGlyphs'>θ</text>
-<text x='420.27' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='174.81px' lengthAdjust='spacingAndGlyphs'>posterior-plot-3-spike-3</text>
+<polyline points='112.03,505.96 720.00,505.96 ' style='stroke-width: 0.00; stroke: none; stroke-linecap: butt;' />
+<polyline points='139.67,514.46 139.67,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='250.21,514.46 250.21,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='360.75,514.46 360.75,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='471.29,514.46 471.29,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='581.83,514.46 581.83,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<polyline points='692.37,514.46 692.37,505.96 ' style='stroke-width: 0.64; stroke-linecap: butt;' />
+<text x='139.67' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='250.21' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='360.75' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='471.29' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.6</text>
+<text x='581.83' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<text x='692.37' y='533.13' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='23.63px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='329.02' y='563.96' style='font-size: 17.00px; font-family: sans;' textLength='161.62px' lengthAdjust='spacingAndGlyphs'>Population proportion</text>
+<text x='490.64' y='563.96' style='font-size: 17.00px; font-family: sans;' textLength='4.25px' lengthAdjust='spacingAndGlyphs'> </text>
+<text x='494.89' y='563.96' style='font-size: 17.00px; font-family: sans;' textLength='8.13px' lengthAdjust='spacingAndGlyphs'>θ</text>
+<text x='416.02' y='11.70' text-anchor='middle' style='font-size: 17.00px; font-family: sans;' textLength='174.81px' lengthAdjust='spacingAndGlyphs'>posterior-plot-3-spike-3</text>
 </g>
 </svg>
