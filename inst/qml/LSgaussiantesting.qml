@@ -94,7 +94,7 @@ Form {
 							label:				qsTr("μ₀")
 							name:				"parMu"
 							visible:			typeItem.currentValue === "normal"
-							value:				"0"
+							defaultValue:		"0"
 							fieldWidth:			70
 							useExternalBorder:	false
 							showBorder:			true
@@ -104,7 +104,7 @@ Form {
 							label:				qsTr("σ₀")
 							name:				"parSigma"
 							visible:			typeItem.currentValue === "normal"
-							value:				"1"
+							defaultValue:		"1"
 							min:				0
 							inclusive:			JASP.None
 							fieldWidth:			70
@@ -116,7 +116,7 @@ Form {
 							label:				qsTr("μ₀")
 							name:				"parPoint"
 							visible:			typeItem.currentValue === "spike"
-							value:				"0"
+							defaultValue:		"0"
 							min:				0
 							max:				1
 							inclusive:			JASP.None

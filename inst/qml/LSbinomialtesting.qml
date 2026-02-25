@@ -80,7 +80,7 @@ Form {
 						{
 							label: 				qsTr("P(H)")
 							name: 				"priorWeight"
-							value:				"1"
+							defaultValue:		"1"
 							min: 				0
 							inclusive: 			JASP.None
 							fieldWidth:			40 * preferencesModel.uiScale
@@ -112,7 +112,7 @@ Form {
 							label:				qsTr("α")
 							name:				"betaPriorAlpha"
 							visible:			typeItem.currentValue === "beta"
-							value:				"1"
+							defaultValue:		"1"
 							min:				0
 							inclusive:			JASP.None
 							fieldWidth:			50 * preferencesModel.uiScale
@@ -124,7 +124,7 @@ Form {
 							label:				qsTr("β")
 							name:				"betaPriorBeta"
 							visible:			typeItem.currentValue === "beta"
-							value:				"1"
+							defaultValue:		"1"
 							min:				0
 							inclusive:			JASP.None
 							fieldWidth:			50 * preferencesModel.uiScale
@@ -136,7 +136,7 @@ Form {
 							label:				qsTr("θ₀")
 							name:				"spikePoint"
 							visible:			typeItem.currentValue === "spike"
-							value:				"0.5"
+							defaultValue:		"0.5"
 							min:				0
 							max:				1
 							inclusive:			JASP.MinMax
@@ -154,7 +154,7 @@ Form {
 							name:				"truncationLower"
 							id:					truncationLower
 							visible:			typeItem.currentValue === "beta"
-							value:				"0"
+							defaultValue:		"0"
 							min:				0
 							max:				truncationUpper.value
 							inclusive:			JASP.MinOnly
@@ -168,7 +168,7 @@ Form {
 							name:				"truncationUpper"
 							id:					truncationUpper
 							visible:			typeItem.currentValue === "beta"
-							value:				"1"
+							defaultValue:		"1"
 							min:				truncationLower.value
 							max:				1
 							inclusive:			JASP.MaxOnly
