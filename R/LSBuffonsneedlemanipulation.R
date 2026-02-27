@@ -20,8 +20,11 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   # Parse formula field if needed - evaluate R expressions entered by user
   if (is.character(options[["lengthToDistanceProportion"]])) {
     parsedValue <- .parseRCodeInOptions(options[["lengthToDistanceProportion"]])
-    if (!is.na(parsedValue) && is.numeric(parsedValue)) {
+    if (!is.na(parsedValue) && is.numeric(parsedValue) && parsedValue >= 0 && parsedValue <= 1) {
       options[["lengthToDistanceProportion"]] <- parsedValue
+    } else {
+      # If value is out of range or invalid, use default (80% = 0.8)
+      options[["lengthToDistanceProportion"]] <- 0.8
     }
   }
 
@@ -35,7 +38,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   if(!is.null(jaspResults[["summaryTable"]])) return()
   # example d for computation
   d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d/100
+  l <- options[["lengthToDistanceProportion"]]*d
 
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
@@ -67,7 +70,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
 .buffonsNeedleManipulationPropDistPlot <- function(jaspResults, options){
   if(!is.null(jaspResults[["propDistPlot"]])) return()
   d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d/100
+  l <- options[["lengthToDistanceProportion"]]*d
   ## 1. prior and posterior plot for proportion of crosses
   if (options[["priorPosteriorProportion"]]){
     propDistPlot <- createJaspPlot(title = gettext("Prior and Posterior for Proportion of Crosses"),
@@ -135,7 +138,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
 .buffonsNeedleManipulationPiDistPlot <- function(jaspResults, options){
   if(!is.null(jaspResults[["piDistPlot"]])) return()
   d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d/100
+  l <- options[["lengthToDistanceProportion"]]*d
   ## 2. Distribution Plot
   if (options[["priorPosteriorPi"]]){
     piDistPlot <- createJaspPlot(title = gettextf("Implied Prior and Posterior for %s", "\u03c0"),  width = 480, height = 320)
