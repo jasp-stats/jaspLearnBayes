@@ -1,9 +1,15 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2026-03-16 21:50+0000\n"
+"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
+"jasplearnbayes-qml/id/>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Language: id\n"
 "X-Qt-Contexts: true\n"
 
@@ -122,7 +128,7 @@ msgstr "Negatif benar"
 
 msgctxt "LSbinaryclassification|"
 msgid "Priors"
-msgstr ""
+msgstr "Priori"
 
 msgctxt "LSbinaryclassification|"
 msgid "~ Beta(α = "
@@ -242,7 +248,7 @@ msgstr "Jenis plot"
 
 msgctxt "LSbinaryclassification|"
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 msgctxt "LSbinaryclassification|"
 msgid "Half-eye"
@@ -256,7 +262,6 @@ msgctxt "LSbinaryclassification|"
 msgid "Credible intervals"
 msgstr "Interval yang dapat dipercaya"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Model"
 msgstr "Model"
@@ -265,7 +270,6 @@ msgctxt "LSbinomialestimation|"
 msgid "Distribution"
 msgstr "Distribusi"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Parameter (θ)"
 msgstr "Parameter (θ)"
@@ -336,7 +340,7 @@ msgstr "θ₀"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "Perbandingan panjang jarum dengan jarak antar garis:"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "%"
@@ -352,7 +356,7 @@ msgstr "Prior untuk proporsi persilangan"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Plot"
-msgstr "Plot"
+msgstr "Diagram"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior and posterior for the proportion of crosses"
@@ -372,7 +376,7 @@ msgstr "Interval yang dapat dipercaya"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr ""
+msgstr "Perbandingan panjang jarum dengan jarak antar garis:"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "%"
@@ -384,29 +388,27 @@ msgstr "Prior untuk proporsi persilangan"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter a"
-msgstr ""
+msgstr "Priori beta: parameter a"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Beta prior: parameter b"
-msgstr ""
+msgstr "Priori beta: parameter b"
 
-#, fuzzy
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Plot"
-msgstr "Plot"
+msgstr "Diagram"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Needle plot"
-msgstr ""
+msgstr "Diagram Jarum"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Color crossing needles"
-msgstr ""
+msgstr "Jarum silang warna"
 
-#, fuzzy
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr "Prior dan posterior untuk proporsi persilangan"
+msgstr "Priori dan posterior untuk proporsi persilangan"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Legend"
@@ -794,7 +796,7 @@ msgstr "Atas"
 
 msgctxt "LStestingpredictions|"
 msgid "Joint"
-msgstr ""
+msgstr "Gabungan"
 
 msgctxt "LStestingpredictions|"
 msgid "Overlying"
@@ -850,7 +852,7 @@ msgstr "Atas"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Joint"
-msgstr ""
+msgstr "Gabungan"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Overlying"
@@ -902,7 +904,7 @@ msgstr "BF₀₁"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "log(BF₁₀)"
-msgstr ""
+msgstr "log(BF₁₀)"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
@@ -934,7 +936,7 @@ msgstr "Atas"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Joint"
-msgstr ""
+msgstr "Gabungan"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Overlying"
@@ -974,7 +976,7 @@ msgstr "Bersyarat"
 
 msgctxt "LStestingsequential|"
 msgid "Joint"
-msgstr ""
+msgstr "Gabungan"
 
 msgctxt "LStestingsequential|"
 msgid "Normalized"
@@ -1006,7 +1008,7 @@ msgstr "BF₀₁"
 
 msgctxt "LStestingsequential|"
 msgid "log(BF₁₀)"
-msgstr ""
+msgstr "log(BF₁₀)"
 
 msgctxt "LStestingsequential|"
 msgid "Updating table"
@@ -1046,11 +1048,11 @@ msgstr "untuk"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter α: "
-msgstr ""
+msgstr "Priori parameter α: "
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior parameter β:"
-msgstr ""
+msgstr "Priori parameter β:"
 
 msgctxt "LSestimationpredictions|"
 msgid "Summary table"
@@ -1214,7 +1216,7 @@ msgstr "No. sampel"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. burnin samples"
-msgstr ""
+msgstr "No. sampel burnin"
 
 msgctxt "LSbinaryclassification|"
 msgid "Thinning"
@@ -1230,30 +1232,28 @@ msgstr "Untuk berbagai ambang batas"
 
 msgctxt "LSbinomialestimation|"
 msgid "Truncation"
-msgstr ""
+msgstr "Trunkasi"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Lower"
-msgstr "Lebih rendah"
+msgstr "Bawah"
 
-#, fuzzy
 msgctxt "LSbinomialestimation|"
 msgid "Upper"
 msgstr "Atas"
 
 msgctxt "LSbinomialtesting|"
 msgid "Truncation"
-msgstr ""
+msgstr "Trunkasi"
 
 msgctxt "LSbinomialtesting|"
 msgid "Prior prob."
-msgstr ""
+msgstr "Prob. priori"
 
 msgctxt "LSbinomialtesting|"
 msgid "Lo"
-msgstr ""
+msgstr "Bwh"
 
 msgctxt "LSbinomialtesting|"
 msgid "Up"
-msgstr ""
+msgstr "Ats"
