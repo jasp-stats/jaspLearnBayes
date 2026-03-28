@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 03:04\n"
-"PO-Revision-Date: 2026-03-21 03:26+0000\n"
+"PO-Revision-Date: 2026-03-28 03:10+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/id/>\n"
@@ -35,7 +35,7 @@ msgid "Lower"
 msgstr "Bawah"
 
 msgid "%s%% Credible Interval"
-msgstr ""
+msgstr "%s%% Interval Kredibel"
 
 msgid "Upper"
 msgstr "Atas"
@@ -53,7 +53,7 @@ msgid "Proportion of Crosses"
 msgstr ""
 
 msgid "Density"
-msgstr ""
+msgstr "Kepadatan"
 
 msgid "%1$s%% CI: [%2$s, %3$s]"
 msgstr ""
@@ -110,16 +110,16 @@ msgid "Mean"
 msgstr "Rerata"
 
 msgid "Median"
-msgstr ""
+msgstr "Median"
 
 msgid "SD"
 msgstr "SD"
 
 msgid "Rhat"
-msgstr ""
+msgstr "Rhat"
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 msgid "Eff. Sample Size"
 msgstr ""
@@ -179,7 +179,7 @@ msgid "Priors and Posteriors"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parameter"
 
 msgid "Sensitivity"
 msgstr ""
@@ -464,7 +464,7 @@ msgid "Estimation Summary"
 msgstr ""
 
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 msgid "Prior (%s)"
 msgstr ""
@@ -482,7 +482,7 @@ msgid "Please specify successes and failures."
 msgstr ""
 
 msgid "Warning:"
-msgstr ""
+msgstr "Peringatan:"
 
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
 msgstr ""
@@ -530,7 +530,7 @@ msgid "Predicted number of successes"
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "Probabilitas"
 
 msgid "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."
 msgstr ""
@@ -554,7 +554,7 @@ msgid "log(BF%s)"
 msgstr ""
 
 msgid "Hypothesis"
-msgstr ""
+msgstr "Hipotesis"
 
 msgid "P(H)"
 msgstr ""
@@ -596,7 +596,7 @@ msgid "Joint probability"
 msgstr ""
 
 msgid "Posterior probability"
-msgstr ""
+msgstr "Probabilitas posterior"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
@@ -845,7 +845,7 @@ msgid "<ul><li>'central' - a central interval (or quantile) that covers the cent
 msgstr ""
 
 msgid "Mode"
-msgstr ""
+msgstr "Mode"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
@@ -932,4 +932,4 @@ msgid "Future data"
 msgstr ""
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "BF Inklusi"
