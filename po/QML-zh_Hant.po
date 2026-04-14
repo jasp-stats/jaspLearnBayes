@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-12 16:09+0000\n"
+"PO-Revision-Date: 2026-04-14 14:49+0000\n"
 "Last-Translator: 陳正昌 <chencc99@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/jasp/jasplearnbayes-qml/zh_Hant/>\n"
@@ -146,7 +146,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "混淆矩陣"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
