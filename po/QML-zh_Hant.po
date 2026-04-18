@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-02 07:09+0000\n"
+"PO-Revision-Date: 2026-04-14 14:49+0000\n"
 "Last-Translator: 陳正昌 <chencc99@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/jasp/jasplearnbayes-qml/zh_Hant/>\n"
@@ -146,7 +146,7 @@ msgstr ""
 
 msgctxt "LSbinaryclassification|"
 msgid "Confusion matrix"
-msgstr ""
+msgstr "混淆矩陣"
 
 msgctxt "LSbinaryclassification|"
 msgid "Text"
@@ -606,7 +606,7 @@ msgstr ""
 
 msgctxt "LSestimationpredictions|"
 msgid "Mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LSestimationpredictions|"
 msgid "Lower"
@@ -650,7 +650,7 @@ msgstr ""
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LSestimationpriorandposterior|"
 msgid "Lower"
@@ -682,7 +682,7 @@ msgstr ""
 
 msgctxt "LSestimationsequential|"
 msgid "Mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LSestimationsequential|"
 msgid "BF"
@@ -782,7 +782,7 @@ msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LStestingpredictions|"
 msgid "lower"
@@ -810,7 +810,7 @@ msgstr ""
 
 msgctxt "LStestingpredictions|"
 msgid "Mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LStestingpredictions|"
 msgid "Lower"
@@ -838,7 +838,7 @@ msgstr ""
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "Lower"
@@ -922,7 +922,7 @@ msgstr ""
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Mass"
-msgstr ""
+msgstr "機率質量"
 
 msgctxt "LStestingpriorandposterior|"
 msgid "Lower"
