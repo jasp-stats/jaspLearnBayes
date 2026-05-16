@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 03:04\n"
-"PO-Revision-Date: 2026-04-29 00:22+0000\n"
-"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
+"PO-Revision-Date: 2026-05-17 06:11+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/id/>\n"
 "Language: id\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 msgid "Summary Table"
 msgstr ""
@@ -32,13 +32,13 @@ msgid "Median for %s"
 msgstr ""
 
 msgid "Lower"
-msgstr "Bawah"
+msgstr "Batas Bawah"
 
 msgid "%s%% Credible Interval"
 msgstr "%s%% Interval Kredibel"
 
 msgid "Upper"
-msgstr "Atas"
+msgstr "Batas Atas"
 
 msgid "Prior and Posterior for Proportion of Crosses"
 msgstr ""
@@ -53,7 +53,7 @@ msgid "Proportion of Crosses"
 msgstr ""
 
 msgid "Density"
-msgstr "Kepadatan"
+msgstr "Densitas"
 
 msgid "%1$s%% CI: [%2$s, %3$s]"
 msgstr ""
@@ -101,13 +101,13 @@ msgid "Tables"
 msgstr ""
 
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 msgid "Estimate"
 msgstr "Estimasi"
 
 msgid "Mean"
-msgstr "Rerata"
+msgstr "Rata-rata"
 
 msgid "Median"
 msgstr "Median"
@@ -191,7 +191,7 @@ msgid "beta(%1$s,%2$s)"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "Plot"
 
 msgid "Probability Positive"
 msgstr ""
@@ -296,7 +296,7 @@ msgid "Marker"
 msgstr ""
 
 msgid "Count"
-msgstr "Hitung"
+msgstr "Jumlah"
 
 msgid "Estimates"
 msgstr "Estimasi"
@@ -431,7 +431,7 @@ msgid "Data Summary"
 msgstr ""
 
 msgid "Counts"
-msgstr ""
+msgstr "Cacah"
 
 msgid "Proportion"
 msgstr ""
@@ -845,7 +845,7 @@ msgid "<ul><li>'central' - a central interval (or quantile) that covers the cent
 msgstr ""
 
 msgid "Mode"
-msgstr "Mode"
+msgstr "Modus"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
