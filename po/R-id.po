@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 03:04\n"
-"PO-Revision-Date: 2026-05-17 06:11+0000\n"
-"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"PO-Revision-Date: 2026-06-13 03:58+0000\n"
+"Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/id/>\n"
 "Language: id\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 
 msgid "Summary Table"
 msgstr ""
@@ -848,88 +848,91 @@ msgid "Mode"
 msgstr "Modus"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
-msgstr ""
+msgstr "Peringatan: Jumlah pemain harus paling setidaknya 2. Sesuaikan masukan!"
 
 msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
-msgstr ""
+msgstr "Peringatan: Jumlah pemain harus paling banyak 9. Sesuaikan masukan!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
 msgstr ""
+"Peringatan: Jumlah titik diperlukan untuk memenangkan harus setidaknya 1!"
 
 msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
-msgstr ""
+msgstr "Peringatan: Pemain %1$s sudah memenangkan permainan. Sesuaikan masukan!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
+msgstr "Peringatan: Tidak ada nilai masukan negatif! Sesuaikan masukan!"
 
 msgid "Players"
-msgstr ""
+msgstr "Pemain"
 
 msgid "p(win 1 point)"
-msgstr ""
+msgstr "p(menangkan 1 poin)"
 
 msgid "Points Gained"
-msgstr ""
+msgstr "Titik Diperoleh"
 
 msgid "Analytical"
-msgstr ""
+msgstr "Analitikal"
 
 msgid "p(win the game)"
-msgstr ""
+msgstr "p(menangkan permainan)"
 
 msgid "Simulated"
-msgstr ""
+msgstr "Disimulasi"
 
 msgid "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings."
 msgstr ""
+"Jumlah pemain (%1$i) tidak sama dengan jumlah titik untuk setiap pemain "
+"ketika diganggu (%2$i). Silakan periksa pengaturan sesuai."
 
 msgid "Prior Skill"
-msgstr ""
+msgstr "Kemampuan Priori"
 
 msgid "Only numeric values are allowed in the input."
-msgstr ""
+msgstr "Hanya nilai numerik diizinkan dalam masukan."
 
 msgid "normal (%1$s, %2$s)"
-msgstr ""
+msgstr "normal (%1$s, %2$s)"
 
 msgid "normal (%1$.2f, %2$.2f)"
-msgstr ""
+msgstr "normal (%1$.2f, %2$.2f)"
 
 msgid "normal (%1$s, %2$.2f)"
-msgstr ""
+msgstr "normal (%1$s, %2$.2f)"
 
 msgid "Prior (μ)"
-msgstr ""
+msgstr "Priori (μ)"
 
 msgid "Prior Mean"
-msgstr ""
+msgstr "Rerata priori"
 
 msgid "Posterior (μ)"
-msgstr ""
+msgstr "Posterior (μ)"
 
 msgid "Posterior Mean"
-msgstr ""
+msgstr "Rerata Posterior"
 
 msgid "Population mean"
-msgstr ""
+msgstr "Rerata populasi"
 
 msgid "Prediction"
-msgstr ""
+msgstr "Prediksi"
 
 msgid "Prediction Mean"
-msgstr ""
+msgstr "Rerata Prediksi"
 
 msgid "Please, specify the standard deviation of the data."
-msgstr ""
+msgstr "Silakan, tentukan deviasi standar data."
 
 msgid "The prediction for %1$s future %2$s is based on %3$s."
-msgstr ""
+msgstr "Prediksi untuk %1$s mendatang %2$s berdasarkan %3$s."
 
 msgid "Sample means"
-msgstr ""
+msgstr "Rerata sampel"
 
 msgid "Future data"
-msgstr ""
+msgstr "Data mendatang"
 
 msgid "Inclusion BF"
 msgstr "BF Inklusi"
