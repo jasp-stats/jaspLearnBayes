@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.95.5\n"
 "POT-Creation-Date: 2025-11-15 03:04\n"
-"PO-Revision-Date: 2026-06-13 03:58+0000\n"
+"PO-Revision-Date: 2026-06-16 01:01+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/id/>\n"
@@ -14,22 +14,22 @@ msgstr ""
 "X-Generator: Weblate 2026.7.dev0\n"
 
 msgid "Summary Table"
-msgstr ""
+msgstr "Tabel Ringkasan"
 
 msgid "Tosses"
-msgstr ""
+msgstr "Lemparan"
 
 msgid "Crosses"
-msgstr ""
+msgstr "Silang"
 
 msgid "MLE for %s"
-msgstr ""
+msgstr "MLE untuk %s"
 
 msgid "Interval Mass"
-msgstr ""
+msgstr "Massa Interval"
 
 msgid "Median for %s"
-msgstr ""
+msgstr "Median untuk %s"
 
 msgid "Lower"
 msgstr "Batas Bawah"
@@ -41,7 +41,7 @@ msgid "Upper"
 msgstr "Batas Atas"
 
 msgid "Prior and Posterior for Proportion of Crosses"
-msgstr ""
+msgstr "Priori dan Posterior untuk Proporsi Silang"
 
 msgid "Posterior"
 msgstr "Posterior"
@@ -50,55 +50,59 @@ msgid "Prior"
 msgstr "Priori"
 
 msgid "Proportion of Crosses"
-msgstr ""
+msgstr "Proporsi Silang"
 
 msgid "Density"
 msgstr "Densitas"
 
 msgid "%1$s%% CI: [%2$s, %3$s]"
-msgstr ""
+msgstr "%1$s%% CI: [%2$s, %3$s]"
 
 msgid "Implied Prior and Posterior for %s"
-msgstr ""
+msgstr "Priori dan Posterior Tersirat untuk %s"
 
 msgid "Implied Posterior"
-msgstr ""
+msgstr "Posterior Tersirat"
 
 msgid "Implied Prior"
-msgstr ""
+msgstr "Priori Tersirat"
 
 msgid "Needle Plot"
-msgstr ""
+msgstr "Diagram Jarum"
 
 msgid "Implied Prior and Posterior for  %s"
-msgstr ""
+msgstr "Priori dan Posterior Tersirat untuk  %s"
 
 msgid "This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.\n\n                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).\n\n                   Common binary classification applications are:\n                   <ul>\n                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>\n                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>\n                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>\n                   </ul>\n\n                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).\n\n                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.\n                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).\n                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.\n                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).\n\n                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.\n                   Sensitivity is the probability of testing positive if the condition is positive.\n                   Specificity is the probability of testing negative if the condition is negative.\n                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.\n                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.\n                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.\n\n                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:\n\n                   %s\n\n                   <h5>References</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
 
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "Selamat datang di klasifikasi biner dengan JASP!"
 
 msgid "JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
 msgstr ""
+"JAGS memerlukan parameter positif ketat untuk priori Beta. Atur {α, β} > 0 "
+"untuk distribusi priori dari Pravalens, Sensitifitas, dan Kekhususan."
 
 msgid "Some of the specified colors are not valid colors."
-msgstr ""
+msgstr "Beberapa warna tertentu bukan warna valid."
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "Variabel 'Kondisi positif (biner)' harus memiliki dua tingkat!"
 
 msgid "Each condition needs at least one observation."
-msgstr ""
+msgstr "Setiap kondisi memerlukan setidaknya satu observasi."
 
 msgid "Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s)."
 msgstr ""
+"Rerata penanda di kondisi positif (%1$s) perlu lebih besar dari rerata "
+"penandan di kondisi negatif (%2$s)."
 
 msgid "Estimating parameters per varying thresholds..."
-msgstr ""
+msgstr "Mengestimasi parameter per ambang batas bervariasi..."
 
 msgid "Tables"
-msgstr ""
+msgstr "Tabel"
 
 msgid "Statistics"
 msgstr "Statistik"
@@ -122,34 +126,34 @@ msgid "Diagnostics"
 msgstr "Diagnostik"
 
 msgid "Eff. Sample Size"
-msgstr ""
+msgstr "Ukuran Sampel Ef."
 
 msgid "Notation"
-msgstr ""
+msgstr "Notasi"
 
 msgid "Interpretation"
-msgstr ""
+msgstr "Interpretasi"
 
 msgid "Confusion Matrix"
-msgstr ""
+msgstr "Matriks Kebingungan"
 
 msgid "%s%% CI"
 msgstr "%s%% CI"
 
 msgid "Positive test"
-msgstr ""
+msgstr "Uji positif"
 
 msgid "Outcome"
 msgstr "Hasil"
 
 msgid "Lower %s"
-msgstr ""
+msgstr "Bawah %s"
 
 msgid "Upper %s"
-msgstr ""
+msgstr "Atas %s"
 
 msgid "Negative test"
-msgstr ""
+msgstr "Uji negatif"
 
 msgid "Positive/Total"
 msgstr ""
@@ -335,7 +339,7 @@ msgid "F-measure"
 msgstr ""
 
 msgid "Proportion of a population affected by the condition."
-msgstr ""
+msgstr "Proporsi dari populasi terdampak oleh kondisi."
 
 msgid "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive."
 msgstr ""
@@ -837,12 +841,25 @@ msgstr ""
 
 msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown  (the selected hypothesis correponds to the '0' in BF%1$s%2$s). The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
+"Opsi 'Faktor Bayes' dapat membandingkan akurasi prediktif dari hipotesis "
+"dengan hipotesis lain ('vs. Semua'), hipotesis terbaik ('vs. terbaik'), atau "
+"hipotesis spesifik dipilih di tarik turun 'vs.'  (hipotesis terpilih sesuai "
+"dengan '0' di BF%1$s%2$s). Nominator dan denominator dari faktor Bayes dapat "
+"dibalikkan dengan memilih opsi 'BF%2$s%1$s' (mengukur bukti mendukung "
+"hipotesis kedua), atau ditransform ke skala log dengan memilih opsi 'log"
+"(BF%1$s%2$s)."
 
 msgid "The 'Updating table' option generates a numerical summary of the displayed figure."
 msgstr ""
+"Opsi 'Memperbarui tabel' menghasilkan ringkasan numerik figur ditampilkan."
 
 msgid "<ul><li>'central' - a central interval (or quantile) that covers the central 'mass'%% area of the distribution</li><li>'HPD' - a highest posterior density interval that covers 'mass'%% area with the shortest range</li><li>'custom' - an interval defined by a 'lower' and 'upper' bound. It returns the posterior mass of the parameter falling inside the custom interval.</li>%s</ul>"
 msgstr ""
+"<ul><li>'pusat' - interval pusat (atau kuantil) yang mencakup area 'massa'%% "
+"pusat dari distribusi</li><li>'HPD' - interval kepadatan posterior tertinggi "
+"yang mencakup area 'massa'%% dengan rentang terpendek</li><li>'kustom' - "
+"interval didefinisikan oleh batas 'bawah' dan 'atas'. Itu menghasilkan massa "
+"posterior dari parameter berada di dalam interval kustom.</li>%s</ul>"
 
 msgid "Mode"
 msgstr "Modus"
