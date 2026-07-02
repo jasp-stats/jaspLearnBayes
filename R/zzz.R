@@ -1,12 +1,12 @@
 .onLoad <- function(libname, pkgname) {
-
-  if (jaspBase:::getOS() == "osx" &&
-      isTRUE(try(jaspBase::jaspResultsCalledFromJasp()))
-  ) {
-
+  if (isTRUE(try(jaspBase::jaspResultsCalledFromJasp()))) {
     jagsHome <- Sys.getenv("JAGS_HOME")
-    options(jags.moddir = file.path(jagsHome, "modules-4"))
-    runjags::runjags.options(jagspath = jagsHome)
-
+    if (jagsHome != "") {
+      if (jaspBase:::getOS() == "osx") {
+        options(jags.moddir = file.path(jagsHome, "modules-4"))
+      }
+      jagspath <- if (jaspBase:::getOS() == "win") file.path(jagsHome, "x64") else jagsHome
+      runjags::runjags.options(jagspath = jagspath)
+    }
   }
 }
