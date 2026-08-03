@@ -28,10 +28,10 @@ Form
 	{
 		name: "lengthToDistanceProportion";
 		label: qsTr("Proportion of needle length to interline distance:")
-		value: "0.8"
-		min: 0
-		max: 1
-		inclusive: JASP.None
+		value: "80"
+		afterLabel: qsTr("%")
+		min: 1
+		max: 100
 	}
 
 

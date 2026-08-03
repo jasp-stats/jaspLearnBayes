@@ -19,13 +19,27 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
 
   # Parse formula field if needed - evaluate R expressions entered by user
   if (is.character(options[["lengthToDistanceProportion"]])) {
-    parsedValue <- .parseRCodeInOptions(options[["lengthToDistanceProportion"]])
-    if (!is.na(parsedValue) && is.numeric(parsedValue) && parsedValue >= 0 && parsedValue <= 1) {
-      options[["lengthToDistanceProportion"]] <- parsedValue
-    } else {
-      # If value is out of range or invalid, use default (80% = 0.8)
-      options[["lengthToDistanceProportion"]] <- 0.8
-    }
+    options[["lengthToDistanceProportion"]] <- tryCatch(
+      .parseRCodeInOptions(options[["lengthToDistanceProportion"]]),
+      error = function(e) NA_real_
+    )
+  }
+
+  lengthToDistanceProportion <- options[["lengthToDistanceProportion"]]
+  validLengthToDistanceProportion <- is.numeric(lengthToDistanceProportion) &&
+    length(lengthToDistanceProportion) == 1L &&
+    !is.complex(lengthToDistanceProportion) &&
+    is.finite(lengthToDistanceProportion) &&
+    lengthToDistanceProportion >= 1 &&
+    lengthToDistanceProportion <= 100
+
+  if (!validLengthToDistanceProportion) {
+    .buffonsNeedleManipulationSummaryTable(
+      jaspResults,
+      options,
+      errorMessage = gettext("The proportion of needle length to interline distance must be between 1% and 100%.")
+    )
+    return()
   }
 
   .buffonsNeedleManipulationSummaryTable(jaspResults, options)
@@ -34,16 +48,23 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
   return()
 }
 
-.buffonsNeedleManipulationSummaryTable <- function(jaspResults, options){
+.buffonsNeedleManipulationSummaryTable <- function(jaspResults, options, errorMessage = NULL){
   if(!is.null(jaspResults[["summaryTable"]])) return()
-  # example d for computation
-  d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d
 
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
   summaryTable$position <- 1
   summaryTable$dependOn(c("numberOfCrosses", "numberOfThrows", "priorAlpha", "priorBeta", "lengthToDistanceProportion", "ciLevel", "min", "max"))
+  jaspResults[["summaryTable"]] <- summaryTable
+
+  if (!is.null(errorMessage)) {
+    summaryTable$setError(errorMessage)
+    return()
+  }
+
+  # example d for computation
+  d <- 5
+  l <- options[["lengthToDistanceProportion"]]*d/100
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Tosses"), type = "integer")
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
@@ -64,13 +85,12 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
 
   summaryTable$addRows(list(NumCrosses = options[["numberOfCrosses"]], NumObservations = options[["numberOfThrows"]], Mass = mass,
                            lowerCI = CI95lower, Median = med, upperCI = CI95upper, MLE = MLE))
-  jaspResults[["summaryTable"]] <- summaryTable
 }
 
 .buffonsNeedleManipulationPropDistPlot <- function(jaspResults, options){
   if(!is.null(jaspResults[["propDistPlot"]])) return()
   d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d
+  l <- options[["lengthToDistanceProportion"]]*d/100
   ## 1. prior and posterior plot for proportion of crosses
   if (options[["priorPosteriorProportion"]]){
     propDistPlot <- createJaspPlot(title = gettext("Prior and Posterior for Proportion of Crosses"),
@@ -138,7 +158,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
 .buffonsNeedleManipulationPiDistPlot <- function(jaspResults, options){
   if(!is.null(jaspResults[["piDistPlot"]])) return()
   d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d
+  l <- options[["lengthToDistanceProportion"]]*d/100
   ## 2. Distribution Plot
   if (options[["priorPosteriorPi"]]){
     piDistPlot <- createJaspPlot(title = gettextf("Implied Prior and Posterior for %s", "\u03c0"),  width = 480, height = 320)
