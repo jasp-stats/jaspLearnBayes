@@ -214,7 +214,7 @@ msgstr "Datos"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Input Type"
-msgstr "Tipo de Entrada"
+msgstr "Tipo de entrada"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Select variable"
@@ -238,7 +238,7 @@ msgstr "Aciertos"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Failures"
-msgstr "Fracasos"
+msgstr "Fallos"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Comma-separated Sequence of Observations"

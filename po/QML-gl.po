@@ -566,7 +566,7 @@ msgstr "Acertos"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Failures"
-msgstr "Fracasos"
+msgstr "Fallos"
 
 msgctxt "LSbinomialdatainput|"
 msgid "Selected"
