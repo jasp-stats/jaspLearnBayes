@@ -25,46 +25,22 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
     )
   }
 
-  lengthToDistanceProportion <- options[["lengthToDistanceProportion"]]
-  validLengthToDistanceProportion <- is.numeric(lengthToDistanceProportion) &&
-    length(lengthToDistanceProportion) == 1L &&
-    !is.complex(lengthToDistanceProportion) &&
-    is.finite(lengthToDistanceProportion) &&
-    lengthToDistanceProportion >= 1 &&
-    lengthToDistanceProportion <= 100
-
-  if (!validLengthToDistanceProportion) {
-    .buffonsNeedleManipulationSummaryTable(
-      jaspResults,
-      options,
-      errorMessage = gettext("The proportion of needle length to interline distance must be between 1% and 100%.")
-    )
-    return()
-  }
-
   .buffonsNeedleManipulationSummaryTable(jaspResults, options)
   .buffonsNeedleManipulationPropDistPlot(jaspResults, options)
   .buffonsNeedleManipulationPiDistPlot(jaspResults, options)
   return()
 }
 
-.buffonsNeedleManipulationSummaryTable <- function(jaspResults, options, errorMessage = NULL){
+.buffonsNeedleManipulationSummaryTable <- function(jaspResults, options){
   if(!is.null(jaspResults[["summaryTable"]])) return()
+  # example d for computation
+  d <- 5
+  l <- options[["lengthToDistanceProportion"]]*d/100
 
   ## Summary Table
   summaryTable <- createJaspTable(title = gettext("Summary Table"))
   summaryTable$position <- 1
   summaryTable$dependOn(c("numberOfCrosses", "numberOfThrows", "priorAlpha", "priorBeta", "lengthToDistanceProportion", "ciLevel", "min", "max"))
-  jaspResults[["summaryTable"]] <- summaryTable
-
-  if (!is.null(errorMessage)) {
-    summaryTable$setError(errorMessage)
-    return()
-  }
-
-  # example d for computation
-  d <- 5
-  l <- options[["lengthToDistanceProportion"]]*d/100
   #summaryTable$addCitation("JASP Team (2018). JASP (Version 0.9.2) [Computer software].")
   summaryTable$addColumnInfo(name = "NumObservations", title = gettext("Tosses"), type = "integer")
   summaryTable$addColumnInfo(name = "NumCrosses", title = gettext("Crosses"), type = "integer")
@@ -85,6 +61,7 @@ LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state =
 
   summaryTable$addRows(list(NumCrosses = options[["numberOfCrosses"]], NumObservations = options[["numberOfThrows"]], Mass = mass,
                            lowerCI = CI95lower, Median = med, upperCI = CI95upper, MLE = MLE))
+  jaspResults[["summaryTable"]] <- summaryTable
 }
 
 .buffonsNeedleManipulationPropDistPlot <- function(jaspResults, options){

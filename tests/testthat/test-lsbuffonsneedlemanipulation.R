@@ -54,19 +54,3 @@ test_that("Formula input preserves percentage behavior", {
                                  list(16, 0, 16.4381357547624, 10, 100, 9.66364618026701, 32.3161343887626
                                  ))
 })
-
-test_that("Invalid length-to-distance percentage sets a summary table error", {
-  invalidOptions <- options
-  invalidOptions$lengthToDistanceProportion <- "101"
-
-  invalidResults <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, invalidOptions)
-  summaryTable <- invalidResults[["results"]][["summaryTable"]]
-
-  testthat::expect_identical(summaryTable[["status"]], "error")
-  testthat::expect_identical(
-    summaryTable[["error"]][["errorMessage"]],
-    "The proportion of needle length to interline distance must be between 1% and 100%."
-  )
-  testthat::expect_null(invalidResults[["results"]][["propDistPlot"]])
-  testthat::expect_null(invalidResults[["results"]][["piDistPlot"]])
-})
