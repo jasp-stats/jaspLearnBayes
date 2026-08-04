@@ -16,6 +16,15 @@
 #
 
 LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state = NULL){
+
+  # Parse formula field if needed - evaluate R expressions entered by user
+  if (is.character(options[["lengthToDistanceProportion"]])) {
+    options[["lengthToDistanceProportion"]] <- tryCatch(
+      .parseRCodeInOptions(options[["lengthToDistanceProportion"]]),
+      error = function(e) NA_real_
+    )
+  }
+
   .buffonsNeedleManipulationSummaryTable(jaspResults, options)
   .buffonsNeedleManipulationPropDistPlot(jaspResults, options)
   .buffonsNeedleManipulationPiDistPlot(jaspResults, options)

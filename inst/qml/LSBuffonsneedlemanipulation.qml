@@ -24,11 +24,11 @@ Form
 	columns: 1
 
 
-	IntegerField
+	FormulaField
 	{
 		name: "lengthToDistanceProportion";
 		label: qsTr("Proportion of needle length to interline distance:")
-		defaultValue: 80
+		value: "80"
 		afterLabel: qsTr("%")
 		min: 1
 		max: 100

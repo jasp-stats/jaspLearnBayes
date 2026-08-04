@@ -41,3 +41,16 @@ test_that("Summary Table results match", {
                                  list(16, 0, 16.4381357547624, 10, 100, 9.66364618026701, 32.3161343887626
                                  ))
 })
+
+
+test_that("Formula input preserves percentage behavior", {
+  formulaOptions <- options
+  formulaOptions$lengthToDistanceProportion <- "40 * 2"
+
+  formulaResults <- jaspTools::runAnalysis("LSBuffonsneedlemanipulation", dataset, formulaOptions)
+  table <- formulaResults[["results"]][["summaryTable"]][["data"]]
+
+  jaspTools::expect_equal_tables(table,
+                                 list(16, 0, 16.4381357547624, 10, 100, 9.66364618026701, 32.3161343887626
+                                 ))
+})
