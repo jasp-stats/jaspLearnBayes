@@ -1,0 +1,934 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jaspLearnBayes 0.1\n"
+"Report-Msgid-Bugs-To: github.com/jasp-stats/jasp-issues/issues\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: JASP translators\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Summary Table"
+msgstr "汇总表"
+
+msgid "Tosses"
+msgstr "投掷次数"
+
+msgid "Crosses"
+msgstr "相交次数"
+
+msgid "MLE for %s"
+msgstr "%s 的最大似然估计"
+
+msgid "Interval Mass"
+msgstr "区间质量"
+
+msgid "Median for %s"
+msgstr "%s 的中位数"
+
+msgid "Lower"
+msgstr "下限"
+
+msgid "%s%% Credible Interval"
+msgstr "%s%% 可信区间"
+
+msgid "Upper"
+msgstr "上限"
+
+msgid "Prior and Posterior for Proportion of Crosses"
+msgstr "相交比例的先验与后验"
+
+msgid "Posterior"
+msgstr "后验"
+
+msgid "Prior"
+msgstr "先验"
+
+msgid "Proportion of Crosses"
+msgstr "相交比例"
+
+msgid "Density"
+msgstr "密度"
+
+msgid "%1$s%% CI: [%2$s, %3$s]"
+msgstr "%1$s%% 置信区间：[%2$s, %3$s]"
+
+msgid "Implied Prior and Posterior for %s"
+msgstr "%s 的隐含先验与后验"
+
+msgid "Implied Posterior"
+msgstr "隐含后验"
+
+msgid "Implied Prior"
+msgstr "隐含先验"
+
+msgid "Needle Plot"
+msgstr "投针图"
+
+msgid "Implied Prior and Posterior for  %s"
+msgstr "%s 的隐含先验与后验"
+
+msgid "This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.\n\n                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).\n\n                   Common binary classification applications are:\n                   <ul>\n                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>\n                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>\n                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>\n                   </ul>\n\n                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).\n\n                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.\n                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).\n                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.\n                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).\n\n                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.\n                   Sensitivity is the probability of testing positive if the condition is positive.\n                   Specificity is the probability of testing negative if the condition is negative.\n                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.\n                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.\n                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.\n\n                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:\n\n                   %s\n\n                   <h5>References</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+msgstr "本分析演示了<b>二分类</b>，这是一种常见的统计过程，根据分类规则将受试者分为两组。\n\n                  二分类是一种将受试者数据二分以作出二值决策（例如是/否、真/假）的过程。\n\n                  常见的二分类应用包括：\n                   <ul>\n                     <li><b>医学检测与诊断</b>，即通过分类判断患者是否患有某种疾病。</li>\n                     <li><b>垃圾邮件检测</b>，即通过分类判断某条消息（例如电子邮件）是否为垃圾邮件。</li>\n                     <li><b>质量控制</b>，即通过分类判断是否达到行业标准。</li>\n                   </ul>\n\n                  由于二分类常用于医学检测，因此围绕二分类问题的术语与医学术语相似（例如患病率、状况、标志）。\n\n                  在实践中，受试者的<i>真实</i>状态与分类规则给出的<i>指定标签</i>之间存在重要区别。\n                  在 JASP 中，真实状态称为<b>状况</b>（阳性/阴性），指定标签称为<b>检验</b>（阳性/阴性）。\n                  在许多应用中，状况或检验可能不对称，因此除了整体的准确度度量外，人们还关注各种类型的错误。\n                  这些错误类型用于区分，例如，患者患病但检验结果为阴性（假阴性），或患者未患病但检验结果为阳性（假阳性）。\n\n                  检验的特性通常用其<b>敏感度</b>和<b>特异度</b>来描述。\n                  敏感度是状况为阳性时检验结果为阳性的概率。\n                  特异度是状况为阴性时检验结果为阴性的概率。\n                  状况的一个属性是<b>患病率</b>，即总体中状况为阳性的受试者所占的比例。\n                  检验或患病率的不对称特征可能导致外行人看起来矛盾的情况。\n                  例如，在某些情况下，即使检验结果为阳性，患者未患某特定疾病的可能性也高于患该疾病的可能性。\n\n                  正式地，检验为阳性后受试者状况为阳性的概率（即阳性预测值）通过应用<b>贝叶斯定理</b>获得：\n\n                   %s\n\n                   <h5>参考文献</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
+
+msgid "Welcome to binary classification with JASP!"
+msgstr "欢迎使用 JASP 进行二分类！"
+
+msgid "JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
+msgstr "JAGS 要求 Beta 先验的参数严格为正。请将患病率、敏感度和特异度的先验分布设置为 {α, β} > 0。"
+
+msgid "Some of the specified colors are not valid colors."
+msgstr "某些指定的颜色不是有效的颜色。"
+
+msgid "The 'Positive condition (binary)' variable must have two levels!"
+msgstr "“阳性状况（二值）”变量必须有两个水平！"
+
+msgid "Each condition needs at least one observation."
+msgstr "每个状况至少需要一个观测。"
+
+msgid "Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s)."
+msgstr "阳性状况（%1$s）中标志的均值必须大于阴性状况（%2$s）中标志的均值。"
+
+msgid "Estimating parameters per varying thresholds..."
+msgstr "正在为各变化阈值估计参数……"
+
+msgid "Tables"
+msgstr "表格"
+
+msgid "Statistics"
+msgstr "统计量"
+
+msgid "Estimate"
+msgstr "估计值"
+
+msgid "Mean"
+msgstr "均值"
+
+msgid "Median"
+msgstr "中位数"
+
+msgid "SD"
+msgstr "标准差"
+
+msgid "Rhat"
+msgstr "Rhat"
+
+msgid "Diagnostics"
+msgstr "诊断"
+
+msgid "Eff. Sample Size"
+msgstr "有效样本量"
+
+msgid "Notation"
+msgstr "符号"
+
+msgid "Interpretation"
+msgstr "解释"
+
+msgid "Confusion Matrix"
+msgstr "混淆矩阵"
+
+msgid "%s%% CI"
+msgstr "%s%% 置信区间"
+
+msgid "Positive test"
+msgstr "阳性检验"
+
+msgid "Outcome"
+msgstr "结果"
+
+msgid "Lower %s"
+msgstr "下限 %s"
+
+msgid "Upper %s"
+msgstr "上限 %s"
+
+msgid "Negative test"
+msgstr "阴性检验"
+
+msgid "Positive/Total"
+msgstr "阳性/合计"
+
+msgid "Negative/Total"
+msgstr "阴性/合计"
+
+msgid "Total"
+msgstr "合计"
+
+msgid "Positive condition"
+msgstr "阳性状况"
+
+msgid "Negative condition"
+msgstr "阴性状况"
+
+msgid "True/Total"
+msgstr "真/合计"
+
+msgid "Prevalence"
+msgstr "患病率"
+
+msgid "Rareness"
+msgstr "罕见性"
+
+msgid "Priors and Posteriors"
+msgstr "先验与后验"
+
+msgid "Parameter"
+msgstr "参数"
+
+msgid "Sensitivity"
+msgstr "敏感度"
+
+msgid "Specificity"
+msgstr "特异度"
+
+msgid "beta(%1$s,%2$s)"
+msgstr "beta(%1$s,%2$s)"
+
+msgid "Plots"
+msgstr "绘图"
+
+msgid "Probability Positive"
+msgstr "阳性概率"
+
+msgid "Not tested"
+msgstr "未检验"
+
+msgid "Tested"
+msgstr "已检验"
+
+msgid "Negative"
+msgstr "阴性"
+
+msgid "Positive"
+msgstr "阳性"
+
+msgid "Test Result"
+msgstr "检验结果"
+
+msgid "P(Condition = positive)"
+msgstr "P（状况 = 阳性）"
+
+msgid "Icon Plot"
+msgstr "图标图"
+
+msgid "True positive"
+msgstr "真阳性"
+
+msgid "False positive"
+msgstr "假阳性"
+
+msgid "False negative"
+msgstr "假阴性"
+
+msgid "True negative"
+msgstr "真阴性"
+
+msgid "Area Plot"
+msgstr "面积图"
+
+msgid "Receiving Operating Characteristic Curve"
+msgstr "受试者工作特征曲线（ROC）"
+
+msgid "False Positive Rate (1-Specificity)"
+msgstr "假阳性率（1-特异度）"
+
+msgid "True Positive Rate (Sensitivity)"
+msgstr "真阳性率（敏感度）"
+
+msgid "Total Operating Characteristic Curve"
+msgstr "总运行特征曲线（TOC）"
+
+msgid "True positives + False positives"
+msgstr "真阳性 + 假阳性"
+
+msgid "True positives"
+msgstr "真阳性"
+
+msgid "Precision-recall"
+msgstr "精确率-召回率"
+
+msgid "Sensitivity (Recall)"
+msgstr "敏感度（召回率）"
+
+msgid "Positive Predictive Value (Precision)"
+msgstr "阳性预测值（精确率）"
+
+msgid "Test Characteristics by Threshold"
+msgstr "按阈值的检验特性"
+
+msgid "Test Threshold"
+msgstr "检验阈值"
+
+msgid "Characteristic"
+msgstr "特性"
+
+msgid "PPV and NPV by Threshold"
+msgstr "按阈值的 PPV 和 NPV"
+
+msgid "Predictive Value"
+msgstr "预测值"
+
+msgid "PPV and NPV by Prevalence"
+msgstr "按患病率的 PPV 和 NPV"
+
+msgid "Alluvial Plot"
+msgstr "冲击图"
+
+msgid "Condition"
+msgstr "状况"
+
+msgid "Test"
+msgstr "检验"
+
+msgid "Proportion of Population"
+msgstr "总体比例"
+
+msgid "Signal Detection"
+msgstr "信号检测"
+
+msgid "Marker"
+msgstr "标志"
+
+msgid "Count"
+msgstr "计数"
+
+msgid "Estimates"
+msgstr "估计"
+
+msgid "Positive predictive value"
+msgstr "阳性预测值"
+
+msgid "Negative predictive value"
+msgstr "阴性预测值"
+
+msgid "False discovery rate"
+msgstr "错误发现率"
+
+msgid "False omission rate"
+msgstr "错误遗漏率"
+
+msgid "False positive rate"
+msgstr "假阳性率"
+
+msgid "False negative rate"
+msgstr "假阴性率"
+
+msgid "Accuracy"
+msgstr "准确率"
+
+msgid "Pretest odds"
+msgstr "检验前优势"
+
+msgid "Positive likelihood ratio"
+msgstr "阳性似然比"
+
+msgid "Negative likelihood ratio"
+msgstr "阴性似然比"
+
+msgid "F-measure"
+msgstr "F 度量"
+
+msgid "Proportion of a population affected by the condition."
+msgstr "受该状况影响的总体比例。"
+
+msgid "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive."
+msgstr "（真阳性率）受该状况影响且被正确检验为阳性的比例。"
+
+msgid "(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative."
+msgstr "（真阴性率）未受该状况影响且被正确检验为阴性的比例。"
+
+msgid "Proportion of a population affected by a condition and correctly tested positive."
+msgstr "受某状况影响且被正确检验为阳性的总体比例。"
+
+msgid "Proportion of a population not affected by a condition and incorrectly tested positive."
+msgstr "未受某状况影响但被错误检验为阳性的总体比例。"
+
+msgid "Proportion of a population not affected by a condition and correctly tested negative."
+msgstr "未受某状况影响且被正确检验为阴性的总体比例。"
+
+msgid "Proportion of a population affected by a condition and incorrectly tested negative."
+msgstr "受某状况影响但被错误检验为阴性的总体比例。"
+
+msgid "Proportion of those who tested positive and are affected by the condition."
+msgstr "检验为阳性且受该状况影响的比例。"
+
+msgid "Proportion of those who tested negative and are not affected by the condition."
+msgstr "检验为阴性且未受该状况影响的比例。"
+
+msgid "Proportion of false positives in the pool of those that test positive."
+msgstr "检验为阳性的群体中假阳性的比例。"
+
+msgid "Proportion of false negatives in the pool of those that test negative."
+msgstr "检验为阴性的群体中假阴性的比例。"
+
+msgid "Complement proportion to specificity."
+msgstr "与特异度互补的比例。"
+
+msgid "Complement proportion to sensitivity."
+msgstr "与敏感度互补的比例。"
+
+msgid "Proportion of the population that is true positive or true negative."
+msgstr "总体中为真阳性或真阴性的比例。"
+
+msgid "P(Test = positive | Condition = positive)"
+msgstr "P（检验 = 阳性 | 状况 = 阳性）"
+
+msgid "P(Test = negative | Condition = negative)"
+msgstr "P（检验 = 阴性 | 状况 = 阴性）"
+
+msgid "P(Condition = positive %s Test = positive)"
+msgstr "P（状况 = 阳性 %s 检验 = 阳性）"
+
+msgid "P(Condition = negative %s Test = positive)"
+msgstr "P（状况 = 阴性 %s 检验 = 阳性）"
+
+msgid "P(Condition = negative %s Test = negative)"
+msgstr "P（状况 = 阴性 %s 检验 = 阴性）"
+
+msgid "P(Condition = positive %s Test = negative)"
+msgstr "P（状况 = 阳性 %s 检验 = 阴性）"
+
+msgid "P(Condition = positive | Test = positive)"
+msgstr "P（状况 = 阳性 | 检验 = 阳性）"
+
+msgid "P(Condition = negative | Test = negative)"
+msgstr "P（状况 = 阴性 | 检验 = 阴性）"
+
+msgid "P(Condition = negative | Test = positive)"
+msgstr "P（状况 = 阴性 | 检验 = 阳性）"
+
+msgid "P(Condition = positive | Test = negative)"
+msgstr "P（状况 = 阳性 | 检验 = 阴性）"
+
+msgid "P(Test = positive | Condition = negative)"
+msgstr "P（检验 = 阳性 | 状况 = 阴性）"
+
+msgid "P(Test = negative | Condition = positive)"
+msgstr "P（检验 = 阴性 | 状况 = 阳性）"
+
+msgid "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)"
+msgstr "P（状况 = 阳性 %1$s 检验 = 阳性 %2$s 状况 = 阴性 %1$s 检验 = 阴性）"
+
+msgid "Central credible intervals are based on %i samples."
+msgstr "中心可信区间基于 %i 个样本。"
+
+msgid "Parameter estimates are based on %i MCMC samples."
+msgstr "参数估计基于 %i 个 MCMC 样本。"
+
+msgid "positive"
+msgstr "阳性"
+
+msgid "negative"
+msgstr "阴性"
+
+msgid "Data Summary"
+msgstr "数据汇总"
+
+msgid "Counts"
+msgstr "计数"
+
+msgid "Proportion"
+msgstr "比例"
+
+msgid "Successes"
+msgstr "成功数"
+
+msgid "Failures"
+msgstr "失败数"
+
+msgid "spike at %s"
+msgstr "尖峰在 %s"
+
+msgid "beta(%1$s, %2$s)"
+msgstr "beta(%1$s, %2$s)"
+
+msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
+msgstr "beta(%1$s, %2$s)T[%3$s, %4$s]"
+
+msgid "binomial(%1$i, %2$s)"
+msgstr "二项(%1$i, %2$s)"
+
+msgid "beta-binomial(%1$i, %2$s, %3$s)"
+msgstr "beta-二项(%1$i, %2$s, %3$s)"
+
+msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
+msgstr "二项(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
+
+msgid "Estimation Summary"
+msgstr "估计汇总"
+
+msgid "Model"
+msgstr "模型"
+
+msgid "Prior (%s)"
+msgstr "先验（%s）"
+
+msgid "Prior %s"
+msgstr "先验 %s"
+
+msgid "Posterior (%s)"
+msgstr "后验（%s）"
+
+msgid "Posterior %s"
+msgstr "后验 %s"
+
+msgid "Please specify successes and failures."
+msgstr "请指定成功数和失败数。"
+
+msgid "Warning:"
+msgstr "警告："
+
+msgid "These results are based on %1$i %2$s and %3$i %4$s."
+msgstr "这些结果基于 %1$i 个 %2$s 和 %3$i 个 %4$s。"
+
+msgid "Observation"
+msgstr "观测"
+
+msgid "Plot could not be produced due to lacking numerical precision for %1$s."
+msgstr "由于 %1$s 缺乏数值精度，无法生成图形。"
+
+msgid "Population proportion"
+msgstr "总体比例"
+
+msgid "Prior = Posterior"
+msgstr "先验 = 后验"
+
+msgid "More than bimodal CIs are not implemented in the Sequential analysis plot."
+msgstr "序贯分析图未实现双峰以外的置信区间。"
+
+msgid "%i%% CI"
+msgstr "%i%% 置信区间"
+
+msgid "%i%% HPD"
+msgstr "%i%% 最高后验密度"
+
+msgid "SI (BF=%s)"
+msgstr "SI（BF=%s）"
+
+msgid "Prediction (Successes)"
+msgstr "预测（成功数）"
+
+msgid "Prediction %s"
+msgstr "预测 %s"
+
+msgid "Prediction std. deviation"
+msgstr "预测标准差"
+
+msgid "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s."
+msgstr "对 %1$s 个 %2$s 的预测基于 %3$s 个 %4$s 和 %5$s 个 %6$s。"
+
+msgid "Predicted sample proportions"
+msgstr "预测的样本比例"
+
+msgid "Predicted number of successes"
+msgstr "预测的成功数"
+
+msgid "Probability"
+msgstr "概率"
+
+msgid "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."
+msgstr "上置信区间界限高于未来观测次数。请在设置面板中更改上置信区间界限的值。"
+
+msgid "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."
+msgstr "下置信区间界限高于未来观测次数。请在设置面板中更改下置信区间界限的值。"
+
+msgid "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."
+msgstr "下置信区间界限高于上置信区间界限。请在设置面板中更改置信区间界限的值。"
+
+msgid "Proportion of Successes"
+msgstr "成功比例"
+
+msgid "Testing Summary"
+msgstr "检验汇总"
+
+msgid "BF%s"
+msgstr "BF%s"
+
+msgid "log(BF%s)"
+msgstr "log(BF%s)"
+
+msgid "Hypothesis"
+msgstr "假设"
+
+msgid "P(H)"
+msgstr "P(H)"
+
+msgid "log(likelihood)"
+msgstr "log（似然）"
+
+msgid "P(H|data)"
+msgstr "P(H|数据)"
+
+msgid "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range)."
+msgstr "无法计算 %1$s 的汇总。最可能的原因是截断与数据的冲突导致数值精度不足（即后验分布的大部分位于截断范围之外）。"
+
+msgid "Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."
+msgstr "由于某些模型的边际似然不可用，无法计算贝叶斯因子和后验概率。"
+
+msgid "These results are based on %1$i success(es) and %2$i failure(s)"
+msgstr "这些结果基于 %1$i 个成功和 %2$i 个失败"
+
+msgid "The plot could not be created because the posterior model probabilities are not defined for all models."
+msgstr "由于并非所有模型都定义了后验模型概率，因此无法创建该图。"
+
+msgid "P(Successes|%s)"
+msgstr "P（成功数|%s）"
+
+msgid "P(Successes)"
+msgstr "P（成功数）"
+
+msgid "The table could not be created because the posterior model probabilities are not defined for all models."
+msgstr "由于并非所有模型都定义了后验模型概率，因此无法创建该表。"
+
+msgid "Please specify a hypothesis for comparison."
+msgstr "请指定用于比较的假设。"
+
+msgid "Conditional probability"
+msgstr "条件概率"
+
+msgid "Joint probability"
+msgstr "联合概率"
+
+msgid "Posterior probability"
+msgstr "后验概率"
+
+msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
+msgstr "无法绘图：某个贝叶斯因子等于无穷大。"
+
+msgid "Observations"
+msgstr "观测值"
+
+msgid "At least 2 hypotheses need to be specified."
+msgstr "至少需要指定 2 个假设。"
+
+msgid "Posterior probabilities and marginal prediction could not be computed since the marginal likelihoods are not available for some models."
+msgstr "由于某些模型的边际似然不可用，无法计算后验概率和边际预测。"
+
+msgid "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)"
+msgstr "对 %1$i 个观测的预测基于 %2$i 个成功和 %3$i 个失败"
+
+msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
+msgstr "模型/假设“%2$s”的参数“%1$s”必须为正。"
+
+msgid "The truncation range for model/hypothesis '%s' must be within [0, 1] interval."
+msgstr "模型/假设“%s”的截断范围必须位于 [0, 1] 区间内。"
+
+msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
+msgstr "模型/假设“%2$s”的参数“%1$s”必须介于 0 和 1 之间。"
+
+msgid "Please remove duplicates from the %s names."
+msgstr "请从 %s 名称中移除重复项。"
+
+msgid "'Successes'"
+msgstr "“成功数”"
+
+msgid "%1$s %2$s Plots"
+msgstr "%1$s %2$s 图"
+
+msgid "Prior and Posterior Plots"
+msgstr "先验与后验图"
+
+msgid "Sequential Analysis: Point Estimate"
+msgstr "序贯分析：点估计"
+
+msgid "%s Sequential Analysis: Interval"
+msgstr "%s 序贯分析：区间"
+
+msgid "Sequential Analysis: Stacked"
+msgstr "序贯分析：堆叠"
+
+msgid "Sequential Posterior Updating"
+msgstr "序贯后验更新"
+
+msgid "Prediction Summary"
+msgstr "预测汇总"
+
+msgid "%s Prediction Plots"
+msgstr "%s 预测图"
+
+msgid "Conditional %s Plots"
+msgstr "条件 %s 图"
+
+msgid "Joint %s Plots"
+msgstr "联合 %s 图"
+
+msgid "Marginal %s Plots"
+msgstr "边缘 %s 图"
+
+msgid "%1$s %2$s Prediction Plots"
+msgstr "%1$s %2$s 预测图"
+
+msgid "%s Prior and Posterior Plots"
+msgstr "%s 先验与后验图"
+
+msgid "%s Predictive Accuracy Plot"
+msgstr "%s 预测准确度图"
+
+msgid "%s Sequential Analysis"
+msgstr "%s 序贯分析"
+
+msgid "Welcome to the %1$s analysis from the Learn Bayes module. This analysis illustrates Bayesian %2$s using %3$s examples."
+msgstr "欢迎使用 Learn Bayes 模块中的 %1$s 分析。本分析通过 %3$s 个示例说明贝叶斯 %2$s。"
+
+msgid "%s (the population proportion of successes)"
+msgstr "%s（总体的成功比例）"
+
+msgid "%s (the population mean, variance is assumed to be known)"
+msgstr "%s（总体均值，假定方差已知）"
+
+msgid "The analysis is split into 5 sections:\n      <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>\n           <li> %1$s </li>\n           <li> %2$s </li>\n           <li> %3$s </li>\n           <li> %4$s </li> </ol>"
+msgstr "本分析分为 5 个部分：\n      <ol> <li> 数据 - 用于指定计算的数据输入。您可以选用 JASP 中加载的数据集的变量、指定数据的聚合概览，或逐一输入观测值（并在分析过程中更新它们）。 </li>\n           <li> %1$s </li>\n           <li> %2$s </li>\n           <li> %3$s </li>\n           <li> %4$s </li> </ol>"
+
+msgid "The 'Data' section allows you to specify data input for the analysis."
+msgstr "“数据”部分允许您指定分析的数据输入。"
+
+msgid "The 'Select variable' option allows the selection of a variable ('Selected') from a dataset loaded into JASP. %s"
+msgstr "“选择变量”选项允许从 JASP 中加载的数据集选择变量（“已选”）。%s"
+
+msgid "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis."
+msgstr "“指定计数”选项允许使用聚合数据。%1$s 这意味着 %2$s 只使用完整数据更新一次。由于缺乏观测顺序的信息，无法使用序贯分析。"
+
+msgid "The 'Enter sequence' option allows manual input of a specific order of observations. %s"
+msgstr "“输入序列”选项允许手动输入特定的观测顺序。%s"
+
+msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
+msgstr "“二项估计”分析为表示潜在总体成功比例的参数 %1$s 提供两种先验分布类型：\n        <ul><li>“尖峰(%2$s)” - 用于将所有概率质量集中在一个点（%2$s）。这表示总体比例为 %2$s 的确定性先验信念。此信念如此强烈，以至于任何数据都无法改变它。因此，后验也是在 %2$s 处的尖峰。先验和后验的 %5$s 则对应于尖峰的位置。</li><li>“Beta(%3$s, %4$s)” - 用于根据参数为 %3$s 和 %4$s 的 Beta 分布，将概率密度分配到参数 %1$s 的所有取值上。%6$s 在观测到“S”个成功和“F”个失败后，后验分布更新为 beta(%3$s + S, %4$s + F)，并相应地计算 %5$s。</li></ul>"
+
+msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
+msgstr "“高斯估计”分析为正态分布 Normal(%1$s, %2$s) 的参数 %1$s（标准差 %2$s 已知）提供两种先验分布类型：\n        <ul><li>“尖峰(%3$s)” - 用于将所有概率质量集中在一个点（%3$s）。这表示总体比例为 %3$s 的确定性先验信念。此信念如此强烈，以至于任何数据都无法改变它。因此，后验也是在 %3$s 处的尖峰。先验和后验的 %8$s 则对应于尖峰的位置。</li><li>“正态(%3$s, %4$s)” - 用于根据均值为 %3$s、标准差为 %4$s 的正态分布，将概率密度分配到参数 %1$s 的所有取值上。先验 %8$s 对应于正态分布的均值参数 %3$s。在观测到均值为 %5$s 的“N”个观测值后，后验分布更新为 normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) )，其中 %8$s 对应后验分布的均值。</li></ul>"
+
+msgid "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>"
+msgstr "“估计汇总”表显示各个模型的数值汇总。可通过“点估计”选项更改显示的点估计。该表包含以下列：\n    <ul><li>“模型” - 指定的模型名称</li><li>“先验(%1$s)” - 参数 %1$s 的指定先验分布</li><li>“先验 %2$s” - 指定先验分布的 %3$s</li><li>“后验(%1$s)” - 参数 %1$s 的估计后验分布（即用数据更新后的先验分布）</li><li>“后验 %2$s” - 后验分布的 %3$s</li></ul>"
+
+msgid "The 'Binomial Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The marginal likelihood corresponds to a binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with the chance parameter equal to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The marginal likelihood corresponds to a beta-binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with parameters %3$s and %4$s corresponding to the shape parameters of the prior beta distribution.</li></ul>"
+msgstr "“二项检验”分析为表示潜在总体成功比例的参数 %1$s 提供两种先验分布类型：\n        <ul><li>“尖峰(%2$s)” - 用于将所有概率密度集中在一个位置（%2$s）。边际似然对应于在观测成功数处评估的二项密度，其中大小等于观测次数，机会参数等于尖峰的位置。</li><li>“Beta(%3$s, %4$s)” - 用于根据参数为 %3$s 和 %4$s 的 Beta 分布，将概率密度分配到参数 %1$s 的所有取值上。边际似然对应于在观测成功数处评估的 beta-二项密度，其中大小等于观测次数，参数 %3$s 和 %4$s 对应先验 Beta 分布的形状参数。</li></ul>"
+
+msgid "The 'Gaussian Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population mean of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the location of the spike, and standard deviation as %2$s/%7$sN, where 'N' stands for the number of observations.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with mean %3$s and standard deviation %4$s. The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the mean of the prior distribution, and standard deviation of %7$s( %2$s%6$s/N + %4$s%6$s ).</li></ul>"
+msgstr "“高斯检验”分析为正态分布 Normal(%1$s, %2$s) 的参数 %1$s（表示潜在总体均值，标准差 %2$s 已知）提供两种先验分布类型：\n        <ul><li>“尖峰(%3$s)” - 用于将所有概率密度集中在一个位置（%3$s）。边际似然对应于在观测均值处评估的正态密度，其中均值等于尖峰的位置，标准差为 %2$s/%7$sN，其中“N”表示观测次数。</li><li>“正态(%3$s, %4$s)” - 用于根据均值为 %3$s、标准差为 %4$s 的正态分布，将概率密度分配到参数 %1$s 的所有取值上。边际似然对应于在观测均值处评估的正态密度，其中均值等于先验分布的均值，标准差为 %7$s( %2$s%6$s/N + %4$s%6$s )。</li></ul>"
+
+msgid "The posterior probabilities 'P(H|data)' are then computed using Bayes formula,\n        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> where 'P(H)' represents the prior probability of the hypothesis, 'P(data|H)' the marginal likelihood of the data given the hypothesis, and 'P(data)' the probability of the data. The factor 'P(data)' equals the sum of marginal likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
+msgstr "后验概率“P(H|数据)”随后使用贝叶斯公式计算，\n        <center>P(H|数据) = P(H) * P(数据|H) / P(数据)，</center> 其中“P(H)”表示假设的先验概率，“P(数据|H)”表示给定假设下数据的边际似然，“P(数据)”表示数据的概率。因子“P(数据)”等于边际似然乘以先验概率之和，P(数据) = %1$s P(数据|H%2$s)*P(H%2$s)。"
+
+msgid "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model (selected from the 'vs.' dropdown menu) and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgstr "贝叶斯因子“BF”可以通过将两个模型的后验几率除以其先验几率获得，\n        <center>BF%1$s%2$s = ( P(H%1$s|数据)/P(H%2$s|数据) ) / ( P(H%1$s)/P(H%2$s) )，</center> 其中“BF%1$s%2$s”表示支持第 1 个模型相对于第 2 个模型（从“ vs.”下拉菜单选择）的贝叶斯因子，可以解释为相对预测效能的一种自然度量。也可以计算将假设与其余假设进行比较的贝叶斯因子，“ vs. 全部”将第二个假设替换为其余假设之和，可以简化为，\n        <center>BF%1$s%2$s = ( P(H%1$s|数据)/(1-P(H%1$s|数据)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>通过选择“BF%2$s%1$s”选项可以反转贝叶斯因子的分子和分母（量化支持第二个假设的证据），或通过选择“log(BF%1$s%2$s)”选项转换为对数尺度。"
+
+msgid "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:\n    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>"
+msgstr "“检验汇总”表显示各假设的数值汇总。该表包含以下列：\n    <ul><li>“假设” - 指定的假设名称</li><li>“P(H)” - 假设的先验概率</li><li>“log（似然）” - 假设边际似然的对数</li><li>“P(H|数据)” - 假设的后验概率（在更新数据后）</li><li>%s</li></ul>"
+
+msgid "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %4$s distributions are visualized as continuous lines."
+msgstr "“%1$s”选项显示参数 %3$s 的 %2$s 图。尖峰先验分布可视化为箭头（表示其密度为无穷大），%4$s 分布可视化为连续线。"
+
+msgid "The 'All' option shows all %1$s for parameter %2$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis."
+msgstr "“全部”选项将参数 %2$s 的所有 %1$s 叠加显示，便于在 y 轴上使用共同的密度和概率尺度进行比较。"
+
+msgid "The 'Stacked' option shows all %1$s for parameter %2$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr "“堆叠”选项在一个图中显示参数 %2$s 的所有 %1$s，通过将额外的分布绘制在 z 轴上“更远”的位置而产生深度效果。"
+
+msgid "The 'Individual' option shows %1$s for parameter %2$s individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
+msgstr "“单个”选项在单独的图中分别显示参数 %2$s 的 %1$s。可以可视化不同类型的点估计（“点估计”）和可信区间（“置信区间”）：%3$s"
+
+msgid "Furthermore, the 'Observed data' checkbox allows the visualization of the observed %s as a black cross in the figure."
+msgstr "此外，“观测数据”复选框允许在图中用黑色叉号可视化观测到的 %s。"
+
+msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
+msgstr "“条件”选项独立显示参数 %2$s 的所有 %1$s，就好像它们被视为单独的模型（在不存在其他假设的情况下）。可以可视化不同类型的点估计（“点估计”）和可信区间（“置信区间”）：%3$s"
+
+msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s over the parameter by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr "“联合”选项在考虑其他假设的情况下，一起显示参数 %2$s 的所有 %1$s（通过将参数上 %1$s 的密度乘以假设的 %3$s 概率）。此外，“叠加”选项允许将所有 %1$s 叠加显示，便于在 y 轴上使用共同的密度和概率尺度进行比较；“堆叠”选项在一个图中显示所有 %1$s，通过将额外的分布绘制在 z 轴上“更远”的位置而产生深度效果。"
+
+msgid "The 'Marginal' option collapses across all individual %1$s, weighting them by their %2$s probability.%3$s It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%4$s"
+msgstr "“边缘”选项将所有单个 %1$s 整合在一起，按其 %2$s 概率加权。%3$s 可以可视化不同类型的点估计（“点估计”）和可信区间（“置信区间”）：%4$s"
+
+msgid "The 'Prior and posterior distribution' option displays the prior and posterior distribution of the parameter %1$s for the individual %2$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %3$s distributions are visualized as continuous lines. Prior distributions are visualized as dashed grey lines and the posterior distribution as solid black lines. In addition, the observed data summary can be visualized as a black cross by selecting the '%4$s' checkbox."
+msgstr "“先验与后验分布”选项显示各个 %2$s 的参数 %1$s 的先验和后验分布。尖峰先验分布可视化为箭头（表示其密度为无穷大），%3$s 分布可视化为连续线。先验分布用灰色虚线可视化，后验分布用黑色实线可视化。此外，通过选中“%4$s”复选框，可以将观测数据汇总可视化为黑色叉号。"
+
+msgid "The 'Conditional' option shows all prior and posterior distributions for parameter %1$s independently, as if they were considered as individual models (without the existence of other hypotheses)."
+msgstr "“条件”选项独立显示参数 %1$s 的所有先验和后验分布，就好像它们被视为单独的模型（在不存在其他假设的情况下）。"
+
+msgid "The 'Joint' option shows all prior and posterior distributions for parameter %1$s when considered together in light of the other hypotheses. In addition, the 'Overlying' option allows the visualization all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr "“联合”选项在考虑其他假设的情况下，一起显示参数 %1$s 的所有先验和后验分布。此外，“叠加”选项允许将所有 %1$s 叠加显示，便于在 y 轴上使用共同的密度和概率尺度进行比较；“堆叠”选项在一个图中显示所有 %1$s，通过将额外的分布绘制在 z 轴上“更远”的位置而产生深度效果。"
+
+msgid "The 'Marginal' option collapses across all individual prior and posterior distributions, weighting them by their prior and posterior probability."
+msgstr "“边缘”选项将所有单个先验和后验分布整合在一起，按其先验和后验概率加权。"
+
+msgid "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %1$s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%2$s"
+msgstr "“点估计”选项显示点估计 %1$s（y 轴）序贯更新的图形。该图将更新过程可视化为一个个数据点相继到达（x 轴）。可以可视化不同类型的点估计（“点估计”）和可信区间（“置信区间”）：%2$s"
+
+msgid "The 'Updating table' option generates a numerical summary of the displayed figures."
+msgstr "“更新表”选项生成所显示图形的数值汇总。"
+
+msgid "The 'Stacked distributions' option displays a plot with the sequential updating of the posterior distribution density (x- and y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another, creating a depth effect (z-axis)."
+msgstr "“堆叠分布”选项显示后验分布密度（x 轴和 y 轴）序贯更新的图形。该图将更新过程可视化为一个个数据点相继到达，从而产生深度效果（z 轴）。"
+
+msgid "The 'Interval' option displays a sequential plot with the probability of parameter %s lying inside of the interval ranging from ('lower') to ('upper'), (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
+msgstr "“区间”选项显示参数 %s 位于从（“下限”）到（“上限”）区间内的概率（y 轴）的序贯图。该图将更新过程可视化为一个个数据点相继到达（x 轴）。"
+
+msgid "The 'All' option shows the probability of parameter %s lying inside of the specified range for all models in one figure, allowing for easier comparison."
+msgstr "“全部”选项在一个图中显示所有模型中参数 %s 位于指定范围内的概率，便于比较。"
+
+msgid "The 'Stacked' option visualizes the interval for all prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr "“堆叠”选项在一个图中可视化每个模型所有先验分布更新的区间，通过将额外的分布绘制在 z 轴上“更远”的位置而产生深度效果。"
+
+msgid "The 'Posterior updating table' option generates a numerical summary of the updating process for parameter %s. The 'Observation' column tracks how many observations have been already encountered for the corresponding posterior distribution. The first row (observation = 0) corresponds to the prior distribution and the last row corresponds to the final posterior distribution after the prior distribution was updated with all observations."
+msgstr "“后验更新表”选项生成参数 %s 更新过程的数值汇总。“观测”列记录相应的后验分布已经遇到过多少个观测值。第一行（观测 = 0）对应先验分布，最后一行对应先验分布用所有观测值更新后的最终后验分布。"
+
+msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
+msgstr "“二项估计”分析为表示潜在总体成功比例的参数 %1$s 提供两种先验分布类型：\n        <ul><li>“尖峰(%2$s)” - 用于将所有概率密度集中在一个位置（%2$s）。先验 %5$s 对应于尖峰的位置。后验分布同样是在相同位置及其相应的 %5$s 处的尖峰。</li><li>“Beta(%3$s, %4$s)” - 用于根据参数为 %3$s 和 %4$s 的 Beta 分布，将概率密度分配到参数 %1$s 的所有取值上。先验 %6$s。在观测到“S”个成功和“F”个失败后，后验分布更新为 beta(%3$s + S, %4$s + F)，并相应地计算 %5$s。</li></ul>"
+
+msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
+msgstr "“高斯估计”分析为正态分布 Normal(%1$s, %2$s) 的参数 %1$s（标准差 %2$s 已知）提供两种先验分布类型：\n        <ul><li>“尖峰(%3$s)” - 用于将所有概率密度集中在一个位置（%3$s）。先验 %8$s 对应于尖峰的位置。后验分布同样是在相同位置及其相应的 %8$s 处的尖峰。</li><li>“正态(%3$s, %4$s)” - 用于根据均值为 %3$s、标准差为 %4$s 的正态分布，将概率密度分配到参数 %1$s 的所有取值上。先验 %8$s 对应于正态分布的均值参数 %3$s。在观测到均值为 %5$s 的“N”个观测值后，后验分布更新为 normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) )，其中 %8$s 对应后验分布的均值。</li></ul>"
+
+msgid "The 'Posterior prediction' section allows the prediction of future data based on the estimated models%s"
+msgstr "“后验预测”部分允许基于估计的模型预测未来数据%s"
+
+msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s"
+msgstr "对于参数 %1$s 具有尖峰先验分布的模型，对“N”个未来观测（“未来观测”）的预测服从大小为 N、机会参数 %2$s 等于先验分布位置（%2$s）的二项分布。%5$s 对于参数 %1$s 具有 Beta 先验分布的模型，预测分布是大小为 N、后验 Beta 分布参数为 %3$s 和 %4$s 的 beta-二项分布。%6$s"
+
+msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions."
+msgstr "对于参数 %1$s 具有尖峰先验分布且标准差 %2$s（“标准差”）的模型，对“N”个未来观测（“未来观测”）的预测服从均值为先验分布位置 %3$s、标准差为 %2$s/%4$sN 的正态分布。对于参数 %1$s 具有正态先验分布的模型，预测分布是均值为后验分布均值、标准差基于后验分布标准差（%3$s）和新数据的期望标准差（%2$s/%4$sN）的正态分布，即 %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s )。在这两种情况下，%6$s 预测都等于预测分布的均值参数。"
+
+msgid "The 'Prediction Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Posterior (%1$s)' - the estimated posterior distribution for parameter %1$s (used for prediction)</li>%2$s<li>'Posterior %4$s' - the %5$s of the specified posterior distribution</li><li>'Prediction%3$s' - the predictive distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted data</li></ul>"
+msgstr "“预测汇总”表显示各个模型的数值汇总。可通过“点估计”选项更改显示的点估计。该表包含以下列：\n    <ul><li>“模型” - 指定的模型名称</li><li>“后验(%1$s)” - 参数 %1$s 的估计后验分布（用于预测）</li>%2$s<li>“后验 %4$s” - 指定后验分布的 %5$s</li><li>“预测%3$s” - 新数据的预测分布</li><li>“预测 %4$s” - 预测数据的 %5$s</li></ul>"
+
+msgid "The 'Posterior predictive distribution' option displays figures of predictive distributions based on posterior distributions of the individual models. The '%1$s' checkbox transforms the figures with predicted data%2$s into figures with %3$s."
+msgstr "“后验预测分布”选项显示基于各个模型后验分布的预测分布图。“%1$s”复选框将含预测数据%2$s的图形转换为含 %3$s 的图形。"
+
+msgid "The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."
+msgstr "“全部”选项将所有后验预测分布叠加显示，便于在 y 轴上使用共同的密度尺度进行比较。"
+
+msgid "The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr "“堆叠”选项在一个图中显示所有后验预测分布，通过将额外的分布绘制在 z 轴上“更远”的位置而产生深度效果。"
+
+msgid "The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s"
+msgstr "“单个”选项在单独的图中分别显示每个模型的后验预测分布。可以可视化不同类型的点估计（“点估计”）和可信区间（“置信区间”）：%s"
+
+msgid "The '%1$s' option displays figures of predictive distributions based on posterior distributions of the individual models. %2$s"
+msgstr "“%1$s”选项显示基于各个模型后验分布的预测分布图。%2$s"
+
+msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s"
+msgstr "“条件”选项独立显示参数 %2$s 的所有 %1$s，就好像它们被视为单独的模型（在不存在其他假设的情况下）。可以可视化不同类型的可信区间（“置信区间”）：%3$s"
+
+msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the  visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
+msgstr "“联合”选项在考虑其他假设的情况下，一起显示参数 %2$s 的所有 %1$s（通过将 %1$s 的密度乘以假设的 %3$s 概率）。此外，“叠加”选项允许将所有 %1$s 叠加显示，便于在 y 轴上使用共同的密度和概率尺度进行比较；“堆叠”选项在一个图中显示所有 %1$s，通过将额外的分布绘制在 z 轴上“更远”的位置而产生深度效果。"
+
+msgid "The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses."
+msgstr "“预测准确度”选项允许比较所有假设的预测准确度。预测准确度是指在给定假设下数据出现的可能性。"
+
+msgid "The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."
+msgstr "“条件”选项独立显示所有预测准确度，就好像它们被视为单独的模型（在不存在其他假设的情况下）。"
+
+msgid "The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."
+msgstr "“联合”选项在考虑假设先验概率的情况下显示所有预测准确度（通过将条件预测准确度乘以假设的先验概率）。"
+
+msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses)."
+msgstr "“归一化”选项在考虑其他假设的情况下一起显示所有预测准确度（通过用数据的概率归一化联合预测准确度，即假设的后验概率）。"
+
+msgid "The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
+msgstr "“检验结果”选项显示所有假设预测准确度序贯变化（y 轴）的图形。该图将更新过程可视化为一个个数据点相继到达（x 轴）。"
+
+msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."
+msgstr "“归一化”选项在考虑其他假设的情况下一起显示所有预测准确度（通过用数据的概率归一化联合预测准确度，即给定时间点假设的后验概率）。"
+
+msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown  (the selected hypothesis correponds to the '0' in BF%1$s%2$s). The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
+msgstr "“贝叶斯因子”选项可以将假设的预测准确度与其余假设（“ vs. 全部”）、最佳假设（“ vs. 最佳”）或“ vs.”下拉菜单中选择的特定假设（所选假设对应 BF%1$s%2$s 中的“0”）进行比较。通过选择“BF%2$s%1$s”选项可以反转贝叶斯因子的分子和分母（量化支持第二个假设的证据），或通过选择“log(BF%1$s%2$s)”选项转换为对数尺度。"
+
+msgid "The 'Updating table' option generates a numerical summary of the displayed figure."
+msgstr "“更新表”选项生成所显示图形的数值汇总。"
+
+msgid "<ul><li>'central' - a central interval (or quantile) that covers the central 'mass'%% area of the distribution</li><li>'HPD' - a highest posterior density interval that covers 'mass'%% area with the shortest range</li><li>'custom' - an interval defined by a 'lower' and 'upper' bound. It returns the posterior mass of the parameter falling inside the custom interval.</li>%s</ul>"
+msgstr "<ul><li>“中心” - 覆盖分布中心的“质量”%% 区域的中心区间（或分位数）</li><li>“HPD” - 以最短范围覆盖“质量”%% 区域的最高后验密度区间</li><li>“自定义” - 由“下限”和“上限”定义的区间。它返回参数落在自定义区间内的后验质量。</li>%s</ul>"
+
+msgid "Mode"
+msgstr "众数"
+
+msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
+msgstr "警告：玩家人数必须至少为 2。请调整输入！"
+
+msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
+msgstr "警告：玩家人数必须最多为 9。请调整输入！"
+
+msgid "Warning: The number of point(s) required to win should be at least 1!"
+msgstr "警告：获胜所需点数应至少为 1！"
+
+msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
+msgstr "警告：玩家 %1$s 已经赢得本场比赛。请调整输入！"
+
+msgid "Warning: No negative input values! Adjust the inputs!"
+msgstr "警告：不允许负的输入值！请调整输入！"
+
+msgid "Players"
+msgstr "玩家"
+
+msgid "p(win 1 point)"
+msgstr "p(赢得 1 分)"
+
+msgid "Points Gained"
+msgstr "获得的点数"
+
+msgid "Analytical"
+msgstr "解析"
+
+msgid "p(win the game)"
+msgstr "p(赢得比赛)"
+
+msgid "Simulated"
+msgstr "模拟"
+
+msgid "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings."
+msgstr "玩家人数（%1$i）与中断时每位玩家的点数（%2$i）不一致。请检查相应的设置。"
+
+msgid "Prior Skill"
+msgstr "先验技能"
+
+msgid "Only numeric values are allowed in the input."
+msgstr "输入中只允许数值。"
+
+msgid "normal (%1$s, %2$s)"
+msgstr "正态(%1$s, %2$s)"
+
+msgid "normal (%1$.2f, %2$.2f)"
+msgstr "正态(%1$.2f, %2$.2f)"
+
+msgid "normal (%1$s, %2$.2f)"
+msgstr "正态(%1$s, %2$.2f)"
+
+msgid "Prior (μ)"
+msgstr "先验（μ）"
+
+msgid "Prior Mean"
+msgstr "先验均值"
+
+msgid "Posterior (μ)"
+msgstr "后验（μ）"
+
+msgid "Posterior Mean"
+msgstr "后验均值"
+
+msgid "Population mean"
+msgstr "总体均值"
+
+msgid "Prediction"
+msgstr "预测"
+
+msgid "Prediction Mean"
+msgstr "预测均值"
+
+msgid "Please, specify the standard deviation of the data."
+msgstr "请指定数据的标准差。"
+
+msgid "The prediction for %1$s future %2$s is based on %3$s."
+msgstr "对 %1$s 个未来 %2$s 的预测基于 %3$s。"
+
+msgid "Sample means"
+msgstr "样本均值"
+
+msgid "Future data"
+msgstr "未来数据"
+
+msgid "Inclusion BF"
+msgstr "纳入贝叶斯因子"
