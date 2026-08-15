@@ -335,7 +335,9 @@ msgstr "θ₀"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr "Proportion de la longueur de l'aiguille par rapport à la distance entre les lignes :"
+msgstr ""
+"Proportion de la longueur de l'aiguille par rapport à la distance entre les "
+"lignes :"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "%"
@@ -355,7 +357,8 @@ msgstr "Graphique"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr "Distribution a priori et a posteriori pour la proportion de croisements"
+msgstr ""
+"Distribution a priori et a posteriori pour la proportion de croisements"
 
 msgctxt "LSBuffonsneedlemanipulation|"
 msgid "Legend"
@@ -371,7 +374,9 @@ msgstr "Intervalle crédible"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Proportion of needle length to interline distance:"
-msgstr "Proportion de la longueur de l'aiguille par rapport à la distance entre les lignes :"
+msgstr ""
+"Proportion de la longueur de l'aiguille par rapport à la distance entre les "
+"lignes :"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "%"
@@ -403,7 +408,8 @@ msgstr "Colorer les aiguilles qui croisent les lignes"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Prior and posterior for the proportion of crosses"
-msgstr "Distribution a priori et a posteriori pour la proportion de croisements"
+msgstr ""
+"Distribution a priori et a posteriori pour la proportion de croisements"
 
 msgctxt "LSBuffonsneedlesimulation|"
 msgid "Legend"
