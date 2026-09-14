@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.96.4\n"
 "POT-Creation-Date: 2026-04-25 03:43\n"
-"PO-Revision-Date: 2026-09-14 02:29+0000\n"
+"PO-Revision-Date: 2026-09-15 04:00+0000\n"
 "Last-Translator: Sohrab Delshad <sdel4030@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/jasp/"
 "jasplearnbayes-r/fa/>\n"
@@ -35,7 +35,7 @@ msgid "Lower"
 msgstr "پایین"
 
 msgid "%s%% Credible Interval"
-msgstr "فاصله باور %s%%"
+msgstr "بازه باورپذیر %s%%"
 
 msgid "Upper"
 msgstr "بالا"
@@ -44,10 +44,10 @@ msgid "Prior and Posterior for Proportion of Crosses"
 msgstr ""
 
 msgid "Posterior"
-msgstr ""
+msgstr "پسین"
 
 msgid "Prior"
-msgstr ""
+msgstr "پیشین"
 
 msgid "Proportion of Crosses"
 msgstr ""
@@ -101,7 +101,7 @@ msgid "Tables"
 msgstr ""
 
 msgid "Statistics"
-msgstr ""
+msgstr "آماره‌ها"
 
 msgid "Estimate"
 msgstr "برآورد"
@@ -110,7 +110,7 @@ msgid "Mean"
 msgstr "میانگین"
 
 msgid "Median"
-msgstr ""
+msgstr "میانه"
 
 msgid "SD"
 msgstr "انحراف معیار"
@@ -158,7 +158,7 @@ msgid "Negative/Total"
 msgstr ""
 
 msgid "Total"
-msgstr ""
+msgstr "کل"
 
 msgid "Positive condition"
 msgstr ""
@@ -185,13 +185,13 @@ msgid "Sensitivity"
 msgstr ""
 
 msgid "Specificity"
-msgstr ""
+msgstr "ویژگی"
 
 msgid "beta(%1$s,%2$s)"
 msgstr ""
 
 msgid "Plots"
-msgstr ""
+msgstr "نمودارها"
 
 msgid "Probability Positive"
 msgstr ""
@@ -296,16 +296,16 @@ msgid "Marker"
 msgstr ""
 
 msgid "Count"
-msgstr ""
+msgstr "شمارش"
 
 msgid "Estimates"
-msgstr ""
+msgstr "برآوردها"
 
 msgid "Positive predictive value"
 msgstr ""
 
 msgid "Negative predictive value"
-msgstr ""
+msgstr "ارزش پیش‌بینی منفی"
 
 msgid "False discovery rate"
 msgstr ""
@@ -314,13 +314,13 @@ msgid "False omission rate"
 msgstr ""
 
 msgid "False positive rate"
-msgstr ""
+msgstr "نرخ مثبت کاذب"
 
 msgid "False negative rate"
-msgstr ""
+msgstr "نرخ منفی کاذب"
 
 msgid "Accuracy"
-msgstr ""
+msgstr "درستی"
 
 msgid "Pretest odds"
 msgstr ""
@@ -431,7 +431,7 @@ msgid "Data Summary"
 msgstr ""
 
 msgid "Counts"
-msgstr ""
+msgstr "شمارش‌ها"
 
 msgid "Proportion"
 msgstr ""
@@ -548,7 +548,7 @@ msgid "Testing Summary"
 msgstr ""
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
 msgstr ""
@@ -596,7 +596,7 @@ msgid "Joint probability"
 msgstr ""
 
 msgid "Posterior probability"
-msgstr ""
+msgstr "احتمال پسین"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
 msgstr ""
@@ -845,7 +845,7 @@ msgid "<ul><li>'central' - a central interval (or quantile) that covers the cent
 msgstr ""
 
 msgid "Mode"
-msgstr ""
+msgstr "مُد"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
 msgstr ""
