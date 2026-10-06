@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSBuffonsneedlesimulation<- function(jaspResults, dataset, options, state = NULL){
+LSBuffonsneedlesimulationInternal <- function(jaspResults, dataset, options, state = NULL){
 
   # check whether the state is empty
   .buffonsNeedleSimulationCheckErrors(jaspResults, options)

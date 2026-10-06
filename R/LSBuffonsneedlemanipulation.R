@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSBuffonsneedlemanipulation   <- function(jaspResults, dataset, options, state = NULL){
+LSBuffonsneedlemanipulationInternal <- function(jaspResults, dataset, options, state = NULL){
   .buffonsNeedleManipulationSummaryTable(jaspResults, options)
   .buffonsNeedleManipulationPropDistPlot(jaspResults, options)
   .buffonsNeedleManipulationPiDistPlot(jaspResults, options)

@@ -7,7 +7,7 @@ Description
 	icon:			"learning-stats.png"
 	description:	qsTr("Learn Bayesian statistics with simple examples and supporting text")
 	requiresData:	false
-	hasWrappers: 	false
+	hasWrappers: 	true
 	
 
 	GroupTitle
