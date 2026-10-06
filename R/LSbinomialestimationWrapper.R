@@ -21,7 +21,7 @@
 #'
 LSbinomialestimation <- function(
           data = NULL,
-          version = "0.97.1",
+          version = "1",
           colorPalette = "colorblind",
           dataCountsFailures = 0,
           dataCountsSuccesses = 0,
@@ -75,7 +75,7 @@ LSbinomialestimation <- function(
           priorDistributionPlotType = "overlying",
           sequentialAnalysisIntervalEstimatePlot = FALSE,
           sequentialAnalysisIntervalEstimatePlotLower = 0.25,
-          sequentialAnalysisIntervalEstimatePlotType = "stacked",
+          sequentialAnalysisIntervalEstimatePlotType = "overlying",
           sequentialAnalysisIntervalEstimatePlotUpdatingTable = FALSE,
           sequentialAnalysisIntervalEstimatePlotUpper = 0.75,
           sequentialAnalysisPointEstimatePlot = FALSE,

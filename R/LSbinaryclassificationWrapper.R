@@ -21,7 +21,7 @@
 #'
 LSbinaryclassification <- function(
           data = NULL,
-          version = "0.97.1",
+          version = "1",
           alluvialPlot = FALSE,
           areaPlot = FALSE,
           burnin = 500,
@@ -60,7 +60,7 @@ LSbinaryclassification <- function(
           marker = list(types = list(), value = ""),
           negativeTests = 0,
           orderConstraint = TRUE,
-          plotEstimatesType = "halfEye",
+          plotEstimatesType = "interval",
           plotHeight = 320,
           plotWidth = 480,
           positiveTests = 0,

@@ -21,7 +21,7 @@
 #'
 LSgameofchance <- function(
           data = NULL,
-          version = "0.97.1",
+          version = "1",
           ci = TRUE,
           numberOfSimulatedGames = 500,
           players = list(list(levels = list("p(win 1 point)", "Points gained"), name = " 1", values = list(1, 0)), list(levels = list("p(win 1 point)", "Points gained"), name = " 2", values = list(1, 0))),

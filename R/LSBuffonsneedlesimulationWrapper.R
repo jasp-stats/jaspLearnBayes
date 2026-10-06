@@ -21,7 +21,7 @@
 #'
 LSBuffonsneedlesimulation <- function(
           data = NULL,
-          version = "0.97.1",
+          version = "1",
           ciLevel = 0.95,
           highlight = FALSE,
           lengthToDistanceProportion = 80,

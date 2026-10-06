@@ -21,7 +21,7 @@
 #'
 LSbinomialtesting <- function(
           data = NULL,
-          version = "0.97.1",
+          version = "1",
           colorPalette = "colorblind",
           dataCountsFailures = 0,
           dataCountsSuccesses = 0,

@@ -6,7 +6,7 @@
 \usage{
 LSgameofskill(
   data = NULL,
-  version = "0.97.1",
+  version = "1",
   ci = TRUE,
   numberOfSimulatedGames = 500,
   players = list(list(levels = list("Prior skill parameter", "Points gained"), name =
