@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSbinomialestimation   <- function(jaspResults, dataset, options, state = NULL) {
+LSbinomialestimationInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotIndividualCiBf", "sequentialAnalysisPointEstimatePlotCiBf"))
 

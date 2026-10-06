@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSgameofchance   <- function(jaspResults, dataset, options, state = NULL){
+LSgameofchanceInternal <- function(jaspResults, dataset, options, state = NULL){
 
   # input values
   nPlayers  <- length(options[["players"]])

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSbinaryclassification <- function(jaspResults, dataset, options, state = NULL) {
+LSbinaryclassificationInternal <- function(jaspResults, dataset, options, state = NULL) {
   .bcIntro(jaspResults, options)
 
   options <- .bcParseOptions(jaspResults, options)

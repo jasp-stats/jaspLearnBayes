@@ -16,7 +16,7 @@
 #
 
 
-LSgameofskill   <- function(jaspResults, dataset, options, state = NULL){
+LSgameofskillInternal <- function(jaspResults, dataset, options, state = NULL){
 
   # input values
   nPlayers  <- length(options[["players"]])

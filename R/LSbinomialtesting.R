@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-LSbinomialtesting   <- function(jaspResults, dataset, options, state = NULL) {
+LSbinomialtestingInternal <- function(jaspResults, dataset, options, state = NULL) {
 
   options <- .parseAndStoreFormulaOptions(jaspResults, options, c("posteriorDistributionPlotMarginalCiBf", "posteriorDistributionPlotConditionalCiBf"))
 
