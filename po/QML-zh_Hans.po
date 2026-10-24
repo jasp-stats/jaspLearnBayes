@@ -6,6 +6,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_Hans\n"
 "X-Qt-Contexts: true\n"
+"PO-Revision-Date: 2026-10-25 12:51+0000\n"
+"Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/jasp/jasplearnbayes-qml/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 msgctxt "Description|"
 msgid "Learn Bayes"
@@ -419,7 +425,6 @@ msgctxt "LSgaussiantesting|"
 msgid "Sample means"
 msgstr "样本均值"
 
-#, fuzzy
 msgctxt "LSbinomialdatainput|"
 msgid "Data"
 msgstr "数据"
@@ -484,12 +489,10 @@ msgctxt "LSestimationpredictions|"
 msgid "Point estimate"
 msgstr "点估计"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "Plots"
 msgstr "绘图"
 
-#, fuzzy
 msgctxt "LSestimationpredictions|"
 msgid "All"
 msgstr "全部"
@@ -602,7 +605,6 @@ msgctxt "LSestimationsequential|"
 msgid "Upper"
 msgstr "上限"
 
-#, fuzzy
 msgctxt "LSestimationsequential|"
 msgid "All"
 msgstr "全部"
@@ -615,12 +617,10 @@ msgctxt "LSestimationsequential|"
 msgid "Posterior updating table"
 msgstr "后验更新表"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Data"
 msgstr "数据"
 
-#, fuzzy
 msgctxt "LSgaussiandatainput|"
 msgid "Input type"
 msgstr "输入类型"
@@ -787,15 +787,15 @@ msgstr "贝叶斯因子"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs."
-msgstr " vs. "
+msgstr "vs."
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. rest"
-msgstr " vs. 其余"
+msgstr "vs. 其余"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "vs. best"
-msgstr " vs. 最佳"
+msgstr "vs. 最佳"
 
 msgctxt "LStestingpredictiveperformance|"
 msgid "BF₁₀"
@@ -809,7 +809,6 @@ msgctxt "LStestingpredictiveperformance|"
 msgid "log(BF₁₀)"
 msgstr "log(BF₁₀)"
 
-#, fuzzy
 msgctxt "LStestingpriorandposterior|"
 msgid "Prior distribution"
 msgstr "先验分布"
@@ -892,15 +891,15 @@ msgstr "贝叶斯因子"
 
 msgctxt "LStestingsequential|"
 msgid "vs. all"
-msgstr " vs. 全部"
+msgstr "vs. 全部"
 
 msgctxt "LStestingsequential|"
 msgid "vs. best"
-msgstr " vs. 最佳"
+msgstr "vs. 最佳"
 
 msgctxt "LStestingsequential|"
 msgid "vs."
-msgstr " vs. "
+msgstr "vs."
 
 msgctxt "LStestingsequential|"
 msgid "BF₁₀"
@@ -1216,7 +1215,7 @@ msgstr "样本数"
 
 msgctxt "LSbinaryclassification|"
 msgid "No. burnin samples"
-msgstr "预烧样本数"
+msgstr "预热样本数"
 
 msgctxt "LSbinaryclassification|"
 msgid "Thinning"
