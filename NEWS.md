@@ -16,6 +16,9 @@
 
 # jaspLearnBayes (development version)
 
+## Fixed
+* Binary classification: the credible interval of the "Rareness" in the confusion matrix is now the complement of the prevalence interval with swapped bounds (the lower bound was larger than the upper bound).
+
 
 
 ---
