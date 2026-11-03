@@ -670,8 +670,8 @@ model{
 
     tot        = c(gettext(c("Prevalence", "Rareness")), ""),
     tot_value  = c(tab["prevalence", "estimate", drop=TRUE], 1-tab["prevalence", "estimate", drop=TRUE], NA),
-    tot_lower  = c(tab["prevalence", "lowerCI",  drop=TRUE], 1-tab["prevalence", "lowerCI",  drop=TRUE], NA),
-    tot_upper  = c(tab["prevalence", "upperCI",  drop=TRUE], 1-tab["prevalence", "upperCI",  drop=TRUE], NA)
+    tot_lower  = c(tab["prevalence", "lowerCI",  drop=TRUE], 1-tab["prevalence", "upperCI",  drop=TRUE], NA),
+    tot_upper  = c(tab["prevalence", "upperCI",  drop=TRUE], 1-tab["prevalence", "lowerCI",  drop=TRUE], NA)
   )
 
   if(isFALSE(options[["confusionMatrixAdditionalInfo"]]))
