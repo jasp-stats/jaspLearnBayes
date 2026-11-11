@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jaspLearnBayes 0.96.5\n"
 "POT-Creation-Date: 2026-07-04 03:58\n"
-"PO-Revision-Date: 2026-11-11 19:08+0000\n"
+"PO-Revision-Date: 2026-11-12 10:26+0000\n"
 "Last-Translator: Fahad Mahfouz Al-Subhi "
 "<fahadalsubhi@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/jasp/"
@@ -16,22 +16,22 @@ msgstr ""
 "X-Generator: Weblate 2026.11.2.dev0\n"
 
 msgid "Summary Table"
-msgstr ""
+msgstr "جدول الملخص"
 
 msgid "Tosses"
-msgstr ""
+msgstr "الرميات"
 
 msgid "Crosses"
-msgstr ""
+msgstr "التقاطعات"
 
 msgid "MLE for %s"
-msgstr ""
+msgstr "تقدير الإمكان الأعظم لـ%s"
 
 msgid "Interval Mass"
-msgstr ""
+msgstr "الكتلة الاحتمالية للفترة"
 
 msgid "Median for %s"
-msgstr ""
+msgstr "وسيط %s"
 
 msgid "Lower"
 msgstr "الحد الأدنى"
@@ -43,7 +43,7 @@ msgid "Upper"
 msgstr "الحد الأعلى"
 
 msgid "Prior and Posterior for Proportion of Crosses"
-msgstr ""
+msgstr "التوزيعان القبلي والبعدي لنسبة التقاطعات"
 
 msgid "Posterior"
 msgstr "بعدي"
@@ -52,58 +52,115 @@ msgid "Prior"
 msgstr "قبلي"
 
 msgid "Proportion of Crosses"
-msgstr ""
+msgstr "نسبة التقاطعات"
 
 msgid "Density"
 msgstr "الكثافة"
 
 msgid "%1$s%% CI: [%2$s, %3$s]"
-msgstr ""
+msgstr "فترة المصداقية %1$s%%: [%2$s, %3$s]"
 
 msgid "Implied Prior and Posterior for %s"
-msgstr ""
+msgstr "التوزيعان القبلي والبعدي الضمنيان لـ%s"
 
 msgid "Implied Posterior"
-msgstr ""
+msgstr "التوزيع البعدي الضمني"
 
 msgid "Implied Prior"
-msgstr ""
+msgstr "التوزيع القبلي الضمني"
 
 msgid "Needle Plot"
-msgstr ""
+msgstr "رسم الإبر"
 
 msgid "Implied Prior and Posterior for  %s"
-msgstr ""
+msgstr "التوزيعان القبلي والبعدي الضمنيان لـ%s"
 
 msgid "This analysis demonstrates <b>binary classification</b> which is a common statistical procedure where subjects are classified into two groups based on a classification rule.\n\n                   Binary classification is a procedure where data about the subject is dichotomised to reach a binary decision (e.g., yes/no, true/false).\n\n                   Common binary classification applications are:\n                   <ul>\n                     <li><b>Medical testing and diagnosis</b> where the classification determines whether a patient has a certain disease or not.</li>\n                     <li><b>Spam detection</b> where the classification determines whether a message (e.g., an email) is spam or not.</li>\n                     <li><b>Quality control</b> where the classification determines whether an industry standard is met or not.</li>\n                   </ul>\n\n                   Because binary classification is often used in medical testing, the terminology surrounding binary classification problems is similar to medical terminology (e.g., prevalence, condition, marker).\n\n                   In practice, there is an important distinction between the <i>true</i> state of the subject and the <i>assigned label</i> given by the classification rule.\n                   In JASP, the true state is called <b>condition</b> (positive/negative) and the assigned label is called <b>test</b> (positive/negative).\n                   In many applications, the conditions or the tests may not be symmetric, therefore various types of errors are of interest in addition to an overall measure of accuracy.\n                   These types of errors distinguish, for example, whether a patient has a disease but the test came back negative (false negative), or whether a patient does not have a disease but the test came back positive (false positive).\n\n                   Properties of the test are usually described in terms of its <b>sensitivity</b> and <b>specificity</b>.\n                   Sensitivity is the probability of testing positive if the condition is positive.\n                   Specificity is the probability of testing negative if the condition is negative.\n                   A property of condition is <b>prevalence</b>, which is the proportion of subjects that have a positive condition in the population.\n                   Asymmetric characteristics of the test or prevalence can lead to situations that may appear to the untrained eye as paradoxical.\n                   For example, in certain situations it is more likely that a patient does not have a particular disease than that they do, even after testing positive for that disease.\n\n                   Formally, the probability that a subject has a positive condition after the test is positive (i.e., the positive predictive value) is obtained by applying <b>Bayes theorem</b>:\n\n                   %s\n\n                   <h5>References</h5>\n                   Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for classification and prediction</i>. Oxford University Press.\n\n                   <a href=\"https://wikipedia.org/wiki/Binary_classification\">https://wikipedia.org/wiki/Binary_classification</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n\n                   <a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://wikipedia.org/wiki/Bayes%%27_theorem</a>"
 msgstr ""
+"يوضح هذا التحليل <b>التصنيف الثنائي</b>، وهو إجراء إحصائي شائع تُصنَّف فيه "
+"الحالات ضمن مجموعتين وفق قاعدة تصنيف.\n"
+"\n"
+"يحوّل التصنيف الثنائي المعلومات المتعلقة بالحالة إلى قرار ثنائي (مثل نعم/لا، "
+"أو صحيح/خطأ).\n"
+"\n"
+"من تطبيقاته الشائعة:\n"
+"<ul>\n"
+"<li><b>الفحوص الطبية والتشخيص</b> لتحديد إصابة المريض بمرض معين من عدمها.</"
+"li>\n"
+"<li><b>كشف الرسائل المزعجة</b> لتحديد ما إذا كانت رسالة، كالبريد الإلكتروني، "
+"مزعجة أم لا.</li>\n"
+"<li><b>ضبط الجودة</b> لتحديد استيفاء معيار صناعي من عدمه.</li>\n"
+"</ul>\n"
+"\n"
+"نظرًا إلى شيوع استخدامه في الفحوص الطبية، تتشابه مصطلحاته مع المصطلحات الطبية"
+"، مثل الانتشار والحالة والمؤشر.\n"
+"\n"
+"يجب التمييز عمليًا بين حالة الفرد <i>الحقيقية</i> و<i>التسمية المسندة</i> "
+"إليه بقاعدة التصنيف.\n"
+"في JASP، تُسمى الحقيقة <b>الحالة</b> (موجبة/سالبة)، وتُسمى التسمية المسندة <b>"
+"الاختبار</b> (موجب/سالب).\n"
+"قد لا تكون الحالات أو الاختبارات متماثلة في كثير من التطبيقات؛ لذا تهم أنواع "
+"مختلفة من الأخطاء بجانب الدقة الإجمالية.\n"
+"مثلًا، قد يكون المريض مصابًا لكن نتيجة الاختبار سالبة (سلبية كاذبة)، أو غير مصاب "
+"لكن النتيجة موجبة (إيجابية كاذبة).\n"
+"\n"
+"تُوصف خصائص الاختبار عادةً بـ<b>الحساسية</b> و<b>النوعية</b>.\n"
+"الحساسية احتمال نتيجة موجبة إذا كانت الحالة موجبة.\n"
+"والنوعية احتمال نتيجة سالبة إذا كانت الحالة سالبة.\n"
+"ومن خصائص الحالة <b>الانتشار</b>، أي نسبة أفراد المجتمع ذوي الحالة الموجبة.\n"
+"قد يؤدي عدم تماثل خصائص الاختبار أو الانتشار إلى نتائج تبدو متناقضة لغير "
+"المتخصص.\n"
+"مثلًا، قد يكون عدم إصابة مريض بمرض معين أرجح من إصابته، حتى بعد ظهور نتيجة "
+"موجبة لذلك المرض.\n"
+"\n"
+"يُحسب احتمال الحالة الموجبة بعد اختبار موجب (القيمة التنبؤية الموجبة) "
+"باستخدام <b>مبرهنة بايز</b>:\n"
+"\n"
+"%s\n"
+"\n"
+"<h5>المراجع</h5>\n"
+"Pepe, M. S. (2003). <i>The statistical evaluation of medical tests for "
+"classification and prediction</i>. Oxford University Press.\n"
+"\n"
+"<a href=\"https://wikipedia.org/wiki/Binary_classification\">https://"
+"wikipedia.org/wiki/Binary_classification</a>\n"
+"\n"
+"<a href=\"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers\">"
+"https://wikipedia.org/wiki/Evaluation_of_binary_classifiers</a>\n"
+"\n"
+"<a href=\"https://wikipedia.org/wiki/Bayes%%27_theorem\">https://"
+"wikipedia.org/wiki/Bayes%%27_theorem</a>"
 
 msgid "Welcome to binary classification with JASP!"
-msgstr ""
+msgstr "مرحبًا بك في التصنيف الثنائي باستخدام JASP!"
 
 msgid "JAGS requires strictly positive parameters for Beta priors. Set {α, β} > 0 for the prior distributions of Prevalence, Sensitivity, and Specificity."
 msgstr ""
+"يتطلب JAGS معلمات موجبة تمامًا لتوزيعات بيتا القبلية. اضبط {α, β} > 0 "
+"لتوزيعات الانتشار والحساسية والنوعية القبلية."
 
 msgid "Some of the specified colors are not valid colors."
-msgstr ""
+msgstr "بعض الألوان المحددة غير صالحة."
 
 msgid "The 'Positive condition (binary)' variable must have two levels!"
-msgstr ""
+msgstr "يجب أن يكون لمتغير 'الحالة الموجبة (ثنائي)' مستويان!"
 
 msgid "Each condition needs at least one observation."
-msgstr ""
+msgstr "تتطلب كل حالة مشاهدة واحدة على الأقل."
 
 msgid "Mean of marker in positive condition (%1$s) needs to be larger than the mean of marker in negative condition (%2$s)."
 msgstr ""
+"يجب أن يكون متوسط المؤشر في الحالة الموجبة (%1$s) أكبر من متوسطه في الحالة "
+"السالبة (%2$s)."
 
 msgid "Estimating parameters per varying thresholds..."
-msgstr ""
+msgstr "جارٍ تقدير المعلمات عند عتبات متغيرة..."
 
 msgid "Tables"
-msgstr ""
+msgstr "الجداول"
 
 msgid "Statistics"
-msgstr ""
+msgstr "الإحصاءات"
 
 msgid "Estimate"
 msgstr "التقدير"
@@ -118,184 +175,184 @@ msgid "SD"
 msgstr "الانحراف المعياري (SD)"
 
 msgid "Rhat"
-msgstr ""
+msgstr "Rhat"
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "التشخيص"
 
 msgid "Eff. Sample Size"
-msgstr ""
+msgstr "حجم العينة الفعّال"
 
 msgid "Notation"
-msgstr ""
+msgstr "الترميز"
 
 msgid "Interpretation"
-msgstr ""
+msgstr "التفسير"
 
 msgid "Confusion Matrix"
-msgstr ""
+msgstr "مصفوفة الالتباس"
 
 msgid "%s%% CI"
-msgstr "%s%% CI"
+msgstr "فترة الثقة %s%%"
 
 msgid "Positive test"
-msgstr ""
+msgstr "اختبار إيجابي"
 
 msgid "Outcome"
-msgstr ""
+msgstr "النتيجة"
 
 msgid "Lower %s"
-msgstr ""
+msgstr "الحد الأدنى %s"
 
 msgid "Upper %s"
-msgstr ""
+msgstr "الحد الأعلى %s"
 
 msgid "Negative test"
-msgstr ""
+msgstr "اختبار سلبي"
 
 msgid "Positive/Total"
-msgstr ""
+msgstr "الإيجابية/الإجمالية"
 
 msgid "Negative/Total"
-msgstr ""
+msgstr "السلبي/الإجمالي"
 
 msgid "Total"
 msgstr "الإجمالي"
 
 msgid "Positive condition"
-msgstr ""
+msgstr "الحالة الموجبة"
 
 msgid "Negative condition"
-msgstr ""
+msgstr "الحالة السالبة"
 
 msgid "True/Total"
-msgstr ""
+msgstr "الصحيح/الإجمالي"
 
 msgid "Prevalence"
-msgstr ""
+msgstr "معدل الانتشار"
 
 msgid "Rareness"
-msgstr ""
+msgstr "الندرة"
 
 msgid "Priors and Posteriors"
-msgstr ""
+msgstr "التوزيعات القبلية والبعدية"
 
 msgid "Parameter"
 msgstr "المعلمة"
 
 msgid "Sensitivity"
-msgstr ""
+msgstr "الحساسية"
 
 msgid "Specificity"
 msgstr "النوعية"
 
 msgid "beta(%1$s,%2$s)"
-msgstr ""
+msgstr "beta(%1$s,%2$s)"
 
 msgid "Plots"
-msgstr ""
+msgstr "المخططات"
 
 msgid "Probability Positive"
-msgstr ""
+msgstr "احتمال القيمة الموجبة"
 
 msgid "Not tested"
-msgstr ""
+msgstr "لم يُختبر"
 
 msgid "Tested"
-msgstr ""
+msgstr "مختبَر"
 
 msgid "Negative"
-msgstr ""
+msgstr "سالب"
 
 msgid "Positive"
-msgstr ""
+msgstr "موجب"
 
 msgid "Test Result"
-msgstr ""
+msgstr "نتيجة الاختبار"
 
 msgid "P(Condition = positive)"
-msgstr ""
+msgstr "P(Condition = positive)"
 
 msgid "Icon Plot"
-msgstr ""
+msgstr "رسم الأيقونات"
 
 msgid "True positive"
-msgstr ""
+msgstr "إيجابي حقيقي"
 
 msgid "False positive"
-msgstr ""
+msgstr "موجب كاذب"
 
 msgid "False negative"
-msgstr ""
+msgstr "سالب كاذب"
 
 msgid "True negative"
-msgstr ""
+msgstr "سلبي حقيقي"
 
 msgid "Area Plot"
-msgstr ""
+msgstr "مخطط مساحي"
 
 msgid "Receiving Operating Characteristic Curve"
-msgstr ""
+msgstr "منحنى خصائص تشغيل المستقبِل"
 
 msgid "False Positive Rate (1-Specificity)"
-msgstr ""
+msgstr "معدل الإيجابيات الكاذبة (1-النوعية)"
 
 msgid "True Positive Rate (Sensitivity)"
-msgstr ""
+msgstr "معدل الإيجابيات الصحيحة (الحساسية)"
 
 msgid "Total Operating Characteristic Curve"
-msgstr ""
+msgstr "منحنى خصائص التشغيل الكلية"
 
 msgid "True positives + False positives"
-msgstr ""
+msgstr "الإيجابيات الصحيحة + الإيجابيات الكاذبة"
 
 msgid "True positives"
-msgstr ""
+msgstr "الإيجابيات الصحيحة"
 
 msgid "Precision-recall"
-msgstr ""
+msgstr "الإحكام–الاستدعاء"
 
 msgid "Sensitivity (Recall)"
-msgstr ""
+msgstr "الحساسية (الاستدعاء)"
 
 msgid "Positive Predictive Value (Precision)"
-msgstr ""
+msgstr "القيمة التنبؤية الموجبة (الإحكام)"
 
 msgid "Test Characteristics by Threshold"
-msgstr ""
+msgstr "خصائص الاختبار حسب العتبة"
 
 msgid "Test Threshold"
-msgstr ""
+msgstr "عتبة الاختبار"
 
 msgid "Characteristic"
-msgstr ""
+msgstr "الخاصية"
 
 msgid "PPV and NPV by Threshold"
-msgstr ""
+msgstr "PPV وNPV حسب العتبة"
 
 msgid "Predictive Value"
-msgstr ""
+msgstr "القيمة التنبؤية"
 
 msgid "PPV and NPV by Prevalence"
-msgstr ""
+msgstr "PPV وNPV حسب معدل الانتشار"
 
 msgid "Alluvial Plot"
-msgstr ""
+msgstr "مخطط تدفق الفئات (Alluvial)"
 
 msgid "Condition"
-msgstr ""
+msgstr "الحالة"
 
 msgid "Test"
 msgstr "اختبار"
 
 msgid "Proportion of Population"
-msgstr ""
+msgstr "نسبة من المجتمع"
 
 msgid "Signal Detection"
-msgstr ""
+msgstr "كشف الإشارات"
 
 msgid "Marker"
-msgstr ""
+msgstr "المؤشر"
 
 msgid "Count"
 msgstr "العدد"
@@ -304,16 +361,16 @@ msgid "Estimates"
 msgstr "التقديرات"
 
 msgid "Positive predictive value"
-msgstr ""
+msgstr "القيمة التنبؤية الموجبة"
 
 msgid "Negative predictive value"
 msgstr "القيمة التنبؤية السالبة"
 
 msgid "False discovery rate"
-msgstr ""
+msgstr "معدل الاكتشافات الكاذبة"
 
 msgid "False omission rate"
-msgstr ""
+msgstr "معدل الإغفال الكاذب"
 
 msgid "False positive rate"
 msgstr "معدل الإيجابيات الكاذبة"
@@ -325,613 +382,859 @@ msgid "Accuracy"
 msgstr "الدقة"
 
 msgid "Pretest odds"
-msgstr ""
+msgstr "الأرجحية قبل الاختبار"
 
 msgid "Positive likelihood ratio"
-msgstr ""
+msgstr "نسبة الإمكان الموجبة"
 
 msgid "Negative likelihood ratio"
-msgstr ""
+msgstr "نسبة الإمكان السالبة"
 
 msgid "F-measure"
-msgstr ""
+msgstr "مقياس F"
 
 msgid "Proportion of a population affected by the condition."
-msgstr ""
+msgstr "نسبة أفراد المجتمع المصابين بالحالة."
 
 msgid "(True positive rate) Proportion of those who are affected by the condition and are correctly tested positive."
 msgstr ""
+"نسبة المصابين بالحالة الذين جاءت نتيجة اختبارهم موجبة على نحو صحيح (معدل "
+"الإيجابيات الحقيقية)."
 
 msgid "(True negative rate) Proportion of those who are not affected by the condition and are correctly tested negative."
 msgstr ""
+"نسبة غير المصابين بالحالة الذين جاءت نتيجة اختبارهم سالبة على نحو صحيح (معدل "
+"السلبيات الحقيقية)."
 
 msgid "Proportion of a population affected by a condition and correctly tested positive."
 msgstr ""
+"نسبة أفراد المجتمع المصابين بالحالة والذين جاءت نتيجة اختبارهم موجبة على نحو "
+"صحيح."
 
 msgid "Proportion of a population not affected by a condition and incorrectly tested positive."
 msgstr ""
+"نسبة أفراد المجتمع غير المصابين بالحالة والذين جاءت نتيجة اختبارهم موجبة على "
+"نحو خاطئ."
 
 msgid "Proportion of a population not affected by a condition and correctly tested negative."
 msgstr ""
+"نسبة أفراد المجتمع غير المصابين بالحالة والذين جاءت نتيجة اختبارهم سالبة على "
+"نحو صحيح."
 
 msgid "Proportion of a population affected by a condition and incorrectly tested negative."
 msgstr ""
+"نسبة أفراد المجتمع المصابين بالحالة والذين جاءت نتيجة اختبارهم سالبة على نحو "
+"خاطئ."
 
 msgid "Proportion of those who tested positive and are affected by the condition."
-msgstr ""
+msgstr "نسبة المصابين بالحالة بين من جاءت نتيجة اختبارهم موجبة."
 
 msgid "Proportion of those who tested negative and are not affected by the condition."
-msgstr ""
+msgstr "نسبة غير المصابين بالحالة بين من جاءت نتيجة اختبارهم سالبة."
 
 msgid "Proportion of false positives in the pool of those that test positive."
-msgstr ""
+msgstr "نسبة الإيجابيات الكاذبة بين جميع من جاءت نتيجة اختبارهم موجبة."
 
 msgid "Proportion of false negatives in the pool of those that test negative."
-msgstr ""
+msgstr "نسبة السلبيات الكاذبة بين جميع من جاءت نتيجة اختبارهم سالبة."
 
 msgid "Complement proportion to specificity."
-msgstr ""
+msgstr "النسبة المتمّمة للنوعية."
 
 msgid "Complement proportion to sensitivity."
-msgstr ""
+msgstr "النسبة المتمّمة للحساسية."
 
 msgid "Proportion of the population that is true positive or true negative."
-msgstr ""
+msgstr "نسبة أفراد المجتمع ذوي النتائج الإيجابية الحقيقية أو السلبية الحقيقية."
 
 msgid "P(Test = positive | Condition = positive)"
-msgstr ""
+msgstr "P(Test = positive | Condition = positive)"
 
 msgid "P(Test = negative | Condition = negative)"
-msgstr ""
+msgstr "P(Test = negative | Condition = negative)"
 
 msgid "P(Condition = positive %s Test = positive)"
-msgstr ""
+msgstr "P(Condition = positive %s Test = positive)"
 
 msgid "P(Condition = negative %s Test = positive)"
-msgstr ""
+msgstr "P(Condition = negative %s Test = positive)"
 
 msgid "P(Condition = negative %s Test = negative)"
-msgstr ""
+msgstr "P(Condition = negative %s Test = negative)"
 
 msgid "P(Condition = positive %s Test = negative)"
-msgstr ""
+msgstr "P(Condition = positive %s Test = negative)"
 
 msgid "P(Condition = positive | Test = positive)"
-msgstr ""
+msgstr "P(Condition = positive | Test = positive)"
 
 msgid "P(Condition = negative | Test = negative)"
-msgstr ""
+msgstr "P(Condition = negative | Test = negative)"
 
 msgid "P(Condition = negative | Test = positive)"
-msgstr ""
+msgstr "P(Condition = negative | Test = positive)"
 
 msgid "P(Condition = positive | Test = negative)"
-msgstr ""
+msgstr "P(Condition = positive | Test = negative)"
 
 msgid "P(Test = positive | Condition = negative)"
-msgstr ""
+msgstr "P(Test = positive | Condition = negative)"
 
 msgid "P(Test = negative | Condition = positive)"
-msgstr ""
+msgstr "P(Test = negative | Condition = positive)"
 
 msgid "P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s Test = negative)"
 msgstr ""
+"P(Condition = positive %1$s Test = positive %2$s Condition = negative %1$s "
+"Test = negative)"
 
 msgid "Central credible intervals are based on %i samples."
-msgstr ""
+msgstr "تستند فترات المصداقية المركزية إلى %i عينة."
 
 msgid "Parameter estimates are based on %i MCMC samples."
-msgstr ""
+msgstr "تستند تقديرات المعلمات إلى %i من عينات MCMC."
 
 msgid "positive"
-msgstr ""
+msgstr "موجب"
 
 msgid "negative"
-msgstr ""
+msgstr "سالب"
 
 msgid "Data Summary"
-msgstr ""
+msgstr "ملخص البيانات"
 
 msgid "Counts"
-msgstr ""
+msgstr "الأعداد"
 
 msgid "Proportion"
-msgstr ""
+msgstr "النسبة"
 
 msgid "Successes"
-msgstr ""
+msgstr "حالات النجاح"
 
 msgid "Failures"
-msgstr ""
+msgstr "حالات الإخفاق"
 
 msgid "spike at %s"
-msgstr ""
+msgstr "كتلة نقطية عند %s"
 
 msgid "beta(%1$s, %2$s)"
-msgstr ""
+msgstr "beta(%1$s, %2$s)"
 
 msgid "beta(%1$s, %2$s)T[%3$s, %4$s]"
-msgstr ""
+msgstr "beta(%1$s, %2$s)T[%3$s, %4$s]"
 
 msgid "binomial(%1$i, %2$s)"
-msgstr ""
+msgstr "binomial(%1$i, %2$s)"
 
 msgid "beta-binomial(%1$i, %2$s, %3$s)"
-msgstr ""
+msgstr "beta-binomial(%1$i, %2$s, %3$s)"
 
 msgid "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
-msgstr ""
+msgstr "binomial(%1$s, beta(%2$s, %3$s)T[%4$s, %5$s])"
 
 msgid "Estimation Summary"
-msgstr ""
+msgstr "ملخص التقدير"
 
 msgid "Model"
 msgstr "النموذج"
 
 msgid "Prior (%s)"
-msgstr ""
+msgstr "قبلي (%s)"
 
 msgid "Prior %s"
-msgstr ""
+msgstr "قبلي %s"
 
 msgid "Posterior (%s)"
-msgstr ""
+msgstr "بعدي (%s)"
 
 msgid "Posterior %s"
-msgstr ""
+msgstr "بعدي %s"
 
 msgid "Please specify successes and failures."
-msgstr ""
+msgstr "يرجى تحديد حالات النجاح والإخفاق."
 
 msgid "Warning:"
-msgstr ""
+msgstr "تحذير:"
 
 msgid "These results are based on %1$i %2$s and %3$i %4$s."
-msgstr ""
+msgstr "تستند هذه النتائج إلى %1$i %2$s و%3$i %4$s."
 
 msgid "Observation"
-msgstr ""
+msgstr "مشاهدة"
 
 msgid "Plot could not be produced due to lacking numerical precision for %1$s."
-msgstr ""
+msgstr "تعذر إنشاء المخطط لعدم كفاية الدقة العددية لـ %1$s."
 
 msgid "Population proportion"
-msgstr ""
+msgstr "نسبة المجتمع"
 
 msgid "Prior = Posterior"
-msgstr ""
+msgstr "التوزيع القبلي = التوزيع البعدي"
 
 msgid "More than bimodal CIs are not implemented in the Sequential analysis plot."
 msgstr ""
+"عرض الفترات (CI) ذات أكثر من منوالين غير مدعوم في مخطط التحليل المتتابع."
 
 msgid "%i%% CI"
-msgstr ""
+msgstr "فترة المصداقية %i%%"
 
 msgid "%i%% HPD"
-msgstr ""
+msgstr "%i%% HPD"
 
 msgid "SI (BF=%s)"
-msgstr ""
+msgstr "SI (BF=%s)"
 
 msgid "Prediction (Successes)"
-msgstr ""
+msgstr "التنبؤ (حالات النجاح)"
 
 msgid "Prediction %s"
-msgstr ""
+msgstr "التنبؤ %s"
 
 msgid "Prediction std. deviation"
-msgstr ""
+msgstr "الانحراف المعياري للتنبؤ"
 
 msgid "The prediction for %1$s %2$s is based on %3$s %4$s and %5$s %6$s."
-msgstr ""
+msgstr "يستند التنبؤ لـ %1$s %2$s إلى %3$s %4$s و%5$s %6$s."
 
 msgid "Predicted sample proportions"
-msgstr ""
+msgstr "نسب العينات المتنبأ بها"
 
 msgid "Predicted number of successes"
-msgstr ""
+msgstr "عدد النجاحات المتوقعة"
 
 msgid "Probability"
 msgstr "الاحتمال"
 
 msgid "The upper CI limit is higher than the number of future observations. Please, change the value of the upper CI limit in the settings panel."
 msgstr ""
+"الحد الأعلى للفترة أكبر من عدد المشاهدات المستقبلية. يرجى تغيير قيمة الحد "
+"الأعلى للفترة في لوحة الإعدادات."
 
 msgid "The lower CI limit is higher than the number of future observations. Please, change the value of the lower CI limit in the settings panel."
 msgstr ""
+"الحد الأدنى للفترة أكبر من عدد المشاهدات المستقبلية. يرجى تغيير قيمة الحد "
+"الأدنى للفترة في لوحة الإعدادات."
 
 msgid "The lower CI limit is higher than the upper CI limit. Please, change the value of the CI limits in the settings panel."
 msgstr ""
+"الحد الأدنى للفترة أكبر من حدها الأعلى. يرجى تغيير قيم حدود الفترة في لوحة "
+"الإعدادات."
 
 msgid "Proportion of Successes"
-msgstr ""
+msgstr "نسبة النجاحات"
 
 msgid "Testing Summary"
-msgstr ""
+msgstr "ملخص الاختبار"
 
 msgid "BF%s"
-msgstr ""
+msgstr "BF%s"
 
 msgid "log(BF%s)"
-msgstr ""
+msgstr "log(BF%s)"
 
 msgid "Hypothesis"
 msgstr "الفرضية"
 
 msgid "P(H)"
-msgstr ""
+msgstr "P(H)"
 
 msgid "log(likelihood)"
-msgstr ""
+msgstr "log(likelihood)"
 
 msgid "P(H|data)"
-msgstr ""
+msgstr "P(H|data)"
 
 msgid "Summary of %1$s could not be computed. The most likely reason is the lack of numerical precision due to the truncation-data conflict (i.e., majority of the posterior distribution lies outside of the truncation range)."
 msgstr ""
+"تعذّر حساب ملخص %1$s. السبب الأرجح هو نقص الدقة العددية نتيجة التعارض بين "
+"البتر والبيانات (أي إن معظم التوزيع البعدي يقع خارج مدى البتر)."
 
 msgid "Bayes factors and posterior probabilities could not be computed since the marginal likelihoods are not available for some models."
 msgstr ""
+"تعذر حساب عوامل بايز والاحتمالات البعدية لعدم توفر الإمكانات الهامشية لبعض "
+"النماذج."
 
 msgid "These results are based on %1$i success(es) and %2$i failure(s)"
-msgstr ""
+msgstr "تستند هذه النتائج إلى %1$i من النجاحات و%2$i من الإخفاقات"
 
 msgid "The plot could not be created because the posterior model probabilities are not defined for all models."
 msgstr ""
+"تعذر إنشاء المخطط لأن الاحتمالات البعدية للنماذج غير معرَّفة لجميع النماذج."
 
 msgid "P(Successes|%s)"
-msgstr ""
+msgstr "P(Successes|%s)"
 
 msgid "P(Successes)"
-msgstr ""
+msgstr "P(Successes)"
 
 msgid "The table could not be created because the posterior model probabilities are not defined for all models."
 msgstr ""
+"تعذر إنشاء الجدول لأن الاحتمالات البعدية للنماذج غير معرَّفة لجميع النماذج."
 
 msgid "Please specify a hypothesis for comparison."
-msgstr ""
+msgstr "يرجى تحديد فرضية للمقارنة."
 
 msgid "Conditional probability"
-msgstr ""
+msgstr "الاحتمال الشرطي"
 
 msgid "Joint probability"
-msgstr ""
+msgstr "الاحتمال المشترك"
 
 msgid "Posterior probability"
 msgstr "الاحتمال البعدي"
 
 msgid "Plotting not possible: One of the Bayes factor is equal to infinity."
-msgstr ""
+msgstr "لا يمكن الرسم: أحد عوامل بايز يساوي ما لا نهاية."
 
 msgid "Observations"
-msgstr ""
+msgstr "مشاهدات"
 
 msgid "At least 2 hypotheses need to be specified."
-msgstr ""
+msgstr "يجب تحديد ما لا يقل عن 2 من الفرضيات."
 
 msgid "Posterior probabilities and marginal prediction could not be computed since the marginal likelihoods are not available for some models."
 msgstr ""
+"تعذر حساب الاحتمالات البعدية والتنبؤ الهامشي لعدم توفر الإمكانات الهامشية لبعض "
+"النماذج."
 
 msgid "The prediction for %1$i observation(s) is based on %2$i success(es) and %3$i failure(s)"
 msgstr ""
+"يستند التنبؤ لـ %1$i من المشاهدات إلى %2$i من النجاحات و%3$i من الإخفاقات"
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be positive."
-msgstr ""
+msgstr "يجب أن تكون المعلمة '%1$s' للنموذج/الفرضية '%2$s' موجبة."
 
 msgid "The truncation range for model/hypothesis '%s' must be within [0, 1] interval."
-msgstr ""
+msgstr "يجب أن يقع نطاق البتر للنموذج/الفرضية '%s' ضمن الفترة [0, 1]."
 
 msgid "The parameter '%1$s' for model/hypothesis '%2$s' must be between 0 and 1."
-msgstr ""
+msgstr "يجب أن تقع المعلمة '%1$s' للنموذج/الفرضية '%2$s' بين 0 و1."
 
 msgid "Please remove duplicates from the %s names."
-msgstr ""
+msgstr "يرجى إزالة التكرارات من أسماء %s."
 
 msgid "'Successes'"
-msgstr ""
+msgstr "'النجاحات'"
 
 msgid "%1$s %2$s Plots"
-msgstr ""
+msgstr "مخططات %1$s %2$s"
 
 msgid "Prior and Posterior Plots"
-msgstr ""
+msgstr "مخططات التوزيعين القبلي والبعدي"
 
 msgid "Sequential Analysis: Point Estimate"
-msgstr ""
+msgstr "التحليل المتتابع: التقدير النقطي"
 
 msgid "%s Sequential Analysis: Interval"
-msgstr ""
+msgstr "%s: التحليل التتابعي: الفترة"
 
 msgid "Sequential Analysis: Stacked"
-msgstr ""
+msgstr "التحليل المتتابع: مكدّس"
 
 msgid "Sequential Posterior Updating"
-msgstr ""
+msgstr "التحديث المتتابع للتوزيع البعدي"
 
 msgid "Prediction Summary"
-msgstr ""
+msgstr "ملخص التنبؤ"
 
 msgid "%s Prediction Plots"
-msgstr ""
+msgstr "مخططات التنبؤ %s"
 
 msgid "Conditional %s Plots"
-msgstr ""
+msgstr "رسوم %s المشروطة"
 
 msgid "Joint %s Plots"
-msgstr ""
+msgstr "رسوم %s المشتركة"
 
 msgid "Marginal %s Plots"
-msgstr ""
+msgstr "رسوم %s الهامشية"
 
 msgid "%1$s %2$s Prediction Plots"
-msgstr ""
+msgstr "مخططات التنبؤ %1$s %2$s"
 
 msgid "%s Prior and Posterior Plots"
-msgstr ""
+msgstr "%s: مخططات التوزيعين القبلي والبعدي"
 
 msgid "%s Predictive Accuracy Plot"
-msgstr ""
+msgstr "مخطط الدقة التنبؤية %s"
 
 msgid "%s Sequential Analysis"
-msgstr ""
+msgstr "%s: التحليل التتابعي"
 
 msgid "Welcome to the %1$s analysis from the Learn Bayes module. This analysis illustrates Bayesian %2$s using %3$s examples."
 msgstr ""
+"مرحبًا بك في تحليل %1$s من وحدة تعلّم بايز. يوضح هذا التحليل %2$s البايزي "
+"باستخدام أمثلة %3$s."
 
 msgid "%s (the population proportion of successes)"
-msgstr ""
+msgstr "%s (نسبة النجاحات في المجتمع)"
 
 msgid "%s (the population mean, variance is assumed to be known)"
-msgstr ""
+msgstr "%s (متوسط المجتمع، بافتراض أن التباين معلوم)"
 
 msgid "The analysis is split into 5 sections:\n      <ol> <li> Data - for specifying the data input for the computations. You can either use a variable from a dataset loaded into JASP, specify an aggregated overview of the data, or enter the observations one by one (and update them during the analysis). </li>\n           <li> %1$s </li>\n           <li> %2$s </li>\n           <li> %3$s </li>\n           <li> %4$s </li> </ol>"
 msgstr ""
+"ينقسم التحليل إلى 5 أقسام:\n"
+"      <ol> <li> البيانات - لتحديد مدخلات الحساب. يمكنك استخدام متغير من "
+"مجموعة بيانات محمَّلة في JASP، أو تحديد ملخص مجمَّع للبيانات، أو إدخال المشاهدات "
+"واحدةً تلو الأخرى وتحديثها أثناء التحليل. </li>\n"
+"           <li> %1$s </li>\n"
+"           <li> %2$s </li>\n"
+"           <li> %3$s </li>\n"
+"           <li> %4$s </li> </ol>"
 
 msgid "The 'Data' section allows you to specify data input for the analysis."
-msgstr ""
+msgstr "يتيح قسم 'البيانات' تحديد مدخلات البيانات للتحليل."
 
 msgid "The 'Select variable' option allows the selection of a variable ('Selected') from a dataset loaded into JASP. %s"
 msgstr ""
+"يتيح خيار «تحديد المتغير» اختيار متغير («محدد») من مجموعة بيانات محمَّلة في "
+"JASP. %s"
 
 msgid "The 'Specify counts' option allows the use of aggregated data. %1$s This means that the %2$s are updated only once, with the complete data. The lack of information about the order of observations precludes the use of sequential analysis."
 msgstr ""
+"يتيح خيار «تحديد التكرارات» استخدام البيانات المجمعة. %1$s ويعني ذلك تحديث "
+"%2$s مرة واحدة فقط باستخدام البيانات الكاملة. يمنع غياب المعلومات عن ترتيب "
+"المشاهدات استخدام التحليل التتابعي."
 
 msgid "The 'Enter sequence' option allows manual input of a specific order of observations. %s"
-msgstr ""
+msgstr "يتيح خيار 'إدخال متتالية' إدخال ترتيب محدد للمشاهدات يدويًا. %s"
 
 msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability mass at one point (%2$s). This represents the prior belief that the population proportion is %2$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %2$s. The prior and the posterior %5$s then corresponds to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. %6$s After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
+"يوفر تحليل «تقدير ثنائي الحدين» نوعين من التوزيع القبلي للمعلمة %1$s، التي "
+"تمثل نسبة النجاح في المجتمع:\n"
+"        <ul><li>'Spike(%2$s)' - يركز الكتلة الاحتمالية كلها عند النقطة (%2$s)"
+". يمثل يقينًا قبليًا بأن نسبة المجتمع تساوي %2$s، لا تستطيع البيانات تغييره؛ "
+"لذا يبقى البعدي كتلةً عند %2$s. يقابل %5$s القبلي والبعدي موقع الكتلة.</li>"
+"<li>'Beta(%3$s, %4$s)' - يوزع الكثافة عبر قيم المعلمة %1$s وفق توزيع بيتا "
+"بمعلمتيه %3$s و%4$s. %6$s بعد مشاهدة 'S' نجاحات و'F' إخفاقات، يُحدَّث البعدي "
+"إلى beta(%3$s + S, %4$s + F)، ويُحسب %5$s وفقًا لذلك.</li></ul>"
 
 msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability mass at one point (%3$s). This represents the prior belief that the population proportion is %3$s with certainty. This conviction is so strong that no data can move this prior belief. Hence, the posterior is also a spike at %3$s. The prior and the posterior %8$s then corresponds to the location of the spike.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
 msgstr ""
+"يوفر تحليل «التقدير الغاوسي» نوعين من التوزيع القبلي للمعلمة %1$s في توزيع "
+"طبيعي Normal(%1$s, %2$s) بانحراف معياري معلوم %2$s:\n"
+"        <ul><li>'Spike(%3$s)' - يركز الكتلة الاحتمالية عند نقطة واحدة (%3$s). "
+"يمثل يقينًا قبليًا بأن متوسط المجتمع يساوي %3$s، لا تستطيع البيانات تغييره؛ لذا "
+"يبقى البعدي كتلةً عند %3$s. يقابل %8$s القبلي والبعدي موقع الكتلة.</li><li>"
+"'Normal(%3$s, %4$s)' - يوزع الكثافة عبر قيم المعلمة %1$s بتوزيع طبيعي بمتوسط "
+"%3$s وانحراف معياري %4$s. يقابل %8$s القبلي معلمة المتوسط %3$s. بعد مشاهدة "
+"'N' مشاهدات بمتوسط %5$s، يُحدَّث البعدي إلى normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/"
+"N) + %4$s%6$s) + ((%2$s%6$s/N)*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/"
+"%4$s%6$s + N/%2$s%6$s) )، ويقابل %8$s متوسط التوزيع البعدي.</li></ul>"
 
 msgid "The 'Estimation Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Prior (%1$s)' - the specified prior distribution for parameter %1$s</li><li>'Prior %2$s' - the %3$s of the specified prior distribution</li><li>'Posterior (%1$s)' - the estimated posterior distribution for the parameter %1$s (i.e., the prior distribution updated with data)</li><li>'Posterior %2$s' - the %3$s of the posterior distribution</li></ul>"
 msgstr ""
+"يعرض جدول «ملخص التقدير» ملخصات عددية للنماذج الفردية. يمكن تغيير التقدير "
+"النقطي المعروض بخيار «التقدير النقطي». يتكون الجدول من الأعمدة الآتية:\n"
+"    <ul><li>«النموذج» - أسماء النماذج المحددة</li><li>«القبلي (%1$s)» - "
+"التوزيع القبلي المحدد للمعلمة %1$s</li><li>«القبلي %2$s» - %3$s للتوزيع "
+"القبلي المحدد</li><li>«البعدي (%1$s)» - التوزيع البعدي المقدَّر للمعلمة %1$s "
+"(أي القبلي المحدَّث بالبيانات)</li><li>«البعدي %2$s» - %3$s للتوزيع البعدي</li>"
+"</ul>"
 
 msgid "The 'Binomial Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The marginal likelihood corresponds to a binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with the chance parameter equal to the location of the spike.</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The marginal likelihood corresponds to a beta-binomial density evaluated at the observed number of successes, with size equal to the number of observations, and with parameters %3$s and %4$s corresponding to the shape parameters of the prior beta distribution.</li></ul>"
 msgstr ""
+"يوفر تحليل «اختبار ثنائي الحدين» نوعين من التوزيع القبلي للمعلمة %1$s، التي "
+"تمثل نسبة النجاح في المجتمع:\n"
+"        <ul><li>'Spike(%2$s)' - يركز الكتلة الاحتمالية عند موضع واحد (%2$s). "
+"يوافق الإمكان الهامشي دالة كتلة ثنائي الحدين عند عدد النجاحات المشاهَد، بحجم "
+"يساوي عدد المشاهدات ومعلمة احتمال تساوي موقع الكتلة.</li><li>'Beta(%3$s, "
+"%4$s)' - يوزع الكثافة عبر قيم المعلمة %1$s وفق توزيع بيتا بمعلمتيه %3$s "
+"و%4$s. يوافق الإمكان الهامشي دالة كتلة بيتا–ثنائي الحدين عند عدد النجاحات "
+"المشاهَد، بحجم يساوي عدد المشاهدات ومعلمتي الشكل %3$s و%4$s للتوزيع القبلي.</"
+"li></ul>"
 
 msgid "The 'Gaussian Testing' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population mean of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the location of the spike, and standard deviation as %2$s/%7$sN, where 'N' stands for the number of observations.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with mean %3$s and standard deviation %4$s. The marginal likelihood corresponds to a normal density evaluated at the observed mean, with mean equal to the mean of the prior distribution, and standard deviation of %7$s( %2$s%6$s/N + %4$s%6$s ).</li></ul>"
 msgstr ""
+"يوفر تحليل «الاختبار الغاوسي» نوعين من التوزيع القبلي للمعلمة %1$s، التي تمثل "
+"متوسط المجتمع لتوزيع طبيعي Normal(%1$s, %2$s) بانحراف معياري معلوم %2$s:\n"
+"        <ul><li>'Spike(%3$s)' - يركز الكتلة الاحتمالية عند موضع واحد (%3$s). "
+"يوافق الإمكان الهامشي كثافة طبيعية عند المتوسط المشاهَد، بمتوسط يساوي موقع "
+"الكتلة وانحراف معياري %2$s/%7$sN، حيث 'N' عدد المشاهدات.</li><li>'Normal"
+"(%3$s, %4$s)' - يوزع الكثافة عبر قيم المعلمة %1$s بتوزيع طبيعي بمتوسط %3$s "
+"وانحراف معياري %4$s. يوافق الإمكان الهامشي كثافة طبيعية عند المتوسط المشاهَد، "
+"بمتوسط يساوي المتوسط القبلي وانحراف معياري %7$s( %2$s%6$s/N + %4$s%6$s ).</"
+"li></ul>"
 
 msgid "The posterior probabilities 'P(H|data)' are then computed using Bayes formula,\n        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> where 'P(H)' represents the prior probability of the hypothesis, 'P(data|H)' the marginal likelihood of the data given the hypothesis, and 'P(data)' the probability of the data. The factor 'P(data)' equals the sum of marginal likelihoods multiplied by the prior probabilities, P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
 msgstr ""
+"تُحسب الاحتمالات البعدية 'P(H|data)' بقاعدة بايز:\n"
+"        <center>P(H|data) = P(H) * P(data|H) / P(data),</center> حيث يمثل 'P"
+"(H)' الاحتمال القبلي للفرضية، و'P(data|H)' الإمكان الهامشي للبيانات تحتها، و'P"
+"(data)' احتمال البيانات. يساوي العامل 'P(data)' مجموع الإمكانات الهامشية "
+"مضروبة في الاحتمالات القبلية: P(data) = %1$s P(data|H%2$s)*P(H%2$s)."
 
 msgid "The Bayes factors 'BF' can be obtained by dividing the posterior odds of two models by their prior odds,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P(H%2$s) ),</center> where 'BF%1$s%2$s' stands for the Bayes factor in favor of the 1st model in comparison to the 2nd model (selected from the 'vs.' dropdown menu) and can be interpreted as a natural measure of relative predictive performance. It is also possible to compute a Bayes factor that compares the hypothesis to the remaining hypotheses 'vs. all' exchange the second hypothesis for the sum of the remaining hypotheses, which can be simplified into,\n        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P(H%1$s)/(1-P(H%1$s)) ).</center>The numerator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
+"تُحسب عوامل بايز 'BF' بقسمة الأرجحية البعدية لنموذجين على أرجحيتهما القبلية:\n"
+"        <center>BF%1$s%2$s = ( P(H%1$s|data)/P(H%2$s|data) ) / ( P(H%1$s)/P"
+"(H%2$s) ),</center> حيث يمثل 'BF%1$s%2$s' عامل بايز لصالح النموذج الأول مقابل "
+"الثاني (المختار من قائمة «مقابل»)، ويُفسَّر كمقياس طبيعي للأداء التنبؤي النسبي. "
+"يمكن أيضًا مقارنة الفرضية ببقية الفرضيات («مقابل الكل») باستبدال الفرضية "
+"الثانية بمجموع البقية، فتُبسَّط الصيغة إلى:\n"
+"        <center>BF%1$s%2$s = ( P(H%1$s|data)/(1-P(H%1$s|data)) ) / ( P"
+"(H%1$s)/(1-P(H%1$s)) ).</center>يمكن عكس البسط والمقام باختيار 'BF%2$s%1$s' "
+"لقياس الدليل لصالح الفرضية الثانية، أو التحويل إلى المقياس اللوغاريتمي "
+"باختيار 'log(BF%1$s%2$s)'."
 
 msgid "The 'Testing Summary' table displays numerical summaries for the hypotheses. It is composed of the following columns:\n    <ul><li>'Hypothesis' - the specified hypothesis names</li><li>'P(H)' - the prior probability of the hypothesis</li><li>'log(likelihood)' - the log of the marginal likelihood of the hypothesis</li><li>'P(H|data)' - the posterior probability of the hypothesis (after updating with the data)</li><li>%s</li></ul>"
 msgstr ""
+"يعرض جدول «ملخص الاختبار» ملخصات عددية للفرضيات. يتكون من الأعمدة الآتية:\n"
+"    <ul><li>«الفرضية» - أسماء الفرضيات المحددة</li><li>'P(H)' - الاحتمال "
+"القبلي للفرضية</li><li>'log(likelihood)' - لوغاريتم الإمكان الهامشي للفرضية</"
+"li><li>'P(H|data)' - الاحتمال البعدي للفرضية (بعد التحديث بالبيانات)</li><li>"
+"%s</li></ul>"
 
 msgid "The '%1$s' option displays the %2$s plots for parameter %3$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %4$s distributions are visualized as continuous lines."
 msgstr ""
+"يعرض خيار «%1$s» رسوم %2$s للمعلمة %3$s. تُمثَّل التوزيعات القبلية ذات الكتلة "
+"النقطية بأسهم (للدلالة على أن كثافتها لا نهائية)، وتُمثَّل توزيعات %4$s بخطوط "
+"متصلة."
 
 msgid "The 'All' option shows all %1$s for parameter %2$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis."
 msgstr ""
+"يعرض خيار «الكل» جميع %1$s للمعلمة %2$s متراكبةً، لتسهيل المقارنة باستخدام "
+"مقياس مشترك للكثافة والاحتمال على المحور y."
 
 msgid "The 'Stacked' option shows all %1$s for parameter %2$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"يعرض خيار «مكدَّس» جميع %1$s للمعلمة %2$s في شكل واحد، مع إضفاء عمق بوضع "
+"التوزيعات الإضافية في مواقع أبعد على المحور z."
 
 msgid "The 'Individual' option shows %1$s for parameter %2$s individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
 msgstr ""
+"يعرض خيار «فردي» %1$s للمعلمة %2$s في أشكال مستقلة. يمكن عرض أنواع مختلفة من "
+"التقديرات النقطية («التقدير النقطي») وفترات المصداقية ('CI'):%3$s"
 
 msgid "Furthermore, the 'Observed data' checkbox allows the visualization of the observed %s as a black cross in the figure."
 msgstr ""
+"يتيح مربع 'البيانات المشاهدة' أيضًا عرض %s المشاهد كعلامة تقاطع سوداء في الشكل."
 
 msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%3$s"
 msgstr ""
+"يعرض خيار «شرطي» جميع %1$s للمعلمة %2$s بصورة مستقلة، كما لو كانت نماذج "
+"منفردة (دون وجود فرضيات أخرى). يمكن عرض أنواع مختلفة من التقديرات النقطية («"
+"التقدير النقطي») وفترات المصداقية ('CI'):%3$s"
 
 msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s over the parameter by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"يعرض خيار «مشترك» جميع %1$s للمعلمة %2$s مجتمعةً في ضوء الفرضيات الأخرى (بضرب "
+"كثافة %1$s على المعلمة في الاحتمال %3$s للفرضية). يتيح خيار «متراكب» عرض جميع "
+"%1$s متراكبةً لتسهيل المقارنة بمقياس مشترك للكثافة والاحتمال على المحور y. "
+"ويعرض «مكدَّس» جميع %1$s في شكل واحد، مع إضفاء عمق بوضع التوزيعات الإضافية أبعد "
+"على المحور z."
 
 msgid "The 'Marginal' option collapses across all individual %1$s, weighting them by their %2$s probability.%3$s It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%4$s"
 msgstr ""
+"يدمج خيار «هامشي» جميع %1$s الفردية، مع ترجيحها باحتمالها %2$s.%3$s يمكن عرض "
+"أنواع مختلفة من التقديرات النقطية («التقدير النقطي») وفترات المصداقية ('CI')"
+":%4$s"
 
 msgid "The 'Prior and posterior distribution' option displays the prior and posterior distribution of the parameter %1$s for the individual %2$s. Spike prior distributions are visualized as arrows (signifying that their density is infinite) and %3$s distributions are visualized as continuous lines. Prior distributions are visualized as dashed grey lines and the posterior distribution as solid black lines. In addition, the observed data summary can be visualized as a black cross by selecting the '%4$s' checkbox."
 msgstr ""
+"يعرض خيار «التوزيع القبلي والبعدي» التوزيعين القبلي والبعدي للمعلمة %1$s لكل "
+"%2$s على حدة. تُمثَّل القبليات ذات الكتلة النقطية بأسهم (للدلالة على كثافتها "
+"اللانهائية)، وتُمثَّل توزيعات %3$s بخطوط متصلة. تُرسم القبليات بخطوط رمادية "
+"متقطعة والبعديات بخطوط سوداء متصلة. ويمكن عرض ملخص البيانات المشاهَدة كعلامة "
+"تقاطع سوداء بتحديد مربع «%4$s»."
 
 msgid "The 'Conditional' option shows all prior and posterior distributions for parameter %1$s independently, as if they were considered as individual models (without the existence of other hypotheses)."
 msgstr ""
+"يعرض خيار «شرطي» جميع التوزيعات القبلية والبعدية للمعلمة %1$s بصورة مستقلة، "
+"كما لو كانت نماذج منفردة (دون وجود فرضيات أخرى)."
 
 msgid "The 'Joint' option shows all prior and posterior distributions for parameter %1$s when considered together in light of the other hypotheses. In addition, the 'Overlying' option allows the visualization all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"يعرض خيار «مشترك» جميع التوزيعات القبلية والبعدية للمعلمة %1$s مجتمعةً في ضوء "
+"الفرضيات الأخرى. يتيح «متراكب» عرض توزيعات %1$s متراكبةً لتسهيل المقارنة "
+"بمقياس مشترك للكثافة والاحتمال على المحور y. ويعرض «مكدَّس» توزيعات %1$s في شكل "
+"واحد، مع إضفاء عمق بوضع التوزيعات الإضافية أبعد على المحور z."
 
 msgid "The 'Marginal' option collapses across all individual prior and posterior distributions, weighting them by their prior and posterior probability."
 msgstr ""
+"يجمع الخيار 'الهامشي' التوزيعات القبلية والبعدية الفردية كلها، مرجّحًا إياها "
+"باحتمالاتها القبلية والبعدية."
 
 msgid "The 'Point estimate' option displays a plot with the sequential updating of the point estimate %1$s (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis). It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%2$s"
 msgstr ""
+"يعرض خيار «التقدير النقطي» رسمًا للتحديث التتابعي للتقدير النقطي %1$s (المحور "
+"y). يوضح الشكل العملية كما لو كانت نقاط البيانات تصل تباعًا (المحور x). يمكن "
+"عرض أنواع مختلفة من التقديرات النقطية («التقدير النقطي») وفترات المصداقية "
+"('CI'):%2$s"
 
 msgid "The 'Updating table' option generates a numerical summary of the displayed figures."
-msgstr ""
+msgstr "يُنشئ خيار 'جدول التحديث' ملخصًا عدديًا للأشكال المعروضة."
 
 msgid "The 'Stacked distributions' option displays a plot with the sequential updating of the posterior distribution density (x- and y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another, creating a depth effect (z-axis)."
 msgstr ""
+"يعرض خيار «التوزيعات المكدَّسة» رسمًا للتحديث التتابعي لكثافة التوزيع البعدي "
+"(المحوران x وy). يوضح الشكل العملية كما لو كانت نقاط البيانات تصل تباعًا، مع "
+"إضفاء عمق (المحور z)."
 
 msgid "The 'Interval' option displays a sequential plot with the probability of parameter %s lying inside of the interval ranging from ('lower') to ('upper'), (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
 msgstr ""
+"يعرض خيار «الفترة» رسمًا تتابعيًا لاحتمال وقوع المعلمة %s داخل الفترة من "
+"('lower') إلى ('upper') على المحور y. يوضح الشكل عملية التحديث كما لو كانت "
+"نقاط البيانات تصل تباعًا (المحور x)."
 
 msgid "The 'All' option shows the probability of parameter %s lying inside of the specified range for all models in one figure, allowing for easier comparison."
 msgstr ""
+"يعرض خيار «الكل» احتمال وقوع المعلمة %s ضمن المدى المحدد لجميع النماذج في "
+"شكل واحد، لتسهيل المقارنة."
 
 msgid "The 'Stacked' option visualizes the interval for all prior distribution updates for each model within one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"يعرض خيار «مكدَّس» الفترة لجميع تحديثات التوزيع القبلي لكل نموذج في شكل واحد، "
+"مع إضفاء عمق بوضع التوزيعات الإضافية في مواقع أبعد على المحور z."
 
 msgid "The 'Posterior updating table' option generates a numerical summary of the updating process for parameter %s. The 'Observation' column tracks how many observations have been already encountered for the corresponding posterior distribution. The first row (observation = 0) corresponds to the prior distribution and the last row corresponds to the final posterior distribution after the prior distribution was updated with all observations."
 msgstr ""
+"ينشئ خيار «جدول التحديث البعدي» ملخصًا عدديًا لتحديث المعلمة %s. يتتبع عمود «"
+"المشاهدة» عدد المشاهدات المستخدمة حتى التوزيع البعدي المقابل. يقابل الصف "
+"الأول (المشاهدة = 0) التوزيع القبلي، ويقابل الأخير التوزيع البعدي النهائي بعد "
+"تحديث القبلي بجميع المشاهدات."
 
 msgid "The 'Binomial Estimation' analysis offers two types of prior distributions for parameter %1$s that represents the underlying population proportion of successes:\n        <ul><li>'Spike(%2$s)' - for concentrating all probability density at one location (%2$s). The prior %5$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %5$s</li><li>'Beta(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a beta distribution with parameters %3$s and %4$s. The prior %6$s. After observing 'S' successes and 'F' failures, the posterior distribution updates to beta(%3$s + S, %4$s + F) with a %5$s computed correspondingly.</li></ul>"
 msgstr ""
+"يوفر تحليل «تقدير ثنائي الحدين» نوعين من التوزيع القبلي للمعلمة %1$s، التي "
+"تمثل نسبة النجاح في المجتمع:\n"
+"        <ul><li>'Spike(%2$s)' - يركز الكتلة الاحتمالية كلها عند موضع واحد "
+"(%2$s). يقابل %5$s القبلي موقع الكتلة. ويبقى التوزيع البعدي كتلةً في الموقع "
+"نفسه وبـ%5$s الموافق.</li><li>'Beta(%3$s, %4$s)' - يوزع الكثافة عبر قيم "
+"المعلمة %1$s وفق توزيع بيتا بمعلمتيه %3$s و%4$s. القبلي %6$s. بعد مشاهدة 'S' "
+"نجاحات و'F' إخفاقات، يُحدَّث البعدي إلى beta(%3$s + S, %4$s + F)، ويُحسب %5$s "
+"وفقًا لذلك.</li></ul>"
 
 msgid "The 'Gaussian Estimation' analysis offers two types of prior distributions for parameter %1$s of a normal distribution, Normal(%1$s, %2$s), with known standard deviation %2$s:\n        <ul><li>'Spike(%3$s)' - for concentrating all probability density at one location (%3$s). The prior %8$s corresponds to the location of the spike. The posterior distribution is again a spike at the same location and corresponding %8$s.</li><li>'Normal(%3$s, %4$s)' - for allocating probability density across all values of parameter %1$s according to a normal distribution with parameters mean %3$s and standard deviation %4$s. The prior %8$s corresponds to the mean parameter of the normal distribution %3$s. After seeing 'N' observations with mean %5$s, the posterior distribution updates to normal( (%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + (%2$s%6$s*%3$s)/( (%2$s%6$s/N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) ) with %8$s corresponding to the mean of posterior distribution.</li></ul>"
 msgstr ""
+"يوفر تحليل «التقدير الغاوسي» نوعين من التوزيع القبلي للمعلمة %1$s في توزيع "
+"طبيعي Normal(%1$s, %2$s) بانحراف معياري معلوم %2$s:\n"
+"        <ul><li>'Spike(%3$s)' - يركز الكتلة الاحتمالية عند موضع واحد (%3$s). "
+"يقابل %8$s القبلي موقع الكتلة. ويبقى البعدي كتلةً في الموقع نفسه وبـ%8$s "
+"الموافق.</li><li>'Normal(%3$s, %4$s)' - يوزع الكثافة عبر قيم المعلمة %1$s "
+"بتوزيع طبيعي بمتوسط %3$s وانحراف معياري %4$s. يقابل %8$s القبلي معلمة "
+"المتوسط %3$s. بعد مشاهدة 'N' مشاهدات بمتوسط %5$s، يُحدَّث البعدي إلى normal( "
+"(%4$s%6$s*%5$s)/( (%2$s%6$s/N) + %4$s%6$s) + ((%2$s%6$s/N)*%3$s)/( (%2$s%6$s/"
+"N) + %4$s%6$s), 1/%7$s(1/%4$s%6$s + N/%2$s%6$s) )، ويقابل %8$s متوسط التوزيع "
+"البعدي.</li></ul>"
 
 msgid "The 'Posterior prediction' section allows the prediction of future data based on the estimated models%s"
 msgstr ""
+"يتيح قسم 'التنبؤ البعدي' التنبؤ ببيانات مستقبلية استنادًا إلى النماذج "
+"المقدرة%s"
 
 msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') follow a binomial distribution with size N and chance parameter %2$s equal to the location of the prior distribution. %5$s For a model with a beta prior distribution for parameter %1$s, the predictive distribution is a beta-binomial distribution with size N and posterior beta distribution parameters %3$s and %4$s. %6$s"
 msgstr ""
+"للنموذج ذي توزيع قبلي بكتلة نقطية للمعلمة %1$s، تتبع تنبؤات 'N' مشاهدات "
+"مستقبلية («المشاهدات المستقبلية») توزيع ثنائي الحدين بحجم N ومعلمة احتمال "
+"%2$s تساوي موقع التوزيع القبلي. %5$s وللنموذج ذي توزيع بيتا قبلي للمعلمة %1$s"
+"، يكون التوزيع التنبؤي بيتا–ثنائي الحدين بحجم N ومعلمتي توزيع بيتا البعدي "
+"%3$s و%4$s. %6$s"
 
 msgid "For a model with a spike prior distribution for parameter %1$s, predictions for 'N' future observation ('Future observations') with standard deviation %2$s ('SD') follow a normal distribution with mean parameter equal to the location of the prior distribution %3$s and standard deviation %2$s/%4$sN. For a model with a normal prior distribution for parameter %1$s, the predictive distribution is a normal distribution with mean equal to the mean of the posterior distribution and standard deviation based on the standard deviation of the posterior distribution (%3$s) and expected standard deviation of the new data (%2$s/%4$sN), %4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). In both cases, the %6$s prediction is equal to the mean parameter of the distribution for predictions."
 msgstr ""
+"للنموذج ذي توزيع قبلي بكتلة نقطية للمعلمة %1$s، يتبع متوسط 'N' مشاهدات "
+"مستقبلية («المشاهدات المستقبلية») بانحراف معياري %2$s ('SD') توزيعًا طبيعيًا، "
+"بمتوسط يساوي موقع الكتلة وانحراف معياري %2$s/%4$sN. يرمز %3$s للانحراف "
+"المعياري البعدي المستخدم أدناه. وللنموذج ذي توزيع طبيعي قبلي للمعلمة %1$s، "
+"يكون التوزيع التنبؤي طبيعيًا بمتوسط يساوي المتوسط البعدي وانحراف معياري يجمع "
+"الانحراف البعدي (%3$s) والانحراف المتوقع لمتوسط البيانات الجديدة (%2$s/%4$sN): "
+"%4$s( %3$s%5$s + (%2$s/%4$sN)%5$s ). في الحالتين، يساوي متوسط التنبؤ معلمة "
+"متوسط توزيعه. نوع فترة التنبؤ المحدد: %6$s."
 
 msgid "The 'Prediction Summary' table displays numerical summaries for the individual models. The displayed point estimate can be changed using the 'Point estimate' option. The table is composed of the following columns:\n    <ul><li>'Model' - the specified model names</li><li>'Posterior (%1$s)' - the estimated posterior distribution for parameter %1$s (used for prediction)</li>%2$s<li>'Posterior %4$s' - the %5$s of the specified posterior distribution</li><li>'Prediction%3$s' - the predictive distribution for new data</li><li>'Prediction %4$s' - the %5$s of predicted data</li></ul>"
 msgstr ""
+"يعرض جدول «ملخص التنبؤ» ملخصات عددية للنماذج الفردية. يمكن تغيير التقدير "
+"النقطي بخيار «التقدير النقطي». يتكون الجدول من الأعمدة الآتية:\n"
+"    <ul><li>«النموذج» - أسماء النماذج المحددة</li><li>«البعدي (%1$s)» - "
+"التوزيع البعدي المقدَّر للمعلمة %1$s (المستخدم للتنبؤ)</li>%2$s<li>«البعدي %4$s"
+"» - %5$s للتوزيع البعدي المحدد</li><li>«التنبؤ%3$s» - التوزيع التنبؤي "
+"للبيانات الجديدة</li><li>«التنبؤ %4$s» - %5$s للبيانات المتنبأ بها</li></ul>"
 
 msgid "The 'Posterior predictive distribution' option displays figures of predictive distributions based on posterior distributions of the individual models. The '%1$s' checkbox transforms the figures with predicted data%2$s into figures with %3$s."
 msgstr ""
+"يعرض خيار «التوزيع التنبؤي البعدي» أشكالًا لتوزيعات تنبؤية تستند إلى التوزيعات "
+"البعدية للنماذج الفردية. يحوّل مربع الاختيار «%1$s» الأشكال التي تتضمن بيانات "
+"متنبأً بها%2$s إلى أشكال تتضمن %3$s."
 
 msgid "The 'All' option shows all posterior predictive distributions on top of each other, allowing for easier comparison with a common density scale on the y-axis."
 msgstr ""
+"يعرض خيار «الكل» جميع التوزيعات التنبؤية البعدية متراكبةً، لتسهيل المقارنة "
+"باستخدام مقياس كثافة مشترك على المحور y."
 
 msgid "The 'Stacked' option shows all posterior predictive distributions in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"يعرض خيار «مكدَّس» جميع التوزيعات التنبؤية البعدية في شكل واحد، مع إضفاء عمق "
+"بوضع التوزيعات الإضافية في مواقع أبعد على المحور z."
 
 msgid "The 'Individual' option shows posterior predictive distributions for each model individually in separate figures. It is possible to visualize different types of point estimates ('Point estimate') and credible intervals ('CI'):%s"
 msgstr ""
+"يعرض خيار «فردي» التوزيعات التنبؤية البعدية لكل نموذج في شكل مستقل. يمكن عرض "
+"أنواع مختلفة من التقديرات النقطية («التقدير النقطي») وفترات المصداقية ('CI')"
+":%s"
 
 msgid "The '%1$s' option displays figures of predictive distributions based on posterior distributions of the individual models. %2$s"
 msgstr ""
+"يعرض الخيار '%1$s' أشكال التوزيعات التنبؤية المستندة إلى التوزيعات البعدية "
+"للنماذج الفردية. %2$s"
 
 msgid "The 'Conditional' option shows all %1$s for parameter %2$s independently, as if they were considered as individual models (without the existence of other hypotheses). It is possible to visualize different of credible intervals ('CI'):%3$s"
 msgstr ""
+"يعرض خيار «شرطي» جميع %1$s للمعلمة %2$s بصورة مستقلة، كما لو كانت نماذج "
+"منفردة (دون وجود فرضيات أخرى). يمكن عرض أنواع مختلفة من فترات المصداقية "
+"('CI'):%3$s"
 
 msgid "The 'Joint' option shows all %1$s for parameter %2$s when considered together in light of the other hypotheses (by multiplying the density of the %1$s by the %3$s probability of the hypothesis). In addition, the 'Overlying' option allows the  visualization of all %1$s on top of each other, allowing for easier comparison with a common density and probability scale on the y-axis and the 'Stacked' option shows all %1$s in one figure with a depth effect induced by plotting the additional distributions 'further' on the z-axis."
 msgstr ""
+"يعرض خيار «مشترك» جميع %1$s للمعلمة %2$s مجتمعةً في ضوء الفرضيات الأخرى (بضرب "
+"كثافة %1$s في الاحتمال %3$s للفرضية). يتيح خيار «متراكب» عرض جميع %1$s "
+"متراكبةً لتسهيل المقارنة بمقياس مشترك للكثافة والاحتمال على المحور y. ويعرض «"
+"مكدَّس» جميع %1$s في شكل واحد، مع إضفاء عمق بوضع التوزيعات الإضافية أبعد على "
+"المحور z."
 
 msgid "The 'Predictive accuracy' option allows a comparison of the predictive accuracy across all hypotheses. Predictive accuracy refers to how likely the data are given the hypotheses."
 msgstr ""
+"يتيح خيار «الدقة التنبؤية» مقارنة الدقة التنبؤية عبر جميع الفرضيات. تشير "
+"الدقة التنبؤية إلى مدى احتمال البيانات في ظل الفرضيات."
 
 msgid "The 'Conditional' option shows all predictive accuracies independently, as if they were considered as individual models (without the existence of other hypotheses)."
 msgstr ""
+"يعرض خيار «شرطي» جميع قيم الدقة التنبؤية بصورة مستقلة، كما لو كانت نماذج "
+"منفردة (دون وجود فرضيات أخرى)."
 
 msgid "The 'Joint' option shows all predictive accuracies when taking the prior probabilities of hypotheses into account (by multiplying conditional predictive accuracies by prior probabilities of the hypotheses)."
 msgstr ""
+"يعرض خيار «مشترك» جميع قيم الدقة التنبؤية مع أخذ الاحتمالات القبلية للفرضيات "
+"في الحسبان (بضرب قيم الدقة التنبؤية الشرطية في الاحتمالات القبلية للفرضيات)."
 
 msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses)."
 msgstr ""
+"يعرض خيار «مطبَّع» جميع قيم الدقة التنبؤية مجتمعةً في ضوء الفرضيات الأخرى، بقسمة "
+"قيم الدقة التنبؤية المشتركة على احتمال البيانات؛ فتنتج الاحتمالات البعدية "
+"للفرضيات."
 
 msgid "The 'Test results' option displays a plot with the sequential change in the predictive accuracy of all hypotheses (y-axis). The figure visualizes the updating process as if the individual data points were arriving one after another (x-axis)."
 msgstr ""
+"يعرض خيار «نتائج الاختبار» رسمًا للتغير التتابعي في الدقة التنبؤية لجميع "
+"الفرضيات (المحور y). يوضح الشكل عملية التحديث كما لو كانت نقاط البيانات تصل "
+"تباعًا (المحور x)."
 
 msgid "The 'Normalized' option shows all predictive accuracies considered together in light of the other hypotheses (by normalizing the joint predictive accuracies by the probability of the data, which equals to the posterior probability of the hypotheses at the given time point)."
 msgstr ""
+"يعرض خيار «مطبَّع» جميع قيم الدقة التنبؤية مجتمعةً في ضوء الفرضيات الأخرى، بقسمة "
+"قيم الدقة التنبؤية المشتركة على احتمال البيانات؛ فتنتج الاحتمالات البعدية "
+"للفرضيات عند النقطة الزمنية المعنية."
 
 msgid "The 'Bayes factor' option can compare the predictive accuracies of the hypotheses to the rest of the hypotheses ('vs. All'), the best hypothesis ('vs. best'), or a specific hypothesis selected in the 'vs.' dropdown  (the selected hypothesis correponds to the '0' in BF%1$s%2$s). The nominator and denominator of the Bayes factors can be reversed by choosing the 'BF%2$s%1$s' option (quantifying the evidence in favor of the second hypothesis), or transformed to a log scale by choosing the 'log(BF%1$s%2$s)' option."
 msgstr ""
+"يتيح خيار «عامل بايز» مقارنة الدقة التنبؤية للفرضيات ببقية الفرضيات («مقابل "
+"الكل»)، أو بأفضل فرضية («مقابل الأفضل»)، أو بفرضية محددة من قائمة «مقابل» "
+"(تقابل الفرضية المختارة '0' في BF%1$s%2$s). يمكن عكس البسط والمقام باختيار "
+"'BF%2$s%1$s' لقياس الدليل لصالح الفرضية الثانية، أو التحويل إلى المقياس "
+"اللوغاريتمي باختيار 'log(BF%1$s%2$s)'."
 
 msgid "The 'Updating table' option generates a numerical summary of the displayed figure."
-msgstr ""
+msgstr "يُنشئ خيار 'جدول التحديث' ملخصًا عدديًا للشكل المعروض."
 
 msgid "<ul><li>'central' - a central interval (or quantile) that covers the central 'mass'%% area of the distribution</li><li>'HPD' - a highest posterior density interval that covers 'mass'%% area with the shortest range</li><li>'custom' - an interval defined by a 'lower' and 'upper' bound. It returns the posterior mass of the parameter falling inside the custom interval.</li>%s</ul>"
 msgstr ""
+"<ul><li>'central' - فترة مركزية (أو فترة قائمة على القيم الكمية) تغطي مساحة "
+"'mass'%% المركزية من التوزيع</li><li>'HPD' - فترة الكثافة البعدية الأعلى التي "
+"تغطي مساحة 'mass'%% بأقصر مدى</li><li>'custom' - فترة يحددها حدان 'lower' "
+"و'upper'. تعيد الكتلة الاحتمالية البعدية للمعلمة الواقعة داخل الفترة "
+"المخصصة.</li>%s</ul>"
 
 msgid "Mode"
 msgstr "المنوال"
 
 msgid "Warning: The number of players must be at least 2. Adjust the inputs!"
-msgstr ""
+msgstr "تحذير: يجب أن يكون عدد اللاعبين 2 على الأقل. عدّل المدخلات!"
 
 msgid "Warning: The number of players must be at most 9. Adjust the inputs!"
-msgstr ""
+msgstr "تحذير: يجب ألا يتجاوز عدد اللاعبين 9. عدّل المدخلات!"
 
 msgid "Warning: The number of point(s) required to win should be at least 1!"
-msgstr ""
+msgstr "تحذير: يجب ألا يقل عدد النقاط اللازمة للفوز عن 1!"
 
 msgid "Warning: Player %1$s has already won the game. Adjust the inputs!"
-msgstr ""
+msgstr "تحذير: فاز اللاعب %1$s بالفعل. عدّل المدخلات!"
 
 msgid "Warning: No negative input values! Adjust the inputs!"
-msgstr ""
+msgstr "تحذير: لا يُسمح بقيم مدخلة سالبة! عدّل المدخلات!"
 
 msgid "Players"
-msgstr ""
+msgstr "اللاعبون"
 
 msgid "p(win 1 point)"
-msgstr ""
+msgstr "p(win 1 point)"
 
 msgid "Points Gained"
-msgstr ""
+msgstr "عدد النقاط المحققة"
 
 msgid "Analytical"
-msgstr ""
+msgstr "حساب تحليلي"
 
 msgid "p(win the game)"
-msgstr ""
+msgstr "p(win the game)"
 
 msgid "Simulated"
-msgstr ""
+msgstr "مُحاكًى"
 
 msgid "The number of players (%1$i) does not equal the numbers of points for each player when interrupted (%2$i). Please check the appropriate settings."
 msgstr ""
+"عدد اللاعبين (%1$i) لا يساوي عدد قيم النقاط لكل لاعب عند الانقطاع (%2$i). يرجى "
+"التحقق من الإعدادات المناسبة."
 
 msgid "Prior Skill"
-msgstr ""
+msgstr "المهارة القبلية"
 
 msgid "Only numeric values are allowed in the input."
-msgstr ""
+msgstr "القيم العددية فقط هي المسموح بها في المدخل."
 
 msgid "normal (%1$s, %2$s)"
-msgstr ""
+msgstr "طبيعي (%1$s, %2$s)"
 
 msgid "normal (%1$.2f, %2$.2f)"
-msgstr ""
+msgstr "طبيعي (%1$.2f, %2$.2f)"
 
 msgid "normal (%1$s, %2$.2f)"
-msgstr ""
+msgstr "طبيعي (%1$s, %2$.2f)"
 
 msgid "Prior (μ)"
-msgstr ""
+msgstr "التوزيع القبلي (μ)"
 
 msgid "Prior Mean"
-msgstr ""
+msgstr "المتوسط القبلي"
 
 msgid "Posterior (μ)"
-msgstr ""
+msgstr "التوزيع البعدي (μ)"
 
 msgid "Posterior Mean"
-msgstr ""
+msgstr "المتوسط البعدي"
 
 msgid "Population mean"
-msgstr ""
+msgstr "متوسط المجتمع"
 
 msgid "Prediction"
-msgstr ""
+msgstr "التنبؤ"
 
 msgid "Prediction Mean"
-msgstr ""
+msgstr "متوسط التنبؤ"
 
 msgid "Please, specify the standard deviation of the data."
-msgstr ""
+msgstr "يرجى تحديد الانحراف المعياري للبيانات."
 
 msgid "The prediction for %1$s future %2$s is based on %3$s."
-msgstr ""
+msgstr "يستند التنبؤ لـ %1$s %2$s مستقبلية إلى %3$s."
 
 msgid "Sample means"
-msgstr ""
+msgstr "متوسطات العينات"
 
 msgid "Future data"
-msgstr ""
+msgstr "البيانات المستقبلية"
 
 msgid "Inclusion BF"
-msgstr ""
+msgstr "عامل بايز للإدراج"
