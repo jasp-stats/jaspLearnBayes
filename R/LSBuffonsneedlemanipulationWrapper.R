@@ -40,12 +40,7 @@ LSBuffonsneedlemanipulation <- function(
           priorPosteriorProportionCi = FALSE,
           priorPosteriorProportionLegend = FALSE) {
 
-   defaultArgCalls <- formals(jaspLearnBayes::LSBuffonsneedlemanipulation)
-   defaultArgs <- lapply(defaultArgCalls, eval)
-   options <- as.list(match.call())[-1L]
-   options <- lapply(options, eval)
-   defaults <- setdiff(names(defaultArgs), names(options))
-   options[defaults] <- defaultArgs[defaults]
+   options <- mget(names(formals(sys.function())), envir = environment(), inherits = FALSE)
    options[["data"]] <- NULL
    options[["version"]] <- NULL
 
@@ -55,5 +50,7 @@ LSBuffonsneedlemanipulation <- function(
    }
 
 
+   # Options not given in the call get their default from the form, which can depend on the other options.
+   options <- options[names(options) %in% names(match.call())[-1L]]
    return(jaspBase::runWrappedAnalysis("jaspLearnBayes", "LSBuffonsneedlemanipulation", "LSBuffonsneedlemanipulation.qml", options, version, TRUE))
 }
