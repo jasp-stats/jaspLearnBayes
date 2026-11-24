@@ -15,8 +15,8 @@
 ---
 
 # jaspLearnBayes (development version)
-
-
+## Fixed
+* Fixed Binomial Testing and Binomial Estimation stopping with an error when the credible interval of a prior or posterior plot contains no point of the plotted density line, as with very narrow distributions ([INTERNAL-jasp#1293](https://github.com/jasp-stats/INTERNAL-jasp/issues/1293)).
 
 ---
 

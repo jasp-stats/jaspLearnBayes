@@ -1537,3 +1537,105 @@ context("Learn Bayes - Binomial Estimation")
                                    list(5, 0.625, "Successes", 3, 0.375, "Failures", 8, "", "Total"))
   })
 }
+### credible intervals that contain no point of the plotted density (jasp-stats/INTERNAL-jasp#1293)
+{
+  # the 95% central interval of the beta(0.5, 50000) prior lies below .001, the first point of the plotted density,
+  # and the 95% central interval of the beta(5005000 + 3, 4995000 + 6) posterior lies between the points .500 and .501
+  options <- analysisOptions("LSbinomialestimation")
+  options$colorPalette <- "colorblind"
+  options$dataSummary <- TRUE
+  options$dataInputType <- "counts"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- FALSE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 6
+  options$dataCountsSuccesses <- 3
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "central"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "central"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(name = "Models 1", betaPriorAlpha = "5005000", betaPriorBeta = "4995000",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 2", betaPriorAlpha = "0.5", betaPriorBeta = "50000",
+                              spikePoint = "0.5", type = "beta", value = "2", truncationLower = 0, truncationUpper = 1))
+  options$dataVariableSelected <- ""
+  set.seed(1)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
+
+  # the interval bar is the first segment layer of the plot and the shaded interval its polygon layer
+  getLayerData <- function(plot, geom) Filter(function(l) inherits(l$geom, geom), plot$layers)[[1]]$data
+
+  test_that("Prior plot shades a central interval below the first point of the plotted density", {
+    # central interval of the beta(0.5, 50000) prior
+    ci <- qbeta(c(.025, .975), 0.5, 50000)
+    plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior_Models 2"]][["data"]]
+    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
+    interval <- getLayerData(testPlot, "GeomSegment")
+    expect_equal(c(interval$xStart, interval$xEnd), ci)
+    expect_equal(range(getLayerData(testPlot, "GeomPolygon")$x), ci)
+  })
+
+  test_that("Posterior plot shades a central interval between two points of the plotted density", {
+    # central interval of the beta(5005000 + 3, 4995000 + 6) posterior; the plotted density at x is
+    # (pbeta(x + .001) - pbeta(x - .001)) / .002, so at the interval ends the shading takes the straight line between .500 and .501
+    a <- 5005003
+    b <- 4995006
+    ci <- qbeta(c(.025, .975), a, b)
+    line <- (pbeta(c(.500, .501) + .001, a, b) - pbeta(c(.500, .501) - .001, a, b)) / .002
+    height <- line[1] + (ci - .500) / .001 * (line[2] - line[1])
+    plotName <- results[["results"]][["containerPlotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior"]][["collection"]][["containerPlotsPosterior_plotsPosterior_Models 1"]][["data"]]
+    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
+    shade <- getLayerData(testPlot, "GeomPolygon")
+    expect_equal(shade$x, rep(ci, each = 2))
+    expect_equal(shade$y, c(0, height, 0), tolerance = 1e-6)
+  })
+}

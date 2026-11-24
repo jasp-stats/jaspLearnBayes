@@ -498,7 +498,7 @@ LSbinomialtestingInternal <- function(jaspResults, dataset, options, state = NUL
 
           if (!is.null(dfCI)) {
             for (r in 1:nrow(dfCI)) {
-              tempCILinesPP   <- dfLinesPP[dfLinesPP$x >= dfCI$xStart[r] & dfLinesPP$x <= dfCI$xEnd[r],]
+              tempCILinesPP   <- .dataCILinesLS(dfLinesPP, dfCI$xStart[r], dfCI$xEnd[r])
               tempCILinesPP$g <- paste(c(as.character(dfCI$g), r), collapse = "")
               tempCILinesPP   <- rbind.data.frame(
                 data.frame(x = dfCI$xStart[r], y = 0, g = tempCILinesPP$g[1]),

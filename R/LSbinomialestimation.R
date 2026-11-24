@@ -441,7 +441,7 @@ LSbinomialestimationInternal <- function(jaspResults, dataset, options, state = 
 
           if (!is.null(dfCI)) {
             for (r in 1:nrow(dfCI)) {
-              tempCILinesPP   <- dfLinesPP[dfLinesPP$x >= dfCI$xStart[r] & dfLinesPP$x <= dfCI$xEnd[r] & dfLinesPP$g %in% c(type, "Prior = Posterior"),]
+              tempCILinesPP   <- .dataCILinesLS(dfLinesPP[dfLinesPP$g %in% c(type, "Prior = Posterior"),], dfCI$xStart[r], dfCI$xEnd[r])
               tempCILinesPP$g <- paste(c(as.character(dfCI$g), r), collapse = "")
               tempCILinesPP   <- rbind.data.frame(
                 data.frame(x = dfCI$xStart[r], y = 0, g = tempCILinesPP$g[1]),

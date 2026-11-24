@@ -662,6 +662,17 @@
 
   return(plot)
 }
+.dataCILinesLS         <- function(lines, xStart, xEnd) {
+
+  # the part of the density line within the interval
+  dat <- lines[lines$x >= xStart & lines$x <= xEnd,]
+
+  # an interval between two neighbouring points of the line, or beyond its first or last point, contains none of them: use the height of the line at the interval ends
+  if (nrow(dat) == 0)
+    dat <- data.frame(x = c(xStart, xEnd), y = stats::approx(lines$x, lines$y, c(xStart, xEnd), rule = 2)$y, g = lines$g[1])
+
+  return(dat)
+}
 .plotIndividualLS      <- function(allLines, allArrows, pointEstimate, CI, CIallLines, dfPoints = NULL, xRange, xName, yName = NULL, showLegend = FALSE, nRound = 3) {
 
   mappingLines   <- ggplot2::aes(x = x, y = y, color = g)

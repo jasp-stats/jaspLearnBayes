@@ -2023,3 +2023,134 @@ context("Learn Bayes - Binomial Testing")
                                         "Hypothesis 5", -2.89292031955249, 0.285762976374653, 0.2))
   })
 }
+### credible intervals that contain no point of the plotted density (jasp-stats/INTERNAL-jasp#1293)
+{
+  # the 95% central interval of the beta(0.5, 50000) prior lies below .001, the first point of the plotted density
+  options <- analysisOptions("LSbinomialtesting")
+  options$priorPredictivePerformanceBfType <- "BF10"
+  options$sequentialAnalysisPredictivePerformancePlotBfType <- "BF10"
+  options$priorPredictivePerformanceBfComparison <- "inclusion"
+  options$sequentialAnalysisPredictivePerformancePlotBfComparison <- "inclusion"
+  options$priorPredictivePerformanceBfVsHypothesis <- ""
+  options$sequentialAnalysisPredictivePerformancePlotBfVsHypothesis <- ""
+  options$colorPalette <- "colorblind"
+  options$dataSummary <- TRUE
+  options$dataInputType <- "counts"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$introductoryText <- FALSE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 100000
+  options$dataCountsSuccesses <- 5
+  options$priorAndPosteriorDistributionPlot <- FALSE
+  options$priorAndPosteriorDistributionPlotObservedProportion <- FALSE
+  options$priorAndPosteriorDistributionPlotType <- "conditional"
+  options$sequentialAnalysisPredictivePerformancePlot <- FALSE
+  options$sequentialAnalysisPredictivePerformancePlotType <- "conditional"
+  options$sequentialAnalysisPredictivePerformancePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotConditionalCiBf <- 1
+  options$posteriorDistributionPlotConditionalCi <- TRUE
+  options$posteriorDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotJointType <- "overlying"
+  options$posteriorDistributionPlotConditionalCiLower <- 0
+  options$posteriorDistributionPlotMarginalCiBf <- 1
+  options$posteriorDistributionPlotMarginalCi <- FALSE
+  options$posteriorDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorDistributionPlotMarginalCiLower <- 0.25
+  options$posteriorDistributionPlotMarginalCiType <- "central"
+  options$posteriorDistributionPlotMarginalCiUpper <- 0.75
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$posteriorDistributionPlotType <- "conditional"
+  options$posteriorDistributionPlotConditionalCiType <- "central"
+  options$posteriorDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotConditionalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotJoinType <- "overlying"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCi <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalCiMass <- 0.95
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorPredictivePerformanceDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiLower <- 0
+  options$priorPredictivePerformanceDistributionPlotMarginalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotConditionalCi <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotConditionalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotConditionalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotJoinType <- "overlying"
+  options$posteriorPredictionDistributionPlotConditionalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCi <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotMarginalPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotMarginalPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotMarginalCiLower <- 0
+  options$posteriorPredictionDistributionPlotMarginalCiType <- "central"
+  options$posteriorPredictionDistributionPlotMarginalCiUpper <- 1
+  options$posteriorPredictionDistributionPlotType <- "joint"
+  options$posteriorPredictionDistributionPlotConditionalCiType <- "central"
+  options$posteriorPredictionDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlotType <- "conditional"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiType <- "central"
+  options$priorPredictivePerformanceDistributionPlotConditionalCiUpper <- 1
+  options$priorPredictivePerformanceDistributionPlot <- FALSE
+  options$priorPredictivePerformanceDistributionPlotObservedNumberOfSuccessess <- FALSE
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlot <- FALSE
+  options$priorPredictivePerformanceAccuracyPlotType <- "conditional"
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotConditionalCi <- TRUE
+  options$priorDistributionPlotConditionalCiMass <- 0.95
+  options$priorDistributionPlotConditionalPointEstimate <- FALSE
+  options$priorDistributionPlotConditionalPointEstimateType <- "mean"
+  options$priorDistributionPlotJointType <- "overlying"
+  options$priorDistributionPlotConditionalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCi <- FALSE
+  options$priorDistributionPlotMarginalCiMass <- 0.95
+  options$priorDistributionPlotMarginalPointEstimate <- FALSE
+  options$priorDistributionPlotMarginalPointEstimateType <- "mean"
+  options$priorDistributionPlotMarginalCiLower <- 0.25
+  options$priorDistributionPlotMarginalCiType <- "central"
+  options$priorDistributionPlotMarginalCiUpper <- 0.75
+  options$priorDistributionPlotType <- "conditional"
+  options$priorDistributionPlotConditionalCiType <- "central"
+  options$priorDistributionPlotConditionalCiUpper <- 0.75
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$priorPredictivePerformanceDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(priorWeight = "1", name = "Hypothesis 1", betaPriorAlpha = "0.5", betaPriorBeta = "50000",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1))
+  options$dataVariableSelected <- ""
+  set.seed(1)
+  results <- jaspTools::runAnalysis("LSbinomialtesting", "debug.csv", options)
+
+  # the interval bar is the first segment layer of the plot and the shaded interval its polygon layer
+  getLayerData <- function(plot, geom) Filter(function(l) inherits(l$geom, geom), plot$layers)[[1]]$data
+
+  test_that("Prior plot shades a central interval below the first point of the plotted density", {
+    # central interval of the beta(0.5, 50000) prior; the plotted density at its first point .001 is
+    # (pbeta(.002) - pbeta(0)) / .002, and the shading takes that height
+    ci <- qbeta(c(.025, .975), 0.5, 50000)
+    height <- pbeta(.002, 0.5, 50000) / .002
+    plotName <- results[["results"]][["containerPlotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior"]][["collection"]][["containerPlotsPrior_plotsPrior_Hypothesis 1"]][["data"]]
+    testPlot <- results[["state"]][["figures"]][[plotName]][["obj"]]
+    interval <- getLayerData(testPlot, "GeomSegment")
+    expect_equal(c(interval$xStart, interval$xEnd), ci)
+    shade <- getLayerData(testPlot, "GeomPolygon")
+    expect_equal(shade$x, rep(ci, each = 2))
+    expect_equal(shade$y, c(0, height, height, 0))
+  })
+
+}
