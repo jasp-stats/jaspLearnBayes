@@ -17,6 +17,7 @@
 # jaspLearnBayes (development version)
 ## Fixed
 * Fixed Binomial Testing and Binomial Estimation stopping with an error when the credible interval of a prior or posterior plot contains no point of the plotted density line, as with very narrow distributions ([INTERNAL-jasp#1293](https://github.com/jasp-stats/INTERNAL-jasp/issues/1293)).
+* Fixed the HPD intervals of beta priors and posteriors in Binomial Testing and Binomial Estimation being found on a grid with .001 spacing, which shifted their ends by up to about .001 and made the intervals of very narrow distributions too wide or shrink to one point; they are now computed from the quantile function of the (truncated) beta distribution, with the grid kept for extreme cases such as shape parameters above 1e15.
 
 ---
 

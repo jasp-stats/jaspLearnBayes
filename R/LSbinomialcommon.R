@@ -366,6 +366,12 @@
 
   } else {
 
+    HDI <- tryCatch(.betaHDIQuantileLS(alpha, beta, lower, upper, coverage), error = function(e) NULL)
+
+  }
+
+  if (is.null(HDI)) {
+
     # new density approach - instead of pdf, use scaled cdf
     # - more computationally stable then using quantile function
     # - deals with infinities in the parameter boundaries
@@ -381,6 +387,136 @@
   }
 
   HDI <- matrix(as.vector(HDI), ncol = 2)
+  return(HDI)
+}
+.betaHDIQuantileLS          <- function(alpha, beta, lower, upper, coverage) {
+
+  # HPD interval from the quantile function of the (truncated) beta distribution instead of a grid
+  # returns NULL (and the grid is used as before) for a mass of 100%, a shape parameter above 1e15 (qbeta and pbeta
+  # are wrong together from about 5e18), a truncated distribution with no mass in double precision, a mass inside
+  # the truncation range that cannot be computed accurately, and ends that cannot be found, lie outside the
+  # truncation range or whose tail probability is not the intended one (for example a quantile below the smallest
+  # double)
+  if (coverage >= 1 || max(alpha, beta) > 1e15)
+    return(NULL)
+
+  FLower <- stats::pbeta(lower, alpha, beta)
+  FUpper <- stats::pbeta(upper, alpha, beta)
+  if (FUpper <= FLower)
+    return(NULL)
+
+  # the mass inside the range is taken from the tail in which it is more accurate
+  SLower <- stats::pbeta(lower, alpha, beta, lower.tail = FALSE)
+  SUpper <- stats::pbeta(upper, alpha, beta, lower.tail = FALSE)
+  if (FUpper <= SLower) {
+    mass     <- FUpper - FLower
+    massFrom <- FUpper
+  } else {
+    mass     <- SLower - SUpper
+    massFrom <- SLower
+  }
+
+  if (!is.finite(mass) || mass <= 1e-8 * massFrom)
+    return(NULL)
+
+  # point with mass pL of the truncated distribution to its left and pR = 1 - pL to its right, each given so that a
+  # small mass keeps its precision: x, 1 - x and their logs, each from the smaller tail probability; a log below the
+  # smallest double comes from the tail of the beta near 0 or 1, for example F(x) = x^alpha / (alpha B(alpha, beta));
+  # qbeta's precision warnings are not passed on, the ends of the result are checked by endAccurate()
+  qTrunc <- function(pL, pR) {
+    if (pL <= 0) return(c(lower, 1 - lower, log(lower), log1p(-lower)))
+    if (pR <= 0) return(c(upper, 1 - upper, log(upper), log1p(-upper)))
+    pLeft  <- FLower + pL * mass
+    pRight <- SUpper + pR * mass
+    if (pLeft <= pRight) {
+      x  <- suppressWarnings(stats::qbeta(pLeft, alpha, beta))
+      xc <- if (x <= 0.5) 1 - x else suppressWarnings(stats::qbeta(pLeft, beta, alpha, lower.tail = FALSE))
+    } else {
+      xc <- suppressWarnings(stats::qbeta(pRight, beta, alpha))
+      x  <- if (xc <= 0.5) 1 - xc else suppressWarnings(stats::qbeta(pRight, alpha, beta, lower.tail = FALSE))
+    }
+    # the log of the larger of x and 1 - x comes from the smaller one with log1p(), which keeps it precise when it is
+    # multiplied by a large shape parameter
+    logX  <- if (x > 0.5) log1p(-xc) else if (x > 0)  log(x)  else (log(pLeft)  + log(alpha) + lbeta(alpha, beta)) / alpha
+    logXc <- if (xc > 0.5) log1p(-x) else if (xc > 0) log(xc) else (log(pRight) + log(beta)  + lbeta(alpha, beta)) / beta
+    return(c(x, xc, logX, logXc))
+  }
+  # whether the point has the intended mass, checked on the smaller tail probability and the more precise of x and 1 - x
+  endAccurate <- function(pL, pR) {
+    if (pL <= 0 || pR <= 0)
+      return(TRUE)
+    x      <- qTrunc(pL, pR)
+    pLeft  <- FLower + pL * mass
+    pRight <- SUpper + pR * mass
+    if (pLeft <= pRight) {
+      tailError <- pLeft - (if (x[1] <= 0.5) stats::pbeta(x[1], alpha, beta)
+                            else stats::pbeta(x[2], beta, alpha, lower.tail = FALSE))
+    } else {
+      tailError <- pRight - (if (x[2] <= 0.5) stats::pbeta(x[2], beta, alpha)
+                             else stats::pbeta(x[1], alpha, beta, lower.tail = FALSE))
+    }
+    return(is.finite(tailError) && abs(tailError) <= 1e-6 * mass)
+  }
+  # log density up to a constant, from the logs of x and 1 - x
+  logDensity <- function(x) {
+    (if (alpha == 1) 0 else (alpha - 1) * x[3]) + (if (beta == 1) 0 else (beta - 1) * x[4])
+  }
+  # masses p left of the first end and q right of the second end, p + q = pMax, at which both ends have equal
+  # density; the difference of the log densities rises with p for one peak and falls for the U shape, and without a
+  # sign change the answer is p = 0 or q = 0, whichever keeps the higher density inside; the root is searched in p
+  # or in q, whichever is the smaller, so that a small mass keeps its precision
+  equalDensity <- function(pMax, rising) {
+    densityDifference <- function(p, q) logDensity(qTrunc(p, 1 - p)) - logDensity(qTrunc(1 - q, q))
+    sgn    <- if (rising) 1 else -1
+    dStart <- sgn * densityDifference(0, pMax)
+    dEnd   <- sgn * densityDifference(pMax, 0)
+    if (is.nan(dStart) || is.nan(dEnd))
+      return(NULL)
+    if (dStart >= 0)
+      return(c(0, pMax))
+    if (dEnd <= 0)
+      return(c(pMax, 0))
+    dMid <- sgn * densityDifference(pMax / 2, pMax - pMax / 2)
+    if (is.nan(dMid))
+      return(NULL)
+    if (dMid >= 0) {
+      p <- try(suppressWarnings(stats::uniroot(function(p) densityDifference(p, pMax - p), c(0, pMax / 2),
+                                               tol = 1e-300, maxiter = 2000)$root), silent = TRUE)
+      return(if (inherits(p, "try-error")) NULL else c(p, pMax - p))
+    } else {
+      q <- try(suppressWarnings(stats::uniroot(function(q) densityDifference(pMax - q, q), c(0, pMax - pMax / 2),
+                                               tol = 1e-300, maxiter = 2000)$root), silent = TRUE)
+      return(if (inherits(q, "try-error")) NULL else c(pMax - q, q))
+    }
+  }
+
+  if (alpha < 1 && beta < 1) {
+
+    # the density is highest at both ends: leave out the gap with the remaining mass whose ends have equal density
+    # (the density falls before the gap and rises after it); a part with less than 1e-12 of the mass is left out:
+    # no plot or label can show it, and the search cannot tell a much smaller mass from zero
+    pq <- equalDensity(coverage, rising = FALSE)
+    if (is.null(pq))
+      return(NULL)
+    pq[pq < 1e-12 * coverage] <- 0
+    HDI <- rbind(c(lower, qTrunc(pq[1], 1 - pq[1])[1]), c(qTrunc(1 - pq[2], pq[2])[1], upper))
+    HDI <- HDI[pq > 0, , drop = FALSE]
+
+  } else {
+
+    # the density has one peak, or falls or rises throughout: take the interval whose ends have equal density,
+    # or which starts or ends at a bound
+    pq <- equalDensity(1 - coverage, rising = TRUE)
+    if (is.null(pq))
+      return(NULL)
+    HDI <- matrix(c(qTrunc(pq[1], 1 - pq[1])[1], qTrunc(1 - pq[2], pq[2])[1]), ncol = 2)
+
+  }
+
+  if (nrow(HDI) == 0 || any(!is.finite(HDI)) || any(HDI < lower) || any(HDI > upper) || any(HDI[, 1] > HDI[, 2]) ||
+      !endAccurate(pq[1], 1 - pq[1]) || !endAccurate(1 - pq[2], pq[2]))
+    return(NULL)
+
   return(HDI)
 }
 .binomialHDILS              <- function(n, theta, coverage) {
