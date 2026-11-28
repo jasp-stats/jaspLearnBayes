@@ -267,106 +267,108 @@ context("Learn Bayes - Binomial Estimation")
 
   test_that("Sequential Updating Table results match", {
     table <- results[["results"]][["containerIterativeOverlying"]][["collection"]][["containerIterativeOverlying_tableIterative"]][["data"]]
+    # Models Beta intervals: 95% HPD of the beta(2 + successes, 2 + failures) posterior, worked out from the
+    # equal density of its two ends with uniroot()
     jaspTools::expect_equal_tables(table,
-                                   list("[0.094, 0.905]", 0.5, "[0.300, 0.300]", 0.3, 0, "[0.044, 0.772]",
-                                        0.38572756813239, "[0.300, 0.300]", 0.3, 1, "[0.148, 0.854]",
-                                        0.5, "[0.300, 0.300]", 0.3, 2, "[0.238, 0.894]", 0.578592809309287,
+                                   list("[0.094, 0.906]", 0.5, "[0.300, 0.300]", 0.3, 0, "[0.044, 0.772]",
+                                        0.38572756813239, "[0.300, 0.300]", 0.3, 1, "[0.147, 0.853]",
+                                        0.5, "[0.300, 0.300]", 0.3, 2, "[0.239, 0.895]", 0.578592809309287,
                                         "[0.300, 0.300]", 0.3, 3, "[0.184, 0.816]", 0.5, "[0.300, 0.300]",
-                                        0.3, 4, "[0.148, 0.746]", 0.440155204634766, "[0.300, 0.300]",
-                                        0.3, 5, "[0.124, 0.684]", 0.39308483281063, "[0.300, 0.300]",
+                                        0.3, 4, "[0.149, 0.746]", 0.440155204634766, "[0.300, 0.300]",
+                                        0.3, 5, "[0.124, 0.685]", 0.39308483281063, "[0.300, 0.300]",
                                         0.3, 6, "[0.182, 0.732]", 0.451694156223663, "[0.300, 0.300]",
-                                        0.3, 7, "[0.234, 0.766]", 0.5, "[0.300, 0.300]", 0.3, 8, "[0.280, 0.792]",
-                                        0.54049281421956, "[0.300, 0.300]", 0.3, 9, "[0.324, 0.815]",
-                                        0.574923338650419, "[0.300, 0.300]", 0.3, 10, "[0.362, 0.832]",
-                                        0.604556744392119, "[0.300, 0.300]", 0.3, 11, "[0.328, 0.791]",
-                                        0.565167213922496, "[0.300, 0.300]", 0.3, 12, "[0.362, 0.808]",
+                                        0.3, 7, "[0.234, 0.766]", 0.5, "[0.300, 0.300]", 0.3, 8, "[0.281, 0.793]",
+                                        0.54049281421956, "[0.300, 0.300]", 0.3, 9, "[0.323, 0.814]",
+                                        0.574923338650419, "[0.300, 0.300]", 0.3, 10, "[0.361, 0.832]",
+                                        0.604556744392119, "[0.300, 0.300]", 0.3, 11, "[0.328, 0.792]",
+                                        0.565167213922496, "[0.300, 0.300]", 0.3, 12, "[0.362, 0.809]",
                                         0.591773498675099, "[0.300, 0.300]", 0.3, 13, "[0.392, 0.823]",
                                         0.61531276594024, "[0.300, 0.300]", 0.3, 14, "[0.420, 0.836]",
                                         0.636286181644356, "[0.300, 0.300]", 0.3, 15, "[0.446, 0.846]",
                                         0.65509143085512, "[0.300, 0.300]", 0.3, 16, "[0.416, 0.816]",
-                                        0.622894794821295, "[0.300, 0.300]", 0.3, 17, "[0.440, 0.827]",
-                                        0.640565733353753, "[0.300, 0.300]", 0.3, 18, "[0.460, 0.836]",
-                                        0.656655004344889, "[0.300, 0.300]", 0.3, 19, "[0.482, 0.845]",
-                                        0.671365816585758, "[0.300, 0.300]", 0.3, 20, "[0.500, 0.853]",
+                                        0.622894794821295, "[0.300, 0.300]", 0.3, 17, "[0.439, 0.827]",
+                                        0.640565733353753, "[0.300, 0.300]", 0.3, 18, "[0.461, 0.836]",
+                                        0.656655004344889, "[0.300, 0.300]", 0.3, 19, "[0.481, 0.845]",
+                                        0.671365816585758, "[0.300, 0.300]", 0.3, 20, "[0.500, 0.852]",
                                         0.684868008478614, "[0.300, 0.300]", 0.3, 21, "[0.474, 0.828]",
-                                        0.65784657834052, "[0.300, 0.300]", 0.3, 22, "[0.492, 0.836]",
+                                        0.65784657834052, "[0.300, 0.300]", 0.3, 22, "[0.491, 0.835]",
                                         0.670836999809617, "[0.300, 0.300]", 0.3, 23, "[0.508, 0.843]",
-                                        0.682877205036544, "[0.300, 0.300]", 0.3, 24, "[0.522, 0.849]",
-                                        0.69406775991081, "[0.300, 0.300]", 0.3, 25, "[0.537, 0.855]",
+                                        0.682877205036544, "[0.300, 0.300]", 0.3, 24, "[0.523, 0.849]",
+                                        0.69406775991081, "[0.300, 0.300]", 0.3, 25, "[0.538, 0.855]",
                                         0.704495525209941, "[0.300, 0.300]", 0.3, 26, "[0.551, 0.861]",
                                         0.714235913830798, "[0.300, 0.300]", 0.3, 27, "[0.528, 0.840]",
-                                        0.691449298248634, "[0.300, 0.300]", 0.3, 28, "[0.507, 0.821]",
+                                        0.691449298248634, "[0.300, 0.300]", 0.3, 28, "[0.507, 0.820]",
                                         0.670070729920772, "[0.300, 0.300]", 0.3, 29, "[0.520, 0.827]",
                                         0.679967316384646, "[0.300, 0.300]", 0.3, 30, "[0.533, 0.833]",
-                                        0.689287516232948, "[0.300, 0.300]", 0.3, 31, "[0.544, 0.838]",
-                                        0.698080254263729, "[0.300, 0.300]", 0.3, 32, "[0.526, 0.821]",
+                                        0.689287516232948, "[0.300, 0.300]", 0.3, 31, "[0.545, 0.838]",
+                                        0.698080254263729, "[0.300, 0.300]", 0.3, 32, "[0.526, 0.820]",
                                         0.678871788869583, "[0.300, 0.300]", 0.3, 33, "[0.537, 0.826]",
                                         0.687472547900221, "[0.300, 0.300]", 0.3, 34, "[0.548, 0.831]",
                                         0.695624641542151, "[0.300, 0.300]", 0.3, 35, "[0.531, 0.815]",
-                                        0.677942968082248, "[0.300, 0.300]", 0.3, 36, "[0.514, 0.798]",
-                                        0.661137560458077, "[0.300, 0.300]", 0.3, 37, "[0.498, 0.782]",
-                                        0.64514491836568, "[0.300, 0.300]", 0.3, 38, "[0.484, 0.767]",
-                                        0.62990751702158, "[0.300, 0.300]", 0.3, 39, "[0.496, 0.774]",
-                                        0.638447436303181, "[0.300, 0.300]", 0.3, 40, "[0.505, 0.779]",
-                                        0.646602144702128, "[0.300, 0.300]", 0.3, 41, "[0.492, 0.765]",
-                                        0.632340703720261, "[0.300, 0.300]", 0.3, 42, "[0.502, 0.771]",
-                                        0.640275248179192, "[0.300, 0.300]", 0.3, 43, "[0.511, 0.776]",
-                                        0.647874567128595, "[0.300, 0.300]", 0.3, 44, "[0.498, 0.763]",
-                                        0.634471796690132, "[0.300, 0.300]", 0.3, 45, "[0.507, 0.768]",
-                                        0.641880701656875, "[0.300, 0.300]", 0.3, 46, "[0.496, 0.756]",
-                                        0.629129419469412, "[0.300, 0.300]", 0.3, 47, "[0.484, 0.745]",
-                                        0.616874813086074, "[0.300, 0.300]", 0.3, 48, "[0.474, 0.733]",
+                                        0.677942968082248, "[0.300, 0.300]", 0.3, 36, "[0.514, 0.799]",
+                                        0.661137560458077, "[0.300, 0.300]", 0.3, 37, "[0.499, 0.783]",
+                                        0.64514491836568, "[0.300, 0.300]", 0.3, 38, "[0.484, 0.768]",
+                                        0.62990751702158, "[0.300, 0.300]", 0.3, 39, "[0.495, 0.774]",
+                                        0.638447436303181, "[0.300, 0.300]", 0.3, 40, "[0.505, 0.780]",
+                                        0.646602144702128, "[0.300, 0.300]", 0.3, 41, "[0.492, 0.766]",
+                                        0.632340703720261, "[0.300, 0.300]", 0.3, 42, "[0.502, 0.772]",
+                                        0.640275248179192, "[0.300, 0.300]", 0.3, 43, "[0.511, 0.777]",
+                                        0.647874567128595, "[0.300, 0.300]", 0.3, 44, "[0.498, 0.764]",
+                                        0.634471796690132, "[0.300, 0.300]", 0.3, 45, "[0.508, 0.769]",
+                                        0.641880701656875, "[0.300, 0.300]", 0.3, 46, "[0.495, 0.757]",
+                                        0.629129419469412, "[0.300, 0.300]", 0.3, 47, "[0.484, 0.744]",
+                                        0.616874813086074, "[0.300, 0.300]", 0.3, 48, "[0.473, 0.732]",
                                         0.605088428278435, "[0.300, 0.300]", 0.3, 49, "[0.482, 0.738]",
-                                        0.612492624209658, "[0.300, 0.300]", 0.3, 50, "[0.472, 0.727]",
-                                        0.601220656886222, "[0.300, 0.300]", 0.3, 51, "[0.462, 0.716]",
-                                        0.590356033725692, "[0.300, 0.300]", 0.3, 52, "[0.470, 0.722]",
+                                        0.612492624209658, "[0.300, 0.300]", 0.3, 50, "[0.471, 0.727]",
+                                        0.601220656886222, "[0.300, 0.300]", 0.3, 51, "[0.461, 0.716]",
+                                        0.590356033725692, "[0.300, 0.300]", 0.3, 52, "[0.470, 0.721]",
                                         0.597627465725956, "[0.300, 0.300]", 0.3, 53, "[0.460, 0.711]",
                                         0.587204447349039, "[0.300, 0.300]", 0.3, 54, "[0.469, 0.716]",
-                                        0.594280619749873, "[0.300, 0.300]", 0.3, 55, "[0.460, 0.706]",
-                                        0.584265290819207, "[0.300, 0.300]", 0.3, 56, "[0.468, 0.711]",
-                                        0.591155626527085, "[0.300, 0.300]", 0.3, 57, "[0.476, 0.717]",
-                                        0.597821293739793, "[0.300, 0.300]", 0.3, 58, "[0.484, 0.722]",
+                                        0.594280619749873, "[0.300, 0.300]", 0.3, 55, "[0.459, 0.706]",
+                                        0.584265290819207, "[0.300, 0.300]", 0.3, 56, "[0.467, 0.711]",
+                                        0.591155626527085, "[0.300, 0.300]", 0.3, 57, "[0.475, 0.717]",
+                                        0.597821293739793, "[0.300, 0.300]", 0.3, 58, "[0.483, 0.722]",
                                         0.604273104107719, "[0.300, 0.300]", 0.3, 59, "[0.490, 0.727]",
                                         0.610521186566894, "[0.300, 0.300]", 0.3, 60, "[0.498, 0.731]",
-                                        0.616575040384333, "[0.300, 0.300]", 0.3, 61, "[0.504, 0.736]",
-                                        0.622443583334046, "[0.300, 0.300]", 0.3, 62, "[0.496, 0.727]",
-                                        0.613060533443989, "[0.300, 0.300]", 0.3, 63, "[0.488, 0.717]",
-                                        0.603956150474431, "[0.300, 0.300]", 0.3, 64, "[0.478, 0.708]",
-                                        0.595118204160828, "[0.300, 0.300]", 0.3, 65, "[0.472, 0.700]",
-                                        0.586535169305878, "[0.300, 0.300]", 0.3, 66, "[0.464, 0.691]",
-                                        0.578196175742505, "[0.300, 0.300]", 0.3, 67, "[0.470, 0.696]",
-                                        0.584109131212598, "[0.300, 0.300]", 0.3, 68, "[0.476, 0.700]",
-                                        0.589858603518289, "[0.300, 0.300]", 0.3, 69, "[0.484, 0.705]",
-                                        0.59545128002427, "[0.300, 0.300]", 0.3, 70, "[0.476, 0.697]",
+                                        0.616575040384333, "[0.300, 0.300]", 0.3, 61, "[0.505, 0.736]",
+                                        0.622443583334046, "[0.300, 0.300]", 0.3, 62, "[0.496, 0.726]",
+                                        0.613060533443989, "[0.300, 0.300]", 0.3, 63, "[0.487, 0.717]",
+                                        0.603956150474431, "[0.300, 0.300]", 0.3, 64, "[0.479, 0.708]",
+                                        0.595118204160828, "[0.300, 0.300]", 0.3, 65, "[0.471, 0.699]",
+                                        0.586535169305878, "[0.300, 0.300]", 0.3, 66, "[0.463, 0.691]",
+                                        0.578196175742505, "[0.300, 0.300]", 0.3, 67, "[0.470, 0.695]",
+                                        0.584109131212598, "[0.300, 0.300]", 0.3, 68, "[0.477, 0.700]",
+                                        0.589858603518289, "[0.300, 0.300]", 0.3, 69, "[0.483, 0.705]",
+                                        0.59545128002427, "[0.300, 0.300]", 0.3, 70, "[0.476, 0.696]",
                                         0.58744105050883, "[0.300, 0.300]", 0.3, 71, "[0.482, 0.701]",
-                                        0.592917347189705, "[0.300, 0.300]", 0.3, 72, "[0.474, 0.693]",
-                                        0.585150168403083, "[0.300, 0.300]", 0.3, 73, "[0.482, 0.698]",
-                                        0.590514466487781, "[0.300, 0.300]", 0.3, 74, "[0.488, 0.702]",
-                                        0.595741809870873, "[0.300, 0.300]", 0.3, 75, "[0.494, 0.706]",
+                                        0.592917347189705, "[0.300, 0.300]", 0.3, 72, "[0.475, 0.693]",
+                                        0.585150168403083, "[0.300, 0.300]", 0.3, 73, "[0.481, 0.697]",
+                                        0.590514466487781, "[0.300, 0.300]", 0.3, 74, "[0.487, 0.701]",
+                                        0.595741809870873, "[0.300, 0.300]", 0.3, 75, "[0.493, 0.706]",
                                         0.600837377135875, "[0.300, 0.300]", 0.3, 76, "[0.486, 0.698]",
                                         0.593358338512864, "[0.300, 0.300]", 0.3, 77, "[0.492, 0.702]",
-                                        0.598357914811768, "[0.300, 0.300]", 0.3, 78, "[0.498, 0.706]",
+                                        0.598357914811768, "[0.300, 0.300]", 0.3, 78, "[0.497, 0.706]",
                                         0.603236048712387, "[0.300, 0.300]", 0.3, 79, "[0.503, 0.710]",
                                         0.607997111862196, "[0.300, 0.300]", 0.3, 80, "[0.508, 0.714]",
-                                        0.612645268578687, "[0.300, 0.300]", 0.3, 81, "[0.514, 0.718]",
-                                        0.617184487995694, "[0.300, 0.300]", 0.3, 82, "[0.518, 0.721]",
+                                        0.612645268578687, "[0.300, 0.300]", 0.3, 81, "[0.514, 0.717]",
+                                        0.617184487995694, "[0.300, 0.300]", 0.3, 82, "[0.519, 0.721]",
                                         0.621618555365786, "[0.300, 0.300]", 0.3, 83, "[0.512, 0.714]",
                                         0.61450101368092, "[0.300, 0.300]", 0.3, 84, "[0.505, 0.707]",
-                                        0.607544611226366, "[0.300, 0.300]", 0.3, 85, "[0.500, 0.700]",
-                                        0.600743937631615, "[0.300, 0.300]", 0.3, 86, "[0.504, 0.704]",
+                                        0.607544611226366, "[0.300, 0.300]", 0.3, 85, "[0.499, 0.700]",
+                                        0.600743937631615, "[0.300, 0.300]", 0.3, 86, "[0.504, 0.703]",
                                         0.605163663866717, "[0.300, 0.300]", 0.3, 87, "[0.498, 0.697]",
                                         0.598537968373689, "[0.300, 0.300]", 0.3, 88, "[0.492, 0.690]",
-                                        0.592055780320433, "[0.300, 0.300]", 0.3, 89, "[0.498, 0.694]",
-                                        0.59642653398455, "[0.300, 0.300]", 0.3, 90, "[0.501, 0.697]",
+                                        0.592055780320433, "[0.300, 0.300]", 0.3, 89, "[0.497, 0.694]",
+                                        0.59642653398455, "[0.300, 0.300]", 0.3, 90, "[0.502, 0.697]",
                                         0.600704624291, "[0.300, 0.300]", 0.3, 91, "[0.496, 0.691]",
                                         0.594403685290299, "[0.300, 0.300]", 0.3, 92, "[0.490, 0.684]",
-                                        0.588233553913292, "[0.300, 0.300]", 0.3, 93, "[0.484, 0.677]",
-                                        0.582190198964589, "[0.300, 0.300]", 0.3, 94, "[0.478, 0.671]",
-                                        0.576269753178822, "[0.300, 0.300]", 0.3, 95, "[0.484, 0.675]",
-                                        0.580535426024885, "[0.300, 0.300]", 0.3, 96, "[0.478, 0.669]",
-                                        0.574749482467959, "[0.300, 0.300]", 0.3, 97, "[0.482, 0.672]",
-                                        0.578945969319675, "[0.300, 0.300]", 0.3, 98, "[0.478, 0.666]",
-                                        0.573288632711558, "[0.300, 0.300]", 0.3, 99, "[0.482, 0.670]",
+                                        0.588233553913292, "[0.300, 0.300]", 0.3, 93, "[0.484, 0.678]",
+                                        0.582190198964589, "[0.300, 0.300]", 0.3, 94, "[0.479, 0.672]",
+                                        0.576269753178822, "[0.300, 0.300]", 0.3, 95, "[0.484, 0.676]",
+                                        0.580535426024885, "[0.300, 0.300]", 0.3, 96, "[0.478, 0.670]",
+                                        0.574749482467959, "[0.300, 0.300]", 0.3, 97, "[0.483, 0.673]",
+                                        0.578945969319675, "[0.300, 0.300]", 0.3, 98, "[0.478, 0.667]",
+                                        0.573288632711558, "[0.300, 0.300]", 0.3, 99, "[0.482, 0.671]",
                                         0.577418036585966, "[0.300, 0.300]", 0.3, 100))
   })
 
@@ -1637,5 +1639,180 @@ context("Learn Bayes - Binomial Estimation")
     shade <- getLayerData(testPlot, "GeomPolygon")
     expect_equal(shade$x, rep(ci, each = 2))
     expect_equal(shade$y, c(0, height, 0), tolerance = 1e-6)
+  })
+}
+### HPD intervals from the quantile function instead of the .001 grid of the plotted density
+{
+  # 95% HPD intervals of the priors and of the posteriors after 3 successes and 6 failures
+  options <- analysisOptions("LSbinomialestimation")
+  options$colorPalette <- "colorblind"
+  options$dataSummary <- TRUE
+  options$dataInputType <- "counts"
+  options$dataSequenceSequenceOfObservations <- ""
+  options$sequentialAnalysisPosteriorUpdatingTable <- FALSE
+  options$introductoryText <- FALSE
+  options$dataSequenceFailures <- list()
+  options$dataVariableFailures <- list()
+  options$dataSequenceSuccesses <- list()
+  options$dataVariableSuccesses <- list()
+  options$dataCountsFailures <- 6
+  options$dataCountsSuccesses <- 3
+  options$posteriorDistributionPloPriorDistribution <- FALSE
+  options$posteriorDistributionPlotObservedProportion <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiBf <- 1
+  options$sequentialAnalysisPointEstimatePlotCiMass <- 0.95
+  options$sequentialAnalysisPointEstimatePlotType <- "mean"
+  options$sequentialAnalysisPointEstimatePlotCi <- FALSE
+  options$sequentialAnalysisPointEstimatePlotCiType <- "central"
+  options$sequentialAnalysisIntervalEstimatePlot <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotLower <- 0.25
+  options$sequentialAnalysisIntervalEstimatePlotType <- "overlying"
+  options$sequentialAnalysisIntervalEstimatePlotUpdatingTable <- FALSE
+  options$sequentialAnalysisIntervalEstimatePlotUpper <- 0.75
+  options$sequentialAnalysisPointEstimatePlot <- FALSE
+  options$sequentialAnalysisStackedDistributionsPlot <- FALSE
+  options$sequentialAnalysisPointEstimatePlotUpdatingTable <- FALSE
+  options$posteriorDistributionPlot <- TRUE
+  options$posteriorDistributionPlotIndividualCiBf <- 1
+  options$posteriorDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorDistributionPlotIndividualCi <- TRUE
+  options$posteriorDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorDistributionPlotIndividualCiType <- "HPD"
+  options$posteriorDistributionPlotIndividualCiLower <- 0.25
+  options$posteriorDistributionPlotType <- "individual"
+  options$posteriorDistributionPlotIndividualCiUpper <- 0.75
+  options$posteriorPredictionDistributionPlotIndividualCi <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualCiMass <- 0.95
+  options$posteriorPredictionDistributionPlotIndividualPointEstimate <- FALSE
+  options$posteriorPredictionDistributionPlotIndividualPointEstimateType <- "mean"
+  options$posteriorPredictionDistributionPlotIndividualCiLower <- 0
+  options$posteriorPredictionDistributionPlotIndividualCiType <- "central"
+  options$posteriorPredictionDistributionPlotIndividualCiUpper <- 1
+  options$posteriorPredictionDistributionPlot <- FALSE
+  options$priorDistributionPlot <- TRUE
+  options$priorDistributionPlotIndividualCiMass <- 0.95
+  options$priorDistributionPlotIndividualCi <- TRUE
+  options$priorDistributionPlotIndividualPointEstimate <- FALSE
+  options$priorDistributionPlotIndividualPointEstimateType <- "mean"
+  options$priorDistributionPlotIndividualCiType <- "HPD"
+  options$priorDistributionPlotIndividualCiLower <- 0.25
+  options$priorDistributionPlotType <- "individual"
+  options$priorDistributionPlotIndividualCiUpper <- 0.75
+  options$priorAndPosteriorPointEstimate <- "mean"
+  options$posteriorPredictionNumberOfFutureTrials <- 1
+  options$posteriorPredictionDistributionPlotAsSampleProportion <- FALSE
+  options$posteriorPredictionDistributionPlotType <- "overlying"
+  options$posteriorPredictionSummaryTable <- FALSE
+  options$posteriorPredictionDistributionPlotPredictionsTable <- FALSE
+  options$posteriorPredictionSummaryTablePointEstimate <- "mean"
+  options$models <- list(list(name = "Models 1", betaPriorAlpha = "0.5", betaPriorBeta = "50000",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 2", betaPriorAlpha = "2", betaPriorBeta = "2",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 3", betaPriorAlpha = "0.5", betaPriorBeta = "0.5",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 4", betaPriorAlpha = "3", betaPriorBeta = "4",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0.2, truncationUpper = 0.6),
+                         list(name = "Models 5", betaPriorAlpha = "0.001", betaPriorBeta = "0.001",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 6", betaPriorAlpha = "8", betaPriorBeta = "85",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0.47, truncationUpper = 1),
+                         list(name = "Models 7", betaPriorAlpha = "1e20", betaPriorBeta = "0.5",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 8", betaPriorAlpha = "0.5", betaPriorBeta = "0.999999",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models 9", betaPriorAlpha = "3", betaPriorBeta = "1e13",
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1))
+  set.seed(1)
+  results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
+
+  getPlot <- function(type, model) {
+    container <- paste0("containerPlots", type)
+    plotName  <- results[["results"]][[container]][["collection"]][[paste0(container, "_plots", type)]][["collection"]][[paste0(container, "_plots", type, "_", model)]][["data"]]
+    return(results[["state"]][["figures"]][[plotName]][["obj"]])
+  }
+  getInterval <- function(type, model) {
+    testPlot <- getPlot(type, model)
+    interval  <- Filter(function(l) inherits(l$geom, "GeomSegment"), testPlot$layers)[[1]]$data
+    return(c(interval$xStart, interval$xEnd))
+  }
+  getPriorIntervalLabel <- function(model) {
+    testPlot <- getPlot("Prior", model)
+    return(Filter(function(l) inherits(l$geom, "GeomText"), testPlot$layers)[[1]]$data$label)
+  }
+  # one-peaked (truncated) beta: the 95% interval whose two ends have the same density, found with uniroot()
+  equalDensityHPD <- function(a, b, lower = 0, upper = 1) {
+    C1  <- pbeta(lower, a, b)
+    C2  <- pbeta(upper, a, b)
+    end <- function(l) qbeta(pbeta(l, a, b) + .95 * (C2 - C1), a, b)
+    l   <- uniroot(function(l) dbeta(l, a, b, log = TRUE) - dbeta(end(l), a, b, log = TRUE),
+                   c(lower, qbeta(C1 + .05 * (C2 - C1), a, b)), tol = 1e-12)$root
+    return(c(l, end(l)))
+  }
+
+  test_that("HPD interval of a falling beta density starts at 0 and ends at its 95% quantile", {
+    # beta(0.5, 50000) prior: the density falls throughout, so the HPD interval is [0, qbeta(.95)] = [0, 3.8e-5]
+    expect_equal(getInterval("Prior", "Models 1"), c(0, qbeta(.95, 0.5, 50000)))
+  })
+
+  test_that("HPD interval of a one-peaked beta density has the same density at both ends", {
+    # beta(2 + 3, 2 + 6) posterior
+    expect_equal(getInterval("Posterior", "Models 2"), equalDensityHPD(5, 8))
+  })
+
+  test_that("HPD interval of a beta(0.5, 0.5) density leaves out the middle 5%", {
+    # symmetric density with its highest points at 0 and 1: [0, qbeta(.475)] and [qbeta(.525), 1]
+    interval <- getInterval("Prior", "Models 3")
+    expect_equal(interval, c(0, qbeta(.525, 0.5, 0.5), qbeta(.475, 0.5, 0.5), 1))
+  })
+
+  test_that("HPD interval of a truncated beta density has the same density at both ends", {
+    # beta(3, 4) prior truncated to [0.2, 0.6]
+    expect_equal(getInterval("Prior", "Models 4"), equalDensityHPD(3, 4, 0.2, 0.6))
+  })
+
+  test_that("HPD interval of a beta(0.001, 0.001) density keeps both parts", {
+    # symmetric density with almost all its mass next to 0 and 1: [0, qbeta(.475)] and [qbeta(.525), 1], where
+    # qbeta(.475) = 5.3e-23 and qbeta(.525) is 1 in double precision
+    interval <- getInterval("Prior", "Models 5")
+    expect_equal(interval, c(0, 1, qbeta(.475, 0.001, 0.001), 1))
+    expect_equal(pbeta(interval[3], 0.001, 0.001), .475)
+    expect_match(getPriorIntervalLabel("Models 5"), "[0.000, 0.000] and [1.000, 1.000]", fixed = TRUE)
+  })
+
+  test_that("HPD interval of a spike prior is labeled with one value", {
+    expect_match(getPriorIntervalLabel("Models Point"), "' [0.500] '", fixed = TRUE)
+  })
+
+  test_that("HPD interval of a beta posterior truncated far in its upper tail starts at the lower bound", {
+    # beta(8 + 3, 85 + 6) posterior truncated to [0.47, 1], which holds a mass of 9e-16: the density falls throughout
+    # the range (mode 0.1), so the 95% interval is [0.47, x] with 5% of that mass above x, from the upper tail
+    massAbove <- pbeta(0.47, 11, 91, lower.tail = FALSE)
+    expect_equal(getInterval("Posterior", "Models 6"), c(0.47, qbeta(.05 * massAbove, 11, 91, lower.tail = FALSE)))
+  })
+
+  test_that("HPD interval of a beta density with a shape parameter above 1e15 comes from the grid as before", {
+    # beta(1e20, 0.5) prior: qbeta() and pbeta() are not accurate for such shapes, so the interval is the one of the
+    # grid of the plotted density, whose last point below 1 is 0.9995
+    expect_equal(getInterval("Prior", "Models 7"), c(0.9995, 1))
+  })
+
+  test_that("HPD interval of a beta density leaves out a part with almost no mass", {
+    # beta(0.5, 0.999999) prior: the density is also highest next to 1, but the part of the HPD set there holds a mass
+    # far below the smallest double, so the 95% interval is [0, qbeta(.95)]
+    expect_equal(getInterval("Prior", "Models 8"), c(0, qbeta(.95, 0.5, 0.999999)))
+  })
+
+  test_that("HPD interval of a beta density with a very large shape parameter matches the gamma limit", {
+    # beta(3, 1e13) prior: 1e13 x is close to a gamma(3) variable (relative error about 1e-12), so 1e13 times the 95%
+    # interval is the gamma(3) HPD interval, whose two ends have the same gamma density, found with uniroot(); the
+    # interval is scaled up because expect_equal() compares values below its tolerance in absolute terms
+    end <- function(p) qgamma(p + .95, 3)
+    p   <- uniroot(function(p) dgamma(qgamma(p, 3), 3, log = TRUE) - dgamma(end(p), 3, log = TRUE),
+                   c(1e-10, .05 - 1e-10), tol = 1e-14)$root
+    expect_equal(getInterval("Prior", "Models 9") * 1e13, c(qgamma(p, 3), end(p)))
   })
 }

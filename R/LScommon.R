@@ -1045,7 +1045,7 @@
       if (is.na(CI$xStart[i])) {
         x <- "none"
         #x <- "~symbol(\\306)"
-      } else if (CI$xStart[i] == CI$xEnd[i]) {
+      } else if (CI$xStart[i] == CI$xEnd[i] && !isTRUE(CI[["isContinuous"]][i])) {
         x <- paste(c(
           "[",format(round(CI$xStart[i], nRound), nsmall = nRound),"]"
         ), collapse = "")
