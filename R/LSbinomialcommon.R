@@ -1012,6 +1012,8 @@
   }
 
   dat       <- data.frame(xStart = x[,1], xEnd = x[,2], g = "HPD", coverage = coverage)
+  if (type == "parameter" && prior[["type"]] == "beta")
+    dat$isContinuous <- TRUE
   return(dat)
 }
 .dataCentralBinomialLS      <- function(data, prior, coverage, n = NULL, type = c("parameter", "prediction")) {

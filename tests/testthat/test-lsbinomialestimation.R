@@ -1723,16 +1723,25 @@ context("Learn Bayes - Binomial Estimation")
                          list(name = "Models 8", betaPriorAlpha = "0.5", betaPriorBeta = "0.999999",
                               spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
                          list(name = "Models 9", betaPriorAlpha = "3", betaPriorBeta = "1e13",
-                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1))
+                              spikePoint = "0.5", type = "beta", value = "", truncationLower = 0, truncationUpper = 1),
+                         list(name = "Models Point", betaPriorAlpha = "1", betaPriorBeta = "1",
+                              spikePoint = "0.5", type = "spike", value = "", truncationLower = 0, truncationUpper = 1))
   set.seed(1)
   results <- jaspTools::runAnalysis("LSbinomialestimation", "debug.csv", options)
 
-  getInterval <- function(type, model) {
+  getPlot <- function(type, model) {
     container <- paste0("containerPlots", type)
     plotName  <- results[["results"]][[container]][["collection"]][[paste0(container, "_plots", type)]][["collection"]][[paste0(container, "_plots", type, "_", model)]][["data"]]
-    testPlot  <- results[["state"]][["figures"]][[plotName]][["obj"]]
+    return(results[["state"]][["figures"]][[plotName]][["obj"]])
+  }
+  getInterval <- function(type, model) {
+    testPlot <- getPlot(type, model)
     interval  <- Filter(function(l) inherits(l$geom, "GeomSegment"), testPlot$layers)[[1]]$data
     return(c(interval$xStart, interval$xEnd))
+  }
+  getPriorIntervalLabel <- function(model) {
+    testPlot <- getPlot("Prior", model)
+    return(Filter(function(l) inherits(l$geom, "GeomText"), testPlot$layers)[[1]]$data$label)
   }
   # one-peaked (truncated) beta: the 95% interval whose two ends have the same density, found with uniroot()
   equalDensityHPD <- function(a, b, lower = 0, upper = 1) {
@@ -1771,6 +1780,11 @@ context("Learn Bayes - Binomial Estimation")
     interval <- getInterval("Prior", "Models 5")
     expect_equal(interval, c(0, 1, qbeta(.475, 0.001, 0.001), 1))
     expect_equal(pbeta(interval[3], 0.001, 0.001), .475)
+    expect_match(getPriorIntervalLabel("Models 5"), "[0.000, 0.000] and [1.000, 1.000]", fixed = TRUE)
+  })
+
+  test_that("HPD interval of a spike prior is labeled with one value", {
+    expect_match(getPriorIntervalLabel("Models Point"), "' [0.500] '", fixed = TRUE)
   })
 
   test_that("HPD interval of a beta posterior truncated far in its upper tail starts at the lower bound", {
